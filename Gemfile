@@ -60,3 +60,55 @@ end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
+
+
+# ********** BANP Dependencies ********** #
+
+# For development
+group :development do
+  # Better errors
+  gem 'better_errors'
+  gem 'binding_of_caller'
+
+  # Create Entity Relationship Diagram
+  gem 'rails-erd', '~> 1.4', '>= 1.4.7'
+  # Create models for ActiveRecord
+  gem 'railroady', '~> 1.4', '>= 1.4.2'
+end
+
+# Faker - fill data
+gem 'faker', git: 'https://github.com/stympy/faker.git', branch: 'master'
+
+# Paperclip - Easy file attachment management for ActiveRecord
+gem 'paperclip', '~> 5.2.0'
+
+# Fiendly id - Pretty URL
+gem 'friendly_id', '~> 5.2'
+
+# Audited - Audits models
+gem 'audited', '~> 4.2', '>= 4.2.1'
+
+# Will Paginate - Pagination
+gem 'will_paginate', '~> 3.1', '>= 3.1.5'
+# Will Paginate - Bootstrap Pagination
+gem 'will_paginate-bootstrap', '~> 1.0', '>= 1.0.1'
+
+# Render_Sync - Realtime partials
+gem 'render_sync', '~> 0.5.0'
+# Render_Sync with Pusher
+gem 'pusher', '~> 1.3', '>= 1.3.1'
+# Faye (Only to prevent precompile heroku error)
+gem 'faye', '~> 1.2', '>= 1.2.2'
+
+# Bootstrap 3
+gem 'bootstrap-sass', '~> 3.3.7'
+
+# Wicked PDF
+gem 'wicked_pdf', '~> 1.1'
+gem 'wkhtmltopdf-binary', '~> 0.12.3'
+
+# Rails HTML Sanitizer
+gem 'rails-html-sanitizer', '~> 1.0.4 '
+
+# AWS - Amazon Web Services
+gem 'aws-sdk', '~> 2.3'
