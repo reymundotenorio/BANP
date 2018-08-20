@@ -112,3 +112,6 @@ gem 'rails-html-sanitizer', '~> 1.0.4 '
 
 # AWS - Amazon Web Services
 gem 'aws-sdk', '~> 2.3'
+
+# Figaro - Configuration using ENV and a single YAML file
+gem 'figaro', '~> 1.1', '>= 1.1.1'
