@@ -1,4 +1,12 @@
 GIT
+  remote: https://github.com/reymundotenorio/render_sync
+  revision: 4422b78d9bd55c7c2d4c570956b226c4c9c14644
+  branch: master
+  specs:
+    render_sync (0.5.0)
+      em-http-request
+
+GIT
   remote: https://github.com/stympy/faker.git
   revision: edff2e4898a7222a98e9a9ce81c48d6d88fe26c9
   branch: master
@@ -222,8 +230,6 @@ GEM
     rb-fsevent (0.10.3)
     rb-inotify (0.9.10)
       ffi (>= 0.5.0, < 2)
-    render_sync (0.5.0)
-      em-http-request
     ruby-graphviz (1.2.3)
     ruby_dep (1.5.0)
     rubyzip (1.2.1)
@@ -307,7 +313,7 @@ DEPENDENCIES
   rails (~> 5.2.1)
   rails-erd (~> 1.4, >= 1.4.7)
   rails-html-sanitizer (~> 1.0.4)
-  render_sync (~> 0.5.0)
+  render_sync!
   sass-rails (~> 5.0)
   selenium-webdriver
   spring
@@ -325,4 +331,4 @@ RUBY VERSION
    ruby 2.5.1p57
 
 BUNDLED WITH
-   1.16.3
+   1.16.4

@@ -94,7 +94,8 @@ gem 'will_paginate', '~> 3.1', '>= 3.1.5'
 gem 'will_paginate-bootstrap', '~> 1.0', '>= 1.0.1'
 
 # Render_Sync - Realtime partials
-gem 'render_sync', '~> 0.5.0'
+# gem 'render_sync', '~> 0.5.0'
+gem 'render_sync', git: 'https://github.com/reymundotenorio/render_sync', branch: 'master'
 # Render_Sync with Pusher
 gem 'pusher', '~> 1.3', '>= 1.3.1'
 # Faye (Only to prevent precompile heroku error)
