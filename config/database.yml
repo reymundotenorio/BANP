@@ -12,9 +12,9 @@
 default: &default
   adapter: mysql2
   encoding: utf8
-  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
-  username: <%= ENV["database_username"] %>
-  password: <%= ENV["database_password"] %>
+  pool: <%= ENV.fetch('RAILS_MAX_THREADS') { 5 } %>
+  username: <%= ENV['database_username'] %>
+  password: <%= ENV['database_password'] %>
   socket: /var/run/mysqld/mysqld.sock
 
 development:
@@ -44,11 +44,11 @@ test:
 #
 # You can use this database configuration with:
 #
-#   production:
-#     url: <%= ENV['DATABASE_URL'] %>
-#
 production:
-  <<: *default
-  database: banp_production
-  username: banp
-  password: <%= ENV['BANP_DATABASE_PASSWORD'] %>
+  url: <%= ENV['database_url'] %>
+#
+# production:
+#   <<: *default
+#   database: banp_production
+#   username: banp
+#   password: <%= ENV['BANP_DATABASE_PASSWORD'] %>
