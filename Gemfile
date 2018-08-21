@@ -93,12 +93,12 @@ gem 'will_paginate', '~> 3.1', '>= 3.1.5'
 # Will Paginate - Bootstrap Pagination
 gem 'will_paginate-bootstrap', '~> 1.0', '>= 1.0.1'
 
-# Render_Sync - Realtime partials
-gem 'render_sync', '~> 0.5.0'
-# Render_Sync with Pusher
-gem 'pusher', '~> 1.3', '>= 1.3.1'
-# Faye (Only to prevent precompile heroku error)
-gem 'faye', '~> 1.2', '>= 1.2.2'
+# # Render_Sync - Realtime partials
+# gem 'render_sync', '~> 0.5.0'
+# # Render_Sync with Pusher
+# gem 'pusher', '~> 1.3', '>= 1.3.1'
+# # Faye (Only to prevent precompile heroku error)
+# gem 'faye', '~> 1.2', '>= 1.2.2'
 
 # Bootstrap 3
 gem 'bootstrap-sass', '~> 3.3.7'
