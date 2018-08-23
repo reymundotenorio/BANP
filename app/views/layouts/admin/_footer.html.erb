@@ -1,0 +1,33 @@
+<footer>
+  <section class="footer-top">
+    <div class="container">
+      <div class="row">
+        <div class="col-xs-12 col-sm-2 col-md-1">
+          <div class="footer-legal">
+            <%= image_tag 'img/footer-usda-organic.png', class: "img-responsive", alt: "USDA Organic" %>
+          </div>
+        </div>
+
+        <div class="col-xs-12 col-sm-10 col-md-11">
+          <div class="footer-legal">
+            <p><span>&copy; <%= Time.now.year %></span> <span>Better and Nice Produce Corp. <span>Miami, Florida</span></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="footer-bottom hidden">
+    <div class="container">
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="footer-logo">
+            <%= link_to (admin_root_path) do %>
+            <p class="banp-logo">BANP</p>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</footer>

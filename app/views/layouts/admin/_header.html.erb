@@ -1,0 +1,80 @@
+<header id="back-top" class="header-top navbar-fixed-top affix-top" role="navigation" data-spy="affix" data-offset-top="1">
+  <!-- Top navbar -->
+  <section class="top-navbar">
+    <!-- Container -->
+    <div class="container">
+      <!-- Navbar brand top -->
+      <div class="navbar-brand-top">
+        <!-- Navbar brand row -->
+        <div class="row navbar-brand-row">
+          <div class="col-xs-12 col-sm-4 col-md-6 hidden-xs">
+            <!-- Logo -->
+            <div class="logo-top">
+              <%= link_to (admin_root_path) do %><p class="banp-logo">BANP</p><% end %>
+            </div>
+            <!-- End Logo -->
+          </div>
+
+          <div class="col-xs-12 col-sm-8 col-md-6">
+            <!-- Settings container -->
+            <div class="settings-container">
+              <!-- Search button -->
+              <%= render 'layouts/admin/search-button' %>
+              <!-- End Search button -->
+
+              <!-- Languages -->
+              <%= render 'layouts/admin/languages' %>
+              <!-- End Languages -->
+
+              <!-- Notifications -->
+              <%= render 'layouts/admin/notifications' %>
+              <!-- End Notifications -->
+
+              <!-- User -->
+              <%= render 'layouts/admin/user' %>
+              <!-- End User -->
+            </div>
+            <!-- End Settings container -->
+          </div>
+        </div>
+        <!-- End Navbar brand row -->
+      </div>
+      <!-- End Navbar brand top -->
+    </div>
+    <!-- End Container -->
+
+    <!-- Navbar default -->
+    <nav class="navbar navbar-default" role="navigation">
+      <!-- Container -->
+      <div class="container">
+        <!-- Navbar mobile -->
+        <div class="navbar-header">
+          <!-- Navbar toggle -->
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar top-bar"></span>
+            <span class="icon-bar middle-bar"></span>
+            <span class="icon-bar bottom-bar"></span>
+          </button>
+          <!-- End Navbar toggle -->
+
+          <!-- Logo mobile -->
+          <%= link_to (admin_root_path), class: "navbar-brand visible-xs" do %><p class="banp-logo">BANP</p><% end %>
+          <!-- End Logo mobile -->
+        </div>
+        <!-- End Navbar mobile -->
+
+        <!-- Navbar collapse -->
+        <%= render 'layouts/admin/navigation' %>
+        <!-- End Navbar collapse -->
+      </div>
+      <!-- Container -->
+    </nav>
+    <!-- End Navbar default -->
+  </section>
+  <!-- End Top navbar -->
+
+  <!-- Search form -->
+  <%= render 'layouts/admin/search-form' %>
+  <!-- End Search form -->
+</header>

@@ -1,0 +1,108 @@
+<div class="collapse navbar-collapse" id="navbar">
+  <!-- Navbar nav -->
+  <ul class="nav navbar-nav">
+    <!-- Dashboard -->
+    <li>
+      <a href="#"><i class="fas fa-tachometer-alt"></i> <%= t('header.navigation.dashboard') %></a>
+    </li>
+    <!-- End Dashboard -->
+
+    <!-- Providers -->
+    <li>
+      <%= link_to (admin_providers_path), class: "#{'active' if controller_name == 'providers'}" do %><i class="fas fa-building"></i> <span><%= t('header.navigation.providers') %></span></a><% end %>
+    </li>
+    <!-- End Providers -->
+
+    <!-- Customers -->
+    <li>
+      <a href="#"><i class="fas fa-users"></i> <%= t('header.navigation.customers') %></a>
+    </li>
+    <!-- End Customers -->
+
+    <!-- Catalog -->
+    <li class="dropdown ">
+      <a href="#" class="dropdown-toggle <%= 'active' if (controller_name == 'categories' or controller_name == 'products') %>" data-toggle="dropdown">
+        <i class="fas fa-list-alt"></i> <%= t('header.navigation.catalog') %> <i class="fas fa-caret-down"></i>
+      </a>
+      <ul class="dropdown-menu">
+        <li>
+          <%= link_to (admin_categories_path), class: "#{'active' if controller_name == 'categories'}" do %><i class="fas fa-tags"></i> <span><%= t('header.navigation.categories') %></span></a><% end %>
+        </li>
+        <li>
+          <%= link_to (admin_products_path), class: "#{'active' if controller_name == 'products'}" do %><i class="fas fa-cubes"></i> <span><%= t('header.navigation.products') %></span></a><% end %>
+        </li>
+      </ul>
+    </li>
+    <!-- End Catalog -->
+
+    <!-- Purchases -->
+    <li class="dropdown ">
+      <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+        <i class="fas fa-shopping-bag"></i> <%= t('header.navigation.purchases') %> <i class="fas fa-caret-down"></i>
+      </a>
+      <ul class="dropdown-menu">
+        <li>
+          <a href="#"><i class="far fa-newspaper"></i> <%= t('header.navigation.orders') %></a>
+        </li>
+        <li>
+          <a href="#"><i class="fas fa-cart-arrow-down"></i> <%= t('header.navigation.receptions') %></a>
+        </li>
+        <li>
+          <a href="#"><i class="fas fa-archive"></i> <%= t('header.navigation.inventory') %></a>
+        </li>
+        <li>
+          <a href="#"><i class="fas fa-undo"></i> <%= t('header.navigation.returns') %></a>
+        </li>
+      </ul>
+    </li>
+    <!-- End Purchases -->
+
+    <!-- Sales -->
+    <li class="dropdown ">
+      <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+        <i class="fas fa-shopping-cart"></i> <%= t('header.navigation.sales') %> <i class="fas fa-caret-down"></i>
+      </a>
+      <ul class="dropdown-menu">
+        <li>
+          <a href="#"><i class="far fa-newspaper"></i> <%= t('header.navigation.orders') %></a>
+        </li>
+        <li>
+          <a href="#"><i class="fas fa-cart-plus"></i> <%= t('header.navigation.invoicing') %></a>
+        </li>
+        <li>
+          <a href="#"><i class="fas fa-truck"></i> <%= t('header.navigation.deliveries') %></a>
+        </li>
+        <li>
+          <a href="#"><i class="fas fa-calculator"></i> <%= t('header.navigation.quotes') %></a>
+        </li>
+        <li>
+          <a href="#"><i class="fas fa-undo"></i> <%= t('header.navigation.returns') %></a>
+        </li>
+      </ul>
+    </li>
+    <!-- End Sales -->
+
+    <!-- Reports -->
+    <li class="dropdown ">
+      <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+        <i class="fas fa-chart-bar"></i> <%= t('header.navigation.reports') %> <i class="fas fa-caret-down"></i>
+      </a>
+      <ul class="dropdown-menu">
+        <li>
+          <a href="#"><i class="fas fa-shopping-bag"></i> <%= t('header.navigation.purchases') %></a>
+        </li>
+        <li>
+          <a href="#"><i class="fas fa-shopping-cart"></i> <%= t('header.navigation.sales') %></a>
+        </li>
+      </ul>
+    </li>
+    <!-- End Reportes -->
+
+    <!-- Employees -->
+    <li>
+      <a href="#"><i class="fas fa-briefcase"></i> <%= t('header.navigation.employees') %></a>
+    </li>
+    <!-- End Employees -->
+  </ul>
+  <!-- End Navbar nav -->
+</div>

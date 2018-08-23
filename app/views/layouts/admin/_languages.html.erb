@@ -1,0 +1,16 @@
+<div class="language-container">
+  <div class="dropdown">
+    <a href="#" class="custom-btn dropdown-toggle" data-toggle="dropdown">
+      <i class="fas fa-language"></i>
+    </a>
+
+    <ul class="dropdown-menu">
+      <li class="">
+        <%= link_to (change_language_path(:en)), class: "#{'active' if I18n.locale.to_s == 'en'}" do %><span class="flag-icon flag-icon-us"></span> <span>English</span><% end %>
+      </li>
+      <li class="">
+        <%= link_to (change_language_path(:es)), class: "#{'active' if I18n.locale.to_s == 'es'}" do %><span class="flag-icon flag-icon-es"></span> <span>Español</span><% end %>
+      </li>
+    </ul>
+  </div>
+</div>
