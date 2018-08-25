@@ -1,0 +1,86 @@
+// -----------------------------------------------------------------------------
+// This file contains all styles related to the button component.
+// -----------------------------------------------------------------------------
+
+@mixin btn-style{
+  -webkit-transition: all 0.5s ease;
+  transition: all 0.5s ease;
+  background-color: $btn-color;
+  padding: 5px 15px;
+  color: $white;
+  text-decoration: none;
+  text-align: center;
+  border: none;
+  border-radius: 0px;
+
+  white-space: pre-wrap;
+  white-space: -moz-pre-wrap;
+  white-space: -pre-wrap;
+  white-space: -o-pre-wrap;
+  word-wrap: break-word;
+
+  line-height: 30px;
+  outline: none;
+
+  font-size: 16px;
+  // box-shadow: 0px 3px 10px rgba($black,0.25), 0px 3px 10px rgba($black,0.18);
+  -webkit-box-shadow: 0px 2px 5px 0px rgba($black,0.16), 0px 2px 10px 0px rgba($black,0.12);
+  box-shadow: 0px 2px 5px 0px rgba($black,0.16), 0px 2px 10px 0px rgba($black,0.12);
+
+  @include on-event{
+    background-color: shade($btn-color, 10%);
+    text-decoration: none;
+    color: $white;
+    border: none;
+    // box-shadow: none;
+    -webkit-box-shadow: 0px 5px 11px 0px rgba($black,.18), 0px 4px 15px 0px rgba($black,.15);
+    box-shadow: 0px 5px 11px 0px rgba($black,.18), 0px 4px 15px 0px rgba($black,.15);
+
+    outline: 0px solid $transparent;
+  }
+}
+
+// Override buttons behavior
+.btn-general{
+  @include btn-style;
+
+  &.btn-default{
+    background-color: $sixth-color;
+
+    @include on-event{
+      background-color: shade($sixth-color, 10%);
+      color: $white;
+    }
+  }
+
+  &.btn-success{
+    background-color: $third-color;
+
+    @include on-event{
+      background-color: shade($third-color, 10%);
+    }
+  }
+
+  &.btn-warning{
+    background-color: $fourth-color;
+
+    @include on-event{
+      background-color: shade($fourth-color, 10%);
+    }
+  }
+
+  &.btn-danger{
+    background-color: $fifth-color;
+
+    @include on-event{
+      background-color: shade($fifth-color, 10%);
+    }
+  }
+
+  &.active, &:active{
+    &.focus, &:focus, &:hover{
+      @extend .btn-default;
+    }
+  }
+}
+// End Override btn default behavior

@@ -1,0 +1,298 @@
+// -----------------------------------------------------------------------------
+// This file contains all styles related to the default Bootstrap components.
+// -----------------------------------------------------------------------------
+
+.alert{
+  border-radius: 0px;
+  color: $white;
+  border: none;
+  margin-bottom: 25px;
+
+  &.alert-success{
+    background-color: $third-color;
+  }
+
+  &.alert-danger{
+    background-color: $fifth-color;
+  }
+
+  .close{
+    opacity: 0.7;
+    color: $white;
+    -webkit-transition: all 0.3s ease;
+    transition: all 0.3s ease;
+
+    @include on-event{
+      opacity: 1;
+    }
+  }
+
+  strong{
+    i{
+      padding-right: 5px;
+    }
+  }
+
+  p{
+    color: $white;
+  }
+
+  ul{
+    margin: 0px;
+    padding: 0px;
+    list-style: none;
+
+    padding-top: 5px;
+
+    li{
+      p{
+        margin: 0px;
+      }
+    }
+  }
+
+}
+
+.material-card{
+  position: relative;
+  background-color: $white;
+  padding: 15px;
+  margin: 15px 0px;
+
+  float: left;
+  width: 100%;
+
+  &.false{
+    // background-color: rgba($hover-color, 0.1);
+    p{
+      color: $hover-color;
+    }
+  }
+
+  &.material-card-pdf{
+    // background-color: rgba($body-color, 0.5);
+    background-color: $transparent;
+  }
+}
+
+.shadow-card{
+  -webkit-box-shadow: 0px 3px 10px rgba($black,0.25), 0px 3px 10px rgba($black,0.18);
+  box-shadow: 0px 3px 10px rgba($black,0.25), 0px 3px 10px rgba($black,0.18);
+
+  &.shadow-card-pdf{
+    // -webkit-box-shadow: 0px 1px 15px rgba($black,0.25), 0px 1px 15px rgba($black,0.18);
+    // box-shadow: 0px 1px 15px rgba($black,0.25), 0px 1px 15px rgba($black,0.18);
+
+    -webkit-box-shadow: none;
+    box-shadow: none;
+  }
+}
+
+.title-container{
+  padding-top: 5px;
+  padding-bottom: 30px;
+
+  h1{
+    margin: 0px;
+    text-align: center;
+
+    i{
+      padding-right: 5px;
+    }
+  }
+
+  &.title-container-pdf{
+    padding: 0px;
+
+    p{
+      font-weight: bold;
+      color: $text-color;
+      margin: 0px;
+    }
+  }
+
+  .btn-new-container{
+    text-align: center;
+    padding-top: 20px;
+
+    i{
+      padding-right: 5px;
+    }
+  }
+}
+
+.breadcrumb{
+  background-color: $transparent;
+  padding: 0px;
+  margin: 0px;
+  padding-bottom: 5px;
+
+  >li{
+    i{
+      padding-right: 5px;
+    }
+
+    &.invisible{
+      visibility: hidden;
+    }
+  }
+}
+
+.pagination{
+  border-radius: 0px;
+
+  >li{
+    &:first-child, &:last-child{
+      >a, >span{
+        border-radius: 0px;
+      }
+    }
+
+    >a, >span{
+      border: none;
+      color: $text-color;
+
+      @include on-event{
+        color: $text-color;
+        background-color: $grey;
+
+        -webkit-box-shadow: 0px 2px 5px 0px rgba($black,0.16), 0px 2px 10px 0px rgba($black,0.12);
+        box-shadow: 0px 2px 5px 0px rgba($black,0.16), 0px 2px 10px 0px rgba($black,0.12);
+      }
+    }
+
+    &.active{
+      >a, >span{
+        background-color: $btn-color;
+        color: $white;
+
+        -webkit-box-shadow: 0px 2px 5px 0px rgba($black,0.16), 0px 2px 10px 0px rgba($black,0.12);
+        box-shadow: 0px 2px 5px 0px rgba($black,0.16), 0px 2px 10px 0px rgba($black,0.12);
+
+        @include on-event{
+          background-color: shade($btn-color, 10%);
+
+          -webkit-box-shadow: 0px 5px 11px 0px rgba($black,.18), 0px 4px 15px 0px rgba($black,.15);
+          box-shadow: 0px 5px 11px 0px rgba($black,.18), 0px 4px 15px 0px rgba($black,.15);
+        }
+      }
+    }
+  }
+}
+
+
+.modal-open{
+  padding-right: 0px !important;
+}
+
+.modal{
+  padding-right: 0px !important;
+
+  .modal-dialog{
+    width: 100%;
+    margin: 0px;
+
+    .modal-content{
+      background-color: $transparent;
+      -webkit-box-shadow: none;
+      box-shadow: none;
+      border: none;
+
+      button.close{
+        color: $white;
+        font-size: 32px;
+        opacity: 1;
+        margin-bottom: 5px;
+      }
+
+      .modal-body{
+        padding: 0px 15px;
+      }
+
+      .index{
+        padding: 0px;
+
+        .material-card{
+          margin: 0px;
+        }
+      }
+    }
+  }
+}
+
+
+@media (min-width: 768px) {
+
+  .title-container{
+    float: none;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: row;
+    flex-direction: row;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-pack: justify;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+
+    padding-bottom: 10px;
+
+    h1{
+      text-align: left;
+
+      &.false{
+        // color: $hover-color;
+      }
+    }
+
+    .btn-new-container{
+      text-align: right;
+      padding-top: 0px;
+    }
+  }
+
+  .modal{
+    .modal-dialog{
+      width: (750px - 15px);
+      margin: 0px auto;
+
+      // .modal-content{
+      //   .modal-body{
+      //     padding-right: 0px;
+      //   }
+      // }
+    }
+  }
+
+}
+
+@media (min-width: 992px) {
+
+  .modal{
+    .modal-dialog{
+      width: (970px - 15px);
+    }
+  }
+
+}
+
+
+@media (min-width: 1200px) {
+
+  .modal{
+    .modal-dialog{
+      width: (1170px - 15px);
+
+      .modal-content{
+        .modal-body{
+          padding-right: 0px;
+        }
+      }
+    }
+  }
+
+}

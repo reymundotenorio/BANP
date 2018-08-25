@@ -1,0 +1,212 @@
+.history {
+  padding-bottom: 15px;
+  // min-height: 74.1vh;
+
+  // Timeline
+  .about-timeline {
+    padding: 15px 0;
+
+    .timeline-info {
+      margin-bottom: 25px;
+
+      &.first-last-row {
+        margin-bottom: 0;
+      }
+
+      &:nth-last-child(2) {
+        margin-bottom: 0;
+      }
+      // Timeline circle
+      .timeline-circle {
+        .circle {
+          margin: 0 auto;
+          display: block;
+          margin-bottom: 10px;
+          z-index: 1;
+          position: relative;
+          color: $white;
+          position: relative;
+          display: -webkit-box;
+          display: -ms-flexbox;
+          display: flex;
+          -webkit-box-align: center;
+          -ms-flex-align: center;
+          align-items: center;
+          -webkit-box-pack: center;
+          -ms-flex-pack: center;
+          justify-content: center;
+          height: 45px;
+          width: 45px;
+          border-radius: 100%;
+          -webkit-box-shadow: 0 3px 10px rgba($black,0.25), 0 3px 10px rgba($black,0.18);
+          box-shadow: 0 3px 10px rgba($black,0.25), 0 3px 10px rgba($black,0.18);
+          background-color: $secondary-color;
+
+          i {
+            font-size: 20px;
+          }
+
+          &.edit {
+            background-color: $fourth-color;
+          }
+
+          &.new {
+            background-color: $third-color;
+          }
+        }
+      }
+      // End Timeline circle
+      // Timeline content
+      .timeline-content {
+        padding-top: 5px;
+        margin-bottom: 5px;
+
+        .timeline-box {
+          background-color: $white;
+          border-left: 8px solid $secondary-color;
+          -webkit-box-shadow: 0 0 2px 1px rgba(0,0,0,0.17);
+          box-shadow: 0 0 2px 1px rgba(0,0,0,0.17);
+          border-radius: 5px;
+          padding: 20px 15px;
+
+          &.edit {
+            border-left-color: $fourth-color;
+          }
+
+          &.new {
+            border-left-color: $third-color;
+          }
+        }
+      }
+      // End Timeline content
+    }
+
+    .detail-info {
+      .info {
+        border-bottom: 1px solid #ddd;
+        padding: 10px 0;
+
+        &:first-child {
+          padding-top: 0;
+        }
+
+        &:last-child {
+          border-bottom: none;
+          padding-bottom: 0;
+        }
+      }
+
+      p {
+        margin: 0;
+      }
+
+      .title {
+        padding-bottom: 5px;
+
+        &.datetime {
+          text-align: right;
+          color: rgba($text-color, 0.8);
+          font-style: italic;
+          padding-bottom: 10px;
+        }
+      }
+
+      .before {
+        color: $fifth-color;
+      }
+
+      .after {
+        color: $third-color;
+      }
+    }
+  }
+  // END Timeline
+}
+@media (min-width: 992px) {
+  .history {
+    // Timeline
+    .about-timeline {
+      padding: 30px;
+
+      .timeline-info {
+        display: table;
+        width: 100%;
+        margin-bottom: 30px;
+
+        &:nth-last-child(2) {
+          margin-bottom: 30px;
+        }
+
+        &.first-last-row {
+          margin-bottom: 30px;
+
+          &:last-child {
+            margin-bottom: 0;
+          }
+        }
+        // Timeline circle
+        .timeline-circle {
+          display: table-cell;
+          width: 45px;
+          vertical-align: middle;
+          position: relative;
+
+          .circle {
+            margin-bottom: 0;
+          }
+
+          .vertical-line {
+            width: 1px;
+            background-color: rgba($text-color,0.25);
+            position: absolute;
+            top: 0;
+            bottom: -30px;
+            right: 22px;
+            left: auto;
+            // z-index: 0;
+            &.first-line {
+              top: 0;
+            }
+          }
+
+          .begin-final-divider {
+            width: 40px;
+            height: 4px;
+            margin: 0 2px 0 auto;
+            position: relative;
+            background-color: tint($text-color, 70%);
+            z-index: 1;
+          }
+        }
+        // End Timeline circle
+        // Timeline horizontal line
+        .timeline-horizontal-line {
+          display: table-cell;
+          width: 32px;
+          vertical-align: middle;
+
+          .horizontal-line {
+            height: 1px;
+            width: 100%;
+            background-color: rgba($text-color,0.25);
+          }
+        }
+        // End Timeline horizontal line
+        // Timeline content
+        .timeline-content {
+          padding-top: 0;
+          margin-bottom: 0;
+          padding-left: 0;
+          padding-right: 0;
+
+          .timeline-box {
+            padding-left: 30px;
+            padding-right: 30px;
+          }
+        }
+        // End Timeline content
+      }
+    }
+    // END Timeline
+  }
+}

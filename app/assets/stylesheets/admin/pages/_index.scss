@@ -1,0 +1,360 @@
+// ----------------------------------------------------------
+// This file contains all styles related to the index pages
+// ----------------------------------------------------------
+
+.index{
+  padding-bottom: 15px;
+  // min-height: 74.1vh;
+
+  &.index-pdf{
+    padding-top: 10px;
+    min-height: none;
+  }
+
+  .search-record{
+    padding-bottom: 25px;
+
+    .input-group{
+      width: 100%;
+      position: relative;
+
+      .input-group-btn{
+        padding-left: 10px;
+      }
+    }
+  }
+
+  .show-buttons{
+    .btn-container{
+      text-align: center;
+      margin-bottom: 15px;
+
+      &:last-child{
+        margin-bottom: 0px;
+      }
+
+      .btn-general{
+        i{
+          padding-right: 5px;
+        }
+      }
+    }
+  }
+
+  .table{
+    margin-top: 30px;
+    display: block;
+
+    &.table-pdf{
+      display: table;
+      margin-top: 0px;
+
+      // thead{
+      //   display: table-header-group;
+      // }
+
+      tr{
+        page-break-before: always;
+        page-break-after: always;
+        page-break-inside: avoid;
+
+        th{
+          padding-left: 8px;
+          padding-right: 8px;
+
+          &:first-child{
+            padding-left: 0px;
+          }
+
+          &:last-child{
+            padding-right: 0px;
+          }
+        }
+      }
+
+      tbody{
+        display: table-row-group;
+        vertical-align: top;
+
+        tr{
+          display: table-row;
+          margin-top: 0px;
+
+          &.false{
+            td{
+              p{
+                color: $hover-color;
+              }
+            }
+          }
+
+          td{
+            border-top: 1px solid #ddd;
+            padding-left: 8px;
+            padding-right: 8px;
+
+            &:first-child{
+              padding-left: 0px;
+            }
+
+            &:last-child{
+              padding-right: 0px;
+            }
+
+            &:before{
+              display: none;
+            }
+          }
+        }
+      }
+    }
+
+    thead{
+      display: none;
+    }
+
+    >tbody{
+      display: block;
+
+      >tr{
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-orient: vertical;
+        -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+        flex-direction: column;
+        -webkit-box-pack: center;
+        -ms-flex-pack: center;
+        justify-content: center;
+        -webkit-box-align: stretch;
+        -ms-flex-align: stretch;
+        align-items: stretch;
+
+        -webkit-transition: all 0.3s ease;
+        transition: all 0.3s ease;
+
+        margin: 0px -15px;
+        padding: 0px 15px;
+
+        margin-top: 15px;
+        cursor: pointer;
+
+        // No clickable row
+        &.no-clickable-row{
+          cursor: auto;
+
+          @include on-event{
+            background-color: transparent;
+          }
+
+          &.false{
+            @include on-event{
+              background-color: transparent;
+            }
+          }
+        }
+        // End No clickable row
+
+        @include on-event{
+          background-color: $grey;
+        }
+
+        &.false{
+          @include on-event{
+            background-color: rgba($hover-color, 0.2);
+          }
+        }
+
+        &.false{
+          // background-color: rgba($hover-color, 0.1);
+
+          >td{
+            p{
+              color: $hover-color;
+            }
+
+            &:before{
+              color: $hover-color;
+            }
+          }
+        }
+
+        &:first-child{
+          margin-top: 0px;
+
+          >td{
+            &:first-child{
+              border-top: none;
+              // margin-top: 0px;
+            }
+          }
+        }
+
+        >td{
+          p{
+            margin: 0px;
+          }
+
+          &:first-child{
+            border-top: none;
+            // margin-top: 15px;
+          }
+
+          &:before{
+            content: attr(data-header);
+            display: block;
+            font-weight: bold;
+            padding-bottom: 5px;
+          }
+        }
+      }
+    }
+
+    .actions-buttons{
+      text-align: left;
+
+      &.open{
+        .dropdown-menu{
+          @extend .custom-btn-group;
+          background-color: $grey;
+          border: none;
+          border-radius: 0px;
+
+          left: -8px;
+          right: auto;
+
+          margin-bottom: 8px;
+
+          &:after{
+            content: "";
+            position: absolute;
+            bottom: -16px;
+            top: auto;
+
+            left: 8px;
+            right: auto;
+
+            font-size: 0px;
+            border: 8px solid transparent;
+            border-top-color: $grey;
+          }
+
+          >li>a{
+            @extend .custom-btn;
+
+            background-color: $transparent;
+            border: none;
+            -webkit-box-shadow: none;
+            box-shadow: none;
+
+            padding: 0px;
+
+            color: $text-color;
+
+            @include on-event{
+              color: $hover-color;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+
+
+
+@media (min-width: 992px) {
+
+  .index{
+    .search-record{
+      padding-bottom: 15px;
+    }
+
+    .show-buttons{
+      text-align: right;
+
+      .btn-container{
+        margin-bottom: 0px;
+        display: inline-block;
+        padding-right: 10px;
+
+        &:last-child{
+          padding-right: 0px;
+        }
+      }
+    }
+
+    .table{
+      display: table;
+      margin-top: 15px;
+
+      thead{
+        display: table-header-group;
+
+        >tr{
+          >th{
+            // text-align: center;
+          }
+        }
+      }
+
+      >tbody{
+        display: table-row-group;
+
+        >tr{
+          display: table-row;
+          margin: 0px;
+          padding: 0px;
+
+          // @include on-event{
+          //   background-color: $grey;
+          // }
+          //
+          // &.false{
+          //   @include on-event{
+          //     background-color: rgba($hover-color, 0.2);
+          //   }
+          // }
+
+          &:first-child{
+            >td{
+              &:first-child{
+                border-top: 1px solid #ddd;
+              }
+            }
+          }
+
+          >td{
+            &:first-child{
+              border-top: 1px solid #ddd;
+              // margin-top: 0px;
+            }
+
+            &:before{
+              display: none;
+            }
+          }
+        }
+      }
+
+      .actions-buttons{
+        text-align: center;
+
+        &.open{
+          .dropdown-menu{
+            right: -8px;
+            left: auto;
+
+            &:after{
+              right: 40px;
+              left: auto;
+            }
+          }
+        }
+      }
+    }
+  }
+
+}

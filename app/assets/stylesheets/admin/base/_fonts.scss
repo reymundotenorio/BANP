@@ -1,0 +1,48 @@
+// -----------------------------------------------------------------------------
+// This file contains all @font-face declarations, if any.
+// -----------------------------------------------------------------------------
+
+// 100 - Thin
+// 200 - Extra Light, Ultra Light
+// 300 - Light
+// 400 - Normal, Book, Regular
+// 500 - Medium
+// 600 - Semi Bold, Demi Bold
+// 700 - Bold
+// 800 - Extra Bold, Ultra Bold
+// 900 - Black, Heavy
+
+// Open Sans
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700');
+
+// Moserrat
+@import url('https://fonts.googleapis.com/css?family=Montserrat:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i');
+
+//Ubuntu
+@import url('https://fonts.googleapis.com/css?family=Ubuntu:400,700');
+
+// Font Awesome 5.0.7
+@import url('https://use.fontawesome.com/releases/v5.0.7/css/all.css');
+
+//Cyclo
+@font-face {
+  font-family: 'Cyclo';
+
+  // src: url('https://s3.amazonaws.com/betterandnice/fonts/Cyclo/Cyclo.eot'),
+  // url('https://s3.amazonaws.com/betterandnice/fonts/Cyclo/Cyclo.eot?#iefix') format("embedded-opentype"),
+  // url('https://s3.amazonaws.com/betterandnice/fonts/Cyclo/Cyclo.woff2') format("woff2"),
+  // url('https://s3.amazonaws.com/betterandnice/fonts/Cyclo/Cyclo.woff') format("woff"),
+  // url('https://s3.amazonaws.com/betterandnice/fonts/Cyclo/Cyclo.otf'),
+  // url('https://s3.amazonaws.com/betterandnice/fonts/Cyclo/Cyclo.ttf') format("truetype");
+
+  src: url('https://res.cloudinary.com/reymundotenorio/raw/upload/v1521873857/Cyclo.eot'),
+  url('https://res.cloudinary.com/reymundotenorio/raw/upload/v1521873857/Cyclo.eot?#iefix') format("embedded-opentype"),
+  url('https://res.cloudinary.com/reymundotenorio/raw/upload/v1521873856/Cyclo.woff2') format("woff2"),
+  url('https://res.cloudinary.com/reymundotenorio/raw/upload/v1521873856/Cyclo.woff') format("woff"),
+  url('https://res.cloudinary.com/reymundotenorio/raw/upload/v1521873859/Cyclo.otf'),
+  url('https://res.cloudinary.com/reymundotenorio/raw/upload/v1521873857/Cyclo.ttf') format("truetype");
+
+  font-weight: normal;
+  font-style: normal;
+}
+//End Cyclo

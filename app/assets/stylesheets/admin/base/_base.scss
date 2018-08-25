@@ -1,0 +1,89 @@
+// -----------------------------------------------------------------------------
+// This file contains very basic styles.
+// -----------------------------------------------------------------------------
+
+body{
+  background-color: $body-color;
+  font-family: $primary-font;
+  font-style: normal;
+  font-size: 16px;
+  line-height: 25px;
+  color: $text-color;
+
+  &.body-pdf{
+    background-color: $white;
+    font-size: 14px;
+    line-height: 20px;
+  }
+}
+
+// Main titles
+h1,
+h2,
+h3,
+h4,
+h5{
+  color: $text-color;
+  font-family: $secondary-font;
+  text-transform: none;
+}
+
+h1{
+  font-size: 24px;
+}
+
+p{
+  color: $text-color;
+  word-wrap: break-word;
+}
+
+// Basic styles for links
+a{
+  -webkit-transition: all 0.3s ease;
+  transition: all 0.3s ease;
+  color: $hover-color;
+  text-decoration: none;
+
+  @include on-event{
+    text-decoration: underline;
+    color: $hover-color;
+  }
+}
+
+.form-control{
+  border-radius: 0px;
+  border: none;
+  color: $text-color;
+  font-size: 16px;
+  background-color: $transparent;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  border-bottom: 1px solid #ddd;
+  -webkit-transition: all 0.3s ease;
+  transition: all 0.3s ease;
+  height: 40px;
+
+  @include placeholder{
+    color: tint($text-color, 15%);
+  }
+
+  @include on-event{
+    -webkit-box-shadow: none;
+    box-shadow: none;
+  }
+
+  &:focus{
+    -webkit-box-shadow: 0 1px 0 0 tint($btn-color, 15%);
+    box-shadow: 0 1px 0 0 tint($btn-color, 15%);
+    border-bottom: 1px solid tint($btn-color, 15%);
+  }
+}
+
+
+@media (min-width: 768px) {
+
+  h1{
+    font-size: 30px;
+  }
+
+}
