@@ -145,12 +145,12 @@
           cursor: auto;
 
           @include on-event{
-            background-color: transparent;
+            background-color: $transparent;
           }
 
           &.false{
             @include on-event{
-              background-color: transparent;
+              background-color: $transparent;
             }
           }
         }
@@ -236,7 +236,7 @@
             right: auto;
 
             font-size: 0px;
-            border: 8px solid transparent;
+            border: 8px solid $transparent;
             border-top-color: $grey;
           }
 

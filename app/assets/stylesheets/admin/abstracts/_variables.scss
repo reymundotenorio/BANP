@@ -6,9 +6,10 @@
 $primary-font: 'Montserrat', 'Open Sans', sans-serif;
 $secondary-font: 'Ubuntu', sans-serif;
 $third-font: 'Cyclo', sans-serif;
+
 /// Copy text color
 /// @type Color
-// $text-color: #555555 !default;
+
 $text-color: #444444 !default;
 
 //color on variables
@@ -18,19 +19,19 @@ $grey: #f5f5f5;
 $transparent: transparent;
 
 // Company color pallete
-$primary-color: #EC2931; // Cherry Tomato
-$secondary-color: #5F4B8B; // Ultra Violet
-$third-color: #00A68C; // Arcadia
+$primary-color: #ec2931; // Cherry Tomato
+$secondary-color: #5f4b8b; // Ultra Violet
+$third-color: #00a68c; // Arcadia
 $fourth-color: #f39c12; // Orange - https://flatuicolors.com/palette/defo
 $fifth-color: #c0392b; // Pomegranada - https://flatuicolors.com/palette/defo
 $sixth-color: #2980b9; // Peter River - https://flatuicolors.com/palette/defo
-$seventh-color: #EBE1DF; // Almost Mauve
+$seventh-color: #ebe1df; // Almost Mauve
 $btn-color: $secondary-color;
 $hover-color: $primary-color;
-$body-color: $seventh-color;
+$body-color: tint($primary-color, 95%); // $seventh-color
 
 /// Relative or absolute URL where all assets are served from
 /// @type String
 /// @example scss - When using a CDN
-///   $base-url: 'http://cdn.example.com/assets/';
+/// $base-url: 'http://cdn.example.com/assets/';
 $base-url: '/assets/' !default;
