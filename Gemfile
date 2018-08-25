@@ -76,6 +76,9 @@ group :development do
   gem 'railroady', '~> 1.4', '>= 1.4.2'
 end
 
+# Use jquery as the JavaScript library
+gem 'jquery-rails'
+
 # Faker - fill data
 gem 'faker', git: 'https://github.com/stympy/faker.git', branch: 'master'
 
