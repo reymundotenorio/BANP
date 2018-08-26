@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   # End Root
 
   # Change language
-  get '/change_language/:locale', to: 'settings#change_locale', as: 'change_language'
+  get '/change_language/:lang', to: 'settings#change_lang', as: 'change_language'
   # End Change language
 
   # Admin namespace

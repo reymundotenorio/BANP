@@ -6,7 +6,6 @@
 .header-top{
   -webkit-box-shadow: 0px 2px 6px rgba($black,0.2);
   box-shadow: 0px 2px 6px rgba($black,0.2);
-
   @include primary-color;
   // background-color: $primary-color;
 
@@ -52,9 +51,6 @@
     .top-navbar{
       // Navbar brand top
       .navbar-brand-top{
-        // padding-top: 2px;
-        // padding-bottom: 2px;
-
         .navbar-brand-row {
           // Settings container
           .settings-container {
@@ -100,12 +96,6 @@
       // End Navbar toggle
     }
     // End Navbar default
-
-    // Fix affix header
-    .fix-body{
-      // padding-top: 108px + 40px + 15px;
-    }
-    // End Fix affix header
   }
   // End Affix
 }
@@ -115,7 +105,7 @@
 .fix-body{
   position: relative;
   display: block;
-  padding-top: 156px + 15px;
+  padding-top: 114px;
 }
 // End Fix affix header
 
@@ -127,9 +117,9 @@
     @include primary-color;
 
     .banp-logo{
+      font-size: 24px;
       // color: $text-color;
       // border-color: $text-color;
-      font-size: 24px;
       // font-family: $primary-font;
     }
   }
@@ -189,14 +179,11 @@
           line-height: 16px;
           padding-bottom: 2px;
           font-size: 14px;
-
           color: $white;
-
 
           &:last-child{
             padding-bottom: 0px;
           }
-
         }
       }
 
@@ -228,44 +215,19 @@
         .search-btn-container{
           text-align: center;
           padding: 0px 12px;
-
           display: none;
 
           .search-toggle-button{
+            cursor: not-allowed;
+            pointer-events: none;
+            opacity: 0;
+
             // Search mobile button closed
             &.collapsed{
               cursor: default;
               pointer-events: auto;
-              // color: $hover-color;
-
-              // font-size: 16px;
-              // border: 1px solid $white;
-              // width: 32px;
-              // height: 32px;
-
               opacity: 1;
             } // End Search mobile button closed
-
-            // color: tint($text-color, 30%);
-            cursor: not-allowed;
-            pointer-events: none;
-
-            // font-size: 0px;
-            // border: none;
-            // width: 0px;
-            // height: 0px;
-
-            opacity: 0;
-
-            // color: $white;
-            // font-size: 18px;
-            // font-weight: bold;
-            // width: auto;
-            // border: none;
-            // border-radius: 0px;
-            // margin: 0px;
-            // padding: 0px;
-            // float: none;
           }
         }
         // End Search button
@@ -276,9 +238,7 @@
           padding: 0px 12px;
 
           .dropdown{
-            >a{
-              // color: $white;
-
+            > a{
               @include on-event{
                 text-decoration: none;
               }
@@ -332,6 +292,7 @@
                 @include on-event{
                   text-decoration: none;
                   color: $hover-color;
+                  background-color: $transparent;
                 }
               }
             }
@@ -345,9 +306,7 @@
           padding: 0px 12px;
 
           .dropdown{
-            >a{
-              // color: $white;
-
+            > a{
               @include on-event{
                 text-decoration: none;
               }
@@ -395,6 +354,7 @@
                 @include on-event{
                   text-decoration: none;
                   color: $hover-color;
+                  background-color: $transparent;
                 }
               }
             }
@@ -409,9 +369,7 @@
           padding-right: 0px;
 
           .dropdown{
-            >a{
-              // color: $white;
-
+            > a{
               @include on-event{
                 text-decoration: none;
               }
@@ -440,13 +398,11 @@
               }
 
               span{
-                color: $text-color;
                 text-align: center;
-                display: block;
-                // padding-bottom: 5px;
+                display: inline-block;
 
-                &:last-child{
-                  padding-bottom: 10px;
+                &.profile{
+                  display: block;
                 }
               }
 
@@ -470,6 +426,7 @@
                 @include on-event{
                   text-decoration: none;
                   color: $hover-color;
+                  background-color: $transparent;
                 }
               }
             }
@@ -496,7 +453,6 @@
   // Navbar header
   .navbar-header{
     @include primary-color;
-
     height: auto;
 
     // Navbar brand
@@ -508,7 +464,6 @@
       margin-left: 15px;
       margin-top: 15px;
       margin-bottom: 15px;
-
       -webkit-transition: all 0.3s ease;
       transition: all 0.3s ease;
 
@@ -595,7 +550,6 @@
     -webkit-box-shadow: none;
     box-shadow: none;
     border: none;
-    // background-color: rgba($primary-color, 0.8);
     background-color: $white;
 
     // *** External Vendor Design ***
@@ -631,7 +585,6 @@
       background-color: $transparent;
       font-size: 16px;
       font-weight: bold;
-      // color: $white;
       color: $text-color;
       padding-top: 10px;
       padding-bottom: 10px;
@@ -680,7 +633,7 @@
       // Dropdown menu open
       &.open{
         // Parent item
-        >a{
+        > a{
           background-color: $transparent;
           color: $hover-color;
           border-color: $transparent;
@@ -701,24 +654,15 @@
 
           // List item
           > li{
-
             // Dropdown menu items
-            >a{
-              // color: $white;
-
+            > a{
               @include on-event{
-                // background-color: $hover-color;
-                // color: $white;
               }
             } // End Dropdown menu items
 
             // Activated dropdown item
             &.active > a{
-              // background-color: $hover-color;
-              // color: $white;
-
               @include on-event{
-                // color: $white;
               }
             }
             // End Activated dropdown item
@@ -760,8 +704,8 @@
       .navbar-default{
         // Navbar nav
         ul.navbar-nav{
-          >li{
-            >a{
+          > li{
+            > a{
               i{
                 font-size: 0px;
                 padding-bottom: 0px;
@@ -772,19 +716,13 @@
         // End Navbar nav
       }
       // End Navbar default
-
-      // Fix affix header
-      .fix-body{
-        // padding-top: 96px + 40px + 15px;
-      }
-      // End Fix affix header
     }
   }
   // End Header
 
   // Fix affix header
   .fix-body{
-    padding-top: 163px + 15px;
+    padding-top: 118px;
   }
   // End Fix affix header
 
@@ -829,14 +767,12 @@
       -webkit-box-shadow: none;
       box-shadow: none;
       // *** End External Vendor Design ***
-
     }
     // End Navbar collapse -> Mobile menu dropdown
 
     // Navbar nav
     ul.navbar-nav{
       @include flex-navigation;
-
       padding-top: 0px;
       padding-bottom: 0px;
       margin: 0 auto;
@@ -844,12 +780,11 @@
 
       li{
         @include flex-child;
-
         text-align: center;
       }
 
-      >li{
-        >a{
+      > li{
+        > a{
           padding: 10px 0px;
           border-bottom: 4px solid $transparent;
 
@@ -879,24 +814,15 @@
       // Navigation items
       li a, .open ul.dropdown-menu > li > a, ul.dropdown-menu > li > a{
         font-size: 14px;
-        // color: $text-color;
         word-break: normal;
         white-space: nowrap;
 
         @include on-event{
-          // background-color: $transparent;
-          // color: $primary-color;
-          // text-decoration: none;
         }
 
         // Activated item
         &.active{
-          // background-color: $transparent;
-          // color: $primary-color;
-
           @include on-event{
-            // background-color: $transparent;
-            // color: $secondary-color;
           }
         }
         // End Activated item
@@ -928,8 +854,6 @@
         &.open{
           // Parent item
           > a{
-            // background-color: $transparent;
-            // color: $primary-color;
             border-bottom-color: $hover-color;
           }
           // End Parent item
@@ -944,7 +868,6 @@
             border: none;
             width: auto;
             margin-top: 15px;
-
             left: 50%;
             -webkit-transform: translateX(-50%);
             transform: translateX(-50%);
@@ -977,11 +900,9 @@
               border: none;
 
               // Dropdown menu items
-              >a{
+              > a{
                 text-align: left;
-                // color: $white;
                 word-break: break-word;
-                // white-space: normal;
 
                 @include on-event{
                 }
@@ -1012,7 +933,7 @@
 
   // Fix affix header
   .fix-body{
-    padding-top: 167px + 15px;
+    padding-top: 122px;
   }
   // End Fix affix header
 
@@ -1020,9 +941,8 @@
   .navbar-default{
     // Navbar nav
     ul.navbar-nav{
-
-      >li{
-        >a{
+      > li{
+        > a{
           i{
             font-size: 20px;
           }
@@ -1031,7 +951,6 @@
 
       // Navigation items
       li a, .open ul.dropdown-menu > li > a, ul.dropdown-menu > li > a{
-        // font-size: 16px;
       }
       // End Navigation items
     }
