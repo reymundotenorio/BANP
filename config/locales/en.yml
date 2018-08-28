@@ -29,10 +29,22 @@ en:
   # Models
   activerecord:
     models:
+      employee: "Employee"
       provider: "Provider"
       category: "Category"
       product: "Product"
     attributes:
+      employee:
+        first_name: "First name"
+        last_name: "Last name"
+        phone: "Phone"
+        role: "Role"
+        state: "State"
+        image_file_name: "Image file name"
+        image_content_type: "Image content type"
+        image_file_size: "Image file size"
+        email: "Email"
+        password_digest: "Password"
       provider:
         name: "Name"
         FEIN: "Federal Employer Identification Number (FEIN)"

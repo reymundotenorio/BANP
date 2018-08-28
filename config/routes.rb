@@ -12,8 +12,14 @@ Rails.application.routes.draw do
   # Admin namespace
   namespace :admin do
     # Root
-    root 'home#index'
+    root 'authentication#login'
     # End Root
+
+    # Authentications
+    get '/login', to: 'authentication#login', as: 'login'
+      get '/reset_password', to: 'authentication#reset_password', as: 'reset_password'
+
+    # End Authentications
 
     # Providers
     get '/providers', to: 'providers#index', as: 'providers'
