@@ -72,7 +72,7 @@
       }
     }
   }
-  
+
   .form-info{
     label{
       // padding-bottom: 5px;
@@ -100,6 +100,8 @@
       -ms-flex-pack: center;
       justify-content: center;
 
+
+
       .form-control[disabled], .form-control[readonly], fieldset[disabled] .form-control{
         background-color: $transparent;
       }
@@ -125,6 +127,10 @@
         -webkit-box-pack: center;
         -ms-flex-pack: center;
         justify-content: center;
+
+        .forgot-pass{
+          margin-top: 15px;
+        }
 
         .btn-general{
           margin-bottom: 15px;
@@ -155,6 +161,11 @@
           -webkit-box-pack: end;
           -ms-flex-pack: end;
           justify-content: flex-end;
+
+          .forgot-pass{
+            margin-top: 0px;
+            margin-right: 15px;
+          }
 
           .btn-general{
             margin-bottom: 0px;

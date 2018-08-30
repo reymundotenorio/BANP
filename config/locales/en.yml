@@ -126,6 +126,8 @@ en:
       errors_found: "errors found:"
       restart: "Restart"
       save: "Save"
+      login: "Login"
+      forgot_password: "Forgot password?"
 
 
 # Rails Default

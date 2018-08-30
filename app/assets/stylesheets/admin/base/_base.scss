@@ -41,8 +41,8 @@ p{
 
 // Basic styles for links
 a{
-  -webkit-transition: all 0.3s ease;
-  transition: all 0.3s ease;
+  -webkit-transition: all 0.5s ease;
+  transition: all 0.5s ease;
   color: $hover-color;
   text-decoration: none;
 
@@ -61,12 +61,12 @@ a{
   -webkit-box-shadow: none;
   box-shadow: none;
   border-bottom: 1px solid #ddd;
-  -webkit-transition: all 0.3s ease;
-  transition: all 0.3s ease;
+  -webkit-transition: all 0.5s ease;
+  transition: all 0.5s ease;
   height: 40px;
 
   @include placeholder{
-    color: tint($text-color, 15%);
+    color: tint($text-color, 40%);
   }
 
   @include on-event{
@@ -80,7 +80,6 @@ a{
     border-bottom: 1px solid tint($btn-color, 15%);
   }
 }
-
 
 @media (min-width: 768px) {
 

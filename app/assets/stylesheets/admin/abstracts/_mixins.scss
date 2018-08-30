@@ -30,11 +30,24 @@
     &:focus{
       @content;
     }
-  } @else{
+
+    &.active, &:active{
+      &.focus, &:focus, &:hover{
+        @content;
+      }
+    }
+  }
+  @else{
     &:hover,
     &:active,
     &:focus{
       @content;
+    }
+
+    &.active, &:active{
+      &.focus, &:focus, &:hover{
+        @content;
+      }
     }
   }
 }
