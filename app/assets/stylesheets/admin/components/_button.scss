@@ -49,43 +49,37 @@
 // Override buttons behavior
 .btn-general{
   @include btn-style;
-
-  &.btn-default{
-    background-color: $sixth-color;
-
-    @include on-event{
-      background-color: shade($sixth-color, 10%);
-      color: $white;
-    }
-  }
-
-  &.btn-success{
-    background-color: $third-color;
-
-    @include on-event{
-      background-color: shade($third-color, 10%);
-    }
-  }
-
-  &.btn-warning{
-    background-color: $fourth-color;
-
-    @include on-event{
-      background-color: shade($fourth-color, 10%);
-    }
-  }
-
-  &.btn-danger{
-    background-color: $fifth-color;
-
-    @include on-event{
-      background-color: shade($fifth-color, 10%);
-    }
-  }
-
-  // &.active, &:active{
-  //   &.focus, &:focus, &:hover{
-  //     @extend .btn-default;
+  
+  // &.btn-default{
+  //   background-color: $sixth-color;
+  //
+  //   @include on-event{
+  //     background-color: shade($sixth-color, 10%);
+  //     color: $white;
+  //   }
+  // }
+  //
+  // &.btn-success{
+  //   background-color: $third-color;
+  //
+  //   @include on-event{
+  //     background-color: shade($third-color, 10%);
+  //   }
+  // }
+  //
+  // &.btn-warning{
+  //   background-color: $fourth-color;
+  //
+  //   @include on-event{
+  //     background-color: shade($fourth-color, 10%);
+  //   }
+  // }
+  //
+  // &.btn-danger{
+  //   background-color: $fifth-color;
+  //
+  //   @include on-event{
+  //     background-color: shade($fifth-color, 10%);
   //   }
   // }
 }

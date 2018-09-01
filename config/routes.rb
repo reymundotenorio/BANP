@@ -12,12 +12,21 @@ Rails.application.routes.draw do
   # Admin namespace
   namespace :admin do
     # Root
-    root 'authentication#login'
+    root 'authentication/sessions#new'
     # End Root
 
     # Authentications
-    get '/login', to: 'authentication#login', as: 'login'
-      get '/reset_password', to: 'authentication#reset_password', as: 'reset_password'
+
+    # Sessions
+    get '/login' => 'authentication/sessions#new', as: 'login'
+    post '/login' => 'authentication/sessions#create', as: 'login_employee'
+    delete '/log_out' => 'authentication/sessions#destroy', as: 'log_out'
+
+    # Passwords
+    get '/reset_password' => 'authentication/passwords#new', as: 'reset_password'
+    get '/update_password/:reset_password_token' => 'authentication/passwords#edit', as: 'edit_password'
+    post '/reset_password' => 'authentication/passwords#create', as: 'reset_password_employee'
+    patch '/update_password' => 'authentication/passwords#update', as: 'update_password'
 
     # End Authentications
 

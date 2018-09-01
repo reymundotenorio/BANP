@@ -15,16 +15,18 @@ body{
     justify-content: center;
 
     .background-container{
-      background: url(asset-path("img/login-background.jpg")) no-repeat center center;
-      background-size: cover;
+      // background: url(asset-path("img/login-background.jpg")) no-repeat center center;
+      // background-size: cover;
+      @include gradient-color(40s);
+
       position: fixed;
       top: 0px;
       bottom: 0px;
       left: 0px;
       right: 0px;
 
-      -webkit-filter: blur(70px);
-      filter: blur(70px);
+      // -webkit-filter: blur(70px);
+      // filter: blur(70px);
     }
 
     .blur {
