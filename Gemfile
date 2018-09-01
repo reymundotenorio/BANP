@@ -119,3 +119,6 @@ gem 'aws-sdk', '~> 2.3'
 
 # Figaro - Configuration using ENV and a single YAML file
 gem 'figaro', '~> 1.1', '>= 1.1.1'
+
+# Use ActiveModel has_secure_password
+gem 'bcrypt', '~> 3.1.7'

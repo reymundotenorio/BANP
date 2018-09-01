@@ -34,7 +34,8 @@
   -webkit-transition: all 0.3s ease;
   transition: all 0.3s ease;
 
-  color: $primary-color;
+  // color: $primary-color;
+  color: $text-color;
   background-color: $white;
 
   position: relative;
@@ -60,5 +61,6 @@
     text-decoration: none;
     -webkit-box-shadow: none;
     box-shadow: none;
+    color: tint($text-color, 30%);
   }
 }
