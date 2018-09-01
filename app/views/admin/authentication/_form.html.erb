@@ -14,13 +14,15 @@
               <div class="form-info">
 
                 <div class="form-group">
-                  <label><b><%= t('activerecord.attributes.employee.email') %></b></label>
                   <%= f.text_field :email, class: "form-control input", placeholder: t('activerecord.attributes.employee.email'), required: true %>
+                  <label><b><%= t('activerecord.attributes.employee.email') %></b></label>
+                  <div class="border-bottom"></div>
                 </div>
 
                 <div class="form-group">
-                  <label><b><%= t('activerecord.attributes.employee.password_digest') %></b></label>
                   <%= f.password_field :password, class: "form-control input", placeholder: t('activerecord.attributes.employee.password_digest'), required: true %>
+                  <label><b><%= t('activerecord.attributes.employee.password_digest') %></b></label>
+                  <div class="border-bottom"></div>
                 </div>
 
                 <div class="main-buttons">

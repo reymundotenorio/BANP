@@ -52,6 +52,69 @@ a{
   }
 }
 
+.form-group{
+  position: relative;
+  padding-top: 30px;
+
+  label{
+    position: absolute;
+    bottom: 6px;
+    top: auto;
+    left: auto;
+    right: auto;
+    transform: translateY(0px );
+    transition: all 0.3s ease;
+  }
+
+  input{
+    &:valid, &:focus{
+      + label{
+        transform: translateY(-30px );
+        font-size: 14px;
+
+        + .border-bottom{
+          &:before{
+            width: 50%;
+          }
+
+          &:after{
+            width: 50%;
+          }
+        }
+      }
+
+    }
+  }
+
+  .border-bottom{
+    position: relative;
+
+    &:after, &:before{
+      content: "";
+      position: absolute;
+      bottom: 0px;
+      top: auto;
+      width: 0px;
+      height: 2px;
+
+      -webkit-box-shadow: 0 1px 0 0 tint($btn-color, 15%);
+      box-shadow: 0 1px 0 0 tint($btn-color, 15%);
+      border-bottom: 1px solid tint($btn-color, 15%);
+
+      -webkit-transition: all 0.3s ease;
+      transition: all 0.3s ease;
+    }
+
+    &:before{
+      left: 50%;
+    }
+
+    &:after{
+      right: 50%;
+    }
+  }
+}
+
 .form-control{
   border-radius: 0px;
   border: none;
@@ -66,7 +129,8 @@ a{
   height: 40px;
 
   @include placeholder{
-    color: tint($text-color, 40%);
+    // color: tint($text-color, 40%);
+    color: $transparent;
   }
 
   @include on-event{
@@ -75,9 +139,7 @@ a{
   }
 
   &:focus{
-    -webkit-box-shadow: 0 1px 0 0 tint($btn-color, 15%);
-    box-shadow: 0 1px 0 0 tint($btn-color, 15%);
-    border-bottom: 1px solid tint($btn-color, 15%);
+    border-bottom-color: #ddd;
   }
 }
 
