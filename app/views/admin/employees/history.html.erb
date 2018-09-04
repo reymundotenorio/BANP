@@ -33,7 +33,7 @@
             </li>
 
             <li>
-              <%= link_to (admin_employee_path(@employee)) do %><i class="fas fa-id-card"></i> <span><%= @employee.name %></span><% end %>
+              <%= link_to (admin_employee_path(@employee)) do %><i class="fas fa-id-card"></i> <span><%= @employee.first_name %> <%= @employee.last_name %></span><% end %>
             </li>
 
             <li class="active">

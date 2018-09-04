@@ -49,7 +49,7 @@
           }
 
           &.new {
-            background-color: $third-color;
+            background-color: $fifth-color;
           }
         }
       }
@@ -72,7 +72,7 @@
           }
 
           &.new {
-            border-left-color: $third-color;
+            border-left-color:  $fifth-color;
           }
         }
       }
@@ -114,7 +114,7 @@
       }
 
       .after {
-        color: $third-color;
+        color:  $fifth-color;
       }
     }
   }

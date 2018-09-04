@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/reymundotenorio/render_sync
-  revision: 4422b78d9bd55c7c2d4c570956b226c4c9c14644
+  revision: 0576b920d93bce2a999f4a650d919f575c972ee3
   branch: master
   specs:
     render_sync (0.5.0)
