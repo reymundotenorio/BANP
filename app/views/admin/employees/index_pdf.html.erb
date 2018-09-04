@@ -1,0 +1,47 @@
+<!-- PDF resource -->
+<% categories = resource %>
+<!-- End PDF resource -->
+
+<!-- Index PDF -->
+<section class="index index-pdf">
+  <div class="container">
+    <!-- Information -->
+    <div class="row">
+      <div class="col-xs-12 col-sm-12">
+        <!-- Material card -->
+        <div class="material-card shadow-card material-card-pdf shadow-card-pdf">
+
+          <!-- Table -->
+          <div class="row no-margin">
+            <div class="col-xs-12 no-padding">
+              <table class="table table-pdf">
+                <!-- <thead> -->
+                <tr>
+                  <th>No.</th>
+                  <th><%= t('activerecord.attributes.category.name') %></th>
+                  <th><%= t('activerecord.attributes.category.description') %></th>
+                </tr>
+                <!-- </thead> -->
+
+                <tbody>
+                  <% categories.each do |category| %>
+                  <tr class="<%= category.state %>">
+                    <td data-header="No."><p><%= category.id %></p></td>
+                    <td data-header="<%= t('activerecord.attributes.category.name') %>"><p><%= category.name %></p></td>
+                    <td data-header="<%= t('activerecord.attributes.category.description') %>"><p><%= category.description %></p></td>
+                  </tr>
+                  <% end %>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <!-- End Table -->
+
+        </div>
+        <!-- End Material card -->
+      </div>
+    </div>
+    <!-- End Information -->
+  </div>
+</section>
+<!-- End Index PDF -->

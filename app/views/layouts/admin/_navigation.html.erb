@@ -1,4 +1,30 @@
 <div class="collapse navbar-collapse" id="navbar">
+  <!-- Navbar brand top -->
+  <div class="navbar-brand-top visible-xs">
+    <!-- Navbar brand row -->
+    <div class="row navbar-brand-row">
+      <div class="col-xs-12">
+        <!-- Settings container -->
+        <div class="settings-container">
+          <!-- Languages -->
+          <%= render 'layouts/admin/languages' %>
+          <!-- End Languages -->
+
+          <!-- Notifications -->
+          <%= render 'layouts/admin/notifications' %>
+          <!-- End Notifications -->
+
+          <!-- User -->
+          <%= render 'layouts/admin/user' %>
+          <!-- End User -->
+        </div>
+        <!-- End Settings container -->
+      </div>
+    </div>
+    <!-- End Navbar brand row -->
+  </div>
+  <!-- End Navbar brand top -->
+
   <!-- Navbar nav -->
   <ul class="nav navbar-nav">
     <!-- Dashboard -->

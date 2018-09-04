@@ -12,3 +12,18 @@ Rails.application.config.assets.paths << Rails.root.join('node_modules')
 # application.js, application.css, and all non-JS/CSS in the app/assets
 # folder are already added.
 # Rails.application.config.assets.precompile += %w( admin.js admin.css )
+
+# Form
+Rails.application.config.assets.precompile += %w( form.js )
+
+# Jquery Mask
+Rails.application.config.assets.precompile += %w( jquery-mask/jquery.mask.js )
+
+# Clickeable Row
+Rails.application.config.assets.precompile += %w( clickable-row.js )
+
+# Select Category
+# Rails.application.config.assets.precompile += %w( select-category.js )
+
+# PDF
+# Rails.application.config.assets.precompile += %w( admin/application.scss )

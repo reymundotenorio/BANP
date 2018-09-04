@@ -1,5 +1,4 @@
 class SettingsController < ApplicationController
-
   # Change current language
   def change_lang
     current_lang = params[:lang].to_s.strip.to_sym
@@ -8,5 +7,4 @@ class SettingsController < ApplicationController
     redirect_to request.referer || root_url
   end
   # End Change current language
-
 end

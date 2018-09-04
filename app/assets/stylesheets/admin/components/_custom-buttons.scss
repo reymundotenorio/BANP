@@ -36,7 +36,7 @@
 
   // color: $primary-color;
   color: $text-color;
-  background-color: $white;
+  background-color: $body-color;
 
   position: relative;
   display: -webkit-box;
@@ -50,7 +50,7 @@
   justify-content: center;
   height: 32px;
   width: 32px;
-  border-radius: 100%;
+  border-radius: 0px;
 
   border: 1px solid $transparent;
 
@@ -61,6 +61,7 @@
     text-decoration: none;
     -webkit-box-shadow: none;
     box-shadow: none;
-    color: tint($text-color, 30%);
+    background-color: shade($body-color, 10%);
+    color: $text-color;
   }
 }

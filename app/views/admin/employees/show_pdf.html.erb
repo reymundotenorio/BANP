@@ -1,0 +1,64 @@
+<!-- PDF resource -->
+<% category = resource %>
+<!-- End PDF resource -->
+
+<!-- Details PDF -->
+<section class="details details-pdf">
+  <div class="container">
+    <!-- Information -->
+    <div class="row">
+      <div class="col-xs-4">
+        <!-- Material card -->
+        <div class="material-card material-card-pdf shadow-card shadow-card-pdf <%= category.state %>">
+          <!-- General information -->
+          <div class="row no-margin">
+            <div class="col-xs-12 no-padding">
+              <div class="general-info">
+                <div class="image-container">
+                  <%= image_tag category.image.url(:medium), class: "img-responsive" %>
+                </div>
+
+                <!-- <div class="main-info">
+                  <p class="name"><b><% category.name %></b></p>
+                </div> -->
+              </div>
+            </div>
+          </div>
+          <!-- End General information -->
+        </div>
+        <!-- End Material card -->
+      </div>
+
+      <div class="col-xs-8">
+        <!-- Material card -->
+        <div class="material-card material-card-pdf shadow-card shadow-card-pdf <%= category.state %>">
+          <div class="row no-margin">
+            <div class="col-xs-12 no-padding">
+              <div class="detail-info <%= category.state %>">
+
+                <div class="info">
+                  <p class="title"><b><%= t('activerecord.attributes.category.name') %></b></p>
+                  <p><%= category.name %></p>
+                </div>
+
+                <div class="info">
+                  <p class="title"><b><%= t('activerecord.attributes.category.description') %></b></p>
+                  <p><%= category.description %></p>
+                </div>
+
+                <div class="info">
+                  <p class="title"><b><%= t('activerecord.attributes.category.state') %></b></p>
+                  <p><%= category.state ? t('views.show.enabled') : t('views.show.disabled') %></p>
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- End Material card -->
+      </div>
+    </div>
+    <!-- End Information -->
+  </div>
+</section>
+<!-- End Details PDF -->

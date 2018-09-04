@@ -1,0 +1,51 @@
+<!-- Form Title -->
+<section class="form-title">
+  <div class="container">
+    <!-- Title -->
+    <div class="row title-container">
+      <div class="col-xs-12 col-lg-10">
+        <!-- Heading -->
+        <h1 class="<%= @employee.state %>"><i class="fas fa-edit"></i> <%= t('views.edit.edit') %></h1>
+        <!-- End Heading -->
+      </div>
+      <div class="col-xs-12 col-lg-2">
+        <!-- Export button-->
+        <div class="btn-new-container">
+          <% if(@employee.state) %>
+          <%= link_to (admin_active_deactive_employee_path(@employee, employee: {state:false})), method: :patch, class: "btn btn-general btn-danger" do %><i class="fas fa-times"></i> <span><%= t('views.edit.disable') %></span><% end %>
+          <% else %>
+          <%= link_to (admin_active_deactive_employee_path(@employee, employee: {state:true})), method: :patch, class: "btn btn-general btn-success" do %><i class="fas fa-check"></i> <span><%= t('views.edit.enable') %></span><% end %>
+          <% end %>
+        </div>
+        <!-- End Export button-->
+      </div>
+
+    </div>
+    <!-- End Title -->
+
+    <!-- Breadcrumb -->
+    <div class="row">
+      <div class="col-xs-12 hidden-xs">
+        <div class="breadcrumb-container">
+          <ol class="breadcrumb">
+            <li>
+              <%= link_to (admin_categories_path) do %><i class="fas fa-list-alt"></i> <span><%= t('header.navigation.categories') %></span><% end %>
+            </li>
+
+            <li>
+              <%= link_to (admin_employee_path(@employee)) do %><i class="fas fa-id-card"></i> <span><%= @employee.name %></span><% end %>
+            </li>
+
+            <li class="active">
+              <i class="fas fa-edit"></i> <%= t('views.edit.edit') %>
+            </li>
+          </ol>
+        </div>
+      </div>
+    </div>
+    <!-- End Breadcrumb -->
+  </div>
+</section>
+<!-- End Form Title -->
+
+<%= render 'form' %>

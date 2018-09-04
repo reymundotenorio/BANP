@@ -7,10 +7,7 @@
   -webkit-box-shadow: 0px 2px 6px rgba($black,0.2);
   box-shadow: 0px 2px 6px rgba($black,0.2);
 
-  // @include primary-color;
-  // background-color: $primary-color;
-
-  @include gradient-color(30s);
+  @include primary-color;
 
   &.header-top-pdf{
   }
@@ -108,13 +105,13 @@
 .fix-body{
   position: relative;
   display: block;
-  padding-top: 114px;
+  padding-top: (114px + 15px);
 }
 // End Fix affix header
 
 // Top navbar
 .top-navbar{
-  @include primary-color-shade(15%);
+  @include primary-color;
 
   &.top-navbar-pdf{
     @include primary-color;
@@ -570,6 +567,31 @@
     // *** End External Vendor Design ***
 
     max-height: none;
+
+    &.in{
+      overflow-y: visible;
+    }
+
+    .navbar-brand-top{
+      padding: 10px 0px;
+      padding-bottom: 15px;
+
+      .navbar-brand-row{
+        .settings-container{
+          justify-content: center;
+
+          .custom-btn{
+            background-color: $btn-color;
+            color: $white;
+
+            @include on-event{
+              background-color: shade($btn-color, 10%);
+              color: $white;
+            }
+          }
+        }
+      }
+    }
   }
   // End Navbar collapse -> Mobile menu dropdown
 
@@ -728,7 +750,7 @@
 
   // Fix affix header
   .fix-body{
-    padding-top: 118px;
+    padding-top: (118px + 15px);
   }
   // End Fix affix header
 
@@ -939,7 +961,7 @@
 
   // Fix affix header
   .fix-body{
-    padding-top: 122px;
+    padding-top: (122px + 15px);
   }
   // End Fix affix header
 

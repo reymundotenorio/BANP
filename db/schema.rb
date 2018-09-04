@@ -49,10 +49,14 @@ ActiveRecord::Schema.define(version: 2018_08_28_024255) do
     t.string "password_digest", null: false
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
+    t.integer "sign_in_count", default: 0, null: false
     t.datetime "current_sign_in_at"
+    t.datetime "last_sign_in_at"
+    t.string "current_sign_in_ip"
+    t.string "last_sign_in_ip"
     t.string "confirmation_token"
     t.datetime "confirmation_sent_at"
-    t.boolean "confirmed", null: false
+    t.boolean "confirmed", default: false, null: false
     t.integer "failed_attempts", default: 0, null: false
     t.string "unlock_token"
     t.datetime "locked_at"

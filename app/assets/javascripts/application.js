@@ -19,4 +19,5 @@
 //= require sync
 //
 //= require preloader
+//= material-input
 //  require_tree

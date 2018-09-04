@@ -23,4 +23,10 @@ class ApplicationController < ActionController::Base
     I18n.locale = current_lang
   end
   # End Cookie set language
+
+  # Render 404
+  def render_404
+    render file: "#{Rails.root}/public/404.html", layout: false, status: 404
+  end
+  # End Render 404
 end

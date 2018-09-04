@@ -1,0 +1,43 @@
+<!-- Form Title -->
+<section class="form-title">
+  <div class="container">
+    <!-- Title -->
+    <div class="row title-container">
+      <div class="col-xs-12 col-lg-10">
+        <!-- Heading -->
+        <h1 class=""><i class="fas fa-plus"></i> <%= t('views.new.new') %></h1>
+        <!-- End Heading -->
+      </div>
+      <div class="col-xs-12 col-lg-2">
+        <!-- List button-->
+        <div class="btn-new-container">
+          <%= link_to (admin_employees_path), class: "btn btn-general" do %><i class="fas fa-list-alt"></i> <span><%= t('header.navigation.employees') %></span><% end %>
+        </div>
+        <!-- End List button-->
+      </div>
+
+    </div>
+    <!-- End Title -->
+
+    <!-- Breadcrumb -->
+    <div class="row">
+      <div class="col-xs-12 hidden-xs">
+        <div class="breadcrumb-container">
+          <ol class="breadcrumb">
+            <li>
+              <%= link_to (admin_employees_path) do %><i class="fas fa-list-alt"></i> <span><%= t('header.navigation.employees') %></span><% end %>
+            </li>
+
+            <li class="active">
+              <i class="fas fa-plus"></i> <%= t('views.new.new') %>
+            </li>
+          </ol>
+        </div>
+      </div>
+    </div>
+    <!-- End Breadcrumb -->
+  </div>
+</section>
+<!-- End Form Title -->
+
+<%= render 'form' %>

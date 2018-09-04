@@ -18,17 +18,28 @@ Rails.application.routes.draw do
     # Authentications
 
     # Sessions
-    get '/login' => 'authentication/sessions#new', as: 'login'
-    post '/login' => 'authentication/sessions#create', as: 'login_employee'
-    delete '/log_out' => 'authentication/sessions#destroy', as: 'log_out'
+    get '/sign-in' => 'authentication/sessions#new', as: 'sign_in'
+    post '/sign-in' => 'authentication/sessions#create', as: 'sign_inemployee'
+    delete '/sign-out' => 'authentication/sessions#destroy', as: 'sign_out'
 
     # Passwords
-    get '/reset_password' => 'authentication/passwords#new', as: 'reset_password'
-    get '/update_password/:reset_password_token' => 'authentication/passwords#edit', as: 'edit_password'
-    post '/reset_password' => 'authentication/passwords#create', as: 'reset_password_employee'
-    patch '/update_password' => 'authentication/passwords#update', as: 'update_password'
+    get '/reset-password' => 'authentication/passwords#new', as: 'reset_password'
+    get '/update-password/:reset_password_token' => 'authentication/passwords#edit', as: 'edit_password'
+    post '/reset-password' => 'authentication/passwords#create', as: 'reset_password_employee'
+    patch '/update-password' => 'authentication/passwords#update', as: 'update_password'
 
     # End Authentications
+
+    # Employees
+    get '/employees', to: 'employees#index', as: 'employees'
+    get '/employee/new', to: 'employees#new', as: 'new_employee'
+    get '/employee/:id', to: 'employees#show', as: 'employee'
+    get '/employee/:id/edit', to: 'employees#edit', as: 'edit_employee'
+    get '/employee/:id/history', to: 'employees#history', as: 'history_employee'
+    post '/employees', to: 'employees#create'
+    patch '/employee/:id', to: 'employees#update', as: 'update_employee'
+    patch '/employees/state/:id', to: 'employees#active_deactive', as: 'active_deactive_employee'
+    # End Employees
 
     # Providers
     get '/providers', to: 'providers#index', as: 'providers'
