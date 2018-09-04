@@ -14,10 +14,14 @@ body{
     -ms-flex-pack: center;
     justify-content: center;
 
+    min-height: 100vh;
+
     .background-container{
       // background: url(asset-path("img/login-background.jpg")) no-repeat center center;
       // background-size: cover;
-      @include gradient-color(40s);
+      // @include gradient-color(40s);
+
+      @include primary-color;
 
       position: fixed;
       top: 0px;
