@@ -11,7 +11,7 @@
   text-shadow: -2px 0px 5px rgba($black, 0.5);
   border: 4px solid $white;
   border-radius: 5px;
-  padding: 10px 10px 4px 10px;
+  padding: 10px 10px 2px 10px;
   margin: 0px;
   display: inline-block;
   -webkit-transition: all 0.3s ease;
@@ -36,39 +36,6 @@
 
   &.header-top-pdf{
   }
-
-  // Search form
-  .search-form{
-    .input-group{
-      width: 100%;
-      position: relative;
-
-      input{
-        background-color: $white;
-        padding-right: 42px;
-      }
-
-      .input-group-btn{
-        position: absolute;
-        right: 0px;
-        width: auto;
-
-        .btn-general{
-          border-radius: 0px;
-          background-color: $transparent;
-          color: tint($text-color, 15%);
-          -webkit-box-shadow: none;
-          box-shadow: none;
-          z-index: 4;
-
-          @include on-event{
-            color: $hover-color;
-          }
-        }
-      }
-    }
-  }
-  // End Search form
 
   // Affix
   &.affix{
@@ -123,6 +90,7 @@
     // End Navbar default
   }
   // End Affix
+
 }
 // End Header
 
@@ -130,7 +98,7 @@
 .fix-body{
   position: relative;
   display: block;
-  padding-top: (72px + 30px);
+  padding-top: (70px + 30px);
 }
 // End Fix affix header
 
@@ -143,19 +111,24 @@
 
     .banp-logo{
       font-size: 24px;
-      // color: $text-color;
-      // border-color: $text-color;
-      // font-family: $primary-font;
     }
+  }
+
+  .header-options{
+    margin-bottom: -58px;
+    position: relative;
+    z-index: 10;
   }
 
   // Navbar brand top
   .navbar-brand-top{
     text-align: center;
-    padding-top: 5px;
-    padding-bottom: 5px;
+    // padding-top: 8px;
+    padding-bottom: 8px;
     -webkit-transition: all 0.3s ease;
     transition: all 0.3s ease;
+
+    padding-top: 18px;
 
     .navbar-brand-row{
       display: -webkit-box;
@@ -211,6 +184,8 @@
         -ms-flex-pack: end;
         justify-content: flex-end;
 
+        margin-right: 30px;
+
         // Custom buttons
         .custom-btn{
           height: 32px;
@@ -219,31 +194,11 @@
         }
         // End Custom buttons
 
-        // Search button
-        .search-btn-container{
-          text-align: center;
-          padding: 0px 12px;
-          display: none;
-
-          .search-toggle-button{
-            cursor: not-allowed;
-            pointer-events: none;
-            opacity: 0;
-
-            // Search mobile button closed
-            &.collapsed{
-              cursor: default;
-              pointer-events: auto;
-              opacity: 1;
-            } // End Search mobile button closed
-          }
-        }
-        // End Search button
-
         // Language container
         .language-container{
           text-align: center;
-          padding: 0px 12px;
+          padding: 0px 5px;
+          // padding: 0px 12px;
 
           .dropdown{
             > a{
@@ -311,7 +266,8 @@
         // Notifications container
         .notifications-container{
           text-align: center;
-          padding: 0px 12px;
+          padding: 0px 5px;
+          // padding: 0px 12px;
 
           .dropdown{
             > a{
@@ -373,8 +329,8 @@
         // User container
         .user-container{
           text-align: center;
-          padding: 0px 12px;
-          padding-right: 0px;
+          padding: 0px 5px;
+          // padding: 0px 12px;
 
           .dropdown{
             > a{
@@ -458,6 +414,7 @@
   margin-bottom: 0px;
   min-height: 0px;
 
+
   // Navbar header
   .navbar-header{
     @include primary-color;
@@ -475,6 +432,9 @@
       -webkit-transition: all 0.3s ease;
       transition: all 0.3s ease;
 
+      position: relative;
+      z-index: 15;
+
       img{
         width: 100%;
       }
@@ -489,9 +449,11 @@
     transition: all 0.3s ease;
     background-color: $transparent;
     margin: 0px;
-    top: 18px;
+    top: 17px;
     right: 5px;
     border: none;
+
+    z-index: 15;
 
     @include on-event{
       background-color: $transparent;
@@ -575,27 +537,6 @@
 
     &.in{
       overflow-y: visible;
-    }
-
-    .navbar-brand-top{
-      padding: 10px 0px;
-      padding-bottom: 15px;
-
-      .navbar-brand-row{
-        .settings-container{
-          justify-content: center;
-
-          .custom-btn{
-            background-color: $btn-color;
-            color: $white;
-
-            @include on-event{
-              background-color: shade($btn-color, 10%);
-              color: $white;
-            }
-          }
-        }
-      }
     }
   }
   // End Navbar collapse -> Mobile menu dropdown
@@ -755,13 +696,49 @@
 
   // Fix affix header
   .fix-body{
-    padding-top: (118px + 30px);
+    padding-top: (122px + 30px);
   }
   // End Fix affix header
 
   // Top navbar
   .top-navbar{
     background: $transparent;
+
+    .header-options{
+      margin-bottom: auto;
+    }
+
+    // Navbar brand top
+    .navbar-brand-top{
+      padding-top: 8px;
+
+      .navbar-brand-row{
+        // Settings container
+        .settings-container{
+          margin-right: auto;
+
+          // Language container
+          .language-container{
+            padding: 0px 12px;
+          }
+          // End Language container
+
+          // Notifications container
+          .notifications-container{
+            padding: 0px 12px;
+          }
+          // End Notification container
+
+          // User container
+          .user-container{
+            padding: 0px 12px;
+          }
+          // End User container
+        }
+        // Settings container
+      }
+    }
+    // End Navbar brand top
   }
 
   // Navbar default
@@ -820,6 +797,7 @@
         > a{
           padding: 10px 0px;
           border-bottom: 4px solid $transparent;
+          position: relative;
 
           i{
             display: block;
@@ -829,8 +807,34 @@
             transition: font-size 0.3s ease;
           }
 
+          &:before, &:after{
+            content: "";
+            position: absolute;
+            bottom: -4px;
+            top: auto;
+            height: 4px;
+            width: 0%;
+                        transition: all 0.3s ease;
+          }
+
+          &:before{
+            left: 50%;
+            right: auto;
+            @include primary-color;
+          }
+
+          &:after{
+            right: 50%;
+            left: auto;
+            @include primary-color-inverted;
+          }
+
           @include on-event{
-            border-bottom-color: $hover-color;
+            // border-bottom-color: $hover-color;
+
+            &:before, &:after{
+              width: 50%;
+            }
           }
 
           &.active{
@@ -900,7 +904,7 @@
             background-color: $white;
             border: none;
             width: auto;
-            margin-top: 15px;
+            margin-top: 10px;
             left: 50%;
             -webkit-transform: translateX(-50%);
             transform: translateX(-50%);
@@ -966,7 +970,7 @@
 
   // Fix affix header
   .fix-body{
-    padding-top: (122px + 30px);
+    padding-top: (126px + 30px);
   }
   // End Fix affix header
 

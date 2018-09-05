@@ -35,8 +35,8 @@
   transition: all 0.3s ease;
 
   // color: $primary-color;
-  color: $text-color;
-  background-color: $body-color;
+  color: $white;
+  background-color: $transparent;
 
   position: relative;
   display: -webkit-box;
@@ -54,14 +54,16 @@
 
   border: 1px solid $transparent;
 
-  -webkit-box-shadow: 0px 3px 10px rgba($black,0.30), 0px 3px 10px rgba($black,0.23);
-  box-shadow: 0px 3px 10px rgba($black,0.30), 0px 3px 10px rgba($black,0.23);
+  // -webkit-box-shadow: 0px 3px 10px rgba($black,0.30), 0px 3px 10px rgba($black,0.23);
+  // box-shadow: 0px 3px 10px rgba($black,0.30), 0px 3px 10px rgba($black,0.23);
+
+  box-shadow: none;
 
   @include on-event{
     text-decoration: none;
     -webkit-box-shadow: none;
     box-shadow: none;
-    background-color: shade($body-color, 10%);
+    // background-color: shade($body-color, 10%);
     color: $text-color;
   }
 }
