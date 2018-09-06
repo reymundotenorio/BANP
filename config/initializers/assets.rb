@@ -26,4 +26,7 @@ Rails.application.config.assets.precompile += %w( clickable-row.js )
 # Rails.application.config.assets.precompile += %w( select-category.js )
 
 # PDF
-# Rails.application.config.assets.precompile += %w( admin/application.scss )
+Rails.application.config.assets.precompile += %w( admin/application.scss )
+
+# Material input
+Rails.application.config.assets.precompile += %w( material-input.js )

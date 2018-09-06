@@ -78,6 +78,54 @@ a{
   }
 }
 
+::-moz-selection{
+  background: $primary-color;
+  color: $white;
+}
+
+::selection{
+  background: $primary-color;
+  color: $white;
+}
+
+.input-group{
+  .border-bottom{
+    position: absolute;
+    left: 0px;
+    right: (46px + 10px);
+    bottom: 0px;
+    top: auto;
+
+    &:after{
+      content: "";
+      position: absolute;
+      bottom: 2px;
+      top: auto;
+      left: 0px;
+      right: auto;
+      width: 0px;
+      height: 2px;
+
+      -webkit-box-shadow: 0 1px 0 0 tint($primary-color, 15%);
+      box-shadow: 0 1px 0 0 tint($primary-color, 15%);
+      border-bottom: 1px solid tint($primary-color, 15%);
+
+      -webkit-transition: all 0.3s ease;
+      transition: all 0.3s ease;
+    }
+  }
+
+  input{
+    &.with-value, &:focus{  //&:invalid,
+      + .border-bottom{
+        &:after{
+          width: 100%;
+        }
+      }
+    }
+  }
+}
+
 .form-group{
   position: relative;
   padding-top: 30px;
@@ -88,7 +136,9 @@ a{
     top: auto;
     left: auto;
     right: auto;
+    -webkit-transform: translateY(0px);
     transform: translateY(0px);
+    -webkit-transition: all 0.3s ease;
     transition: all 0.3s ease;
   }
 
@@ -105,9 +155,9 @@ a{
       width: 0px;
       height: 2px;
 
-      -webkit-box-shadow: 0 1px 0 0 tint($btn-color, 15%);
-      box-shadow: 0 1px 0 0 tint($btn-color, 15%);
-      border-bottom: 1px solid tint($btn-color, 15%);
+      -webkit-box-shadow: 0 1px 0 0 tint($primary-color, 15%);
+      box-shadow: 0 1px 0 0 tint($primary-color, 15%);
+      border-bottom: 1px solid tint($primary-color, 15%);
 
       -webkit-transition: all 0.3s ease;
       transition: all 0.3s ease;
@@ -116,6 +166,7 @@ a{
 
   .field_with_errors{
     + label{
+      -webkit-transform: translateY(-30px);
       transform: translateY(-30px);
       font-size: 14px;
       color: $sixth-color;
@@ -132,6 +183,7 @@ a{
   input{
     &.with-value, &:valid, &:focus{  //&:invalid,
       + label{
+        -webkit-transform: translateY(-30px);
         transform: translateY(-30px);
         font-size: 14px;
 
@@ -160,6 +212,7 @@ a{
 
   select{
     + label{
+      -webkit-transform: translateY(-30px);
       transform: translateY(-30px);
       font-size: 14px;
 

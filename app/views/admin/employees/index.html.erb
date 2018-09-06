@@ -31,6 +31,7 @@
                 <%= form_tag admin_employees_path, method: 'get', id: "employees_search", autocomplete:"off" do %>
                 <div class="input-group">
                   <%= text_field_tag :search, params[:search], class: "form-control", placeholder: t('views.index.search') %>
+                  <div class="border-bottom"></div>
 
                   <span class="input-group-btn">
                     <%= button_tag t('elements.search'), class: "btn btn-general btn-warning", data: {disable_with: "<i class='fas fa-spinner fa-spin'></i>"} do %><i class="fas fa-search"></i><% end %>

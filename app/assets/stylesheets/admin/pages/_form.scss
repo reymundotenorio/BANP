@@ -141,6 +141,10 @@
 
           i{
             padding-right: 5px;
+
+            &.fa-spinner.fa-spin{
+              padding-right: 0px;
+            }
           }
 
           &:last-child{

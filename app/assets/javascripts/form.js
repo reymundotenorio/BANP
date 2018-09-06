@@ -8,7 +8,7 @@ $(document).ready(function() {
 
   // Reset the file-input and img-tag values
   $("#reset-button").click(function() {
-    $("#preview-image").attr("src", "/images/default/default.png"),
+    $("#preview-image").attr("src", "https://s3.amazonaws.com/betterandnice/images/default/default.png"),
     $("#filename").attr("value", "");
   });
 
