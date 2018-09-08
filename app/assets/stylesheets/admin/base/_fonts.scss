@@ -30,13 +30,13 @@
 @font-face {
   font-family: 'Cyclo';
 
-  src: url('https://s3.amazonaws.com/betterandnice/fonts/Cyclo/Cyclo.eot'),
-  url('https://s3.amazonaws.com/betterandnice/fonts/Cyclo/Cyclo.eot?#iefix') format("embedded-opentype"),
-  url('https://s3.amazonaws.com/betterandnice/fonts/Cyclo/Cyclo.woff2') format("woff2"),
-  url('https://s3.amazonaws.com/betterandnice/fonts/Cyclo/Cyclo.woff') format("woff"),
-  url('https://s3.amazonaws.com/betterandnice/fonts/Cyclo/Cyclo.otf'),
-  url('https://s3.amazonaws.com/betterandnice/fonts/Cyclo/Cyclo.ttf') format("truetype");
-  
+  // src: url('https://s3.amazonaws.com/betterandnice/fonts/Cyclo/Cyclo.eot'),
+  // url('https://s3.amazonaws.com/betterandnice/fonts/Cyclo/Cyclo.eot?#iefix') format("embedded-opentype"),
+  // url('https://s3.amazonaws.com/betterandnice/fonts/Cyclo/Cyclo.woff2') format("woff2"),
+  // url('https://s3.amazonaws.com/betterandnice/fonts/Cyclo/Cyclo.woff') format("woff"),
+  // url('https://s3.amazonaws.com/betterandnice/fonts/Cyclo/Cyclo.otf'),
+  // url('https://s3.amazonaws.com/betterandnice/fonts/Cyclo/Cyclo.ttf') format("truetype");
+
   // src: url('https://res.cloudinary.com/reymundotenorio/raw/upload/v1521873857/Cyclo.eot'),
   // url('https://res.cloudinary.com/reymundotenorio/raw/upload/v1521873857/Cyclo.eot?#iefix') format("embedded-opentype"),
   // url('https://res.cloudinary.com/reymundotenorio/raw/upload/v1521873856/Cyclo.woff2') format("woff2"),
@@ -45,12 +45,12 @@
   // url('https://res.cloudinary.com/reymundotenorio/raw/upload/v1521873857/Cyclo.ttf') format("truetype");
 
 
-  // src: url('cyclo-webfont.eot');
-  // src: url('cyclo-webfont.eot?#iefix') format('embedded-opentype'),
-  // url('cyclo-webfont.woff2') format('woff2'),
-  // url('cyclo-webfont.woff') format('woff'),
-  // url('cyclo-webfont.ttf') format('truetype'),
-  // url('cyclo-webfont.svg#cycloregular') format('svg');
+  src: url('https://s3.amazonaws.com/betterandnice/fonts/cyclo/cyclo.eot');
+  src: url('cyclo.eot?#iefix') format('embedded-opentype'),
+  url('https://s3.amazonaws.com/betterandnice/fonts/cyclo/cyclo.woff2') format('woff2'),
+  url('https://s3.amazonaws.com/betterandnice/fonts/cyclo/cyclo.woff') format('woff'),
+  url('https://s3.amazonaws.com/betterandnice/fonts/cyclo/cyclo.ttf') format('truetype'),
+  url('https://s3.amazonaws.com/betterandnice/fonts/cyclo/cyclo.svg#cycloregular') format('svg');
 
   font-weight: normal;
   font-style: normal;
