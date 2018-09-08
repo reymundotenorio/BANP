@@ -67,9 +67,9 @@
 
                   <div class="col-xs-12 col-sm-4 col-md-12 button-container no-padding">
                     <% if(employee.state) %>
-                    <%= link_to (admin_active_deactive_employee_path(employee, employee: {state:false})), method: :patch, class: "btn btn-general btn-danger" do %><i class="fas fa-times"></i> <span><%= t('views.show.disable') %></span><% end %>
+                    <%= link_to (admin_deactive_employee_path(employee)), method: :patch, class: "btn btn-general btn-danger" do %><i class="fas fa-times"></i> <span><%= t('views.show.disable') %></span><% end %>
                     <% else %>
-                    <%= link_to (admin_active_deactive_employee_path(employee, employee: {state:true})), method: :patch, class: "btn btn-general btn-success" do %><i class="fas fa-check"></i> <span><%= t('views.show.enable') %></span><% end %>
+                    <%= link_to (admin_active_employee_path(employee)), method: :patch, class: "btn btn-general btn-success" do %><i class="fas fa-check"></i> <span><%= t('views.show.enable') %></span><% end %>
                     <% end %>
                   </div>
                 </div>

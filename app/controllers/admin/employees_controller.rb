@@ -4,7 +4,7 @@ class Admin::EmployeesController < ApplicationController
   # End Admin layout
 
   # Find employees with Friendly_ID
-  before_action :set_employee, only: [:show, :edit, :update, :active_deactive, :history]
+  before_action :set_employee, only: [:show, :edit, :update, :active, :deactive, :history]
   # End Find employees with Friendly_ID
 
   # Sync model DSL
@@ -90,7 +90,7 @@ class Admin::EmployeesController < ApplicationController
     # End Deleting blank spaces
 
     # Adding default values on blank? (nil or "")
-    @employee[:state] = true if @employee[:state].blank?
+    # @employee[:state] = true if @employee[:state].blank?
 
 
     if @employee.save
@@ -109,18 +109,27 @@ class Admin::EmployeesController < ApplicationController
     end
   end
 
-  # Active and deactive
-  def active_deactive
-    if @employee.update(params.require(:employee).permit(:state))
-      redirect_to_back_success params[:employee][:state]
+  # Active
+  def active
+    if @employee.update_attributes(state: true)
+      redirect_to_back_success true
     else
-      redirect_to_back_error state params[:employee][:state]
+      redirect_to_back_error true
+    end
+  end
+
+  # Deactive
+  def deactive
+    if @employee.update_attributes(state: false)
+      redirect_to_back_success false
+    else
+      redirect_to_back_error false
     end
   end
 
   # Redirect to back with success
   def redirect_to_back_success(state)
-    if state == 'true'
+    if state
       redirect_back fallback_location: admin_employees_path, notice: t('alerts.enabled', model: t('activerecord.models.employee'))
     else
       redirect_back fallback_location: admin_employees_path, notice: t('alerts.disabled', model: t('activerecord.models.employee'))
@@ -129,7 +138,7 @@ class Admin::EmployeesController < ApplicationController
 
   # Redirect to back with error
   def redirect_to_back_error(state)
-    if state == 'true'
+    if state
       redirect_back fallback_location: admin_employees_path, alert: t('alerts.not_enabled', model: t('activerecord.models.employee'))
     else
       redirect_back fallback_location: admin_employees_path, alert: t('alerts.not_disabled', model: t('activerecord.models.employee'))

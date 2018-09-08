@@ -38,7 +38,8 @@ Rails.application.routes.draw do
     get '/employee/:id/history', to: 'employees#history', as: 'history_employee'
     post '/employees', to: 'employees#create'
     patch '/employee/:id', to: 'employees#update', as: 'update_employee'
-    patch '/employees/state/:id', to: 'employees#active_deactive', as: 'active_deactive_employee'
+    patch '/employees/:id/active', to: 'employees#active', as: 'active_employee'
+    patch '/employees/:id/deactive', to: 'employees#deactive', as: 'deactive_employee'
     # End Employees
 
     # Providers

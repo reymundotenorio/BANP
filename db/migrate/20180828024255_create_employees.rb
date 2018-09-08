@@ -6,7 +6,7 @@ class CreateEmployees < ActiveRecord::Migration[5.2]
       t.string :last_name, null: false
       t.string :phone, limit: 14 # Phone number format (000) 000-0000
       t.string :role, null: false #
-      t.boolean :state, null: false
+      t.boolean :state, default: false, null: false
 
       t.attachment :image # Paperclip file_name, content_type, file_size, updated_at
       t.string :slug, unique: true # Friendly_id slug
