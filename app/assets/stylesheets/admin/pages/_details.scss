@@ -5,7 +5,6 @@
 .details{
   &.details-pdf{
     padding-top: 10px;
-    min-height: none;
   }
 
   .general-info{
@@ -69,7 +68,7 @@
 
     &.false{
       .info{
-        border-bottom-color: rgba($hover-color, 0.3);
+        border-bottom-color: rgba($sixth-color, 0.3);
       }
     }
   }
