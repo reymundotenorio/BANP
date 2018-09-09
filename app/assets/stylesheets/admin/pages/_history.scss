@@ -1,22 +1,22 @@
-.history {
-
+.history{
   // Timeline
-  .about-timeline {
+  .about-timeline{
     padding: 15px 0;
 
-    .timeline-info {
+    .timeline-info{
       margin-bottom: 25px;
 
-      &.first-last-row {
+      &.first-last-row{
         margin-bottom: 0;
       }
 
-      &:nth-last-child(2) {
+      &:nth-last-child(2){
         margin-bottom: 0;
       }
+
       // Timeline circle
-      .timeline-circle {
-        .circle {
+      .timeline-circle{
+        .circle{
           margin: 0 auto;
           display: block;
           margin-bottom: 10px;
@@ -40,26 +40,27 @@
           box-shadow: 0 3px 10px rgba($black,0.25), 0 3px 10px rgba($black,0.18);
           background-color: $secondary-color;
 
-          i {
+          i{
             font-size: 20px;
           }
 
-          &.edit {
+          &.edit{
             background-color: $fourth-color;
           }
 
-          &.new {
+          &.new{
             background-color: $fifth-color;
           }
         }
       }
       // End Timeline circle
+
       // Timeline content
-      .timeline-content {
+      .timeline-content{
         padding-top: 5px;
         margin-bottom: 5px;
 
-        .timeline-box {
+        .timeline-box{
           background-color: $white;
           border-left: 8px solid $secondary-color;
           -webkit-box-shadow: 0 0 2px 1px rgba(0,0,0,0.17);
@@ -67,11 +68,11 @@
           border-radius: 5px;
           padding: 20px 15px;
 
-          &.edit {
+          &.edit{
             border-left-color: $fourth-color;
           }
 
-          &.new {
+          &.new{
             border-left-color:  $fifth-color;
           }
         }
@@ -79,29 +80,29 @@
       // End Timeline content
     }
 
-    .detail-info {
-      .info {
+    .detail-info{
+      .info{
         border-bottom: 1px solid #ddd;
         padding: 10px 0;
 
-        &:first-child {
+        &:first-child{
           padding-top: 0;
         }
 
-        &:last-child {
+        &:last-child{
           border-bottom: none;
           padding-bottom: 0;
         }
       }
 
-      p {
+      p{
         margin: 0;
       }
 
-      .title {
+      .title{
         padding-bottom: 5px;
 
-        &.datetime {
+        &.datetime{
           text-align: right;
           color: rgba($text-color, 0.8);
           font-style: italic;
@@ -109,51 +110,54 @@
         }
       }
 
-      .before {
+      .before{
         color: $fifth-color;
       }
 
-      .after {
+      .after{
         color:  $fifth-color;
       }
     }
   }
-  // END Timeline
+  // End Timeline
 }
-@media (min-width: 992px) {
-  .history {
+
+@media (min-width: 992px){
+
+  .history{
     // Timeline
-    .about-timeline {
+    .about-timeline{
       padding: 30px;
 
-      .timeline-info {
+      .timeline-info{
         display: table;
         width: 100%;
         margin-bottom: 30px;
 
-        &:nth-last-child(2) {
+        &:nth-last-child(2){
           margin-bottom: 30px;
         }
 
-        &.first-last-row {
+        &.first-last-row{
           margin-bottom: 30px;
 
-          &:last-child {
+          &:last-child{
             margin-bottom: 0;
           }
         }
+
         // Timeline circle
-        .timeline-circle {
+        .timeline-circle{
           display: table-cell;
           width: 45px;
           vertical-align: middle;
           position: relative;
 
-          .circle {
+          .circle{
             margin-bottom: 0;
           }
 
-          .vertical-line {
+          .vertical-line{
             width: 1px;
             background-color: rgba($text-color,0.25);
             position: absolute;
@@ -161,13 +165,13 @@
             bottom: -30px;
             right: 22px;
             left: auto;
-            // z-index: 0;
-            &.first-line {
+
+            &.first-line{
               top: 0;
             }
           }
 
-          .begin-final-divider {
+          .begin-final-divider{
             width: 40px;
             height: 4px;
             margin: 0 2px 0 auto;
@@ -177,27 +181,29 @@
           }
         }
         // End Timeline circle
+
         // Timeline horizontal line
-        .timeline-horizontal-line {
+        .timeline-horizontal-line{
           display: table-cell;
           width: 32px;
           vertical-align: middle;
 
-          .horizontal-line {
+          .horizontal-line{
             height: 1px;
             width: 100%;
             background-color: rgba($text-color,0.25);
           }
         }
         // End Timeline horizontal line
+
         // Timeline content
-        .timeline-content {
+        .timeline-content{
           padding-top: 0;
           margin-bottom: 0;
           padding-left: 0;
           padding-right: 0;
 
-          .timeline-box {
+          .timeline-box{
             padding-left: 30px;
             padding-right: 30px;
           }
@@ -205,6 +211,7 @@
         // End Timeline content
       }
     }
-    // END Timeline
+    // End Timeline
   }
+
 }

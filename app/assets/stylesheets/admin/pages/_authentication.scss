@@ -17,10 +17,6 @@ body{
     min-height: 100vh;
 
     .background-container{
-      // background: url(asset-path("img/login-background.jpg")) no-repeat center center;
-      // background-size: cover;
-      // @include gradient-color(40s);
-
       @include primary-color;
 
       position: fixed;
@@ -28,38 +24,6 @@ body{
       bottom: 0px;
       left: 0px;
       right: 0px;
-
-      // -webkit-filter: blur(70px);
-      // filter: blur(70px);
-    }
-
-    .blur {
-      position: fixed;
-      padding: 70px;
-      top: -70px;
-      bottom: -70px;
-      right: -70px;
-      left: -70px;
-
-      background-image: linear-gradient(to top right, rgba(#2b2832, 0.8) 0%, rgba(#545763, 0.8) 45%, rgba(#454d5b, 0.6) 60%);
-
-      -webkit-filter: blur(70px);
-      filter: blur(70px);
-
-      &:after{
-        content: '';
-        position: fixed;
-        top: 0px;
-        bottom: 0px;
-        left: 0px;
-        right: 0px;
-        z-index: 1001;
-
-        background-image: linear-gradient(360deg, rgba(#2b2832, 0.8) 0%, rgba(#2b2832, 0.4) 46%, rgba($black, 0.05) 50%);
-
-        -webkit-filter: blur(70px);
-        filter: blur(70px);
-      }
     }
   }
 }

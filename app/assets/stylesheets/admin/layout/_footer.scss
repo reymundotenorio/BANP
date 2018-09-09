@@ -26,7 +26,6 @@ footer{
 
 .footer-pdf{
   background-color: $white;
-  // border-top: 2px solid $grey;
   padding-top: 5px;
 
   p{
@@ -54,34 +53,9 @@ footer{
   }
 }
 
-.footer-bottom{
-  @include primary-color;
-
-  padding: 5px 0px;
-
-  .footer-logo{
-    text-align: center;
-
-    // BANP logo
-    .banp-logo{
-      font-family: $third-font;
-      font-weight: bold;
-      font-size: 18px;
-      color: $white;
-      text-shadow: -2px 0px 5px rgba($black, 0.5);
-      border: 2px solid $white;
-      border-radius: 5px;
-      padding: 4px 5px;
-      margin: 0px;
-      display: inline-block;
-      -webkit-transition: all 0.3s ease;
-      transition: all 0.3s ease;
-    }
-    // End BANP logo
-  }
-}
 
 @media (min-width: 768px){
+
   .fix-footer{
     padding-bottom: (58px + 30px);
   }
@@ -115,4 +89,5 @@ footer{
       }
     }
   }
+  
 }

@@ -5,7 +5,7 @@
 
 // Colors
 
-@mixin gradient-color($animation-time) {
+@mixin gradient-color($animation-time){
   // background: linear-gradient(-45deg, #EE7752, #E73C7E, #23A6D5, #23D5AB);
   background: linear-gradient(-45deg, $fourth-color, $primary-color, $third-color, $secondary-color);
   background-size: 400% 400%;
@@ -13,13 +13,13 @@
   animation: Gradient $animation-time ease infinite;
 }
 
-@mixin primary-color { // Firewatch
+@mixin primary-color{ // Firewatch
   background: $secondary-color;  /* fallback for old browsers */
   background: -webkit-linear-gradient(to right, $primary-color, $secondary-color);  /* Chrome 10-25, Safari 5.1-6 */
   background: linear-gradient(to right, $primary-color, $secondary-color); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
 
-@mixin primary-color-inverted { // Firewatch
+@mixin primary-color-inverted{ // Firewatch
   background: $secondary-color;  /* fallback for old browsers */
   background: -webkit-linear-gradient(to left, $primary-color, $secondary-color);  /* Chrome 10-25, Safari 5.1-6 */
   background: linear-gradient(to left, $primary-color, $secondary-color); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */

@@ -3,70 +3,70 @@
 // -----------------------------------------------------------------------------
 
 // Custom-helpers
-.full-wd {
+.full-wd{
   width: 100%;
 }
 
-.no-margin {
+.no-margin{
   margin: 0px;
 }
 
-.no-padding {
+.no-padding{
   padding-left: 0px;
   padding-right: 0px;
 }
 
 // Center link inside
-.link-center {
+.link-center{
   text-align: center;
 }
 // End Center link inside
 
 // Visible only on 4K
-.visible-4k {
+.visible-4k{
   display: none !important;
 }
 // End Visible only on 4K
 
 // No break words
-.no-break {
+.no-break{
   white-space: nowrap;
 }
 // End No break words
 
 // Center images
-img {
+img{
   margin: 0 auto;
 }
 // End Center images
 
 // Videos Full Width
-video {
+video{
   width: 100%;
 }
 // End Videos Full Width
 
-@media (min-width: 768px) {
+@media (min-width: 768px){
 
   // Featured pages Jobs section
-  .featured-jobs {
+  .featured-jobs{
     padding-bottom: 100px;
   }
   // End Featured pages Jobs section
 
 }
 
-@media (min-width: 1920px) {
+@media (min-width: 1920px){
 
   // Hide on 4K
-  .hidden-4k {
+  .hidden-4k{
     background: none !important;
     height: auto !important;
   }
   // Hide on 4K
 
   // Visible only on 4K
-  .visible-4k {
+  .visible-4k{
     display: block !important;
   }
   // End Visible only on 4K
@@ -75,26 +75,38 @@ video {
 
 
 // Gradient
-@-webkit-keyframes Gradient {
-  0% {
+@-webkit-keyframes Gradient{
+  0%{
     background-position: 0% 50%
   }
-  50% {
+  50%{
     background-position: 100% 50%
   }
-  100% {
+  100%{
     background-position: 0% 50%
   }
 }
 
-@keyframes Gradient {
-  0% {
+@-webkit-keyframes Gradient{
+  0%{
     background-position: 0% 50%
   }
-  50% {
+  50%{
     background-position: 100% 50%
   }
-  100% {
+  100%{
+    background-position: 0% 50%
+  }
+}
+
+@keyframes Gradient{
+  0%{
+    background-position: 0% 50%
+  }
+  50%{
+    background-position: 100% 50%
+  }
+  100%{
     background-position: 0% 50%
   }
 }

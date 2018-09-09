@@ -3,17 +3,12 @@
 // ------------------------------------------------------------
 
 .details{
-
   &.details-pdf{
     padding-top: 10px;
     min-height: none;
   }
 
   .general-info{
-    .image-container{
-      // padding: 15px 30px;
-    }
-
     .main-info{
       padding-top: 15px;
 
@@ -80,7 +75,7 @@
   }
 }
 
-@media (min-width: 768px) {
+@media (min-width: 768px){
 
   .details{
     .general-info{
@@ -94,7 +89,7 @@
 
 }
 
-@media (min-width: 992px) {
+@media (min-width: 992px){
 
   .details{
     .general-info{

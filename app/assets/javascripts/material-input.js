@@ -5,6 +5,7 @@ $(document).ready(function() {
     if($(this).val() == ''){
       $(this).removeClass("with-value"); // Remove class
     }
+    
     else{
       $(this).addClass("with-value"); // Add class
     }

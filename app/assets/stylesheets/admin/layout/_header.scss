@@ -12,7 +12,7 @@
   text-shadow: -2px 0px 5px rgba($black, 0.5);
   border: 4px solid $white;
   border-radius: 5px;
-  padding: 10px;
+  padding: 6px 6px 3px;
   margin: 0px;
   display: inline-block;
   -webkit-transition: all 0.3s ease;
@@ -30,10 +30,10 @@
 
 // Header
 .header-top{
-  -webkit-box-shadow: 0px 2px 6px rgba($black,0.2);
-  box-shadow: 0px 2px 6px rgba($black,0.2);
-
   @include primary-color;
+
+  -webkit-box-shadow: 0px 3px 10px rgba($black, 0.15), 0px 3px 10px rgba($black, 0.1);
+  box-shadow: 0px 3px 10px rgba($black, 0.15), 0px 3px 10px rgba($black, 0.1);
 
   &.header-top-pdf{
   }
@@ -45,13 +45,14 @@
       // BANP logo
       .banp-logo{
         font-size: 20px;
-        padding: 6px 5px;
+        padding: 3px 3px 2px;
+        border-width: 2px;
       }
       // End BANP logo
 
       // Header options
       .header-options{
-        margin-bottom: -48px;
+        margin-bottom: -46px;
       }
       // End Header options
 
@@ -78,7 +79,7 @@
 
       // Navbar toggle
       .navbar-toggle{
-        top: 8px;
+        top: 5px;
       }
       // End Navbar toggle
     }
@@ -108,9 +109,10 @@
       font-size: 24px;
     }
   }
+
   // Header options
   .header-options{
-    margin-bottom: -58px;
+    margin-bottom: -62px;
     position: relative;
     z-index: 10;
     -webkit-transition: all 0.3s ease;
@@ -121,12 +123,11 @@
   // Navbar brand top
   .navbar-brand-top{
     text-align: center;
-    // padding-top: 8px;
     padding-bottom: 8px;
     -webkit-transition: all 0.3s ease;
     transition: all 0.3s ease;
 
-    padding-top: 18px;
+    padding-top: 22px;
 
     .navbar-brand-row{
       display: -webkit-box;
@@ -265,7 +266,6 @@
         .notifications-container{
           text-align: center;
           padding: 0px 5px;
-          // padding: 0px 12px;
 
           .dropdown{
             > a{
@@ -328,7 +328,6 @@
         .user-container{
           text-align: center;
           padding: 0px 5px;
-          // padding: 0px 12px;
 
           .dropdown{
             > a{
@@ -412,10 +411,10 @@
   margin-bottom: 0px;
   min-height: 0px;
 
-
   // Navbar header
   .navbar-header{
     @include primary-color;
+
     height: auto;
 
     // Navbar brand
@@ -447,7 +446,7 @@
     transition: all 0.3s ease;
     background-color: $transparent;
     margin: 0px;
-    top: 17px;
+    top: 21px;
     right: 5px;
     border: none;
 
@@ -485,7 +484,7 @@
     .icon-bar{
       -webkit-transition: all 0.3s ease;
       transition: all 0.3s ease;
-      background-color: $white;
+      background-color: $text-color;
       height: 3px;
       width: 25px;
 
@@ -835,21 +834,14 @@
           }
 
           @include on-event{
-            // border-bottom-color: $hover-color;
-
             &:before, &:after{
               width: 50%;
             }
           }
 
           &.active{
-            // border-bottom-color: $hover-color;
             &:before, &:after{
               width: 50%;
-            }
-
-            @include on-event{
-              // border-bottom-color: $btn-color;
             }
           }
           // End Activated item
