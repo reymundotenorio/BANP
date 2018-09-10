@@ -18,6 +18,24 @@
     </div>
     <!-- End Title -->
 
+    <!-- Breadcrumb -->
+    <div class="row">
+      <div class="col-xs-12 hidden-xs">
+        <div class="breadcrumb-container">
+          <ol class="breadcrumb">
+            <li>
+              <%= link_to (admin_root_path) do %><i class="fas fa-tachometer-alt"></i> <span><%= t('header.navigation.dashboard') %></span><% end %>
+            </li>
+
+            <li class="active">
+              <i class="fas fa-list-alt"></i> <%= t('header.navigation.providers') %>
+            </li>
+          </ol>
+        </div>
+      </div>
+    </div>
+    <!-- End Breadcrumb -->
+
     <!-- Information -->
     <div class="row">
       <div class="col-xs-12 col-sm-12">

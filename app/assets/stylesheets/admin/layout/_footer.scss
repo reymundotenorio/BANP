@@ -77,6 +77,10 @@ footer{
       justify-content: center;
     }
 
+    .image-container{
+      width: auto;
+    }
+
     img{
       padding-bottom: 0px;
     }
@@ -84,10 +88,14 @@ footer{
     p{
       text-align: left;
 
+      &.request-info{
+        text-align: right;
+      }
+
       span{
         display: inline-block;
       }
     }
   }
-  
+
 }

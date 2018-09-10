@@ -4,15 +4,27 @@
   <section class="footer-top">
     <div class="container-fluid">
       <div class="row">
-        <div class="col-xs-12 col-sm-2 col-md-1">
+        <div class="col-xs-12 col-sm-1 image-container">
           <div class="footer-legal">
             <%= image_tag 'img/footer-usda-organic.png', class: "img-responsive", alt: "USDA Organic" %>
           </div>
         </div>
 
-        <div class="col-xs-12 col-sm-10 col-md-11">
+        <div class="col-xs-12 col-sm-7">
           <div class="footer-legal">
             <p><span>&copy; <%= Time.now.year %></span> <span>Better and Nice Produce Corp. <span>Miami, Florida</span></p>
+          </div>
+        </div>
+
+        <% client = DeviceDetector.new(request.user_agent) %>
+        <% client_ip = request.remote_ip %>
+        <% client_browser = client.name %>
+        <% client_os = "#{client.os_name} #{client.os_full_version}" %>
+        <% client_device = client.device_name %>
+
+        <div class="col-xs-12 col-sm-4">
+          <div class="footer-legal">
+            <p class="request-info"><span><%= client.known? ? "#{Resolv.getname(request.remote_ip)} @ #{client_ip} - #{client_device} #{client_browser} #{client_os}" : "#{Resolv.getname(request.remote_ip)} @ #{client_ip}" %></span></p>
           </div>
         </div>
       </div>

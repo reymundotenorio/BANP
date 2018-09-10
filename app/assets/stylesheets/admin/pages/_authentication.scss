@@ -17,7 +17,7 @@ body{
     min-height: 100vh;
 
     .background-container{
-      @include primary-color;
+      @include primary-color-top;
 
       position: fixed;
       top: 0px;

@@ -12,14 +12,13 @@
         <!-- Export button-->
         <div class="btn-new-container">
           <% if(@employee.state) %>
-          <%= link_to (admin_active_deactive_employee_path(@employee, employee: {state:false})), method: :patch, class: "btn btn-general btn-danger" do %><i class="fas fa-times"></i> <span><%= t('views.edit.disable') %></span><% end %>
+          <%= link_to (admin_deactive_employee_path(@employee)), method: :patch, class: "btn btn-general btn-danger" do %><i class="fas fa-times"></i> <span><%= t('views.edit.disable') %></span><% end %>
           <% else %>
-          <%= link_to (admin_active_deactive_employee_path(@employee, employee: {state:true})), method: :patch, class: "btn btn-general btn-success" do %><i class="fas fa-check"></i> <span><%= t('views.edit.enable') %></span><% end %>
+          <%= link_to (admin_active_employee_path(@employee)), method: :patch, class: "btn btn-general btn-success" do %><i class="fas fa-check"></i> <span><%= t('views.edit.enable') %></span><% end %>
           <% end %>
         </div>
         <!-- End Export button-->
       </div>
-
     </div>
     <!-- End Title -->
 
@@ -29,11 +28,11 @@
         <div class="breadcrumb-container">
           <ol class="breadcrumb">
             <li>
-              <%= link_to (admin_categories_path) do %><i class="fas fa-list-alt"></i> <span><%= t('header.navigation.categories') %></span><% end %>
+              <%= link_to (admin_employees_path) do %><i class="fas fa-list-alt"></i> <span><%= t('header.navigation.employees') %></span><% end %>
             </li>
 
             <li>
-              <%= link_to (admin_employee_path(@employee)) do %><i class="fas fa-id-card"></i> <span><%= @employee.name %></span><% end %>
+              <%= link_to (admin_employee_path(@employee)) do %><i class="fas fa-id-card"></i> <span><%= @employee.first_name %> <%= @employee.last_name %></span><% end %>
             </li>
 
             <li class="active">

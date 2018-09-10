@@ -49,7 +49,8 @@
           }
 
           &.new{
-            background-color: $fifth-color;
+            // background-color: $fifth-color;
+            background-color: $third-color;
           }
         }
       }
@@ -73,7 +74,8 @@
           }
 
           &.new{
-            border-left-color:  $fifth-color;
+            // border-left-color: $fifth-color;
+            border-left-color: $third-color;
           }
         }
       }
@@ -111,11 +113,12 @@
       }
 
       .before{
-        color: $fifth-color;
+        color: $sixth-color;
       }
 
       .after{
-        color:  $fifth-color;
+        // color:  $fifth-color;
+        color:  $third-color;
       }
     }
   }

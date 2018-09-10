@@ -10,7 +10,8 @@
   margin-bottom: 25px;
 
   &.alert-success{
-    background-color: $fifth-color;
+    // background-color: $fifth-color;
+    background-color: $third-color
   }
 
   &.alert-danger{
@@ -22,6 +23,7 @@
     color: $white;
     -webkit-transition: all 0.3s ease;
     transition: all 0.3s ease;
+    top: 2px;
 
     @include on-event{
       opacity: 1;
@@ -36,6 +38,7 @@
 
   p{
     color: $white;
+    margin: 0px;
   }
 
   ul{
