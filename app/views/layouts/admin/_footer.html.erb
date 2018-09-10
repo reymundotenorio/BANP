@@ -1,6 +1,6 @@
 <div class="fix-footer"></div>
 
-<footer class="hidden-xs">
+<footer>
   <section class="footer-top">
     <div class="container-fluid">
       <div class="row">
@@ -24,7 +24,7 @@
 
         <div class="col-xs-12 col-sm-4">
           <div class="footer-legal">
-            <p class="request-info"><span><%= client.known? ? "#{Resolv.getname(request.remote_ip)} @ #{client_ip} - #{client_device} #{client_browser} #{client_os}" : "#{Resolv.getname(request.remote_ip)} @ #{client_ip}" %></span></p>
+            <p class="request-info"><span><%= client.known? ? "#{client_device} #{client_browser} #{client_os} @ #{client_ip}" : "#{client_ip}" %></span></p>
           </div>
         </div>
       </div>

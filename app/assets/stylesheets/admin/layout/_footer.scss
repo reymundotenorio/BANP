@@ -14,14 +14,6 @@ footer{
   background-color: $white;
   -webkit-box-shadow: 0px -2px 6px rgba($black,0.2);
   box-shadow: 0px -2px 6px rgba($black,0.2);
-
-  position: fixed;
-  bottom: 0px;
-  top: auto;
-  left: 0px;
-  right: 0px;
-
-  z-index: 10;
 }
 
 .footer-pdf{
@@ -47,6 +39,10 @@ footer{
     margin: 0px;
     line-height: 1;
 
+    &.request-info{
+      padding-top: 10px;
+    }
+
     span{
       display: block;
     }
@@ -58,6 +54,16 @@ footer{
 
   .fix-footer{
     padding-bottom: (58px + 30px);
+  }
+
+  footer{
+    position: fixed;
+    bottom: 0px;
+    top: auto;
+    left: 0px;
+    right: 0px;
+
+    z-index: 10;
   }
 
   .footer-top{
@@ -90,6 +96,7 @@ footer{
 
       &.request-info{
         text-align: right;
+        padding-top: 0px;
       }
 
       span{
