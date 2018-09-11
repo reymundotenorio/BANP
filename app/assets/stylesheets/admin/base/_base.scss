@@ -173,22 +173,60 @@ a{
       }
     }
 
-    &:required{
-      + label{
-        &:after{
-          content:" *";
-          font-size: 0.8em;
-          position: absolute;
-          top: -2px;
-          bottom: auto;
-          left: auto;
-          right: auto;
+    // &:required{
+    //   + label{
+    //     &:after{
+    //       content:" *";
+    //       font-size: 0.8em;
+    //       position: absolute;
+    //       top: -2px;
+    //       bottom: auto;
+    //       left: auto;
+    //       right: auto;
+    //     }
+    //   }
+    // }
+  }
+
+  .dropdown{
+    .dropdown-toggle{
+      background-color: $transparent;
+      cursor: pointer;
+
+      @include placeholder{
+        color: tint($text-color, 40%);
+      }
+    }
+
+    .dropdown-menu{
+      border-radius: 0px;
+      border: none;
+      margin: 0px;
+      padding: 0px;
+      right: 0px;
+      left: 0px;
+      background-color: $white;
+      margin-top: 1px;
+      width: 100%;
+
+      li{
+        p{
+          font-size: 16px;
+          padding: 5px 15px;
+          margin: 0px;
+          cursor: pointer;
+
+          -webkit-transition: all 0.3s ease;
+
+          transition: all 0.3s ease;
+
+          @include on-event{
+            color: $hover-color;
+          }
         }
       }
     }
-  }
 
-  select{
     + label{
       -webkit-transform: translateY(-30px);
       transform: translateY(-30px);

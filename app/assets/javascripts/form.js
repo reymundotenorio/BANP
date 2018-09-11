@@ -34,5 +34,11 @@ $(document).ready(function() {
   $("#select_image").change(function(){
     updateImageSelected(this);
   });
-  
+
+
+  // Dropdown "Bootstrap" listener
+  $(".dropdown-item").click(function(){
+    $(".dropdown-toggle").val($.trim($(this).text()));
+  });
+
 });

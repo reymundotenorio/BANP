@@ -39,7 +39,7 @@ ActiveRecord::Schema.define(version: 2018_08_28_024255) do
     t.string "last_name", null: false
     t.string "phone", limit: 14
     t.string "role", null: false
-    t.boolean "state", null: false
+    t.boolean "state", default: true, null: false
     t.string "image_file_name"
     t.string "image_content_type"
     t.integer "image_file_size"

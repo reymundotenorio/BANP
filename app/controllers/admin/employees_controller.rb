@@ -92,7 +92,6 @@ class Admin::EmployeesController < ApplicationController
     # Adding default values on blank? (nil or "")
     # @employee[:state] = true if @employee[:state].blank?
 
-
     if @employee.save
       redirect_to [:admin, @employee], notice: t('alerts.created', model: t('activerecord.models.employee'))
     else
