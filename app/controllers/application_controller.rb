@@ -29,4 +29,16 @@ class ApplicationController < ActionController::Base
     render file: "#{Rails.root}/public/404.html", layout: false, status: 404
   end
   # End Render 404
+
+  # Render PDF
+  def to_pdf(name_pdf, template, resource, datetime, pdf_title)
+    render pdf: name_pdf,
+    template: template,
+    layout: "admin/application_pdf.html.erb",
+    page_size: "letter",
+    # orientation: 'Landscape', # Portrait
+    margin: { top: 5, bottom: 10 },
+    footer: { content: render_to_string("layouts/admin/footer_pdf.html.erb", layout: nil, locals: { datetime: datetime }) },
+    locals: { resource: resource, pdf_title: pdf_title }
+  end
 end

@@ -1,6 +1,6 @@
 class Admin::EmployeesController < ApplicationController
   # Admin layout
-  layout 'admin/application'
+  layout "admin/application"
   # End Admin layout
 
   # Find employees with Friendly_ID
@@ -18,18 +18,18 @@ class Admin::EmployeesController < ApplicationController
   # /employees
   def index
     @employees = Employee.search(params[:search], params[:show]).paginate(page: params[:page], per_page: 15) # Employees with pagination
-    @show_all = params[:show] == 'all' ? true : false # View All (Enabled and Disabled)
+    @show_all = params[:show] == "all" ? true : false # View All (Enabled and Disabled)
 
     current_lang = params[:lang]
 
     I18n.locale = current_lang
     datetime = I18n.l Time.now
 
-    file_time = Time.now.strftime('%m%d%Y')
+    file_time = Time.now.strftime("%m%d%Y")
 
     name_pdf = "employees-#{file_time}"
-    template = 'admin/employees/index_pdf.html.erb'
-    title_pdf = t('header.navigation.employees')
+    template = "admin/employees/index_pdf.html.erb"
+    title_pdf = t("header.navigation.employees")
 
     respond_to do |format|
       format.html
@@ -53,11 +53,11 @@ class Admin::EmployeesController < ApplicationController
     I18n.locale = current_lang
     datetime = I18n.l Time.now
 
-    file_time = Time.now.strftime('%m%d%Y')
+    file_time = Time.now.strftime("%m%d%Y")
 
     name_pdf = "employee-#{@employee.slug}-#{file_time}"
-    template = 'admin/employees/show_pdf.html.erb'
-    title_pdf = t('activerecord.models.employee')
+    template = "admin/employees/show_pdf.html.erb"
+    title_pdf = t("activerecord.models.employee")
 
     respond_to do |format|
       format.html
@@ -93,7 +93,7 @@ class Admin::EmployeesController < ApplicationController
     # @employee[:state] = true if @employee[:state].blank?
 
     if @employee.save
-      redirect_to [:admin, @employee], notice: t('alerts.created', model: t('activerecord.models.employee'))
+      redirect_to [:admin, @employee], notice: t("alerts.created", model: t("activerecord.models.employee"))
     else
       render :new
     end
@@ -102,7 +102,7 @@ class Admin::EmployeesController < ApplicationController
   # Update
   def update
     if @employee.update(employee_params)
-      redirect_to [:admin, @employee], notice: t('alerts.updated', model: t('activerecord.models.employee'))
+      redirect_to [:admin, @employee], notice: t("alerts.updated", model: t("activerecord.models.employee"))
     else
       render :edit
     end
@@ -129,30 +129,19 @@ class Admin::EmployeesController < ApplicationController
   # Redirect to back with success
   def redirect_to_back_success(state)
     if state
-      redirect_back fallback_location: admin_employees_path, notice: t('alerts.enabled', model: t('activerecord.models.employee'))
+      redirect_back fallback_location: admin_employees_path, notice: t("alerts.enabled", model: t("activerecord.models.employee"))
     else
-      redirect_back fallback_location: admin_employees_path, notice: t('alerts.disabled', model: t('activerecord.models.employee'))
+      redirect_back fallback_location: admin_employees_path, notice: t("alerts.disabled", model: t("activerecord.models.employee"))
     end
   end
 
   # Redirect to back with error
   def redirect_to_back_error(state)
     if state
-      redirect_back fallback_location: admin_employees_path, alert: t('alerts.not_enabled', model: t('activerecord.models.employee'))
+      redirect_back fallback_location: admin_employees_path, alert: t("alerts.not_enabled", model: t("activerecord.models.employee"))
     else
-      redirect_back fallback_location: admin_employees_path, alert: t('alerts.not_disabled', model: t('activerecord.models.employee'))
+      redirect_back fallback_location: admin_employees_path, alert: t("alerts.not_disabled", model: t("activerecord.models.employee"))
     end
-  end
-
-  # Render PDF
-  def to_pdf(name_pdf, template, resource, datetime, pdf_title)
-    render pdf: name_pdf,
-    template: template,
-    layout: 'admin/application_pdf.html.erb',
-    page_size: 'letter',
-    margin: { top: 5, bottom: 10 },
-    footer: { content: render_to_string('layouts/admin/footer_pdf.html.erb', layout: nil, locals: { datetime: datetime }) },
-    locals: { resource: resource, title_pdf: pdf_title }
   end
 
   private

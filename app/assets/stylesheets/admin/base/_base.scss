@@ -159,6 +159,9 @@ a{
   // End Error on input
 
   input{
+    position: relative;
+    z-index: 100;
+    
     &.with-value, &:valid, &:focus{
       + label{
         -webkit-transform: translateY(-30px);

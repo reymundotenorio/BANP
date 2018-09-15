@@ -22,7 +22,7 @@ class Employee < ApplicationRecord
   # Friendly_ID slug_candidates
   def slug_candidates
     [
-      :first_name,
+      [:first_name, :last_name],
       [:first_name, :last_name, :id],
       [:first_name, :id]
     ]

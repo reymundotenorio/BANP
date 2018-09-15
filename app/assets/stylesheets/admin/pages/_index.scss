@@ -82,16 +82,17 @@
     margin-top: 30px;
     display: block;
 
+    // Table PDF
     &.table-pdf{
       display: table;
       margin-top: 0px;
 
-      tr{
+      >tr{
         page-break-before: always;
         page-break-after: always;
         page-break-inside: avoid;
 
-        th{
+        >th{
           padding-left: 8px;
           padding-right: 8px;
 
@@ -105,11 +106,11 @@
         }
       }
 
-      tbody{
+      >tbody{
         display: table-row-group;
         vertical-align: top;
 
-        tr{
+        >tr{
           display: table-row;
           margin-top: 0px;
 
@@ -121,7 +122,21 @@
             }
           }
 
-          td{
+          &:first-child{
+            >td{
+              &:first-child{
+                border-top: 1px solid #ddd;
+              }
+            }
+          }
+
+          >td{
+            &:first-child{
+              border-top: 1px solid #ddd;
+            }
+          }
+
+          >td{
             border-top: 1px solid #ddd;
             padding-left: 8px;
             padding-right: 8px;
@@ -141,6 +156,7 @@
         }
       }
     }
+    // End Table PDF
 
     thead{
       display: none;
@@ -167,7 +183,8 @@
         -webkit-transition: all 0.3s ease;
         transition: all 0.3s ease;
 
-        margin: 0px -15px;
+        // margin: 0px -15px;
+        margin: 0 auto;
         padding: 0px 15px;
 
         margin-top: 15px;
@@ -194,10 +211,10 @@
         // End No clickable row
 
         @include on-event{
-          background-color: rgba($grey, 0.5);
+          background-color: rgba($grey, 0.95);
 
-          -webkit-box-shadow: 0px 3px 10px rgba($black, 0.15), 0px 3px 10px rgba($black, 0.1);
-          box-shadow: 0px 3px 10px rgba($black, 0.15), 0px 3px 10px rgba($black, 0.1);
+          // -webkit-box-shadow: 0px 3px 10px rgba($black, 0.15), 0px 3px 10px rgba($black, 0.1);
+          // box-shadow: 0px 3px 10px rgba($black, 0.15), 0px 3px 10px rgba($black, 0.1);
         }
 
         &.false{

@@ -1,5 +1,5 @@
 <!-- PDF resource -->
-<% categories = resource %>
+<% employees = resource %>
 <!-- End PDF resource -->
 
 <!-- Index PDF -->
@@ -7,7 +7,7 @@
   <div class="container">
     <!-- Information -->
     <div class="row">
-      <div class="col-xs-12 col-sm-12">
+      <div class="col-xs-12">
         <!-- Material card -->
         <div class="material-card shadow-card material-card-pdf shadow-card-pdf">
 
@@ -18,17 +18,23 @@
                 <!-- <thead> -->
                 <tr>
                   <th>No.</th>
-                  <th><%= t('activerecord.attributes.category.name') %></th>
-                  <th><%= t('activerecord.attributes.category.description') %></th>
+                  <th><%= t('activerecord.attributes.employee.first_name') %></th>
+                  <th><%= t('activerecord.attributes.employee.last_name') %></th>
+                  <th><%= t('activerecord.attributes.employee.email') %></th>
+                  <th><%= t('activerecord.attributes.employee.phone') %></th>
+                  <th><%= t('activerecord.attributes.employee.role') %></th>
                 </tr>
                 <!-- </thead> -->
 
                 <tbody>
-                  <% categories.each do |category| %>
-                  <tr class="<%= category.state %>">
-                    <td data-header="No."><p><%= category.id %></p></td>
-                    <td data-header="<%= t('activerecord.attributes.category.name') %>"><p><%= category.name %></p></td>
-                    <td data-header="<%= t('activerecord.attributes.category.description') %>"><p><%= category.description %></p></td>
+                  <% employees.each do |employee| %>
+                  <tr class="<%= employee.state %>">
+                    <td><p><%= employee.id %></p></td>
+                    <td><p><%= employee.first_name %></p></td>
+                    <td><p><%= employee.last_name %></p></td>
+                    <td><p><%= employee.email %></p></td>
+                    <td><p><%= employee.phone %></p></td>
+                    <td><p><%= employee.role %></p></td>
                   </tr>
                   <% end %>
                 </tbody>
