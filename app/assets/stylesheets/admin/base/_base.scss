@@ -161,7 +161,7 @@ a{
   input{
     position: relative;
     z-index: 100;
-    
+
     &.with-value, &:valid, &:focus{
       + label{
         -webkit-transform: translateY(-30px);
@@ -244,6 +244,12 @@ a{
   }
 }
 // End Material inputs
+
+// Turbolinks progress bar
+.turbolinks-progress-bar {
+  background-color: $third-color;
+}
+// End Turbolinks progress bar
 
 @media (min-width: 768px){
 
