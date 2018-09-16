@@ -1,6 +1,6 @@
 class Admin::Authentication::SessionsController < ApplicationController
   # Authentication layout
-  layout 'admin/authentication'
+  layout "admin/authentication"
   # End Authentication layout
 
   # /sign-in
@@ -27,7 +27,7 @@ class Admin::Authentication::SessionsController < ApplicationController
         # Si el usuario existe, pero contraseña no coincide
         increment_attempts
       else # Usuario no existe
-        flash[:alert] = 'Correo electrónico y/o contraseña inválidos'
+        flash[:alert] = "Correo electrónico y/o contraseña inválidos"
         render :new
       end
 

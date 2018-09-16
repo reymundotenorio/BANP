@@ -4,8 +4,7 @@
 
 .index{
   &.index-pdf{
-    padding-top: 10px;
-    min-height: none;
+    padding-top: 10px; 
   }
 
   .search-record{
@@ -118,7 +117,7 @@
           page-break-before: always;
           page-break-after: always;
           page-break-inside: avoid;
-          
+
           display: table-row;
           margin-top: 0px;
 

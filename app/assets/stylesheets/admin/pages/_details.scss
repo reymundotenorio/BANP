@@ -68,7 +68,7 @@
 
     &.false{
       .info{
-        border-bottom-color: rgba($sixth-color, 0.3);
+        border-bottom-color: tint($sixth-color, 80%);
       }
     }
   }

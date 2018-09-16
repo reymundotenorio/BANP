@@ -11,7 +11,8 @@
   <!-- End Meta information -->
 
   <!-- Favicon settings -->
-  <link rel="icon" type="image/png" href="/favicon.png">
+  <!-- <link rel="icon" type="image/png" href="/favicon.png"> -->
+  <%= favicon_link_tag asset_path("img/favicon.png"), rel: "icon", type: "image/png" %>
   <meta name="theme-color" content="#f15f79">
   <!-- End Favicon settings -->
 
@@ -31,8 +32,8 @@
   <!-- End CSP Tags -->
 
   <!-- Application -->
-  <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-  <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  <%= stylesheet_link_tag "application", media: "all", "data-turbolinks-track": "reload" %>
+  <%= javascript_include_tag "application", "data-turbolinks-track": "reload" %>
   <!-- End Application -->
 
   <!-- Render sync config -->
@@ -41,7 +42,7 @@
 </head>
 
 <!-- Header -->
-<%= render 'layouts/admin/header' %>
+<%= render "layouts/admin/header" %>
 <!-- End Header -->
 
 <!-- Fix body (affix) -->
@@ -50,7 +51,7 @@
 <!-- End Fix body (affix) -->
 
 <!-- Alerts -->
-<%= render 'layouts/admin/alerts' %>
+<%= render "layouts/admin/alerts" %>
 <!-- End Alerts -->
 
 <!-- Preloader -->
@@ -70,6 +71,6 @@
 <!-- End Main content -->
 
 <!-- Footer -->
-<%= render 'layouts/admin/footer' %>
+<%= render "layouts/admin/footer" %>
 <!-- End Footer -->
 </html>

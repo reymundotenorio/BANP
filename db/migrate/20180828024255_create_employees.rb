@@ -4,15 +4,17 @@ class CreateEmployees < ActiveRecord::Migration[5.2]
       # Information
       t.string :first_name, null: false
       t.string :last_name, null: false
+      t.string :email, null: false
       t.string :phone, limit: 14 # Phone number format (000) 000-0000
       t.string :role, null: false #
+      t.boolean :confirmed, default: false, null: false
       t.boolean :state, default: true, null: false
 
       t.attachment :image # Paperclip file_name, content_type, file_size, updated_at
       t.string :slug, unique: true # Friendly_id slug
 
       # Authenticatable
-      t.string :email, null: false
+      # t.string :email, null: false
       t.string :password_digest, null: false # Encrypted password
 
       # Recoverable
@@ -29,7 +31,7 @@ class CreateEmployees < ActiveRecord::Migration[5.2]
       # Confirmable
       t.string :confirmation_token
       t.datetime :confirmation_sent_at
-      t.boolean :confirmed, default: false, null: false
+      # t.boolean :confirmed, default: false, null: false
 
       # Lockable
       t.integer :failed_attempts, default: 0, null: false
