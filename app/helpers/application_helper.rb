@@ -6,13 +6,21 @@ module ApplicationHelper
   # End Clean phone number
 
   # Clean history information
-  def clean_history(info)
-    if info==true
-      t('views.show.enabled')
+  def clean_history(info, confirmed = false)
+    if info == true
+      if confirmed
+        t('views.show.confirmed')
+      else
+        t('views.show.enabled')
+      end
 
-    elsif info==false
-      t('views.show.disabled')
-      
+    elsif info == false
+      if confirmed
+        t('views.show.not_confirmed')
+      else
+        t('views.show.disabled')
+      end
+
     else
       info
     end

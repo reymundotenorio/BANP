@@ -17,3 +17,20 @@
 #   email: "reymundotenorio@gmail.com",
 #   password_digest: "$2a$10$77fJKtz3cZiUSN2/JBH0m.i0YgbqHbq/wd43SOJiKtjzi/GyHZSuq"
 # )
+
+require 'faker'
+
+
+100.times do |count|
+  Employee.create(
+    # id: (count + 1),
+    first_name: Faker::Name.first_name,
+    last_name: Faker::Name.last_name,
+    phone: "(#{Faker::Number.number(3)}) #{Faker::Number.number(3)}-#{Faker::Number.number(4)}",
+    role: ["Administrator", "Seller", "Driver"].sample,
+    email: Faker::Internet.email,
+    password_digest: "$2a$10$77fJKtz3cZiUSN2/JBH0m.i0YgbqHbq/wd43SOJiKtjzi/GyHZSuq",
+    state: Faker::Boolean.boolean(0.8)
+  )
+end
+puts 'Finishing filling of data with faker'

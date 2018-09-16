@@ -29,7 +29,7 @@ es:
   # Models
   activerecord:
     models:
-      employee: "Empleados"
+      employee: "Empleado"
       provider: "Proveedor"
       category: "Categoría"
       product: "Producto"
@@ -45,6 +45,12 @@ es:
         image_file_size: "Tamaño de la imagen"
         email: "Correo electrónico"
         password_digest: "Contraseña"
+        sign_in_count: "Cantidad de inicio de sesión"
+        current_sign_in_at: "Inicio de sesión actual a las"
+        last_sign_in_at: "Inicio de sesión anterior a las"
+        current_sign_in_ip: "IP del inicio de sesión actual"
+        last_sign_in_ip: "IP del inicio de sesión anterior"
+        confirmed: "Confirmado"
       provider:
         name: "Nombre"
         FEIN: "Número de Identificación Federal del Empleador (FEIN)"
@@ -112,6 +118,8 @@ es:
       enable: "Habilitar"
       enabled: "Habilitado"
       disabled: "Inhabilitado"
+      confirmed: "Confirmado"
+      not_confirmed: "No confirmado"
     new:
       new: "Nuevo"
     edit:

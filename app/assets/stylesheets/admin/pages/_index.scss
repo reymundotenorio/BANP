@@ -87,6 +87,10 @@
       display: table;
       margin-top: 0px;
 
+      thead, tfoot {
+        display: table-row-group
+      }
+
       >tr{
         page-break-before: always;
         page-break-after: always;
@@ -111,6 +115,10 @@
         vertical-align: top;
 
         >tr{
+          page-break-before: always;
+          page-break-after: always;
+          page-break-inside: avoid;
+          
           display: table-row;
           margin-top: 0px;
 
@@ -191,7 +199,6 @@
         cursor: pointer;
 
         -webkit-box-shadow: none;
-
         box-shadow: none;
 
         // No clickable row

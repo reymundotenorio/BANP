@@ -11,7 +11,7 @@
       <div class="col-xs-12 col-lg-2">
         <!-- Export button-->
         <div class="btn-new-container">
-          <%= link_to (admin_employee_path(employee, format: "pdf", lang: I18n.locale)), target: "_blank", class: "btn btn-general" do %><i class="fas fa-download"></i> <span><%= t('views.index.export') %></span><% end %>
+          <%= link_to (admin_employee_path(employee, format: "pdf", lang: I18n.locale)), target: "_blank", class: "btn btn-general" do %><i class="fas fa-download"></i> <span><%= t("views.index.export") %></span><% end %>
         </div>
         <!-- End Export button-->
       </div>
@@ -24,7 +24,7 @@
         <div class="breadcrumb-container">
           <ol class="breadcrumb">
             <li>
-              <%= link_to (admin_employees_path) do %><i class="fas fa-list-alt"></i> <span><%= t('header.navigation.employees') %></span><% end %>
+              <%= link_to (admin_employees_path) do %><i class="fas fa-list-alt"></i> <span><%= t("header.navigation.employees") %></span><% end %>
             </li>
 
             <li class="active">
@@ -52,24 +52,24 @@
                 <div class="main-info">
                   <!-- <p class="name"><b> employee.name </b></p> -->
 
-                  <p><%= t('views.show.created_at', time: time_ago_in_words(employee.created_at)) %></p>
-                  <p><%= t('views.show.updated_at', time: time_ago_in_words(employee.updated_at)) %></p>
+                  <p><%= t("views.show.created_at", time: time_ago_in_words(employee.created_at)) %></p>
+                  <p><%= t("views.show.updated_at", time: time_ago_in_words(employee.updated_at)) %></p>
                 </div>
 
                 <div class="main-buttons">
                   <div class="col-xs-12 col-sm-4 col-md-6 button-container no-padding">
-                    <%= link_to (admin_edit_employee_path(employee)), class: "btn btn-general btn-warning" do %><i class="fas fa-edit"></i> <span><%= t('views.show.edit') %></span><% end %>
+                    <%= link_to (admin_edit_employee_path(employee)), class: "btn btn-general btn-warning" do %><i class="fas fa-edit"></i> <span><%= t("views.show.edit") %></span><% end %>
                   </div>
 
                   <div class="col-xs-12 col-sm-4 col-md-6 button-container no-padding">
-                    <%= link_to (admin_history_employee_path(employee)), class: "btn btn-general btn-default" do %><i class="fas fa-history"></i> <span><%= t('views.show.history') %></span><% end %>
+                    <%= link_to (admin_history_employee_path(employee)), class: "btn btn-general btn-default" do %><i class="fas fa-history"></i> <span><%= t("views.show.history") %></span><% end %>
                   </div>
 
                   <div class="col-xs-12 col-sm-4 col-md-12 button-container no-padding">
                     <% if(employee.state) %>
-                    <%= link_to (admin_deactive_employee_path(employee)), method: :patch, class: "btn btn-general btn-danger" do %><i class="fas fa-times"></i> <span><%= t('views.show.disable') %></span><% end %>
+                    <%= link_to (admin_deactive_employee_path(employee)), method: :patch, class: "btn btn-general btn-danger" do %><i class="fas fa-times"></i> <span><%= t("views.show.disable") %></span><% end %>
                     <% else %>
-                    <%= link_to (admin_active_employee_path(employee)), method: :patch, class: "btn btn-general btn-success" do %><i class="fas fa-check"></i> <span><%= t('views.show.enable') %></span><% end %>
+                    <%= link_to (admin_active_employee_path(employee)), method: :patch, class: "btn btn-general btn-success" do %><i class="fas fa-check"></i> <span><%= t("views.show.enable") %></span><% end %>
                     <% end %>
                   </div>
                 </div>
@@ -88,28 +88,28 @@
             <div class="col-xs-12 no-padding">
               <div class="detail-info <%= employee.state %>">
                 <div class="info">
-                  <p class="title"><b><%= t('activerecord.attributes.employee.email') %></b></p>
+                  <p class="title"><b><%= t("activerecord.attributes.employee.email") %></b></p>
                   <p><a href="mailto:<%= employee.email %>"><%= employee.email %></a></p>
                 </div>
 
                 <div class="info">
-                  <p class="title"><b><%= t('activerecord.attributes.employee.phone') %></b></p>
+                  <p class="title"><b><%= t("activerecord.attributes.employee.phone") %></b></p>
                   <p><a href="tel:<%= clean_phone(employee.phone) %>"><%= employee.phone %></a></p>
                 </div>
 
                 <div class="info">
-                  <p class="title"><b><%= t('activerecord.attributes.employee.role') %></b></p>
+                  <p class="title"><b><%= t("activerecord.attributes.employee.role") %></b></p>
                   <p><%= employee.role %></p>
                 </div>
 
                 <div class="info">
-                  <p class="title"><b><%= t('activerecord.attributes.employee.confirmed') %></b></p>
-                  <p><%= employee.confirmed %></p>
+                  <p class="title"><b><%= t("activerecord.attributes.employee.confirmed") %></b></p>
+                  <p><%= employee.confirmed ? t("views.show.confirmed") : t("views.show.not_confirmed") %></p>
                 </div>
 
                 <div class="info">
-                  <p class="title"><b><%= t('activerecord.attributes.employee.state') %></b></p>
-                  <p><%= employee.state ? t('views.show.enabled') : t('views.show.disabled') %></p>
+                  <p class="title"><b><%= t("activerecord.attributes.employee.state") %></b></p>
+                  <p><%= employee.state ? t("views.show.enabled") : t("views.show.disabled") %></p>
                 </div>
               </div>
             </div>

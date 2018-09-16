@@ -45,6 +45,12 @@ en:
         image_file_size: "Image file size"
         email: "Email"
         password_digest: "Password"
+        sign_in_count: "Sign in count"
+        current_sign_in_at: "Current sign in at"
+        last_sign_in_at: "Last sign in at"
+        current_sign_in_ip: "Current sign in IP"
+        last_sign_in_ip: "Last sign in IP"
+        confirmed: "Confirmado"
       provider:
         name: "Name"
         FEIN: "Federal Employer Identification Number (FEIN)"
@@ -112,6 +118,8 @@ en:
       enable: "Enable"
       enabled: "Enabled"
       disabled: "Disabled"
+      confirmed: "Confirmed"
+      not_confirmed: "Not confirmed"
     new:
       new: "New"
     edit:

@@ -5,7 +5,7 @@
     <div class="row title-container">
       <div class="col-xs-12 col-lg-10">
         <!-- Heading -->
-        <h1 class="false"><i class="fas fa-history"></i> <%= t('views.history.history') %></h1>
+        <h1 class="false"><i class="fas fa-history"></i> <%= t("views.history.history") %></h1>
         <!-- End Heading -->
       </div>
       <div class="col-xs-12 col-lg-2">
@@ -13,7 +13,7 @@
         <div class="btn-new-container">
           <!-- New button-->
           <div class="btn-new-container">
-            <%= link_to (admin_employee_path(@employee)), class: "btn btn-general" do %><i class="fas fa-id-card"></i> <span><%= t('activerecord.models.employee') %></span><% end %>
+            <%= link_to (admin_employee_path(@employee)), class: "btn btn-general" do %><i class="fas fa-id-card"></i> <span><%= t("activerecord.models.employee") %></span><% end %>
           </div>
           <!-- End New button-->
         </div>
@@ -29,7 +29,7 @@
         <div class="breadcrumb-container">
           <ol class="breadcrumb">
             <li>
-              <%= link_to (admin_employees_path) do %><i class="fas fa-list-alt"></i> <span><%= t('header.navigation.employees') %></span><% end %>
+              <%= link_to (admin_employees_path) do %><i class="fas fa-list-alt"></i> <span><%= t("header.navigation.employees") %></span><% end %>
             </li>
 
             <li>
@@ -37,7 +37,7 @@
             </li>
 
             <li class="active">
-              <i class="fas fa-history"></i> <%= t('views.history.history') %>
+              <i class="fas fa-history"></i> <%= t("views.history.history") %>
             </li>
           </ol>
         </div>
@@ -86,8 +86,8 @@
               <div class="timeline-info">
                 <!-- Bullet -->
                 <div class="timeline-circle">
-                  <div class="circle <%= audit.action == 'create' ? 'new' : 'edit' %>" alt="Timeline circle">
-                    <% if audit.action == 'create' %>
+                  <div class="circle <%= audit.action == "create" ? "new" : "edit" %>" alt="Timeline circle">
+                    <% if audit.action == "create" %>
                     <i class="fas fa-plus"></i>
                     <% else %>
                     <i class="fas fa-edit"></i>
@@ -108,7 +108,7 @@
 
                 <!-- Timeline content -->
                 <div class="timeline-content no-padding">
-                  <div class="timeline-box <%= audit.action == 'create' ? 'new' : 'edit' %>">
+                  <div class="timeline-box <%= audit.action == "create" ? "new" : "edit" %>">
 
                     <div class="detail-info">
                       <div class="">
@@ -117,29 +117,29 @@
 
                       <!-- Attribute and Changes -->
                       <% audit.audited_changes.each do |attribute, changes| %>
-                      <!-- Excluding Slug and Image updated at -->
-                      <% if attribute!="slug" and attribute!="image_updated_at" %>
+                      <!-- Excluding some information -->
+                      <% if attribute != "slug" and attribute != "image_updated_at" and attribute != "password_digest" and attribute != "reset_password_token" and attribute != "reset_password_sent_at" and attribute != "confirmation_token" and attribute != "confirmation_sent_at" and attribute != "failed_attempts" and attribute != "unlock_token" and attribute != "locked_at" %>
 
                       <div class="info">
                         <p class="title"><b><%= Employee.human_attribute_name(attribute) %></b></p>
 
                         <!-- Update -->
-                        <% if audit.action=="update" %>
+                        <% if audit.action == "update" %>
 
-                        <p class="after"><i class="fas fa-check-circle"></i> <%= clean_history(changes[1])  %></p>
-                        <p class="before"><i class="fas fa-times-circle"></i> <%= clean_history(changes[0]) %></p>
+                        <p class="after"><i class="fas fa-check-circle"></i> <%= clean_history(changes[1], attribute == "confirmed" ? true : false) %></p>
+                        <p class="before"><i class="fas fa-times-circle"></i> <%= clean_history(changes[0], attribute == "confirmed" ? true : false) %></p>
 
                         <!-- New -->
                         <% else %>
 
-                        <p> <%= clean_history(changes) %></p>
+                        <p> <%= clean_history(changes, attribute == "confirmed" ? true : false) %></p>
 
                         <% end %>
                         <!-- End Update | New -->
                       </div>
 
                       <% end %>
-                      <!-- End Excluding Slug and Image updated at -->
+                      <!-- End Excluding some information -->
                       <% end %>
                       <!-- End Attribute and Changes -->
                     </div>

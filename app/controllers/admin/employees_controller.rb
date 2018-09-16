@@ -101,7 +101,7 @@ class Admin::EmployeesController < ApplicationController
 
   # Update
   def update
-    if @employee.update(employee_params)
+    if @employee.update (employee_params)
       redirect_to [:admin, @employee], notice: t("alerts.updated", model: t("activerecord.models.employee"))
     else
       render :edit
@@ -111,38 +111,22 @@ class Admin::EmployeesController < ApplicationController
   # Active
   def active
     if @employee.update_attributes(state: true)
-      redirect_to_back_success true
+      redirect_to_back(true, admin_employees_path, "employee", "success")
     else
-      redirect_to_back_error true
+      redirect_to_back(true, admin_employees_path, "employee", "error")
     end
   end
 
   # Deactive
   def deactive
     if @employee.update_attributes(state: false)
-      redirect_to_back_success false
+      redirect_to_back(false, admin_employees_path, "employee", "success")
     else
-      redirect_to_back_error false
+      redirect_to_back(false, admin_employees_path, "employee", "error")
     end
   end
 
-  # Redirect to back with success
-  def redirect_to_back_success(state)
-    if state
-      redirect_back fallback_location: admin_employees_path, notice: t("alerts.enabled", model: t("activerecord.models.employee"))
-    else
-      redirect_back fallback_location: admin_employees_path, notice: t("alerts.disabled", model: t("activerecord.models.employee"))
-    end
-  end
 
-  # Redirect to back with error
-  def redirect_to_back_error(state)
-    if state
-      redirect_back fallback_location: admin_employees_path, alert: t("alerts.not_enabled", model: t("activerecord.models.employee"))
-    else
-      redirect_back fallback_location: admin_employees_path, alert: t("alerts.not_disabled", model: t("activerecord.models.employee"))
-    end
-  end
 
   private
 
@@ -150,7 +134,7 @@ class Admin::EmployeesController < ApplicationController
   def set_employee
     @employee = Employee.friendly.find(params[:id])
   rescue
-    render_404 # Located on Application controller
+    render :index
   end
 
   # Employee params

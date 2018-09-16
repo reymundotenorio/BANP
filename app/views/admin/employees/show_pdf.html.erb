@@ -1,5 +1,5 @@
 <!-- PDF resource -->
-<% category = resource %>
+<% employee = resource %>
 <!-- End PDF resource -->
 
 <!-- Details PDF -->
@@ -9,18 +9,14 @@
     <div class="row">
       <div class="col-xs-4">
         <!-- Material card -->
-        <div class="material-card material-card-pdf shadow-card shadow-card-pdf <%= category.state %>">
+        <div class="material-card material-card-pdf shadow-card shadow-card-pdf <%= employee.state %>">
           <!-- General information -->
           <div class="row no-margin">
             <div class="col-xs-12 no-padding">
               <div class="general-info">
                 <div class="image-container">
-                  <%= image_tag category.image.url(:medium), class: "img-responsive" %>
+                  <%= image_tag employee.image.url(:medium), class: "img-responsive" %>
                 </div>
-
-                <!-- <div class="main-info">
-                  <p class="name"><b><% category.name %></b></p>
-                </div> -->
               </div>
             </div>
           </div>
@@ -31,24 +27,43 @@
 
       <div class="col-xs-8">
         <!-- Material card -->
-        <div class="material-card material-card-pdf shadow-card shadow-card-pdf <%= category.state %>">
+        <div class="material-card material-card-pdf shadow-card shadow-card-pdf <%= employee.state %>">
           <div class="row no-margin">
             <div class="col-xs-12 no-padding">
-              <div class="detail-info <%= category.state %>">
+              <div class="detail-info <%= employee.state %>">
 
                 <div class="info">
-                  <p class="title"><b><%= t('activerecord.attributes.category.name') %></b></p>
-                  <p><%= category.name %></p>
+                  <p class="title"><b><%= t("activerecord.attributes.employee.first_name") %></b></p>
+                  <p><%= employee.first_name %></p>
                 </div>
 
                 <div class="info">
-                  <p class="title"><b><%= t('activerecord.attributes.category.description') %></b></p>
-                  <p><%= category.description %></p>
+                  <p class="title"><b><%= t("activerecord.attributes.employee.last_name") %></b></p>
+                  <p><%= employee.last_name %></p>
                 </div>
 
                 <div class="info">
-                  <p class="title"><b><%= t('activerecord.attributes.category.state') %></b></p>
-                  <p><%= category.state ? t('views.show.enabled') : t('views.show.disabled') %></p>
+                  <p class="title"><b><%= t("activerecord.attributes.employee.email") %></b></p>
+                  <p><a href="mailto:<%= employee.email %>"><%= employee.email %></a></p>
+                </div>
+
+                <div class="info">
+                  <p class="title"><b><%= t("activerecord.attributes.employee.phone") %></b></p>
+                  <p><a href="tel:<%= clean_phone(employee.phone) %>"><%= employee.phone %></a></p>
+                </div>
+
+                <div class="info">
+                  <p class="title"><b><%= t("activerecord.attributes.employee.role") %></b></p>
+                  <p><%= employee.role %></p>
+                </div>
+
+                <div class="info">
+                  <p class="title"><b><%= t("activerecord.attributes.employee.confirmed") %></b></p>
+                  <p><%= employee.confirmed ? t("views.show.confirmed") : t("views.show.not_confirmed") %></p>
+                </div>
+                <div class="info">
+                  <p class="title"><b><%= t("activerecord.attributes.employee.state") %></b></p>
+                  <p><%= employee.state ? t("views.show.enabled") : t("views.show.disabled") %></p>
                 </div>
 
               </div>

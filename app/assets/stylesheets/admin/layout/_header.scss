@@ -35,9 +35,6 @@
   -webkit-box-shadow: 0px 3px 10px rgba($black, 0.15), 0px 3px 10px rgba($black, 0.1);
   box-shadow: 0px 3px 10px rgba($black, 0.15), 0px 3px 10px rgba($black, 0.1);
 
-  &.header-top-pdf{
-  }
-
   // Affix
   &.affix{
     // Top navbar
@@ -103,11 +100,17 @@
   @include primary-color;
 
   &.top-navbar-pdf{
-    @include primary-color;
 
     .banp-logo{
       font-size: 24px;
     }
+
+    // Navbar brand top
+    .navbar-brand-top{
+      padding-bottom: 15px;
+      padding-top: 15px;
+    }
+    // End Navbar brand top
   }
 
   // Header options
