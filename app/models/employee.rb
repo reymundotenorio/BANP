@@ -5,9 +5,12 @@ class Employee < ApplicationRecord
   # Search
   def self.search(search, show_all)
     if search
-      where('first_name LIKE :search OR last_name LIKE :search OR phone LIKE :search OR email LIKE :search OR role LIKE :search', search: "%#{search}%")
-    elsif show_all == 'all'
+      query = "(first_name LIKE :search OR last_name LIKE :search OR phone LIKE :search OR email LIKE :search OR role LIKE :search)"
+      where(query, search: "%#{search}%")
+
+    elsif show_all == "all"
       all
+
     else
       enabled
     end
@@ -80,7 +83,7 @@ class Employee < ApplicationRecord
   # Employee role
   # def employee_role
   #   if role != 0 && role != 1 && role != 2
-  #     errors.add(:role, 'Must select the employee role')
+  #     errors.add(:role, "Must select the employee role")
   #   end
   # end
 
@@ -92,18 +95,18 @@ class Employee < ApplicationRecord
   # Image validation (whiny = silence ImageMagick Error)
   has_attached_file :image,
   whiny: false,
-  styles: { thumb: '100x100>', medium: '300x300>', regular: '800x800>' },
-  default_url: 'https://s3.amazonaws.com/betterandnice/images/default/default.png',
-  url: '/images/employees/:id/:style/:basename.:extension',
-  path: ':rails_root/public/images/employees/:id/:style/:basename.:extension'
+  styles: { thumb: "100x100>", medium: "300x300>", regular: "800x800>" },
+  default_url: "https://s3.amazonaws.com/betterandnice/images/default/default.png",
+  url: "/images/employees/:id/:style/:basename.:extension",
+  path: ":rails_root/public/images/employees/:id/:style/:basename.:extension"
 
   validates_attachment_content_type :image,
-  content_type: ['image/jpeg', 'image/gif', 'image/png'],
-  message: I18n.t('validates.image_format')
+  content_type: ["image/jpeg", "image/gif", "image/png"],
+  message: I18n.t("validates.image_format")
 
   validates_attachment_size :image,
   less_than: 5.megabytes,
-  message: I18n.t('validates.image_size')
+  message: I18n.t("validates.image_size")
 
   ## End Paperclip
 
