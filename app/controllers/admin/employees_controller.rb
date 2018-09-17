@@ -33,6 +33,7 @@ class Admin::EmployeesController < ApplicationController
 
     respond_to do |format|
       format.html
+      format.js
       format.pdf do
         to_pdf(name_pdf, template, Employee.all, datetime, title_pdf)
       end

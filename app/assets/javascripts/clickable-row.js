@@ -5,5 +5,5 @@ $(document).ready(function() {
     linkdata = $(this).attr('data-href');
     window.location.href = linkdata;
   });
-
+  
 });

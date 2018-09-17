@@ -30,3 +30,9 @@ Rails.application.config.assets.precompile += %w( admin/application.scss )
 
 # Material input
 Rails.application.config.assets.precompile += %w( material-input.js )
+
+# Pagination with Ajax
+Rails.application.config.assets.precompile += %w( pagination-ajax.js )
+
+# Auto search
+Rails.application.config.assets.precompile += %w( auto-search.js )

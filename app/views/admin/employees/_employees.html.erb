@@ -1,0 +1,40 @@
+
+<!-- Table -->
+<div class="row no-margin">
+  <div class="col-xs-12 no-padding">
+
+    <table class="table">
+      <thead>
+        <tr>
+          <th>No.</th>
+          <th><%= t("activerecord.attributes.employee.first_name") %></th>
+          <th><%= t("activerecord.attributes.employee.last_name") %></th>
+          <th><%= t("activerecord.attributes.employee.email") %></th>
+          <th><%= t("activerecord.attributes.employee.phone") %></th>
+          <th><%= t("activerecord.attributes.employee.role") %></th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <!-- Categories data table Sync -->
+        <%= sync partial: "data_table", collection: @employees %>
+        <%= sync_new partial: "data_table", resource: Employee.new %>
+        <!-- End Categories data table Sync -->
+
+      </tbody>
+    </table>
+
+
+  </div>
+</div>
+<!-- End Table -->
+
+<!-- Pagination -->
+<div class="row no-margin">
+  <div class="col-xs-12 no-padding">
+    <!-- Will Paginate -->
+    <%= will_paginate @employees, renderer: BootstrapPagination::Rails %>
+    <!-- End Will Paginate -->
+  </div>
+</div>
+<!-- End Pagination -->

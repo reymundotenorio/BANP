@@ -30,12 +30,11 @@ $(document).ready(function() {
     }
   }
 
-  // Add the updateImageSelected function to the event lister of the #select_image element
-  $("#select_image").change(function(){
+  // Add the updateImageSelected function to the event lister of the #select-image element
+  $("#select-image").change(function(){
     updateImageSelected(this);
   });
-
-
+  
   // Dropdown "Bootstrap" listener
   $(".dropdown-item").click(function(){
     $(".dropdown-toggle").val($.trim($(this).text()));
