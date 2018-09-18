@@ -8,11 +8,11 @@ class Admin::EmployeesController < ApplicationController
   # End Find employees with Friendly_ID
 
   # Sync model DSL
-  enable_sync only: [:create, :update, :active_deactive]
+  enable_sync only: [:create, :update, :active, :deactive]
   # End Sync model DSL
-
+  
   # Authentication
-  #  before_action :require_admin, only: [:index, :show, :new, :create, :edit, :update, :active_deactive, :history]
+  #  before_action :require_admin, only: [:index, :show, :new, :create, :edit, :update, :active, :deactive, :history]
   # End Authentication
 
   # /employees
