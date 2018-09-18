@@ -1,8 +1,6 @@
-
 <!-- Table -->
 <div class="row no-margin">
   <div class="col-xs-12 no-padding">
-
     <table class="table">
       <thead>
         <tr>
@@ -16,15 +14,12 @@
       </thead>
 
       <tbody>
-        <!-- Categories data table Sync -->
+        <!-- Data table Sync -->
         <%= sync partial: "data_table", collection: @employees %>
         <%= sync_new partial: "data_table", resource: Employee.new %>
-        <!-- End Categories data table Sync -->
-
+        <!-- End Data table Sync -->
       </tbody>
     </table>
-
-
   </div>
 </div>
 <!-- End Table -->

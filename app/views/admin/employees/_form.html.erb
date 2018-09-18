@@ -7,34 +7,7 @@
     <div class="row">
 
       <!-- Show errors -->
-      <% if @employee.errors.any? %>
-      <section class="alerts">
-        <div class="container">
-          <div class="row">
-            <div class="col-xs-12">
-              <!-- Alert -->
-              <div class="alert alert-danger alert-dismissible shadow-card" role="alert">
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                  <span aria-hidden="true"><i class="fas fa-times-circle"></i></span>
-                </button>
-
-                <strong><p><i class="fas fa-exclamation-triangle"></i> <%= t("views.form.the_information_could_not_be_saved") %></p></strong>
-
-                <ul>
-                  <li><strong><p><%= @employee.errors.count == 1 ? "#{@employee.errors.count} #{t('views.form.error_found')}" : "#{@employee.errors.count} #{t('views.form.errors_found')}" %></p></strong></li>
-
-                  <% @employee.errors.each do |attribute, message| %>
-                  <li><p><%= "#{Employee.human_attribute_name(attribute)}: #{message}" %></p></li>
-                  <% end %>
-                </ul>
-
-              </div>
-              <!-- End Alert -->
-            </div>
-          </div>
-        </div>
-      </section>
-      <% end %>
+      <%= render partial: "templates/form_errors", locals: {resource: @employee, model: Employee} %>
       <!-- End Show errors -->
 
       <div class="col-xs-12 col-md-5 col-lg-4">
@@ -140,7 +113,6 @@
 
                 <div class="main-buttons">
                   <div class="col-xs-12 col-sm-12 button-container no-padding">
-
                     <%= button_tag type: "reset", id: "reset-button", class: "btn btn-general btn-warning" do %> <i class="fas fa-eraser"></i> <span><%= t("views.form.restart") %></span> <% end %>
 
                     <%= f.button class: "btn btn-general btn-success", data: {disable_with: "<i class='fas fa-spinner fa-spin'></i>"} do %><i class="fas fa-save"></i> <span><%= t("views.form.save") %></span> <% end %>
