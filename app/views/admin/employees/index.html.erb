@@ -52,7 +52,7 @@
                   <div class="border-bottom"></div>
 
                   <span class="input-group-btn">
-                    <%= button_tag t("elements.search"), class: "btn btn-general btn-warning", data: {disable_with: "<i class='fas fa-spinner fa-spin'></i>"} do %><i class="fas fa-search"></i><% end %>
+                    <%= button_tag t("elements.search"), class: "btn btn-general", data: {disable_with: "<i class='fas fa-spinner fa-spin'></i>"} do %><i class="fas fa-search"></i><% end %>
                   </span>
                 </div>
                 <% end %>
@@ -64,16 +64,8 @@
             <!-- Show all -->
             <div class="col-xs-12 col-md-6 no-padding">
               <div class="show-buttons">
-                <div class="btn-container">
-                  <% if @show_all %>
-                  <!-- Enabled button -->
-                  <%= button_to admin_employees_path, method: :get, params: {}, class: "btn btn-general btn-success" do %><i class="fa fa-list-ul" aria-hidden="true"></i> <span><%= t("views.index.show_enabled") %></span><% end %>
-                  <!-- End Enabled button -->
-                  <% else %>
-                  <!-- All button -->
-                  <%= button_to admin_employees_path, method: :get, params: { show: "all" }, class: "btn btn-general btn-danger" do %><i class="fa fa-list-alt" aria-hidden="true"></i> <span><%= t("views.index.show_all") %></span><% end %>
-                  <!-- End All button -->
-                  <% end %>
+                <div class="btn-container" id="show-buttons">
+                  <%= render "admin/employees/show_buttons" %>
                 </div>
 
                 <!-- Export button-->

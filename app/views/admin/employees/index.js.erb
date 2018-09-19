@@ -1,3 +1,4 @@
-$("#employees").html("<%=  escape_javascript(render partial: "admin/employees/employees") %>");
+$("#employees").html("<%= escape_javascript(render partial: "admin/employees/employees") %>");
+$("#show-buttons").html("<%= escape_javascript(render partial: "admin/employees/show_buttons") %>");
 $(".pagination a").attr("data-remote", "true");
 z

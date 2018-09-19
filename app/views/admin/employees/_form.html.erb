@@ -28,7 +28,7 @@
                   <div class="input-group">
                     <input class="form-control" readonly="" id="filename" type="text">
                     <span class="input-group-btn">
-                      <span class="btn btn-general btn-default btn-file">
+                      <span class="btn btn-general btn-file">
                         <i class="fas fa-upload"></i>
                         <%= f.file_field :image, id: "select-image", accept: "image/*" %>
                       </span>
@@ -113,9 +113,9 @@
 
                 <div class="main-buttons">
                   <div class="col-xs-12 col-sm-12 button-container no-padding">
-                    <%= button_tag type: "reset", id: "reset-button", class: "btn btn-general btn-warning" do %> <i class="fas fa-eraser"></i> <span><%= t("views.form.restart") %></span> <% end %>
+                    <%= button_tag type: "reset", id: "reset-button", class: "btn btn-general" do %> <i class="fas fa-eraser"></i> <span><%= t("views.form.restart") %></span> <% end %>
 
-                    <%= f.button class: "btn btn-general btn-success", data: {disable_with: "<i class='fas fa-spinner fa-spin'></i>"} do %><i class="fas fa-save"></i> <span><%= t("views.form.save") %></span> <% end %>
+                    <%= f.button class: "btn btn-general", data: {disable_with: "<i class='fas fa-spinner fa-spin'></i>"} do %><i class="fas fa-save"></i> <span><%= t("views.form.save") %></span> <% end %>
                   </div>
                 </div>
 

@@ -10,7 +10,7 @@ class Admin::EmployeesController < ApplicationController
   # Sync model DSL
   enable_sync only: [:create, :update, :active, :deactive]
   # End Sync model DSL
-  
+
   # Authentication
   #  before_action :require_admin, only: [:index, :show, :new, :create, :edit, :update, :active, :deactive, :history]
   # End Authentication
@@ -18,6 +18,8 @@ class Admin::EmployeesController < ApplicationController
   # /employees
   def index
     @employees = Employee.search(params[:search], params[:show]).paginate(page: params[:page], per_page: 15) # Employees with pagination
+    print "PRUEBAA SHOW #{params[:show]}"
+    
     @show_all = params[:show] == "all" ? true : false # View All (Enabled and Disabled)
 
     current_lang = params[:lang]
