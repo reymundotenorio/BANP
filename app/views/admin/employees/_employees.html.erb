@@ -3,20 +3,16 @@
   <div class="col-xs-12 no-padding">
     <table class="table">
       <thead>
-        <tr>
-          <th>No.</th>
-          <th><%= t("activerecord.attributes.employee.first_name") %></th>
-          <th><%= t("activerecord.attributes.employee.last_name") %></th>
-          <th><%= t("activerecord.attributes.employee.email") %></th>
-          <th><%= t("activerecord.attributes.employee.phone") %></th>
-          <th><%= t("activerecord.attributes.employee.role") %></th>
-        </tr>
+        <% model = "employee" %>
+        <% attributes = ["first_name", "last_name", "email" ,"phone", "role"] %>
+
+        <%= render partial: "admin/partials/table_header", locals: {model: model, attributes: attributes} %>
       </thead>
 
       <tbody>
         <!-- Data table Sync -->
-        <%= sync partial: "data_table", collection: @employees %>
-        <%= sync_new partial: "data_table", resource: Employee.new %>
+        <%= sync partial: "table_data", collection: @employees %>
+        <%= sync_new partial: "table_data", resource: Employee.new %>
         <!-- End Data table Sync -->
       </tbody>
     </table>

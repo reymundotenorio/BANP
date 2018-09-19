@@ -18,27 +18,15 @@
               <h1 class="text-center"><%= pdf_title %></h1>
 
               <table class="table table-pdf">
-                <!-- <thead> -->
-                <tr>
-                  <th>No.</th>
-                  <th><%= t("activerecord.attributes.employee.first_name") %></th>
-                  <th><%= t("activerecord.attributes.employee.last_name") %></th>
-                  <th><%= t("activerecord.attributes.employee.email") %></th>
-                  <th><%= t("activerecord.attributes.employee.phone") %></th>
-                  <th><%= t("activerecord.attributes.employee.role") %></th>
-                </tr>
-                <!-- </thead> -->
+
+                <% model = "employee" %>
+                <% attributes = ["first_name", "last_name", "email" ,"phone", "role"] %>
+
+                <%= render partial: "admin/partials/table_header", locals: {model: model, attributes: attributes} %>
 
                 <tbody>
                   <% employees.each do |employee| %>
-                  <tr class="<%= employee.state %>">
-                    <td><p><%= employee.id %></p></td>
-                    <td><p><%= employee.first_name %></p></td>
-                    <td><p><%= employee.last_name %></p></td>
-                    <td><p><%= employee.email %></p></td>
-                    <td><p><%= employee.phone %></p></td>
-                    <td><p><%= employee.role %></p></td>
-                  </tr>
+                  <%= render partial: "admin/partials/table_information", locals: {resource: employee, attributes: attributes} %>
                   <% end %>
                 </tbody>
               </table>
