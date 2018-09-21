@@ -34,10 +34,15 @@ $(document).ready(function() {
   $("#select-image").change(function(){
     updateImageSelected(this);
   });
-  
+
   // Dropdown "Bootstrap" listener
   $(".dropdown-item").click(function(){
     $(".dropdown-toggle").val($.trim($(this).text()));
   });
+
+  // $( "#employee_role" ).focus(function() {
+  // $("#employee_role").dropdown("toggle");
+  // });
+
 
 });
