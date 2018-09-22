@@ -79,7 +79,7 @@
           </div>
 
           <!-- Render Datable and Pagination with Ajax -->
-          <div id="employees">
+          <div id="render-data">
             <%= render "admin/employees/employees" %>
           </div>
           <!-- End Render Datable and Pagination with Ajax -->
@@ -92,10 +92,6 @@
   </div>
 </section>
 <!-- End Index -->
-
-<!-- Clickable row -->
-<%= javascript_include_tag "clickable-row", "data-turbolinks-track": "reload" %>
-<!-- End Clickable row -->
 
 <!-- Pagination with Ajax -->
 <%= javascript_include_tag "pagination-ajax", "data-turbolinks-track": "reload" %>

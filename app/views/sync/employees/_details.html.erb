@@ -50,8 +50,6 @@
                 </div>
 
                 <div class="main-info">
-                  <!-- <p class="name"><b> employee.name </b></p> -->
-
                   <p><%= t("views.show.created_at", time: time_ago_in_words(employee.created_at)) %></p>
                   <p><%= t("views.show.updated_at", time: time_ago_in_words(employee.updated_at)) %></p>
                 </div>
@@ -87,30 +85,23 @@
           <div class="row no-margin">
             <div class="col-xs-12 no-padding">
               <div class="detail-info <%= employee.state %>">
-                <div class="info">
-                  <p class="title"><b><%= t("activerecord.attributes.employee.email") %></b></p>
-                  <p><a href="mailto:<%= employee.email %>"><%= employee.email %></a></p>
-                </div>
 
-                <div class="info">
-                  <p class="title"><b><%= t("activerecord.attributes.employee.phone") %></b></p>
-                  <p><a href="tel:<%= clean_phone(employee.phone) %>"><%= employee.phone %></a></p>
-                </div>
+                <% attributes = ["email" ,"phone", "role", "sign_in_count", "current_sign_in_at", "last_sign_in_at", "current_sign_in_ip", "last_sign_in_ip", "confirmed", "state"] %> 
 
+                <% attributes.each do |attribute| %>
                 <div class="info">
-                  <p class="title"><b><%= t("activerecord.attributes.employee.role") %></b></p>
-                  <p><%= employee.role %></p>
-                </div>
+                  <p class="title"><b><%= t("activerecord.attributes.employee.#{attribute}") %></b></p>
 
-                <div class="info">
-                  <p class="title"><b><%= t("activerecord.attributes.employee.confirmed") %></b></p>
-                  <p><%= employee.confirmed ? t("views.show.confirmed") : t("views.show.not_confirmed") %></p>
+                  <% if attribute == "state" %>
+                  <p><%= employee["#{attribute}"] ? t("views.show.enabled") : t("views.show.disabled") %></p>
+                  <% elsif attribute == "confirmed" %>
+                  <p><%= employee["#{attribute}"] ? t("views.show.confirmed") : t("views.show.not_confirmed") %></p>
+                  <% else %>
+                  <p><%= employee["#{attribute}"] %></p>
+                  <% end %>
                 </div>
+                <% end %>
 
-                <div class="info">
-                  <p class="title"><b><%= t("activerecord.attributes.employee.state") %></b></p>
-                  <p><%= employee.state ? t("views.show.enabled") : t("views.show.disabled") %></p>
-                </div>
               </div>
             </div>
           </div>

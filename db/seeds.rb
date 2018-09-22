@@ -5,8 +5,8 @@
 #
 #   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
 #   Character.create(name: "Luke", movie: movies.first)
-require "faker"
 
+require "faker"
 
 100.times do |count|
   Employee.create(
@@ -20,4 +20,5 @@ require "faker"
     state: Faker::Boolean.boolean(0.8)
   )
 end
+
 puts "The information have been seeded"

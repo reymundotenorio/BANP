@@ -1,5 +1,5 @@
 <!-- PDF resource -->
-<% employee = resource %>
+<% #employee = resource %>
 <!-- End PDF resource -->
 
 <!-- Details PDF -->
@@ -11,71 +11,9 @@
         <h1 class="text-center"><%= pdf_title %></h1>
       </div>
 
-      <div class="col-xs-4">
-        <!-- Material card -->
-        <div class="material-card material-card-pdf shadow-card shadow-card-pdf <%= employee.state %>">
-          <!-- General information -->
-          <div class="row no-margin">
-            <div class="col-xs-12 no-padding">
-              <div class="general-info">
-                <div class="image-container">
-                  <%= image_tag employee.image.url(:medium), class: "img-responsive" %>
-                </div>
-              </div>
-            </div>
-          </div>
-          <!-- End General information -->
-        </div>
-        <!-- End Material card -->
-      </div>
-
-      <div class="col-xs-8">
-        <!-- Material card -->
-        <div class="material-card material-card-pdf shadow-card shadow-card-pdf <%= employee.state %>">
-          <div class="row no-margin">
-            <div class="col-xs-12 no-padding">
-              <div class="detail-info <%= employee.state %>">
-
-                <div class="info">
-                  <p class="title"><b><%= t("activerecord.attributes.employee.first_name") %></b></p>
-                  <p><%= employee.first_name %></p>
-                </div>
-
-                <div class="info">
-                  <p class="title"><b><%= t("activerecord.attributes.employee.last_name") %></b></p>
-                  <p><%= employee.last_name %></p>
-                </div>
-
-                <div class="info">
-                  <p class="title"><b><%= t("activerecord.attributes.employee.email") %></b></p>
-                  <p><a href="mailto:<%= employee.email %>"><%= employee.email %></a></p>
-                </div>
-
-                <div class="info">
-                  <p class="title"><b><%= t("activerecord.attributes.employee.phone") %></b></p>
-                  <p><a href="tel:<%= clean_phone(employee.phone) %>"><%= employee.phone %></a></p>
-                </div>
-
-                <div class="info">
-                  <p class="title"><b><%= t("activerecord.attributes.employee.role") %></b></p>
-                  <p><%= employee.role %></p>
-                </div>
-
-                <div class="info">
-                  <p class="title"><b><%= t("activerecord.attributes.employee.confirmed") %></b></p>
-                  <p><%= employee.confirmed ? t("views.show.confirmed") : t("views.show.not_confirmed") %></p>
-                </div>
-                <div class="info">
-                  <p class="title"><b><%= t("activerecord.attributes.employee.state") %></b></p>
-                  <p><%= employee.state ? t("views.show.enabled") : t("views.show.disabled") %></p>
-                </div>
-
-              </div>
-            </div>
-          </div>
-        </div>
-        <!-- End Material card -->
-      </div>
+      <% attributes = ["first_name", "last_name", "email" ,"phone", "role", "sign_in_count", "current_sign_in_at", "last_sign_in_at", "current_sign_in_ip", "last_sign_in_ip", "confirmed", "state"] %>
+      
+      <%= render partial: "admin/partials/details_info", locals: {resource: resource, attributes: attributes} %>
     </div>
     <!-- End Information -->
   </div>

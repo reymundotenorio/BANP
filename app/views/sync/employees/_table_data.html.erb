@@ -1,8 +1,10 @@
 <tr class="clickable-row <%= employee.state %>" data-href="<%= admin_employee_path(employee) %>">
+
+  <% attributes = ["first_name", "last_name", "email" ,"phone", "role"] %>
+  
   <td data-header="No."><p><%= employee.id %></p></td>
-  <td data-header="<%= t('activerecord.attributes.employee.first_name') %>"><p><%= employee.first_name %></p></td>
-  <td data-header="<%= t('activerecord.attributes.employee.last_name') %>"><p><%= employee.last_name %></p></td>
-  <td data-header="<%= t('activerecord.attributes.employee.email') %>"><p><%= employee.email %></p></td>
-  <td data-header="<%= t('activerecord.attributes.employee.phone') %>"><p><%= employee.phone %></p></td>
-  <td data-header="<%= t('activerecord.attributes.employee.role') %>"><p><%= employee.role %></p></td>
+  <% attributes.each do |attribute| %>
+  <td data-header='<%= t("activerecord.attributes.employee.#{attribute}") %>'><p><%= employee["#{attribute}"] %></p></td>
+  <% end %>
+
 </tr>

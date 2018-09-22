@@ -18,16 +18,15 @@ class Admin::EmployeesController < ApplicationController
   # /employees
   def index
     @employees = Employee.search(params[:search], params[:show]).paginate(page: params[:page], per_page: 15) # Employees with pagination
-    print "PRUEBAA SHOW #{params[:show]}"
-    
+
     @show_all = params[:show] == "all" ? true : false # View All (Enabled and Disabled)
 
     current_lang = params[:lang]
 
     I18n.locale = current_lang
-    datetime = I18n.l Time.now
 
-    file_time = Time.now.strftime("%m%d%Y")
+    datetime =  Time.zone.now
+    file_time = datetime.strftime("%m%d%Y")
 
     name_pdf = "employees-#{file_time}"
     template = "admin/employees/index_pdf.html.erb"
@@ -37,7 +36,7 @@ class Admin::EmployeesController < ApplicationController
       format.html
       format.js
       format.pdf do
-        to_pdf(name_pdf, template, Employee.all, datetime, title_pdf)
+        to_pdf(name_pdf, template, Employee.all, I18n.l(datetime), title_pdf)
       end
     end
   end
@@ -47,16 +46,14 @@ class Admin::EmployeesController < ApplicationController
     @employee = Employee.new
   end
 
-  # /employee/:id
+  # /employee/:id)
   def show
     # Employee found by before_filter
 
     current_lang = params[:lang]
 
-    I18n.locale = current_lang
-    datetime = I18n.l Time.now
-
-    file_time = Time.now.strftime("%m%d%Y")
+    datetime =  Time.zone.now
+    file_time = datetime.strftime("%m%d%Y")
 
     name_pdf = "employee-#{@employee.slug}-#{file_time}"
     template = "admin/employees/show_pdf.html.erb"
@@ -65,7 +62,7 @@ class Admin::EmployeesController < ApplicationController
     respond_to do |format|
       format.html
       format.pdf do
-        to_pdf(name_pdf, template, @employee, datetime, title_pdf)
+        to_pdf(name_pdf, template, @employee, I18n.l(datetime), title_pdf)
       end
     end
   end
@@ -128,7 +125,6 @@ class Admin::EmployeesController < ApplicationController
       redirect_to_back(false, admin_employees_path, "employee", "error")
     end
   end
-
 
 
   private

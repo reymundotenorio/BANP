@@ -89,6 +89,7 @@
                   <div class="circle <%= audit.action == "create" ? "new" : "edit" %>" alt="Timeline circle">
                     <% if audit.action == "create" %>
                     <i class="fas fa-plus"></i>
+
                     <% else %>
                     <i class="fas fa-edit"></i>
                     <% end %>
@@ -117,6 +118,7 @@
 
                       <!-- Attribute and Changes -->
                       <% audit.audited_changes.each do |attribute, changes| %>
+
                       <!-- Excluding some information -->
                       <% if attribute != "slug" and attribute != "image_updated_at" and attribute != "password_digest" and attribute != "reset_password_token" and attribute != "reset_password_sent_at" and attribute != "confirmation_token" and attribute != "confirmation_sent_at" and attribute != "failed_attempts" and attribute != "unlock_token" and attribute != "locked_at" %>
 
@@ -125,15 +127,12 @@
 
                         <!-- Update -->
                         <% if audit.action == "update" %>
-
                         <p class="after"><i class="fas fa-check-circle"></i> <%= clean_history(changes[1], attribute == "confirmed" ? true : false) %></p>
                         <p class="before"><i class="fas fa-times-circle"></i> <%= clean_history(changes[0], attribute == "confirmed" ? true : false) %></p>
 
                         <!-- New -->
                         <% else %>
-
                         <p> <%= clean_history(changes, attribute == "confirmed" ? true : false) %></p>
-
                         <% end %>
                         <!-- End Update | New -->
                       </div>
