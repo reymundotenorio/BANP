@@ -9,16 +9,16 @@ module ApplicationHelper
   def clean_history(info, confirmed = false)
     if info == true
       if confirmed
-        t('views.show.confirmed')
+        t("views.show.confirmed")
       else
-        t('views.show.enabled')
+        t("views.show.enabled")
       end
 
     elsif info == false
       if confirmed
-        t('views.show.not_confirmed')
+        t("views.show.not_confirmed")
       else
-        t('views.show.disabled')
+        t("views.show.disabled")
       end
 
     else

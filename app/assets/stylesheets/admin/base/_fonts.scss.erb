@@ -13,21 +13,21 @@
 // 900 - Black, Heavy
 
 // Open Sans
-// @import url('https://fonts.googleapis.com/css?family=Open+Sans:400,700');
+// @import url("https://fonts.googleapis.com/css?family=Open+Sans:400,700");
 
 // Moserrat
-@import url('https://fonts.googleapis.com/css?family=Montserrat:400,700');
+@import url("https://fonts.googleapis.com/css?family=Montserrat:400,700");
 
 //Ubuntu
-@import url('https://fonts.googleapis.com/css?family=Ubuntu:400,700');
+@import url("https://fonts.googleapis.com/css?family=Ubuntu:400,700");
 
 // Font Awesome 5.3.1
-@import url('https://use.fontawesome.com/releases/v5.3.1/css/all.css');
+@import url("https://use.fontawesome.com/releases/v5.3.1/css/all.css");
 
 
 //Cyclo
 @font-face{
-  font-family: 'Cyclo';
+  font-family: "Cyclo";
 
   // Load local fonts on development
   <% if Rails.env.development? %>
@@ -41,22 +41,22 @@
   // font-url("cyclo/cyclo.svg#cycloregular") format("svg");
 
   // Cloudynary
-  src: url('https://res.cloudinary.com/reymundotenorio/raw/upload/v1537065372/cyclo/cyclo.eot');
-  src: url('https://res.cloudinary.com/reymundotenorio/raw/upload/v1537065372/cyclo/cyclo.eot?#iefix') format('embedded-opentype'),
-  url('https://res.cloudinary.com/reymundotenorio/raw/upload/v1537065372/cyclo/cyclo.woff2') format('woff2'),
-  url('https://res.cloudinary.com/reymundotenorio/raw/upload/v1537065372/cyclo/cyclo.woff') format('woff'),
-  url('https://res.cloudinary.com/reymundotenorio/raw/upload/v1537065372/cyclo/cyclo.ttf') format('truetype');
+  src: url("https://res.cloudinary.com/reymundotenorio/raw/upload/v1537065372/cyclo/cyclo.eot");
+  src: url("https://res.cloudinary.com/reymundotenorio/raw/upload/v1537065372/cyclo/cyclo.eot?#iefix") format("embedded-opentype"),
+  url("https://res.cloudinary.com/reymundotenorio/raw/upload/v1537065372/cyclo/cyclo.woff2") format("woff2"),
+  url("https://res.cloudinary.com/reymundotenorio/raw/upload/v1537065372/cyclo/cyclo.woff") format("woff"),
+  url("https://res.cloudinary.com/reymundotenorio/raw/upload/v1537065372/cyclo/cyclo.ttf") format("truetype");
 
   // Load AWS fonts on productionhttps://res.cloudinary.com/reymundotenorio/raw/upload/v1537065372/cyclo/cyclo.eot
   <% else %>
 
   // AWS S3
-  src: url('https://s3.amazonaws.com/betterandnice/fonts/cyclo/cyclo.eot');
-  src: url('https://s3.amazonaws.com/betterandnice/fonts/cyclo/cyclo.eot?#iefix') format('embedded-opentype'),
-  url('https://s3.amazonaws.com/betterandnice/fonts/cyclo/cyclo.woff2') format('woff2'),
-  url('https://s3.amazonaws.com/betterandnice/fonts/cyclo/cyclo.woff') format('woff'),
-  url('https://s3.amazonaws.com/betterandnice/fonts/cyclo/cyclo.ttf') format('truetype'),
-  url('https://s3.amazonaws.com/betterandnice/fonts/cyclo/cyclo.svg#cycloregular') format('svg');
+  src: url("https://s3.amazonaws.com/betterandnice/fonts/cyclo/cyclo.eot");
+  src: url("https://s3.amazonaws.com/betterandnice/fonts/cyclo/cyclo.eot?#iefix") format("embedded-opentype"),
+  url("https://s3.amazonaws.com/betterandnice/fonts/cyclo/cyclo.woff2") format("woff2"),
+  url("https://s3.amazonaws.com/betterandnice/fonts/cyclo/cyclo.woff") format("woff"),
+  url("https://s3.amazonaws.com/betterandnice/fonts/cyclo/cyclo.ttf") format("truetype"),
+  url("https://s3.amazonaws.com/betterandnice/fonts/cyclo/cyclo.svg#cycloregular") format("svg");
 
   <% end %>
 

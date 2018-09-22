@@ -3,34 +3,21 @@
 #
 # Examples:
 #
-#   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
-#   Character.create(name: 'Luke', movie: movies.first)
-
-
-# Employee.create(
-#   first_name: "Reymundo",
-#   last_name: "Tenorio",
-#   phone: "+50588070840",
-#   role: "Administrator",
-#   state: true,
-#
-#   email: "reymundotenorio@gmail.com",
-#   password_digest: "$2a$10$77fJKtz3cZiUSN2/JBH0m.i0YgbqHbq/wd43SOJiKtjzi/GyHZSuq"
-# )
-
-require 'faker'
+#   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
+#   Character.create(name: "Luke", movie: movies.first)
+require "faker"
 
 
 100.times do |count|
   Employee.create(
-    # id: (count + 1),
+    id: (count + 1),
     first_name: Faker::Name.first_name,
     last_name: Faker::Name.last_name,
     phone: "(#{Faker::Number.number(3)}) #{Faker::Number.number(3)}-#{Faker::Number.number(4)}",
     role: ["Administrator", "Seller", "Driver"].sample,
     email: Faker::Internet.email,
-    password_digest: "$2a$10$77fJKtz3cZiUSN2/JBH0m.i0YgbqHbq/wd43SOJiKtjzi/GyHZSuq",
+    password_digest: Faker::Crypto.md5,
     state: Faker::Boolean.boolean(0.8)
   )
 end
-puts 'Finishing filling of data with faker'
+puts "The information have been seeded"

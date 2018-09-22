@@ -1,7 +1,7 @@
 $(document).ready(function() {
 
   // Display on the text-input, the filename selected by the file-input
-  $('input[type=file]').change(function (e) {
+  $("input[type=file]").change(function(e) {
     filename = $(this).val();
     $("#filename").attr("value", filename);
     $(this).attr("value", "");
@@ -15,10 +15,10 @@ $(document).ready(function() {
 
   // Display on the img-tag, the image selected by the file-input
   function updateImageSelected(input) {
-    if (input.files && input.files[0] && input.files[0].type.match('image.*')) {
+    if (input.files && input.files[0] && input.files[0].type.match("image.*")) {
       var reader = new FileReader();
 
-      reader.onload = function (e) {
+      reader.onload = function(e) {
         $("#preview-image").attr("src", e.target.result);
       }
 
@@ -40,9 +40,18 @@ $(document).ready(function() {
     $(".dropdown-toggle").val($.trim($(this).text()));
   });
 
-  // $( "#employee_role" ).focus(function() {
-  // $("#employee_role").dropdown("toggle");
-  // });
+  // Dropdown "Bootstrap" listener on pressing the "Enter" key
+  $(".dropdown-item").on("keypress", function(e) {
+    if(e.which === 13){
+      $(".dropdown-toggle").val($.trim($(this).text()));
+      $("#role-dropdown").removeClass("open");
+    }
+  });
 
+  // Open dropdown on input focus and add focus to dropdown-menu first item
+  $( "#employee_role" ).focus(function() {
+    $("#role-dropdown").addClass("open");
+    $("#role-dropdown .dropdown-menu li:first-child .dropdown-item").focus();
+  });
 
 });

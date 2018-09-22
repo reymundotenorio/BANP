@@ -3,9 +3,9 @@
 // -----------------------------------------------------------------------------
 
 ///font-variables
-$primary-font: 'Ubuntu', sans-serif;
-$secondary-font: 'Montserrat', sans-serif;
-$third-font: 'Cyclo', sans-serif;
+$primary-font: "Ubuntu", sans-serif;
+$secondary-font: "Montserrat", sans-serif;
+$third-font: "Cyclo", sans-serif;
 
 /// Copy text color
 /// @type Color
@@ -32,5 +32,5 @@ $body-color: tint($secondary-color, 95%);
 /// Relative or absolute URL where all assets are served from
 /// @type String
 /// @example scss - When using a CDN
-/// $base-url: 'http://cdn.example.com/assets/';
-$base-url: '/assets/' !default;
+/// $base-url: "http://cdn.example.com/assets/";
+$base-url: "/assets/" !default;

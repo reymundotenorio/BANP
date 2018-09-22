@@ -81,7 +81,7 @@
   background: $initial; /* FF3.6+ */ /* Chrome,Safari4+ */ /* Chrome10+,Safari5.1+ */ /* Opera 11.10+ */ /* IE10+ */
   background: -webkit-gradient(linear,  left top, left bottom,  from($initial),to($final));
   background: linear-gradient(to bottom,  $initial 0%,$final 100%); /* W3C */
-  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#{$initial}', endColorstr='#{$final}',GradientType=0 ); /* IE6-9 */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr="#{$initial}", endColorstr="#{$final}",GradientType=0 ); /* IE6-9 */
 }
 
 // Mixing for gradient background
@@ -90,7 +90,7 @@
   background: $initial; /* FF3.6+ */ /* Chrome,Safari4+ */ /* Chrome10+,Safari5.1+ */ /* Opera 11.10+ */ /* IE10+ */
   background: -webkit-gradient(linear, left top, right top, from($initial), to($final));
   background: linear-gradient(left, $initial, $final); /* W3C */
-  filter: progid:DXImageTransform.Microsoft.gradient(start-colourStr='#{$initial}', end-colourStr='#{$final}', gradientType='1'); /* IE6-9 */
+  filter: progid:DXImageTransform.Microsoft.gradient(start-colourStr="#{$initial}", end-colourStr="#{$final}", gradientType="1"); /* IE6-9 */
 }
 
 // Flex setup for navigation elements

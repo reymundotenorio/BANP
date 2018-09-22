@@ -1,8 +1,8 @@
 $(document).ready(function() {
-  
-  $('input.form-control').on('keyup change', function() {
+
+  $("input.form-control").on("keyup change", function() {
     // If empty
-    if($(this).val() == ''){
+    if($(this).val() == ""){
       $(this).removeClass("with-value"); // Remove class
     }
 

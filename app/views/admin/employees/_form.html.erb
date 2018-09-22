@@ -79,12 +79,12 @@
                 <div class="form-group">
                   <% role_options = ["Seller", "Driver", "Administrator"]; %>
 
-                  <div class="dropdown">
-                    <%= f.text_field :role, class: "form-control input dropdown-toggle", "data-toggle": "dropdown", placeholder: t("views.form.select_role"), readonly: true, required: true %>
+                  <div class="dropdown" id="role-dropdown">
+                    <%= f.text_field :role, class: "form-control input dropdown-toggle disabled", "data-toggle": "dropdown", placeholder: t("views.form.select_role"), readonly: true, required: true %>
 
                     <ul class="dropdown-menu">
                       <% role_options.each do |role_name| %>
-                      <li><p class="<%= role_name == :role ? 'dropdown-item active' : 'dropdown-item' %>"><%= role_name %></p></li>
+                      <li><p class="<%= role_name == :role ? 'dropdown-item active' : 'dropdown-item' %>" tabindex="0"><%= role_name %></p></li>
                       <% end %>
                     </ul>
                   </div>

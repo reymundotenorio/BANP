@@ -1,6 +1,6 @@
 class Employee < ApplicationRecord
   # Secure password
-  has_secure_password validations: false
+  # has_secure_password validations: false
 
   # Search
   def self.search(search, show_all)
@@ -48,19 +48,19 @@ class Employee < ApplicationRecord
   # End Uniqueness validation
 
   # Confirmation validation
-  validates :password, confirmation: true, if: :password_present?
+  # validates :password, confirmation: true, if: :password_present?
   # End Confirmation validation
 
-  def password_present?
-    new_record? || password.present? && password_confirmation.present?
-  end
+  # def password_present?
+  #   new_record? || password.present? && password_confirmation.present?
+  # end
 
   # Presence validation
   validates :first_name, presence: true
   validates :last_name, presence: true
   validates :email, presence: true
-  validates :password, presence: true, if: :password_present?
-  validates :password_confirmation, presence: true, if: :password_present?
+  # validates :password, presence: true, if: :password_present?
+  # validates :password_confirmation, presence: true, if: :password_present?
   validates :role, presence: true
   # End  Presence validation
 
@@ -69,7 +69,7 @@ class Employee < ApplicationRecord
   validates :last_name, length: { maximum: 255 }
   validates :phone, length: { is: 14 }, allow_blank: true
   validates :email, length: { maximum: 255 }
-  validates :password, length: { minimum: 8 }, if: :password_present?
+  # validates :password, length: { minimum: 8 }, if: :password_present?
   validates :role, length: { maximum: 20 }
   # End Length validation
 

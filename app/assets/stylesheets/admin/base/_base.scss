@@ -225,6 +225,7 @@ a{
 
           @include on-event{
             color: $hover-color;
+            outline: none;
           }
         }
       }
