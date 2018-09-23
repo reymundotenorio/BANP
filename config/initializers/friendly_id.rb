@@ -18,7 +18,7 @@ FriendlyId.defaults do |config|
 
   config.reserved_words = %w(new edit index session login logout users admin
     stylesheets assets javascripts images)
-
+    
   # This adds an option to to treat reserved words as conflicts rather than exceptions.
   # When there is no good candidate, a UUID will be appended, matching the existing
   # conflict behavior.
@@ -30,11 +30,11 @@ FriendlyId.defaults do |config|
   # Uncomment this to use friendly finders in all models. By default, if
   # you wish to find a record by its friendly id, you must do:
   #
-  #    MyModel.friendly.find("foo")
+  #    MyModel.friendly.find('foo')
   #
   # If you uncomment this, you can do:
   #
-  #    MyModel.find("foo")
+  #    MyModel.find('foo')
   #
   # This is significantly more convenient but may not be appropriate for
   # all applications, so you must explicity opt-in to this behavior. You can
@@ -54,9 +54,9 @@ FriendlyId.defaults do |config|
   # config.use :slugged
   #
   # By default, FriendlyId's :slugged addon expects the slug column to be named
-  # "slug", but you can change it if you wish.
+  # 'slug', but you can change it if you wish.
   #
-  # config.slug_column = "slug"
+  # config.slug_column = 'slug'
   #
   # By default, slug has no size limit, but you can change it if you wish.
   #
@@ -67,7 +67,7 @@ FriendlyId.defaults do |config|
   # separator. If you're upgrading from FriendlyId 4, you may wish to replace this
   # with two dashes.
   #
-  # config.sequence_separator = "-"
+  # config.sequence_separator = '-'
   #
   # Note that you must use the :slugged addon **prior** to the line which
   # configures the sequence separator, or else FriendlyId will raise an undefined

@@ -137,6 +137,8 @@ es:
       login: "Inicias sesióñ"
       forgot_password: "¿Olvidaste la contraseña?"
       select_role: "Seleccione un rol"
+    sign_in:
+      incorrect_user_pwd: "Correo electrónico o contraseña incorrectos"
 
 
 # Rails default

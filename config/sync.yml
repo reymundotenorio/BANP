@@ -1,17 +1,17 @@
 # Pusher
 development:
   adapter_javascript_url: "http://js.pusher.com/2.0/pusher.min.js"
-  app_id: <%= ENV["pusher_app_id"] %>
-  api_key: <%= ENV["pusher_key"] %>
-  auth_token: <%= ENV["pusher_secret"] %>
+  app_id: <%= ENV['pusher_app_id'] %>
+  api_key: <%= ENV['pusher_key'] %>
+  auth_token: <%= ENV['pusher_secret'] %>
   adapter: "Pusher"
   async: true
 
 production:
     adapter_javascript_url: "http://js.pusher.com/2.0/pusher.min.js"
-    app_id: <%= ENV["pusher_app_id"] %>
-    api_key: <%= ENV["pusher_key"] %>
-    auth_token: <%= ENV["pusher_secret"] %>
+    app_id: <%= ENV['pusher_app_id'] %>
+    api_key: <%= ENV['pusher_key'] %>
+    auth_token: <%= ENV['pusher_secret'] %>
     adapter: "Pusher"
     async: true
 
