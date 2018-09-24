@@ -22,14 +22,11 @@ class Admin::Authentication::SessionsController < ApplicationController
 
         # If user exist and password matches
         if @employee && @employee.authenticate(params[:sign_in][:password])
+          session[:user_id] = @employee.id
           session_info
-          redirect_to admin_root_path, notice: "#{t('views.sign_in.incorrect_user_pwd')}*"
-          # session[:user_id] = @employee.id
+          reset_attemps
 
-          # reset_attemps
-          # session_info
-          #     redirect_to dashboard_path, notice: "Bienvenido #{@employee.primer_nombre} #{@employee.primer_apellido}, ha iniciado sesión correctamente"
-          #
+          redirect_to admin_employee_path, notice: "Bienvenido #{@employee.first_name} #{@employee.last_name}, ha iniciado sesión correctamente"
 
           # If user exist but the password doesn't match
         else
@@ -50,11 +47,37 @@ class Admin::Authentication::SessionsController < ApplicationController
 
     # If exceeded the number of failed attempts
     if @employee.failed_attempts >= @max_failed_attempts
+      # If unlock email has been sent
+      if @employee.unlock_sent
+
+
+        # If unlock email has not been sent
+      else
+        send_unlock_email
+      end
+
       true
 
       # If not exceeded the number of failed attempts
     else
       false
+    end
+  end
+
+  # Send unlock email to the user
+  def send_unlock_email
+    generate_token
+
+    @user.update_attribute(:unlock_sent, true)
+    @user.update_attribute(:unlock_token, @token)
+    UserMailer.unlock_instructions(@user, @token).deliver
+  end
+
+  # Generate token
+  def generate_token
+    loop do
+      @token = SecureRandom.hex(15)
+      break @token unless Employee.where(unlock_token: @token).exists?
     end
   end
 
@@ -84,12 +107,9 @@ class Admin::Authentication::SessionsController < ApplicationController
     sync_update @employee
   end
 
-  #
-  # # Generar token
-  # def generate_token
-  #   loop do
-  #     @token = SecureRandom.hex(15)
-  #     break @token unless User.where(desbloqueo_token: @token).exists?
-  #   end
-  # end
+  # Reset failed attemps counter
+  def reset_attemps
+    @employee.update_attribute(:failed_attempts, 0)
+    @employee.update_attribute(:unlock_sent, false)
+  end
 end

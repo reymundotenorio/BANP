@@ -1,13 +1,88 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <style>
-      /* Email styles need to be inline */
-    </style>
-  </head>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 
-  <body>
-    <%= yield %>
-  </body>
+  <!-- Stylesheet -->
+  <style media="screen">
+
+  .container-fluid {
+    margin-right: auto;
+    margin-left: auto;
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+
+  .row{
+    margin-left: -15px;
+    margin-right: -15px;
+  }
+
+  .col-xs-12{
+    position: relative;
+    min-height: 1px;
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+
+  .col-xs-12{
+    width: 100%;
+  }
+
+  .mailer-header{
+    background: #f15f79;
+    background: -webkit-linear-gradient(to right, #b24592, #f15f79);
+    background: linear-gradient(to right, #b24592, #f15f79);
+    padding: 30px 0px;
+  }
+
+  .email-body{
+    padding: 15px 0px;
+  }
+
+  .banp-logo{
+    font-family: "Cyclo", sans-serif;
+    font-weight: bold;
+    font-size: 28px;
+    line-height: 1;
+    color: #fff;
+    text-shadow: -2px 0px 5px rgba(0, 0, 0, 0.5);
+    border: 4px solid #fff;
+    border-radius: 5px;
+    padding: 6px 6px 3px;
+    margin: 0px;
+    display: inline-block;
+    text-align: center;
+  }
+  </style>
+  <!-- End Stylesheet -->
+</head>
+
+<body>
+  <header>
+    <section class="mailer-header">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-xs-12">
+            <p class="banp-logo">BANP</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </header>
+
+  <%= yield %>
+
+  <footer>
+    <section>
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-xs-12">
+            <p><span>&copy; <%= Time.now.year %></span> <span>Better and Nice Produce Corp. <span>Miami, Florida</span></p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </footer>
+</body>
 </html>

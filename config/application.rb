@@ -36,5 +36,7 @@ module Banp
     # Custom fonts
     config.assets.paths << Rails.root.join("app", "assets", "fonts")
 
+    # Custom errors
+    config.exceptions_app = self.routes
   end
 end

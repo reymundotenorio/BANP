@@ -10,18 +10,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
   <!-- End Meta information -->
 
+  <!-- Base -->
+  <base href="<%= $banp_domain %>"/>
+  <!-- End Base -->
+
   <!-- Favicon settings -->
   <!-- <link rel="icon" type="image/png" href="/favicon.png"> -->
   <%= favicon_link_tag asset_path("img/favicon.png"), rel: "icon", type: "image/png" %>
   <meta name="theme-color" content="#444444">
   <!-- End Favicon settings -->
-
-  <!-- OpenGraph info -->
-  <meta property="og:title" content="Better and Nice Produce Corp">
-  <meta property="og:description" content="Better and Nice Produce is at the forefront of produce quality, whit more than 20 years in the business. Serving all the South Florida with the best in gourmet, organic, and specialty pershibles. Better and Nice Produce continues to push the envelopment in quality and Service. Better and Nice Produce is committed to live by its motto, 'Anywhere, anytime, fresh produce on time'.">
-  <meta property="og:url" content="http://www.betterandnice.com">
-  <meta property="og:image" content="http://www.betterandnice.com/favicon.png">
-  <!-- End OpenGraph info -->
 
   <!-- CSRF Tags -->
   <%= csrf_meta_tags %>
@@ -31,8 +28,9 @@
   <%= csp_meta_tag %>
   <!-- End CSP Tags -->
 
+  <!-- PDF Stylesheet -->
   <%= wicked_pdf_stylesheet_link_tag "application" -%>
-  <base href="<%= $banp_domain %>"/>
+  <!-- End PDF Stylesheet -->
 </head>
 
 <body class="body-pdf">

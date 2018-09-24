@@ -139,6 +139,9 @@ es:
       select_role: "Seleccione un rol"
     sign_in:
       incorrect_user_pwd: "Correo electrónico o contraseña incorrectos"
+    errors:
+      page_empty: "Esta página está vacía"
+      back_to_home: "Regresar a Inicio"
 
 
 # Rails default
