@@ -25,8 +25,9 @@ class Admin::Authentication::SessionsController < ApplicationController
           session[:user_id] = @employee.id
           session_info
           reset_attemps
+          send_unlock_email
 
-          redirect_to admin_employee_path, notice: "Bienvenido #{@employee.first_name} #{@employee.last_name}, ha iniciado sesión correctamente"
+          redirect_to admin_employees_path, notice: "Bienvenido #{@employee.first_name} #{@employee.last_name}, ha iniciado sesión correctamente"
 
           # If user exist but the password doesn't match
         else
@@ -68,9 +69,10 @@ class Admin::Authentication::SessionsController < ApplicationController
   def send_unlock_email
     generate_token
 
-    @user.update_attribute(:unlock_sent, true)
-    @user.update_attribute(:unlock_token, @token)
-    UserMailer.unlock_instructions(@user, @token).deliver
+    @employee.update_attribute(:unlock_sent, true)
+    @employee.update_attribute(:unlock_token, @token)
+    # AuthenticationMailer.unlock_instructions(@employee, @token).deliver
+    AuthenticationMailer.confirmation_instructions(@employee, @token, I18n.locale).deliver
   end
 
   # Generate token

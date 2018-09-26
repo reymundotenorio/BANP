@@ -9,7 +9,7 @@
 require "faker"
 
 100.times do |count|
-  Employee.create(
+  Employee.new(
     id: (count + 1),
     first_name: Faker::Name.first_name,
     last_name: Faker::Name.last_name,
@@ -18,7 +18,7 @@ require "faker"
     email: Faker::Internet.email,
     password_digest: Faker::Crypto.md5,
     state: Faker::Boolean.boolean(0.8)
-  )
+  ).save(validate: false)
 end
 
 puts "The information have been seeded"

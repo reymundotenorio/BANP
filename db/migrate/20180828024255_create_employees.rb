@@ -14,7 +14,6 @@ class CreateEmployees < ActiveRecord::Migration[5.2]
       t.string :slug, unique: true # Friendly_id slug
 
       # Authenticatable
-      # t.string :email, null: false
       t.string :password_digest, null: false # Encrypted password
 
       # Recoverable
@@ -36,7 +35,7 @@ class CreateEmployees < ActiveRecord::Migration[5.2]
       t.integer :failed_attempts, default: 0, null: false
       t.string :unlock_token # Unlock by email or text code
       t.boolean :unlock_sent, default: false, null: false
-
+      
       t.timestamps
     end
 

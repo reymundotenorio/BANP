@@ -142,6 +142,11 @@ en:
     errors:
       page_empty: "This page is empty"
       back_to_home: "Back to Home"
+    mailer:
+      welcome: "Welcome"
+      confirm_account_button_link: "You can confirm your account by clicking on the button or through the link"
+      confirm_account_link: "You can confirm your account by clicking on the following link"
+      confirm_account: "Confirm account"
 
 
 # Rails Default

@@ -37,29 +37,29 @@ ActiveRecord::Schema.define(version: 2018_08_28_024255) do
   create_table "employees", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "first_name", null: false
     t.string "last_name", null: false
+    t.string "email", null: false
     t.string "phone", limit: 14
     t.string "role", null: false
+    t.boolean "confirmed", default: false, null: false
     t.boolean "state", default: true, null: false
     t.string "image_file_name"
     t.string "image_content_type"
     t.integer "image_file_size"
     t.datetime "image_updated_at"
     t.string "slug"
-    t.string "email", null: false
     t.string "password_digest", null: false
     t.string "reset_password_token"
-    t.datetime "reset_password_sent_at"
+    t.boolean "reset_password_sent", default: false, null: false
     t.integer "sign_in_count", default: 0, null: false
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
     t.string "current_sign_in_ip"
     t.string "last_sign_in_ip"
     t.string "confirmation_token"
-    t.datetime "confirmation_sent_at"
-    t.boolean "confirmed", default: false, null: false
+    t.boolean "confirmation_sent", default: false, null: false
     t.integer "failed_attempts", default: 0, null: false
     t.string "unlock_token"
-    t.datetime "locked_at"
+    t.boolean "unlock_sent", default: false, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["confirmation_token"], name: "index_employees_on_confirmation_token", unique: true

@@ -9,21 +9,21 @@
   font-size: 28px;
   line-height: 1;
   color: $white;
-  text-shadow: -2px 0px 5px rgba($black, 0.5);
-  border: 4px solid $white;
+  // text-shadow: -2px 0px 5px rgba($black, 0.5);
+  border: 3px solid $white;
   border-radius: 5px;
-  padding: 6px 6px 3px;
+  padding: 8px 8px 4px;
   margin: 0px;
   display: inline-block;
   -webkit-transition: all 0.3s ease;
   transition: all 0.3s ease;
 
-  -webkit-box-shadow: 0px 0px 10px rgba($black, 0.5);
-  box-shadow: 0px 0px 10px rgba($black, 0.5);
+  // -webkit-box-shadow: 0px 0px 10px rgba($black, 0.5);
+  // box-shadow: 0px 0px 10px rgba($black, 0.5);
 
   &.black{
     color: $black;
-    border: 4px solid $black;
+    border: 3px solid $black;
   }
 }
 // End BANP logo
@@ -91,7 +91,7 @@
 .fix-body{
   position: relative;
   display: block;
-  padding-top: (78px + 30px);
+  padding-top: (76px + 30px);
 }
 // End Fix affix header
 
@@ -702,7 +702,7 @@
 
   // Fix affix header
   .fix-body{
-    padding-top: (125px + 30px);
+    padding-top: (123px + 30px);
   }
   // End Fix affix header
 
@@ -973,7 +973,7 @@
 
   // Fix affix header
   .fix-body{
-    padding-top: (129px + 30px);
+    padding-top: (127px + 30px);
   }
   // End Fix affix header
 

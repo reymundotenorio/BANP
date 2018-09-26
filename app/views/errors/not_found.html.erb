@@ -1,16 +1,16 @@
 <section class="error-page">
   <div class="container">
-    <div class="row flex-row material-card shadow-card">
+    <div class="row flex-row material-card">
       <div class="col-xs-12 col-md-6 col-lg-5 col-lg-offset-1">
-        <%= image_tag "img/404-empty-box.png", class: "img-responsive", alt: "Empty box" %>
+        <%= image_tag "img/404-empty-basket.png", class: "img-responsive", alt: "Empty basket" %>
       </div>
 
       <div class="col-xs-12 col-md-6 col-lg-5">
-        <h1>4<span><%= image_tag "img/404-tomato.png", class: "img-responsive", alt: "0" %></span>4</h1>
+        <h1>4<span><%= image_tag "img/error-tomato.png", class: "img-responsive", alt: "0" %></span>4</h1>
         <h2><span><%= t("views.errors.page_empty")%></span></h2>
 
         <p><%= link_to admin_root_path, title: "t('views.errors.back_to_home')" do %><i class="fas fa-undo-alt"></i> <span><%= t("views.errors.back_to_home")%></span><% end %></p>
-        </div>
       </div>
     </div>
-  </section>
+  </div>
+</section>
