@@ -43,6 +43,18 @@ body{
 .sign-in-form{
   .form{
     padding-bottom: 0px;
+
+    .auth-alerts{
+      padding-top: 20px;
+
+      .flash-alert{
+        color: $sixth-color;
+      }
+
+      .flash-notice{
+        color: $third-color;
+      }
+    }
   }
 }
 

@@ -19,6 +19,18 @@
               </div>
             </div>
 
+            <% if flash.any? %>
+            <div class="col-xs-12 no-padding auth-alerts">
+              <% if !flash[:alert].blank? %>
+              <strong><p class="flash-alert"><i class="fas fa-exclamation-triangle"></i> <%= flash[:alert] %></p></strong>
+              <% end %>
+
+              <% if !flash[:notice].blank? %>
+              <strong><p class="flash-notice"><i class="fas fa-info-circle"></i> <%= flash[:notice] %></p></strong>
+              <% end %>
+            </div>
+            <% end %>
+
             <div class="col-xs-12 no-padding">
               <div class="form-info">
 
