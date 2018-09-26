@@ -25,14 +25,13 @@ class Admin::Authentication::SessionsController < ApplicationController
           session[:user_id] = @employee.id
           session_info
           reset_attemps
-          send_unlock_email
-
+    
           redirect_to admin_employees_path, notice: "Bienvenido #{@employee.first_name} #{@employee.last_name}, ha iniciado sesión correctamente"
 
           # If user exist but the password doesn't match
         else
-          # increment_attempts
-          redirect_to admin_root_path, alert: "#{t('views.sign_in.incorrect_user_pwd')}*"
+          increment_attempts
+          redirect_to admin_root_path, alert: "#{t('views.sign_in.incorrect_pwd')}, #{count == 1 ? t('views.sign_in.remaining_attempt') : t('views.sign_in.remaining_attempts')}"
         end
 
       end
@@ -44,10 +43,10 @@ class Admin::Authentication::SessionsController < ApplicationController
 
   # Validate if user is blocked
   def user_blocked?
-    @max_failed_attempts = 5
+    max_failed_attempts = 5
 
     # If exceeded the number of failed attempts
-    if @employee.failed_attempts >= @max_failed_attempts
+    if @employee.failed_attempts >= max_failed_attempts
       # If unlock email has been sent
       if @employee.unlock_sent
 
@@ -77,10 +76,10 @@ class Admin::Authentication::SessionsController < ApplicationController
 
   # Generate token
   def generate_token
-    loop do
+    #loop do
       @token = SecureRandom.hex(15)
-      break @token unless Employee.where(unlock_token: @token).exists?
-    end
+      #break @token unless Employee.where(unlock_token: @token).exists?
+    #end
   end
 
   # Save session information
@@ -109,9 +108,18 @@ class Admin::Authentication::SessionsController < ApplicationController
     sync_update @employee
   end
 
-  # Reset failed attemps counter
+  # Reset failed attemps count
   def reset_attemps
     @employee.update_attribute(:failed_attempts, 0)
     @employee.update_attribute(:unlock_sent, false)
+  end
+  
+    # Increment failed attemps count
+  def increment_attempts
+  failed_attempts = @employee.failed_attempts
+    failed_attempts += 1
+    
+    @employee.update_attribute(:failed_attempts, failed_attempts)
+    return
   end
 end

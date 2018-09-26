@@ -138,7 +138,10 @@ es:
       forgot_password: "¿Olvidaste la contraseña?"
       select_role: "Seleccione un rol"
     sign_in:
-      incorrect_user_pwd: "Correo electrónico o contraseña incorrectos"
+      incorrect_user_pwd: "Correo electrónico o contraseña incorrecto"
+      incorrect_pwd: "Contraseña incorrecta"
+      remaining_attempts: "intentos restantes"
+      remaining_attempt: "intento restante"
     errors:
       page_empty: "Esta página está vacía"
       back_to_home: "Regresar a Inicio"
