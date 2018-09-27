@@ -35,7 +35,7 @@
               <div class="form-info">
 
                 <div class="form-group">
-                  <%= f.email_field :email, class: "form-control input", placeholder: t("activerecord.attributes.employee.email"), required: true %>
+                  <%= f.email_field :email, class: "form-control input", placeholder: t("activerecord.attributes.employee.email"), required: true, autofocus: true %>
                   <label><b><%= t("activerecord.attributes.employee.email") %></b></label>
                   <div class="border-bottom"></div>
                 </div>
@@ -50,7 +50,7 @@
                   <div class="col-xs-12 col-sm-12 button-container no-padding">
                     <%= link_to (admin_reset_password_path), class: "forgot-pass hidden-xs" do %><i class="fas fa-chalkboard-teacher"></i> <span><%= t("views.form.forgot_password") %></span><% end %>
 
-                    <%= f.button class: "btn btn-general btn-success", data: {disable_with: "<i class='fas fa-spinner fa-spin'></i>"} do %><i class="fas fa-fingerprint"></i> <span><%= t("views.form.sign_in") %></span> <% end %>
+                    <%= f.button class: "btn btn-general", data: {disable_with: "<i class='fas fa-spinner fa-spin'></i>"} do %><i class="fas fa-fingerprint"></i> <span><%= t("views.form.sign_in") %></span> <% end %>
 
                     <%= link_to (admin_reset_password_path), class: "forgot-pass visible-xs" do %><i class="fas fa-chalkboard-teacher"></i> <span><%= t("views.form.forgot_password") %></span><% end %>
                   </div>

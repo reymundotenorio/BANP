@@ -137,20 +137,25 @@ es:
       login: "Inicias sesióñ"
       forgot_password: "¿Olvidaste la contraseña?"
       select_role: "Seleccione un rol"
-    sign_in:
+    authentication:
       incorrect_user_pwd: "Correo electrónico o contraseña incorrecto"
       incorrect_pwd: "Contraseña incorrecta"
       remaining_attempts: "intentos restantes"
       remaining_attempt: "intento restante"
+      signed_in_correctly: "Bienvenido %{@first_name} %{@last_name}"
+      signed_out_correctly: "Has cerrado la sesión correctamente"
     errors:
       page_empty: "Esta página está vacía"
       back_to_home: "Regresar a Inicio"
     mailer:
       welcome: "Bienvenid@"
+      greetings: "Greetings"
       confirm_account_button_link: "Puede confirmar su cuenta haciendo clic en el botón o a través del enlace"
       confirm_account_link: "Puede confirmar su cuenta haciendo clic en el siguiente enlace"
+      unlock_account_button_link: "Puede desbloquear su cuenta haciendo clic en el botón o a través del enlace"
+      unlock_account_link: "Puede desbloquear su cuenta haciendo clic en el siguiente enlace"
       confirm_account: "Confirmar cuenta"
-      
+      unlock_account: "Desbloquear cuenta"      
 
 # Rails default
 

@@ -137,19 +137,25 @@ en:
       login: "Login"
       forgot_password: "Forgot password?"
       select_role: "Select a role"
-    sign_in:
+    authentication:
       incorrect_user_pwd: "Incorrect email or password"
       incorrect_pwd: "Incorrect password"
       remaining_attempts: "remaining attempts"
       remaining_attempt: "remaining attempt"
+      signed_in_correctly: "Welcome %{@first_name} %{@last_name}"
+      signed_out_correctly: "You have signed out correctly"
     errors:
       page_empty: "This page is empty"
       back_to_home: "Back to Home"
     mailer:
       welcome: "Welcome"
+      greetings: "Greetings"
       confirm_account_button_link: "You can confirm your account by clicking on the button or through the link"
       confirm_account_link: "You can confirm your account by clicking on the following link"
+      unlock_account_button_link: "You can unlock your account by clicking on the button or through the link"
+      unlock_account_link: "You can unlock your account by clicking on the following link"      
       confirm_account: "Confirm account"
+      unlock_account: "Unlock account"
 
 
 # Rails Default

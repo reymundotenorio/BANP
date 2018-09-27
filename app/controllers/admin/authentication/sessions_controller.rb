@@ -17,32 +17,35 @@ class Admin::Authentication::SessionsController < ApplicationController
       # If user is locked
       if user_locked?(max_failed_attempts)
         # Redirect to unlock_account
-        # reset_attemps
-        redirect_to admin_root_path, alert: "Su cuenta ha sido bloqueada, por favor, revise su correo"
+        reset_attemps
+         flash[:alert] = "Su cuenta ha sido bloqueada, revise su correo electronico con las instrucciones de desbloqueo"
+         render :new
 
         # If user is not locked
       else
 
         # If user exist and password matches
         if @employee && @employee.authenticate(params[:sign_in][:password])
-          session[:user_id] = @employee.id
+          session[:employee_id] = @employee.id
           session_info
           reset_attemps
 
-          redirect_to admin_employees_path, notice: "Bienvenido #{@employee.first_name} #{@employee.last_name}, ha iniciado sesión correctamente"
+          redirect_to admin_employees_path, notice: "#{t('views.authentication.signed_in_correctly', first_name: @employee.first_name, last_name: @employee.last_name)}"
 
           # If user exist but the password doesn't match
         else
           remaining_attempts = max_failed_attempts - increment_attempts
           remaining_attempts += 1
 
-          redirect_to admin_root_path, alert: "#{t('views.sign_in.incorrect_pwd')}, #{remaining_attempts} #{remaining_attempts == 1 ? t('views.sign_in.remaining_attempt') : t('views.sign_in.remaining_attempts')}"
+          flash[:alert] = "#{t('views.authentication.incorrect_pwd')}, #{remaining_attempts} #{remaining_attempts == 1 ? t('views.authentication.remaining_attempt') : t('views.authentication.remaining_attempts')}"
+        render :new
         end
 
       end
       # If user doesn't exist
     else
-      redirect_to admin_root_path, alert: t("views.sign_in.incorrect_user_pwd")
+      flash[:alert] = t("views.authentication.incorrect_user_pwd")
+      render :new
     end
   end
 
@@ -75,13 +78,15 @@ class Admin::Authentication::SessionsController < ApplicationController
     @employee.update_attribute(:unlock_token, @token)
 
     # Send email
-    # AuthenticationMailer.unlock_instructions(@employee, @token, I18n.locale).deliver
-    # AuthenticationMailer.confirmation_instructions(@employee, @token, I18n.locale).deliver
+    AuthenticationMailer.unlock_instructions(@employee, @token, I18n.locale).deliver
   end
 
   # Generate token
-  def generate_token
+  def generate_tokenuse
+    loop do
     @token = SecureRandom.hex(15)
+    break @token unless Employee.where(unlock_token: @token).exists?
+    end    
   end
 
   # Save session information
@@ -124,5 +129,12 @@ class Admin::Authentication::SessionsController < ApplicationController
     @employee.update_attribute(:failed_attempts, failed_attempts)
 
     failed_attempts
+  end
+  
+  # Sign out
+  def destroy
+    session[:employee_id] = nil
+    flash[:notice] = t("views.authentication.signed_out_correctly")
+    render :new
   end
 end

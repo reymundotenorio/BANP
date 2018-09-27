@@ -93,10 +93,31 @@ class Admin::EmployeesController < ApplicationController
     # @employee[:state] = true if @employee[:state].blank?
 
     if @employee.save
+    send_confirmation_email
       redirect_to [:admin, @employee], notice: t("alerts.created", model: t("activerecord.models.employee"))
     else
       render :new
     end
+  end
+    
+  # Send unlock email to the user
+  def send_confirmation_email
+    # Generate random token
+    generate_token
+    
+    @employee.update_attribute(:confirmation_sent, true)
+    @employee.update_attribute(:confirmation_token, @token)
+
+    # Send email
+    AuthenticationMailer.confirmation_instructions(@employee, @token, I18n.locale).deliver
+  end
+
+  # Generate token
+  def generate_token
+    loop do
+    @token = SecureRandom.hex(15)
+    break @token unless Employee.where(confirmation_token: @token).exists?
+    end    
   end
 
   # Update

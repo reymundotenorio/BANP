@@ -2,6 +2,14 @@ class ApplicationController < ActionController::Base
   # Always run set_lang
   before_action :set_lang
   # End Always run set_lang
+  
+  #Helper for the view
+      helper_method :current_user
+
+    # Current employee
+    def current_employee
+        @current_employee ||= Employee.find(session[:employee_id]) if session[:employee_id]
+    end
 
   # Domain global variable
   if Rails.env == "development"
