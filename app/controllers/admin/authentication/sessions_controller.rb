@@ -14,13 +14,13 @@ class Admin::Authentication::SessionsController < ApplicationController
 
     # If user exists
     if @employee
-      # If user is blocked
-      if user_blocked?(max_failed_attempts)
+      # If user is locked
+      if user_locked?(max_failed_attempts)
         # Redirect to unlock_account
         # reset_attemps
         redirect_to admin_root_path, alert: "Su cuenta ha sido bloqueada, por favor, revise su correo"
-        
-        # If user is not blocked
+
+        # If user is not locked
       else
 
         # If user exist and password matches
@@ -46,20 +46,19 @@ class Admin::Authentication::SessionsController < ApplicationController
     end
   end
 
-  # Validate if user is blocked
-  def user_blocked?(max_failed_attempts)
-
+  # Validate if user is locked
+  def user_locked?(max_failed_attempts)
     # If exceeded the number of failed attempts
     if @employee.failed_attempts >= max_failed_attempts
       # If unlock email has been sent
       if @employee.unlock_sent
+        true
 
         # If unlock email has not been sent
       else
         send_unlock_email
+        true
       end
-
-      true
 
       # If not exceeded the number of failed attempts
     else
@@ -82,10 +81,7 @@ class Admin::Authentication::SessionsController < ApplicationController
 
   # Generate token
   def generate_token
-    #loop do
     @token = SecureRandom.hex(15)
-    #break @token unless Employee.where(unlock_token: @token).exists?
-    #end
   end
 
   # Save session information
