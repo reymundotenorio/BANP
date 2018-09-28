@@ -1,4 +1,8 @@
 class Admin::Authentication::ConfirmationsController < ApplicationController
+  # Authentication layout
+  layout "admin/authentication"
+  # End Authentication layout
+  
   def new
   end
 
@@ -6,6 +10,7 @@ class Admin::Authentication::ConfirmationsController < ApplicationController
   def show
     @token = params[:confirmation_token]
 
+      # If token has been found
     if @employee = Employee.find_by(confirmation_token: @token)
 
       # If user is enabled
@@ -18,7 +23,7 @@ class Admin::Authentication::ConfirmationsController < ApplicationController
           # Render Sync with external controller
           sync_update @employee
 
-          redirect_to admin_sign_in_path, notice: "Su cuenta #{@employee.email} ha sido confirmada con éxito. Ahora puede iniciar sesión"
+          redirect_to admin_sign_in_path, notice: "Su cuenta #{@employee.email} ha sido confirmada con éxito"
 
           # If user is already confirmed
         else
@@ -27,8 +32,10 @@ class Admin::Authentication::ConfirmationsController < ApplicationController
 
         # If user is disabled
       else
-        redirect_to admin_sign_in_path, alert: 'No puede confirmar su cuenta, ésta ha sido desactivada. Comuníquese con el Administrador para solucionar este inconveniente'
+        redirect_to admin_sign_in_path, alert: 'Su cuenta ha sido desactivada. Comuníquese con el Administrador para solucionar este inconveniente'
       end
+      
+      # If token has not been found
     else
       redirect_to admin_sign_in_path, alert: "El código de confirmación #{@token} no ha sido encontrado en el sistema"
     end
