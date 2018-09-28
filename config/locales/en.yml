@@ -144,6 +144,10 @@ en:
       remaining_attempt: "remaining attempt"
       signed_in_correctly: "Welcome %{first_name} %{@last_name}"
       signed_out_correctly: "You have signed out correctly"
+      successfully_confirmed: "Your %{email} account has been successfully confirmed"
+      account_confirmed: "Your account %{@email} is confirmed"
+      account_disabled: "Your account %{@email} is disabled. Contact the administrator to solve this problem"
+      token_not_found: "The confirmation code %{token} has not been found in the system"
     errors:
       page_empty: "This page is empty"
       back_to_home: "Back to Home"

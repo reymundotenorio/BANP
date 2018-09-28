@@ -144,6 +144,10 @@ es:
       remaining_attempt: "intento restante"
       signed_in_correctly: "Bienvenido %{first_name} %{last_name}"
       signed_out_correctly: "Has cerrado la sesión correctamente"
+      successfully_confirmed: "Su cuenta %{email} ha sido confirmada con éxito"
+      account_confirmed: "Su cuenta %{email} está confirmada"
+      account_disabled: "Tu cuenta %{email} está deshabilitada. Contacte al administrador para resolver este problema"
+      token_not_found: "El código de confirmación % {token} no se ha encontrado"
     errors:
       page_empty: "Esta página está vacía"
       back_to_home: "Regresar a Inicio"

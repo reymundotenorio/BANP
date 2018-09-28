@@ -23,21 +23,21 @@ class Admin::Authentication::ConfirmationsController < ApplicationController
           # Render Sync with external controller
           sync_update @employee
 
-          redirect_to admin_sign_in_path, notice: "Su cuenta #{@employee.email} ha sido confirmada con éxito"
+          redirect_to admin_sign_in_path, notice: "#{t('views.authentication.successfully_confirmed', @employee.email)}"
 
           # If user is already confirmed
         else
-          redirect_to admin_sign_in_path, notice: "Su cuenta #{@employee.email} se encuentra confirmada"
+          redirect_to admin_sign_in_path, notice: "#{t('views.authentication.account_confirmed', @employee.email)}"
         end
 
         # If user is disabled
       else
-        redirect_to admin_sign_in_path, alert: 'Su cuenta ha sido desactivada. Comuníquese con el Administrador para solucionar este inconveniente'
+        redirect_to admin_sign_in_path, alert: "#{t('views.authentication.account_disabled')}"
       end
       
       # If token has not been found
     else
-      redirect_to admin_sign_in_path, alert: "El código de confirmación #{@token} no ha sido encontrado en el sistema"
+      redirect_to admin_sign_in_path, alert: "#{t('views.authentication.token_not_found', @token)}"
     end
   end
 end

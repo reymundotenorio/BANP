@@ -12,7 +12,7 @@ class Admin::EmployeesController < ApplicationController
   # End Sync model DSL
 
   # Authentication
-  #  before_action :require_admin, only: [:index, :show, :new, :create, :edit, :update, :active, :deactive, :history]
+   before_action :require_employee, only: [:index, :show, :new, :create, :edit, :update, :active, :deactive, :history]
   # End Authentication
 
   # /employees

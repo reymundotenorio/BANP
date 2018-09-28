@@ -10,6 +10,11 @@ class ApplicationController < ActionController::Base
     def current_employee
         @current_employee ||= Employee.find(session[:employee_id]) if session[:employee_id]
     end
+    
+        # Require employee
+    def require_employee
+        redirect_to admin_sign_in_path, alert: 'Necesita iniciar sesión para continuar' unless current_employee
+    end
 
   # Domain global variable
   if Rails.env == "development"

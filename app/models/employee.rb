@@ -89,6 +89,15 @@ class Employee < ApplicationRecord
 
   ## End Validations
 
+  # Helpers
+
+  # Is administrator?
+  def is_admin?
+    role == "administrator"
+  end
+
+  # End Helpers
+
 
   ## Paperclip
 
