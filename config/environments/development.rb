@@ -63,11 +63,13 @@ Rails.application.configure do
   Paperclip.options[:command_path] = "/usr/bin/"
   # End ImageMagick path
 
-
   # Adds additional error checking when serving assets at runtime.
   # Checks for improperly declared sprockets dependencies.
   # Raises helpful error messages.
   config.assets.raise_runtime_errors = true
+
+  # Set default host URL for email links
+  config.action_mailer.default_url_options = { host: "localhost:3000" }
 
   # Gmail configuration
   config.action_mailer.raise_delivery_errors = true

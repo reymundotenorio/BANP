@@ -23,8 +23,12 @@ Rails.application.routes.draw do
 
     # Sessions
     get "/sign-in" => "authentication/sessions#new", as: "sign_in"
-    post "/sign-in" => "authentication/sessions#create", as: "sign_inemployee"
+    post "/sign-in" => "authentication/sessions#create", as: "sign_in_employee"
     delete "/sign-out" => "authentication/sessions#destroy", as: "sign_out"
+
+    # Confirmations
+    get '/confirm-account' => 'authentication/confirmations#new', as: 'confirm_account'
+    get '/confirm-employee-account/:confirmation_token' => 'authentication/confirmations#show', as: 'confirm_employee_account'
 
     # Passwords
     get "/reset-password" => "authentication/passwords#new", as: "reset_password"

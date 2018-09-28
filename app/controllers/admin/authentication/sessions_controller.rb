@@ -18,8 +18,8 @@ class Admin::Authentication::SessionsController < ApplicationController
       if user_locked?(max_failed_attempts)
         # Redirect to unlock_account
         reset_attemps
-         flash[:alert] = "Su cuenta ha sido bloqueada, revise su correo electronico con las instrucciones de desbloqueo"
-         render :new
+        flash[:alert] = "Su cuenta ha sido bloqueada, revise su correo electronico con las instrucciones de desbloqueo"
+        render :new
 
         # If user is not locked
       else
@@ -38,7 +38,7 @@ class Admin::Authentication::SessionsController < ApplicationController
           remaining_attempts += 1
 
           flash[:alert] = "#{t('views.authentication.incorrect_pwd')}, #{remaining_attempts} #{remaining_attempts == 1 ? t('views.authentication.remaining_attempt') : t('views.authentication.remaining_attempts')}"
-        render :new
+          render :new
         end
 
       end
@@ -84,9 +84,9 @@ class Admin::Authentication::SessionsController < ApplicationController
   # Generate token
   def generate_tokenuse
     loop do
-    @token = SecureRandom.hex(15)
-    break @token unless Employee.where(unlock_token: @token).exists?
-    end    
+      @token = SecureRandom.hex(15)
+      break @token unless Employee.where(unlock_token: @token).exists?
+    end
   end
 
   # Save session information
@@ -130,7 +130,7 @@ class Admin::Authentication::SessionsController < ApplicationController
 
     failed_attempts
   end
-  
+
   # Sign out
   def destroy
     session[:employee_id] = nil
