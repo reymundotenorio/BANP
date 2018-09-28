@@ -142,7 +142,7 @@ en:
       incorrect_pwd: "Incorrect password"
       remaining_attempts: "remaining attempts"
       remaining_attempt: "remaining attempt"
-      signed_in_correctly: "Welcome %{@first_name} %{@last_name}"
+      signed_in_correctly: "Welcome %{first_name} %{@last_name}"
       signed_out_correctly: "You have signed out correctly"
     errors:
       page_empty: "This page is empty"

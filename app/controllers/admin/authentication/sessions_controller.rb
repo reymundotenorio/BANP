@@ -14,33 +14,42 @@ class Admin::Authentication::SessionsController < ApplicationController
 
     # If user exists
     if @employee
-      # If user is locked
-      if user_locked?(max_failed_attempts)
-        # Redirect to unlock_account
-        reset_attemps
-        flash[:alert] = "Su cuenta ha sido bloqueada, revise su correo electronico con las instrucciones de desbloqueo"
-        render :new
 
-        # If user is not locked
-      else
+      # If user is enabled
+      if @employee.state
 
-        # If user exist and password matches
-        if @employee && @employee.authenticate(params[:sign_in][:password])
-          session[:employee_id] = @employee.id
-          session_info
+        # If user is locked
+        if user_locked?(max_failed_attempts)
+          # Redirect to unlock_account
           reset_attemps
-
-          redirect_to admin_employees_path, notice: "#{t('views.authentication.signed_in_correctly', first_name: @employee.first_name, last_name: @employee.last_name)}"
-
-          # If user exist but the password doesn't match
-        else
-          remaining_attempts = max_failed_attempts - increment_attempts
-          remaining_attempts += 1
-
-          flash[:alert] = "#{t('views.authentication.incorrect_pwd')}, #{remaining_attempts} #{remaining_attempts == 1 ? t('views.authentication.remaining_attempt') : t('views.authentication.remaining_attempts')}"
+          flash[:alert] = "Su cuenta ha sido bloqueada, revise su correo electronico con las instrucciones de desbloqueo"
           render :new
+
+          # If user is not locked
+        else
+
+          # If user exist and password matches
+          if @employee && @employee.authenticate(params[:sign_in][:password])
+            session[:employee_id] = @employee.id
+            session_info
+            reset_attemps
+
+            redirect_to admin_employees_path, notice: "#{t('views.authentication.signed_in_correctly', first_name: @employee.first_name, last_name: @employee.last_name)}"
+
+            # If user exist but the password doesn't match
+          else
+            remaining_attempts = max_failed_attempts - increment_attempts
+            remaining_attempts += 1
+
+            flash[:alert] = "#{t('views.authentication.incorrect_pwd')}, #{remaining_attempts} #{remaining_attempts == 1 ? t('views.authentication.remaining_attempt') : t('views.authentication.remaining_attempts')}"
+            render :new
+          end
         end
 
+        # If user is disabled
+      else
+        flash[:alert] = "Su cuenta ha sido desactivada. Comuníquese con el Administrador para solucionar este inconveniente"
+        render :new
       end
       # If user doesn't exist
     else

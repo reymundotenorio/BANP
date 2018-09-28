@@ -142,7 +142,7 @@ es:
       incorrect_pwd: "Contraseña incorrecta"
       remaining_attempts: "intentos restantes"
       remaining_attempt: "intento restante"
-      signed_in_correctly: "Bienvenido %{@first_name} %{@last_name}"
+      signed_in_correctly: "Bienvenido %{first_name} %{last_name}"
       signed_out_correctly: "Has cerrado la sesión correctamente"
     errors:
       page_empty: "Esta página está vacía"

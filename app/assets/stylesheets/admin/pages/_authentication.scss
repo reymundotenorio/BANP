@@ -18,12 +18,13 @@ body{
 
     .background-container{
       @include primary-color-top;
-     
+
       position: fixed;
       top: 0px;
       bottom: 0px;
       left: 0px;
       right: 0px;
+
     }
 
     .alerts{
@@ -35,6 +36,105 @@ body{
         max-width: 412px;
         margin: 0px auto 25px;
       }
+    }
+
+    .auth-languages{
+      position: fixed;
+      top: 15px;
+      bottom: auto;
+      left: 0px;
+      right: 0px;
+      z-index: 5;
+
+      // Language container
+      .language-container{
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-orient: horizontal;
+        -webkit-box-direction: normal;
+        -ms-flex-direction: row;
+        flex-direction: row;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        align-items: center;
+        -webkit-box-pack: end;
+        -ms-flex-pack: end;
+        justify-content: flex-end;
+
+        .dropdown{
+          > a{
+
+            &.custom-btn{
+              color: $white;
+              opacity: 1;
+
+              @include on-event{
+                color: $white;
+                opacity: 0.8;
+              }
+            }
+
+            @include on-event{
+              text-decoration: none;
+            }
+          }
+
+          .dropdown-menu{
+            border-radius: 0px;
+            border: none;
+            margin: 0px;
+            padding: 0px;
+            right: 0px;
+            left: auto;
+            background-color: $white;
+            margin-top: 10px;
+
+            &:before{
+              content: "";
+              position: absolute;
+              top: -16px;
+              bottom: auto;
+              right: 8px;
+              left: auto;
+              font-size: 0px;
+              border: 8px solid $transparent;
+              border-bottom-color: $white;
+            }
+
+            a{
+              padding: 5px 15px;
+              color: $text-color;
+              font-weight: bold;
+
+              span{
+                margin-right: 5px;
+              }
+
+              &.active{
+                color: tint($text-color, 30%);
+                cursor: not-allowed;
+                pointer-events: none;
+
+                span{
+                  opacity: 0.5;
+                }
+
+                @include on-event{
+                  color: tint($text-color, 30%);
+                }
+              }
+
+              @include on-event{
+                text-decoration: none;
+                color: $hover-color;
+                background-color: $transparent;
+              }
+            }
+          }
+        }
+      }
+      // End Language container
     }
   }
 }
