@@ -8,6 +8,7 @@
         <h1 class=""><i class="fas fa-plus"></i> <%= t("views.new.new") %></h1>
         <!-- End Heading -->
       </div>
+
       <div class="col-xs-12 col-lg-2">
         <!-- List button-->
         <div class="btn-new-container">
@@ -15,7 +16,6 @@
         </div>
         <!-- End List button-->
       </div>
-
     </div>
     <!-- End Title -->
 
@@ -24,6 +24,10 @@
       <div class="col-xs-12 hidden-xs">
         <div class="breadcrumb-container">
           <ol class="breadcrumb">
+            <li>
+              <%= link_to (admin_root_path) do %><i class="fas fa-tachometer-alt"></i> <span><%= t("header.navigation.dashboard") %></span><% end %>
+            </li>
+            
             <li>
               <%= link_to (admin_employees_path) do %><i class="fas fa-list-alt"></i> <span><%= t("header.navigation.employees") %></span><% end %>
             </li>

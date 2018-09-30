@@ -157,6 +157,12 @@
           -ms-flex-pack: end;
           justify-content: flex-end;
 
+          &.center{
+            -webkit-box-pack: center;
+            -ms-flex-pack: center;
+            justify-content: center;
+          }
+
           .forgot-pass{
             margin-top: 0px;
             margin-right: 15px;

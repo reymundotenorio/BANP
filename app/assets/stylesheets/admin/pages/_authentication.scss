@@ -27,17 +27,6 @@ body{
 
     }
 
-    .alerts{
-      position: relative;
-      z-index: 1000;
-      width: 100%;
-
-      .alert{
-        max-width: 412px;
-        margin: 0px auto 25px;
-      }
-    }
-
     .auth-languages{
       position: fixed;
       top: 15px;
@@ -136,61 +125,46 @@ body{
       }
       // End Language container
     }
-  }
-}
 
-// Sign in
-.sign-in-form{
-  .form{
-    padding-bottom: 0px;
+    // Sign in
+    .sign-in-form{
+      .form{
+        padding-bottom: 0px;
 
-    .auth-alerts{
-      padding-top: 20px;
-
-      .flash-alert{
-        color: $sixth-color;
-      }
-
-      .flash-notice{
-        color: $third-color;
-      }
-    }
-  }
-}
-
-
-@media (min-width: 768px){
-  body{
-    &.auth{
-      .alerts{
-        .alert{
-          max-width: calc(83.3333333333% - 5px);
+        .auth-alerts{
+          padding-top: 20px;
         }
       }
     }
-  }
-}
 
-@media (min-width: 992px){
-  body{
-    &.auth{
-      .alerts{
-        .alert{
-          max-width: calc(66.6666666667% - 10px);
-        }
+    // Flash
+    .flash-alert{
+      color: $sixth-color;
+    }
+
+    .flash-notice{
+      color: $third-color;
+    }
+
+    // Confirmation and Unlock messages
+    .message{
+      h1{
+        font-size: 20px;
+        font-weight: bold;
+        text-align: center;
+        padding-bottom: 20px;
+      }
+
+      p{
+        font-size: 18px;
+        font-weight: bold;
+        text-align: center;
+      }
+
+      .redirect-container{
+        padding-top: 20px;
       }
     }
-  }
-}
 
-@media (min-width: 1200px){
-  body{
-    &.auth{
-      .alerts{
-        .alert{
-          max-width: calc(50% - 15px);
-        }
-      }
-    }
   }
 }

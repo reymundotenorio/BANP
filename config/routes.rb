@@ -29,6 +29,12 @@ Rails.application.routes.draw do
     # Confirmations
     get '/confirm-account' => 'authentication/confirmations#new', as: 'confirm_account'
     get '/confirm-employee-account/:confirmation_token' => 'authentication/confirmations#show', as: 'confirm_employee_account'
+    post "/resend_confirmation" => "authentication/confirmations#send_confirmation_email", as: "resend_confirmation"
+
+    # Unlocks
+    get '/unlock-account' => 'authentication/unlocks#new', as: 'unlock_account'
+    get '/unlock-employee-account/:unlock_token' => 'authentication/unlocks#show', as: 'unlock_employee_account'
+    post "/resend_unlock" => "authentication/unlocks#send_unlock_email", as: "resend_unlock"
 
     # Passwords
     get "/reset-password" => "authentication/passwords#new", as: "reset_password"

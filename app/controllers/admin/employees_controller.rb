@@ -12,7 +12,7 @@ class Admin::EmployeesController < ApplicationController
   # End Sync model DSL
 
   # Authentication
-   before_action :require_employee, only: [:index, :show, :new, :create, :edit, :update, :active, :deactive, :history]
+  before_action :require_employee, only: [:index, :show, :new, :create, :edit, :update, :active, :deactive, :history]
   # End Authentication
 
   # /employees
@@ -92,19 +92,22 @@ class Admin::EmployeesController < ApplicationController
     # Adding default values on blank? (nil or "")
     # @employee[:state] = true if @employee[:state].blank?
 
+    # If record was saved
     if @employee.save
-    send_confirmation_email
-      redirect_to [:admin, @employee], notice: t("alerts.created", model: t("activerecord.models.employee"))
+      send_confirmation_email
+      redirect_to [:admin, @employee], notice: "#{t('alerts.updated', model: t('activerecord.models.employee'))}. #{t('views.authentication.account_not_confirmed', email: @employee.email)}"
+
+      # If record was not saved
     else
       render :new
     end
   end
-    
+
   # Send unlock email to the user
   def send_confirmation_email
     # Generate random token
     generate_token
-    
+
     @employee.update_attribute(:confirmation_sent, true)
     @employee.update_attribute(:confirmation_token, @token)
 
@@ -115,15 +118,16 @@ class Admin::EmployeesController < ApplicationController
   # Generate token
   def generate_token
     loop do
-    @token = SecureRandom.hex(15)
-    break @token unless Employee.where(confirmation_token: @token).exists?
-    end    
+      @token = SecureRandom.hex(15)
+      break @token unless Employee.where(confirmation_token: @token).exists?
+    end
   end
 
   # Update
   def update
     if @employee.update (employee_params)
       redirect_to [:admin, @employee], notice: t("alerts.updated", model: t("activerecord.models.employee"))
+
     else
       render :edit
     end
@@ -133,6 +137,7 @@ class Admin::EmployeesController < ApplicationController
   def active
     if @employee.update_attributes(state: true)
       redirect_to_back(true, admin_employees_path, "employee", "success")
+      
     else
       redirect_to_back(true, admin_employees_path, "employee", "error")
     end
@@ -142,11 +147,11 @@ class Admin::EmployeesController < ApplicationController
   def deactive
     if @employee.update_attributes(state: false)
       redirect_to_back(false, admin_employees_path, "employee", "success")
+
     else
       redirect_to_back(false, admin_employees_path, "employee", "error")
     end
   end
-
 
   private
 

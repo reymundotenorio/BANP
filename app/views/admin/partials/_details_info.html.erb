@@ -22,21 +22,23 @@
     <div class="row no-margin">
       <div class="col-xs-12 no-padding">
         <div class="detail-info <%= resource.state %>">
-
           <% attributes.each do |attribute| %>
+
           <div class="info">
             <p class="title"><b><%= t("activerecord.attributes.#{resource}.#{attribute}") %></b></p>
 
             <% if attribute == "state" %>
             <p><%= resource["#{attribute}"] ? t("views.show.enabled") : t("views.show.disabled") %></p>
+
             <% elsif attribute == "confirmed" %>
             <p><%= resource["#{attribute}"] ? t("views.show.confirmed") : t("views.show.not_confirmed") %></p>
+
             <% else %>
             <p><%= resource["#{attribute}"] %></p>
             <% end %>
           </div>
-          <% end %>
 
+          <% end %>
         </div>
       </div>
     </div>

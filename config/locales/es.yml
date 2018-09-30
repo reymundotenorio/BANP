@@ -146,8 +146,17 @@ es:
       signed_out_correctly: "Has cerrado la sesión correctamente"
       successfully_confirmed: "Su cuenta %{email} ha sido confirmada con éxito"
       account_confirmed: "Su cuenta %{email} está confirmada"
-      account_disabled: "Tu cuenta %{email} está deshabilitada. Contacte al administrador para resolver este problema"
-      token_not_found: "El código de confirmación % {token} no se ha encontrado"
+      successfully_confirmed: "Su cuenta %{email} ha sido desbloqueada con éxito"
+      account_confirmed: "Su cuenta %{email} está desbloqueada"
+      account_not_confirmed: "Su cuenta %{email} no está confirmada, revise su correo electrónico con las instrucciones para confirmar su cuenta"
+      account_not_confirmed_resend: "Su cuenta %{email} no está confirmada"
+      account_disabled: "Su cuenta %{email} está deshabilitada. Contacte al administrador para resolver este problema"
+      account_locked: "Su cuenta %{email} ha sido bloqueada, revise su correo electronico con las instrucciones de desbloqueo"
+      token_not_found: "El código de confirmación %{token} no se ha encontrado"
+      email_not_found: "El correo electronico %{email} no se ha encontrado"
+      resend_confirmation_instructions: "Si desea volver a enviar las instrucciones para confirmar su cuenta, ingrese la dirección de correo electrónico que registró"
+      resend_unlock_instructions: "Si desea volver a enviar las instrucciones para desbloquear su cuenta, ingrese la dirección de correo electrónico que registró"
+      resend_instructions: "Reenviar"
     errors:
       page_empty: "Esta página está vacía"
       back_to_home: "Regresar a Inicio"
@@ -159,7 +168,7 @@ es:
       unlock_account_button_link: "Puede desbloquear su cuenta haciendo clic en el botón o a través del enlace"
       unlock_account_link: "Puede desbloquear su cuenta haciendo clic en el siguiente enlace"
       confirm_account: "Confirmar cuenta"
-      unlock_account: "Desbloquear cuenta"      
+      unlock_account: "Desbloquear cuenta"
 
 # Rails default
 

@@ -1,7 +1,3 @@
-<!-- PDF resource -->
-<% #employee = resource %>
-<!-- End PDF resource -->
-
 <!-- Details PDF -->
 <section class="details details-pdf">
   <div class="container">
@@ -12,7 +8,7 @@
       </div>
 
       <% attributes = ["first_name", "last_name", "email" ,"phone", "role", "sign_in_count", "current_sign_in_at", "last_sign_in_at", "current_sign_in_ip", "last_sign_in_ip", "confirmed", "state"] %>
-      
+
       <%= render partial: "admin/partials/details_info", locals: {resource: resource, attributes: attributes} %>
     </div>
     <!-- End Information -->

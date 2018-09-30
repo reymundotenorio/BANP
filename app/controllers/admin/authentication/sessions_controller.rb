@@ -5,12 +5,20 @@ class Admin::Authentication::SessionsController < ApplicationController
 
   # /sign-in
   def new
+    hide_message = params[:hide_message]
+
+    if hide_message
+      @hide_message = true
+
+    else
+      @hide_message = false
+    end
   end
 
   # Sign in
   def create
     @employee = Employee.find_by(email: params[:sign_in][:email])
-    max_failed_attempts = 5
+    max_failed_attempts = 4
 
     # If user exists
     if @employee
@@ -18,37 +26,44 @@ class Admin::Authentication::SessionsController < ApplicationController
       # If user is enabled
       if @employee.state
 
-        # If user is locked
-        if user_locked?(max_failed_attempts)
-          # Redirect to unlock_account
-          reset_attemps
-          flash[:alert] = "Su cuenta ha sido bloqueada, revise su correo electronico con las instrucciones de desbloqueo"
-          render :new
+        # If user is confirmed
+        if @employee.confirmed
 
-          # If user is not locked
-        else
-
-          # If user exist and password matches
-          if @employee && @employee.authenticate(params[:sign_in][:password])
-            session[:employee_id] = @employee.id
-            session_info
-            reset_attemps
-
-            redirect_to admin_employees_path, notice: "#{t('views.authentication.signed_in_correctly', first_name: @employee.first_name, last_name: @employee.last_name)}"
-
-            # If user exist but the password doesn't match
-          else
-            remaining_attempts = max_failed_attempts - increment_attempts
-            remaining_attempts += 1
-
-            flash[:alert] = "#{t('views.authentication.incorrect_pwd')}, #{remaining_attempts} #{remaining_attempts == 1 ? t('views.authentication.remaining_attempt') : t('views.authentication.remaining_attempts')}"
+          # If user is locked
+          if user_locked?(max_failed_attempts)
+            # Redirect to unlock_account
+            # reset_attemps
+            flash[:alert] = t("views.authentication.account_locked", email: @employee.email)
             render :new
+
+            # If user is not locked
+          else
+            # If user exist and password matches
+            if @employee && @employee.authenticate(params[:sign_in][:password])
+              session[:employee_id] = @employee.id
+              session_info
+              reset_attemps
+
+              redirect_to admin_employees_path, notice: t("views.authentication.signed_in_correctly", first_name: @employee.first_name, last_name: @employee.last_name)
+
+              # If user exist but the password doesn't match
+            else
+              remaining_attempts = max_failed_attempts - increment_attempts
+              remaining_attempts += 1
+
+              flash[:alert] = "#{t('views.authentication.incorrect_pwd')}, #{remaining_attempts} #{remaining_attempts == 1 ? t('views.authentication.remaining_attempt') : t('views.authentication.remaining_attempts')}"
+              render :new
+            end
           end
+
+          # If user is not confirmed
+        else
+          redirect_to admin_confirm_account_path(email: @employee.email), alert: t("views.authentication.account_not_confirmed_resend", email: @employee.email)
         end
 
         # If user is disabled
       else
-        flash[:alert] = "Su cuenta ha sido desactivada. Comuníquese con el Administrador para solucionar este inconveniente"
+        flash[:alert] = t("views.authentication.account_disabled", email: @employee.email)
         render :new
       end
       # If user doesn't exist
@@ -91,7 +106,7 @@ class Admin::Authentication::SessionsController < ApplicationController
   end
 
   # Generate token
-  def generate_tokenuse
+  def generate_token
     loop do
       @token = SecureRandom.hex(15)
       break @token unless Employee.where(unlock_token: @token).exists?
@@ -107,12 +122,14 @@ class Admin::Authentication::SessionsController < ApplicationController
 
     if @employee.last_sign_in_at.blank?
       @employee.update_attribute(:last_sign_in_at, Time.zone.now)
+
     else
       @employee.update_attribute(:last_sign_in_at, @employee.current_sign_in_at)
     end
 
     if @employee.last_sign_in_ip.blank?
       @employee.update_attribute(:last_sign_in_ip, request.remote_ip)
+
     else
       @employee.update_attribute(:last_sign_in_ip, @employee.current_sign_in_ip)
     end

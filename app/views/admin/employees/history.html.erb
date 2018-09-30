@@ -8,6 +8,7 @@
         <h1 class="false"><i class="fas fa-history"></i> <%= t("views.history.history") %></h1>
         <!-- End Heading -->
       </div>
+
       <div class="col-xs-12 col-lg-2">
         <!-- Export button-->
         <div class="btn-new-container">
@@ -19,7 +20,6 @@
         </div>
         <!-- End Export button-->
       </div>
-
     </div>
     <!-- End Title -->
 
@@ -28,6 +28,10 @@
       <div class="col-xs-12 hidden-xs">
         <div class="breadcrumb-container">
           <ol class="breadcrumb">
+            <li>
+              <%= link_to (admin_root_path) do %><i class="fas fa-tachometer-alt"></i> <span><%= t("header.navigation.dashboard") %></span><% end %>
+            </li>
+
             <li>
               <%= link_to (admin_employees_path) do %><i class="fas fa-list-alt"></i> <span><%= t("header.navigation.employees") %></span><% end %>
             </li>
@@ -54,7 +58,6 @@
           <div class="row no-margin">
             <!-- Timeline -->
             <div class="about-timeline col-xs-12 no-padding">
-
               <!-- Timeline First -->
               <div class="timeline-info first-last-row">
                 <!-- Bullet -->
@@ -110,7 +113,6 @@
                 <!-- Timeline content -->
                 <div class="timeline-content no-padding">
                   <div class="timeline-box <%= audit.action == "create" ? "new" : "edit" %>">
-
                     <div class="detail-info">
                       <div class="">
                         <p class="title datetime"><b><%= I18n.localize audit.created_at %></b></p>

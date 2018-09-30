@@ -7,7 +7,7 @@
         <div class="material-card shadow-card true">
           <div class="row no-margin">
             <div class="col-xs-12 no-padding auth-alerts">
-              <% if flash.any? && !@hide_message%>
+              <% if flash.any? && !@hide_message %>
 
               <div class="col-xs-12 no-padding auth-alerts">
                 <% if !flash[:alert].blank? %>
@@ -18,17 +18,17 @@
                 <strong><p class="flash-notice"><i class="fas fa-info-circle"></i> <%= flash[:notice] %></p></strong>
                 <% end %>
               </div>
-
+              
               <% end %>
             </div>
 
             <div class="col-xs-12 no-padding form">
-              <h1><%= t('views.authentication.resend_confirmation_instructions') %></h1>
+              <h1><%= t('views.authentication.resend_unlock_instructions') %></h1>
             </div>
 
             <div class="col-xs-12 no-padding form">
               <!-- Form -->
-              <%= form_for :resend_confirmation, url: admin_resend_confirmation_path, html: {class: "sign-in-form", autocomplete: "on"} do |f| %>
+              <%= form_for :resend_unlock, url: admin_resend_unlock_path, html: {class: "sign-in-form", autocomplete: "on"} do |f| %>
               <div class="col-xs-12 no-padding">
                 <div class="form-info">
 

@@ -8,11 +8,13 @@
         <h1 class="<%= @employee.state %>"><i class="fas fa-edit"></i> <%= t("views.edit.edit") %></h1>
         <!-- End Heading -->
       </div>
+
       <div class="col-xs-12 col-lg-2">
         <!-- Export button-->
         <div class="btn-new-container">
           <% if(@employee.state) %>
           <%= link_to (admin_deactive_employee_path(@employee)), method: :patch, class: "btn btn-general" do %><i class="fas fa-times"></i> <span><%= t("views.edit.disable") %></span><% end %>
+
           <% else %>
           <%= link_to (admin_active_employee_path(@employee)), method: :patch, class: "btn btn-general" do %><i class="fas fa-check"></i> <span><%= t("views.edit.enable") %></span><% end %>
           <% end %>
@@ -27,6 +29,10 @@
       <div class="col-xs-12 hidden-xs">
         <div class="breadcrumb-container">
           <ol class="breadcrumb">
+            <li>
+              <%= link_to (admin_root_path) do %><i class="fas fa-tachometer-alt"></i> <span><%= t("header.navigation.dashboard") %></span><% end %>
+            </li>
+
             <li>
               <%= link_to (admin_employees_path) do %><i class="fas fa-list-alt"></i> <span><%= t("header.navigation.employees") %></span><% end %>
             </li>

@@ -2,23 +2,24 @@ class ApplicationController < ActionController::Base
   # Always run set_lang
   before_action :set_lang
   # End Always run set_lang
-  
-  #Helper for the view
-      helper_method :current_user
 
-    # Current employee
-    def current_employee
-        @current_employee ||= Employee.find(session[:employee_id]) if session[:employee_id]
-    end
-    
-        # Require employee
-    def require_employee
-        redirect_to admin_sign_in_path, alert: 'Necesita iniciar sesión para continuar' unless current_employee
-    end
+  #Helper for the view
+  helper_method :current_user
+
+  # Current employee
+  def current_employee
+    @current_employee ||= Employee.find(session[:employee_id]) if session[:employee_id]
+  end
+
+  # Require employee
+  def require_employee
+    redirect_to admin_sign_in_path, alert: 'Necesita iniciar sesión para continuar' unless current_employee
+  end
 
   # Domain global variable
   if Rails.env == "development"
     $banp_domain = "http://localhost:3000/"
+
   else
     $banp_domain = "http://www.betterandnice.com/"
   end
@@ -28,6 +29,7 @@ class ApplicationController < ActionController::Base
   def set_lang
     if cookies[:banp_lang] && I18n.available_locales.include?(cookies[:banp_lang].to_sym)
       current_lang = cookies[:banp_lang].to_sym
+
     else
       current_lang = I18n.default_locale
       cookies.permanent[:banp_lang] = current_lang
@@ -42,6 +44,7 @@ class ApplicationController < ActionController::Base
     if state
       if type == "success"
         redirect_back fallback_location: path, notice: t("alerts.enabled", model: t("activerecord.models.#{resource}"))
+
       elsif type == "error"
         redirect_back fallback_location: path, alert: t("alerts.not_enabled", model: t("activerecord.models.#{resource}"))
       end
@@ -49,6 +52,7 @@ class ApplicationController < ActionController::Base
     else
       if type == "success"
         redirect_back fallback_location: path, notice: t("alerts.disabled", model: t("activerecord.models.#{resource}"))
+
       elsif type == "error"
         redirect_back fallback_location: path, alert: t("alerts.not_disabled", model: t("activerecord.models.#{resource}"))
       end

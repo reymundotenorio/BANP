@@ -1,6 +1,8 @@
 <tr class="<%= resource.state %>">
   <td><p><%= resource.id %></p></td>
   <% attributes.each do |attribute| %>
+
   <td><p><%= resource["#{attribute}"] %></p></td>
+  
   <% end %>
 </tr>
