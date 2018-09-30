@@ -31,10 +31,7 @@ class Admin::Authentication::SessionsController < ApplicationController
 
           # If user is locked
           if user_locked?(max_failed_attempts)
-            # Redirect to unlock_account
-            # reset_attemps
-            flash[:alert] = t("views.authentication.account_locked", email: @employee.email)
-            render :new
+            redirect_to admin_unlock_account_path(email: @employee.email), alert: t("views.authentication.account_locked", email: @employee.email)
 
             # If user is not locked
           else
