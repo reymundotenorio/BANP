@@ -8,7 +8,7 @@ class Admin::EmployeesController < ApplicationController
   # End Find employees with Friendly_ID
 
   # Sync model DSL
-  enable_sync only: [:create, :update, :active, :deactive]
+  enable_sync only: [:create, :update, :active, :deactive, :send_confirmation_email]
   # End Sync model DSL
 
   # Authentication
@@ -137,7 +137,7 @@ class Admin::EmployeesController < ApplicationController
   def active
     if @employee.update_attributes(state: true)
       redirect_to_back(true, admin_employees_path, "employee", "success")
-      
+
     else
       redirect_to_back(true, admin_employees_path, "employee", "error")
     end

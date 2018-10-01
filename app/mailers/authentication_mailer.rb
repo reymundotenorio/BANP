@@ -26,9 +26,12 @@ class AuthenticationMailer < ApplicationMailer
     end
   end
 
-  def reset_password_instructions(user, token)
+  def reset_password_instructions(user, token, locale)
     @user = user
     @token = token
-    mail(to: @user.email, subject: "Instrucciones para reestablecer contraseña")
+
+    I18n.with_locale(locale) do
+      mail(to: @user.email, subject: "BANP - #{I18n.t('views.mailer.reset_password')}")
+    end
   end
 end

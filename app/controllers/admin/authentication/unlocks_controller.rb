@@ -4,7 +4,7 @@ class Admin::Authentication::UnlocksController < ApplicationController
   # End Authentication layout
 
   def new
-    @email = params[:email]
+    @email = params[:email].strip.downcase!
     hide_message = params[:hide_message]
 
     if hide_message
@@ -43,11 +43,11 @@ class Admin::Authentication::UnlocksController < ApplicationController
             # Render Sync with external controller
             sync_update @employee
 
-            flash[:notice] = "#{t('views.authentication.successfully_unlocked', email: @employee.email)}"
+            flash[:notice] = t('views.authentication.successfully_unlocked', email: @employee.email)
 
             # If user has not exceeded the max of failed attemps
           else
-            flash[:notice] = "#{t('views.authentication.account_unlocked', email: @employee.email)}"
+            flash[:notice] = t('views.authentication.account_unlocked', email: @employee.email)
           end
 
           # If user is not confirmed
@@ -57,13 +57,13 @@ class Admin::Authentication::UnlocksController < ApplicationController
 
         # If user is disabled
       else
-        flash[:alert] = "#{t('views.authentication.account_disabled')}"
+        flash[:alert] = t('views.authentication.account_disabled')
         @not_found = true
       end
 
       # If token has not been found
     else
-      flash[:alert] = "#{t('views.authentication.token_not_found', token: @token)}"
+      flash[:alert] = t('views.authentication.token_not_found', token: @token)
       @not_found = true
     end
 
@@ -81,13 +81,13 @@ class Admin::Authentication::UnlocksController < ApplicationController
 
         # If user is disabled
       else
-        flash[:alert] = "#{t('views.authentication.account_disabled')}"
+        flash[:alert] = t('views.authentication.account_disabled')
         render :new
       end
 
       # If email has not been found
     else
-      flash[:alert] = "#{t('views.authentication.email_not_found', email: email)}"
+      flash[:alert] = t('views.authentication.email_not_found', email: email)
       render :new
     end
 
@@ -96,6 +96,9 @@ class Admin::Authentication::UnlocksController < ApplicationController
 
     @employee.update_attribute(:unlock_sent, true)
     @employee.update_attribute(:unlock_token, @token)
+
+    # Render Sync with external controller
+    sync_update @employee
 
     # Send email
     AuthenticationMailer.unlock_instructions(@employee, @token, I18n.locale).deliver

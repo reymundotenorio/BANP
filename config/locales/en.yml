@@ -167,8 +167,11 @@ en:
       confirm_account_link: "You can confirm your account by clicking on the following link"
       unlock_account_button_link: "You can unlock your account by clicking on the button or through the link"
       unlock_account_link: "You can unlock your account by clicking on the following link"
+      reset_password_button_link: "You can reset your password by clicking on the button or through the link"
+      reset_password_link: "You can reset your password by clicking on the following link"
       confirm_account: "Confirm account"
       unlock_account: "Unlock account"
+      reset_password: "Reset your password"
 
 
 # Rails Default

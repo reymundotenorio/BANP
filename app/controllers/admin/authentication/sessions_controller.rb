@@ -98,6 +98,9 @@ class Admin::Authentication::SessionsController < ApplicationController
     @employee.update_attribute(:unlock_sent, true)
     @employee.update_attribute(:unlock_token, @token)
 
+    # Render Sync with external controller
+    sync_update @employee
+
     # Send email
     AuthenticationMailer.unlock_instructions(@employee, @token, I18n.locale).deliver
   end
@@ -142,6 +145,9 @@ class Admin::Authentication::SessionsController < ApplicationController
   def reset_attemps
     @employee.update_attribute(:failed_attempts, 0)
     @employee.update_attribute(:unlock_sent, false)
+
+    # Render Sync with external controller
+    sync_update @employee
   end
 
   # Increment failed attemps count
@@ -150,6 +156,9 @@ class Admin::Authentication::SessionsController < ApplicationController
     failed_attempts += 1
 
     @employee.update_attribute(:failed_attempts, failed_attempts)
+
+    # Render Sync with external controller
+    sync_update @employee
 
     failed_attempts
   end
