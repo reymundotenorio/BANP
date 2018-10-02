@@ -64,6 +64,11 @@ class Admin::Authentication::PasswordsController < ApplicationController
 
     render :show
   end
+  
+ def update_password
+  @employee = FIND BY
+@employee.update(employee_params)
+ end
 
   # Send unlock email to the user
   def send_unlock_email
@@ -109,4 +114,10 @@ class Admin::Authentication::PasswordsController < ApplicationController
       break @token unless Employee.where(reset_password_token: @token).exists?
     end
   end
+  
+  private
+  
+  def employee_params
+  params.require(:employee).permit(:password, :password_confirmation)
+end
 end
