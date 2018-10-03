@@ -17,7 +17,7 @@ class Admin::Authentication::SessionsController < ApplicationController
 
   # Sign in
   def create
-    @employee = Employee.find_by(email: params[:sign_in][:email])
+    @employee = Employee.find_by(email: params[:sign_in][:email].strip.downcase!)
     max_failed_attempts = 4
 
     # If user exists
@@ -163,7 +163,7 @@ class Admin::Authentication::SessionsController < ApplicationController
     failed_attempts
   end
 
-  # Sign out
+  # /sign-out
   def destroy
     session[:employee_id] = nil
     flash[:notice] = t("views.authentication.signed_out_correctly")

@@ -157,6 +157,7 @@ en:
       resend_confirmation_instructions: "If you would like to resend the instructions for confirming your account, enter the email address you registered to"
       resend_unlock_instructions: "If you would like to resend the instructions for unlocking your account, enter the email address you registered to"
       resend_instructions: "Resend"
+      email_sent: "An email has been sent to your account %{email} with the new instructions"
     errors:
       page_empty: "This page is empty"
       back_to_home: "Back to Home"

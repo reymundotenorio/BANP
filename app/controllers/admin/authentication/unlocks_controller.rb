@@ -3,8 +3,9 @@ class Admin::Authentication::UnlocksController < ApplicationController
   layout "admin/authentication"
   # End Authentication layout
 
+  # /unlock-employee-account
   def new
-    @email = params[:email].strip.downcase!
+    @email = params[:email]
     hide_message = params[:hide_message]
 
     if hide_message
@@ -15,7 +16,7 @@ class Admin::Authentication::UnlocksController < ApplicationController
     end
 
     if @email
-
+      @email.strip.downcase!
     else
       @email = ""
     end
@@ -53,6 +54,7 @@ class Admin::Authentication::UnlocksController < ApplicationController
           # If user is not confirmed
         else
           redirect_to admin_confirm_account_path(email: @employee.email), alert: t("views.authentication.account_not_confirmed_resend", email: @employee.email)
+          return
         end
 
         # If user is disabled
@@ -74,7 +76,7 @@ class Admin::Authentication::UnlocksController < ApplicationController
   def send_unlock_email
 
     # If email has been found
-    if @employee = Employee.find_by(email: params[:resend_unlock][:email])
+    if @employee = Employee.find_by(email: params[:resend_unlock][:email].strip.downcase!)
 
       # If user is enabled
       if @employee.state
@@ -83,12 +85,14 @@ class Admin::Authentication::UnlocksController < ApplicationController
       else
         flash[:alert] = t('views.authentication.account_disabled')
         render :new
+        return
       end
 
       # If email has not been found
     else
-      flash[:alert] = t('views.authentication.email_not_found', email: email)
+      flash[:alert] = t('views.authentication.email_not_found', params[:resend_unlock][:email].strip.downcase!)
       render :new
+      return
     end
 
     # Generate random token
@@ -103,6 +107,7 @@ class Admin::Authentication::UnlocksController < ApplicationController
     # Send email
     AuthenticationMailer.unlock_instructions(@employee, @token, I18n.locale).deliver
 
+    flash[:notice] = t("views.authentication.email_sent", @employee.email)
     render :new
   end
 

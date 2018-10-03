@@ -157,6 +157,7 @@ es:
       resend_confirmation_instructions: "Si desea volver a enviar las instrucciones para confirmar su cuenta, ingrese la dirección de correo electrónico que registró"
       resend_unlock_instructions: "Si desea volver a enviar las instrucciones para desbloquear su cuenta, ingrese la dirección de correo electrónico que registró"
       resend_instructions: "Reenviar"
+      email_sent: "Se ha enviado un correo electrónico a su cuenta %{email} con las nuevas instrucciones"
     errors:
       page_empty: "Esta página está vacía"
       back_to_home: "Regresar a Inicio"

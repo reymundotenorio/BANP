@@ -29,19 +29,19 @@ Rails.application.routes.draw do
     # Confirmations
     get '/confirm-account' => 'authentication/confirmations#new', as: 'confirm_account'
     get '/confirm-employee-account/:confirmation_token' => 'authentication/confirmations#show', as: 'confirm_employee_account'
-    post "/resend-confirmation" => "authentication/confirmations#send_confirmation_email", as: "resend_confirmation"
+    post "/confirm-account" => "authentication/confirmations#send_confirmation_email", as: "resend_confirmation"
 
     # Unlocks
     get '/unlock-account' => 'authentication/unlocks#new', as: 'unlock_account'
     get '/unlock-employee-account/:unlock_token' => 'authentication/unlocks#show', as: 'unlock_employee_account'
-    post "/resend-unlock" => "authentication/unlocks#send_unlock_email", as: "resend_unlock"
+    post "/unlock-account" => "authentication/unlocks#send_unlock_email", as: "resend_unlock"
 
     # Passwords
     get "/reset-password" => "authentication/passwords#new", as: "reset_password"
-    get "/reset-employee-password/:reset_password_token" => "authentication/passwords#edit", as: "reset_employee_password"
-    post "/resend-reset-password" => "authentication/passwords#send_reset_password_email", as: "resend_reset_password"
+    get "/reset-employee-password/:reset_password_token" => "authentication/passwords#show", as: "reset_employee_password"
+    post "/reset-password" => "authentication/passwords#send_reset_password_email", as: "resend_reset_password"
 
-    patch "/update-password" => "authentication/passwords#update", as: "update_password"
+    patch "/update-password" => "authentication/passwords#update_password", as: "update_password"
 
     # End Authentications
 

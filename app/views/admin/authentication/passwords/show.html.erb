@@ -1,5 +1,5 @@
 <!-- Form -->
-<%= form_for [:admin, @employee],  html: {class: "", autocomplete: "off"} do |f| %>
+<%= form_for @employee, url: admin_update_password_path, html: {class: "", autocomplete: "off"} do |f| %>
 <section class="form">
   <div class="container">
     <!-- Information -->
@@ -15,7 +15,7 @@
           <div class="row no-margin">
             <div class="col-xs-12 no-padding">
               <div class="form-info">
-               
+
                 <!-- Only for new records -->
                   <!--  < if action_name == "new" || action_name == "create" > -->
 
@@ -30,7 +30,7 @@
                   <label><b><%= t("activerecord.attributes.employee.password_confirmation") %></b></label>
                   <div class="border-bottom"></div>
                 </div>
-                
+
                  <!--  < end > -->
                 <!-- End Only for new records -->
 

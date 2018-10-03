@@ -3,8 +3,9 @@ class Admin::Authentication::ConfirmationsController < ApplicationController
   layout "admin/authentication"
   # End Authentication layout
 
+  # /confirm-employee-account
   def new
-    @email = params[:email].strip.downcase!
+    @email = params[:email]
     hide_message = params[:hide_message]
 
     if hide_message
@@ -15,7 +16,7 @@ class Admin::Authentication::ConfirmationsController < ApplicationController
     end
 
     if @email
-
+      @email.strip.downcase!
     else
       @email = ""
     end
@@ -65,7 +66,7 @@ class Admin::Authentication::ConfirmationsController < ApplicationController
   def send_confirmation_email
 
     # If email has been found
-    if @employee = Employee.find_by(email: params[:resend_confirmation][:email])
+    if @employee = Employee.find_by(email: params[:resend_confirmation][:email].strip.downcase!)
 
       # If user is enabled
       if @employee.state
@@ -74,12 +75,14 @@ class Admin::Authentication::ConfirmationsController < ApplicationController
       else
         flash[:alert] = t('views.authentication.account_disabled')
         render :new
+        return
       end
 
       # If email has not been found
     else
-      flash[:alert] = t('views.authentication.email_not_found', email: email)
+      flash[:alert] = t('views.authentication.email_not_found', email: params[:resend_confirmation][:email].strip.downcase!)
       render :new
+      return
     end
 
     # Generate random token
@@ -94,6 +97,7 @@ class Admin::Authentication::ConfirmationsController < ApplicationController
     # Send email
     AuthenticationMailer.confirmation_instructions(@employee, @token, I18n.locale).deliver
 
+    flash[:notice] = t("views.authentication.email_sent", @employee.email)
     render :new
   end
 
