@@ -69,6 +69,7 @@ class Admin::Authentication::UnlocksController < ApplicationController
       @not_found = true
     end
 
+    # REMOVE RENDER AND CREATE REDIRECTS TO NOTIFICATION PAGE
     render :show
   end
 

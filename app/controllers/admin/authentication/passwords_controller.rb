@@ -69,8 +69,8 @@ class Admin::Authentication::PasswordsController < ApplicationController
     render :show
   end
 
-  def update_password
-    if  @employee.update(employee_params)
+  def update_password(employee)
+    if employee.update(employee_params)
 
       redirect_to admin_sign_in_path, notice: "YES"
     else

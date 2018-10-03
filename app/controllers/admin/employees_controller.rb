@@ -86,7 +86,7 @@ class Admin::EmployeesController < ApplicationController
     @employee[:last_name].strip!
     @employee[:phone].strip!
     @employee[:role].strip!
-    @employee[:email].strip.downcase!
+    @employee[:email].strip!.downcase!
     # End Deleting blank spaces
 
     # Adding default values on blank? (nil or "")
@@ -125,7 +125,7 @@ class Admin::EmployeesController < ApplicationController
 
   # Update
   def update
-    if @employee.update (employee_params)
+    if @employee.update(employee_params)
       redirect_to [:admin, @employee], notice: t("alerts.updated", model: t("activerecord.models.employee"))
 
     else
