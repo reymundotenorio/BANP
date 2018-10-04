@@ -23,11 +23,11 @@
             <!-- End Messages -->
 
             <div class="col-xs-12 no-padding redirect-container">
-              <% if not_found %>
-              <p><%= link_to admin_confirm_account_path(hide_message: true), title: "t('views.authentication.resend_instructions')" do %><i class="fas fa-envelope"></i> <span><%= t("views.authentication.resend_instructions") %></span><% end %></p>
+              <% if found %>
+              <p><%= link_to admin_root_path(hide_message: true), title: "t('views.errors.back_to_home')" do %><i class="fas fa-undo-alt"></i> <span><%= t("views.errors.back_to_home") %></span><% end %></p>
 
               <% else %>
-              <p><%= link_to admin_root_path(hide_message: true), title: "t('views.errors.back_to_home')" do %><i class="fas fa-undo-alt"></i> <span><%= t("views.errors.back_to_home") %></span><% end %></p>
+              <p><%= link_to admin_confirm_account_path(hide_message: true), title: "t('views.authentication.resend_instructions')" do %><i class="fas fa-envelope"></i> <span><%= t("views.authentication.resend_instructions") %></span><% end %></p>
               <% end %>
             </div>
           </div>

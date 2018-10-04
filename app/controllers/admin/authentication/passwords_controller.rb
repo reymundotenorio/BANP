@@ -3,6 +3,10 @@ class Admin::Authentication::PasswordsController < ApplicationController
   layout "admin/authentication"
   # End Authentication layout
 
+  # Find employees with Find by Token
+  before_action :set_employee, only: [:update_password]
+  # End Find employees with Find by Token
+
   # /resend-reset-password
   def new
     @email = params[:email]
@@ -26,7 +30,6 @@ class Admin::Authentication::PasswordsController < ApplicationController
   # /resend-reset-password/:reset_password_token
   def show
     @token = params[:reset_password_token]
-    @not_found = false;
     max_failed_attempts = 4
 
     # If token has been found
@@ -45,7 +48,8 @@ class Admin::Authentication::PasswordsController < ApplicationController
 
             # If user has not exceeded the max of failed attemps
           else
-            #show update password form
+
+            # Display password form
           end
 
           # If user is not confirmed
@@ -56,25 +60,30 @@ class Admin::Authentication::PasswordsController < ApplicationController
 
         # If user is disabled
       else
-        flash[:alert] = t('views.authentication.account_disabled')
-        @not_found = true
+        redirect_to admin_auth_notifications_path(found: false), alert: t('views.authentication.account_disabled')
+        return
       end
 
       # If token has not been found
     else
-      redirect_to admin_reset_password_path, alert: t('views.authentication.token_not_found', token: @token)
+      redirect_to redirect_to admin_auth_notifications_path, alert: t('views.authentication.token_not_found', token: @token)
       return
     end
-
-    render :show
   end
 
-  def update_password(employee)
-    if employee.update(employee_params)
+  # Set Employee
+  def set_employee
+    @employee = Employee.find_by(reset_password_token: @token)
+  rescue
+    redirect_to redirect_to admin_auth_notifications_path, alert: t('views.authentication.token_not_found')
+  end
 
-      redirect_to admin_sign_in_path, notice: "YES"
+  # Update password
+  def update_password
+    if @employee.update(employee_params)
+      redirect_to admin_auth_notifications_path, notice: "Contraseña actualizada"
     else
-      redirect_to admin_sign_in_path, alert: "NO"
+      render :show
     end
   end
 
@@ -91,15 +100,13 @@ class Admin::Authentication::PasswordsController < ApplicationController
 
         # If user is disabled
       else
-        flash[:alert] = t('views.authentication.account_disabled')
-        render :new
+        redirect_to admin_auth_notifications_path, alert: t('views.authentication.account_disabled')
         return
       end
 
       # If email has not been found
     else
-      flash[:alert] = t('views.authentication.email_not_found', email: params[:resend_reset_password][:email])
-      render :new
+      redirect_to admin_auth_notifications_path, alert: t('views.authentication.email_not_found', email: params[:resend_reset_password][:email])
       return
     end
 
@@ -115,8 +122,7 @@ class Admin::Authentication::PasswordsController < ApplicationController
     # Send email
     AuthenticationMailer.reset_password_instructions(@employee, @token, I18n.locale).deliver
 
-    flash[:notice] = t("views.authentication.email_sent", email: @employee.email)
-    render :new
+    redirect_to admin_auth_notifications_path, notice: t("views.authentication.email_sent", email: @employee.email)
   end
 
   # Generate token

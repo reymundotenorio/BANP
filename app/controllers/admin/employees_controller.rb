@@ -12,7 +12,7 @@ class Admin::EmployeesController < ApplicationController
   # End Sync model DSL
 
   # Authentication
-  before_action :require_employee, only: [:index, :show, :new, :create, :edit, :update, :active, :deactive, :history]
+  # before_action :require_employee, only: [:index, :show, :new, :create, :edit, :update, :active, :deactive, :history]
   # End Authentication
 
   # /employees
@@ -135,7 +135,7 @@ class Admin::EmployeesController < ApplicationController
 
   # Active
   def active
-    if @employee.update_attributes(state: true)
+    if @employee.update(state: true)
       redirect_to_back(true, admin_employees_path, "employee", "success")
 
     else
@@ -145,7 +145,7 @@ class Admin::EmployeesController < ApplicationController
 
   # Deactive
   def deactive
-    if @employee.update_attributes(state: false)
+    if @employee.update(state: false)
       redirect_to_back(false, admin_employees_path, "employee", "success")
 
     else

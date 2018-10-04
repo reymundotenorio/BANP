@@ -21,6 +21,9 @@ Rails.application.routes.draw do
 
     # Authentications
 
+    # Notifications
+    get "/authentication/notifications" => "authentication/notifications#new", as: "auth_notifications"
+
     # Sessions
     get "/sign-in" => "authentication/sessions#new", as: "sign_in"
     post "/sign-in" => "authentication/sessions#create", as: "sign_in_employee"
