@@ -3,10 +3,6 @@ class Admin::Authentication::PasswordsController < ApplicationController
   layout "admin/authentication"
   # End Authentication layout
 
-  # Find employees with Find by Token
-  before_action :set_employee, only: [:update_password]
-  # End Find employees with Find by Token
-
   # /resend-reset-password
   def new
     @email = params[:email]
@@ -21,7 +17,7 @@ class Admin::Authentication::PasswordsController < ApplicationController
     end
 
     if @email
-      @email.strip.downcase!
+      @email.strip!.downcase!
     else
       @email = ""
     end
@@ -44,7 +40,7 @@ class Admin::Authentication::PasswordsController < ApplicationController
       end
 
       # If user has exceeded the max of failed attemps
-      if employee_blocked?
+      if employee_locked?
         return
       end
     end
@@ -57,50 +53,15 @@ class Admin::Authentication::PasswordsController < ApplicationController
       return true
 
     else
-      redirect_to redirect_to admin_auth_notifications_path, alert: t('views.authentication.token_not_found',  token: @token)
+      redirect_to admin_auth_notifications_path, alert: t('views.authentication.token_not_found',  token: @token)
       return false
     end
   end
-
-  # Verify employee state
-  def employee_enabled?
-    if @employee.state
-      return true
-
-    else
-      redirect_to admin_auth_notifications_path(found: false), alert: t('views.authentication.account_disabled', email: @employee.email)
-      return false
-    end
-  end
-
-  # Verify employee confirmation
-  def employee_confirmed?
-    if @employee.confirmed
-      return true
-
-    else
-      redirect_to admin_confirm_account_path(email: @employee.email), alert: t("views.authentication.account_not_confirmed_resend", email: @employee.email)
-      return false
-    end
-  end
-
-  # Verify employee block status
-  def employee_blocked?
-    max_failed_attempts = 4
-
-    if @employee.failed_attempts  >= max_failed_attempts
-      redirect_to admin_unlock_account_path(email: @employee.email), alert: t('views.authentication.account_locked', email: @employee.email)
-      return true
-
-    else
-      return false
-    end
-  end
-
-
 
   # Update password
   def update_password
+    set_employee
+
     if @employee.update(employee_params)
       redirect_to admin_auth_notifications_path, notice: "Contraseña actualizada"
     else
@@ -110,11 +71,10 @@ class Admin::Authentication::PasswordsController < ApplicationController
 
   # Send reset email to the user
   def send_reset_password_email
-    # max_failed_attempts = 4
     # RESET FLASH
 
     # If email has been found
-    if @employee = Employee.find_by(email: params[:resend_reset_password][:email])
+    if @employee = Employee.find_by(email: params[:resend_reset_password][:email].strip!.downcase!)
       # If user is disabled
       if !employee_enabled?
         return
@@ -126,13 +86,13 @@ class Admin::Authentication::PasswordsController < ApplicationController
       end
 
       # If user has exceeded the max of failed attemps
-      if employee_blocked?
+      if employee_locked?
         return
       end
 
       # If email has not been found
     else
-      redirect_to admin_auth_notifications_path, alert: t('views.authentication.email_not_found', email: params[:resend_reset_password][:email])
+      redirect_to admin_auth_notifications_path, alert: t('views.authentication.email_not_found', email: params[:resend_reset_password][:email].strip!.downcase!)
       return
     end
 

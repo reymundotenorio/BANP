@@ -11,10 +11,49 @@ class ApplicationController < ActionController::Base
     @current_employee ||= Employee.find(session[:employee_id]) if session[:employee_id]
   end
 
+  # Employee methods
+
   # Require employee
   def require_employee
     redirect_to admin_sign_in_path, alert: 'Necesita iniciar sesión para continuar' unless current_employee
   end
+
+  # Verify employee state
+  def employee_enabled?
+    if @employee.state
+      return true
+
+    else
+      redirect_to admin_auth_notifications_path(found: false), alert: t('views.authentication.account_disabled', email: @employee.email)
+      return false
+    end
+  end
+
+  # Verify employee confirmation
+  def employee_confirmed?
+    if @employee.confirmed
+      return true
+
+    else
+      redirect_to admin_confirm_account_path(email: @employee.email), alert: t("views.authentication.account_not_confirmed_resend", email: @employee.email)
+      return false
+    end
+  end
+
+  # Verify employee block status
+  def employee_locked?
+    max_failed_attempts = 4
+
+    if @employee.failed_attempts  >= max_failed_attempts
+      redirect_to admin_unlock_account_path(email: @employee.email), alert: t('views.authentication.account_locked', email: @employee.email)
+      return true
+
+    else
+      return false
+    end
+  end
+
+  # End Employee methods
 
   # Domain global variable
   if Rails.env == "development"

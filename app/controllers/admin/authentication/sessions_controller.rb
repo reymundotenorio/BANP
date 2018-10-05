@@ -17,7 +17,7 @@ class Admin::Authentication::SessionsController < ApplicationController
 
   # Sign in
   def create
-    @employee = Employee.find_by(email: params[:sign_in][:email].strip.downcase!)
+    @employee = Employee.find_by(email: params[:sign_in][:email].strip!.downcase!)
     max_failed_attempts = 4
 
     # If user exists
@@ -41,7 +41,7 @@ class Admin::Authentication::SessionsController < ApplicationController
               session_info
               reset_attemps
 
-              redirect_to admin_employees_path, notice: t("views.authentication.signed_in_correctly", first_name: @employee.first_name, last_name: @employee.last_name)
+              redirect_to admin_root_path, notice: t("views.authentication.signed_in_correctly", first_name: @employee.first_name, last_name: @employee.last_name)
 
               # If user exist but the password doesn't match
             else

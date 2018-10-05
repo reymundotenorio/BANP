@@ -16,13 +16,13 @@ Rails.application.routes.draw do
   # Admin namespace
   namespace :admin do
     # Root
-    root "authentication/sessions#new"
+    root "authentication/employee#index"
     # End Root
 
     # Authentications
 
     # Notifications
-    get "/authentication/notifications" => "authentication/notifications#new", as: "auth_notifications"
+    get "/authentication/notifications" => "authentication/notifications#index", as: "auth_notifications"
 
     # Sessions
     get "/sign-in" => "authentication/sessions#new", as: "sign_in"

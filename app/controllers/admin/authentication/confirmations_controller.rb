@@ -16,7 +16,7 @@ class Admin::Authentication::ConfirmationsController < ApplicationController
     end
 
     if @email
-      @email.strip.downcase!
+      @email.strip!.downcase!
     else
       @email = ""
     end
@@ -26,6 +26,7 @@ class Admin::Authentication::ConfirmationsController < ApplicationController
   def show
     @token = params[:confirmation_token]
     @not_found = false;
+
 
     # If token has been found
     if @employee = Employee.find_by(confirmation_token: @token)
@@ -66,7 +67,7 @@ class Admin::Authentication::ConfirmationsController < ApplicationController
   def send_confirmation_email
 
     # If email has been found
-    if @employee = Employee.find_by(email: params[:resend_confirmation][:email].strip.downcase!)
+    if @employee = Employee.find_by(email: params[:resend_confirmation][:email].strip!.downcase!)
 
       # If user is enabled
       if @employee.state
@@ -80,7 +81,7 @@ class Admin::Authentication::ConfirmationsController < ApplicationController
 
       # If email has not been found
     else
-      flash[:alert] = t('views.authentication.email_not_found', email: params[:resend_confirmation][:email].strip.downcase!)
+      flash[:alert] = t('views.authentication.email_not_found', email: params[:resend_confirmation][:email].strip!.downcase!)
       render :new
       return
     end

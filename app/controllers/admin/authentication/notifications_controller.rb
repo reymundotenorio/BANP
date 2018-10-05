@@ -4,7 +4,7 @@ class Admin::Authentication::NotificationsController < ApplicationController
   # End Authentication layout
 
   # /authentication/notifications
-  def new
+  def index
     @found = params[:found]
 
     if @found
