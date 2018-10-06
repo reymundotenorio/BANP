@@ -7,14 +7,14 @@ class Admin::Authentication::PasswordsController < ApplicationController
   def new
     @email = params[:email]
 
-    hide_message = params[:hide_message]
-
-    if hide_message
-      @hide_message = true
-
-    else
-      @hide_message = false
-    end
+    # hide_message = params[:hide_message]
+    #
+    # if hide_message
+    #   @hide_message = true
+    #
+    # else
+    #   @hide_message = false
+    # end
 
     if @email
       @email.strip!.downcase!

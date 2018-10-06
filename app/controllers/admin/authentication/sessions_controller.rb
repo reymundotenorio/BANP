@@ -5,14 +5,14 @@ class Admin::Authentication::SessionsController < ApplicationController
 
   # /sign-in
   def new
-    hide_message = params[:hide_message]
-
-    if hide_message
-      @hide_message = true
-
-    else
-      @hide_message = false
-    end
+    # hide_message = params[:hide_message]
+    #
+    # if hide_message
+    #   @hide_message = true
+    #
+    # else
+    #   @hide_message = false
+    # end
   end
 
   # Sign in

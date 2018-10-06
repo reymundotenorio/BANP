@@ -8,12 +8,12 @@ class Admin::Authentication::ConfirmationsController < ApplicationController
     @email = params[:email]
     hide_message = params[:hide_message]
 
-    if hide_message
-      @hide_message = true
-
-    else
-      @hide_message = false
-    end
+    # if hide_message
+    #   @hide_message = true
+    #
+    # else
+    #   @hide_message = false
+    # end
 
     if @email
       @email.strip!.downcase!

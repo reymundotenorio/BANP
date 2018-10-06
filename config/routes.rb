@@ -16,7 +16,7 @@ Rails.application.routes.draw do
   # Admin namespace
   namespace :admin do
     # Root
-    root "authentication/employee#index"
+    root "employees#index"
     # End Root
 
     # Authentications
