@@ -39,7 +39,6 @@ class Employee < ApplicationRecord
 
   ## End Friendly_ID
 
-
   ## Validations
 
   # Uniqueness validation

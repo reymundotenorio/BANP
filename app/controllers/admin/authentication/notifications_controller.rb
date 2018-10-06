@@ -5,11 +5,7 @@ class Admin::Authentication::NotificationsController < ApplicationController
 
   # /authentication/notifications
   def index
-    @found = params[:found]
-
-    if @found
-    else
-      @found = true
-    end
+    @source = params[:source]
+    @source = "not-found" unless @source
   end
 end

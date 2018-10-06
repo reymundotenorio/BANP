@@ -30,22 +30,21 @@ class ApplicationController < ActionController::Base
   end
 
   # Verify employee confirmation
-  def employee_confirmed?
+  def employee_confirmed?(redirect_resend = true)
     if @employee.confirmed
       return true
 
     else
-      redirect_to admin_confirm_account_path(email: @employee.email), alert: t("views.authentication.account_not_confirmed_resend", email: @employee.email)
+      redirect_to admin_confirm_account_path(email: @employee.email), alert: t("views.authentication.account_not_confirmed_resend", email: @employee.email) if redirect_resend
+
       return false
     end
   end
 
   # Verify employee block status
-  def employee_locked?
-    max_failed_attempts = 4
-
-    if @employee.failed_attempts  >= max_failed_attempts
-      redirect_to admin_unlock_account_path(email: @employee.email), alert: t('views.authentication.account_locked', email: @employee.email)
+  def employee_locked?(redirect_resend = true)
+    if @employee.failed_attempts  >= $max_failed_attempts
+      redirect_to admin_unlock_account_path(email: @employee.email), alert: t('views.authentication.account_locked_resend', email: @employee.email) if redirect_resend
       return true
 
     else
@@ -56,6 +55,8 @@ class ApplicationController < ActionController::Base
   # End Employee methods
 
   # Domain global variable
+  $max_failed_attempts = 4
+
   if Rails.env == "development"
     $banp_domain = "http://localhost:3000/"
 

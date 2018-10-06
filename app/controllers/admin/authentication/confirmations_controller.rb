@@ -5,92 +5,85 @@ class Admin::Authentication::ConfirmationsController < ApplicationController
 
   # /confirm-employee-account
   def new
-    @email = params[:email]
-    hide_message = params[:hide_message]
-
-    # if hide_message
-    #   @hide_message = true
-    #
-    # else
-    #   @hide_message = false
-    # end
-
-    if @email
-      @email.strip!.downcase!
-    else
-      @email = ""
-    end
+    @email = params[:email].strip.downcase
+    @email = "" unless @email
   end
 
   # /confirm-employee-account/:confirmation_token
   def show
     @token = params[:confirmation_token]
-    @not_found = false;
-
 
     # If token has been found
-    if @employee = Employee.find_by(confirmation_token: @token)
+    if set_employee
 
-      # If user is enabled
-      if @employee.state
-
-        # If user is not confirmed yet
-        if !@employee.confirmed
-          @employee.update_attribute(:confirmed, true)
-
-          # Render Sync with external controller
-          sync_update @employee
-
-          flash[:notice] = t('views.authentication.successfully_confirmed', email: @employee.email)
-
-          # If user is already confirmed
-        else
-          flash[:notice] = t('views.authentication.account_confirmed', email: @employee.email)
-        end
-
-        # If user is disabled
-      else
-        flash[:alert] = t('views.authentication.account_disabled')
-        @not_found = true
+      # If user is disabled
+      if !employee_enabled?
+        return
       end
 
-      # If token has not been found
-    else
-      flash[:alert] = t('views.authentication.token_not_found', token: @token)
-      @not_found = true
-    end
+      # If user has exceeded the max of failed attemps
+      if employee_locked?
+        return
+      end
 
-    render :show
+      # If user is not confirmed yet
+      if !employee_confirmed?(false)
+        @employee.update(confirmed: true)
+        @employee.update(confirmation_sent: false)
+
+        # Render Sync with external controller
+        sync_update @employee
+
+        redirect_to admin_auth_notifications_path, notice: t("views.authentication.successfully_confirmed", email: @employee.email)
+        return
+
+        # If user is already confirmed
+      else
+        redirect_to admin_auth_notifications_path, notice:  t("views.authentication.account_confirmed", email: @employee.email)
+        return
+      end
+    end
+    # End If token has been found
+  end
+
+  # Set Employee
+  def set_employee
+    if @employee = Employee.find_by(confirmation_token: @token)
+      return true
+
+    else
+      redirect_to admin_auth_notifications_path(source: "reset-password"), alert: t("views.authentication.token_not_found", token: @token)
+      return false
+    end
   end
 
   # Send unlock email to the user
   def send_confirmation_email
+    email = params[:resend_confirmation][:email].strip.downcase
 
     # If email has been found
-    if @employee = Employee.find_by(email: params[:resend_confirmation][:email].strip!.downcase!)
+    if @employee = Employee.find_by(email: email)
+      # If user is disabled
+      if !employee_enabled?
+        return
+      end
 
-      # If user is enabled
-      if @employee.state
-
-        # If user is disabled
-      else
-        flash[:alert] = t('views.authentication.account_disabled')
-        render :new
+      # If user has exceeded the max of failed attemps
+      if employee_locked?
         return
       end
 
       # If email has not been found
     else
-      flash[:alert] = t('views.authentication.email_not_found', email: params[:resend_confirmation][:email].strip!.downcase!)
-      render :new
+      redirect_to admin_auth_notifications_path(source: "confirmation"), alert: t("views.authentication.email_not_found", email: email)
       return
     end
 
     # Generate random token
     generate_token
 
-    @employee.update_attribute(:confirmation_sent, true)
-    @employee.update_attribute(:confirmation_token, @token)
+    @employee.update(confirmation_sent: true)
+    @employee.update(confirmation_token: @token)
 
     # Render Sync with external controller
     sync_update @employee
@@ -98,7 +91,7 @@ class Admin::Authentication::ConfirmationsController < ApplicationController
     # Send email
     AuthenticationMailer.confirmation_instructions(@employee, @token, I18n.locale).deliver
 
-    flash[:notice] = t("views.authentication.email_sent", @employee.email)
+    flash[:notice] = t("views.authentication.email_sent", email: @employee.email)
     render :new
   end
 

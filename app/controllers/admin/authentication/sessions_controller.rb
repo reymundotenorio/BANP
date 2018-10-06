@@ -5,92 +5,68 @@ class Admin::Authentication::SessionsController < ApplicationController
 
   # /sign-in
   def new
-    # hide_message = params[:hide_message]
-    #
-    # if hide_message
-    #   @hide_message = true
-    #
-    # else
-    #   @hide_message = false
-    # end
   end
 
   # Sign in
   def create
-    @employee = Employee.find_by(email: params[:sign_in][:email].strip!.downcase!)
-    max_failed_attempts = 4
-
-    # If user exists
-    if @employee
-
-      # If user is enabled
-      if @employee.state
-
-        # If user is confirmed
-        if @employee.confirmed
-
-          # If user is locked
-          if user_locked?(max_failed_attempts)
-            redirect_to admin_unlock_account_path(email: @employee.email), alert: t("views.authentication.account_locked", email: @employee.email)
-
-            # If user is not locked
-          else
-            # If user exist and password matches
-            if @employee && @employee.authenticate(params[:sign_in][:password])
-              session[:employee_id] = @employee.id
-              session_info
-              reset_attemps
-
-              redirect_to admin_root_path, notice: t("views.authentication.signed_in_correctly", first_name: @employee.first_name, last_name: @employee.last_name)
-
-              # If user exist but the password doesn't match
-            else
-              remaining_attempts = max_failed_attempts - increment_attempts
-              remaining_attempts += 1
-
-              flash[:alert] = "#{t('views.authentication.incorrect_pwd')}, #{remaining_attempts} #{remaining_attempts == 1 ? t('views.authentication.remaining_attempt') : t('views.authentication.remaining_attempts')}"
-              render :new
-            end
-          end
-
-          # If user is not confirmed
-        else
-          redirect_to admin_confirm_account_path(email: @employee.email), alert: t("views.authentication.account_not_confirmed_resend", email: @employee.email)
-        end
-
-        # If user is disabled
-      else
-        flash[:alert] = t("views.authentication.account_disabled", email: @employee.email)
-        render :new
+    # If employee exists
+    if set_employee
+      # If employee is disabled
+      if !employee_enabled?
+        return
       end
-      # If user doesn't exist
+
+      # If employee is not confirmed
+      if !employee_confirmed?
+        return
+      end
+
+      # If employee has exceeded the max of failed attemps
+      if employee_locked?(false)
+        # If unlock email has not been sent
+        send_unlock_email unless @employee.unlock_sent
+
+        redirect_to admin_auth_notifications_path(resource: "unlock"), alert: t("views.authentication.account_locked", email: @employee.email)
+        return
+
+        # If employee is not locked
+      else
+        # If employee exist and password matches
+        if @employee && @employee.authenticate(params[:sign_in][:password])
+          session[:employee_id] = @employee.id
+          session_info
+          reset_attemps
+
+          redirect_to admin_employees_path, notice: t("views.authentication.signed_in_correctly", first_name: @employee.first_name, last_name: @employee.last_name)
+
+          # If employee exist but the password doesn't match
+        else
+          remaining_attempts = $max_failed_attempts - increment_attempts
+          remaining_attempts += 1
+
+          flash[:alert] = "#{t('views.authentication.incorrect_pwd')}, #{remaining_attempts} #{remaining_attempts == 1 ? t('views.authentication.remaining_attempt') : t('views.authentication.remaining_attempts')}"
+          render :new
+        end
+      end
+    end
+    # End If email has been found
+  end
+
+  # Set Employee
+  def set_employee
+    email = params[:sign_in][:email].strip.downcase
+
+    if @employee = Employee.find_by(email: email)
+      return true
+
     else
       flash[:alert] = t("views.authentication.incorrect_user_pwd")
       render :new
+      return false
     end
   end
 
-  # Validate if user is locked
-  def user_locked?(max_failed_attempts)
-    # If exceeded the number of failed attempts
-    if @employee.failed_attempts >= max_failed_attempts
-      # If unlock email has been sent
-      if @employee.unlock_sent
-        true
-
-        # If unlock email has not been sent
-      else
-        send_unlock_email
-        true
-      end
-
-      # If not exceeded the number of failed attempts
-    else
-      false
-    end
-  end
-
-  # Send unlock email to the user
+  # Send unlock email to the employee
   def send_unlock_email
     # Generate random token
     generate_token

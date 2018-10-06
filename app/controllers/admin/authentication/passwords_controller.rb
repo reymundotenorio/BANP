@@ -5,22 +5,8 @@ class Admin::Authentication::PasswordsController < ApplicationController
 
   # /resend-reset-password
   def new
-    @email = params[:email]
-
-    # hide_message = params[:hide_message]
-    #
-    # if hide_message
-    #   @hide_message = true
-    #
-    # else
-    #   @hide_message = false
-    # end
-
-    if @email
-      @email.strip!.downcase!
-    else
-      @email = ""
-    end
+    @email = params[:email].strip.downcase
+    @email = "" unless @email
   end
 
   # /resend-reset-password/:reset_password_token
@@ -49,11 +35,11 @@ class Admin::Authentication::PasswordsController < ApplicationController
 
   # Set Employee
   def set_employee
-    if  @employee = Employee.find_by(reset_password_token: @token)
+    if @employee = Employee.find_by(reset_password_token: @token)
       return true
 
     else
-      redirect_to admin_auth_notifications_path, alert: t('views.authentication.token_not_found',  token: @token)
+      redirect_to admin_auth_notifications_path(source: "reset-password"), alert: t("views.authentication.token_not_found", token: @token)
       return false
     end
   end
@@ -63,6 +49,11 @@ class Admin::Authentication::PasswordsController < ApplicationController
     set_employee
 
     if @employee.update(employee_params)
+      @employee.update(reset_password_sent: false)
+
+      # Render Sync with external controller
+      sync_update @employee
+      
       redirect_to admin_auth_notifications_path, notice: "Contraseña actualizada"
     else
       render :show
@@ -71,10 +62,10 @@ class Admin::Authentication::PasswordsController < ApplicationController
 
   # Send reset email to the user
   def send_reset_password_email
-    # RESET FLASH
+    email = params[:resend_reset_password][:email].strip.downcase
 
     # If email has been found
-    if @employee = Employee.find_by(email: params[:resend_reset_password][:email].strip!.downcase!)
+    if @employee = Employee.find_by(email: email)
       # If user is disabled
       if !employee_enabled?
         return
@@ -92,15 +83,15 @@ class Admin::Authentication::PasswordsController < ApplicationController
 
       # If email has not been found
     else
-      redirect_to admin_auth_notifications_path, alert: t('views.authentication.email_not_found', email: params[:resend_reset_password][:email].strip!.downcase!)
+      redirect_to admin_auth_notifications_path(source: "reset-password"), alert: t("views.authentication.email_not_found", email: email)
       return
     end
 
     # Generate random token
     generate_token
 
-    @employee.update_attribute(:reset_password_sent, true)
-    @employee.update_attribute(:reset_password_token, @token)
+    @employee.update(reset_password_sent: true)
+    @employee.update(reset_password_token: @token)
 
     # Render Sync with external controller
     sync_update @employee

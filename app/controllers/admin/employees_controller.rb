@@ -82,11 +82,11 @@ class Admin::EmployeesController < ApplicationController
     @employee = Employee.new(employee_params)
 
     # Deleting blank spaces
-    @employee[:first_name].strip!
-    @employee[:last_name].strip!
-    @employee[:phone].strip!
-    @employee[:role].strip!
-    @employee[:email].strip!.downcase!
+    @employee[:first_name] = @employee[:first_name].strip
+    @employee[:last_name]= @employee[:last_name].strip
+    @employee[:phone] = @employee[:phone].strip
+    @employee[:role] = @employee[:role].strip
+    @employee[:email] =  @employee[:email].strip.downcase
     # End Deleting blank spaces
 
     # Adding default values on blank? (nil or "")
@@ -95,7 +95,7 @@ class Admin::EmployeesController < ApplicationController
     # If record was saved
     if @employee.save
       send_confirmation_email
-      redirect_to [:admin, @employee], notice: "#{t('alerts.updated', model: t('activerecord.models.employee'))}. #{t('views.authentication.account_not_confirmed', email: @employee.email)}"
+      redirect_to [:admin, @employee], notice: "#{t('alerts.created', model: t('activerecord.models.employee'))}. #{t('views.authentication.account_not_confirmed', email: @employee.email)}"
 
       # If record was not saved
     else
