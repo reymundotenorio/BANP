@@ -54,7 +54,8 @@ class Admin::Authentication::SessionsController < ApplicationController
 
   # Set Employee
   def set_employee
-    email = params[:sign_in][:email].strip.downcase
+    email = params[:sign_in][:email]
+    email = email.strip.downcase
 
     if @employee = Employee.find_by(email: email)
       return true
@@ -77,8 +78,11 @@ class Admin::Authentication::SessionsController < ApplicationController
     # Render Sync with external controller
     sync_update @employee
 
+    ip = request.remote_ip
+    location = Geocoder.search(ip).first.country
+
     # Send email
-    AuthenticationMailer.unlock_instructions(@employee, @token, I18n.locale).deliver
+    AuthenticationMailer.unlock_instructions(@employee, @token, I18n.locale, ip, location).deliver
   end
 
   # Generate token

@@ -5,8 +5,8 @@ class Admin::Authentication::ConfirmationsController < ApplicationController
 
   # /confirm-employee-account
   def new
-    @email = params[:email].strip.downcase
-    @email = "" unless @email
+    @email = params[:email]
+    @email = @email.blank? ? "" : @email.strip.downcase
   end
 
   # /confirm-employee-account/:confirmation_token
@@ -59,7 +59,8 @@ class Admin::Authentication::ConfirmationsController < ApplicationController
 
   # Send unlock email to the user
   def send_confirmation_email
-    email = params[:resend_confirmation][:email].strip.downcase
+    email = params[:resend_confirmation][:email]
+    email = email.strip.downcase
 
     # If email has been found
     if @employee = Employee.find_by(email: email)
@@ -88,8 +89,11 @@ class Admin::Authentication::ConfirmationsController < ApplicationController
     # Render Sync with external controller
     sync_update @employee
 
+    ip = request.remote_ip
+    location = Geocoder.search(ip).first.country
+
     # Send email
-    AuthenticationMailer.confirmation_instructions(@employee, @token, I18n.locale).deliver
+    AuthenticationMailer.confirmation_instructions(@employee, @token, I18n.locale, ip, location).deliver
 
     flash[:notice] = t("views.authentication.email_sent", email: @employee.email)
     render :new

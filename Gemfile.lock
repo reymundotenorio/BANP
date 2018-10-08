@@ -146,6 +146,7 @@ GEM
       thor (~> 0.14)
     friendly_id (5.2.4)
       activerecord (>= 4.0.0)
+    geocoder (1.5.0)
     globalid (0.4.1)
       activesupport (>= 4.2.0)
     http_parser.rb (0.6.0)
@@ -311,6 +312,7 @@ DEPENDENCIES
   faye (~> 1.2, >= 1.2.2)
   figaro (~> 1.1, >= 1.1.1)
   friendly_id (~> 5.2)
+  geocoder
   jbuilder (~> 2.5)
   jquery-rails
   listen (>= 3.0.5, < 3.2)

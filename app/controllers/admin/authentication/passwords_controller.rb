@@ -5,8 +5,8 @@ class Admin::Authentication::PasswordsController < ApplicationController
 
   # /resend-reset-password
   def new
-    @email = params[:email].strip.downcase
-    @email = "" unless @email
+    @email = params[:email]
+    @email = @email.blank? ? "" : @email.strip.downcase
   end
 
   # /resend-reset-password/:reset_password_token
@@ -46,6 +46,7 @@ class Admin::Authentication::PasswordsController < ApplicationController
 
   # Update password
   def update_password
+    @token = params[:token]
     set_employee
 
     if @employee.update(employee_params)
@@ -53,8 +54,10 @@ class Admin::Authentication::PasswordsController < ApplicationController
 
       # Render Sync with external controller
       sync_update @employee
-      
-      redirect_to admin_auth_notifications_path, notice: "Contraseña actualizada"
+
+      send_password_update_email
+
+      redirect_to admin_auth_notifications_path, notice: "Contraseña actualizada #{@employee.email}"
     else
       render :show
     end
@@ -62,7 +65,8 @@ class Admin::Authentication::PasswordsController < ApplicationController
 
   # Send reset email to the user
   def send_reset_password_email
-    email = params[:resend_reset_password][:email].strip.downcase
+    email = params[:resend_reset_password][:email]
+    email = email.strip.downcase
 
     # If email has been found
     if @employee = Employee.find_by(email: email)
@@ -96,10 +100,23 @@ class Admin::Authentication::PasswordsController < ApplicationController
     # Render Sync with external controller
     sync_update @employee
 
+    ip = request.remote_ip
+    location = Geocoder.search(ip).first.country
+
     # Send email
-    AuthenticationMailer.reset_password_instructions(@employee, @token, I18n.locale).deliver
+    AuthenticationMailer.reset_password_instructions(@employee, @token, I18n.locale, ip, location).deliver
 
     redirect_to admin_auth_notifications_path, notice: t("views.authentication.email_sent", email: @employee.email)
+  end
+
+  # Send notification email to the user
+  def send_password_update_email
+
+    ip = request.remote_ip
+    location = Geocoder.search(ip).first.country
+
+    # Send email
+    AuthenticationMailer.password_update(@employee, I18n.locale, ip, location).deliver
   end
 
   # Generate token

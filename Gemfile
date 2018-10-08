@@ -124,3 +124,6 @@ gem "bcrypt", "~> 3.1.7"
 
 # Device detector
 gem "device_detector"
+
+# Geocoder - IP location
+gem "geocoder"

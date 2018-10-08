@@ -157,9 +157,11 @@ en:
       email_not_found: "The email %{email} has not been found"
       resend_confirmation_instructions: "If you would like to resend the instructions for confirming your account, enter the email address you registered to"
       resend_unlock_instructions: "If you would like to resend the instructions for unlocking your account, enter the email address you registered to"
+      resend_reset_password_instructions: "If you would like to resend the instructions for reset you password, enter the email address you registered to"
       resend_instructions: "Resend instructions"
       resend: "Resend"
       email_sent: "An email has been sent to your account %{email} with the new instructions"
+      password_reset: "You have requested to reset the password for %{email}"
     errors:
       page_empty: "This page is empty"
       back_to_home: "Back to Home"
@@ -172,9 +174,14 @@ en:
       unlock_account_link: "You can unlock your account by clicking on the following link"
       reset_password_button_link: "You can reset your password by clicking on the button or through the link"
       reset_password_link: "You can reset your password by clicking on the following link"
+      password_updated: "Your password has been updated"
+      password_updated_button_link: "If you were not the person who changed the password of your account, you can request to resend the instructions to reset your password by clicking on the button or through the link"
+      password_updated_link: "Your password has been updated. If you were not the person who changed the password of your account, you can request to resend the instructions to reset your password by clicking on the following link"
       confirm_account: "Confirm account"
       unlock_account: "Unlock account"
       reset_password: "Reset your password"
+      password_update: "Password update"
+      requested_info: "The instructions were requested from the IP %{ip} with location in %{location}"
 
 
 # Rails Default

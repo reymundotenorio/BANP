@@ -14,6 +14,11 @@
           <!-- Table -->
           <div class="row no-margin">
             <div class="col-xs-12 no-padding">
+              <h1 class="text-center"><%= t("views.mailer.reset_password") %></h1>
+              <p class="text-center"><%= t("views.authentication.password_reset", email: @employee.email) %></p>
+            </div>
+
+            <div class="col-xs-12 no-padding">
               <div class="form-info">
 
                 <div class="form-group">
@@ -27,6 +32,10 @@
                   <label><b><%= t("activerecord.attributes.employee.password_confirmation") %></b></label>
                   <div class="border-bottom"></div>
                 </div>
+
+                <!-- Token -->
+                <%= hidden_field_tag "token", @token %>
+                <!-- End Token -->
 
                 <div class="main-buttons">
                   <div class="col-xs-12 col-sm-12 button-container no-padding">

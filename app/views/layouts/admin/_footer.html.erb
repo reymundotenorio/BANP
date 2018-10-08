@@ -22,9 +22,11 @@
         <% client_os = "#{client.os_name} #{client.os_full_version}" %>
         <% client_device = client.device_name %>
 
+        <% client_country = Geocoder.search(client_ip).first.country %>
+
         <div class="col-xs-12 col-sm-4">
           <div class="footer-legal">
-            <p class="request-info"><span><%= client.known? ? "#{client_device} #{client_browser} #{client_os} @ #{client_ip}" : "#{client_ip}" %></span></p>
+            <p class="request-info"><span><%= client.known? ? "#{client_device} #{client_browser} #{client_os} @ #{client_ip} | #{client_country}" : "#{client_ip} | #{client_country}" %></span></p>
           </div>
         </div>
       </div>

@@ -140,10 +140,26 @@ body{
     // Flash
     .flash-alert{
       color: $sixth-color;
+
+      span{
+        display: block;
+
+        i{
+          padding-bottom: 10px;
+        }
+      }
     }
 
     .flash-notice{
       color: $third-color;
+
+      span{
+        display: block;
+
+        i{
+          padding-bottom: 10px;
+        }
+      }
     }
 
     // Confirmation and Unlock messages

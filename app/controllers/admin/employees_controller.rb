@@ -111,8 +111,11 @@ class Admin::EmployeesController < ApplicationController
     @employee.update_attribute(:confirmation_sent, true)
     @employee.update_attribute(:confirmation_token, @token)
 
+    ip = request.remote_ip
+    location = Geocoder.search(ip).first.country
+
     # Send email
-    AuthenticationMailer.confirmation_instructions(@employee, @token, I18n.locale).deliver
+    AuthenticationMailer.confirmation_instructions(@employee, @token, I18n.locale, ip, location).deliver
   end
 
   # Generate token

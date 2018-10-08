@@ -5,14 +5,13 @@ class Admin::Authentication::UnlocksController < ApplicationController
 
   # /unlock-employee-account
   def new
-    @email = params[:email].strip.downcase
-    @email = "" unless @email
+    @email = params[:email]
+    @email = @email.blank? ? "" : @email.strip.downcase
   end
 
   # /unlock-employee-account/:unlock_token
   def show
     @token = params[:unlock_token]
-    @not_found = false;
 
     # If token has been found
     if set_employee
@@ -58,7 +57,9 @@ class Admin::Authentication::UnlocksController < ApplicationController
 
   # Send unlock email to the user
   def send_unlock_email
-    email = params[:resend_unlock][:email].strip.downcase
+    email = params[:resend_unlock][:email]
+    email = email.strip.downcase
+
     # If email has been found
     if @employee = Employee.find_by(email: email)
 
@@ -87,8 +88,11 @@ class Admin::Authentication::UnlocksController < ApplicationController
     # Render Sync with external controller
     sync_update @employee
 
+    ip = request.remote_ip
+    location = Geocoder.search(ip).first.country
+
     # Send email
-    AuthenticationMailer.unlock_instructions(@employee, @token, I18n.locale).deliver
+    AuthenticationMailer.unlock_instructions(@employee, @token, I18n.locale, ip, location).deliver
 
     flash[:notice] = t("views.authentication.email_sent", email: @employee.email)
     render :new
