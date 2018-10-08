@@ -23,6 +23,7 @@ class Admin::Authentication::SessionsController < ApplicationController
 
       # If employee has exceeded the max of failed attemps
       if employee_locked?(false)
+
         # If unlock email has not been sent
         send_unlock_email unless @employee.unlock_sent
 
@@ -80,6 +81,10 @@ class Admin::Authentication::SessionsController < ApplicationController
 
     ip = request.remote_ip
     location = Geocoder.search(ip).first.country
+
+
+    # Send SMS
+    send_sms(@employee.phone, "BANP - #{t('views.mailer.greetings')} #{@employee.first_name}, #{t('views.mailer.unlock_account_link')}: #{admin_unlock_employee_account_url(unlock_token: @token)}")
 
     # Send email
     AuthenticationMailer.unlock_instructions(@employee, @token, I18n.locale, ip, location).deliver
