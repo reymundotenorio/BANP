@@ -1,4 +1,7 @@
 class ApplicationController < ActionController::Base
+  # Twilio gem
+  require "twilio-ruby"
+
   # Always run set_lang
   before_action :set_lang
   # End Always run set_lang
@@ -15,7 +18,7 @@ class ApplicationController < ActionController::Base
 
   # Require employee
   def require_employee
-    redirect_to admin_sign_in_path, alert: 'Necesita iniciar sesión para continuar' unless current_employee
+    redirect_to admin_sign_in_path, alert: "Necesita iniciar sesión para continuar" unless current_employee
   end
 
   # Verify employee state
@@ -24,7 +27,7 @@ class ApplicationController < ActionController::Base
       return true
 
     else
-      redirect_to admin_auth_notifications_path(found: false), alert: t('views.authentication.account_disabled', email: @employee.email)
+      redirect_to admin_auth_notifications_path(found: false), alert: t("views.authentication.account_disabled", email: @employee.email)
       return false
     end
   end
@@ -44,7 +47,7 @@ class ApplicationController < ActionController::Base
   # Verify employee block status
   def employee_locked?(redirect_resend = true)
     if @employee.failed_attempts  >= $max_failed_attempts
-      redirect_to admin_unlock_account_path(email: @employee.email), alert: t('views.authentication.account_locked_resend', email: @employee.email) if redirect_resend
+      redirect_to admin_unlock_account_path(email: @employee.email), alert: t("views.authentication.account_locked_resend", email: @employee.email) if redirect_resend
       return true
 
     else
@@ -53,6 +56,12 @@ class ApplicationController < ActionController::Base
   end
 
   # End Employee methods
+
+  # Twilio send SMS
+  def send_sms(phone_number, message)
+    twilio = Twilio::REST::Client.new
+    twilio.messages.create({from: ENV["twilio_phone_number"], to: phone_number, body: message})
+  end
 
   # Domain global variable
   $max_failed_attempts = 4

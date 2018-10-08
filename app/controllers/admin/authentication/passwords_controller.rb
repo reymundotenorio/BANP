@@ -115,6 +115,9 @@ class Admin::Authentication::PasswordsController < ApplicationController
     ip = request.remote_ip
     location = Geocoder.search(ip).first.country
 
+    # Send SMS
+    send_sms(@employee.phone, "BANP - #{t('views.mailer.greetings')} #{@employee.first_name}, #{t('views.mailer.password_updated_link')}: #{admin_reset_password_url(email: @employee.email)}")
+
     # Send email
     AuthenticationMailer.password_update(@employee, I18n.locale, ip, location).deliver
   end

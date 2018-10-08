@@ -176,7 +176,7 @@ es:
       reset_password_link: "Puede restablecer su contraseña haciendo clic en el siguiente enlace"
       password_updated: "Su contraseña ha sido actualizada"
       password_updated_button_link: "Si no fue la persona que cambió la contraseña de su cuenta, puede solicitar que se le reenvíen las instrucciones para restablecer su contraseña haciendo clic en el botón o a través del enlace"
-      password_updated_link: "Su contraseña ha sido actualizada. Si usted no fue la persona que cambió la contraseña de su cuenta, puede solicitar que se le reenvíen las instrucciones para restablecer su contraseña haciendo clic siguiente enlace"
+      password_updated_link: "Su contraseña ha sido actualizada. Si usted no fue la persona que cambió la contraseña de su cuenta, puede solicitar que se le reenvíen las instrucciones para restablecer su contraseña haciendo clic en el siguiente enlace"
       confirm_account: "Confirmar cuenta"
       unlock_account: "Desbloquear cuenta"
       reset_password: "Restablecer su contraseña"

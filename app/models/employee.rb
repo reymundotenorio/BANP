@@ -66,14 +66,14 @@ class Employee < ApplicationRecord
   # Length validation
   validates :first_name, length: { maximum: 255 }
   validates :last_name, length: { maximum: 255 }
-  validates :phone, length: { is: 14 }, allow_blank: true
+  # validates :phone, length: { is: 14 }, allow_blank: true # Avoid phone validation
   validates :email, length: { maximum: 255 }
   validates :password, length: { minimum: 8 }, if: :password_present?
   validates :role, length: { maximum: 20 }
   # End Length validation
 
   # Format validation
-  validates_format_of :phone, with: /\A\(\d{3}\) \d{3}-\d{4}\z/, allow_blank: true # (000) 000-0000
+  # validates_format_of :phone, with: /\A\(\d{3}\) \d{3}-\d{4}\z/, allow_blank: true # (000) 000-0000 # Avoid phone validation
   # End Format validation
 
   # Validate employee role

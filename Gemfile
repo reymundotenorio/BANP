@@ -127,3 +127,6 @@ gem "device_detector"
 
 # Geocoder - IP location
 gem "geocoder"
+
+# Twilio SMS
+gem 'twilio-ruby', '~> 5.14.1'
