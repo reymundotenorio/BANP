@@ -49,6 +49,12 @@ class Admin::Authentication::PasswordsController < ApplicationController
     @token = params[:token]
     set_employee
 
+    # Verify recaptcha
+    if !verify_recaptcha
+      redirect_to admin_reset_employee_password_path(reset_password_token: @token), alert: t("views.form.recaptcha_error")
+      return
+    end
+
     if @employee.update(employee_params)
       @employee.update(reset_password_sent: false)
 
@@ -67,6 +73,12 @@ class Admin::Authentication::PasswordsController < ApplicationController
   def send_reset_password_email
     email = params[:resend_reset_password][:email]
     email = email.strip.downcase
+
+    # Verify recaptcha
+    if !verify_recaptcha
+      redirect_to admin_reset_password_path(email: email), alert: t("views.form.recaptcha_error")
+      return
+    end
 
     # If email has been found
     if @employee = Employee.find_by(email: email)

@@ -17,18 +17,18 @@
               </div>
             </div>
 
-            <% if flash.any? && !@hide_message %>
+            <% if flash.any? %>
 
             <div class="col-xs-12 no-padding auth-alerts">
               <% if !flash[:alert].blank? %>
-              <strong><p class="flash-alert"><i class="fas fa-exclamation-triangle"></i> <%= flash[:alert] %></p></strong>
+              <strong><p class="flash-alert text-center"><i class="fas fa-exclamation-triangle"></i> <%= flash[:alert] %></p></strong>
               <% end %>
 
               <% if !flash[:notice].blank? %>
-              <strong><p class="flash-notice"><i class="fas fa-info-circle"></i> <%= flash[:notice] %></p></strong>
+              <strong><p class="flash-notice text-center"><i class="fas fa-info-circle"></i> <%= flash[:notice] %></p></strong>
               <% end %>
-            </div
-            >
+            </div>
+
             <% end %>
 
             <div class="col-xs-12 no-padding">
@@ -44,6 +44,12 @@
                   <label><b><%= t("activerecord.attributes.employee.password_digest") %></b></label>
                   <div class="border-bottom"></div>
                 </div>
+
+                <!-- Recaptcha -->
+                <div class="form-group text-center">
+                  <%= recaptcha_tags id: "recaptcha-center", hl: I18n.locale %>
+                </div>
+                <!-- End Recaptcha -->
 
                 <div class="main-buttons sessions">
                   <div class="col-xs-12 col-sm-12 button-container no-padding">

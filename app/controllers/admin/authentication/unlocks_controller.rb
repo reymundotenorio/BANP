@@ -60,6 +60,12 @@ class Admin::Authentication::UnlocksController < ApplicationController
     email = params[:resend_unlock][:email]
     email = email.strip.downcase
 
+    # Verify recaptcha
+    if !verify_recaptcha
+      redirect_to admin_unlock_account_path(email: email), alert: t("views.form.recaptcha_error")
+      return
+    end
+
     # If email has been found
     if @employee = Employee.find_by(email: email)
 

@@ -62,6 +62,12 @@ class Admin::Authentication::ConfirmationsController < ApplicationController
     email = params[:resend_confirmation][:email]
     email = email.strip.downcase
 
+    # Verify recaptcha
+    if !verify_recaptcha
+      redirect_to admin_confirm_account_path(email: email), alert: t("views.form.recaptcha_error")
+      return
+    end
+
     # If email has been found
     if @employee = Employee.find_by(email: email)
       # If user is disabled

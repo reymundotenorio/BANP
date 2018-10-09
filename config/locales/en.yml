@@ -137,6 +137,7 @@ en:
       login: "Login"
       forgot_password: "Forgot password?"
       select_role: "Select a role"
+      recaptcha_error: "Verify that you are not a robot"
     authentication:
       incorrect_user_pwd: "Incorrect email or password"
       incorrect_pwd: "Incorrect password"
@@ -145,7 +146,7 @@ en:
       signed_in_correctly: "Welcome %{first_name} %{last_name}"
       signed_out_correctly: "You have signed out correctly"
       successfully_confirmed: "Your %{email} account has been successfully confirmed"
-      account_confirmed: "Your account %{email} is confirmed" 
+      account_confirmed: "Your account %{email} is confirmed"
       successfully_unlocked: "Your %{email} account has been successfully unlocked"
       account_unlocked: "Your account %{email} is unlocked"
       account_not_confirmed: "Your account %{email} is not confirmed, check your email with the instructions to confirm your account"

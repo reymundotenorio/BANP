@@ -9,6 +9,13 @@ class Admin::Authentication::SessionsController < ApplicationController
 
   # Sign in
   def create
+
+    # Verify recaptcha
+    if !verify_recaptcha
+      redirect_to admin_sign_in_path, alert: t("views.form.recaptcha_error")
+      return
+    end
+
     # If employee exists
     if set_employee
       # If employee is disabled

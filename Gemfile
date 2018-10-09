@@ -129,4 +129,7 @@ gem "device_detector"
 gem "geocoder"
 
 # Twilio SMS
-gem 'twilio-ruby', '~> 5.14.1'
+gem "twilio-ruby", "~> 5.14.1"
+
+# Google recaptcha
+gem "recaptcha"

@@ -13,6 +13,20 @@
         <div class="material-card shadow-card <%= @employee.state %>">
           <!-- Table -->
           <div class="row no-margin">
+            <% if flash.any? && !@hide_message%>
+
+            <div class="col-xs-12 no-padding auth-alerts">
+              <% if !flash[:alert].blank? %>
+              <strong><p class="flash-alert text-center"><i class="fas fa-exclamation-triangle"></i> <%= flash[:alert] %></p></strong>
+              <% end %>
+
+              <% if !flash[:notice].blank? %>
+              <strong><p class="flash-notice text-center"><i class="fas fa-info-circle"></i> <%= flash[:notice] %></p></strong>
+              <% end %>
+            </div>
+
+            <% end %>
+
             <div class="col-xs-12 no-padding">
               <h1 class="text-center"><%= t("views.mailer.reset_password") %></h1>
               <p class="text-center"><%= t("views.authentication.password_reset", email: @employee.email) %></p>
@@ -37,8 +51,14 @@
                 <%= hidden_field_tag "token", @token %>
                 <!-- End Token -->
 
+                <!-- Recaptcha -->
+                <div class="form-group text-center">
+                  <%= recaptcha_tags id: "recaptcha-center", hl: I18n.locale %>
+                </div>
+                <!-- End Recaptcha -->
+
                 <div class="main-buttons">
-                  <div class="col-xs-12 col-sm-12 button-container no-padding">
+                  <div class="col-xs-12 col-sm-12 button-container center no-padding">
                     <%= f.button class: "btn btn-general", data: {disable_with: "<i class='fas fa-spinner fa-spin'></i>"} do %><i class="fas fa-save"></i> <span><%= t("views.form.save") %></span> <% end %>
                   </div>
                 </div>

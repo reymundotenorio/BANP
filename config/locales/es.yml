@@ -137,6 +137,7 @@ es:
       login: "Inicias sesióñ"
       forgot_password: "¿Olvidaste la contraseña?"
       select_role: "Seleccione un rol"
+      recaptcha_error: "Comprueba que no eres un robot"
     authentication:
       incorrect_user_pwd: "Correo electrónico o contraseña incorrecto"
       incorrect_pwd: "Contraseña incorrecta"

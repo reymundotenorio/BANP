@@ -6,21 +6,21 @@
         <!-- Material card -->
         <div class="material-card shadow-card true">
           <div class="row no-margin">
+
+            <% if flash.any? && !@hide_message%>
+
             <div class="col-xs-12 no-padding auth-alerts">
-              <% if flash.any? && !@hide_message%>
+              <% if !flash[:alert].blank? %>
+              <strong><p class="flash-alert"><i class="fas fa-exclamation-triangle"></i> <%= flash[:alert] %></p></strong>
+              <% end %>
 
-              <div class="col-xs-12 no-padding auth-alerts">
-                <% if !flash[:alert].blank? %>
-                <strong><p class="flash-alert"><i class="fas fa-exclamation-triangle"></i> <%= flash[:alert] %></p></strong>
-                <% end %>
-
-                <% if !flash[:notice].blank? %>
-                <strong><p class="flash-notice"><i class="fas fa-info-circle"></i> <%= flash[:notice] %></p></strong>
-                <% end %>
-              </div>
-
+              <% if !flash[:notice].blank? %>
+              <strong><p class="flash-notice"><i class="fas fa-info-circle"></i> <%= flash[:notice] %></p></strong>
               <% end %>
             </div>
+
+            <% end %>
+            
 
             <div class="col-xs-12 no-padding form">
               <h1><%= t("views.authentication.resend_confirmation_instructions") %></h1>
@@ -37,6 +37,12 @@
                     <label><b><%= t("activerecord.attributes.employee.email") %></b></label>
                     <div class="border-bottom"></div>
                   </div>
+
+                  <!-- Recaptcha -->
+                  <div class="form-group text-center">
+                    <%= recaptcha_tags id: "recaptcha-center", hl: I18n.locale %>
+                  </div>
+                  <!-- End Recaptcha -->
 
                   <div class="main-buttons sessions">
                     <div class="col-xs-12 col-sm-12 button-container center no-padding">
