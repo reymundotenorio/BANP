@@ -41,9 +41,15 @@ class Admin::Authentication::SessionsController < ApplicationController
       else
         # If employee exist and password matches
         if @employee && @employee.authenticate(params[:sign_in][:password])
-          session[:employee_id] = @employee.id
-          session_info
           reset_attemps
+
+          session_info
+
+          # If employee has two factor authentication enabled
+          if @employee.two_factor_auth
+          end
+
+          session[:employee_id] = @employee.id
 
           redirect_to admin_employees_path, notice: t("views.authentication.signed_in_correctly", first_name: @employee.first_name, last_name: @employee.last_name)
 
