@@ -50,6 +50,7 @@ ActiveRecord::Schema.define(version: 2018_08_28_024255) do
     t.string "password_digest", null: false
     t.string "reset_password_token"
     t.boolean "reset_password_sent", default: false, null: false
+    t.datetime "reset_password_sent_at"
     t.integer "sign_in_count", default: 0, null: false
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
@@ -60,6 +61,8 @@ ActiveRecord::Schema.define(version: 2018_08_28_024255) do
     t.integer "failed_attempts", default: 0, null: false
     t.string "unlock_token"
     t.boolean "unlock_sent", default: false, null: false
+    t.boolean "two_factor_auth", default: false, null: false
+    t.integer "two_factor_auth_code"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["confirmation_token"], name: "index_employees_on_confirmation_token", unique: true

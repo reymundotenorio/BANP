@@ -18,7 +18,8 @@ Employee.new(
   role: ["Administrator", "Seller", "Driver"].sample,
   email: Faker::Internet.email,
   password_digest: "$2a$10$77fJKtz3cZiUSN2/JBH0m.i0YgbqHbq/wd43SOJiKtjzi/GyHZSuq",
-  state: Faker::Boolean.boolean(0.8)
+  state: Faker::Boolean.boolean(0.8),
+  two_factor_auth: true
 ).save(validate: false)
 
 100.times do |count|

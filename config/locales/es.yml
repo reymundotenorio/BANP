@@ -183,6 +183,7 @@ es:
       reset_password: "Restablecer su contraseña"
       password_update: "Actualización de contraseña"
       requested_info: "Las instrucciones fueron solicitadas desde el IP %{ip} con ubicación en %{location}"
+      token_expiration: "Este enlace estará disponible por %{expiration_time} horas. Si no solicitó restablecer su contraseña, simplemente puede ignorar este correo electrónico; Su contraseña no será cambiada."
 
 # Rails default
 

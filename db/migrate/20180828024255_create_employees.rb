@@ -19,6 +19,7 @@ class CreateEmployees < ActiveRecord::Migration[5.2]
       # Recoverable
       t.string :reset_password_token
       t.boolean :reset_password_sent, default: false, null: false
+      t.datetime :reset_password_sent_at
 
       # Trackable
       t.integer :sign_in_count, default: 0, null: false
@@ -35,7 +36,11 @@ class CreateEmployees < ActiveRecord::Migration[5.2]
       t.integer :failed_attempts, default: 0, null: false
       t.string :unlock_token # Unlock by email or text code
       t.boolean :unlock_sent, default: false, null: false
-      
+
+      # Two factor authentication
+      t.boolean :two_factor_auth, default: false, null:false
+      t.integer :two_factor_auth_code
+
       t.timestamps
     end
 

@@ -60,6 +60,10 @@ class Admin::Authentication::SessionsController < ApplicationController
     # End If email has been found
   end
 
+  def two_factor
+    #code
+  end
+
   # Set Employee
   def set_employee
     email = params[:sign_in][:email]

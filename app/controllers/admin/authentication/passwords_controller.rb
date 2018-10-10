@@ -108,6 +108,7 @@ class Admin::Authentication::PasswordsController < ApplicationController
 
     @employee.update(reset_password_sent: true)
     @employee.update(reset_password_token: @token)
+    @employee.update(reset_password_sent_at: Time.zone.now)
 
     # Render Sync with external controller
     sync_update @employee
