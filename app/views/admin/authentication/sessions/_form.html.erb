@@ -1,5 +1,5 @@
 <!-- Form -->
-<%= form_for :sign_in, url: admin_sign_in_path, html: {class: "sign-in-form", autocomplete: "on"} do |f| %>
+<%= form_for :sign_in, url: admin_sign_in_path, html: {class: "sign-in-form", id: "invisible-recaptcha-form", autocomplete: "on"} do |f| %>
 <section class="form">
   <div class="container">
     <!-- Information -->
@@ -57,9 +57,13 @@
                 <div class="main-buttons sessions">
                   <div class="col-xs-12 col-sm-12 button-container no-padding">
                     <%= link_to (admin_reset_password_path), class: "forgot-pass hidden-xs" do %><i class="fas fa-chalkboard-teacher"></i> <span><%= t("views.form.forgot_password") %></span><% end %>
-                  
-                    
-                    <%= invisible_recaptcha_tags text: "<i class='fas fa-fingerprint'></i> <span>#{t('views.form.sign_in')}</span>", class: "btn btn-general" %> 
+                                
+      
+ <button type="button" id="submit-btn" class="btn btn-general"><i class="fas fa-fingerprint"></i> <span><%= t("views.form.sign_in") %></span></button>
+           
+                                <!-- Invisible recaptcha -->
+                    <%= invisible_recaptcha_tags ui: :invisible, callback: "submitInvisibleRecaptchaForm" %> 
+                     <!-- End Invisible recaptcha -->
                     
                     <%= link_to (admin_reset_password_path), class: "forgot-pass visible-xs" do %><i class="fas fa-chalkboard-teacher"></i> <span><%= t("views.form.forgot_password") %></span><% end %>
                   </div>
@@ -76,3 +80,31 @@
 </section>
 <% end %>
 <!-- End Form -->
+
+
+<script type="text/javascript">
+// // app/assets/javascripts/application.js
+// $("#submit-btn").click(function() {
+//   if ($('#invisible-recaptcha-form').validate()){
+//     // call reCAPTCHA check
+//     grecaptcha.execute();
+//   }
+// });
+//
+// var submitInvisibleRecaptchaForm = function() {
+//   $("#invisible-recaptcha-form").submit();
+// };
+
+// app/assets/javascripts/application.js
+document.getElementById('submit-btn').addEventListener('click', function (e) {
+  // do some validation
+  // if(isValid) {
+    // call reCAPTCHA check
+    grecaptcha.execute();
+  // }
+});
+
+var submitInvisibleRecaptchaForm = function () {
+  document.getElementById("invisible-recaptcha-form").submit();
+};
+</script>
