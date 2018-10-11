@@ -1,5 +1,5 @@
 <!-- Form -->
-<%= form_for :sign_in, url: admin_sign_in_path, html: {class: "sign-in-form", id: "invisible-recaptcha-form", autocomplete: "on"} do |f| %>
+<%= form_for :sign_in, url: admin_sign_in_path, html: {class: "sign-in-form", autocomplete: "on"} do |f| %>
 <section class="form">
   <div class="container">
     <!-- Information -->
@@ -43,72 +43,38 @@
                   <%= f.password_field :password, class: "form-control input", placeholder: t("activerecord.attributes.employee.password_digest"), required: true %>
                   <label><b><%= t("activerecord.attributes.employee.password_digest") %></b></label>
                   <div class="border-bottom"></div>
+
+                  <button type="button" id="display-password" class=""><i class="fas fa-eye"></i></button>
                 </div>
 
                 <!-- Recaptcha -->
-                <!--
                 <div class="form-group text-center">
-                < recaptcha_tags id: "recaptcha-center", hl: I18n.locale >
+                  <%= recaptcha_tags id: "recaptcha-center", hl: I18n.locale %>
+                </div>
+                <!-- End Recaptcha -->
 
-              </div>
-            -->
-            <!-- End Recaptcha -->
+                <div class="main-buttons sessions">
+                  <div class="col-xs-12 col-sm-12 button-container no-padding">
+                    <%= link_to (admin_reset_password_path), class: "forgot-pass hidden-xs" do %><i class="fas fa-chalkboard-teacher"></i> <span><%= t("views.form.forgot_password") %></span><% end %>
 
-            <div class="main-buttons sessions">
-              <div class="col-xs-12 col-sm-12 button-container no-padding">
-                <%= link_to (admin_reset_password_path), class: "forgot-pass hidden-xs" do %><i class="fas fa-chalkboard-teacher"></i> <span><%= t("views.form.forgot_password") %></span><% end %>
+                    <%= f.button class: "btn btn-general", data: {disable_with: "<i class='fas fa-spinner fa-spin'></i>"} do %><i class="fas fa-fingerprint"></i> <span><%= t("views.form.sign_in") %></span> <% end %>
 
-
-                <button type="button" id="submit-btn" class="btn btn-general"><i class="fas fa-fingerprint"></i> <span><%= t("views.form.sign_in") %></span></button>
-
-                <!-- Invisible recaptcha -->
-                <%= invisible_recaptcha_tags ui: :invisible, callback: "submitInvisibleRecaptchaForm" %>
-                <!-- End Invisible recaptcha -->
-
-                <%= link_to (admin_reset_password_path), class: "forgot-pass visible-xs" do %><i class="fas fa-chalkboard-teacher"></i> <span><%= t("views.form.forgot_password") %></span><% end %>
+                    <%= link_to (admin_reset_password_path), class: "forgot-pass visible-xs" do %><i class="fas fa-chalkboard-teacher"></i> <span><%= t("views.form.forgot_password") %></span><% end %>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
         </div>
+        <!-- End Material card -->
       </div>
     </div>
-    <!-- End Material card -->
+    <!-- End Information -->
   </div>
-</div>
-<!-- End Information -->
-</div>
 </section>
 <% end %>
 <!-- End Form -->
 
-
-<script type="text/javascript">
-// app/assets/javascripts/application.js
-$("#submit-btn").click(function() {
-
-  $("#invisible-recaptcha-form").validate({
-    debug: true
-  });
-
-  // call reCAPTCHA check
-  grecaptcha.execute();
-
-});
-//
-// var submitInvisibleRecaptchaForm = function() {
-//   $("#invisible-recaptcha-form").submit();
-// };
-
-// // app/assets/javascripts/application.js
-// document.getElementById('submit-btn').addEventListener('click', function (e) {
-//   // do some validation
-//   // if(isValid) {
-//     // call reCAPTCHA check
-//     grecaptcha.execute();
-//   // }
-// });
-
-var submitInvisibleRecaptchaForm = function () {
-  document.getElementById("invisible-recaptcha-form").submit();
-};
-</script>
+<!-- Display password -->
+<%= javascript_include_tag "display-password", "data-turbolinks-track": "reload" %>
+<!-- End Display password -->

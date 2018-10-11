@@ -36,3 +36,6 @@ Rails.application.config.assets.precompile += %w( pagination-ajax.js )
 
 # Auto search
 Rails.application.config.assets.precompile += %w( auto-search.js )
+
+# Display password
+Rails.application.config.assets.precompile += %w( display-password.js )

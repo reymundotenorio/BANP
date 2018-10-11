@@ -106,6 +106,49 @@ a{
   position: relative;
   padding-top: 30px;
 
+  #display-password{
+    position: absolute;
+    bottom: 0px;
+    top: auto;
+    right: 0px;
+    left: auto;
+    border: none;
+    border-radius: 0px;
+    background-color: $transparent;
+    z-index: 110;
+    padding: 8px;
+
+    &:after{
+      content: "";
+      height: 15px;
+      width: 2px;
+      background-color: $text-color;
+      display: none;
+      position: absolute;
+      bottom: 14px;
+      right: 17px;
+      -webkit-transform: skew(-45deg);
+      transform: skew(-45deg);
+      -webkit-transition: all 0.3s ease;
+      transition: all 0.3s ease;
+    }
+
+    &.no-display{
+      &:after{
+        display: block;
+      }
+    }
+
+    @include on-event{
+      outline: inherit;
+      color: $hover-color;
+
+      &:after{
+        background-color: $hover-color;
+      }
+    }
+  }
+
   label{
     position: absolute;
     bottom: 6px;
