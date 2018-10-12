@@ -59,7 +59,7 @@ group :test do
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
-gem "tzinfo-data", platforms: [:mingw, :mswin, :x64_mingw, :jruby]
+# gem "tzinfo-data", platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 
 # ********** BANP Dependencies ********** #
@@ -133,3 +133,6 @@ gem "twilio-ruby", "~> 5.14.1"
 
 # Google recaptcha
 gem "recaptcha"
+
+# Time Zone database
+gem "tzinfo-data", "~> 1.2018", ">= 1.2018.5"
