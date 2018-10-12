@@ -7,7 +7,7 @@
         <div class="material-card shadow-card true">
           <div class="row no-margin">
 
-            <% if flash.any? && !@hide_message %>
+            <% if flash.any? %>
 
             <div class="col-xs-12 no-padding auth-alerts">
               <% if !flash[:alert].blank? %>
@@ -19,7 +19,7 @@
               <% end %>
             </div>
 
-            <% end %>            
+            <% end %>
 
             <div class="col-xs-12 no-padding form">
               <h1><%= t("views.authentication.resend_unlock_instructions") %></h1>
@@ -55,7 +55,7 @@
             </div>
 
             <div class="col-xs-12 no-padding redirect-container">
-              <p><%= link_to admin_root_path(hide_message: true), title: "t('views.errors.back_to_home')" do %><i class="fas fa-undo-alt"></i> <span><%= t("views.errors.back_to_home") %></span><% end %></p>
+              <p><%= link_to admin_root_path, title: "t('views.errors.back_to_home')" do %><i class="fas fa-undo-alt"></i> <span><%= t("views.errors.back_to_home") %></span><% end %></p>
             </div>
           </div>
         </div>

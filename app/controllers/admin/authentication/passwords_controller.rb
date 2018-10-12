@@ -12,6 +12,9 @@ class Admin::Authentication::PasswordsController < ApplicationController
   # /resend-reset-password/:reset_password_token
   def show
     @token = params[:reset_password_token]
+    @employee_password = params[:employee_password]
+
+    @employee_password = @employee_password.blank? ? false : true
 
     # If token has been found
     if set_employee

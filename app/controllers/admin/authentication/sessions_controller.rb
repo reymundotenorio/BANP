@@ -9,7 +9,6 @@ class Admin::Authentication::SessionsController < ApplicationController
 
   # Sign in
   def create
-
     # Verify recaptcha
     if !verify_recaptcha
       redirect_to admin_sign_in_path, alert: t("views.form.recaptcha_error")
@@ -58,7 +57,7 @@ class Admin::Authentication::SessionsController < ApplicationController
           remaining_attempts = $max_failed_attempts - increment_attempts
           remaining_attempts += 1
 
-          flash[:alert] = "#{t('views.authentication.incorrect_pwd')}, #{remaining_attempts} #{remaining_attempts == 1 ? t('views.authentication.remaining_attempt') : t('views.authentication.remaining_attempts')}"
+          flash.now[:alert] = "#{t('views.authentication.incorrect_pwd')}, #{remaining_attempts} #{remaining_attempts == 1 ? t('views.authentication.remaining_attempt') : t('views.authentication.remaining_attempts')}"
           render :new
         end
       end
@@ -79,7 +78,7 @@ class Admin::Authentication::SessionsController < ApplicationController
       return true
 
     else
-      flash[:alert] = t("views.authentication.incorrect_user_pwd")
+      flash.now[:alert] = t("views.authentication.incorrect_user_pwd")
       render :new
       return false
     end
@@ -168,7 +167,7 @@ class Admin::Authentication::SessionsController < ApplicationController
   # /sign-out
   def destroy
     session[:employee_id] = nil
-    flash[:notice] = t("views.authentication.signed_out_correctly")
+    flash.now[:notice] = t("views.authentication.signed_out_correctly")
     render :new
   end
 end

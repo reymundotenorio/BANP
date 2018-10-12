@@ -31,10 +31,27 @@ class Admin::Authentication::ConfirmationsController < ApplicationController
         @employee.update(confirmed: true)
         @employee.update(confirmation_sent: false)
 
-        # Render Sync with external controller
-        sync_update @employee
+        # If employee is not a client
+        if @employee.role != "client"
 
-        redirect_to admin_auth_notifications_path, notice: t("views.authentication.successfully_confirmed", email: @employee.email)
+          generate_token_password
+          @employee.update(reset_password_sent: false)
+          @employee.update(reset_password_token: @token_password)
+          @employee.update(reset_password_sent_at: nil)
+
+          # Render Sync with external controller
+          sync_update @employee
+
+          redirect_to admin_reset_employee_password_path(reset_password_token: @token_password, employee_password: true)
+          return
+
+          # If employee is a client
+        else
+          # Render Sync with external controller
+          sync_update @employee
+
+          redirect_to admin_auth_notifications_path, notice: t("views.authentication.successfully_confirmed", email: @employee.email)
+        end
         return
 
         # If user is already confirmed
@@ -101,8 +118,16 @@ class Admin::Authentication::ConfirmationsController < ApplicationController
     # Send email
     AuthenticationMailer.confirmation_instructions(@employee, @token, I18n.locale, ip, location).deliver
 
-    flash[:notice] = t("views.authentication.email_sent", email: @employee.email)
+    flash.now[:notice] = t("views.authentication.email_sent", email: @employee.email)
     render :new
+  end
+
+  # Generate token for password
+  def generate_token_password
+    loop do
+      @token_password = SecureRandom.hex(15)
+      break @token_password unless Employee.where(reset_password_token: @token_password).exists?
+    end
   end
 
   # Generate token

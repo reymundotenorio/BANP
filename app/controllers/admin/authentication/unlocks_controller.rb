@@ -100,7 +100,7 @@ class Admin::Authentication::UnlocksController < ApplicationController
     # Send email
     AuthenticationMailer.unlock_instructions(@employee, @token, I18n.locale, ip, location).deliver
 
-    flash[:notice] = t("views.authentication.email_sent", email: @employee.email)
+    flash.now[:notice] = t("views.authentication.email_sent", email: @employee.email)
     render :new
   end
 
