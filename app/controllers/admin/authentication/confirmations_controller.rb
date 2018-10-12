@@ -42,7 +42,7 @@ class Admin::Authentication::ConfirmationsController < ApplicationController
           # Render Sync with external controller
           sync_update @employee
 
-          redirect_to admin_reset_employee_password_path(reset_password_token: @token_password, employee_password: true)
+          redirect_to admin_reset_employee_password_path(reset_password_token: @token_password, employee_password: true), notice: t("views.authentication.successfully_confirmed", email: @employee.email)
           return
 
           # If employee is a client

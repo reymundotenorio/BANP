@@ -45,7 +45,7 @@ class Admin::Authentication::PasswordsController < ApplicationController
   def email_expired?
 
     # If is the first-time reset password for employee
-    if @employee.reset_password_sent && reset_password_sent_at != nil
+    if @employee.reset_password_sent && @employee.reset_password_sent_at != nil
       # If the time has exceeded the 2 hours
       if @employee.reset_password_sent_at + 2.hours < Time.zone.now
         return true
