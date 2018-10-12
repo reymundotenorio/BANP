@@ -32,8 +32,33 @@ class Admin::Authentication::PasswordsController < ApplicationController
       if employee_locked?
         return
       end
+
+      if email_expired?
+        redirect_to admin_reset_password_path(email: @employee.email), alert: t("views.authentication.email_expired")
+        return
+      end
     end
     # End If token has been found
+  end
+
+  # If email has expired
+  def email_expired?
+
+    # If is the first-time reset password for employee
+    if @employee.reset_password_sent && reset_password_sent_at != nil
+      # If the time has exceeded the 2 hours
+      if @employee.reset_password_sent_at + 2.hours < Time.zone.now
+        return true
+
+        # If the time has not exceeded the 2 hours
+      else
+        return false
+      end
+
+      # If is not the first-time reset password for employee
+    else
+      return false
+    end
   end
 
   # Set Employee

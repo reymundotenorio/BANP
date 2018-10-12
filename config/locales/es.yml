@@ -163,6 +163,7 @@ es:
       resend: "Reenviar"
       email_sent: "Se ha enviado un correo electrónico a su cuenta %{email} con las nuevas instrucciones"
       password_reset: "Ha solicitado restablecer la contraseña para %{email}"
+      email_expired: "El enlace para restablecer la contraseña ha caducado, solicite el reenvío de las instrucciones para restablecer su contraseña"
     errors:
       page_empty: "Esta página está vacía"
       back_to_home: "Regresar a Inicio"

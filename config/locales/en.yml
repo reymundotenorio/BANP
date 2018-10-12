@@ -163,6 +163,7 @@ en:
       resend: "Resend"
       email_sent: "An email has been sent to your account %{email} with the new instructions"
       password_reset: "You have requested to reset the password for %{email}"
+      email_expired: "The link to reset password has expired, request resend of the instructions for reset you password"
     errors:
       page_empty: "This page is empty"
       back_to_home: "Back to Home"
