@@ -45,7 +45,12 @@
 
                 <div class="main-buttons sessions">
                   <div class="col-xs-12 col-sm-12 button-container no-padding">
+
+                    <%= link_to (admin_resend_otp_path), class: "forgot-pass hidden-xs", method: :patch do %><i class="fas fa-comment"></i> <span><%= t("views.form.resend_otp") %></span><% end %>
+
                     <%= f.button class: "btn btn-general", data: {disable_with: "<i class='fas fa-spinner fa-spin'></i>"} do %><i class="fas fa-id-badge"></i> <span><%= t("views.form.verify") %></span> <% end %>
+
+                    <%= link_to (admin_resend_otp_path), class: "forgot-pass visible-xs", method: :patch do %><i class="fas fa-comment"></i> <span><%= t("views.form.resend_otp") %></span><% end %>
                   </div>
                 </div>
               </div>

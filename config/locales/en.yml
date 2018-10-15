@@ -140,6 +140,7 @@ en:
       forgot_password: "Forgot password?"
       select_role: "Select a role"
       recaptcha_error: "Verify that you are not a robot"
+      resend_otp: "Resend the OTP"
     authentication:
       incorrect_user_pwd: "Incorrect email or password"
       incorrect_pwd: "Incorrect password"
@@ -169,6 +170,10 @@ en:
       email_sent: "An email has been sent to your account %{email} with the new instructions"
       password_reset: "You have requested to reset the password for %{email}"
       email_expired: "The link to reset password has expired, request the resend of the instructions for reset your password"
+      sign_in_required: "You need to log in to continue"
+      otp_required: "You need to enter the OTP to continue"
+      otp_resended: "A new OTP has been resended to your phone number"
+      otp_sms: "Your OTP is: %{otp}. Enter the OTP to access the system"
     errors:
       page_empty: "This page is empty"
       back_to_home: "Back to Home"

@@ -140,6 +140,7 @@ es:
       forgot_password: "¿Olvidaste la contraseña?"
       select_role: "Seleccione un rol"
       recaptcha_error: "Comprueba que no eres un robot"
+      resend_otp: "Reenviar el OTP"
     authentication:
       incorrect_user_pwd: "Correo electrónico o contraseña incorrecto"
       incorrect_pwd: "Contraseña incorrecta"
@@ -169,6 +170,10 @@ es:
       email_sent: "Se ha enviado un correo electrónico a su cuenta %{email} con las nuevas instrucciones"
       password_reset: "Ha solicitado restablecer la contraseña para %{email}"
       email_expired: "El enlace para restablecer la contraseña ha caducado, solicite el reenvío de las instrucciones para restablecer su contraseña"
+      sign_in_required: "Necesita iniciar sesión para continuar"
+      otp_required: "Necesita ingresar el OTP para continuar"
+      otp_resended: "Se ha reenviado un nuevo OTP a su número de teléfono"
+      otp_sms: "Su OTP es: %{otp}. Ingrese el OTP para acceder al sistema"
     errors:
       page_empty: "Esta página está vacía"
       back_to_home: "Regresar a Inicio"

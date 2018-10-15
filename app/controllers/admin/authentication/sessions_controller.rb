@@ -160,9 +160,20 @@ class Admin::Authentication::SessionsController < ApplicationController
       return true
 
     else
-      redirect_to admin_two_factor_path, alert: "Necesita iniciar sesión para continuar"
+      redirect_to admin_two_factor_path, alert: t("views.authentication.sign_in_required")
       return false
     end
+  end
+
+  def resend_otp
+    set_employee_with_two_factor
+
+    generate_otp
+    @employee.update(two_factor_auth_otp: @OTP)
+
+    send_otp
+    redirect_to admin_two_factor_path, notice: t("views.authentication.otp_resended")
+    return
   end
 
   # Generate random and unique OTP
@@ -176,7 +187,7 @@ class Admin::Authentication::SessionsController < ApplicationController
 
   # Send OTP by SMS
   def send_otp
-    send_sms(@employee.phone, "BANP - Your OTP is: #{@OTP}")
+    send_sms(@employee.phone, "BANP - #{t('views.authentication.otp_sms', otp: @OTP)}")
     return
   end
 

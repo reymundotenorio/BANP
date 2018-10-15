@@ -26,11 +26,11 @@ Rails.application.routes.draw do
 
     # Sessions
     get "/sign-in" => "authentication/sessions#new", as: "sign_in"
-    post "/sign-in" => "authentication/sessions#create", as: "sign_in_employee"
-    delete "/sign-out" => "authentication/sessions#destroy", as: "sign_out"
-
     get "/two-factor" => "authentication/sessions#two_factor", as: "two_factor"
+    post "/sign-in" => "authentication/sessions#create", as: "sign_in_employee"
     post "/two-factor" => "authentication/sessions#two_factor_auth", as: "two_factor_auth"
+    patch "/resend-otp" => "authentication/sessions#resend_otp", as: "resend_otp"
+    delete "/sign-out" => "authentication/sessions#destroy", as: "sign_out"
 
     # Confirmations
     get '/confirm-account' => 'authentication/confirmations#new', as: 'confirm_account'

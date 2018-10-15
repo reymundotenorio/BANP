@@ -19,10 +19,10 @@ class ApplicationController < ActionController::Base
   # Require employee
   def require_employee
     if session[:employee_id] && session[:session_confirmed] == false
-      redirect_to admin_two_factor_path, alert: "Necesita ingresar el OTP para continuar"
+      redirect_to admin_two_factor_path, alert: t("views.authentication.otp_required")
 
     elsif session[:session_confirmed] == false
-      redirect_to admin_sign_in_path, alert: "Necesita iniciar sesión para continuar" unless current_employee
+      redirect_to admin_sign_in_path, alert: t("views.authentication.sign_in_required") unless current_employee
     end
   end
 
