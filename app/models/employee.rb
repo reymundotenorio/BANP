@@ -70,6 +70,7 @@ class Employee < ApplicationRecord
   validates :email, length: { maximum: 255 }
   validates :password, length: { minimum: 8 }, if: :password_present?
   validates :role, length: { maximum: 20 }
+  validates :two_factor_auth_otp, length: { is: 6 }, allow_blank: true # Avoid OTP validation
   # End Length validation
 
   # Format validation

@@ -18,7 +18,12 @@ class ApplicationController < ActionController::Base
 
   # Require employee
   def require_employee
-    redirect_to admin_sign_in_path, alert: "Necesita iniciar sesión para continuar" unless current_employee
+    if session[:employee_id] && session[:session_confirmed] == false
+      redirect_to admin_two_factor_path, alert: "Necesita ingresar el OTP para continuar"
+
+    elsif session[:session_confirmed] == false
+      redirect_to admin_sign_in_path, alert: "Necesita iniciar sesión para continuar" unless current_employee
+    end
   end
 
   # Verify employee state
@@ -46,7 +51,7 @@ class ApplicationController < ActionController::Base
 
   # Verify employee block status
   def employee_locked?(redirect_resend = true)
-    if @employee.failed_attempts  >= $max_failed_attempts
+    if @employee.failed_attempts >= $max_failed_attempts
       redirect_to admin_unlock_account_path(email: @employee.email), alert: t("views.authentication.account_locked_resend", email: @employee.email) if redirect_resend
       return true
 

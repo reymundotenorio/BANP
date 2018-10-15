@@ -39,7 +39,7 @@ class CreateEmployees < ActiveRecord::Migration[5.2]
 
       # Two factor authentication
       t.boolean :two_factor_auth, default: false, null:false
-      t.integer :two_factor_auth_code
+      t.string :two_factor_auth_otp
 
       t.timestamps
     end
@@ -48,5 +48,6 @@ class CreateEmployees < ActiveRecord::Migration[5.2]
     add_index :employees, :reset_password_token, unique: true
     add_index :employees, :confirmation_token, unique: true
     add_index :employees, :unlock_token, unique: true
+    add_index :employees, :two_factor_auth_otp, unique: true
   end
 end

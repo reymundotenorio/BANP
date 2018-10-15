@@ -16,7 +16,7 @@
         <a href="#"><i class="fas fa-lock"></i> <span><%= t("header.user.lock") %></span></a>
       </li>
       <li>
-        <a href="#"><i class="fas fa-sign-out-alt"></i> <span><%= t("header.user.sign_off") %></span></a>
+        <%= link_to admin_sign_out_path, method: :delete do %><i class="fas fa-sign-out-alt"></i> <span><%= t("header.user.sign_off") %></span><% end %>
       </li>
     </ul>
   </div>

@@ -16,7 +16,7 @@ Rails.application.routes.draw do
   # Admin namespace
   namespace :admin do
     # Root
-    root "authentication/sessions#new"
+    root "employees#index"
     # End Root
 
     # Authentications
@@ -28,6 +28,9 @@ Rails.application.routes.draw do
     get "/sign-in" => "authentication/sessions#new", as: "sign_in"
     post "/sign-in" => "authentication/sessions#create", as: "sign_in_employee"
     delete "/sign-out" => "authentication/sessions#destroy", as: "sign_out"
+
+    get "/two-factor" => "authentication/sessions#two_factor", as: "two_factor"
+    post "/two-factor" => "authentication/sessions#two_factor_auth", as: "two_factor_auth"
 
     # Confirmations
     get '/confirm-account' => 'authentication/confirmations#new', as: 'confirm_account'

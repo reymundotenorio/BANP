@@ -62,12 +62,13 @@ ActiveRecord::Schema.define(version: 2018_08_28_024255) do
     t.string "unlock_token"
     t.boolean "unlock_sent", default: false, null: false
     t.boolean "two_factor_auth", default: false, null: false
-    t.integer "two_factor_auth_code"
+    t.string "two_factor_auth_otp"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["confirmation_token"], name: "index_employees_on_confirmation_token", unique: true
     t.index ["email"], name: "index_employees_on_email", unique: true
     t.index ["reset_password_token"], name: "index_employees_on_reset_password_token", unique: true
+    t.index ["two_factor_auth_otp"], name: "index_employees_on_two_factor_auth_otp", unique: true
     t.index ["unlock_token"], name: "index_employees_on_unlock_token", unique: true
   end
 

@@ -13,6 +13,7 @@ class Admin::EmployeesController < ApplicationController
 
   # Authentication
   # before_action :require_employee, only: [:index, :show, :new, :create, :edit, :update, :active, :deactive, :history]
+  before_action :require_employee
   # End Authentication
 
   # /employees
