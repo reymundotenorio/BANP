@@ -60,7 +60,7 @@ Rails.application.configure do
   config.file_watcher = ActiveSupport::EventedFileUpdateChecker
 
   # ImageMagick path
-  Paperclip.options[:command_path] = "/usr/bin/"
+  # Paperclip.options[:command_path] = "/usr/bin/"
   # End ImageMagick path
 
   # Adds additional error checking when serving assets at runtime.
@@ -84,4 +84,6 @@ Rails.application.configure do
     enable_starttls_auto: true
   }
 
+  # Store files on Amazon S3.
+  config.active_storage.service = :amazon
 end

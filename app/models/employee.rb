@@ -102,22 +102,27 @@ class Employee < ApplicationRecord
   ## Paperclip
 
   # Image validation (whiny = silence ImageMagick Error)
-  has_attached_file :image,
-  whiny: false,
-  styles: { thumb: "100x100>", medium: "300x300>", regular: "800x800>" },
-  default_url: "https://s3.amazonaws.com/betterandnice/images/default/default.png",
-  url: "/images/employees/:id/:style/:basename.:extension",
-  path: ":rails_root/public/images/employees/:id/:style/:basename.:extension"
 
-  validates_attachment_content_type :image,
-  content_type: ["image/jpeg", "image/gif", "image/png"],
-  message: I18n.t("validates.image_format")
-
-  validates_attachment_size :image,
-  less_than: 5.megabytes,
-  message: I18n.t("validates.image_size")
+  # has_attached_file :image,
+  # whiny: false,
+  # styles: { thumb: "100x100>", medium: "300x300>", regular: "800x800>" },
+  # default_url: "https://s3.amazonaws.com/betterandnice/images/default/default.png",
+  # url: "/images/employees/:id/:style/:basename.:extension",
+  # path: ":rails_root/public/images/employees/:id/:style/:basename.:extension"
+  #
+  # validates_attachment_content_type :image,
+  # content_type: ["image/jpeg", "image/gif", "image/png"],
+  # message: I18n.t("validates.image_format")
+  #
+  # validates_attachment_size :image,
+  # less_than: 5.megabytes,
+  # message: I18n.t("validates.image_size")
 
   ## End Paperclip
+
+  # Active Storage
+  has_one_attached :image
+  # End Active Storage
 
   ## Scopes
   scope :enabled, -> { where(state: true) }

@@ -10,7 +10,7 @@ class CreateEmployees < ActiveRecord::Migration[5.2]
       t.boolean :confirmed, default: false, null: false
       t.boolean :state, default: true, null: false
 
-      t.attachment :image # Paperclip file_name, content_type, file_size, updated_at
+      # t.attachment :image # Paperclip file_name, content_type, file_size, updated_at
       t.string :slug, unique: true # Friendly_id slug
 
       # Authenticatable

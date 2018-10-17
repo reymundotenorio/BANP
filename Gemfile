@@ -83,7 +83,7 @@ gem "jquery-rails"
 gem "faker", git: "https://github.com/stympy/faker.git", branch: "master"
 
 # Paperclip - Easy file attachment management for ActiveRecord
-gem "paperclip", "~> 5.2.0"
+# gem "paperclip", "~> 5.2.0"
 
 # Fiendly id - Pretty URL
 gem "friendly_id", "~> 5.2"
@@ -114,7 +114,7 @@ gem "wkhtmltopdf-binary", "~> 0.12.3"
 gem "rails-html-sanitizer", "~> 1.0.4 "
 
 # AWS - Amazon Web Services
-gem "aws-sdk", "~> 2.3"
+# gem "aws-sdk", "~> 2.3"
 
 # Figaro - Configuration using ENV and a single YAML file
 gem "figaro", "~> 1.1", ">= 1.1.1"
@@ -136,3 +136,6 @@ gem "recaptcha"
 
 # Time Zone database
 gem "tzinfo-data", "~> 1.2018", ">= 1.2018.5"
+
+# AWS SDK S3 - Amazon Web Services - 
+gem "aws-sdk-s3", require: false
