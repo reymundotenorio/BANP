@@ -15,9 +15,14 @@
           <div class="row no-margin">
             <div class="col-xs-12 no-padding">
               <div class="general-info">
+              
                 <!-- Image -->
                 <div class="image-container">
-                  <%=  image_tag @employee.image.url(:medium), id: "preview-image", class: "img-responsive" %>
+                  <% if @employee.image.attached? %>
+                  <%= image_tag url_for(@employee.image), id: "preview-image", class: "img-responsive" %>
+                  <% else %>
+                  <%= image_tag url_for("https://s3.amazonaws.com/betterandnice/images/default/default.png"), id: "preview-image", class: "img-responsive" %>
+                  <% end %>
                 </div>
                 <!-- End Image -->
 

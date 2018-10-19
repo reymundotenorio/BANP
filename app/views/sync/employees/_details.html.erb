@@ -50,9 +50,16 @@
           <div class="row no-margin">
             <div class="col-xs-12 no-padding">
               <div class="general-info">
+
+                <!-- Image -->
                 <div class="image-container">
-                  <%= image_tag employee.image.url(:medium), class: "img-responsive" %>
+                  <% if employee.image.attached? %>
+                  <%= image_tag url_for(employee.image), class: "img-responsive" %>
+                  <% else %>
+                  <%= image_tag url_for("https://s3.amazonaws.com/betterandnice/images/default/default.png"), class: "img-responsive" %>
+                  <% end %>
                 </div>
+                <!-- End Image -->
 
                 <div class="main-info">
                   <p><%= t("views.show.created_at", time: time_ago_in_words(employee.created_at)) %></p>
