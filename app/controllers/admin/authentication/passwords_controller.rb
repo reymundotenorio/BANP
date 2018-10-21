@@ -3,6 +3,10 @@ class Admin::Authentication::PasswordsController < ApplicationController
   layout "admin/authentication"
   # End Authentication layout
 
+  # Authentication
+  before_action :require_employee, only: [:edit_password]
+  # End Authentication
+
   # /resend-reset-password
   def new
     @email = params[:email]
@@ -41,37 +45,6 @@ class Admin::Authentication::PasswordsController < ApplicationController
     # End If token has been found
   end
 
-  # If email has expired
-  def email_expired?
-
-    # If is the first-time reset password for employee
-    if @employee.reset_password_sent && @employee.reset_password_sent_at != nil
-      # If the time has exceeded the 2 hours
-      if @employee.reset_password_sent_at + 2.hours < Time.zone.now
-        return true
-
-        # If the time has not exceeded the 2 hours
-      else
-        return false
-      end
-
-      # If is not the first-time reset password for employee
-    else
-      return false
-    end
-  end
-
-  # Set Employee
-  def set_employee
-    if @employee = Employee.find_by(reset_password_token: @token)
-      return true
-
-    else
-      redirect_to admin_auth_notifications_path(source: "reset-password"), alert: t("views.authentication.token_not_found", token: @token)
-      return false
-    end
-  end
-
   # Update password
   def update_password
     @token = params[:token]
@@ -89,11 +62,30 @@ class Admin::Authentication::PasswordsController < ApplicationController
       # Render Sync with external controller
       sync_update @employee
 
-      send_password_update_email
+      send_update_password_email
 
-      redirect_to admin_auth_notifications_path, notice: "Contraseña actualizada #{@employee.email}"
+      redirect_to admin_auth_notifications_path, notice: t("views.mailer.password_updated")
     else
       render :show
+    end
+  end
+
+  # If email has expired
+  def email_expired?
+    # If is the first-time reset password for employee
+    if @employee.reset_password_sent && @employee.reset_password_sent_at != nil
+      # If the time has exceeded the 2 hours
+      if @employee.reset_password_sent_at + 2.hours < Time.zone.now
+        return true
+
+        # If the time has not exceeded the 2 hours
+      else
+        return false
+      end
+
+      # If is not the first-time reset password for employee
+    else
+      return false
     end
   end
 
@@ -151,7 +143,7 @@ class Admin::Authentication::PasswordsController < ApplicationController
   end
 
   # Send notification email to the user
-  def send_password_update_email
+  def send_update_password_email
 
     ip = request.remote_ip
     location = Geocoder.search(ip).first.country
@@ -160,7 +152,7 @@ class Admin::Authentication::PasswordsController < ApplicationController
     send_sms(@employee.phone, "BANP - #{t('views.mailer.greetings')} #{@employee.first_name}, #{t('views.mailer.password_updated_link')}: #{admin_reset_password_url(email: @employee.email)}")
 
     # Send email
-    AuthenticationMailer.password_update(@employee, I18n.locale, ip, location).deliver
+    AuthenticationMailer.update_password(@employee, I18n.locale, ip, location).deliver
   end
 
   # Generate token
@@ -172,6 +164,28 @@ class Admin::Authentication::PasswordsController < ApplicationController
   end
 
   private
+
+  # Set Employee
+  def set_employee
+    if @employee = Employee.find_by(reset_password_token: @token)
+      return true
+
+    else
+      redirect_to admin_auth_notifications_path(source: "reset-password"), alert: t("views.authentication.token_not_found", token: @token)
+      return false
+    end
+  end
+
+  # Set Employee by ID
+  def set_employee_by_id
+    if @employee = Employee.friendly.find(params[:id])
+      return true
+
+    else
+      redirect_to admin_employees_path(source: "reset-password"), alert: t("views.authentication.token_not_found", token: @token)
+      return false
+    end
+  end
 
   def employee_params
     params.require(:employee).permit(:password, :password_confirmation)

@@ -46,8 +46,7 @@ Rails.application.routes.draw do
     get "/reset-password" => "authentication/passwords#new", as: "reset_password"
     get "/reset-employee-password/:reset_password_token" => "authentication/passwords#show", as: "reset_employee_password"
     post "/reset-password" => "authentication/passwords#send_reset_password_email", as: "resend_reset_password"
-
-    patch "/update-password" => "authentication/passwords#update_password", as: "update_password"
+    patch "/reset-employee-password" => "authentication/passwords#update_password", as: "update_password"
 
     # End Authentications
 
@@ -57,10 +56,12 @@ Rails.application.routes.draw do
     get "/employee/:id", to: "employees#show", as: "employee"
     get "/employee/:id/edit", to: "employees#edit", as: "edit_employee"
     get "/employee/:id/history", to: "employees#history", as: "history_employee"
+    get "/employee/:id/update-password" => "employees#update_password", as: "update_password_employee"
     post "/employees", to: "employees#create"
     patch "/employee/:id", to: "employees#update", as: "update_employee"
     patch "/employees/:id/active", to: "employees#active", as: "active_employee"
     patch "/employees/:id/deactive", to: "employees#deactive", as: "deactive_employee"
+    patch "/employee/:id/update-password" => "employees#change_password", as: "change_password_employee"
     # End Employees
 
     # Providers

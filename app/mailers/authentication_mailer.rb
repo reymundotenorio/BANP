@@ -41,13 +41,13 @@ class AuthenticationMailer < ApplicationMailer
     end
   end
 
-  def password_update(user, locale, ip, location)
+  def update_password(user, locale, ip, location)
     @user = user
     @ip = ip
     @location = location
 
     I18n.with_locale(locale) do
-      mail(to: @user.email, subject: "BANP - #{I18n.t('views.mailer.password_update')}")
+      mail(to: @user.email, subject: "BANP - #{I18n.t('views.mailer.update_password')}")
     end
   end
 end

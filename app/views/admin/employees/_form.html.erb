@@ -4,9 +4,12 @@
   <div class="container">
     <!-- Information -->
     <div class="row">
-      <!-- Show errors -->
-      <%= render partial: "admin/partials/form_errors", locals: {resource: @employee, model: Employee} %>
-      <!-- End Show errors -->
+
+      <div class="col-xs-12">
+        <!-- Show errors -->
+        <%= render partial: "admin/partials/form_errors", locals: {resource: @employee, model: Employee} %>
+        <!-- End Show errors -->
+      </div>
 
       <div class="col-xs-12 col-md-5 col-lg-4">
         <!-- Material card -->
@@ -15,7 +18,7 @@
           <div class="row no-margin">
             <div class="col-xs-12 no-padding">
               <div class="general-info">
-              
+
                 <!-- Image -->
                 <div class="image-container">
                   <% if @employee.image.attached? %>

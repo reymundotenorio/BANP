@@ -137,5 +137,5 @@ gem "recaptcha"
 # Time Zone database
 gem "tzinfo-data", "~> 1.2018", ">= 1.2018.5"
 
-# AWS SDK S3 - Amazon Web Services - 
+# AWS SDK S3 - Amazon Web Services
 gem "aws-sdk-s3", require: false

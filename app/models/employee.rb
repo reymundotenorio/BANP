@@ -39,6 +39,10 @@ class Employee < ApplicationRecord
 
   ## End Friendly_ID
 
+  # Active Storage
+  has_one_attached :image
+  # End Active Storage
+
   ## Validations
 
   # Uniqueness validation
@@ -73,6 +77,17 @@ class Employee < ApplicationRecord
   validates :two_factor_auth_otp, length: { is: 6 }, allow_blank: true # Avoid OTP validation
   # End Length validation
 
+  # Type validation
+  validate :correct_image_type
+  # End Type validation
+
+  # Validate file type
+  def correct_image_type
+    if image.attached? && !image.content_type.in?(%w(image/jpeg image/gif image/png))
+      errors.add(:image, 'Must be a image file')
+    end
+  end
+
   # Format validation
   # validates_format_of :phone, with: /\A\(\d{3}\) \d{3}-\d{4}\z/, allow_blank: true # (000) 000-0000 # Avoid phone validation
   # End Format validation
@@ -97,10 +112,6 @@ class Employee < ApplicationRecord
   end
 
   # End Helpers
-
-  # Active Storage
-  has_one_attached :image
-  # End Active Storage
 
   ## Scopes
   scope :enabled, -> { where(state: true) }

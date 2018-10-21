@@ -1,29 +1,23 @@
 <% if resource.errors.any? %>
 
 <section class="alerts">
-  <div class="container">
-    <div class="row">
-      <div class="col-xs-12">
-        <!-- Alert -->
-        <div class="alert alert-danger alert-dismissible shadow-card" role="alert">
-          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-            <span aria-hidden="true"><i class="fas fa-times-circle"></i></span>
-          </button>
+  <!-- Alert -->
+  <div class="alert alert-danger alert-dismissible shadow-card" role="alert">
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true"><i class="fas fa-times-circle"></i></span>
+    </button>
 
-          <strong><p><i class="fas fa-exclamation-triangle"></i> <%= t("views.form.the_information_could_not_be_saved") %></p></strong>
+    <strong><p><i class="fas fa-exclamation-triangle"></i> <%= t("views.form.the_information_could_not_be_saved") %></p></strong>
+    
+    <ul>
+      <li><strong><p><%= resource.errors.count == 1 ? "#{resource.errors.count} #{t('views.form.error_found')}" : "#{resource.errors.count} #{t('views.form.errors_found')}" %></p></strong></li>
 
-          <ul>
-            <li><strong><p><%= resource.errors.count == 1 ? "#{resource.errors.count} #{t('views.form.error_found')}" : "#{resource.errors.count} #{t('views.form.errors_found')}" %></p></strong></li>
-
-            <% resource.errors.each do |attribute, message| %>
-            <li><p><%= "#{model.human_attribute_name(attribute)}: #{message}" %></p></li>
-            <% end %>
-          </ul>
-        </div>
-        <!-- End Alert -->
-      </div>
-    </div>
+      <% resource.errors.each do |attribute, message| %>
+      <li><p><%= "#{model.human_attribute_name(attribute)}: #{message}" %></p></li>
+      <% end %>
+    </ul>
   </div>
+  <!-- End Alert -->
 </section>
 
 <% end %>

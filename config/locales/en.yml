@@ -45,6 +45,8 @@ en:
         image_file_size: "Image file size"
         email: "Email"
         password_digest: "Password"
+        password: "Password"
+        password_confirmation: "Password confirmation"
         sign_in_count: "Sign in count"
         current_sign_in_at: "Current sign in at"
         last_sign_in_at: "Last sign in at"
@@ -127,6 +129,7 @@ en:
       edit: "Edit"
       disable: "Disable"
       enable: "Enable"
+      update_password: "Update password"
     history:
       history: "History"
     form:
@@ -192,7 +195,7 @@ en:
       confirm_account: "Confirm account"
       unlock_account: "Unlock account"
       reset_password: "Reset your password"
-      password_update: "Password update"
+      update_password: "Update password"
       requested_info: "The instructions were requested from the IP %{ip} with location in %{location}"
       token_expiration: "This link will be available for %{expiration_time} hours. If you did not request to reset your password, then you can just ignore this email; your password will not be change."
 

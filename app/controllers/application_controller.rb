@@ -21,7 +21,7 @@ class ApplicationController < ActionController::Base
     if session[:employee_id] && session[:session_confirmed] == false
       redirect_to admin_two_factor_path, alert: t("views.authentication.otp_required")
 
-    elsif session[:session_confirmed] == false
+    elsif session[:employee_id] == nil && session[:session_confirmed] == nil
       redirect_to admin_sign_in_path, alert: t("views.authentication.sign_in_required") unless current_employee
     end
   end
