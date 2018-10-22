@@ -99,7 +99,7 @@ class Admin::EmployeesController < ApplicationController
 
     # If record was saved
     if @employee.save
-      send_confirmation_email
+      # send_confirmation_email
       redirect_to [:admin, @employee], notice: "#{t('alerts.created', model: t('activerecord.models.employee'))}. #{t('views.authentication.account_not_confirmed', email: @employee.email)}"
 
       # If record was not saved
@@ -182,6 +182,6 @@ class Admin::EmployeesController < ApplicationController
   # Employee params
   def employee_params
     # params.require(:employee).permit(:first_name, :last_name, :phone, :role, :email, :password, :password_confirmation, :image)
-    params.require(:employee).permit(:first_name, :last_name, :phone, :email, :image)
+    params.require(:employee).permit(:first_name, :last_name, :email, :phone, :role, :image)
   end
 end

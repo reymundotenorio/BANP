@@ -56,6 +56,7 @@ class Employee < ApplicationRecord
   validates :first_name, presence: true
   validates :last_name, presence: true
   validates :email, presence: true
+  validates :role, presence: true
   # End  Presence validation
 
   # Length validation
@@ -63,6 +64,7 @@ class Employee < ApplicationRecord
   validates :last_name, length: { maximum: 255 }
   # validates :phone, length: { is: 14 }, allow_blank: true # Avoid phone validation
   validates :email, length: { maximum: 255 }
+  validates :role, length: { maximum: 20 }
   # End Length validation
 
   # Type validation
@@ -80,7 +82,26 @@ class Employee < ApplicationRecord
   # validates_format_of :phone, with: /\A\(\d{3}\) \d{3}-\d{4}\z/, allow_blank: true # (000) 000-0000 # Avoid phone validation
   # End Format validation
 
+  # Validate employee role
+  # validate :employee_role
+
+  # Employee role
+  # def employee_role
+  #   if role != 0 && role != 1 && role != 2
+  #     errors.add(:role, "Must select the employee role")
+  #   end
+  # end
+
   ## End Validations
+
+  # Helpers
+
+  # Is administrator?
+  # def is_admin?
+  #   role == "administrator"
+  # end
+
+  # End Helpers
 
   ## Scopes
   scope :enabled, -> { where(state: true) }

@@ -3,6 +3,8 @@ class User < ApplicationRecord
   belongs_to :employee, inverse_of: :user, optional: true, foreign_key: email
   # belongs_to :costumer, optional: true
 
+  validates :email, uniqueness: true
+
   # Secure password
   has_secure_password validations: false
 
@@ -24,36 +26,15 @@ class User < ApplicationRecord
   validates :email, presence: true
   validates :password, presence: true, if: :password_present?
   validates :password_confirmation, presence: true, if: :password_present?
-  validates :role, presence: true
   # End  Presence validation
 
   # Length validation
   validates :email, length: { maximum: 255 }
   validates :password, length: { minimum: 8 }, if: :password_present?
-  validates :role, length: { maximum: 20 }
   validates :two_factor_auth_otp, length: { is: 6 }, allow_blank: true # Avoid OTP validation
   # End Length validation
 
-  # Validate employee role
-  # validate :employee_role
-
-  # Employee role
-  # def employee_role
-  #   if role != 0 && role != 1 && role != 2
-  #     errors.add(:role, "Must select the employee role")
-  #   end
-  # end
-
   ## End Validations
-
-  # Helpers
-
-  # Is administrator?
-  def is_admin?
-    role == "administrator"
-  end
-
-  # End Helpers
 
   ## Scopes
   scope :enabled, -> { where(state: true) }
