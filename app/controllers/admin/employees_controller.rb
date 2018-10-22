@@ -13,7 +13,7 @@ class Admin::EmployeesController < ApplicationController
 
   # Authentication
   # before_action :require_employee, only: [:index, :show, :new, :create, :edit, :update, :active, :deactive, :history]
-  before_action :require_employee
+  # before_action :require_employee
   # End Authentication
 
   # /employees
@@ -181,6 +181,7 @@ class Admin::EmployeesController < ApplicationController
 
   # Employee params
   def employee_params
-    params.require(:employee).permit(:first_name, :last_name, :phone, :role, :email, :password, :password_confirmation, :image)
+    # params.require(:employee).permit(:first_name, :last_name, :phone, :role, :email, :password, :password_confirmation, :image)
+    params.require(:employee).permit(:first_name, :last_name, :phone, :email, :image)
   end
 end

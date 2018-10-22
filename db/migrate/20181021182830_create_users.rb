@@ -1,0 +1,43 @@
+class CreateUsers < ActiveRecord::Migration[5.2]
+  def change
+    create_table :users do |t|
+      t.references :employee, foreign_key: true
+      # t.references :costumber, foreign_key: true
+
+      # Authenticatable
+      t.string :password_digest, null: false # Encrypted password
+
+      # Recoverable
+      t.string :reset_password_token
+      t.boolean :reset_password_sent, default: false, null: false
+      t.datetime :reset_password_sent_at
+
+      # Trackable
+      t.integer :sign_in_count, default: 0, null: false
+      t.datetime :current_sign_in_at
+      t.datetime :last_sign_in_at
+      t.string :current_sign_in_ip
+      t.string :last_sign_in_ip
+
+      # Confirmable
+      t.string :confirmation_token
+      t.boolean :confirmation_sent, default: false, null: false
+
+      # Lockable
+      t.integer :failed_attempts, default: 0, null: false
+      t.string :unlock_token # Unlock by email or text code
+      t.boolean :unlock_sent, default: false, null: false
+
+      # Two factor authentication
+      t.boolean :two_factor_auth, default: false, null:false
+      t.string :two_factor_auth_otp
+
+      t.timestamps
+    end
+
+    add_index :users, :reset_password_token, unique: true
+    add_index :users, :confirmation_token, unique: true
+    add_index :users, :unlock_token, unique: true
+    add_index :users, :two_factor_auth_otp, unique: true
+  end
+end

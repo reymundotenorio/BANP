@@ -1,11 +1,12 @@
 class Employee < ApplicationRecord
-  # Secure password
-  has_secure_password validations: false
+  # Association
+  has_one :user, inverse_of: :employee
+
 
   # Search
   def self.search(search, show_all)
     if search
-      query = "(first_name LIKE :search OR last_name LIKE :search OR phone LIKE :search OR email LIKE :search OR role LIKE :search)"
+      query = "(first_name LIKE :search OR last_name LIKE :search OR phone LIKE :search OR email LIKE :search)"
       where(query, search: "%#{search}%")
 
     elsif show_all == "all"
@@ -50,21 +51,11 @@ class Employee < ApplicationRecord
   validates :phone, uniqueness: { case_sensitive: false }
   # End Uniqueness validation
 
-  # Confirmation validation
-  validates :password, confirmation: true, if: :password_present?
-  # End Confirmation validation
-
-  def password_present?
-    new_record? || password.present? && password_confirmation.present?
-  end
 
   # Presence validation
   validates :first_name, presence: true
   validates :last_name, presence: true
   validates :email, presence: true
-  validates :password, presence: true, if: :password_present?
-  validates :password_confirmation, presence: true, if: :password_present?
-  validates :role, presence: true
   # End  Presence validation
 
   # Length validation
@@ -72,9 +63,6 @@ class Employee < ApplicationRecord
   validates :last_name, length: { maximum: 255 }
   # validates :phone, length: { is: 14 }, allow_blank: true # Avoid phone validation
   validates :email, length: { maximum: 255 }
-  validates :password, length: { minimum: 8 }, if: :password_present?
-  validates :role, length: { maximum: 20 }
-  validates :two_factor_auth_otp, length: { is: 6 }, allow_blank: true # Avoid OTP validation
   # End Length validation
 
   # Type validation
@@ -92,26 +80,7 @@ class Employee < ApplicationRecord
   # validates_format_of :phone, with: /\A\(\d{3}\) \d{3}-\d{4}\z/, allow_blank: true # (000) 000-0000 # Avoid phone validation
   # End Format validation
 
-  # Validate employee role
-  # validate :employee_role
-
-  # Employee role
-  # def employee_role
-  #   if role != 0 && role != 1 && role != 2
-  #     errors.add(:role, "Must select the employee role")
-  #   end
-  # end
-
   ## End Validations
-
-  # Helpers
-
-  # Is administrator?
-  def is_admin?
-    role == "administrator"
-  end
-
-  # End Helpers
 
   ## Scopes
   scope :enabled, -> { where(state: true) }
