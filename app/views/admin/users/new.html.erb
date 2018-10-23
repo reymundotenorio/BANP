@@ -1,63 +1,47 @@
-<!-- Form -->
-<%= form_for [:admin, @employee],  html: {class: "", autocomplete: "off", multipart: true} do |f| %>
-<section class="form">
+<!-- Form Title -->
+<section class="form-title">
   <div class="container">
-    <!-- Information -->
-    <div class="row">
-
-      <div class="col-xs-12">
-        <!-- Show errors -->
-        <%= render partial: "admin/partials/form_errors", locals: {resource: @employee, model: Employee} %>
-        <!-- End Show errors -->
+    <!-- Title -->
+    <div class="row title-container">
+      <div class="col-xs-12 col-lg-10">
+        <!-- Heading -->
+        <h1 class=""><i class="fas fa-plus"></i> <%= t("views.new.new") %></h1>
+        <!-- End Heading -->
       </div>
 
-      <div class="col-xs-12 col-md-7 col-lg-8">
-        <!-- Material card -->
-        <div class="material-card shadow-card <%= @employee.state %>">
-          <!-- Table -->
-          <div class="row no-margin">
-            <div class="col-xs-12 no-padding">
-              <div class="form-info">
-                <!-- Only for new records -->
-                <% if action_name == "new" || action_name == "create" %>
-
-                <div class="form-group">
-                  <%= f.password_field :password, class: "form-control input", placeholder: t("activerecord.attributes.employee.password"), required: true %>
-                  <label><b><%= t("activerecord.attributes.employee.password") %></b></label>
-                  <div class="border-bottom"></div>
-                </div>
-
-                <div class="form-group">
-                  <%= f.password_field :password_confirmation, class: "form-control input", placeholder: t("activerecord.attributes.employee.password_confirmation"), required: true %>
-                  <label><b><%= t("activerecord.attributes.employee.password_confirmation") %></b></label>
-                  <div class="border-bottom"></div>
-                </div>
-
-                <% end %>
-                <!-- End Only for new records -->
-
-                <div class="main-buttons">
-                  <div class="col-xs-12 col-sm-12 button-container no-padding">
-                    <%= f.button class: "btn btn-general", data: {disable_with: "<i class='fas fa-spinner fa-spin'></i>"} do %><i class="fas fa-save"></i> <span><%= t("views.form.save") %></span> <% end %>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+      <div class="col-xs-12 col-lg-2">
+        <!-- List button-->
+        <div class="btn-new-container">
+          <%= link_to (admin_employees_path), class: "btn btn-general" do %><i class="fas fa-list-alt"></i> <span><%= t("header.navigation.employees") %></span><% end %>
         </div>
-        <!-- End Material card -->
+        <!-- End List button-->
       </div>
     </div>
-    <!-- End Information -->
+    <!-- End Title -->
+
+    <!-- Breadcrumb -->
+    <div class="row">
+      <div class="col-xs-12 hidden-xs">
+        <div class="breadcrumb-container">
+          <ol class="breadcrumb">
+            <li>
+              <%= link_to (admin_root_path) do %><i class="fas fa-tachometer-alt"></i> <span><%= t("header.navigation.dashboard") %></span><% end %>
+            </li>
+
+            <li>
+              <%= link_to (admin_employees_path) do %><i class="fas fa-list-alt"></i> <span><%= t("header.navigation.employees") %></span><% end %>
+            </li>
+
+            <li class="active">
+              <i class="fas fa-plus"></i> <%= t("views.new.new") %>
+            </li>
+          </ol>
+        </div>
+      </div>
+    </div>
+    <!-- End Breadcrumb -->
   </div>
 </section>
-<% end %>
-<!-- End Form -->
+<!-- End Form Title -->
 
-<!-- Form -->
-<%= javascript_include_tag "form", "data-turbolinks-track": "reload" %>
-<!-- End Form -->
-
-<!-- Jquery Mask -->
-<%= javascript_include_tag "jquery-mask/jquery.mask", "data-turbolinks-track": "reload" %>
-<!-- End Jquery Mask -->
+<%= render "form" %>
