@@ -1,7 +1,4 @@
 Rails.application.routes.draw do
-  namespace :admin do
-    get 'users/new'
-  end
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
   # Errors pages
@@ -66,6 +63,11 @@ Rails.application.routes.draw do
     patch "/employees/:id/deactive", to: "employees#deactive", as: "deactive_employee"
     patch "/employee/:id/update-password" => "employees#change_password", as: "change_password_employee"
     # End Employees
+
+    # Users
+    get "/user/:employee_id/employee", to: "users#new_user_employee", as: "new_user_employee"
+    post "/user/employee", to: "user#create_user_employee"
+    # End Users
 
     # Providers
     get "/providers", to: "providers#index", as: "providers"

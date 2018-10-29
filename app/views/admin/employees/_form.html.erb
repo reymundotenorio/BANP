@@ -82,8 +82,8 @@
                   <label><b><%= t("activerecord.attributes.employee.phone") %></b></label>
                   <div class="border-bottom"></div>
                 </div>
-                
-                                <div class="form-group">
+
+                <div class="form-group">
                   <% role_options = ["Seller", "Driver", "Administrator"]; %>
 
                   <div class="dropdown" id="role-dropdown">
@@ -99,7 +99,7 @@
                   <label><b><%= t("activerecord.attributes.employee.role") %></b></label>
                   <div class="border-bottom"></div>
                 </div>
-                
+
                 <div class="main-buttons">
                   <div class="col-xs-12 col-sm-12 button-container no-padding">
                     <%= button_tag type: "reset", id: "reset-button", class: "btn btn-general" do %> <i class="fas fa-eraser"></i> <span><%= t("views.form.restart") %></span> <% end %>

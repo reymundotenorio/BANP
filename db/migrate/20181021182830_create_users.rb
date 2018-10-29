@@ -1,7 +1,9 @@
 class CreateUsers < ActiveRecord::Migration[5.2]
   def change
     create_table :users do |t|
-      t.references :employee, foreign_key: true
+      # t.references :employee, foreign_key: true
+      t.belongs_to :employee, foreign_key: true
+
       # t.references :costumber, foreign_key: true
 
       # Authenticatable

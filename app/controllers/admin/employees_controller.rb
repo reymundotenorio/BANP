@@ -49,7 +49,7 @@ class Admin::EmployeesController < ApplicationController
 
   # /employee/:id)
   def show
-    # Employee found by before_filter
+    # Employee found by before_action
 
     current_lang = params[:lang]
 
@@ -70,12 +70,12 @@ class Admin::EmployeesController < ApplicationController
 
   # /employee/:id/edit
   def edit
-    # Employee found by before_filter
+    # Employee found by before_action
   end
 
   # /employee/:id/history
   def history
-    # Employee found by before_filter
+    # Employee found by before_action
   end
 
   # /employee/:id/update-password
