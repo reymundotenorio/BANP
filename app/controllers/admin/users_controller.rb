@@ -1,14 +1,17 @@
 class Admin::UsersController < ApplicationController
+  # Admin layout
+  layout "admin/application"
+  # End Admin layout
 
   # Find employees with Friendly_ID
-  before_action :set_employee, only: [:new_user_employee, :create_user_employee]
+  before_action :set_employee, only: [:new_employee_user, :new_employee_user]
   # End Find employees with Friendly_ID
 
-  def new_user_employee
+  def new_employee_user
     @user = User.new
   end
 
-  def create_user_employee
+  def create_employee_user
     @user = User.new(user_params)
 
     # If record was saved
@@ -25,7 +28,7 @@ class Admin::UsersController < ApplicationController
 
   # Set Employee
   def set_employee
-    @employee = Employee.friendly.find(params[:employee_id])
+    @employee = Employee.friendly.find(params[:id])
   rescue
     redirect_to admin_employees_path, alert: "No se pudo encontrar"
   end

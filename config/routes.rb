@@ -19,6 +19,11 @@ Rails.application.routes.draw do
     root "employees#index"
     # End Root
 
+    # Users
+    get "/user/:id/assign", to: "users#new_employee_user", as: "new_employee_user"
+    patch "/user/:id", to: "user#create_employee_user", as: "create_employee_user"
+    # End Users
+
     # Authentications
 
     # Notifications
@@ -63,11 +68,6 @@ Rails.application.routes.draw do
     patch "/employees/:id/deactive", to: "employees#deactive", as: "deactive_employee"
     patch "/employee/:id/update-password" => "employees#change_password", as: "change_password_employee"
     # End Employees
-
-    # Users
-    get "/user/:employee_id/employee", to: "users#new_user_employee", as: "new_user_employee"
-    post "/user/employee", to: "user#create_user_employee"
-    # End Users
 
     # Providers
     get "/providers", to: "providers#index", as: "providers"

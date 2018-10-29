@@ -14,7 +14,7 @@
         <div class="btn-new-container">
           <%= link_to (admin_employee_path(employee, format: "pdf", lang: I18n.locale)), target: "_blank", class: "btn btn-general" do %><i class="fas fa-download"></i> <span><%= t("views.index.export") %></span><% end %>
 
-            <%= link_to (admin_new_user_employee_path(employee)), class: "btn btn-general" do %><i class="fas fa-download"></i> <span><%= t("views.index.create_user") %></span><% end %>
+            <%= link_to (admin_new_employee_user_path(employee)), class: "btn btn-general" do %><i class="fas fa-download"></i> <span><%= t("views.index.create_user") %></span><% end %>
         </div>
         <!-- End Export button-->
       </div>
