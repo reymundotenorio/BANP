@@ -19,10 +19,10 @@ Rails.application.routes.draw do
     root "employees#index"
     # End Root
 
-    # Users
-    get "/user/:id/assign", to: "users#new_employee_user", as: "new_employee_user"
-    post "/user/:id", to: "users#create_employee_user", as: "create_employee_user"
-    # End Users
+    # Employee/Users
+    get "/employee/:id/create-user", to: "users#new_employee_user", as: "new_employee_user"
+    post "/employee/:id", to: "users#create_employee_user", as: "create_employee_user"
+    # End Employee/Users
 
     # Authentications
 

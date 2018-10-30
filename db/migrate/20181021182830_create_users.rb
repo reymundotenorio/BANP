@@ -1,7 +1,6 @@
 class CreateUsers < ActiveRecord::Migration[5.2]
   def change
     create_table :users do |t|
-      t.belongs_to :employee, foreign_key: true
       t.string :email, null: false
 
       # t.references :costumber, foreign_key: true
@@ -36,6 +35,8 @@ class CreateUsers < ActiveRecord::Migration[5.2]
 
       t.timestamps
     end
+    
+    add_reference :users, :employee, index: true, foreign_key: true
 
     add_index :users, :email, unique: true
     add_index :users, :reset_password_token, unique: true

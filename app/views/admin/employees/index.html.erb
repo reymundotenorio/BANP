@@ -9,9 +9,9 @@
         <!-- End Heading -->
       </div>
 
-      <div class="col-xs-12 col-lg-2">
+      <div class="col-xs-12 col-lg-2 text-right">
         <!-- New button-->
-        <div class="btn-new-container">
+        <div class="btn-container inline">
           <%= link_to (admin_new_employee_path), class: "btn btn-general" do %><i class="fas fa-plus"></i> <span><%= t("views.index.new") %></span><% end %>
         </div>
         <!-- End New button-->
@@ -63,18 +63,16 @@
             <!-- End Search record -->
 
             <!-- Show all -->
-            <div class="col-xs-12 col-md-6 no-padding">
-              <div class="show-buttons">
-                <div class="btn-container" id="show-buttons">
-                  <%= render "admin/employees/show_buttons" %>
-                </div>
-
-                <!-- Export button-->
-                <div class="btn-container">
-                  <%= link_to (admin_employees_path(format: "pdf", lang: I18n.locale)), target: "_blank", class: "btn btn-general btn-default" do %><i class="fas fa-download"></i> <span><%= t("views.index.export") %></span><% end %>
-                </div>
-                <!-- End Export button-->
+            <div class="col-xs-12 col-md-6 no-padding text-right">
+              <div class="btn-container" id="show-buttons">
+                <%= render "admin/employees/show_buttons" %>
               </div>
+
+              <!-- Export button-->
+              <div class="btn-container">
+                <%= link_to (admin_employees_path(format: "pdf", lang: I18n.locale)), target: "_blank", class: "btn btn-general btn-default" do %><i class="fas fa-download"></i> <span><%= t("views.index.export") %></span><% end %>
+              </div>
+              <!-- End Export button-->
             </div>
             <!-- End Show all -->
           </div>

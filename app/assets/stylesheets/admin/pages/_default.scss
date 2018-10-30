@@ -112,9 +112,13 @@
     }
   }
 
-  .btn-new-container{
+  .btn-container{
     text-align: center;
-    padding-top: 20px;
+    padding-bottom: 15px;
+
+    &:first-child{
+      padding-top: 20px;
+    }
 
     i{
       padding-right: 5px;
@@ -255,9 +259,22 @@
       }
     }
 
-    .btn-new-container{
+    .btn-container{
       text-align: right;
-      padding-top: 0px;
+      padding-bottom: 0px;
+      padding-right: 10px;
+
+      &:first-child{
+        padding-top: 0px;
+      }
+
+      &:last-child{
+        padding-right: 0px;
+      }
+
+      &.inline{
+        display: inline-block;
+      }
     }
   }
 

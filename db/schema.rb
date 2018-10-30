@@ -82,7 +82,6 @@ ActiveRecord::Schema.define(version: 2018_10_21_182830) do
   end
 
   create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.bigint "employee_id"
     t.string "email", null: false
     t.string "password_digest", null: false
     t.string "reset_password_token"
@@ -102,6 +101,7 @@ ActiveRecord::Schema.define(version: 2018_10_21_182830) do
     t.string "two_factor_auth_otp"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "employee_id"
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["employee_id"], name: "index_users_on_employee_id"

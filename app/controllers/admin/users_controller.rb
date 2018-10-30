@@ -12,9 +12,8 @@ class Admin::UsersController < ApplicationController
   end
 
   def create_employee_user
-    @user = User.new(user_params)
+    @user = @employee.build_user(user_params)
 
-    # If record was saved
     if @user.save
       redirect_to [:admin, @employee], notice: "Usuario creado"
 

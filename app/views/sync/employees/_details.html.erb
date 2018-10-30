@@ -9,14 +9,20 @@
         <!-- End Heading -->
       </div>
 
-      <div class="col-xs-12 col-lg-4">
+      <div class="col-xs-12 col-lg-4 text-right">
         <!-- Export button-->
-        <div class="btn-new-container">
+        <div class="btn-container inline">
           <%= link_to (admin_employee_path(employee, format: "pdf", lang: I18n.locale)), target: "_blank", class: "btn btn-general" do %><i class="fas fa-download"></i> <span><%= t("views.index.export") %></span><% end %>
-
-            <%= link_to (admin_new_employee_user_path(employee)), class: "btn btn-general" do %><i class="fas fa-download"></i> <span><%= t("views.index.create_user") %></span><% end %>
         </div>
         <!-- End Export button-->
+
+        <!-- Create user button -->
+        <%if !employee.user.present? %>
+        <div class="btn-container inline">
+          <%= link_to (admin_new_employee_user_path(employee)), class: "btn btn-general" do %><i class="fas fa-download"></i> <span><%= t("views.index.create_user") %></span><% end %>
+        </div>
+        <% end %>
+        <!-- End Create user button -->
       </div>
     </div>
     <!-- End Title -->

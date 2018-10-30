@@ -4,7 +4,7 @@
 
 .index{
   &.index-pdf{
-    padding-top: 10px; 
+    padding-top: 10px;
   }
 
   .search-record{
@@ -60,19 +60,17 @@
     }
   }
 
-  .show-buttons{
-    .btn-container{
-      text-align: center;
-      margin-bottom: 15px;
+  .btn-container{
+    text-align: center;
+    padding-bottom: 15px;
 
-      &:last-child{
-        margin-bottom: 0px;
-      }
+    &:last-child{
+      padding-bottom: 0px;
+    }
 
-      .btn-general{
-        i{
-          padding-right: 5px;
-        }
+    .btn-general{
+      i{
+        padding-right: 5px;
       }
     }
   }
@@ -156,8 +154,10 @@
               padding-right: 0px;
             }
 
-            &:before{
-              display: none;
+            >.record-link{
+              &:before{
+                display: none;
+              }
             }
           }
         }
@@ -195,7 +195,7 @@
         padding: 0px 15px;
 
         margin-top: 15px;
-        cursor: pointer;
+        // cursor: pointer;
 
         -webkit-box-shadow: none;
         box-shadow: none;
@@ -252,19 +252,33 @@
         }
 
         >td{
+          padding: 0px;
+
+          >.record-link{
+            padding: 8px;
+            display: block;
+
+            &:before{
+              content: attr(data-header);
+              display: block;
+              font-weight: bold;
+              padding-bottom: 5px;
+            }
+
+            @include on-event(true){
+              color: $text-color;
+              -webkit-transition: all 0s ease 0s;
+              transition: all 0s ease 0s;
+              text-decoration: none;
+            }
+          }
+
           p{
             margin: 0px;
           }
 
           &:first-child{
             border-top: none;
-          }
-
-          &:before{
-            content: attr(data-header);
-            display: block;
-            font-weight: bold;
-            padding-bottom: 5px;
           }
         }
       }
@@ -331,17 +345,13 @@
       padding-bottom: 15px;
     }
 
-    .show-buttons{
-      text-align: right;
+    .btn-container{
+      padding-bottom: 0px;
+      padding-right: 10px;
+      display: inline-block;
 
-      .btn-container{
-        margin-bottom: 0px;
-        display: inline-block;
-        padding-right: 10px;
-
-        &:last-child{
-          padding-right: 0px;
-        }
+      &:last-child{
+        padding-right: 0px;
       }
     }
 
@@ -374,8 +384,10 @@
               border-top: 1px solid #ddd;
             }
 
-            &:before{
-              display: none;
+            >.record-link{
+              &:before{
+                display: none;
+              }
             }
           }
         }
