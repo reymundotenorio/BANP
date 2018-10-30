@@ -1,6 +1,6 @@
 class User < ApplicationRecord
   # Associations
-  belongs_to :employee, optional: true, foreign_key: "email", primary_key: "email"
+  belongs_to :employee, optional: true
   # belongs_to :costumer, optional: true, inverse_of: :user,
 
   validates :email, uniqueness: true

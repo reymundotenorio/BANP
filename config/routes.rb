@@ -21,7 +21,7 @@ Rails.application.routes.draw do
 
     # Users
     get "/user/:id/assign", to: "users#new_employee_user", as: "new_employee_user"
-    patch "/user/:id", to: "user#create_employee_user", as: "create_employee_user"
+    post "/user/:id", to: "users#create_employee_user", as: "create_employee_user"
     # End Users
 
     # Authentications

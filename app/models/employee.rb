@@ -1,6 +1,6 @@
 class Employee < ApplicationRecord
   # Association
-  has_one :user, foreign_key: "email", primary_key: "email"
+  has_one :user
 
   # Search
   def self.search(search, show_all)

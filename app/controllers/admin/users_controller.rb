@@ -4,7 +4,7 @@ class Admin::UsersController < ApplicationController
   # End Admin layout
 
   # Find employees with Friendly_ID
-  before_action :set_employee, only: [:new_employee_user, :new_employee_user]
+  before_action :set_employee, only: [:new_employee_user, :create_employee_user]
   # End Find employees with Friendly_ID
 
   def new_employee_user
@@ -20,7 +20,7 @@ class Admin::UsersController < ApplicationController
 
       # If record was not saved
     else
-      render :new_user_employee
+      render :new_employee_user
     end
   end
 
@@ -35,6 +35,6 @@ class Admin::UsersController < ApplicationController
 
   # User params
   def user_params
-    params.require(:user).permit(:password, :password_confirmation)
+    params.require(:user).permit(:email, :password, :password_confirmation)
   end
 end

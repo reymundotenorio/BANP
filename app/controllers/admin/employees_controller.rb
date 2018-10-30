@@ -19,11 +19,10 @@ class Admin::EmployeesController < ApplicationController
   # /employees
   def index
     @employees = Employee.search(params[:search], params[:show]).paginate(page: params[:page], per_page: 15) # Employees with pagination
-
     @show_all = params[:show] == "all" ? true : false # View All (Enabled and Disabled)
 
+    # Set language
     current_lang = params[:lang]
-
     I18n.locale = current_lang
 
     datetime =  Time.zone.now
