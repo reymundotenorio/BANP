@@ -123,6 +123,7 @@ en:
       disabled: "Disabled"
       confirmed: "Confirmed"
       not_confirmed: "Not confirmed"
+      create_user: "Create user"
     new:
       new: "New"
     edit:

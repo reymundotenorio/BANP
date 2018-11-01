@@ -5,16 +5,16 @@
     <div class="row title-container">
       <div class="col-xs-12 col-lg-10">
         <!-- Heading -->
-        <h1 class=""><i class="fas fa-plus"></i> <%= t("views.new.new") %></h1>
+        <h1 class=""><i class="fas fa-user"></i> <%= t("views.show.create_user") %></h1>
         <!-- End Heading -->
       </div>
 
       <div class="col-xs-12 col-lg-2">
-        <!-- List button-->
-        <div class="btn-new-container">
-          <%= link_to (admin_employees_path), class: "btn btn-general" do %><i class="fas fa-list-alt"></i> <span><%= t("header.navigation.employees") %></span><% end %>
+        <!-- Employee button -->
+        <div class="btn-container">
+          <%= link_to (admin_employee_path(@employee)), class: "btn btn-general" do %><i class="fas fa-id-card"></i> <span><%= t("activerecord.models.employee") %></span><% end %>
         </div>
-        <!-- End List button-->
+        <!-- End Employee button -->
       </div>
     </div>
     <!-- End Title -->
@@ -32,8 +32,12 @@
               <%= link_to (admin_employees_path) do %><i class="fas fa-list-alt"></i> <span><%= t("header.navigation.employees") %></span><% end %>
             </li>
 
+            <li>
+              <%= link_to (admin_employee_path(@employee)) do %><i class="fas fa-id-card"></i> <span><%= @employee.first_name %> <%= @employee.last_name %></span><% end %>
+            </li>
+
             <li class="active">
-              <i class="fas fa-plus"></i> <%= t("views.new.new") %>
+              <i class="fas fa-user"></i> <%= t("views.show.create_user") %>
             </li>
           </ol>
         </div>
