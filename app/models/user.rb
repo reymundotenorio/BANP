@@ -2,10 +2,9 @@ class User < ApplicationRecord
   # Associations
   belongs_to :employee, optional: true
   audited associated_with: :employee
-  
+    
   # belongs_to :costumer, optional: true, inverse_of: :user,
   
-
   validates :email, uniqueness: true
 
   # Secure password
@@ -49,6 +48,7 @@ class User < ApplicationRecord
 
   # Render sync
   sync :all
+  sync_touch :employee
   # End Render sync
 
   ## Callbacks
