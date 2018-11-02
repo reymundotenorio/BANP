@@ -14,6 +14,7 @@ class Admin::UsersController < ApplicationController
 
   # /employee/:id/update-password
   def employee_update_password
+    @user = @employee.user
   end
 
   def create_employee_user
@@ -30,7 +31,9 @@ class Admin::UsersController < ApplicationController
 
   # Change password
   def employee_change_password
-    if @employee.user.update(user_params)
+    @user = @employee.user
+
+    if @user.update(user_params)
       redirect_to [:admin, @employee], notice: t("views.mailer.password_updated")
 
     else
