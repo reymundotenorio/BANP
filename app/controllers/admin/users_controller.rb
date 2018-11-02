@@ -16,16 +16,6 @@ class Admin::UsersController < ApplicationController
   def employee_update_password
   end
 
-  # Change password
-  def employee_change_password
-    if @employee.user.update(employee_params)
-      redirect_to [:admin, @employee], notice: t("views.mailer.password_updated")
-
-    else
-      render :update_password
-    end
-  end
-
   def create_employee_user
     @user = @employee.build_user(user_params)
 
@@ -35,6 +25,16 @@ class Admin::UsersController < ApplicationController
       # If record was not saved
     else
       render :new_employee_user
+    end
+  end
+
+  # Change password
+  def employee_change_password
+    if @employee.user.update(user_params)
+      redirect_to [:admin, @employee], notice: t("views.mailer.password_updated")
+
+    else
+      render :employee_update_password
     end
   end
 
