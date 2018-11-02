@@ -1,6 +1,8 @@
 class User < ApplicationRecord
   # Associations
   belongs_to :employee, optional: true
+  audited associated_with: :employee
+  
   # belongs_to :costumer, optional: true, inverse_of: :user,
   
 

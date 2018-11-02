@@ -1,6 +1,7 @@
 class Employee < ApplicationRecord
   # Association
   has_one :user
+  has_associated_audits
 
   # Search
   def self.search(search, show_all)

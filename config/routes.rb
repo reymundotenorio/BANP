@@ -21,37 +21,39 @@ Rails.application.routes.draw do
 
     # Employee/Users
     get "/employee/:id/create-user", to: "users#new_employee_user", as: "new_employee_user"
+    get "/employee/:id/update-password", to: "users#employee_update_password", as: "update_password_employee"
     post "/employee/:id", to: "users#create_employee_user", as: "create_employee_user"
+    patch "/employee/:id/change-password", to: "users#employee_change_password", as: "change_password_employee"
     # End Employee/Users
 
     # Authentications
 
     # Notifications
-    get "/authentication/notifications" => "authentication/notifications#index", as: "auth_notifications"
+    get "/authentication/notifications", to: "authentication/notifications#index", as: "auth_notifications"
 
     # Sessions
-    get "/sign-in" => "authentication/sessions#new", as: "sign_in"
-    get "/two-factor" => "authentication/sessions#two_factor", as: "two_factor"
-    post "/sign-in" => "authentication/sessions#create", as: "sign_in_employee"
-    post "/two-factor" => "authentication/sessions#two_factor_auth", as: "two_factor_auth"
-    patch "/resend-otp" => "authentication/sessions#resend_otp", as: "resend_otp"
-    delete "/sign-out" => "authentication/sessions#destroy", as: "sign_out"
+    get "/sign-in", to: "authentication/sessions#new", as: "sign_in"
+    get "/two-factor", to: "authentication/sessions#two_factor", as: "two_factor"
+    post "/sign-in", to: "authentication/sessions#create", as: "sign_in_employee"
+    post "/two-factor", to: "authentication/sessions#two_factor_auth", as: "two_factor_auth"
+    patch "/resend-otp", to: "authentication/sessions#resend_otp", as: "resend_otp"
+    delete "/sign-out", to: "authentication/sessions#destroy", as: "sign_out"
 
     # Confirmations
-    get '/confirm-account' => 'authentication/confirmations#new', as: 'confirm_account'
-    get '/confirm-employee-account/:confirmation_token' => 'authentication/confirmations#show', as: 'confirm_employee_account'
-    post "/confirm-account" => "authentication/confirmations#send_confirmation_email", as: "resend_confirmation"
+    get '/confirm-account', to: 'authentication/confirmations#new', as: 'confirm_account'
+    get '/confirm-employee-account/:confirmation_token', to: 'authentication/confirmations#show', as: 'confirm_employee_account'
+    post "/confirm-account", to: "authentication/confirmations#send_confirmation_email", as: "resend_confirmation"
 
     # Unlocks
-    get '/unlock-account' => 'authentication/unlocks#new', as: 'unlock_account'
-    get '/unlock-employee-account/:unlock_token' => 'authentication/unlocks#show', as: 'unlock_employee_account'
-    post "/unlock-account" => "authentication/unlocks#send_unlock_email", as: "resend_unlock"
+    get '/unlock-account', to: 'authentication/unlocks#new', as: 'unlock_account'
+    get '/unlock-employee-account/:unlock_token', to: 'authentication/unlocks#show', as: 'unlock_employee_account'
+    post "/unlock-account", to: "authentication/unlocks#send_unlock_email", as: "resend_unlock"
 
     # Passwords
-    get "/reset-password" => "authentication/passwords#new", as: "reset_password"
-    get "/reset-employee-password/:reset_password_token" => "authentication/passwords#show", as: "reset_employee_password"
-    post "/reset-password" => "authentication/passwords#send_reset_password_email", as: "resend_reset_password"
-    patch "/reset-employee-password" => "authentication/passwords#update_password", as: "update_password"
+    get "/reset-password", to: "authentication/passwords#new", as: "reset_password"
+    get "/reset-employee-password/:reset_password_token", to: "authentication/passwords#show", as: "reset_employee_password"
+    post "/reset-password", to: "authentication/passwords#send_reset_password_email", as: "resend_reset_password"
+    patch "/reset-employee-password", to: "authentication/passwords#update_password", as: "update_password"
 
     # End Authentications
 
@@ -61,12 +63,10 @@ Rails.application.routes.draw do
     get "/employee/:id", to: "employees#show", as: "employee"
     get "/employee/:id/edit", to: "employees#edit", as: "edit_employee"
     get "/employee/:id/history", to: "employees#history", as: "history_employee"
-    get "/employee/:id/update-password" => "employees#update_password", as: "update_password_employee"
     post "/employees", to: "employees#create"
     patch "/employee/:id", to: "employees#update", as: "update_employee"
     patch "/employees/:id/active", to: "employees#active", as: "active_employee"
     patch "/employees/:id/deactive", to: "employees#deactive", as: "deactive_employee"
-    patch "/employee/:id/update-password" => "employees#change_password", as: "change_password_employee"
     # End Employees
 
     # Providers

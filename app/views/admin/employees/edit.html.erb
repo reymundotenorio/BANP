@@ -10,16 +10,8 @@
       </div>
 
       <div class="col-xs-12 col-sm-8 col-lg-4 text-right">
-        <% if @employee.user.present? %>
-        <!-- Update password button-->
-        <div class="btn-container inline">
-          <%= link_to (admin_update_password_employee_path(@employee)), class: "btn btn-general" do %><i class="fas fa-key"></i> <span><%= t("views.edit.update_password") %></span><% end %>
-        </div>
-        <!-- End Update password button-->
-        <% end %>
-
         <!-- Employee button -->
-        <div class="btn-container inline">
+        <div class="btn-container">
           <%= link_to (admin_employee_path(@employee)), class: "btn btn-general" do %><i class="fas fa-id-card"></i> <span><%= t("activerecord.models.employee") %></span><% end %>
         </div>
         <!-- End Employee button -->

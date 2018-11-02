@@ -77,10 +77,6 @@ class Admin::EmployeesController < ApplicationController
     # Employee found by before_action
   end
 
-  # /employee/:id/update-password
-  def update_password
-  end
-
   # Create
   def create
     @employee = Employee.new(employee_params)
@@ -134,38 +130,6 @@ class Admin::EmployeesController < ApplicationController
 
     else
       redirect_to_back(false, admin_employees_path, "employee", "error")
-    end
-  end
-
-  # Change password
-  def change_password
-    if @employee.update(employee_params)
-      redirect_to [:admin, @employee], notice: t("views.mailer.password_updated")
-    else
-      render :update_password
-    end
-  end
-
-  # Send unlock email to the user
-  def send_confirmation_email
-    # Generate random token
-    generate_token
-
-    @employee.update_attribute(:confirmation_sent, true)
-    @employee.update_attribute(:confirmation_token, @token)
-
-    ip = request.remote_ip
-    location = Geocoder.search(ip).first.country
-
-    # Send email
-    AuthenticationMailer.confirmation_instructions(@employee, @token, I18n.locale, ip, location).deliver
-  end
-
-  # Generate token
-  def generate_token
-    loop do
-      @token = SecureRandom.hex(15)
-      break @token unless Employee.where(confirmation_token: @token).exists?
     end
   end
 

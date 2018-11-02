@@ -10,15 +10,11 @@
       </div>
 
       <div class="col-xs-12 col-lg-2">
-        <!-- Export button-->
-        <div class="btn-new-container">
-          <!-- New button-->
-          <div class="btn-new-container">
-            <%= link_to (admin_employee_path(@employee)), class: "btn btn-general" do %><i class="fas fa-id-card"></i> <span><%= t("activerecord.models.employee") %></span><% end %>
-          </div>
-          <!-- End New button-->
+        <!-- Employee button -->
+        <div class="btn-container">
+          <%= link_to (admin_employee_path(@employee)), class: "btn btn-general" do %><i class="fas fa-id-card"></i> <span><%= t("activerecord.models.employee") %></span><% end %>
         </div>
-        <!-- End Export button-->
+        <!-- End Employee button -->
       </div>
     </div>
     <!-- End Title -->
@@ -121,8 +117,12 @@
                       <!-- Attribute and Changes -->
                       <% audit.audited_changes.each do |attribute, changes| %>
 
+                      <% #excluded_attr = ["slug", "image_updated_at", "password_digest", "reset_password_token", "reset_password_sent_at", "confirmation_token", "confirmation_sent_at", "failed_attempts", "unlock_token", "locked_at"]  %>
+
+                      <% excluded_attr = [""]  %>
+
                       <!-- Excluding some information -->
-                      <% if attribute != "slug" and attribute != "image_updated_at" and attribute != "password_digest" and attribute != "reset_password_token" and attribute != "reset_password_sent_at" and attribute != "confirmation_token" and attribute != "confirmation_sent_at" and attribute != "failed_attempts" and attribute != "unlock_token" and attribute != "locked_at" %>
+                      <% if !excluded_attr.include? attribute  %>
 
                       <div class="info">
                         <p class="title"><b><%= Employee.human_attribute_name(attribute) %></b></p>
