@@ -7,6 +7,10 @@ class Admin::UsersController < ApplicationController
   before_action :set_employee, only: [:new_employee_user, :create_employee_user, :employee_update_password, :employee_change_password]
   # End Find employees with Friendly_ID
 
+  # Sync model DSL
+  enable_sync only: [:create_employee_user, :employee_change_password, :send_confirmation_email]
+  # End Sync model DSL
+
   # /employee/:id/create-user
   def new_employee_user
     @user = User.new
@@ -19,7 +23,7 @@ class Admin::UsersController < ApplicationController
 
   def create_employee_user
     @user = @employee.build_user(user_params)
-
+    
     if @user.save
       redirect_to [:admin, @employee], notice: "Usuario creado"
 

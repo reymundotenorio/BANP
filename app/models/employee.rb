@@ -3,6 +3,14 @@ class Employee < ApplicationRecord
   has_one :user
   has_associated_audits
 
+  # Audit
+  audited
+  # End Audit
+
+  # Render sync
+  sync :all
+  # End Render sync
+
   # Search
   def self.search(search, show_all)
     if search
@@ -106,14 +114,6 @@ class Employee < ApplicationRecord
   ## Scopes
   scope :enabled, -> { where(state: true) }
   ## End Scopes
-
-  # Audit
-  audited
-  # End Audit
-
-  # Render sync
-  sync :all
-  # End Render sync
 
   ## Callbacks
 

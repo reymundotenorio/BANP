@@ -1,14 +1,41 @@
 class User < ApplicationRecord
-  # Associations
-  belongs_to :employee, optional: true
-  audited associated_with: :employee
-    
-  # belongs_to :costumer, optional: true, inverse_of: :user,
-  
-  validates :email, uniqueness: true
-
   # Secure password
   has_secure_password validations: false
+
+  # Associations
+  belongs_to :employee, optional: true
+
+  # Audit
+  # audited
+  audited associated_with: :employee
+  # End Audit
+
+  # Render sync
+  sync :all
+  sync_touch :employee
+  # End Render sync
+
+  ## Friendly_ID
+
+  extend FriendlyId
+  friendly_id :slug_candidates, use: :slugged
+
+  # Friendly_ID slug_candidates
+  def slug_candidates
+    [
+      [:email],
+      [:email, :id]
+    ]
+  end
+
+  # Update Friendly_ID slug
+  def should_generate_new_friendly_id?
+    slug.blank? || email_changed?
+  end
+  # End Update Friendly_ID slug
+
+  ## End Friendly_ID
+
 
   ## Validations
 
@@ -38,18 +65,10 @@ class User < ApplicationRecord
 
   ## End Validations
 
+
   ## Scopes
   scope :enabled, -> { where(state: true) }
   ## End Scopes
-
-  # Audit
-  audited
-  # End Audit
-
-  # Render sync
-  sync :all
-  sync_touch :employee
-  # End Render sync
 
   ## Callbacks
 
