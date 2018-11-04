@@ -14,16 +14,18 @@ class Admin::UsersController < ApplicationController
   # /employee/:id/create-user
   def new_employee_user
     @user = User.new
+    @form_url = admin_create_employee_user_path
   end
 
   # /employee/:id/update-password
   def employee_update_password
     @user = @employee.user
+    @form_url = admin_change_password_employee_path
   end
 
   def create_employee_user
     @user = @employee.build_user(user_params)
-    
+
     if @user.save
       redirect_to [:admin, @employee], notice: "Usuario creado"
 

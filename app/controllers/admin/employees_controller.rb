@@ -77,7 +77,7 @@ class Admin::EmployeesController < ApplicationController
     # Employee found by before_action
 
     @history = @employee.associated_audits
-    @history << @employee.audits
+    @history.push(@employee.audits)
   end
 
   # Create
