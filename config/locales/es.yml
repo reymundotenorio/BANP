@@ -133,6 +133,7 @@ es:
       update_password: "Actualizar contraseña"
     history:
       history: "Historial"
+      confidential_info: "Información confidencial"
     form:
       the_information_could_not_be_saved: "No se ha podido guardar la información."
       error_found: "error encontrado:"

@@ -89,7 +89,7 @@ gem "faker", git: "https://github.com/stympy/faker.git", branch: "master"
 gem "friendly_id", "~> 5.2"
 
 # Audited - Audits models
-gem "audited", "~> 4.2", ">= 4.2.1"
+gem "audited", "~> 4.7"
 
 # Will Paginate - Pagination
 gem "will_paginate", "~> 3.1", ">= 3.1.5"

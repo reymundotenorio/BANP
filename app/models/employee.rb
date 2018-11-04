@@ -1,9 +1,9 @@
 class Employee < ApplicationRecord
   # Association
   has_one :user
-  has_associated_audits
 
   # Audit
+  has_associated_audits
   audited
   # End Audit
 

@@ -75,6 +75,9 @@ class Admin::EmployeesController < ApplicationController
   # /employee/:id/history
   def history
     # Employee found by before_action
+
+    @history = @employee.associated_audits
+    @history << @employee.audits
   end
 
   # Create

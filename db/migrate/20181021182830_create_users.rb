@@ -2,6 +2,7 @@ class CreateUsers < ActiveRecord::Migration[5.2]
   def change
     create_table :users do |t|
       t.string :email, null: false
+      t.string :slug, unique: true # Friendly_id slug
 
       # t.references :costumber, foreign_key: true
 
@@ -35,7 +36,7 @@ class CreateUsers < ActiveRecord::Migration[5.2]
 
       t.timestamps
     end
-    
+
     add_reference :users, :employee, index: true, foreign_key: true
 
     add_index :users, :email, unique: true

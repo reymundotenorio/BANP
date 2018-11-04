@@ -304,7 +304,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  audited (~> 4.2, >= 4.2.1)
+  audited (~> 4.7)
   aws-sdk-s3
   bcrypt (~> 3.1.7)
   better_errors
