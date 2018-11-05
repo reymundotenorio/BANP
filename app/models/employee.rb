@@ -11,6 +11,30 @@ class Employee < ApplicationRecord
   sync :all
   # End Render sync
 
+  after_save :update_user_email
+
+  def update_user_email
+    if self.user.present?
+      if self.user.update(email: self.email)
+      else
+        # errors.add(:email, :blank, message: "User email not updated")
+      end
+    end
+  end
+
+
+  validate  :user_email
+
+  def user_email
+    if self.user.present?
+      user = User.find_by(email: self.email)
+
+      if !user.nil? && user.employee_id != self.id
+        errors.add(:email, :blank, message: "User email not updated")
+      end
+    end
+  end
+
   # Search
   def self.search(search, show_all)
     if search

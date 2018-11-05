@@ -27,7 +27,7 @@ class ApplicationController < ActionController::Base
   end
 
   # Verify employee state
-  def employee_enabled?
+  def employee_enabled
     if @employee.state
       return true
 
@@ -37,22 +37,22 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  # Verify employee confirmation
-  def employee_confirmed?(redirect_resend = true)
-    if @employee.confirmed
+  # Verify user confirmation
+  def user_confirmed?(redirect_resend = true)
+    if @user.confirmed
       return true
 
     else
-      redirect_to admin_confirm_account_path(email: @employee.email), alert: t("views.authentication.account_not_confirmed_resend", email: @employee.email) if redirect_resend
+      redirect_to admin_confirm_account_path(email: @user.email), alert: t("views.authentication.account_not_confirmed_resend", email: @user.email) if redirect_resend
 
       return false
     end
   end
 
-  # Verify employee block status
-  def employee_locked?(redirect_resend = true)
-    if @employee.failed_attempts >= $max_failed_attempts
-      redirect_to admin_unlock_account_path(email: @employee.email), alert: t("views.authentication.account_locked_resend", email: @employee.email) if redirect_resend
+  # Verify user block status
+  def user_locked?(redirect_resend = true)
+    if @user.failed_attempts >= $max_failed_attempts
+      redirect_to admin_unlock_account_path(email: @user.email), alert: t("views.authentication.account_locked_resend", email: @user.email) if redirect_resend
       return true
 
     else
