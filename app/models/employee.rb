@@ -11,27 +11,13 @@ class Employee < ApplicationRecord
   sync :all
   # End Render sync
 
+  # Execute after record is saved on the Database
   after_save :update_user_email
 
+  # Update the email of the user associated
   def update_user_email
     if self.user.present?
-      if self.user.update(email: self.email)
-      else
-        # errors.add(:email, :blank, message: "User email not updated")
-      end
-    end
-  end
-
-
-  validate  :user_email
-
-  def user_email
-    if self.user.present?
-      user = User.find_by(email: self.email)
-
-      if !user.nil? && user.employee_id != self.id
-        errors.add(:email, :blank, message: "User email not updated")
-      end
+      self.user.update(email: self.email)
     end
   end
 
@@ -106,7 +92,21 @@ class Employee < ApplicationRecord
   # Validate file type
   def correct_image_type
     if image.attached? && !image.content_type.in?(%w(image/jpeg image/gif image/png))
-      errors.add(:image, 'Must be a image file')
+      errors.add(:image, :blank, message: I18n.t("validates.image_format"))
+    end
+  end
+
+# User email validation
+  validate  :user_email
+
+  # Validate that email does not exist in the users records
+  def user_email
+    if self.user.present?
+      user = User.find_by(email: self.email)
+
+      if !user.nil? && user.employee_id != self.id
+        errors.add(:email, :blank, message: I18n.t("validates.user_email_taken"))
+      end
     end
   end
 

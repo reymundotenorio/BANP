@@ -99,8 +99,9 @@ es:
 
   # Validates - Image
   validates:
-    image_format: "Formato de la imagen inválido, debe ser .jpg, .gif, .png"
-    image_size: "Tamaño de la imagen excede los 5MB"
+    image_format: "formato inválido"
+    image_size: "tamaño excede los 2MB"
+    user_email_taken: "ya está en uso por otro usuario"
 
   # Views
   views:
