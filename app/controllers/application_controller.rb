@@ -27,12 +27,24 @@ class ApplicationController < ActionController::Base
   end
 
   # Verify employee state
-  def employee_enabled
+  def employee_enabled?
     if @employee.state
       return true
 
     else
       redirect_to admin_auth_notifications_path(found: false), alert: t("views.authentication.account_disabled", email: @employee.email)
+      return false
+    end
+  end
+
+  # Verify if user is employee
+  def user_is_employee?
+    if @user.employee.present?
+      @employee = @user.employee
+      return true
+
+    else
+      redirect_to admin_auth_notifications_path(found: false), alert: "User must be an employee"
       return false
     end
   end

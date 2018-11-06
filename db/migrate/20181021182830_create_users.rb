@@ -22,6 +22,7 @@ class CreateUsers < ActiveRecord::Migration[5.2]
       t.string :last_sign_in_ip
 
       # Confirmable
+      t.boolean :confirmed, default: false, null: false
       t.string :confirmation_token
       t.boolean :confirmation_sent, default: false, null: false
 
