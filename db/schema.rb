@@ -61,7 +61,6 @@ ActiveRecord::Schema.define(version: 2018_10_21_182830) do
     t.string "email", null: false
     t.string "phone", limit: 14
     t.string "role", null: false
-    t.boolean "confirmed", default: false, null: false
     t.boolean "state", default: true, null: false
     t.string "slug"
     t.datetime "created_at", null: false
@@ -93,6 +92,7 @@ ActiveRecord::Schema.define(version: 2018_10_21_182830) do
     t.datetime "last_sign_in_at"
     t.string "current_sign_in_ip"
     t.string "last_sign_in_ip"
+    t.boolean "confirmed", default: false, null: false
     t.string "confirmation_token"
     t.boolean "confirmation_sent", default: false, null: false
     t.integer "failed_attempts", default: 0, null: false
