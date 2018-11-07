@@ -22,8 +22,8 @@ Rails.application.routes.draw do
     # Employee/Users
     get "/employee/:id/create-user", to: "users#new_employee_user", as: "new_employee_user"
     get "/employee/:id/update-password", to: "users#employee_update_password", as: "update_password_employee"
-    post "/employee/:id", to: "users#create_employee_user", as: "create_employee_user"
-    patch "/employee/:id/change-password", to: "users#employee_change_password", as: "change_password_employee"
+    post "/employee/:id/create-user", to: "users#create_employee_user", as: "create_employee_user"
+    patch "/employee/:id/update-password", to: "users#employee_change_password", as: "change_password_employee"
     # End Employee/Users
 
     # Authentications

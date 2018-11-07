@@ -3,9 +3,9 @@ class Admin::UsersController < ApplicationController
   layout "admin/application"
   # End Admin layout
 
-  # Find employees with Friendly_ID
+  # Find employee with Friendly_ID
   before_action :set_employee, only: [:new_employee_user, :create_employee_user, :employee_update_password, :employee_change_password]
-  # End Find employees with Friendly_ID
+  # End Find employee with Friendly_ID
 
   # Sync model DSL
   enable_sync only: [:create_employee_user, :employee_change_password, :send_confirmation_email]
@@ -28,9 +28,10 @@ class Admin::UsersController < ApplicationController
 
     if @user.save
       redirect_to [:admin, @employee], notice: "Usuario creado"
-
+      
       # If record was not saved
     else
+      @form_url = admin_create_employee_user_path
       render :new_employee_user
     end
   end
@@ -43,6 +44,7 @@ class Admin::UsersController < ApplicationController
       redirect_to [:admin, @employee], notice: t("views.mailer.password_updated")
 
     else
+      @form_url = admin_change_password_employee_path
       render :employee_update_password
     end
   end
