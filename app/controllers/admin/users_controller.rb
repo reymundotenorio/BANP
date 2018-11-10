@@ -13,6 +13,10 @@ class Admin::UsersController < ApplicationController
 
   # /employee/:id/create-user
   def new_employee_user
+    if @employee.user.present?
+      redirect_to admin_employee_path(@employee), alert: "Usuario ya existe"
+    end
+    
     @user = User.new
     @form_url = admin_create_employee_user_path
   end
