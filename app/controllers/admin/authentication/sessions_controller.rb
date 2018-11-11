@@ -165,7 +165,7 @@ class Admin::Authentication::SessionsController < ApplicationController
     # End if user exists
   end
 
-  # Set User with two factor authentication
+  # Set user with two factor authentication
   def set_user_with_two_factor
     @user = User.find(session[:employee_id]) if session[:employee_id] && session[:session_confirmed] == false
 
@@ -180,6 +180,11 @@ class Admin::Authentication::SessionsController < ApplicationController
 
   def resend_otp
     set_user_with_two_factor
+
+    # Verify if user is not employee
+    if !user_is_employee?
+      return
+    end
 
     generate_otp
     @user.update(two_factor_auth_otp: @OTP)
@@ -204,7 +209,7 @@ class Admin::Authentication::SessionsController < ApplicationController
     return
   end
 
-  # Set User
+  # Set user
   def set_user
     email = params[:sign_in][:email]
     email = email.strip.downcase
@@ -295,7 +300,7 @@ class Admin::Authentication::SessionsController < ApplicationController
 
     # Render Sync with external controller
     sync_update @user
-    
+
     failed_attempts
   end
 

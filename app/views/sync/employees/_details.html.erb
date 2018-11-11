@@ -115,22 +115,41 @@
               <div class="detail-info <%= employee.state %>">
                 <% attributes = ["email" ,"phone", "role", "state"] %>
 
-                <% attributes += ["confirmed", "sign_in_count", "current_sign_in_at", "last_sign_in_at", "current_sign_in_ip", "last_sign_in_ip"] if employee.user.present? %>
-
                 <% attributes.each do |attribute| %>
+
                 <div class="info">
                   <p class="title"><b><%= t("activerecord.attributes.employee.#{attribute}") %></b></p>
 
                   <% if attribute == "state" %>
                   <p><%= employee["#{attribute}"] ? t("views.show.enabled") : t("views.show.disabled") %></p>
 
-                  <% elsif attribute == "confirmed" %>
-                  <p><%= employee["#{attribute}"] ? t("views.show.confirmed") : t("views.show.not_confirmed") %></p>
-
                   <% else %>
                   <p><%= employee["#{attribute}"] %></p>
                   <% end %>
                 </div>
+
+                <% end %>
+
+                <% user_attributes = ["confirmed", "sign_in_count", "current_sign_in_at", "current_sign_in_ip", "last_sign_in_at", "last_sign_in_ip"] %>
+
+                <% if employee.user.present? %>
+                <% user_attributes.each do |attribute| %>
+
+                <div class="info">
+                  <p class="title"><b><%= t("activerecord.attributes.user.#{attribute}") %></b></p>
+
+                  <% if attribute == "confirmed" %>
+                  <p><%= employee.user["#{attribute}"] ? t("views.show.confirmed") : t("views.show.not_confirmed") %></p>
+
+                  <% elsif attribute == "current_sign_in_at" || attribute == "last_sign_in_at"  %>
+                  <p><%= format_datetime(employee.user["#{attribute}"]) %></p>
+
+                  <% else %>
+                  <p><%= employee.user["#{attribute}"] %></p>
+                  <% end %>
+                </div>
+
+                <% end %>
                 <% end %>
               </div>
             </div>

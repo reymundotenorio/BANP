@@ -14,7 +14,11 @@ class Admin::Authentication::ConfirmationsController < ApplicationController
     @token = params[:confirmation_token]
 
     # If token has been found
-    if set_employee
+    if set_user
+      # Verify if user is not employee
+      if !user_is_employee?
+        return
+      end
 
       # If user is disabled
       if !employee_enabled?
@@ -22,50 +26,46 @@ class Admin::Authentication::ConfirmationsController < ApplicationController
       end
 
       # If user has exceeded the max of failed attemps
-      if employee_locked?
+      if user_locked?
         return
       end
 
       # If user is not confirmed yet
-      if !employee_confirmed?(false)
-        @employee.update(confirmed: true)
-        @employee.update(confirmation_sent: false)
+      if !user_confirmed?(false)
+        @user.update(confirmed: true)
+        @user.update(confirmation_sent: false)
 
         # If employee is not a client
-        if @employee.role != "client"
+        generate_token_password
+        @user.update(reset_password_sent: false)
+        @user.update(reset_password_token: @token_password)
+        @user.update(reset_password_sent_at: nil)
 
-          generate_token_password
-          @employee.update(reset_password_sent: false)
-          @employee.update(reset_password_token: @token_password)
-          @employee.update(reset_password_sent_at: nil)
+        # Render Sync with external controller
+        sync_update @user
 
-          # Render Sync with external controller
-          sync_update @employee
-
-          redirect_to admin_reset_employee_password_path(reset_password_token: @token_password, employee_password: true), notice: t("views.authentication.successfully_confirmed", email: @employee.email)
-          return
-
-          # If employee is a client
-        else
-          # Render Sync with external controller
-          sync_update @employee
-
-          redirect_to admin_auth_notifications_path, notice: t("views.authentication.successfully_confirmed", email: @employee.email)
-        end
+        redirect_to admin_reset_employee_password_path(reset_password_token: @token_password, employee_password: true), notice: t("views.authentication.successfully_confirmed", email: @user.email)
         return
+
+        # If employee is a client
+        # Render Sync with external controller
+        # sync_update @user
+
+        # redirect_to admin_auth_notifications_path, notice: t("views.authentication.successfully_confirmed", email: @user.email)
+        # return
 
         # If user is already confirmed
       else
-        redirect_to admin_auth_notifications_path, notice:  t("views.authentication.account_confirmed", email: @employee.email)
+        redirect_to admin_auth_notifications_path, notice:  t("views.authentication.account_confirmed", email: @user.email)
         return
       end
     end
     # End If token has been found
   end
 
-  # Set Employee
-  def set_employee
-    if @employee = Employee.find_by(confirmation_token: @token)
+  # Set user
+  def set_user
+    if @user = User.find_by(confirmation_token: @token)
       return true
 
     else
@@ -86,14 +86,19 @@ class Admin::Authentication::ConfirmationsController < ApplicationController
     end
 
     # If email has been found
-    if @employee = Employee.find_by(email: email)
-      # If user is disabled
+    if @user = User.find_by(email: email)
+      # Verify if user is not employee
+      if !user_is_employee?
+        return
+      end
+
+      # If employee is disabled
       if !employee_enabled?
         return
       end
 
       # If user has exceeded the max of failed attemps
-      if employee_locked?
+      if user_locked?
         return
       end
 
@@ -106,19 +111,19 @@ class Admin::Authentication::ConfirmationsController < ApplicationController
     # Generate random token
     generate_token
 
-    @employee.update(confirmation_sent: true)
-    @employee.update(confirmation_token: @token)
+    @user.update(confirmation_sent: true)
+    @user.update(confirmation_token: @token)
 
     # Render Sync with external controller
-    sync_update @employee
+    sync_update @user
 
     ip = request.remote_ip
     location = Geocoder.search(ip).first.country
 
     # Send email
-    AuthenticationMailer.confirmation_instructions(@employee, @token, I18n.locale, ip, location).deliver
+    AuthenticationMailer.confirmation_instructions(@user, @token, I18n.locale, ip, location).deliver
 
-    flash.now[:notice] = t("views.authentication.email_sent", email: @employee.email)
+    flash.now[:notice] = t("views.authentication.email_sent", email: @user.email)
     render :new
   end
 
@@ -126,7 +131,7 @@ class Admin::Authentication::ConfirmationsController < ApplicationController
   def generate_token_password
     loop do
       @token_password = SecureRandom.hex(15)
-      break @token_password unless Employee.where(reset_password_token: @token_password).exists?
+      break @token_password unless User.where(reset_password_token: @token_password).exists?
     end
   end
 
@@ -134,7 +139,7 @@ class Admin::Authentication::ConfirmationsController < ApplicationController
   def generate_token
     loop do
       @token = SecureRandom.hex(15)
-      break @token unless Employee.where(confirmation_token: @token).exists?
+      break @token unless User.where(confirmation_token: @token).exists?
     end
   end
 end

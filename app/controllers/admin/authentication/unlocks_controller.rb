@@ -14,39 +14,44 @@ class Admin::Authentication::UnlocksController < ApplicationController
     @token = params[:unlock_token]
 
     # If token has been found
-    if set_employee
-      # If user is disabled
+    if set_user
+      # Verify if user is not employee
+      if !user_is_employee?
+        return
+      end
+
+      # If employee is disabled
       if !employee_enabled?
         return
       end
 
       # If user is not confirmed
-      if !employee_confirmed?
+      if !user_confirmed?
         return
       end
 
       # If user has exceeded the max of failed attemps
-      if employee_locked?(false)
-        @employee.update(failed_attempts: 0)
-        @employee.update(unlock_sent: false)
+      if user_locked?(false)
+        @user.update(failed_attempts: 0)
+        @user.update(unlock_sent: false)
 
         # Render Sync with external controller
-        sync_update @employee
+        sync_update @user
 
-        redirect_to admin_auth_notifications_path, notice: t("views.authentication.successfully_unlocked", email: @employee.email)
+        redirect_to admin_auth_notifications_path, notice: t("views.authentication.successfully_unlocked", email: @user.email)
         return
 
       else
-        redirect_to admin_auth_notifications_path, notice:  t("views.authentication.account_unlocked", email: @employee.email)
+        redirect_to admin_auth_notifications_path, notice:  t("views.authentication.account_unlocked", email: @user.email)
         return
       end
     end
     # End If token has been found
   end
 
-  # Set Employee
-  def set_employee
-    if @employee = Employee.find_by(unlock_token: @token)
+  # Set user
+  def set_user
+    if @user = User.find_by(unlock_token: @token)
       return true
 
     else
@@ -67,15 +72,19 @@ class Admin::Authentication::UnlocksController < ApplicationController
     end
 
     # If email has been found
-    if @employee = Employee.find_by(email: email)
+    if @user = User.find_by(email: email)
+      # Verify if user is not employee
+      if !user_is_employee?
+        return
+      end
 
-      # If user is disabled
+      # If employee is disabled
       if !employee_enabled?
         return
       end
 
       # If user is not confirmed
-      if !employee_confirmed?
+      if !user_confirmed?
         return
       end
 
@@ -88,19 +97,19 @@ class Admin::Authentication::UnlocksController < ApplicationController
     # Generate random token
     generate_token
 
-    @employee.update(unlock_sent: true)
-    @employee.update(unlock_token: @token)
+    @user.update(unlock_sent: true)
+    @user.update(unlock_token: @token)
 
     # Render Sync with external controller
-    sync_update @employee
+    sync_update @user
 
     ip = request.remote_ip
     location = Geocoder.search(ip).first.country
 
     # Send email
-    AuthenticationMailer.unlock_instructions(@employee, @token, I18n.locale, ip, location).deliver
+    AuthenticationMailer.unlock_instructions(@user, @token, I18n.locale, ip, location).deliver
 
-    flash.now[:notice] = t("views.authentication.email_sent", email: @employee.email)
+    flash.now[:notice] = t("views.authentication.email_sent", email: @user.email)
     render :new
   end
 
@@ -108,7 +117,7 @@ class Admin::Authentication::UnlocksController < ApplicationController
   def generate_token
     loop do
       @token = SecureRandom.hex(15)
-      break @token unless Employee.where(unlock_token: @token).exists?
+      break @token unless User.where(unlock_token: @token).exists?
     end
   end
 end

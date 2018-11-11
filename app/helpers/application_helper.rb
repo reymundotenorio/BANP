@@ -4,6 +4,12 @@ module ApplicationHelper
     phone.remove("(",")"," ", "-")
   end
   # End Clean phone number
+  
+  # Format datetime
+  def format_datetime(datetime)
+    I18n.l(datetime)
+  end
+  # End Format datetime
 
   # Clean history information
   def clean_history(info, confirmed = false)
