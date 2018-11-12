@@ -1,3 +1,6 @@
+-# Render table
 $("#render-data").html("#{escape_javascript(render "employees")}");
+-# Render show buttons
 $("#show-buttons").html("#{escape_javascript(render "show_buttons")}");
+-# Render pagination
 $(".pagination a").attr("data-remote", "true");

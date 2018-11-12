@@ -1,23 +1,25 @@
-/ History
+-# History
 %section.history
   .container
-    / Title
+    -# Title
     .row.title-container
       .col-xs-12.col-lg-10
-        / Heading
+        -# Heading
         %h1.false
           %i.fas.fa-history
           = t("views.history.history")
-        / End Heading
+        -# End Heading
+
       .col-xs-12.col-lg-2
-        / Employee button
+        -# Employee button
         .btn-container
           = link_to (admin_employee_path(@employee)), class: "btn btn-general" do
             %i.fas.fa-id-card
             %span= t("activerecord.models.employee")
-        / End Employee button
-    / End Title
-    / Breadcrumb
+        -# End Employee button
+    -# End Title
+
+    -# Breadcrumb
     .row
       .col-xs-12.hidden-xs
         .breadcrumb-container
@@ -39,6 +41,9 @@
             %li.active
               %i.fas.fa-history
               = t("views.history.history")
-    / End Breadcrumb
+    -# End Breadcrumb
+
+    -# Render timeline
     = render "timeline"
-/ End History
+    -# End Render timeline
+-# End History
