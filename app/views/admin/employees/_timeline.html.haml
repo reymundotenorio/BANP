@@ -1,31 +1,30 @@
-/ Information
 .row
   .col-xs-12
-    / Material card
+    -# Material card
     .material-card.shadow-card
-      / Timeline
+      -# Timeline
       .row.no-margin
-        / Timeline
+        -# Timeline
         .about-timeline.col-xs-12.no-padding
-          / Timeline First
+          -# Timeline First
           .timeline-info.first-last-row
-            / Bullet
+            -# Bullet
             .timeline-circle
               .begin-final-divider
               .vertical-line.first-line
-            / End Bullet
-            / Horizontal line
+            -# End Bullet
+            -# Horizontal line
             .timeline-horizontal-line
-            / End Horizontal line
-            / Timeline content
+            -# End Horizontal line
+            -# Timeline content
             .timeline-content.no-padding
-            / End Timeline content
-          / End Timeline First
-          / Audit
+            -# End Timeline content
+          -# End Timeline First
+          -# Audit
           - @history.order(:created_at).reverse.each do |record|
-            / Information
+            -# Information
             .timeline-info
-              / Bullet
+              -# Bullet
               .timeline-circle
                 %div{:alt => "Timeline circle", :class => "circle #{record.action == "create" ? "new" : "edit"}"}
                   - if record.action == "create"
@@ -33,35 +32,35 @@
                   - else
                     %i.fas.fa-edit
                 .vertical-line
-              / End Bullet
-              / Horizontal line
+              -# End Bullet
+              -# Horizontal line
               .timeline-horizontal-line
                 .horizontal-line
-              / End Horizontal line
-              / Timeline content
+              -# End Horizontal line
+              -# Timeline content
               .timeline-content.no-padding
                 %div{:class => "timeline-box #{record.action == "create" ? "new" : "edit"}"}
                   .detail-info
                     %div
                       %p.title.datetime
                         %b= I18n.localize record.created_at
-                    / Attribute and Changes
+                    -# Attribute and Changes
                     - record.audited_changes.each do |attribute, changes|
                       - confidential_attrs = ["password_digest", "reset_password_token", "reset_password_sent" ,"reset_password_sent_at", "confirmation_token", "confirmation_sent", "failed_attempts", "unlock_token", "unlock_sent", "two_factor_auth_otp"]
                       - hidden_attrs = ["slug", "employee_id"]
-                      / If information does not include hidden attributes
+                      -# If information does not include hidden attributes
                       - if !hidden_attrs.include? attribute
                         .info
                           %p.title
                             %b= Employee.human_attribute_name(attribute)
-                          / If information is confidential
+                          -# If information is confidential
                           - if confidential_attrs.include? attribute
                             %p.before
                               %i.fas.fa-user-secret
                               = t("views.history.confidential_info")
-                            / If information is not confidential
+                            -# If information is not confidential
                           - else
-                            / Update
+                            -# Update
                             - if record.action == "update"
                               %p.after
                                 %i.fas.fa-check-circle
@@ -69,30 +68,29 @@
                               %p.before
                                 %i.fas.fa-times-circle
                                 = clean_history(changes[0], attribute == "confirmed" ? true : false)
-                              / New
+                              -# New
                             - else
                               %p= clean_history(changes, attribute == "confirmed" ? true : false)
-                            / End Update | New
-                          / End Information is confidential
-                      / End If information does not include hidden attributes
-                    / End Attribute and Changes
-              / End Timeline content
-            / End Information
-          / End Audit
-          / Timeline Last
+                            -# End Update | New
+                          -# End Information is confidential
+                      -# End If information does not include hidden attributes
+                    -# End Attribute and Changes
+              -# End Timeline content
+            -# End Information
+          -# End Audit
+          -# Timeline Last
           .timeline-info.first-last-row
-            / Bullet
+            -# Bullet
             .timeline-circle
               .begin-final-divider
-            / End Bullet
-            / Horizontal line
+            -# End Bullet
+            -# Horizontal line
             .timeline-horizontal-line
-            / End Horizontal line
-            / Timeline content
+            -# End Horizontal line
+            -# Timeline content
             .timeline-content.no-padding
-            / End Timeline content
-          / End Timeline Last
-        / End Timeline
-      / End Timeline
-    / End Material card
-/ End Information
+            -# End Timeline content
+          -# End Timeline Last
+        -# End Timeline
+      -# End Timeline
+    -# End Material card
