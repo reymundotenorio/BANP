@@ -1,0 +1,43 @@
+.col-xs-4
+  / Material card
+  %div{:class => "material-card material-card-pdf shadow-card shadow-card-pdf #{resource.state}"}
+    / General information
+    .row.no-margin
+      .col-xs-12.no-padding
+        .general-info
+          / Image
+          .image-container
+            - if resource.image.attached?
+              = image_tag url_for(resource.image), class: "img-responsive"
+            - else
+              = image_tag url_for("https://s3.amazonaws.com/betterandnice/images/default/default.png"), class: "img-responsive"
+          / End Image
+    / End General information
+  / End Material card
+.col-xs-8
+  / Material card
+  %div{:class => "material-card material-card-pdf shadow-card shadow-card-pdf #{resource.state}"}
+    .row.no-margin
+      .col-xs-12.no-padding
+        %div{:class => "detail-info #{resource.state}"}
+          - attributes.each do |attribute|
+            .info
+              %p.title
+                %b= t("activerecord.attributes.#{resource}.#{attribute}")
+              - if attribute == "state"
+                %p= resource["#{attribute}"] ? t("views.show.enabled") : t("views.show.disabled")
+              - else
+                %p= resource["#{attribute}"]
+          - user_attributes = ["confirmed", "sign_in_count", "current_sign_in_at", "current_sign_in_ip", "last_sign_in_at", "last_sign_in_ip"]
+          - if resource.user.present?
+            - user_attributes.each do |attribute|
+              .info
+                %p.title
+                  %b= t("activerecord.attributes.user.#{attribute}")
+                - if attribute == "confirmed"
+                  %p= resource.user["#{attribute}"] ? t("views.show.confirmed") : t("views.show.not_confirmed")
+                - elsif attribute == "current_sign_in_at" || attribute == "last_sign_in_at"
+                  %p= format_datetime(resource.user["#{attribute}"])
+                - else
+                  %p= resource.user["#{attribute}"]
+  / End Material card

@@ -1,0 +1,13 @@
+/ Flash message
+- if flash.any?
+  %section.alerts
+    .container
+      .row
+        .col-xs-12
+          / Notice
+          = render "layouts/admin/flash-notice"
+          / End Notice
+          / Alert
+          = render "layouts/admin/flash-alert"
+          / End Alert
+/ End Flash message

@@ -1,0 +1,22 @@
+.user-container
+  .dropdown
+    %a.custom-btn.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
+      %i.fas.fa-user
+    %ul.dropdown-menu
+      %li
+        %span.profile
+          %i.fas.fa-user
+        %span.profile
+          %p Reymundo Tenorio
+      %li
+        %a{:href => "#"}
+          %i.fas.fa-cog
+          %span= t("header.user.configuration")
+      %li
+        %a{:href => "#"}
+          %i.fas.fa-lock
+          %span= t("header.user.lock")
+      %li
+        = link_to (admin_sign_out_path), method: :delete do
+          %i.fas.fa-sign-out-alt
+          %span= t("header.user.sign_off")

@@ -1,0 +1,68 @@
+-# Form
+= form_for :sign_in, url: admin_sign_in_path, html: {class: "sign-in-form", autocomplete: "on"} do |f|
+  %section.form
+    .container
+      .row
+        .col-xs-12.col-sm-10.col-sm-offset-1.col-md-8.col-md-offset-2.col-lg-6.col-lg-offset-3
+          -# Material card
+          .material-card.shadow-card.true
+            .row.no-margin
+              .col-xs-12.no-padding
+                -# Logo
+                .logo-container.text-center
+                  %p.banp-logo.black BANP
+                -# End Logo
+
+              -# Flash notifications
+              = render "admin/partials/authentication_flash"
+              -# End Flash notifications
+
+              .col-xs-12.no-padding
+                .form-info
+                  .form-group
+                    = f.email_field :email, class: "form-control input", placeholder: t("activerecord.attributes.employee.email"), required: true, autofocus: true
+                    %label
+                      %b= t("activerecord.attributes.employee.email")
+                    .border-bottom
+
+                  .form-group
+                    = f.password_field :password, class: "form-control input", placeholder: t("activerecord.attributes.employee.password_digest"), required: true
+                    %label
+                      %b= t("activerecord.attributes.employee.password_digest")
+                    .border-bottom
+
+                    -# Show/Hide password button
+                    %button#display-password{type: "button"}
+                      %i.fas.fa-eye
+                    -# End Show/Hide password button
+
+                  -# Recaptcha
+                  .form-group.text-center
+                    = recaptcha_tags id: "recaptcha-center", hl: I18n.locale
+                  -# End Recaptcha
+
+                  -# Buttons
+                  .main-buttons.sessions
+                    .col-xs-12.col-sm-12.button-container.no-padding
+                      -# Link hidden on mobile
+                      = link_to (admin_reset_password_path), class: "forgot-pass hidden-xs" do
+                        %i.fas.fa-chalkboard-teacher
+                        %span= t("views.form.forgot_password")
+                      -# End Link hidden on mobile
+
+                      = f.button class: "btn btn-general", data: {disable_with: "<i class='fas fa-spinner fa-spin'></i>"} do
+                        %i.fas.fa-fingerprint
+                        %span= t("views.form.sign_in")
+
+                      -# Link visible only on mobile
+                      = link_to (admin_reset_password_path), class: "forgot-pass visible-xs" do
+                        %i.fas.fa-chalkboard-teacher
+                        %span= t("views.form.forgot_password")
+                      -# End Link visible only on mobile
+                  -# End Buttons
+          -# End Material card
+-# End Form
+
+-# Display password script
+= javascript_include_tag "display-password", "data-turbolinks-track": "reload"
+-# End Display password script

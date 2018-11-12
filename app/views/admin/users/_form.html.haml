@@ -1,0 +1,41 @@
+/ Form
+= form_for  @user, url: @form_url, html: {autocomplete: "off"} do |f|
+  %section.form
+    .container
+      / Information
+      .row
+        .col-xs-12.col-sm-10.col-sm-offset-1.col-md-8.col-md-offset-2
+          / Show errors
+          = render partial: "admin/partials/form_errors", locals: {resource: @user, model: User}
+          / End Show errors
+        .col-xs-12.col-sm-10.col-sm-offset-1.col-md-8.col-md-offset-2
+          / Material card
+          %div{:class => "material-card shadow-card #{@employee.state}"}
+            / Table
+            .row.no-margin
+              .col-xs-12.no-padding
+                .form-info
+                  / Email
+                  = f.hidden_field :email, value: @employee.email
+                  / End Email
+                  .form-group
+                    = f.password_field :password, class: "form-control input", placeholder: t("activerecord.attributes.employee.password"), required: true
+                    %label
+                      %b= t("activerecord.attributes.employee.password")
+                    .border-bottom
+                  .form-group
+                    = f.password_field :password_confirmation, class: "form-control input", placeholder: t("activerecord.attributes.employee.password_confirmation"), required: true
+                    %label
+                      %b= t("activerecord.attributes.employee.password_confirmation")
+                    .border-bottom
+                  .main-buttons
+                    .col-xs-12.col-sm-12.button-container.no-padding
+                      = f.button class: "btn btn-general", data: {disable_with: "<i class='fas fa-spinner fa-spin'></i>"} do
+                        %i.fas.fa-save
+                        %span= t("views.form.save")
+          / End Material card
+      / End Information
+/ End Form
+/ Form
+= javascript_include_tag "form", "data-turbolinks-track": "reload"
+/ End Form

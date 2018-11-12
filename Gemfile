@@ -139,3 +139,9 @@ gem "tzinfo-data", "~> 1.2018", ">= 1.2018.5"
 
 # AWS SDK S3 - Amazon Web Services
 gem "aws-sdk-s3", require: false
+
+# HTML Abstraction Markup Language
+gem "haml"
+
+# Haml-rails provides Haml generators
+gem "haml-rails", "~> 1.0"

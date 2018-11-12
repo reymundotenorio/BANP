@@ -1,9 +1,0 @@
-<tr class="clickable-row <%= employee.state %>" data-href="<%= admin_employee_path(employee) %>">
-  <% attributes = ["first_name", "last_name", "email" ,"phone", "role"] %>
-
-  <td><%= link_to admin_employee_path(employee), class: "record-link", "data-header": "No." do %> <p><%= employee.id %></p> <% end %></td>
-
-  <% attributes.each do |attribute| %>
-  <td><%= link_to admin_employee_path(employee), class: "record-link", "data-header": t("activerecord.attributes.employee.#{attribute}") do %> <p><%= employee["#{attribute}"] %></p> <% end %></td>
-  <% end %>
-</tr>

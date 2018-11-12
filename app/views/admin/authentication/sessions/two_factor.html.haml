@@ -1,0 +1,57 @@
+-# Form
+= form_for :two_factor, url: admin_two_factor_auth_path, html: {class: "sign-in-form", autocomplete: "on"} do |f|
+  %section.form
+    .container
+      .row
+        .col-xs-12.col-sm-10.col-sm-offset-1.col-md-8.col-md-offset-2.col-lg-6.col-lg-offset-3
+          -# Material card
+          .material-card.shadow-card.true
+            .row.no-margin
+              .col-xs-12.no-padding
+                -# Instructions
+                %h1.text-center= t("views.authentication.two_factor_auth")
+                %p.text-center= t("views.authentication.two_factor_auth_description")
+                -# End Instructions
+
+              -# Flash notifications
+              = render "admin/partials/authentication_flash"
+              -# End Flash notifications
+
+              .col-xs-12.no-padding
+                .form-info
+                  .form-group
+                    = f.text_field :otp, class: "form-control input", "data-mask": "000000", placeholder: t("activerecord.attributes.employee.two_factor_auth_otp"), required: true, autofocus: true
+                    %label
+                      %b= t("activerecord.attributes.employee.two_factor_auth_otp")
+                    .border-bottom
+
+                  -# Recaptcha
+                  .form-group.text-center
+                    = recaptcha_tags id: "recaptcha-center", hl: I18n.locale
+                  -# End Recaptcha
+
+                  -# Buttons
+                  .main-buttons.sessions
+                    .col-xs-12.col-sm-12.button-container.no-padding
+                      -# Link hidden on mobile
+                      = link_to (admin_resend_otp_path), class: "forgot-pass hidden-xs", method: :patch do
+                        %i.fas.fa-comment
+                        %span= t("views.form.resend_otp")
+                      -# End Link hidden on mobile
+
+                      = f.button class: "btn btn-general", data: {disable_with: "<i class='fas fa-spinner fa-spin'></i>"} do
+                        %i.fas.fa-id-badge
+                        %span= t("views.form.verify")
+
+                      -# Link visible only on mobile
+                      = link_to (admin_resend_otp_path), class: "forgot-pass visible-xs", method: :patch do
+                        %i.fas.fa-comment
+                        %span= t("views.form.resend_otp")
+                      -# End Link visible only on mobile
+                  -# End Buttons
+          -# End Material card
+-# End Form
+
+-# Jquery Mask script
+= javascript_include_tag "jquery-mask/jquery.mask", "data-turbolinks-track": "reload"
+-# End Jquery Mask script

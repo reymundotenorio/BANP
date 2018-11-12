@@ -1,0 +1,54 @@
+!!!
+%html
+  %head
+    %title
+      Better and Nice Produce Corp - #{yield(:title)}
+    / Meta information
+    %meta{:charset => "utf-8"}/
+    %meta{:content => "text/html;charset=utf-8", "http-equiv" => "content-type"}/
+    %meta{:content => "IE=edge", "http-equiv" => "X-UA-Compatible"}/
+    %meta{:content => "width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui", :name => "viewport"}/
+    / End Meta information
+    / Favicon settings
+    = favicon_link_tag asset_path("img/favicon.png"), rel: "icon", type: "image/png"
+    %meta{:content => "#fef7f8", :name => "theme-color"}/
+    / End Favicon settings
+    / OpenGraph info
+    %meta{:content => "Better and Nice Produce Corp", :property => "og:title"}/
+    %meta{:content => "Better and Nice Produce is at the forefront of produce quality, whit more than 20 years in the business. Serving all the South Florida with the best in gourmet, organic, and specialty pershibles. Better and Nice Produce continues to push the envelopment in quality and Service. Better and Nice Produce is committed to live by its motto, 'Anywhere, anytime, fresh produce on time'.", :property => "og:description"}/
+    %meta{:content => "http://www.betterandnice.com", :property => "og:url"}/
+    %meta{:content => "http://www.betterandnice.com/favicon.png", :property => "og:image"}/
+    / End OpenGraph info
+    / CSRF Tags
+    = csrf_meta_tags
+    / End CSRF Tags
+    / CSP Tags
+    = csp_meta_tag
+    / End CSP Tags
+    / Application
+    = stylesheet_link_tag "application", media: "all", "data-turbolinks-track": "reload"
+    = javascript_include_tag "application", "data-turbolinks-track": "reload"
+    / End Application
+  / Preloader
+  %body
+    .preloader
+      .spinner
+        .bounce1
+        .bounce2
+        .bounce3
+    / Preloader
+    / Main content
+    %section.auth-languages
+      .container
+        .row
+          .col-xs-12
+            .language-container
+              / Languages
+              = render "layouts/admin/languages"
+              / End Languages
+    .background-container
+    = yield
+    / End Main content
+    / Material input
+    = javascript_include_tag "material-input", "data-turbolinks-track": "reload"
+    / End Material input

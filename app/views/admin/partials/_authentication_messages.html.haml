@@ -1,0 +1,45 @@
+%section.message
+  .container
+    / Information
+    .row
+      .col-xs-12.col-sm-10.col-sm-offset-1.col-md-8.col-md-offset-2
+        / Material card
+        .material-card.shadow-card.true
+          .row.no-margin
+            / Messages
+            - if flash.any?
+              .col-xs-12.no-padding
+                - if !flash[:alert].blank?
+                  %h1.flash-alert
+                    %span
+                      %i.fas.fa-exclamation-triangle
+                    %span= flash[:alert]
+                - if !flash[:notice].blank?
+                  %h1.flash-notice
+                    %span
+                      %i.fas.fa-info-circle
+                    %span= flash[:notice]
+            / End Messages
+            .col-xs-12.no-padding.redirect-container
+              - if @source == "not-found"
+                %p
+                  = link_to (admin_root_path), title: "t('views.errors.back_to_home')" do
+                    %i.fas.fa-undo-alt
+                    %span= t("views.errors.back_to_home")
+              - elsif @source == "confirmation"
+                %p
+                  = link_to (admin_confirm_account_path), title: "t('views.authentication.resend_instructions')" do
+                    %i.fas.fa-envelope
+                    %span= t("views.authentication.resend_instructions")
+              - elsif @source == "unlock"
+                %p
+                  = link_to (admin_unlock_account_path), title: "t('views.authentication.resend_instructions')" do
+                    %i.fas.fa-envelope
+                    %span= t("views.authentication.resend_instructions")
+              - elsif @source == "reset-password"
+                %p
+                  = link_to (admin_reset_password_path), title: "t('views.authentication.resend_instructions')" do
+                    %i.fas.fa-envelope
+                    %span= t("views.authentication.resend_instructions")
+        / End Material card
+    / End Information

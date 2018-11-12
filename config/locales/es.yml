@@ -152,7 +152,7 @@ es:
       incorrect_pwd: "Contraseña incorrecta"
       incorrect_otp: "OTP incorrecto"
       two_factor_auth: "Autenticación de dos factores"
-      two_factor_auth_desc: "Se ha enviado un mensaje a su número de teléfono con un PIN de verificación. Ingrese el PIN (OTP) para continuar"
+      two_factor_auth_description: "Se ha enviado un mensaje a su número de teléfono con un PIN de verificación. Ingrese el PIN (OTP) para continuar"
       remaining_attempts: "intentos restantes"
       remaining_attempt: "intento restante"
       signed_in_correctly: "Bienvenido %{first_name} %{last_name}"

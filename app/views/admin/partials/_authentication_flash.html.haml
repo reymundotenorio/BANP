@@ -1,0 +1,13 @@
+- if flash.any?
+  .col-xs-12.no-padding.auth-alerts
+    - if !flash[:alert].blank?
+      %strong
+        %p.flash-alert
+          %i.fas.fa-exclamation-triangle
+          = flash[:alert]
+          
+    - if !flash[:notice].blank?
+      %strong
+        %p.flash-notice
+          %i.fas.fa-info-circle
+          = flash[:notice]

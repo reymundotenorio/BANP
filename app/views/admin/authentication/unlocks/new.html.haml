@@ -1,0 +1,49 @@
+%section.message
+  .container
+    .row
+      .col-xs-12.col-sm-10.col-sm-offset-1.col-md-8.col-md-offset-2
+        -# Material card
+        .material-card.shadow-card.true
+          .row.no-margin
+            -# Flash notifications
+            = render "admin/partials/authentication_flash"
+            -# End Flash notifications
+
+            .col-xs-12.no-padding.form
+              -# Instructions
+              %h1= t("views.authentication.resend_unlock_instructions")
+              -# End Instructions
+
+            .col-xs-12.no-padding.form
+              -# Form
+              = form_for :resend_unlock, url: admin_resend_unlock_path, html: {autocomplete: "on"} do |f|
+                .col-xs-12.no-padding
+                  .form-info
+                    .form-group
+                      = f.email_field :email, class: "form-control input", placeholder: t("activerecord.attributes.employee.email"), required: true, autofocus: true, value: @email
+                      %label
+                        %b= t("activerecord.attributes.employee.email")
+                      .border-bottom
+
+                    -# Recaptcha
+                    .form-group.text-center
+                      = recaptcha_tags id: "recaptcha-center", hl: I18n.locale
+                    -# End Recaptcha
+
+                    -# Buttons
+                    .main-buttons.sessions
+                      .col-xs-12.col-sm-12.button-container.center.no-padding
+                        = f.button class: "btn btn-general", data: {disable_with: "<i class='fas fa-spinner fa-spin'></i>"} do
+                          %i.fas.fa-envelope
+                          %span= t("views.authentication.resend")
+                    -# End Buttons
+              -# End Form
+
+            .col-xs-12.no-padding.redirect-container
+              -# Redirect links
+              %p
+                = link_to (admin_root_path), title: "t('views.errors.back_to_home')" do
+                  %i.fas.fa-undo-alt
+                  %span= t("views.errors.back_to_home")
+              -# End Redirect links
+        -# End Material card

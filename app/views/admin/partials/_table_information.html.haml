@@ -1,0 +1,6 @@
+%tr{:class => "#{resource.state}"}
+  %td
+    %p= resource.id
+  - attributes.each do |attribute|
+    %td
+      %p= resource["#{attribute}"]

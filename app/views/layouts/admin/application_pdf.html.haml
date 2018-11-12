@@ -1,0 +1,48 @@
+!!!
+%html
+  %head
+    %title Better and Nice Produce Corp
+    / Meta information
+    %meta{:charset => "utf-8"}/
+    %meta{:content => "text/html;charset=utf-8", "http-equiv" => "content-type"}/
+    %meta{:content => "IE=edge", "http-equiv" => "X-UA-Compatible"}/
+    %meta{:content => "width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui", :name => "viewport"}/
+    / End Meta information
+    / Base
+    %base{:href => "#{$banp_domain}"}/
+    / End Base
+    / Favicon settings
+    / <link rel="icon" type="image/png" href="/favicon.png">
+    = favicon_link_tag asset_path("img/favicon.png"), rel: "icon", type: "image/png"
+    %meta{:content => "#444444", :name => "theme-color"}/
+    / End Favicon settings
+    / CSRF Tags
+    = csrf_meta_tags
+    / End CSRF Tags
+    / CSP Tags
+    = csp_meta_tag
+    / End CSP Tags
+    / PDF Stylesheet
+    = wicked_pdf_stylesheet_link_tag "application"
+    / End PDF Stylesheet
+  %body.body-pdf
+    / Header
+    %header#back-top.header-top
+      / Top navbar
+      %section.top-navbar.top-navbar-pdf
+        / Container
+        .container
+          / Navbar brand top
+          .navbar-brand-top
+            .row.navbar-brand-row
+              .col-xs-4.logo-top
+                %p.banp-logo BANP
+              .col-xs-8.info-pdf
+                %p Anywhere, anytime, fresh produce on time!
+          / End Navbar brand top
+        / End Container
+      / End Top navbar
+    / End Header
+    / Main content
+    = yield
+    / End Main content

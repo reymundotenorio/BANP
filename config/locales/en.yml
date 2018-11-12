@@ -152,7 +152,7 @@ en:
       incorrect_pwd: "Incorrect password"
       incorrect_otp: "Incorrect OTP"
       two_factor_auth: "Two-factor authentication"
-      two_factor_auth_desc: "A message has been sent to your phone number with a verification PIN. Enter the One-Time PIN (OTP) to continue"
+      two_factor_auth_description: "A message has been sent to your phone number with a verification PIN. Enter the One-Time PIN (OTP) to continue"
       remaining_attempts: "remaining attempts"
       remaining_attempt: "remaining attempt"
       signed_in_correctly: "Welcome %{first_name} %{last_name}"

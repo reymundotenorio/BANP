@@ -1,0 +1,56 @@
+%body
+  %header#back-top.header-top.navbar-fixed-top{"data-custom-affix" => "1", :role => "navigation"}
+    / Top navbar
+    %section.top-navbar
+      / Container
+      .container-fluid.header-options
+        / Navbar brand top
+        .navbar-brand-top
+          / Navbar brand row
+          .row.navbar-brand-row
+            .col-xs-12.col-sm-4.col-md-6.hidden-xs
+              / Logo
+              .logo-top
+                = link_to (admin_root_path) do
+                  %p.banp-logo BANP
+              / End Logo
+            .col-xs-12.col-sm-8.col-md-6
+              / Settings container
+              .settings-container
+                / Languages
+                = render "layouts/admin/languages"
+                / End Languages
+                / Notifications
+                = render "layouts/admin/notifications"
+                / End Notifications
+                / User
+                = render "layouts/admin/user"
+                / End User
+              / End Settings container
+          / End Navbar brand row
+        / End Navbar brand top
+      / End Container
+      / Navbar default
+      %nav.navbar.navbar-default{:role => "navigation"}
+        / Container
+        .container
+          / Navbar mobile
+          .navbar-header
+            / Navbar toggle
+            %button.navbar-toggle.collapsed{"aria-expanded" => "false", "data-target" => "#navbar", "data-toggle" => "collapse", :type => "button"}
+              %span.sr-only Toggle navigation
+              %span.icon-bar.top-bar
+              %span.icon-bar.middle-bar
+              %span.icon-bar.bottom-bar
+            / End Navbar toggle
+            / Logo mobile
+            = link_to (admin_root_path), class: "navbar-brand visible-xs" do
+              %p.banp-logo BANP
+            / End Logo mobile
+          / End Navbar mobile
+          / Navbar collapse
+          = render "layouts/admin/navigation"
+          / End Navbar collapse
+        / Container
+      / End Navbar default
+    / End Top navbar
