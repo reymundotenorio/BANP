@@ -1,23 +1,25 @@
-/ Form Title
+-# Form title
 %section.form-title
   .container
-    / Title
+    -# Title
     .row.title-container
       .col-xs-12.col-lg-10
-        / Heading
+        -# Heading
         %h1
           %i.fas.fa-user
           = t("views.show.create_user")
-        / End Heading
+        -# End Heading
+
       .col-xs-12.col-lg-2
-        / Employee button
+        -# Employee button
         .btn-container
           = link_to (admin_employee_path(@employee)), class: "btn btn-general" do
             %i.fas.fa-id-card
             %span= t("activerecord.models.employee")
-        / End Employee button
-    / End Title
-    / Breadcrumb
+        -# End Employee button
+    -# End Title
+
+    -# Breadcrumb
     .row
       .col-xs-12.hidden-xs
         .breadcrumb-container
@@ -39,8 +41,9 @@
             %li.active
               %i.fas.fa-user
               = t("views.show.create_user")
-    / End Breadcrumb
-/ End Form Title
-/ Form
+    -# End Breadcrumb
+-# End Form title
+
+-# Form script
 = render "form"
-/ End Form
+-# End Form script

@@ -30,6 +30,7 @@ es:
   activerecord:
     models:
       employee: "Empleado"
+      user: "Usuario"
       provider: "Proveedor"
       category: "Categoría"
       product: "Producto"
@@ -37,12 +38,14 @@ es:
       employee:
         first_name: "Nombre"
         last_name: "Apellido"
+        email: "Correo electrónico"
         phone: "Teléfono"
         role: "Rol"
         state: "Estado"
         image_file_name: "Nombre de la imagen"
         image_content_type: "Tipo de archivo de la imagen"
         image_file_size: "Tamaño de la imagen"
+      user:
         email: "Correo electrónico"
         password_digest: "Contraseña"
         password: "Contraseña"
@@ -54,6 +57,14 @@ es:
         last_sign_in_ip: "IP del inicio de sesión anterior"
         confirmed: "Confirmado"
         two_factor_auth_otp: "OTP"
+        two_factor_auth: "Autenticación de dos factores"
+        reset_password_token: "Token reestablecer contraseña"
+        reset_password_sent: "Reestablecer contraseña enviada"
+        reset_password_sent_at: "Reestablecer contraseña enviada a las"
+        confirmation_token: "Token confirmación"
+        confirmation_sent: "Confirmación enviada"
+        unlock_token: "Token desbloqueo"
+        unlock_sent: "Desbloqueo enviado"
       provider:
         name: "Nombre"
         FEIN: "Número de Identificación Federal del Empleador (FEIN)"
@@ -96,6 +107,7 @@ es:
     disabled: "%{model} deshabilitado con éxito"
     not_enabled: "%{model} no fue habilitado"
     not_disabled: "%{model} no fue deshabilitado"
+    not_found: "%{model} no encontrado"
 
   # Validates - Image
   validates:
@@ -180,6 +192,7 @@ es:
       otp_required: "Necesita ingresar el OTP para continuar"
       otp_resended: "Se ha reenviado un nuevo OTP a su número de teléfono"
       otp_sms: "Su OTP es: %{otp}. Ingrese el OTP para acceder al sistema"
+      employee_user_exists: "El empleado ya está asociado con un usuario"
     errors:
       page_empty: "Esta página está vacía"
       back_to_home: "Regresar a Inicio"

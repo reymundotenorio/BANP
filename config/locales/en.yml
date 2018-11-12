@@ -30,6 +30,7 @@ en:
   activerecord:
     models:
       employee: "Employee"
+      user: "User"
       provider: "Provider"
       category: "Category"
       product: "Product"
@@ -37,23 +38,33 @@ en:
       employee:
         first_name: "First name"
         last_name: "Last name"
+        email: "Email"
         phone: "Phone"
         role: "Role"
         state: "State"
         image_file_name: "Image file name"
         image_content_type: "Image content type"
         image_file_size: "Image file size"
-        email: "Email"
-        password_digest: "Password"
-        password: "Password"
-        password_confirmation: "Password confirmation"
-        sign_in_count: "Sign in count"
-        current_sign_in_at: "Current sign in at"
-        last_sign_in_at: "Last sign in at"
-        current_sign_in_ip: "Current sign in IP"
-        last_sign_in_ip: "Last sign in IP"
-        confirmed: "Confirmado"
-        two_factor_auth_otp: "OTP"
+      user:
+          email: "Email"
+          password_digest: "Password"
+          password: "Password"
+          password_confirmation: "Password confirmation"
+          sign_in_count: "Sign in count"
+          current_sign_in_at: "Current sign in at"
+          last_sign_in_at: "Last sign in at"
+          current_sign_in_ip: "Current sign in IP"
+          last_sign_in_ip: "Last sign in IP"
+          confirmed: "Confirmed"
+          two_factor_auth_otp: "OTP"
+          two_factor_auth: "Two-factor authentication"
+          reset_password_token: "Reset password token"
+          reset_password_sent: "Reset password sent"
+          reset_password_sent_at: "Reset password sent at"
+          confirmation_token: "Confirmation token"
+          confirmation_sent: "Confirmation sent"
+          unlock_token: "Unlock token"
+          unlock_sent: "Unlock sent"
       provider:
         name: "Name"
         FEIN: "Federal Employer Identification Number (FEIN)"
@@ -96,6 +107,7 @@ en:
     disabled: "%{model} disabled successfully"
     not_enabled: "%{model} was not enabled"
     not_disabled: "%{model} was not disabled"
+    not_found: "%{model} not found"
 
   # Validates - Image
   validates:
@@ -180,6 +192,7 @@ en:
       otp_required: "You need to enter the OTP to continue"
       otp_resended: "A new OTP has been resended to your phone number"
       otp_sms: "Your OTP is: %{otp}. Enter the OTP to access the system"
+      employee_user_exists: "The employee is already associated with a user"
     errors:
       page_empty: "This page is empty"
       back_to_home: "Back to Home"

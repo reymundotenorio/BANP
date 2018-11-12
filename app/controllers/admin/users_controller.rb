@@ -14,9 +14,10 @@ class Admin::UsersController < ApplicationController
   # /employee/:id/create-user
   def new_employee_user
     if @employee.user.present?
-      redirect_to admin_employee_path(@employee), alert: "Usuario ya existe"
+      redirect_to admin_employee_path(@employee), alert: t("views.authentication.employee_user_exists")
+      return
     end
-    
+
     @user = User.new
     @form_url = admin_create_employee_user_path
   end
@@ -31,8 +32,8 @@ class Admin::UsersController < ApplicationController
     @user = @employee.build_user(user_params)
 
     if @user.save
-      redirect_to [:admin, @employee], notice: "Usuario creado"
-      
+      redirect_to [:admin, @employee], notice: t("alerts.created", model: t("activerecord.models.employee"))
+
       # If record was not saved
     else
       @form_url = admin_create_employee_user_path
@@ -81,8 +82,9 @@ class Admin::UsersController < ApplicationController
   # Set Employee
   def set_employee
     @employee = Employee.friendly.find(params[:id])
+    
   rescue
-    redirect_to admin_employees_path, alert: "No se pudo encontrar"
+    redirect_to admin_employees_path, alert: t("alerts.not_found", model: t("activerecord.models.employee"))
   end
 
   # User params

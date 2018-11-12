@@ -21,7 +21,7 @@ class Admin::EmployeesController < ApplicationController
     @employees = Employee.search(params[:search], params[:show]).paginate(page: params[:page], per_page: 15) # Employees with pagination
     @show_all = params[:show] == "all" ? true : false # View All (Enabled and Disabled)
 
-    # Set language
+    # PDF view configuration
     current_lang = params[:lang]
     I18n.locale = current_lang
 
@@ -31,6 +31,7 @@ class Admin::EmployeesController < ApplicationController
     name_pdf = "employees-#{file_time}"
     template = "admin/employees/index_pdf.html.erb"
     title_pdf = t("header.navigation.employees")
+    # End PDF view configuration
 
     respond_to do |format|
       format.html
@@ -50,7 +51,9 @@ class Admin::EmployeesController < ApplicationController
   def show
     # Employee found by before_action
 
+    # PDF view configuration
     current_lang = params[:lang]
+    I18n.locale = current_lang
 
     datetime =  Time.zone.now
     file_time = datetime.strftime("%m%d%Y")
@@ -58,6 +61,7 @@ class Admin::EmployeesController < ApplicationController
     name_pdf = "employee-#{@employee.slug}-#{file_time}"
     template = "admin/employees/show_pdf.html.erb"
     title_pdf = t("activerecord.models.employee")
+    # End PDF view configuration
 
     respond_to do |format|
       format.html
@@ -91,9 +95,6 @@ class Admin::EmployeesController < ApplicationController
     @employee[:role] = @employee[:role].strip
     @employee[:email] =  @employee[:email].strip.downcase
     # End Deleting blank spaces
-
-    # Adding default values on blank? (nil or "")
-    # @employee[:state] = true if @employee[:state].blank?
 
     # If record was saved
     if @employee.save
@@ -141,13 +142,14 @@ class Admin::EmployeesController < ApplicationController
   # Set Employee
   def set_employee
     @employee = Employee.friendly.find(params[:id])
+    
   rescue
+    flash.now[:alert] = t("alerts.not_found", model: t("activerecord.models.employee"))
     render :index
   end
 
   # Employee params
   def employee_params
-    # params.require(:employee).permit(:first_name, :last_name, :phone, :role, :email, :password, :password_confirmation, :image)
     params.require(:employee).permit(:first_name, :last_name, :email, :phone, :role, :image)
   end
 end

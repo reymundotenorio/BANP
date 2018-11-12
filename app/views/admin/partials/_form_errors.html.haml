@@ -1,19 +1,22 @@
 - if resource.errors.any?
   %section.alerts
-    / Alert
-    .alert.alert-danger.alert-dismissible.shadow-card{:role => "alert"}
-      %button.close{"aria-label" => "Close", "data-dismiss" => "alert", :type => "button"}
-        %span{"aria-hidden" => "true"}
+    -# Alert
+    .alert.alert-danger.alert-dismissible.shadow-card{role: "alert"}
+      %button.close{"aria-label": "Close", "data-dismiss": "alert", type: "button"}
+        %span{"aria-hidden": "true"}
           %i.fas.fa-times-circle
+
       %strong
         %p
           %i.fas.fa-exclamation-triangle
           = t("views.form.the_information_could_not_be_saved")
+
       %ul
         %li
           %strong
             %p= resource.errors.count == 1 ? "#{resource.errors.count} #{t('views.form.error_found')}" : "#{resource.errors.count} #{t('views.form.errors_found')}"
+
         - resource.errors.each do |attribute, message|
           %li
             %p= "#{model.human_attribute_name(attribute)}: #{message}"
-    / End Alert
+    -# End Alert
