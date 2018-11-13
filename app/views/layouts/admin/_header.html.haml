@@ -1,56 +1,52 @@
 %body
-  %header#back-top.header-top.navbar-fixed-top{"data-custom-affix" => "1", :role => "navigation"}
-    / Top navbar
+  %header#back-top.header-top.navbar-fixed-top{"data-custom-affix": "1", role: "navigation"}
     %section.top-navbar
-      / Container
       .container-fluid.header-options
-        / Navbar brand top
         .navbar-brand-top
-          / Navbar brand row
           .row.navbar-brand-row
             .col-xs-12.col-sm-4.col-md-6.hidden-xs
-              / Logo
+              -# Logo tablet and mobile
               .logo-top
                 = link_to (admin_root_path) do
                   %p.banp-logo BANP
-              / End Logo
+              -# End Logo tablet and mobile
+
             .col-xs-12.col-sm-8.col-md-6
-              / Settings container
+              -# Settings container
               .settings-container
-                / Languages
+                -# Render languages
                 = render "layouts/admin/languages"
-                / End Languages
-                / Notifications
+                -# End Render languages
+
+                -# Render notifications
                 = render "layouts/admin/notifications"
-                / End Notifications
-                / User
+                -# End Render notifications
+
+                -# Render user
                 = render "layouts/admin/user"
-                / End User
-              / End Settings container
-          / End Navbar brand row
-        / End Navbar brand top
-      / End Container
-      / Navbar default
-      %nav.navbar.navbar-default{:role => "navigation"}
-        / Container
+                -# End Render user
+              -# End Settings container
+
+      -# Navbar default
+      %nav.navbar.navbar-default{role: "navigation"}
         .container
-          / Navbar mobile
+          -# Navbar mobile
           .navbar-header
-            / Navbar toggle
-            %button.navbar-toggle.collapsed{"aria-expanded" => "false", "data-target" => "#navbar", "data-toggle" => "collapse", :type => "button"}
+            -# Navbar toggle
+            %button.navbar-toggle.collapsed{"aria-expanded": "false", "data-target": "#navbar", "data-toggle": "collapse", type: "button"}
               %span.sr-only Toggle navigation
               %span.icon-bar.top-bar
               %span.icon-bar.middle-bar
               %span.icon-bar.bottom-bar
-            / End Navbar toggle
-            / Logo mobile
+            -# End Navbar toggle
+
+            -# Logo mobile
             = link_to (admin_root_path), class: "navbar-brand visible-xs" do
               %p.banp-logo BANP
-            / End Logo mobile
-          / End Navbar mobile
-          / Navbar collapse
+            -# End Logo mobile
+          -# End Navbar mobile
+
+          -# Render navigation
           = render "layouts/admin/navigation"
-          / End Navbar collapse
-        / Container
-      / End Navbar default
-    / End Top navbar
+          -# End Render navigation
+      -# End Navbar default

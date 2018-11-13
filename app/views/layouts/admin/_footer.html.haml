@@ -1,4 +1,5 @@
 .fix-footer
+
 %footer
   %section.footer-top
     .container-fluid
@@ -6,6 +7,7 @@
         .col-xs-12.col-sm-1.image-container
           .footer-legal
             = image_tag "img/footer-usda-organic.png", class: "img-responsive", alt: "USDA Organic"
+
         .col-xs-12.col-sm-7
           .footer-legal
             %p
@@ -14,12 +16,15 @@
               %span
                 Better and Nice Produce Corp.
                 %span Miami, Florida
+
+        -# Setting client attributes
         - client = DeviceDetector.new(request.user_agent)
         - client_ip = request.remote_ip
         - client_browser = client.name
         - client_os = "#{client.os_name} #{client.os_full_version}"
         - client_device = client.device_name
         - client_country = Geocoder.search(client_ip).first.country
+
         .col-xs-12.col-sm-4
           .footer-legal
             %p.request-info

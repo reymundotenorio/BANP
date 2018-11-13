@@ -1,21 +1,25 @@
 .notifications-container
   .dropdown
-    %a.custom-btn.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
+    %a.custom-btn.dropdown-toggle{"data-toggle": "dropdown", :href: "#"}
       %i.fas.fa-bell
+      
     %ul.dropdown-menu
       %li
-        %a{:href => "#"}
+        %a{:href: "#"}
           %i.fas.fa-plus-square
           %span Nuevo usuario registrado
+
       %li
-        %a{:href => "#"}
+        %a{:href: "#"}
           %i.fas.fa-times-circle
           %span Pedido cancelado
+
       %li
-        %a{:href => "#"}
+        %a{:href: "#"}
           %i.fas.fa-clock
           %span Envio pendiente
+
       %li
-        %a{:href => "#"}
+        %a{:href: "#"}
           %i.fas.fa-list
           %span Todas las notificaciones
