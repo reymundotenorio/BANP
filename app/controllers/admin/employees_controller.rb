@@ -143,8 +143,7 @@ class Admin::EmployeesController < ApplicationController
     @employee = Employee.friendly.find(params[:id])
 
   rescue
-    flash.now[:alert] = t("alerts.not_found", model: t("activerecord.models.employee"))
-    render :index
+    redirect_to admin_employees_path, alert: t("alerts.not_found", model: t("activerecord.models.employee"))
   end
 
   # Employee params

@@ -5,10 +5,11 @@
 
     %ul.dropdown-menu
       %li
-        -# Employee detail Sync
-        = sync partial: "employee_info", resource: current_employee
-        = sync_new partial: "details", resource: Employee.new
-        -# End Employee detail Sync
+        -if current_employee
+          -# Employee detail Sync
+          = sync partial: "employee_info", resource: current_employee
+          = sync_new partial: "details", resource: Employee.new
+          -# End Employee detail Sync
         
       %li
         %a{href: "#"}
