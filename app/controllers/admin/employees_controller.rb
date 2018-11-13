@@ -29,7 +29,7 @@ class Admin::EmployeesController < ApplicationController
     file_time = datetime.strftime("%m%d%Y")
 
     name_pdf = "employees-#{file_time}"
-    template = "admin/employees/index_pdf.html.erb"
+    template = "admin/employees/index_pdf.html.haml"
     title_pdf = t("header.navigation.employees")
     # End PDF view configuration
 
@@ -59,7 +59,7 @@ class Admin::EmployeesController < ApplicationController
     file_time = datetime.strftime("%m%d%Y")
 
     name_pdf = "employee-#{@employee.slug}-#{file_time}"
-    template = "admin/employees/show_pdf.html.erb"
+    template = "admin/employees/show_pdf.html.haml"
     title_pdf = t("activerecord.models.employee")
     # End PDF view configuration
 
@@ -98,7 +98,6 @@ class Admin::EmployeesController < ApplicationController
 
     # If record was saved
     if @employee.save
-      # send_confirmation_email
       redirect_to [:admin, @employee], notice: "#{t('alerts.created', model: t('activerecord.models.employee'))}. #{t('views.authentication.account_not_confirmed', email: @employee.email)}"
 
       # If record was not saved
@@ -142,7 +141,7 @@ class Admin::EmployeesController < ApplicationController
   # Set Employee
   def set_employee
     @employee = Employee.friendly.find(params[:id])
-    
+
   rescue
     flash.now[:alert] = t("alerts.not_found", model: t("activerecord.models.employee"))
     render :index

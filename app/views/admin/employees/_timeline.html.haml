@@ -77,16 +77,16 @@
                               -# New info
                               %p.after
                                 %i.fas.fa-check-circle
-                                = clean_history(changes[1], attribute == "confirmed" ? true : false)
+                                = clean_history(changes[1], attribute) 
 
                               -# Previous info
                               %p.before
                                 %i.fas.fa-times-circle
-                                = clean_history(changes[0], attribute == "confirmed" ? true : false)
+                                = clean_history(changes[0], attribute)
 
                               -# New
                             - else
-                              %p= clean_history(changes, attribute == "confirmed" ? true : false)
+                              %p= clean_history(changes, attribute)
                             -# End Update | New
 
                           -# End Information is confidential | not confidential

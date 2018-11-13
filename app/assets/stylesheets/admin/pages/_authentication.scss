@@ -140,6 +140,7 @@ body{
     // Flash
     .flash-alert{
       color: $sixth-color;
+      text-align: center;
 
       span{
         display: block;
@@ -152,6 +153,7 @@ body{
 
     .flash-notice{
       color: $third-color;
+      text-align: center;
 
       span{
         display: block;

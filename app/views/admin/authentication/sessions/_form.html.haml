@@ -20,15 +20,15 @@
               .col-xs-12.no-padding
                 .form-info
                   .form-group
-                    = f.email_field :email, class: "form-control input", placeholder: t("activerecord.attributes.employee.email"), required: true, autofocus: true
+                    = f.email_field :email, class: "form-control input", placeholder: t("activerecord.attributes.user.email"), required: true, autofocus: true
                     %label
-                      %b= t("activerecord.attributes.employee.email")
+                      %b= t("activerecord.attributes.user.email")
                     .border-bottom
 
                   .form-group
-                    = f.password_field :password, class: "form-control input", placeholder: t("activerecord.attributes.employee.password_digest"), required: true
+                    = f.password_field :password, class: "form-control input", placeholder: t("activerecord.attributes.user.password_digest"), required: true
                     %label
-                      %b= t("activerecord.attributes.employee.password_digest")
+                      %b= t("activerecord.attributes.user.password_digest")
                     .border-bottom
 
                     -# Show/Hide password button

@@ -32,6 +32,7 @@ class Admin::UsersController < ApplicationController
     @user = @employee.build_user(user_params)
 
     if @user.save
+      send_confirmation_email
       redirect_to [:admin, @employee], notice: t("alerts.created", model: t("activerecord.models.employee"))
 
       # If record was not saved
@@ -82,7 +83,7 @@ class Admin::UsersController < ApplicationController
   # Set Employee
   def set_employee
     @employee = Employee.friendly.find(params[:id])
-    
+
   rescue
     redirect_to admin_employees_path, alert: t("alerts.not_found", model: t("activerecord.models.employee"))
   end
