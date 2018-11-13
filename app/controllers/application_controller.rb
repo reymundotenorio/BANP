@@ -7,7 +7,7 @@ class ApplicationController < ActionController::Base
   # End Always run set_lang
 
   #Helper for the view
-  helper_method :current_user
+  helper_method :current_employee
 
   # Current employee
   def current_employee

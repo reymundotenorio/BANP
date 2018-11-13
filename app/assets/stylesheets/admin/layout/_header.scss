@@ -367,6 +367,11 @@
 
                 &.profile{
                   display: block;
+                  
+                  img{
+                    max-width: 80px;
+                    margin-top: 5px;
+                  }
                 }
               }
 
