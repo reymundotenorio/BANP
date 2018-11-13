@@ -16,22 +16,22 @@
                   = link_to (admin_root_path), title: "t('views.errors.back_to_home')" do
                     %i.fas.fa-undo-alt
                     %span= t("views.errors.back_to_home")
-
-              -# Confirmation resend instructions
+                    
+                -# Confirmation resend instructions      
               - elsif @source == "confirmation"
                 %p
                   = link_to (admin_confirm_account_path), title: "t('views.authentication.resend_instructions')" do
                     %i.fas.fa-envelope
                     %span= t("views.authentication.resend_instructions")
 
-              -# Unlock resend instructions
+                -# Unlock resend instructions
               - elsif @source == "unlock"
                 %p
                   = link_to (admin_unlock_account_path), title: "t('views.authentication.resend_instructions')" do
                     %i.fas.fa-envelope
                     %span= t("views.authentication.resend_instructions")
 
-              -# Reset password resend instructions
+                -# Reset password resend instructions
               - elsif @source == "reset-password"
                 %p
                   = link_to (admin_reset_password_path), title: "t('views.authentication.resend_instructions')" do

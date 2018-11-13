@@ -48,7 +48,7 @@ class Admin::Authentication::SessionsController < ApplicationController
         # If unlock email has not been sent
         send_unlock_email unless @user.unlock_sent
 
-        redirect_to admin_auth_notifications_path(resource: "unlock"), alert: t("views.authentication.account_locked", email: @user.email)
+        redirect_to admin_auth_notifications_path(source: "unlock"), alert: t("views.authentication.account_locked", email: @user.email)
         return
 
         # If user is not locked
@@ -121,7 +121,7 @@ class Admin::Authentication::SessionsController < ApplicationController
         # If unlock email has not been sent
         send_unlock_email unless @user.unlock_sent
 
-        redirect_to admin_auth_notifications_path(resource: "unlock"), alert: t("views.authentication.account_locked", email: @user.email)
+        redirect_to admin_auth_notifications_path(source: "unlock"), alert: t("views.authentication.account_locked", email: @user.email)
         return
       end
 

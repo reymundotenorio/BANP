@@ -55,7 +55,7 @@ class Admin::Authentication::UnlocksController < ApplicationController
       return true
 
     else
-      redirect_to admin_auth_notifications_path(resource: "unlock"), alert: t("views.authentication.token_not_found", token: @token)
+      redirect_to admin_auth_notifications_path(source: "unlock"), alert: t("views.authentication.token_not_found", token: @token)
       return false
     end
   end
@@ -90,7 +90,7 @@ class Admin::Authentication::UnlocksController < ApplicationController
 
       # If email has not been found
     else
-      redirect_to admin_auth_notifications_path(resource: "unlock"), alert: t("views.authentication.email_not_found", email: email)
+      redirect_to admin_auth_notifications_path(source: "unlock"), alert: t("views.authentication.email_not_found", email: email)
       return
     end
 

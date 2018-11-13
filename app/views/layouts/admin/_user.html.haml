@@ -8,7 +8,8 @@
         %span.profile
           %i.fas.fa-user
         %span.profile
-          %p Reymundo Tenorio
+          %p
+          =@current_employee.first_name if @current_employee
 
       %li
         %a{href: "#"}
@@ -19,7 +20,7 @@
         %a{href: "#"}
           %i.fas.fa-lock
           %span= t("header.user.lock")
-          
+
       %li
         = link_to (admin_sign_out_path), method: :delete do
           %i.fas.fa-sign-out-alt

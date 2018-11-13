@@ -23,7 +23,7 @@
                 %tbody
                   - resource.each do |info|
                     -# Render table information
-                    = render partial: "admin/partials/table_information", locals: {resource: info, attributes: attributes}
+                    = render partial: "admin/partials/information_table", locals: {resource: info, attributes: attributes}
               -# End Table
         -# End Material card
 -# End Index PDF
