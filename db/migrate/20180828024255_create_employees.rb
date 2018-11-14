@@ -9,12 +9,12 @@ class CreateEmployees < ActiveRecord::Migration[5.2]
       t.string :role, null: false
       t.boolean :state, default: true, null: false
 
-      # t.attachment :image # Paperclip file_name, content_type, file_size, updated_at
-      t.string :slug, unique: true # Friendly_id slug
-
+      t.string :slug # Friendly_id slug
       t.timestamps
     end
 
     add_index :employees, :email, unique: true
+    add_index :employees, :phone, unique: true
+    add_index :employees, :slug, unique: true
   end
 end

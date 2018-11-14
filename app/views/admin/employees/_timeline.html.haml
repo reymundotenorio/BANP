@@ -103,10 +103,10 @@
                     -# End Attribute and Changes
 
                     -# Made by
-                    .info
-                      %p.title
-                      - if record.user.present?
-                        %b= t("views.history.made_bye")
+                    - if record.user.present?
+                      .info
+                        %p.title
+                          %b= t("views.history.made_by")
                         %p
                           = record.user.first_name
                           = record.user.last_name
@@ -115,8 +115,8 @@
                     .info
                       %p.title
                         %b= t("views.history.device_ip")
-                        %p
-                          = record.remote_address
+                      %p= record.remote_address
+                      
               -# End Timeline content
             -# End Information
           -# End Audit

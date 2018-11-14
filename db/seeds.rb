@@ -10,9 +10,11 @@
 
 require "faker"
 
+puts "Seeding employees"
+
 100.times do |count|
   Employee.new(
-    # id: (count + 1),
+    id: (count + 1),
     first_name: Faker::Name.first_name,
     last_name: Faker::Name.last_name,
     email: Faker::Internet.email,
@@ -20,6 +22,21 @@ require "faker"
     role: ["Administrator", "Seller", "Driver"].sample,
     state: Faker::Boolean.boolean(0.8)
   ).save
+end
+
+puts "Seeding users"
+
+puts "Seeding prodivers"
+100.times do |count|
+  Provider.create(
+  id: (count + 1),
+  name: Faker::Company.name,
+  FEIN: "#{Faker::Number.number(2)}-#{Faker::Number.number(7)}",
+  phone: "(#{Faker::Number.number(3)}) #{Faker::Number.number(3)}-#{Faker::Number.number(4)}",
+  email: Faker::Internet.email,
+  address: "#{Faker::Address.street_address}. #{Faker::Address.city}, #{Faker::Address.state} #{Faker::Address.zip_code}",
+  state: Faker::Boolean.boolean(0.8)
+  )
 end
 
 puts "The information have been seeded"

@@ -150,5 +150,4 @@ class Employee < ApplicationRecord
   end
 
   ## End Callbacks
-
 end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_10_21_182830) do
+ActiveRecord::Schema.define(version: 2018_11_14_150537) do
 
   create_table "active_storage_attachments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name", null: false
@@ -66,6 +66,8 @@ ActiveRecord::Schema.define(version: 2018_10_21_182830) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["email"], name: "index_employees_on_email", unique: true
+    t.index ["phone"], name: "index_employees_on_phone", unique: true
+    t.index ["slug"], name: "index_employees_on_slug", unique: true
   end
 
   create_table "friendly_id_slugs", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -78,6 +80,22 @@ ActiveRecord::Schema.define(version: 2018_10_21_182830) do
     t.index ["slug", "sluggable_type"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type", length: { slug: 140 }
     t.index ["sluggable_id"], name: "index_friendly_id_slugs_on_sluggable_id"
     t.index ["sluggable_type"], name: "index_friendly_id_slugs_on_sluggable_type"
+  end
+
+  create_table "providers", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "FEIN", limit: 10
+    t.string "email"
+    t.string "phone", limit: 14
+    t.string "address"
+    t.boolean "state", default: true, null: false
+    t.string "slug"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["FEIN"], name: "index_providers_on_FEIN", unique: true
+    t.index ["email"], name: "index_providers_on_email", unique: true
+    t.index ["phone"], name: "index_providers_on_phone", unique: true
+    t.index ["slug"], name: "index_providers_on_slug", unique: true
   end
 
   create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
