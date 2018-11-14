@@ -1,21 +1,21 @@
--# History
-%section.history
+-# Form Title
+%section.form-title
   .container
     -# Title
     .row.title-container
       .col-xs-12.col-lg-10
         -# Heading
-        %h1.false
-          %i.fas.fa-history
-          = t("views.history.history")
+        %h1
+          %i.fas.fa-plus
+          = t("views.new.new")
         -# End Heading
 
       .col-xs-12.col-lg-2
         -# Provider button
         .btn-container
-          = link_to (admin_provider_path(@provider)), class: "btn btn-general" do
-            %i.fas.fa-id-card
-            %span= t("activerecord.models.provider")
+          = link_to (admin_providers_path), class: "btn btn-general" do
+            %i.fas.fa-list-alt
+            %span= t("header.navigation.providers")
         -# End Provider button
     -# End Title
 
@@ -32,17 +32,12 @@
               = link_to (admin_providers_path) do
                 %i.fas.fa-list-alt
                 %span= t("header.navigation.providers")
-            %li
-              = link_to (admin_provider_path(@provider)) do
-                %i.fas.fa-id-card
-                %span
-                  = @provider.first_name
             %li.active
-              %i.fas.fa-history
-              = t("views.history.history")
+              %i.fas.fa-plus
+              = t("views.new.new")
     -# End Breadcrumb
+-# End Form Title
 
-    -# Render timeline
-    = render "admin/partials/timeline"
-    -# End Render timeline
--# End History
+-# Render form
+= render "form"
+-# End Render form
