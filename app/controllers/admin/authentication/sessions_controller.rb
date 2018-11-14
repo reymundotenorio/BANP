@@ -15,6 +15,9 @@ class Admin::Authentication::SessionsController < ApplicationController
       redirect_to admin_root_path
       return
     end
+
+    @email = params[:email]
+    @email = @email.blank? ? "" : @email.strip.downcase
   end
 
   # Sign in
@@ -306,9 +309,18 @@ class Admin::Authentication::SessionsController < ApplicationController
 
   # /sign-out
   def destroy
+    @email = params[:email]
+
     session[:employee_id] = nil
     session[:session_confirmed] = nil
-    redirect_to admin_sign_in_path, notice: t("views.authentication.signed_out_correctly")
-    return
+
+    if @email
+      redirect_to admin_sign_in_path(email: @email), notice: t("views.authentication.locked_correctly")
+      return
+
+    else
+      redirect_to admin_sign_in_path, notice: t("views.authentication.signed_out_correctly")
+      return
+    end
   end
 end

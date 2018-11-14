@@ -1,11 +1,28 @@
-%span.profile
-  -# Employee image
-  - if employee.image.attached?
-    = image_tag url_for(employee.image), class: "img-responsive img-circle"
+%li
+  -if current_employee
+    %span.profile
+      -# Employee image
+      - if employee.image.attached?
+        = image_tag url_for(employee.image), class: "img-responsive img-circle"
 
-  - else
-    %i.fas.fa-user
+      - else
+        %i.fas.fa-user
 
-  %p
-  = employee.first_name
-  = employee.last_name
+      %p
+      = employee.first_name
+      = employee.last_name
+
+%li
+  = link_to admin_employee_path(employee) do
+    %i.fas.fa-cog
+    %span= t("header.user.configuration")
+
+%li
+  = link_to admin_sign_out_path(email: employee.email), method: :delete do
+    %i.fas.fa-lock
+    %span= t("header.user.lock")
+
+%li
+  = link_to admin_sign_out_path, method: :delete do
+    %i.fas.fa-sign-out-alt
+    %span= t("header.user.sign_off")

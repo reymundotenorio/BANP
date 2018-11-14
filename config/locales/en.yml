@@ -195,6 +195,7 @@ en:
       otp_resended: "A new OTP has been resended to your phone number"
       otp_sms: "Your OTP is: %{otp}. Enter the OTP to access the system"
       employee_user_exists: "The employee is already associated with a user"
+      locked_correctly: "You have locked the session correctly"
     errors:
       page_empty: "This page is empty"
       back_to_home: "Back to Home"

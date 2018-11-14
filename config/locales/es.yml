@@ -195,6 +195,7 @@ es:
       otp_resended: "Se ha reenviado un nuevo OTP a su número de teléfono"
       otp_sms: "Su OTP es: %{otp}. Ingrese el OTP para acceder al sistema"
       employee_user_exists: "El empleado ya está asociado con un usuario"
+      locked_correctly: "Ha bloqueado la sesión correctamente"
     errors:
       page_empty: "Esta página está vacía"
       back_to_home: "Regresar a Inicio"

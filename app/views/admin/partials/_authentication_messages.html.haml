@@ -3,7 +3,7 @@
     .row
       .col-xs-12.col-sm-10.col-sm-offset-1.col-md-8.col-md-offset-2
         -# Material card
-        .material-card.shadow-card.true
+        .material-card.shadow-card
           .row.no-margin
             -# Flash notifications
             = render "admin/partials/authentication_flash"
@@ -16,8 +16,8 @@
                   = link_to (admin_root_path), title: "t('views.errors.back_to_home')" do
                     %i.fas.fa-undo-alt
                     %span= t("views.errors.back_to_home")
-                    
-                -# Confirmation resend instructions      
+
+                -# Confirmation resend instructions
               - elsif @source == "confirmation"
                 %p
                   = link_to (admin_confirm_account_path), title: "t('views.authentication.resend_instructions')" do

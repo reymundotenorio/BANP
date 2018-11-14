@@ -5,7 +5,7 @@
       .row
         .col-xs-12.col-sm-10.col-sm-offset-1.col-md-8.col-md-offset-2.col-lg-6.col-lg-offset-3
           -# Material card
-          .material-card.shadow-card.true
+          .material-card.shadow-card
             .row.no-margin
               .col-xs-12.no-padding
                 -# Logo
@@ -20,13 +20,21 @@
               .col-xs-12.no-padding
                 .form-info
                   .form-group
-                    = f.email_field :email, class: "form-control input", placeholder: t("activerecord.attributes.user.email"), required: true, autofocus: true
+                    - if @email != ""
+                      = f.email_field :email, class: "form-control input", placeholder: t("activerecord.attributes.user.email"), required: true, value: @email
+
+                    - else
+                      = f.email_field :email, class: "form-control input", placeholder: t("activerecord.attributes.user.email"), required: true, value: @email, autofocus: true
                     %label
                       %b= t("activerecord.attributes.user.email")
                     .border-bottom
 
                   .form-group
-                    = f.password_field :password, class: "form-control input", placeholder: t("activerecord.attributes.user.password_digest"), required: true
+                    - if @email != ""
+                      = f.password_field :password, class: "form-control input", placeholder: t("activerecord.attributes.user.password_digest"), required: true, autofocus: true
+
+                    - else
+                      = f.password_field :password, class: "form-control input", placeholder: t("activerecord.attributes.user.password_digest"), required: true
                     %label
                       %b= t("activerecord.attributes.user.password_digest")
                     .border-bottom
