@@ -68,7 +68,7 @@ Rails.application.routes.draw do
     patch "/employees/:id/active", to: "employees#active", as: "active_employee"
     patch "/employees/:id/deactive", to: "employees#deactive", as: "deactive_employee"
     # End Employees
-
+    
     # Providers
     get "/providers", to: "providers#index", as: "providers"
     get "/provider/new", to: "providers#new", as: "new_provider"
@@ -77,7 +77,8 @@ Rails.application.routes.draw do
     get "/provider/:id/history", to: "providers#history", as: "history_provider"
     post "/providers", to: "providers#create"
     patch "/provider/:id", to: "providers#update", as: "update_provider"
-    patch "/providers/state/:id", to: "providers#active_deactive", as: "active_deactive_provider"
+    patch "/providers/:id/active", to: "providers#active", as: "active_provider"
+    patch "/providers/:id/deactive", to: "providers#deactive", as: "deactive_provider"
     # End Providers
 
     # Categories
