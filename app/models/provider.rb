@@ -64,8 +64,8 @@ class Provider < ApplicationRecord
   # Length validation
   validates :name, length: { maximum: 255 }
   validates :FEIN, length: { is: 10 }, allow_blank: true
-#   validates :phone, length: { is: 14 }, allow_blank: true
   validates :email, length: { maximum: 255 }, allow_blank: true
+#   validates :phone, length: { is: 14 }, allow_blank: true
   validates :address, length: { maximum: 255 }, allow_blank: true
   # End Length validation
 

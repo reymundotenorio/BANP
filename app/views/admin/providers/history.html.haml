@@ -11,12 +11,12 @@
         -# End Heading
 
       .col-xs-12.col-lg-2
-        -# Employee button
+        -# Provider button
         .btn-container
-          = link_to (admin_employee_path(@employee)), class: "btn btn-general" do
+          = link_to (admin_provider_path(@provider)), class: "btn btn-general" do
             %i.fas.fa-id-card
-            %span= t("activerecord.models.employee")
-        -# End Employee button
+            %span= t("activerecord.models.provider")
+        -# End Provider button
     -# End Title
 
     -# Breadcrumb
@@ -29,21 +29,20 @@
                 %i.fas.fa-tachometer-alt
                 %span= t("header.navigation.dashboard")
             %li
-              = link_to (admin_employees_path) do
+              = link_to (admin_providers_path) do
                 %i.fas.fa-list-alt
-                %span= t("header.navigation.employees")
+                %span= t("header.navigation.providers")
             %li
-              = link_to (admin_employee_path(@employee)) do
+              = link_to (admin_provider_path(@provider)) do
                 %i.fas.fa-id-card
                 %span
-                  = @employee.first_name
-                  = @employee.last_name
+                  = @provider.first_name
             %li.active
               %i.fas.fa-history
               = t("views.history.history")
     -# End Breadcrumb
 
     -# Render timeline
-    = render "admin/partials/timeline"
+    = render "timeline"
     -# End Render timeline
 -# End History

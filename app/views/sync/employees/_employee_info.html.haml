@@ -18,11 +18,11 @@
     %span= t("header.user.configuration")
 
 %li
-  = link_to admin_sign_out_path(email: employee.email), method: :delete do
+  = link_to admin_sign_out_path(email: employee.email), method: "delete" do
     %i.fas.fa-lock
     %span= t("header.user.lock")
 
 %li
-  = link_to admin_sign_out_path, method: :delete do
+  = link_to admin_sign_out_path, method: "delete" do
     %i.fas.fa-sign-out-alt
     %span= t("header.user.sign_off")

@@ -1,0 +1,96 @@
+-# Form
+= form_for [:admin, @provider],  html: {autocomplete: "off", multipart: true} do |f|
+  %section.form
+    .container
+      .row
+        .col-xs-12
+          -# Show errors
+          = render partial: "admin/partials/form_errors", locals: {resource: @provider, model: Provider}
+          -# End Show errors
+
+        .col-xs-12.col-md-5.col-lg-4
+          -# Material card
+          %div{class: "material-card shadow-card #{@provider.state}"}
+            .row.no-margin
+              .col-xs-12.no-padding
+                -# General information
+                .general-info
+                  -# Image
+                  .image-container
+                    - if @provider.image.attached?
+                      = image_tag url_for(@provider.image), id: "preview-image", class: "img-responsive"
+
+                    - else
+                      = image_tag url_for("https://s3.amazonaws.com/betterandnice/images/default/default.png"), id: "preview-image", class: "img-responsive"
+                  -# End Image
+
+                  -# Input imagen
+                  .form-group
+                    .input-group
+                      %input#filename.form-control{readonly: "readonly", type: "text"}/
+
+                      %span.input-group-btn
+                        %span.btn.btn-general.btn-file
+                          %i.fas.fa-upload
+                          = f.file_field :image, id: "select-image", accept: "image/*"
+                  -# End Input imagen
+                -# End General information
+          -# End Material card
+
+        .col-xs-12.col-md-7.col-lg-8
+          -# Material card
+          %div{class: "material-card shadow-card #{@provider.state}"}
+            .row.no-margin
+              .col-xs-12.no-padding
+                .form-info
+                  .form-group
+                    = f.text_field :name, class: "form-control input", placeholder: t("activerecord.attributes.provider.name"), required: true
+                    %label
+                      %b= t("activerecord.attributes.provider.name")
+                    .border-bottom
+
+                  .form-group
+                    = f.text_field :FEIN, class: "form-control input", "data-mask": "00-0000000", placeholder: t("activerecord.attributes.provider.FEIN")
+                    %label
+                      %b= t("activerecord.attributes.provider.FEIN")
+                    .border-bottom
+
+                  .form-group
+                    = f.email_field :email, class: "form-control input", placeholder: t("activerecord.attributes.provider.email")
+                    %label
+                      %b= t("activerecord.attributes.provider.email")
+                    .border-bottom
+
+                  .form-group
+                    = f.telephone_field :phone, class: "form-control input", "data-mask": "(000) 000-0000", placeholder: t("activerecord.attributes.provider.phone")
+                    %label
+                      %b= t("activerecord.attributes.provider.phone")
+                    .border-bottom
+
+                  .form-group
+                    = f.text_area :address, class: "form-control input", rows: "5", placeholder: t("activerecord.attributes.provider.address")
+                    %label
+                      %b= t("activerecord.attributes.provider.address")
+                    .border-bottom
+
+                  -# Buttons
+                  .main-buttons
+                    .col-xs-12.col-sm-12.button-container.no-padding
+                      = button_tag type: "reset", id: "reset-button", class: "btn btn-general" do
+                        %i.fas.fa-eraser
+                        %span= t("views.form.restart")
+
+                      = f.button class: "btn btn-general", data: {disable_with: "<i class='fas fa-spinner fa-spin'></i>"} do
+                        %i.fas.fa-save
+                        %span= t("views.form.save")
+                  -# End Buttons
+          -# End Material card
+-# End Form
+
+-# Form script
+= javascript_include_tag "form", "data-turbolinks-track": "reload"
+-# End Form script
+
+-# Jquery Mask script
+= javascript_include_tag "jquery-mask/jquery.mask", "data-turbolinks-track": "reload"
+-# End Jquery Mask script

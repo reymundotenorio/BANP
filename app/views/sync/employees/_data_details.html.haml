@@ -90,12 +90,12 @@
 
                   .col-xs-12.col-sm-4.col-md-12.button-container.no-padding
                     - if(employee.state)
-                      = link_to (admin_deactive_employee_path(employee)), method: :patch, class: "btn btn-general" do
+                      = link_to (admin_deactive_employee_path(employee)), method: "patch", class: "btn btn-general" do
                         %i.fas.fa-times
                         %span= t("views.show.disable")
 
                     - else
-                      = link_to (admin_active_employee_path(employee)), method: :patch, class: "btn btn-general" do
+                      = link_to (admin_active_employee_path(employee)), method: "patch", class: "btn btn-general" do
                         %i.fas.fa-check
                         %span= t("views.show.enable")
               -# End General information

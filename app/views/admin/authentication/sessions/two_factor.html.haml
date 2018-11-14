@@ -34,7 +34,7 @@
                   .main-buttons.sessions
                     .col-xs-12.col-sm-12.button-container.no-padding
                       -# Link hidden on mobile
-                      = link_to (admin_resend_otp_path), class: "forgot-pass hidden-xs", method: :patch do
+                      = link_to (admin_resend_otp_path), class: "forgot-pass hidden-xs", method: "patch" do
                         %i.fas.fa-comment
                         %span= t("views.form.resend_otp")
                       -# End Link hidden on mobile
@@ -44,7 +44,7 @@
                         %span= t("views.form.verify")
 
                       -# Link visible only on mobile
-                      = link_to (admin_resend_otp_path), class: "forgot-pass visible-xs", method: :patch do
+                      = link_to (admin_resend_otp_path), class: "forgot-pass visible-xs", method: "patch" do
                         %i.fas.fa-comment
                         %span= t("views.form.resend_otp")
                       -# End Link visible only on mobile
