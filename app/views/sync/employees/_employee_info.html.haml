@@ -2,11 +2,10 @@
   -# Employee image
   - if employee.image.attached?
     = image_tag url_for(employee.image), class: "img-responsive img-circle"
-  
+
   - else
     %i.fas.fa-user
-  
+
   %p
   = employee.first_name
   = employee.last_name
-  

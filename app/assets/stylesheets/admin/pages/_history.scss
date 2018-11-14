@@ -109,6 +109,10 @@
           color: rgba($text-color, 0.8);
           font-style: italic;
           padding-bottom: 10px;
+
+          span{
+            display: block;
+          }
         }
       }
 

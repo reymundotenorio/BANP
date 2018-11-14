@@ -20,6 +20,12 @@ module ApplicationHelper
 
       elsif attribute == "confirmed"
         t("views.show.confirmed")
+
+      elsif attribute == "two_factor_auth"
+        t("views.show.enabled")
+
+      else
+        true
       end
 
       # Disabled or Not confirmed
@@ -29,6 +35,12 @@ module ApplicationHelper
 
       elsif attribute == "confirmed"
         t("views.show.not_confirmed")
+
+      elsif attribute == "two_factor_auth"
+        t("views.show.disabled")
+
+      else
+        false
       end
 
       # If attribute is datetime

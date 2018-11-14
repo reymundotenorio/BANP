@@ -147,6 +147,8 @@ es:
     history:
       history: "Historial"
       confidential_info: "Información confidencial"
+      made_bye: "Realizado por"
+      device_ip: "IP del dispositivo"
     form:
       the_information_could_not_be_saved: "No se ha podido guardar la información."
       error_found: "error encontrado:"
