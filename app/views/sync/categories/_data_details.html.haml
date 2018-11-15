@@ -7,7 +7,11 @@
         -# Heading
         %h1{class: "#{category.state}"}
           %i.fas.fa-id-card
-          = category.name
+          - if I18n.locale == :es
+            = category.name_spanish
+            
+          -else
+            = category.name
         -# End Heading
 
       .col-xs-12.col-sm-6.col-md-4.text-right
@@ -34,7 +38,11 @@
                 %span= t("header.navigation.categories")
             %li.active
               %i.fas.fa-id-card
-              = category.name
+              - if I18n.locale == :es
+                = category.name_spanish
+            
+              -else
+                = category.name
     -# End Breadcrumb
 
     -# Information
