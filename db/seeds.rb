@@ -12,8 +12,8 @@ require "faker"
 
 puts "Seeding employees"
 
-100.times do |count|
-  Employee.new(
+40.times do |count|
+  Employee.create(
     id: (count + 1),
     first_name: Faker::Name.first_name,
     last_name: Faker::Name.last_name,
@@ -21,13 +21,13 @@ puts "Seeding employees"
     phone: "(#{Faker::Number.number(3)}) #{Faker::Number.number(3)}-#{Faker::Number.number(4)}",
     role: ["Administrator", "Seller", "Driver"].sample,
     state: Faker::Boolean.boolean(0.8)
-  ).save
+  )
 end
 
 puts "Seeding users"
 
 puts "Seeding prodivers"
-100.times do |count|
+60.times do |count|
   Provider.create(
   id: (count + 1),
   name: Faker::Company.name,
@@ -35,6 +35,16 @@ puts "Seeding prodivers"
   phone: "(#{Faker::Number.number(3)}) #{Faker::Number.number(3)}-#{Faker::Number.number(4)}",
   email: Faker::Internet.email,
   address: "#{Faker::Address.street_address}. #{Faker::Address.city}, #{Faker::Address.state} #{Faker::Address.zip_code}",
+  state: Faker::Boolean.boolean(0.8)
+  )
+end
+
+puts "Seeding categories"
+20.times do |count|
+  Category.create(
+  id: (count + 1),
+  name: Faker::Food.ingredient,
+  description: Faker::Food.description,
   state: Faker::Boolean.boolean(0.8)
   )
 end

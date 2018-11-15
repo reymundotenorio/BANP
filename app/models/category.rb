@@ -1,4 +1,4 @@
-class Provider < ApplicationRecord
+class Category < ApplicationRecord
   # Audit
   audited
   # End Audit
@@ -10,7 +10,7 @@ class Provider < ApplicationRecord
   # Search
   def self.search(search, show_all)
     if search
-      query = "(name LIKE :search OR FEIN LIKE :search OR phone LIKE :search OR email LIKE :search OR address LIKE :search)"
+      query = "(name LIKE :search OR description LIKE :search)"
       where(query, search: "%#{search}%")
 
     elsif show_all == "all"
@@ -31,14 +31,13 @@ class Provider < ApplicationRecord
   def slug_candidates
     [
       [:name],
-      [:name, :FEIN, :id],
-      [:name, :FEIN, :id]
+      [:name, :id]
     ]
   end
 
   # Update Friendly_ID slug
   def should_generate_new_friendly_id?
-    slug.blank? || name_changed? || FEIN_changed?
+    slug.blank? || name_changed?
   end
   # End Update Friendly_ID slug
 
@@ -51,9 +50,7 @@ class Provider < ApplicationRecord
   ## Validations
 
   # Uniqueness validation
-  validates :FEIN, uniqueness: { case_sensitive: false }
-  validates :email, uniqueness: { case_sensitive: false }
-  validates :phone, uniqueness: { case_sensitive: false }
+  validates :name, uniqueness: { case_sensitive: false }
   # End Uniqueness validation
 
   # Presence validation
@@ -62,10 +59,7 @@ class Provider < ApplicationRecord
 
   # Length validation
   validates :name, length: { maximum: 255 }
-  validates :FEIN, length: { is: 10 }, allow_blank: true
-  validates :email, length: { maximum: 255 }, allow_blank: true
-#   validates :phone, length: { is: 14 }, allow_blank: true
-  validates :address, length: { maximum: 255 }, allow_blank: true
+  validates :description, length: { maximum: 255 }, allow_blank: true
   # End Length validation
 
   # Type validation
@@ -78,11 +72,6 @@ class Provider < ApplicationRecord
       errors.add(:image, :blank, message: I18n.t("validates.image_format"))
     end
   end
-
-  # Format validation
-  validates_format_of :FEIN, with: /\A\d{2}-\d{7}\z/ ,allow_blank: true # 00-0000000
-#   validates_format_of :phone, with: /\A\(\d{3}\) \d{3}-\d{4}\z/ ,allow_blank: true # (000) 000-0000
-  # End Format validation
 
   ## End Validations
 

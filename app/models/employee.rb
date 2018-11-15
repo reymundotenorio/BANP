@@ -69,7 +69,6 @@ class Employee < ApplicationRecord
   validates :phone, uniqueness: { case_sensitive: false }
   # End Uniqueness validation
 
-
   # Presence validation
   validates :first_name, presence: true
   validates :last_name, presence: true
