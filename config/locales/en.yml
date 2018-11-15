@@ -79,6 +79,8 @@ en:
       category:
         name: "Name"
         description: "Description"
+        name_spanish: "Name"
+        description_spanish: "Description"
         state: "State"
         image_file_name: "Image file name"
         image_content_type: "Image content type"

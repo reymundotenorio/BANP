@@ -12,7 +12,7 @@ class Admin::ProductsController < ApplicationController
   # End Sync model DSL
 
   # Authentication
-  before_action :require_employee
+  # before_action :require_employee
   # End Authentication
 
   # /products

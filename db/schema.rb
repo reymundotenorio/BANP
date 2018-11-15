@@ -57,12 +57,15 @@ ActiveRecord::Schema.define(version: 2018_11_15_012702) do
 
   create_table "categories", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name", null: false
+    t.string "name_spanish", null: false
     t.string "description"
+    t.string "description_spanish"
     t.boolean "state", default: true, null: false
     t.string "slug"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["name"], name: "index_categories_on_name", unique: true
+    t.index ["name_spanish"], name: "index_categories_on_name_spanish", unique: true
   end
 
   create_table "employees", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|

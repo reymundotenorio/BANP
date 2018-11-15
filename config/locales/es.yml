@@ -79,6 +79,8 @@ es:
       category:
         name: "Nombre"
         description: "Descripción"
+        name_spanish: "Nombre"
+        description_spanish: "Descripción"
         state: "Estado"
         image_file_name: "Nombre de la imagen"
         image_content_type: "Tipo de archivo de la imagen"

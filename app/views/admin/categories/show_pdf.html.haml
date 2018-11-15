@@ -6,7 +6,10 @@
         %h1.text-center= pdf_title
 
       -# Set attributes
-      - attributes = ["name", "description"]
+      - if I18n.locale == :es
+        - attributes = ["name_spanish", "description_spanish"]
+      - else
+        - attributes = ["name", "description"]
 
       -# Render details information
       = render partial: "admin/partials/information_details", locals: {resource: resource, attributes: attributes}

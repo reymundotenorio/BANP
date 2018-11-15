@@ -13,7 +13,7 @@ class Category < ApplicationRecord
   # Search
   def self.search(search, show_all)
     if search
-      query = "(name LIKE :search OR description LIKE :search)"
+      query = "(name LIKE :search OR name_spanish LIKE :search OR description LIKE :search OR description_spanish LIKE :search)"
       where(query, search: "%#{search}%")
 
     elsif show_all == "all"

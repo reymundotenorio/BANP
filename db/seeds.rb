@@ -44,7 +44,9 @@ puts "Seeding categories"
   Category.create(
     id: (count + 1),
     name: Faker::Food.ingredient,
+    name_spanish: Faker::Food.ingredient,
     description: Faker::Food.description,
+    description_spanish: Faker::Food.description,
     state: Faker::Boolean.boolean(0.8)
   )
 end
@@ -63,7 +65,7 @@ puts "Seeding products"
     recipes: "#{Faker::Food.dish}, #{Faker::Food.dish}, #{Faker::Food.dish}",
     recipes_spanish: "#{Faker::Food.dish}, #{Faker::Food.dish}, #{Faker::Food.dish}",
     state: Faker::Boolean.boolean(0.8),
-    # category_id: Faker::Number.between(1, 20)
+    category_id: Faker::Number.between(1, 20)
   )
 end
 

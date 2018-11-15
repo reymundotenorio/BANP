@@ -24,4 +24,28 @@ $(document).ready(function() {
     }
   });
 
+  // Inputs
+  $("input.form-control").each(function() {
+    // If empty
+    if($(this).val() == ""){
+      $(this).removeClass("with-value"); // Remove class
+    }
+
+    else{
+      $(this).addClass("with-value"); // Add class
+    }
+  });
+
+  // Text area
+  $("textarea.form-control").each(function() {
+    // If empty
+    if($(this).val() == ""){
+      $(this).removeClass("with-value"); // Remove class
+    }
+
+    else{
+      $(this).addClass("with-value"); // Add class
+    }
+  });
+
 });

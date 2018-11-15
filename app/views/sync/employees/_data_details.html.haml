@@ -109,6 +109,7 @@
               %div{class: "detail-info #{employee.state}"}
                 -# Set attributes
                 - attributes = ["email" ,"phone", "role", "state"]
+
                 - attributes.each do |attribute|
                   .info
                     %p.title
@@ -122,6 +123,7 @@
 
                 -# Set user attributes
                 - user_attributes = ["confirmed", "sign_in_count", "current_sign_in_at", "current_sign_in_ip", "last_sign_in_at", "last_sign_in_ip"]
+                
                   - user_attributes.each do |attribute| if employee.user.present?
                     .info
                       %p.title

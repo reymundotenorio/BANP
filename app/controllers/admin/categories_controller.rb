@@ -88,7 +88,9 @@ class Admin::CategoriesController < ApplicationController
 
     # Deleting blank spaces
     @category[:name] = @category[:name].strip
+    @category[:name_spanish] = @category[:name].strip
     @category[:description]= @category[:description].strip
+    @category[:description_spanish]= @category[:description].strip
     # End Deleting blank spaces
 
     # If record was saved
@@ -143,6 +145,6 @@ class Admin::CategoriesController < ApplicationController
 
   # Category params
   def category_params
-    params.require(:category).permit(:name, :description, :image)
+    params.require(:category).permit(:name, :name_spanish, :description, :description_spanish, :image)
   end
 end

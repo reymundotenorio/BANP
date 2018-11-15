@@ -1,6 +1,9 @@
 %tr{class: "clickable-row #{category.state}", "data-href": "#{admin_category_path(category)}"}
   -# Set attributes
-  - attributes = ["name", "description"]
+  - if I18n.locale == :es
+    - attributes = ["name_spanish", "description_spanish"]
+  - else
+    - attributes = ["name", "description"]
 
   %td
     = link_to admin_category_path(category), class: "record-link", "data-header": "No." do

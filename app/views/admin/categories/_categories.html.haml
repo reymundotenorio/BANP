@@ -3,8 +3,11 @@
     -# Table
     %table.table
       %thead
-        - model = "provider"
-        - attributes = ["name", "description"]
+        - model = "category"
+        - if I18n.locale == :es
+          - attributes = ["name_spanish", "description_spanish"]
+        - else
+          - attributes = ["name", "description"]
 
         -# Render table header
         = render partial: "admin/partials/table_header", locals: {model: model, attributes: attributes}

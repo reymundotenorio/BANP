@@ -90,7 +90,11 @@
             .col-xs-12.no-padding
               %div{class: "detail-info #{category.state}"}
                 -# Set attributes
-                - attributes = ["description", "state"]
+                - if I18n.locale == :es
+                  - attributes = ["name_spanish", "description_spanish"]
+                - else
+                  - attributes = ["name", "description"]
+
                 - attributes.each do |attribute|
                   .info
                     %p.title
