@@ -5,19 +5,15 @@
     .row.title-container
       .col-xs-12.col-sm-6.col-md-8
         -# Heading
-        %h1{class: "#{category.state}"}
+        %h1{class: "#{product.state}"}
           %i.fas.fa-id-card
-          - if I18n.locale == :es
-            = category.name_spanish
-            
-          -else
-            = category.name
+          = product.name
         -# End Heading
 
       .col-xs-12.col-sm-6.col-md-4.text-right
         -# Export button
         .btn-container.inline
-          = link_to (admin_category_path(category, format: "pdf", lang: I18n.locale)), target: "_blank", class: "btn btn-general" do
+          = link_to (admin_product_path(product, format: "pdf", lang: I18n.locale)), target: "_blank", class: "btn btn-general" do
             %i.fas.fa-download
             %span= t("views.index.export")
         -# End Export button
@@ -33,59 +29,55 @@
                 %i.fas.fa-tachometer-alt
                 %span= t("header.navigation.dashboard")
             %li
-              = link_to (admin_categories_path) do
+              = link_to (admin_products_path) do
                 %i.fas.fa-list-alt
-                %span= t("header.navigation.categories")
+                %span= t("header.navigation.products")
             %li.active
               %i.fas.fa-id-card
-              - if I18n.locale == :es
-                = category.name_spanish
-            
-              -else
-                = category.name
+              = product.name
     -# End Breadcrumb
 
     -# Information
     .row
       .col-xs-12.col-md-5.col-lg-4
         -# Material card
-        %div{class: "material-card shadow-card #{category.state}"}
+        %div{class: "material-card shadow-card #{product.state}"}
           .row.no-margin
             .col-xs-12.no-padding
               -# General information
               .general-info
                 -# Image
                 .image-container
-                  - if category.image.attached?
-                    = image_tag url_for(category.image), class: "img-responsive"
+                  - if product.image.attached?
+                    = image_tag url_for(product.image), class: "img-responsive"
 
                   - else
                     = image_tag url_for("https://s3.amazonaws.com/betterandnice/images/default/default.png"), class: "img-responsive"
                 -# End Image
 
                 .main-info
-                  %p= t("views.show.created_at", time: time_ago_in_words(category.created_at))
-                  %p= t("views.show.updated_at", time: time_ago_in_words(category.updated_at))
+                  %p= t("views.show.created_at", time: time_ago_in_words(product.created_at))
+                  %p= t("views.show.updated_at", time: time_ago_in_words(product.updated_at))
 
                 .main-buttons
                   .col-xs-12.col-sm-4.col-md-6.button-container.no-padding
-                    = link_to (admin_edit_category_path(category)), class: "btn btn-general" do
+                    = link_to (admin_edit_product_path(product)), class: "btn btn-general" do
                       %i.fas.fa-edit
                       %span= t("views.show.edit")
 
                   .col-xs-12.col-sm-4.col-md-6.button-container.no-padding
-                    = link_to (admin_history_category_path(category)), class: "btn btn-general" do
+                    = link_to (admin_history_product_path(product)), class: "btn btn-general" do
                       %i.fas.fa-history
                       %span= t("views.show.history")
 
                   .col-xs-12.col-sm-4.col-md-12.button-container.no-padding
-                    - if(category.state)
-                      = link_to (admin_deactive_category_path(category)), method: "patch", class: "btn btn-general" do
+                    - if(product.state)
+                      = link_to (admin_deactive_product_path(product)), method: "patch", class: "btn btn-general" do
                         %i.fas.fa-times
                         %span= t("views.show.disable")
 
                     - else
-                      = link_to (admin_active_category_path(category)), method: "patch", class: "btn btn-general" do
+                      = link_to (admin_active_product_path(product)), method: "patch", class: "btn btn-general" do
                         %i.fas.fa-check
                         %span= t("views.show.enable")
               -# End General information
@@ -93,26 +85,26 @@
 
       .col-xs-12.col-md-7.col-lg-8
         -# Material card
-        %div{class: "material-card shadow-card #{category.state}"}
+        %div{class: "material-card shadow-card #{product.state}"}
           .row.no-margin
             .col-xs-12.no-padding
-              %div{class: "detail-info #{category.state}"}
+              %div{class: "detail-info #{product.state}"}
                 -# Set attributes
                 - if I18n.locale == :es
-                  - attributes = ["name_spanish", "description_spanish", "state"]
+                  - attributes = ["name_spanish", "price", "content_spanish", "description_spanish", "recipes_spanish", "state"]
                 - else
-                  - attributes = ["name", "description", "state"]
+                  - attributes = ["name", "price", "content", "description", "recipes", "state"]
 
                 - attributes.each do |attribute|
                   .info
                     %p.title
-                      %b= t("activerecord.attributes.category.#{attribute}")
+                      %b= t("activerecord.attributes.product.#{attribute}")
 
                     - if attribute == "state"
-                      %p= category["#{attribute}"] ? t("views.show.enabled") : t("views.show.disabled")
+                      %p= product["#{attribute}"] ? t("views.show.enabled") : t("views.show.disabled")
 
                     - else
-                      %p= category["#{attribute}"]
+                      %p= product["#{attribute}"]
         -# End Material card
     -# End Information
 -# End Details

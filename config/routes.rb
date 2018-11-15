@@ -101,7 +101,8 @@ Rails.application.routes.draw do
     get "/product/:id/history", to: "products#history", as: "history_product"
     post "/products", to: "products#create"
     patch "/product/:id", to: "products#update", as: "update_product"
-    patch "/products/state/:id", to: "products#active_deactive", as: "active_deactive_product"
+    patch "/products/:id/active", to: "products#active", as: "active_product"
+    patch "/products/:id/deactive", to: "products#deactive", as: "deactive_product"
     # End Products
   end
   # End Admin namespace

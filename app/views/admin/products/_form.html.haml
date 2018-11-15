@@ -1,0 +1,120 @@
+-# Form
+= form_for [:admin, @product],  html: {autocomplete: "off", multipart: true} do |f|
+  %section.form
+    .container
+      .row
+        .col-xs-12
+          -# Show errors
+          = render partial: "admin/partials/form_errors", locals: {resource: @product, model: Product}
+          -# End Show errors
+
+        .col-xs-12.col-md-5.col-lg-4
+          -# Material card
+          %div{class: "material-card shadow-card #{@product.state}"}
+            .row.no-margin
+              .col-xs-12.no-padding
+                -# General information
+                .general-info
+                  -# Image
+                  .image-container
+                    - if @product.image.attached?
+                      = image_tag url_for(@product.image), id: "preview-image", class: "img-responsive"
+
+                    - else
+                      = image_tag url_for("https://s3.amazonaws.com/betterandnice/images/default/default.png"), id: "preview-image", class: "img-responsive"
+                  -# End Image
+
+                  -# Input imagen
+                  .form-group
+                    .input-group
+                      %input#filename.form-control{readonly: "readonly", type: "text"}/
+
+                      %span.input-group-btn
+                        %span.btn.btn-general.btn-file
+                          %i.fas.fa-upload
+                          = f.file_field :image, id: "select-image", accept: "image/*"
+                  -# End Input imagen
+                -# End General information
+          -# End Material card
+
+        .col-xs-12.col-md-7.col-lg-8
+          -# Material card
+          %div{class: "material-card shadow-card #{@product.state}"}
+            .row.no-margin
+              .col-xs-12.no-padding
+                .form-info
+                  .form-group
+                    = f.text_field :name, class: "form-control input", placeholder: t("activerecord.attributes.product.name"), required: true
+                    %label
+                      %b= t("activerecord.attributes.product.name")
+                    .border-bottom
+
+                  .form-group
+                    = f.text_field :name_spanish, class: "form-control input", placeholder: t("activerecord.attributes.product.name_spanish"), required: true
+                    %label
+                      %b= t("activerecord.attributes.product.name_spanish")
+                    .border-bottom
+
+                  .form-group
+                    = f.text_field :price, class: "form-control input", placeholder: t("activerecord.attributes.product.price"), required: true
+                    %label
+                      %b= t("activerecord.attributes.product.price")
+                    .border-bottom
+
+                  .form-group
+                    = f.text_area :content, class: "form-control input text-area",placeholder: t("activerecord.attributes.product.content")
+                    %label
+                      %b= t("activerecord.attributes.product.content")
+                    .border-bottom
+
+                  .form-group
+                    = f.text_area :content_spanish, class: "form-control input text-area",placeholder: t("activerecord.attributes.product.content_spanish")
+                    %label
+                      %b= t("activerecord.attributes.product.content_spanish")
+                    .border-bottom
+
+                  .form-group
+                    = f.text_area :description, class: "form-control input text-area",placeholder: t("activerecord.attributes.product.description")
+                    %label
+                      %b= t("activerecord.attributes.product.description")
+                    .border-bottom
+
+                  .form-group
+                    = f.text_area :description_spanish, class: "form-control input text-area",placeholder: t("activerecord.attributes.product.description_spanish")
+                    %label
+                      %b= t("activerecord.attributes.product.description_spanish")
+                    .border-bottom
+
+                  .form-group
+                    = f.text_area :recipes, class: "form-control input text-area",placeholder: t("activerecord.attributes.product.recipes")
+                    %label
+                      %b= t("activerecord.attributes.product.recipes")
+                    .border-bottom
+
+                  .form-group
+                    = f.text_area :recipes_spanish, class: "form-control input text-area",placeholder: t("activerecord.attributes.product.recipes_spanish")
+                    %label
+                      %b= t("activerecord.attributes.product.recipes_spanish")
+                    .border-bottom
+
+                  -# Buttons
+                  .main-buttons
+                    .col-xs-12.col-sm-12.button-container.no-padding
+                      = button_tag type: "reset", id: "reset-button", class: "btn btn-general" do
+                        %i.fas.fa-eraser
+                        %span= t("views.form.restart")
+
+                      = f.button class: "btn btn-general", data: {disable_with: "<i class='fas fa-spinner fa-spin'></i>"} do
+                        %i.fas.fa-save
+                        %span= t("views.form.save")
+                  -# End Buttons
+          -# End Material card
+-# End Form
+
+-# Form script
+= javascript_include_tag "form", "data-turbolinks-track": "reload"
+-# End Form script
+
+-# Jquery Mask script
+= javascript_include_tag "jquery-mask/jquery.mask", "data-turbolinks-track": "reload"
+-# End Jquery Mask script

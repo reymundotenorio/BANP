@@ -7,10 +7,10 @@
 
       -# Set attributes
       - if I18n.locale == :es
-        - attributes = ["name_spanish", "description_spanish", "state"]
+        - attributes = ["name_spanish", "price" "content_spanish", "description_spanish", "recipes_spanish", "state"]
       - else
-        - attributes = ["name", "description", "state"]
-
+        - attributes = ["name", "price", "content", "description", "recipes", "state"]
+        
       -# Render details information
       = render partial: "admin/partials/information_details", locals: {resource: resource, attributes: attributes}
 -# End Details PDF

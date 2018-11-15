@@ -1,0 +1,27 @@
+.row.no-margin
+  .col-xs-12.no-padding
+    -# Table
+    %table.table
+      %thead
+        - model = "product"
+        - if I18n.locale == :es
+          - attributes = ["name_spanish", "price" "content_spanish"]
+        - else
+          - attributes = ["name", "price", "content"]
+
+        -# Render table header
+        = render partial: "admin/partials/table_header", locals: {model: model, attributes: attributes}
+
+      %tbody
+        -# Data table Sync
+        = sync partial: "data_table", collection: @products
+        = sync_new partial: "data_table", resource: Product.new
+        -# End Data table Sync
+    -# End Table
+
+
+.row.no-margin
+  .col-xs-12.no-padding.text-center
+    -# Pagination
+    = will_paginate @products, renderer: BootstrapPagination::Rails
+    -# End Pagination

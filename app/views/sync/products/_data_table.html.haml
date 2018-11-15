@@ -1,0 +1,15 @@
+%tr{class: "clickable-row #{product.state}", "data-href": "#{admin_product_path(product)}"}
+  -# Set attributes
+  - if I18n.locale == :es
+    - attributes = ["name_spanish", "price" "content_spanish"]
+  - else
+    - attributes = ["name", "price", "content"]
+
+  %td
+    = link_to admin_product_path(product), class: "record-link", "data-header": "No." do
+      %p= product.id
+
+  - attributes.each do |attribute|
+    %td
+      = link_to admin_product_path(product), class: "record-link", "data-header": t("activerecord.attributes.product.#{attribute}") do
+        %p= product["#{attribute}"]
