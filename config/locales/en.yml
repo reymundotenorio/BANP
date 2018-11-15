@@ -67,7 +67,8 @@ en:
         unlock_sent: "Unlock sent"
       provider:
         name: "Name"
-        FEIN: "Federal Employer Identification Number (FEIN)"
+        # FEIN: "Federal Employer Identification Number (FEIN)"
+        FEIN: "FEIN"
         phone: "Phone"
         email: "Email"
         address: "Address"

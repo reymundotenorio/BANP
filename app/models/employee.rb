@@ -80,8 +80,8 @@ class Employee < ApplicationRecord
   # Length validation
   validates :first_name, length: { maximum: 255 }
   validates :last_name, length: { maximum: 255 }
-  # validates :phone, length: { is: 14 }, allow_blank: true # Avoid phone validation
   validates :email, length: { maximum: 255 }
+  # validates :phone, length: { is: 14 }, allow_blank: true # Avoid phone validation
   validates :role, length: { maximum: 20 }
   # End Length validation
 
@@ -96,7 +96,7 @@ class Employee < ApplicationRecord
     end
   end
 
-# User email validation
+  # User email validation
   validate  :user_email
 
   # Validate that email does not exist in the users records

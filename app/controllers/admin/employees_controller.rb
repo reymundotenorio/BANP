@@ -4,11 +4,11 @@ class Admin::EmployeesController < ApplicationController
   # End Admin layout
 
   # Find employees with Friendly_ID
-  before_action :set_employee, only: [:show, :edit, :update, :active, :deactive, :history, :update_password, :change_password]
+  before_action :set_employee, only: [:show, :edit, :update, :active, :deactive, :history]
   # End Find employees with Friendly_ID
 
   # Sync model DSL
-  enable_sync only: [:create, :update, :active, :deactive, :change_password, :send_confirmation_email]
+  enable_sync only: [:create, :update, :active, :deactive]
   # End Sync model DSL
 
   # Authentication
@@ -91,9 +91,9 @@ class Admin::EmployeesController < ApplicationController
     # Deleting blank spaces
     @employee[:first_name] = @employee[:first_name].strip
     @employee[:last_name]= @employee[:last_name].strip
+    @employee[:email] =  @employee[:email].strip.downcase
     @employee[:phone] = @employee[:phone].strip
     @employee[:role] = @employee[:role].strip
-    @employee[:email] =  @employee[:email].strip.downcase
     # End Deleting blank spaces
 
     # If record was saved

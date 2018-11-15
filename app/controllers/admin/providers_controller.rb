@@ -1,24 +1,24 @@
 class Admin::ProvidersController < ApplicationController
-     # Admin layout
+  # Admin layout
   layout "admin/application"
   # End Admin layout
 
-  # Find employees with Friendly_ID
-  before_action :set_employee, only: [:show, :edit, :update, :active, :deactive, :history, :update_password, :change_password]
-  # End Find employees with Friendly_ID
+  # Find providers with Friendly_ID
+  before_action :set_provider, only: [:show, :edit, :update, :active, :deactive, :history]
+  # End Find providers with Friendly_ID
 
   # Sync model DSL
-  enable_sync only: [:create, :update, :active, :deactive, :change_password, :send_confirmation_email]
+  enable_sync only: [:create, :update, :active, :deactive]
   # End Sync model DSL
 
   # Authentication
-  # before_action :require_employee, only: [:index, :show, :new, :create, :edit, :update, :active, :deactive, :history]
-  # before_action :require_employee
+  # before_action :require_provider, only: [:index, :show, :new, :create, :edit, :update, :active, :deactive, :history]
+  # before_action :require_provider
   # End Authentication
 
-  # /employees
+  # /providers
   def index
-    @employees = Employee.search(params[:search], params[:show]).paginate(page: params[:page], per_page: 15) # Employees with pagination
+    @providers = Provider.search(params[:search], params[:show]).paginate(page: params[:page], per_page: 15) # Providers with pagination
     @show_all = params[:show] == "all" ? true : false # View All (Enabled and Disabled)
 
     # PDF view configuration
@@ -28,28 +28,28 @@ class Admin::ProvidersController < ApplicationController
     datetime =  Time.zone.now
     file_time = datetime.strftime("%m%d%Y")
 
-    name_pdf = "employees-#{file_time}"
-    template = "admin/employees/index_pdf.html.haml"
-    title_pdf = t("header.navigation.employees")
+    name_pdf = "providers-#{file_time}"
+    template = "admin/providers/index_pdf.html.haml"
+    title_pdf = t("header.navigation.providers")
     # End PDF view configuration
 
     respond_to do |format|
       format.html
       format.js
       format.pdf do
-        to_pdf(name_pdf, template, Employee.all, I18n.l(datetime), title_pdf)
+        to_pdf(name_pdf, template, Provider.all, I18n.l(datetime), title_pdf)
       end
     end
   end
 
-  # /employee/new
+  # /provider/new
   def new
-    @employee = Employee.new
+    @provider = Provider.new
   end
 
-  # /employee/:id)
+  # /provider/:id)
   def show
-    # Employee found by before_action
+    # Provider found by before_action
 
     # PDF view configuration
     current_lang = params[:lang]
@@ -58,47 +58,46 @@ class Admin::ProvidersController < ApplicationController
     datetime =  Time.zone.now
     file_time = datetime.strftime("%m%d%Y")
 
-    name_pdf = "employee-#{@employee.slug}-#{file_time}"
-    template = "admin/employees/show_pdf.html.haml"
-    title_pdf = t("activerecord.models.employee")
+    name_pdf = "provider-#{@provider.slug}-#{file_time}"
+    template = "admin/providers/show_pdf.html.haml"
+    title_pdf = t("activerecord.models.provider")
     # End PDF view configuration
 
     respond_to do |format|
       format.html
       format.pdf do
-        to_pdf(name_pdf, template, @employee, I18n.l(datetime), title_pdf)
+        to_pdf(name_pdf, template, @provider, I18n.l(datetime), title_pdf)
       end
     end
   end
 
-  # /employee/:id/edit
+  # /provider/:id/edit
   def edit
-    # Employee found by before_action
+    # Provider found by before_action
   end
 
-  # /employee/:id/history
+  # /provider/:id/history
   def history
-    # Employee found by before_action
+    # Provider found by before_action
 
-    @history = @employee.associated_audits
-    @history.push(@employee.audits)
+    @history = @provider.audits
   end
 
   # Create
   def create
-    @employee = Employee.new(employee_params)
+    @provider = Provider.new(provider_params)
 
     # Deleting blank spaces
-    @employee[:first_name] = @employee[:first_name].strip
-    @employee[:last_name]= @employee[:last_name].strip
-    @employee[:phone] = @employee[:phone].strip
-    @employee[:role] = @employee[:role].strip
-    @employee[:email] =  @employee[:email].strip.downcase
+    @provider[:name] = @provider[:name].strip
+    @provider[:FEIN]= @provider[:FEIN].strip
+    @provider[:email] =  @provider[:email].strip.downcase
+    @provider[:phone] = @provider[:phone].strip
+    @provider[:address] = @provider[:address].strip
     # End Deleting blank spaces
 
     # If record was saved
-    if @employee.save
-      redirect_to [:admin, @employee], notice: "#{t('alerts.created', model: t('activerecord.models.employee'))}. #{t('views.authentication.account_not_confirmed', email: @employee.email)}"
+    if @provider.save
+      redirect_to [:admin, @provider], notice: t("alerts.created", model: t("activerecord.models.provider"))
 
       # If record was not saved
     else
@@ -108,8 +107,8 @@ class Admin::ProvidersController < ApplicationController
 
   # Update
   def update
-    if @employee.update(employee_params)
-      redirect_to [:admin, @employee], notice: t("alerts.updated", model: t("activerecord.models.employee"))
+    if @provider.update(provider_params)
+      redirect_to [:admin, @provider], notice: t("alerts.updated", model: t("activerecord.models.provider"))
 
     else
       render :edit
@@ -118,36 +117,36 @@ class Admin::ProvidersController < ApplicationController
 
   # Active
   def active
-    if @employee.update(state: true)
-      redirect_to_back(true, admin_employees_path, "employee", "success")
+    if @provider.update(state: true)
+      redirect_to_back(true, admin_providers_path, "provider", "success")
 
     else
-      redirect_to_back(true, admin_employees_path, "employee", "error")
+      redirect_to_back(true, admin_providers_path, "provider", "error")
     end
   end
 
   # Deactive
   def deactive
-    if @employee.update(state: false)
-      redirect_to_back(false, admin_employees_path, "employee", "success")
+    if @provider.update(state: false)
+      redirect_to_back(false, admin_providers_path, "provider", "success")
 
     else
-      redirect_to_back(false, admin_employees_path, "employee", "error")
+      redirect_to_back(false, admin_providers_path, "provider", "error")
     end
   end
 
   private
 
-  # Set Employee
-  def set_employee
-    @employee = Employee.friendly.find(params[:id])
+  # Set Provider
+  def set_provider
+    @provider = Provider.friendly.find(params[:id])
 
   rescue
-    redirect_to admin_employees_path, alert: t("alerts.not_found", model: t("activerecord.models.employee"))
+    redirect_to admin_providers_path, alert: t("alerts.not_found", model: t("activerecord.models.provider"))
   end
 
-  # Employee params
-  def employee_params
-    params.require(:employee).permit(:first_name, :last_name, :email, :phone, :role, :image)
+  # Provider params
+  def provider_params
+    params.require(:provider).permit(:name, :FEIN, :email, :phone, :address, :image)
   end
 end

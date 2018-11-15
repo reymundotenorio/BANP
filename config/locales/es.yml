@@ -67,7 +67,8 @@ es:
         unlock_sent: "Desbloqueo enviado"
       provider:
         name: "Nombre"
-        FEIN: "Número de Identificación Federal del Empleador (FEIN)"
+        # FEIN: "Número de Identificación Federal del Empleador (FEIN)"
+        FEIN: "FEIN"
         phone: "Teléfono"
         email: "Correo electrónico"
         address: "Dirección"

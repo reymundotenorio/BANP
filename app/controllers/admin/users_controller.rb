@@ -33,7 +33,7 @@ class Admin::UsersController < ApplicationController
 
     if @user.save
       send_confirmation_email
-      redirect_to [:admin, @employee], notice: t("alerts.created", model: t("activerecord.models.employee"))
+      redirect_to [:admin, @employee], notice: "#{t('alerts.created', model: t('activerecord.models.employee'))}. #{t('views.authentication.account_not_confirmed', email: @user.email)}"
 
       # If record was not saved
     else
