@@ -67,6 +67,15 @@ a{
   transition: all 0.5s ease;
   height: 40px;
 
+  &.text-area{
+    height: 80px;
+    resize: none;
+
++ label{
+    bottom: 50px;
+  }
+  }
+
   @include placeholder{
     // color: tint($text-color, 40%);
     color: $transparent;
@@ -201,11 +210,25 @@ a{
   }
   // End Error on input
 
-  input{
+  input, textarea{
     position: relative;
     z-index: 100;
 
-    &.with-value, &:valid, &:focus{
+    // &.with-value, &:valid, &:focus{
+    //   + label{
+    //     -webkit-transform: translateY(-30px);
+    //     transform: translateY(-30px);
+    //     font-size: 14px;
+    //
+    //     + .border-bottom{
+    //       &:after{
+    //         width: 100%;
+    //       }
+    //     }
+    //   }
+    // }
+
+    &.with-value, &:focus{
       + label{
         -webkit-transform: translateY(-30px);
         transform: translateY(-30px);

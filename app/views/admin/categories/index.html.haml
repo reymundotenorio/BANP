@@ -1,0 +1,83 @@
+-# Index
+%section.index
+  .container
+    -# Title
+    .row.title-container
+      .col-xs-12.col-lg-10
+        -# Heading
+        %h1
+          %i.fas.fa-list-alt
+          = t("header.navigation.categories")
+        -# End Heading
+
+      .col-xs-12.col-lg-2.text-right
+        -# New button
+        .btn-container.inline
+          = link_to (admin_new_category_path), class: "btn btn-general" do
+            %i.fas.fa-plus
+            %span= t("views.index.new")
+        -# End New button
+    -# End Title
+
+    -# Breadcrumb
+    .row
+      .col-xs-12.hidden-xs
+        .breadcrumb-container
+          %ol.breadcrumb
+            %li
+              = link_to (admin_root_path) do
+                %i.fas.fa-tachometer-alt
+                %span= t("header.navigation.dashboard")
+            %li.active
+              %i.fas.fa-list-alt
+              = t("header.navigation.categories")
+    -# End Breadcrumb
+
+    .row
+      .col-xs-12.col-sm-12
+        -# Material card
+        .material-card.shadow-card
+          .row.no-margin
+            -# Search record
+            .col-xs-12.col-md-6.no-padding
+              #search-record.search-record
+                -# Form
+                = form_tag admin_categories_path, method: "get", id: "search-form", autocomplete:"off", remote: true do
+                  .input-group
+                    = text_field_tag :search, params[:search], id: "search-input", class: "form-control", placeholder: t("views.index.search")
+                    .border-bottom
+
+                    %span.input-group-btn
+                      = button_tag t("elements.search"), class: "btn btn-general", data: {disable_with: "<i class='fas fa-spinner fa-spin'></i>"} do
+                        %i.fas.fa-search
+                -# End Form
+            -# End Search record
+
+            -# Show all
+            .col-xs-12.col-md-6.no-padding.text-right
+              #show-buttons.btn-container
+                -# Render show buttons
+                = render "show_buttons"
+
+              -# Export button
+              .btn-container
+                = link_to (admin_categories_path(format: "pdf", lang: I18n.locale)), target: "_blank", class: "btn btn-general btn-default" do
+                  %i.fas.fa-download
+                  %span= t("views.index.export")
+              -# End Export button
+            -# End Show all
+
+          -# Render table and pagination with Ajax
+          #render-data
+            = render "categories"
+          -# End Render table and pagination with Ajax
+        -# End Material card
+-# End Index
+
+-# Pagination with Ajax script
+= javascript_include_tag "pagination-ajax", "data-turbolinks-track": "reload"
+-# End Pagination with Ajax script
+
+-# Auto search script
+= javascript_include_tag "auto-search", "data-turbolinks-track": "reload"
+-# End Auto search script

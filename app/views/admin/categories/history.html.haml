@@ -1,0 +1,48 @@
+-# History
+%section.history
+  .container
+    -# Title
+    .row.title-container
+      .col-xs-12.col-lg-10
+        -# Heading
+        %h1.false
+          %i.fas.fa-history
+          = t("views.history.history")
+        -# End Heading
+
+      .col-xs-12.col-lg-2
+        -# Category button
+        .btn-container
+          = link_to (admin_category_path(@category)), class: "btn btn-general" do
+            %i.fas.fa-id-card
+            %span= t("activerecord.models.category")
+        -# End Category button
+    -# End Title
+
+    -# Breadcrumb
+    .row
+      .col-xs-12.hidden-xs
+        .breadcrumb-container
+          %ol.breadcrumb
+            %li
+              = link_to (admin_root_path) do
+                %i.fas.fa-tachometer-alt
+                %span= t("header.navigation.dashboard")
+            %li
+              = link_to (admin_categories_path) do
+                %i.fas.fa-list-alt
+                %span= t("header.navigation.categories")
+            %li
+              = link_to (admin_category_path(@category)) do
+                %i.fas.fa-id-card
+                %span
+                  = @category.name
+            %li.active
+              %i.fas.fa-history
+              = t("views.history.history")
+    -# End Breadcrumb
+
+    -# Render timeline
+    = render "admin/partials/timeline"
+    -# End Render timeline
+-# End History
