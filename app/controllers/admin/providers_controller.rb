@@ -12,8 +12,7 @@ class Admin::ProvidersController < ApplicationController
   # End Sync model DSL
 
   # Authentication
-  # before_action :require_provider, only: [:index, :show, :new, :create, :edit, :update, :active, :deactive, :history]
-  # before_action :require_provider
+  before_action :require_employee
   # End Authentication
 
   # /providers
