@@ -6,7 +6,6 @@ class User < ApplicationRecord
   belongs_to :employee, optional: true
 
   # Audit
-  # audited
   audited associated_with: :employee
   # End Audit
 

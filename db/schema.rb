@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_11_15_011414) do
+ActiveRecord::Schema.define(version: 2018_11_15_012702) do
 
   create_table "active_storage_attachments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name", null: false
@@ -92,6 +92,26 @@ ActiveRecord::Schema.define(version: 2018_11_15_011414) do
     t.index ["sluggable_type"], name: "index_friendly_id_slugs_on_sluggable_type"
   end
 
+  create_table "products", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "name_spanish", null: false
+    t.decimal "price", precision: 8, scale: 2, null: false
+    t.string "content"
+    t.string "content_spanish"
+    t.string "description"
+    t.string "description_spanish"
+    t.string "recipes"
+    t.string "recipes_spanish"
+    t.boolean "state", default: true, null: false
+    t.string "slug"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "category_id"
+    t.index ["category_id"], name: "index_products_on_category_id"
+    t.index ["name"], name: "index_products_on_name", unique: true
+    t.index ["name_spanish"], name: "index_products_on_name_spanish", unique: true
+  end
+
   create_table "providers", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name", null: false
     t.string "FEIN", limit: 10
@@ -139,5 +159,6 @@ ActiveRecord::Schema.define(version: 2018_11_15_011414) do
     t.index ["unlock_token"], name: "index_users_on_unlock_token", unique: true
   end
 
+  add_foreign_key "products", "categories"
   add_foreign_key "users", "employees"
 end
