@@ -85,6 +85,7 @@ es:
         image_file_name: "Nombre de la imagen"
         image_content_type: "Tipo de archivo de la imagen"
         image_file_size: "Tamaño de la imagen"
+        select: ""
       product:
         name: "Nombre"
         name_spanish: "Nombre en Español"

@@ -47,5 +47,17 @@ $(document).ready(function() {
       $(this).addClass("with-value"); // Add class
     }
   });
+  
+    // Inputs change
+  $("input.form-control").change(function() {
+    // If empty
+    if($(this).val() == ""){
+      $(this).removeClass("with-value"); // Remove class
+    }
+
+    else{
+      $(this).addClass("with-value"); // Add class
+    }
+  });
 
 });

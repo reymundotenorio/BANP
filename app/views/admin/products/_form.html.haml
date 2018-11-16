@@ -97,6 +97,22 @@
                       %b= t("activerecord.attributes.product.recipes_spanish")
                     .border-bottom
 
+                  .form-group.hidden
+                    = f.hidden_field :category_id, class: "form-control input", placeholder: t("activerecord.attributes.product.category"), required: true
+                    %label
+                      %b= t("activerecord.attributes.product.category")
+                    .border-bottom
+                    
+                  .form-group
+                    .input-btn-group
+                      = f.text_field :category, value: @product.category_id.nil? ? "" : "#{@product.category.name}", class: "form-control input", placeholder: t("activerecord.attributes.product.category"), required: true, disabled: true
+                      %label
+                        %b= t("activerecord.attributes.product.category")
+                      .border-bottom
+                      
+                      = link_to "", class: "btn btn-general", "data-toggle": "modal", "data-target": "#getCategories" do
+                        %i.fas.fa-search
+
                   -# Buttons
                   .main-buttons
                     .col-xs-12.col-sm-12.button-container.no-padding
@@ -118,3 +134,15 @@
 -# Jquery Mask script
 = javascript_include_tag "jquery-mask/jquery.mask", "data-turbolinks-track": "reload"
 -# End Jquery Mask script
+
+
+.modal.fade{id: "getCategories", tabindex: "-1", role: "dialog", "aria-labelledby": "", "aria-hidden": "true"}
+  .modal-dialog
+    .modal-content
+      .modal-body
+        %button.close{type: "button", "data-dismiss": "modal", "aria-hidden": "true"}
+          &times;
+
+        -# Render categories list
+        = render "modal"
+        -# End Render categories list

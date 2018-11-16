@@ -82,6 +82,7 @@ Rails.application.routes.draw do
     # End Providers
 
     # Categories
+
     get "/categories", to: "categories#index", as: "categories"
     get "/category/new", to: "categories#new", as: "new_category"
     get "/category/:id", to: "categories#show", as: "category"

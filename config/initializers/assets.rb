@@ -23,7 +23,7 @@ Rails.application.config.assets.precompile += %w( jquery-mask/jquery.mask.js )
 Rails.application.config.assets.precompile += %w( clickable-row.js )
 
 # Select Category
-# Rails.application.config.assets.precompile += %w( select-category.js )
+Rails.application.config.assets.precompile += %w( select-category.js )
 
 # PDF
 Rails.application.config.assets.precompile += %w( admin/application.scss )

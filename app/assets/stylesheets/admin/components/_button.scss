@@ -48,5 +48,10 @@
 // Override buttons behavior
 .btn-general{
   @include btn-style;
+  
+  &.select-category{
+    line-height: 1;
+    padding: 8px;
+  }
 }
 // End Override btn default behavior

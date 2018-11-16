@@ -1,0 +1,29 @@
+.row.no-margin
+  .col-xs-12.no-padding
+    -# Table
+    %table.table
+      %thead
+        - model = "category"
+        - attributes = ["name", "description", "Select"]
+
+        -# Render table header
+        = render partial: "admin/partials/table_header", locals: {model: model, attributes: attributes}
+
+        - if I18n.locale == :es
+          - attributes = ["name_spanish", "description_spanish"]
+          
+        - else
+          - attributes = ["name", "description"]
+
+      %tbody
+        -# Data table Sync
+        = sync partial: "select_category", collection: @categories
+        = sync_new partial: "select_category", resource: Category.new
+        -# End Data table Sync
+    -# End Table
+
+.row.no-margin
+  .col-xs-12.no-padding.text-center
+    -# Pagination
+    = will_paginate @categories, renderer: BootstrapPagination::Rails
+    -# End Pagination

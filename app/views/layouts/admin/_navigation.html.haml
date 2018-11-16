@@ -2,7 +2,7 @@
   %ul.nav.navbar-nav
     -# Dashboard
     %li
-      %a{href: "#"}
+      = link_to (admin_root_path) do
         %i.fas.fa-tachometer-alt
         = t("header.navigation.dashboard")
     -# End Dashboard
