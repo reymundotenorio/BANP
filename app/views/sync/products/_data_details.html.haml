@@ -40,7 +40,7 @@
               %i.fas.fa-id-card
               - if I18n.locale == :es
                 = product.name_spanish
-                
+
               - else
                 = product.name
     -# End Breadcrumb
@@ -99,14 +99,14 @@
               %div{class: "detail-info #{product.state}"}
                 -# Set attributes
                 - if I18n.locale == :es
-                  - attributes = ["name_spanish", "price", "content_spanish", "description_spanish", "recipes_spanish", "state"]
+                  - attributes = [["name_spanish", "name"], ["price", "price"], ["content_spanish", "content"], ["description_spanish", "description"], ["recipes_spanish", "recipes"], ["state", "state"]]
                 - else
-                  - attributes = ["name", "price", "content", "description", "recipes", "state"]
+                  - attributes = [["name", "name"], ["price", "price"], ["content", "content"], ["description", "description"], ["recipes", "recipes"], ["state", "state"]]
 
-                - attributes.each do |attribute|
+                - attributes.each do |attribute, title|
                   .info
                     %p.title
-                      %b= t("activerecord.attributes.product.#{attribute}")
+                      %b= t("activerecord.attributes.product.#{title}")
 
                     - if attribute == "state"
                       %p= product["#{attribute}"] ? t("views.show.enabled") : t("views.show.disabled")

@@ -40,7 +40,7 @@ puts "Seeding prodivers"
 end
 
 puts "Seeding categories"
-20.times do |count|
+10.times do |count|
   Category.create(
     id: (count + 1),
     name: Faker::Food.ingredient,
@@ -52,7 +52,7 @@ puts "Seeding categories"
 end
 
 puts "Seeding products"
-80.times do |count|
+15.times do |count|
   Product.create(
     id: (count + 1),
     name: Faker::Food.dish,
@@ -65,7 +65,7 @@ puts "Seeding products"
     recipes: "#{Faker::Food.dish}, #{Faker::Food.dish}, #{Faker::Food.dish}",
     recipes_spanish: "#{Faker::Food.dish}, #{Faker::Food.dish}, #{Faker::Food.dish}",
     state: Faker::Boolean.boolean(0.8),
-    category_id: Faker::Number.between(1, 20)
+    category_id: Faker::Number.between(1, 10)
   )
 end
 

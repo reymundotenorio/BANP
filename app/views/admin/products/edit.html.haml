@@ -36,7 +36,11 @@
               = link_to (admin_product_path(@product)) do
                 %i.fas.fa-id-card
                 %span
-                  = @product.name
+                  - if I18n.locale == :es
+                    = @product.name_spanish
+
+                  - else
+                    = @product.name
             %li.active
               %i.fas.fa-edit
               = t("views.edit.edit")
