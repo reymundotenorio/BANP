@@ -6,8 +6,9 @@
         %h1.text-center= pdf_title
 
       -# Set attributes
+      - model = "employee"
       - attributes = ["first_name", "last_name", "email" ,"phone", "role", "state"]
 
       -# Render details information
-      = render partial: "admin/partials/information_details", locals: {resource: resource, attributes: attributes}
+      = render partial: "admin/partials/information_details", locals: {model: model, resource: resource, attributes: attributes}
 -# End Details PDF

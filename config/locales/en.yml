@@ -78,9 +78,9 @@ en:
         image_file_size: "Image file size"
       category:
         name: "Name"
+        name_spanish: "Name in Spanish"
         description: "Description"
-        name_spanish: "Name"
-        description_spanish: "Description"
+        description_spanish: "Description in Spanish"
         state: "State"
         image_file_name: "Image file name"
         image_content_type: "Image content type"

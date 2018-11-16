@@ -36,7 +36,11 @@
               = link_to (admin_category_path(@category)) do
                 %i.fas.fa-id-card
                 %span
-                  = @category.name
+                  - if I18n.locale == :es
+                    = @category.name_spanish
+
+                  - else
+                    = @category.name
             %li.active
               %i.fas.fa-edit
               = t("views.edit.edit")

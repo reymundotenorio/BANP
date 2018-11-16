@@ -6,11 +6,14 @@
         %h1.text-center= pdf_title
 
       -# Set attributes
+      - model = "product"
+
       - if I18n.locale == :es
-        - attributes = ["name_spanish", "price" "content_spanish", "description_spanish", "recipes_spanish", "state"]
+        - attributes = ["name_spanish", "price", "content_spanish", "description_spanish", "recipes_spanish", "state"]
+        
       - else
         - attributes = ["name", "price", "content", "description", "recipes", "state"]
-        
+
       -# Render details information
-      = render partial: "admin/partials/information_details", locals: {resource: resource, attributes: attributes}
+      = render partial: "admin/partials/information_details", locals: {model: model, resource: resource, attributes: attributes}
 -# End Details PDF

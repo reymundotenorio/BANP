@@ -47,12 +47,24 @@
                     = f.text_field :name, class: "form-control input", placeholder: t("activerecord.attributes.category.name"), required: true
                     %label
                       %b= t("activerecord.attributes.category.name")
-                    .border-bottom  
+                    .border-bottom
+
+                  .form-group
+                    = f.text_field :name_spanish, class: "form-control input", placeholder: t("activerecord.attributes.category.name_spanish"), required: true
+                    %label
+                      %b= t("activerecord.attributes.category.name_spanish")
+                    .border-bottom
 
                   .form-group
                     = f.text_area :description, class: "form-control input text-area",placeholder: t("activerecord.attributes.category.description")
                     %label
                       %b= t("activerecord.attributes.category.description")
+                    .border-bottom
+
+                  .form-group
+                    = f.text_area :description_spanish, class: "form-control input text-area",placeholder: t("activerecord.attributes.category.description_spanish")
+                    %label
+                      %b= t("activerecord.attributes.category.description_spanish")
                     .border-bottom
 
                   -# Buttons

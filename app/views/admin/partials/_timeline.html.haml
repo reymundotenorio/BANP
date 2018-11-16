@@ -71,7 +71,7 @@
                             %b= User.human_attribute_name(attribute)
 
                           - else
-                            %b= Employee.human_attribute_name(attribute)
+                            %b= model.human_attribute_name(attribute)
 
                           -# If information is confidential
                           - if confidential_attrs.include? attribute
@@ -116,7 +116,7 @@
                       %p.title
                         %b= t("views.history.device_ip")
                       %p= record.remote_address
-                      
+
               -# End Timeline content
             -# End Information
           -# End Audit

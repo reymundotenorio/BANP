@@ -36,13 +36,18 @@
               = link_to (admin_category_path(@category)) do
                 %i.fas.fa-id-card
                 %span
-                  = @category.name
+                  - if I18n.locale == :es
+                    = @category.name_spanish
+
+                  - else
+                    = @category.name
             %li.active
               %i.fas.fa-history
               = t("views.history.history")
     -# End Breadcrumb
 
     -# Render timeline
-    = render "admin/partials/timeline"
+    - model = Category
+    = render partial: "admin/partials/timeline", locals: {model: model}
     -# End Render timeline
 -# End History

@@ -24,7 +24,7 @@
           - attributes.each do |attribute|
             .info
               %p.title
-                %b= t("activerecord.attributes.#{resource}.#{attribute}")
+                %b= t("activerecord.attributes.#{model}.#{attribute}")
 
               - if attribute == "state"
                 %p= resource["#{attribute}"] ? t("views.show.enabled") : t("views.show.disabled")

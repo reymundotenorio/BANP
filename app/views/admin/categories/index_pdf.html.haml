@@ -16,14 +16,16 @@
               %table.table.table-pdf
                 -# Set attributes
                 - model = "category"
-                
-                - if I18n.locale == :es
-                  - attributes = ["name_spanish", "description_spanish"]
-                - else
-                  - attributes = ["name", "description"]
+
+                - attributes = ["name", "description"]
 
                 -# Render table header
                 = render partial: "admin/partials/table_header", locals: {model: model, attributes: attributes}
+
+                -# Set attributes
+                - if I18n.locale == :es
+                  - attributes = ["name_spanish", "description_spanish"]
+
                 %tbody
                   - resource.each do |info|
                     -# Render table information

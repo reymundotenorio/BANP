@@ -9,7 +9,7 @@
           %i.fas.fa-id-card
           - if I18n.locale == :es
             = category.name_spanish
-            
+
           -else
             = category.name
         -# End Heading
@@ -40,7 +40,7 @@
               %i.fas.fa-id-card
               - if I18n.locale == :es
                 = category.name_spanish
-            
+
               -else
                 = category.name
     -# End Breadcrumb
@@ -99,14 +99,14 @@
               %div{class: "detail-info #{category.state}"}
                 -# Set attributes
                 - if I18n.locale == :es
-                  - attributes = ["name_spanish", "description_spanish", "state"]
+                  - attributes = [["name", "name_spanish"], ["description", "description_spanish"], ["state", "state"]]
                 - else
-                  - attributes = ["name", "description", "state"]
+                  - attributes = [["name", "name"], ["description", "description"], ["state", "state"]]
 
-                - attributes.each do |attribute|
+                - attributes.each do |title, attribute|
                   .info
                     %p.title
-                      %b= t("activerecord.attributes.category.#{attribute}")
+                      %b= t("activerecord.attributes.category.#{title}")
 
                     - if attribute == "state"
                       %p= category["#{attribute}"] ? t("views.show.enabled") : t("views.show.disabled")

@@ -5,7 +5,8 @@
       %thead
         - model = "product"
         - if I18n.locale == :es
-          - attributes = ["name_spanish", "price" "content_spanish"]
+          - attributes = ["name_spanish", "price", "content_spanish"]
+          
         - else
           - attributes = ["name", "price", "content"]
 

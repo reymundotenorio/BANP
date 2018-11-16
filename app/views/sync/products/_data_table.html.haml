@@ -1,7 +1,8 @@
 %tr{class: "clickable-row #{product.state}", "data-href": "#{admin_product_path(product)}"}
   -# Set attributes
   - if I18n.locale == :es
-    - attributes = ["name_spanish", "price" "content_spanish"]
+    - attributes = ["name_spanish", "price", "content_spanish"]
+    
   - else
     - attributes = ["name", "price", "content"]
 

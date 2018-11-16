@@ -43,6 +43,7 @@
     -# End Breadcrumb
 
     -# Render timeline
-    = render "admin/partials/timeline"
+    - model = Product
+    = render partial: "admin/partials/timeline", locals: {model: model}
     -# End Render timeline
 -# End History
