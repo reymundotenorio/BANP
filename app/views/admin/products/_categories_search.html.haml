@@ -4,7 +4,7 @@
     %table.table
       %thead
         - model = "category"
-        - attributes = ["name", "description", "Select"]
+        - attributes = ["name", "description", "select"]
 
         -# Render table header
         = render partial: "admin/partials/table_header", locals: {model: model, attributes: attributes}
