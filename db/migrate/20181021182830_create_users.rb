@@ -2,7 +2,7 @@ class CreateUsers < ActiveRecord::Migration[5.2]
   def change
     create_table :users do |t|
       t.string :email, null: false
-      t.string :slug, unique: true # Friendly_id slug
+      t.string :slug # Friendly_id slug
 
       # t.references :costumber, foreign_key: true
 
@@ -33,7 +33,7 @@ class CreateUsers < ActiveRecord::Migration[5.2]
 
       # Two factor authentication
       t.boolean :two_factor_auth, default: false, null:false
-      t.string :two_factor_auth_otp
+      t.string :two_factor_auth_otp, unique: true
 
       t.timestamps
     end
@@ -41,9 +41,10 @@ class CreateUsers < ActiveRecord::Migration[5.2]
     add_reference :users, :employee, index: true, foreign_key: true
 
     add_index :users, :email, unique: true
+    add_index :users, :slug, unique: true
     add_index :users, :reset_password_token, unique: true
     add_index :users, :confirmation_token, unique: true
     add_index :users, :unlock_token, unique: true
-    add_index :users, :two_factor_auth_otp, unique: true
+    # add_index :users, :two_factor_auth_otp, unique: true
   end
 end

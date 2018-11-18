@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_11_15_012702) do
+ActiveRecord::Schema.define(version: 2018_11_18_173058) do
 
   create_table "active_storage_attachments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name", null: false
@@ -64,8 +64,20 @@ ActiveRecord::Schema.define(version: 2018_11_15_012702) do
     t.string "slug"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["name"], name: "index_categories_on_name", unique: true
-    t.index ["name_spanish"], name: "index_categories_on_name_spanish", unique: true
+    t.index ["slug"], name: "index_categories_on_slug", unique: true
+  end
+
+  create_table "costumers", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "first_name", null: false
+    t.string "last_name", null: false
+    t.string "email", null: false
+    t.string "phone", limit: 14
+    t.string "address"
+    t.boolean "state", default: true, null: false
+    t.string "slug"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["slug"], name: "index_costumers_on_slug", unique: true
   end
 
   create_table "employees", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -79,7 +91,6 @@ ActiveRecord::Schema.define(version: 2018_11_15_012702) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["email"], name: "index_employees_on_email", unique: true
-    t.index ["phone"], name: "index_employees_on_phone", unique: true
     t.index ["slug"], name: "index_employees_on_slug", unique: true
   end
 
@@ -111,8 +122,7 @@ ActiveRecord::Schema.define(version: 2018_11_15_012702) do
     t.datetime "updated_at", null: false
     t.bigint "category_id"
     t.index ["category_id"], name: "index_products_on_category_id"
-    t.index ["name"], name: "index_products_on_name", unique: true
-    t.index ["name_spanish"], name: "index_products_on_name_spanish", unique: true
+    t.index ["slug"], name: "index_products_on_slug", unique: true
   end
 
   create_table "providers", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -125,9 +135,6 @@ ActiveRecord::Schema.define(version: 2018_11_15_012702) do
     t.string "slug"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["FEIN"], name: "index_providers_on_FEIN", unique: true
-    t.index ["email"], name: "index_providers_on_email", unique: true
-    t.index ["phone"], name: "index_providers_on_phone", unique: true
     t.index ["slug"], name: "index_providers_on_slug", unique: true
   end
 
@@ -158,7 +165,7 @@ ActiveRecord::Schema.define(version: 2018_11_15_012702) do
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["employee_id"], name: "index_users_on_employee_id"
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
-    t.index ["two_factor_auth_otp"], name: "index_users_on_two_factor_auth_otp", unique: true
+    t.index ["slug"], name: "index_users_on_slug", unique: true
     t.index ["unlock_token"], name: "index_users_on_unlock_token", unique: true
   end
 

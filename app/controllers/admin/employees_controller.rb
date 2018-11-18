@@ -98,7 +98,7 @@ class Admin::EmployeesController < ApplicationController
 
     # If record was saved
     if @employee.save
-      redirect_to [:admin, @employee], notice: "#{t('alerts.created', model: t('activerecord.models.employee'))}. #{t('views.authentication.account_not_confirmed', email: @employee.email)}"
+      redirect_to [:admin, @employee], notice: t("alerts.created", model: t("activerecord.models.employee"))
 
       # If record was not saved
     else

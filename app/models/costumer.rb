@@ -1,4 +1,4 @@
-class Employee < ApplicationRecord
+class Costumer < ApplicationRecord
   # Association
   has_one :user
 
@@ -74,7 +74,7 @@ class Employee < ApplicationRecord
   validates :last_name, presence: true
   validates :email, presence: true
   validates :phone, presence: true
-  validates :role, presence: true
+  validates :address, presence: true
   # End  Presence validation
 
   # Length validation
@@ -104,7 +104,7 @@ class Employee < ApplicationRecord
     if self.user.present?
       user = User.find_by(email: self.email)
 
-      if !user.nil? && user.employee_id != self.id
+      if !user.nil? && user.user_id != self.id
         errors.add(:email, :blank, message: I18n.t("validates.user_email_taken"))
       end
     end
@@ -113,27 +113,6 @@ class Employee < ApplicationRecord
   # Format validation
   # validates_format_of :phone, with: /\A\(\d{3}\) \d{3}-\d{4}\z/, allow_blank: true # (000) 000-0000 # Avoid phone validation
   # End Format validation
-
-  # Validate employee role
-  # validate :employee_role
-
-  # Employee role
-  # def employee_role
-  #   if role != 0 && role != 1 && role != 2
-  #     errors.add(:role, "Must select the employee role")
-  #   end
-  # end
-
-  ## End Validations
-
-  # Helpers
-
-  # Is administrator?
-  # def is_admin?
-  #   role == "administrator"
-  # end
-
-  # End Helpers
 
   ## Scopes
   scope :enabled, -> { where(state: true) }
