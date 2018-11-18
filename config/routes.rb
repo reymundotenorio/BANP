@@ -19,13 +19,6 @@ Rails.application.routes.draw do
     root "employees#index"
     # End Root
 
-    # Employee/Users
-    get "/employee/:id/create-user", to: "users#new_employee_user", as: "new_employee_user"
-    get "/employee/:id/update-password", to: "users#employee_update_password", as: "update_password_employee"
-    post "/employee/:id/create-user", to: "users#create_employee_user", as: "create_employee_user"
-    patch "/employee/:id/update-password", to: "users#employee_change_password", as: "change_password_employee"
-    # End Employee/Users
-
     # Authentications
 
     # Notifications
@@ -69,6 +62,13 @@ Rails.application.routes.draw do
     patch "/employees/:id/deactive", to: "employees#deactive", as: "deactive_employee"
     # End Employees
 
+    # Employees/Users
+    get "/employee/:id/create-user", to: "users#new_employee_user", as: "new_employee_user"
+    get "/employee/:id/update-password", to: "users#employee_update_password", as: "update_password_employee"
+    post "/employee/:id/create-user", to: "users#create_employee_user", as: "create_employee_user"
+    patch "/employee/:id/update-password", to: "users#employee_change_password", as: "change_password_employee"
+    # End Employees/Users
+
     # Providers
     get "/providers", to: "providers#index", as: "providers"
     get "/provider/new", to: "providers#new", as: "new_provider"
@@ -81,8 +81,26 @@ Rails.application.routes.draw do
     patch "/providers/:id/deactive", to: "providers#deactive", as: "deactive_provider"
     # End Providers
 
-    # Categories
+    # Costumers
+    get "/costumers", to: "costumers#index", as: "costumers"
+    get "/costumer/new", to: "costumers#new", as: "new_costumer"
+    get "/costumer/:id", to: "costumers#show", as: "costumer"
+    get "/costumer/:id/edit", to: "costumers#edit", as: "edit_costumer"
+    get "/costumer/:id/history", to: "costumers#history", as: "history_costumer"
+    post "/costumers", to: "costumers#create"
+    patch "/costumer/:id", to: "costumers#update", as: "update_costumer"
+    patch "/costumers/:id/active", to: "costumers#active", as: "active_costumer"
+    patch "/costumers/:id/deactive", to: "costumers#deactive", as: "deactive_costumer"
+    # End Costumers
 
+    # Costumers/Users
+    get "/costumer/:id/create-user", to: "users#new_costumer_user", as: "new_costumer_user"
+    get "/costumer/:id/update-password", to: "users#costumer_update_password", as: "update_password_costumer"
+    post "/costumer/:id/create-user", to: "users#create_costumer_user", as: "create_costumer_user"
+    patch "/costumer/:id/update-password", to: "users#costumer_change_password", as: "change_password_costumer"
+    # End Costumers/Users
+
+    # Categories
     get "/categories", to: "categories#index", as: "categories"
     get "/category/new", to: "categories#new", as: "new_category"
     get "/category/:id", to: "categories#show", as: "category"
