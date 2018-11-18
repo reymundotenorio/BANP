@@ -22,13 +22,10 @@ puts "Seeding employees"
       role: ["Administrator", "Seller", "Driver"].sample,
       state: Faker::Boolean.boolean(0.8)
     )
-
-  rescue StandarError => e
+  rescue StandardError => e
     puts "Error found #{e.to_s}"
   end
 end
-
-puts "Seeding users"
 
 puts "Seeding prodivers"
 30.times do |count|
@@ -42,8 +39,7 @@ puts "Seeding prodivers"
       address: "#{Faker::Address.street_address}. #{Faker::Address.city}, #{Faker::Address.state} #{Faker::Address.zip_code}",
       state: Faker::Boolean.boolean(0.8)
     )
-
-  rescue StandarError => e
+  rescue StandardError => e
     puts "Error found #{e.to_s}"
   end
 end
@@ -59,7 +55,7 @@ puts "Seeding categories"
       description_spanish: Faker::Food.description,
       state: Faker::Boolean.boolean(0.8)
     )
-  rescue StandarError => e
+  rescue StandardError => e
     puts "Error found #{e.to_s}"
   end
 end
@@ -81,10 +77,29 @@ puts "Seeding products"
       state: Faker::Boolean.boolean(0.8),
       category_id: Faker::Number.between(1, 10)
     )
-
-  rescue StandarError => e
+  rescue StandardError => e
     puts "Error found #{e.to_s}"
   end
 end
+
+puts "Seeding costumers"
+25.times do |count|
+  begin
+    Costumer.create(
+      id: (count + 1),
+      first_name: Faker::Name.first_name,
+      last_name: Faker::Name.last_name,
+      company: Faker::Company.name,
+      email: Faker::Internet.email,
+      phone: "(#{Faker::Number.number(3)}) #{Faker::Number.number(3)}-#{Faker::Number.number(4)}",
+      address: "#{Faker::Address.street_address}. #{Faker::Address.city}, #{Faker::Address.state} #{Faker::Address.zip_code}",
+      state: Faker::Boolean.boolean(0.8)
+    )
+  rescue StandardError => e
+    puts "Error found #{e.to_s}"
+  end
+end
+
+puts "Seeding users"
 
 puts "The information have been seeded"

@@ -24,7 +24,7 @@ class Costumer < ApplicationRecord
   # Search
   def self.search(search, show_all)
     if search
-      query = "(first_name LIKE :search OR last_name LIKE :search OR phone LIKE :search OR email LIKE :search)"
+      query = "(first_name LIKE :search OR last_name LIKE :search OR company LIKE :search OR phone LIKE :search OR email LIKE :search)"
       where(query, search: "%#{search}%")
 
     elsif show_all == "all"
@@ -45,14 +45,14 @@ class Costumer < ApplicationRecord
   def slug_candidates
     [
       [:first_name, :last_name],
-      [:first_name, :last_name, :id],
-      [:first_name, :id]
+      [:first_name, :last_name, :company],
+      [:first_name, :last_name, :company, :id]
     ]
   end
 
   # Update Friendly_ID slug
   def should_generate_new_friendly_id?
-    slug.blank? || first_name_changed? || last_name_changed?
+    slug.blank? || first_name_changed? || last_name_changed? || company_changed?
   end
   # End Update Friendly_ID slug
 
@@ -72,6 +72,7 @@ class Costumer < ApplicationRecord
   # Presence validation
   validates :first_name, presence: true
   validates :last_name, presence: true
+  validates :company, presence: true
   validates :email, presence: true
   validates :phone, presence: true
   validates :address, presence: true
@@ -80,9 +81,10 @@ class Costumer < ApplicationRecord
   # Length validation
   validates :first_name, length: { maximum: 255 }
   validates :last_name, length: { maximum: 255 }
+  validates :company, length: { maximum: 255 }
   validates :email, length: { maximum: 255 }
   # validates :phone, length: { is: 14 }, allow_blank: true # Avoid phone validation
-  validates :role, length: { maximum: 20 }
+  validates :address, length: { maximum: 255 }
   # End Length validation
 
   # Type validation

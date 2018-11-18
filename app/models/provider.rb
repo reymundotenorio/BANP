@@ -31,7 +31,6 @@ class Provider < ApplicationRecord
   def slug_candidates
     [
       [:name],
-      [:name, :FEIN, :id],
       [:name, :FEIN, :id]
     ]
   end
@@ -64,7 +63,7 @@ class Provider < ApplicationRecord
   validates :name, length: { maximum: 255 }
   validates :FEIN, length: { is: 10 }, allow_blank: true
   validates :email, length: { maximum: 255 }, allow_blank: true
-#   validates :phone, length: { is: 14 }, allow_blank: true
+  #   validates :phone, length: { is: 14 }, allow_blank: true
   validates :address, length: { maximum: 255 }, allow_blank: true
   # End Length validation
 
@@ -81,7 +80,7 @@ class Provider < ApplicationRecord
 
   # Format validation
   validates_format_of :FEIN, with: /\A\d{2}-\d{7}\z/ ,allow_blank: true # 00-0000000
-#   validates_format_of :phone, with: /\A\(\d{3}\) \d{3}-\d{4}\z/ ,allow_blank: true # (000) 000-0000
+  #   validates_format_of :phone, with: /\A\(\d{3}\) \d{3}-\d{4}\z/ ,allow_blank: true # (000) 000-0000
   # End Format validation
 
   ## End Validations

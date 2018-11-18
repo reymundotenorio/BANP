@@ -45,8 +45,7 @@ class Employee < ApplicationRecord
   def slug_candidates
     [
       [:first_name, :last_name],
-      [:first_name, :last_name, :id],
-      [:first_name, :id]
+      [:first_name, :last_name, :id]
     ]
   end
 

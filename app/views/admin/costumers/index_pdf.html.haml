@@ -16,7 +16,7 @@
               %table.table.table-pdf
                 -# Set attributes
                 - model = "costumer"
-                - attributes = ["first_name", "last_name", "email" ,"phone", "address"]
+                - attributes = ["first_name", "last_name", "company", "email" ,"phone"]
 
                 -# Render table header
                 = render partial: "admin/partials/table_header", locals: {model: model, attributes: attributes}

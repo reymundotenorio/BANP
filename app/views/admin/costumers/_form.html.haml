@@ -56,6 +56,12 @@
                     .border-bottom
 
                   .form-group
+                    = f.text_field :company, class: "form-control input", placeholder: t("activerecord.attributes.costumer.company"), required: true
+                    %label
+                      %b= t("activerecord.attributes.costumer.company")
+                    .border-bottom
+
+                  .form-group
                     = f.email_field :email, class: "form-control input", placeholder: t("activerecord.attributes.costumer.email"), required: true
                     %label
                       %b= t("activerecord.attributes.costumer.email")

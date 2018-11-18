@@ -46,7 +46,7 @@ class Admin::ProductsController < ApplicationController
     @product = Product.new
 
     @search_form_path = admin_new_product_path(@product)
-    @categories = Category.search(params[:search], "enabled-only").paginate(page: params[:page], per_page: 5) # Categories with pagination
+    @categories = Category.search(params[:search], "enabled-only").paginate(page: params[:page], per_page: 15) # Categories with pagination
 
     respond_to do |format|
       format.html
@@ -83,7 +83,7 @@ class Admin::ProductsController < ApplicationController
     # Product found by before_action
 
     @search_form_path = admin_edit_product_path(@product)
-    @categories = Category.search(params[:search], "enabled-only").paginate(page: params[:page], per_page: 5) # Categories with pagination
+    @categories = Category.search(params[:search], "enabled-only").paginate(page: params[:page], per_page: 15) # Categories with pagination
 
     respond_to do |format|
       format.html

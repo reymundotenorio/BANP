@@ -4,14 +4,17 @@ class User < ApplicationRecord
 
   # Associations
   belongs_to :employee, optional: true
+  belongs_to :costumer, optional: true
 
   # Audit
   audited associated_with: :employee
+  audited associated_with: :costumer
   # End Audit
 
   # Render sync
   sync :all
   sync_touch :employee
+  sync_touch :costumer
   # End Render sync
 
   ## Friendly_ID
