@@ -96,6 +96,14 @@
       .form-control[disabled], .form-control[readonly], fieldset[disabled] .form-control{
         background-color: $transparent;
       }
+
+      .border-bottom{
+        position: absolute;
+        left: 0px;
+        right: 45px;
+        bottom: 0px;
+        top: auto;
+      }
     }
 
     .main-buttons{
