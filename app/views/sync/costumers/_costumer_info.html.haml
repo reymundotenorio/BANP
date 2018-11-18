@@ -1,0 +1,28 @@
+%li
+  -if costumer
+    %span.profile
+      -# Employee image
+      - if costumer.image.attached?
+        = image_tag url_for(costumer.image), class: "img-responsive img-circle"
+
+      - else
+        %i.fas.fa-user
+
+      %p
+      = costumer.first_name
+      = costumer.last_name
+
+%li
+  = link_to admin_costumer_path(costumer) do
+    %i.fas.fa-cog
+    %span= t("header.user.configuration")
+
+%li
+  = link_to admin_sign_out_path(email: costumer.email), method: "delete" do
+    %i.fas.fa-lock
+    %span= t("header.user.lock")
+
+%li
+  = link_to admin_sign_out_path, method: "delete" do
+    %i.fas.fa-sign-out-alt
+    %span= t("header.user.sign_off")

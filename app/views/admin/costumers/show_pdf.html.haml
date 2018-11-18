@@ -1,0 +1,14 @@
+-# Details PDF
+%section.details.details-pdf
+  .container
+    .row
+      .col-xs-12
+        %h1.text-center= pdf_title
+
+      -# Set attributes
+      - model = "costumers"
+      - attributes = ["first_name", "last_name", "email" ,"phone", "address", "state"]
+
+      -# Render details information
+      = render partial: "admin/partials/information_details", locals: {model: model, resource: resource, attributes: attributes}
+-# End Details PDF

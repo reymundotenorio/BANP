@@ -1,0 +1,24 @@
+.row.no-margin
+  .col-xs-12.no-padding
+    -# Table
+    %table.table
+      %thead
+        - model = "costumer"
+        - attributes = ["first_name", "last_name", "email" ,"phone", "address"]
+
+        -# Render table header
+        = render partial: "admin/partials/table_header", locals: {model: model, attributes: attributes}
+
+      %tbody
+        -# Data table Sync
+        = sync partial: "data_table", collection: @costumers
+        = sync_new partial: "data_table", resource: Costumer.new
+        -# End Data table Sync
+    -# End Table
+
+
+.row.no-margin
+  .col-xs-12.no-padding.text-center
+    -# Pagination
+    = will_paginate @costumers, renderer: BootstrapPagination::Rails
+    -# End Pagination

@@ -1,0 +1,98 @@
+-# Form
+= form_for [:admin, @costumer],  html: {autocomplete: "off", multipart: true} do |f|
+  %section.form
+    .container
+      .row
+        .col-xs-12
+          -# Show errors
+          = render partial: "admin/partials/form_errors", locals: {resource: @costumer, model: Costumer}
+          -# End Show errors
+
+        .col-xs-12.col-md-5.col-lg-4
+          -# Material card
+          %div{class: "material-card shadow-card #{@costumer.state}"}
+            .row.no-margin
+              .col-xs-12.no-padding
+                -# General information
+                .general-info
+                  -# Image
+                  .image-container
+                    - if @costumer.image.attached?
+                      = image_tag url_for(@costumer.image), id: "preview-image", class: "img-responsive"
+
+                    - else
+                      = image_tag url_for("https://s3.amazonaws.com/betterandnice/images/default/default.png"), id: "preview-image", class: "img-responsive"
+                  -# End Image
+
+                  -# Input imagen
+                  .form-group
+                    .input-group
+                      %input#filename.form-control{readonly: "readonly", type: "text"}/
+
+                      %span.input-group-btn
+                        %span.btn.btn-general.btn-file
+                          %i.fas.fa-upload
+                          = f.file_field :image, id: "select-image", accept: "image/*"
+                  -# End Input imagen
+                -# End General information
+          -# End Material card
+
+        .col-xs-12.col-md-7.col-lg-8
+          -# Material card
+          %div{class: "material-card shadow-card #{@costumer.state}"}
+            .row.no-margin
+              .col-xs-12.no-padding
+                .form-info
+                  .form-group
+                    = f.text_field :first_name, class: "form-control input", placeholder: t("activerecord.attributes.costumer.first_name"), required: true
+                    %label
+                      %b= t("activerecord.attributes.costumer.first_name")
+                    .border-bottom
+
+                  .form-group
+                    = f.text_field :last_name, class: "form-control input", placeholder: t("activerecord.attributes.costumer.last_name"), required: true
+                    %label
+                      %b= t("activerecord.attributes.costumer.last_name")
+                    .border-bottom
+
+                  .form-group
+                    = f.email_field :email, class: "form-control input", placeholder: t("activerecord.attributes.costumer.email"), required: true
+                    %label
+                      %b= t("activerecord.attributes.costumer.email")
+                    .border-bottom
+
+                  .form-group
+                    -# < f.telephone_field :phone, class: "form-control input", "data-mask": "(000) 000-0000", placeholder: t("activerecord.attributes.costumer.phone"), required: true >
+                    = f.telephone_field :phone, class: "form-control input", placeholder: t("activerecord.attributes.costumer.phone"), required: true
+                    %label
+                      %b= t("activerecord.attributes.costumer.phone")
+                    .border-bottom
+
+                  .form-group
+                    = f.text_area :address, class: "form-control input text-area",placeholder: t("activerecord.attributes.costumer.address")
+                    %label
+                      %b= t("activerecord.attributes.costumer.address")
+                    .border-bottom
+
+
+                  -# Buttons
+                  .main-buttons
+                    .col-xs-12.col-sm-12.button-container.no-padding
+                      = button_tag type: "reset", id: "reset-button", class: "btn btn-general" do
+                        %i.fas.fa-eraser
+                        %span= t("views.form.restart")
+
+                      = f.button class: "btn btn-general", data: {disable_with: "<i class='fas fa-spinner fa-spin'></i>"} do
+                        %i.fas.fa-save
+                        %span= t("views.form.save")
+                  -# End Buttons
+          -# End Material card
+-# End Form
+
+-# Form script
+= javascript_include_tag "form", "data-turbolinks-track": "reload"
+-# End Form script
+
+-# Jquery Mask script
+= javascript_include_tag "jquery-mask/jquery.mask", "data-turbolinks-track": "reload"
+-# End Jquery Mask script
