@@ -39,3 +39,6 @@ Rails.application.config.assets.precompile += %w( auto-search.js )
 
 # Display password
 Rails.application.config.assets.precompile += %w( display-password.js )
+
+# Admin
+Rails.application.config.assets.precompile += %w( admin.css )

@@ -70,7 +70,7 @@ ActiveRecord::Schema.define(version: 2018_11_18_173060) do
   create_table "costumers", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "first_name", null: false
     t.string "last_name", null: false
-    t.string "company", null: false
+    t.string "company"
     t.string "email", null: false
     t.string "phone", limit: 14, null: false
     t.string "address", null: false
