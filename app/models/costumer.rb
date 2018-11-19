@@ -72,7 +72,6 @@ class Costumer < ApplicationRecord
   # Presence validation
   validates :first_name, presence: true
   validates :last_name, presence: true
-  validates :company, presence: true
   validates :email, presence: true
   validates :phone, presence: true
   validates :address, presence: true

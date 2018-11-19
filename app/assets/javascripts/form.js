@@ -54,4 +54,7 @@ $(document).ready(function() {
     $("#role-dropdown .dropdown-menu li:first-child .dropdown-item").focus();
   });
 
+  // Mask for price Input
+  $(".price").mask("#,##0.00", {reverse: true});
+
 });

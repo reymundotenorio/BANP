@@ -3,7 +3,7 @@ class CreateCostumers < ActiveRecord::Migration[5.2]
     create_table :costumers do |t|
       t.string :first_name, null: false
       t.string :last_name, null: false
-      t.string :company, null: false
+      t.string :company
       t.string :email, null: false
       t.string :phone, limit: 14, null: false, unique: true # Phone number format (000) 000-0000
       t.string :address, null: false

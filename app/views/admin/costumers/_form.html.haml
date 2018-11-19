@@ -56,7 +56,7 @@
                     .border-bottom
 
                   .form-group
-                    = f.text_field :company, class: "form-control input", placeholder: t("activerecord.attributes.costumer.company"), required: true
+                    = f.text_field :company, class: "form-control input", placeholder: t("activerecord.attributes.costumer.company")
                     %label
                       %b= t("activerecord.attributes.costumer.company")
                     .border-bottom
@@ -75,7 +75,7 @@
                     .border-bottom
 
                   .form-group
-                    = f.text_area :address, class: "form-control input text-area",placeholder: t("activerecord.attributes.costumer.address")
+                    = f.text_area :address, class: "form-control input text-area",placeholder: t("activerecord.attributes.costumer.address"), required: true
                     %label
                       %b= t("activerecord.attributes.costumer.address")
                     .border-bottom
