@@ -1,0 +1,42 @@
+@charset 'UTF-8';
+
+// 1. Configuration and helpers
+@import
+'abstracts/variables',
+'abstracts/functions',
+'abstracts/mixins';
+
+// 2. Vendors
+/// @import
+///  'vendor/normalize';
+
+// 3. Base stuff
+@import
+'base/fonts',
+'base/base',
+/// 'base/typography',
+'base/helpers';
+
+// 4. Layout-related sections
+@import
+'layout/header',
+'layout/footer';
+
+// 5. Components
+@import
+'components/button',
+'components/carousel',
+'components/social-icons',
+'components/search-box',
+'components/card';
+
+// 6. Page-specific styles
+@import
+'pages/product-results-page',
+'pages/product-details-page',
+'pages/cart-detail',
+'pages/tracker';
+
+// 7. Themes
+@import
+'themes/default';

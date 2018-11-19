@@ -1,0 +1,217 @@
+// -----------------------------------------------------------------------------
+// This file contains CSS helper classes.
+// -----------------------------------------------------------------------------
+//
+// Clear inner floats
+//
+.clearfix::after {
+    clear: both;
+    content: '';
+    display: table;
+}
+
+//
+// Hide text while making it readable for screen readers
+// 1. Needed in WebKit-based browsers because of an implementation bug;
+// See: https://code.google.com/p/chromium/issues/detail?id=457146
+//
+.hide-text {
+    overflow: hidden;
+    padding: 0;
+    /* 1 */
+    text-indent: 101%;
+    white-space: nowrap;
+}
+
+//
+// Hide element while making it readable for screen readers
+// Shamelessly borrowed from HTML5Boilerplate:
+// https://github.com/h5bp/html5-boilerplate/blob/master/src/css/main.css#L119-L133
+//
+.visually-hidden {
+    border: 0;
+    clip: rect(0 0 0 0);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    width: 1px;
+}
+
+// Custom-helpers
+.text-white {
+    color: $white;
+}
+
+.bold-text {
+    font-weight: bold;
+}
+
+.full-wd {
+    width: 100%;
+}
+
+.no-margin {
+    margin: 0px;
+}
+
+.no-padding {
+    padding-left: 0px;
+    padding-right: 0px;
+}
+
+// Center link inside
+.link-center {
+    text-align: center;
+}
+
+// End Center link inside
+// Visible only on 4K
+.visible-4k {
+    display: none !important;
+}
+
+// End Visible only on 4K
+// Featured pages Jobs section
+.featured-jobs {
+    padding-bottom: 50px;
+}
+
+// End Featured pages Jobs section
+// No break words
+.no-break {
+    white-space: nowrap;
+}
+
+// End No break words
+// Hide "Not Ready To Apply" section on the Join Form page and After Apply page
+.hide-not-ready + .not-ready,
+.hide-not-ready + style + .not-ready,
+.hide-not-ready + footer > .not-ready,
+.hide-not-ready + style + footer > .not-ready {
+    display: none;
+}
+
+// End Hide "Not Ready To Apply" section on the Join Form page and After Apply page
+// Center images
+img {
+    margin: 0 auto;
+}
+
+// End Center images
+// Videos Full Width
+video {
+    width: 100%;
+}
+
+// End Videos Full Width
+.aligned-text {
+    text-align: center;
+}
+
+ul.aligned-list {
+    padding: 0px;
+    list-style: none;
+    text-align: center;
+}
+
+:lang(en-US) body{
+    .hidden-en{
+        display: none;
+    }
+}
+
+
+
+@media (min-width: 768px) {
+
+    // Featured pages Jobs section
+    .featured-jobs {
+        padding-bottom: 100px;
+    } // End Featured pages Jobs section
+    .aligned-text {
+        text-align: left;
+    }
+
+    ul.aligned-list {
+        padding-left: 40px;
+        list-style: disc;
+        text-align: left;
+    }
+
+    .responsive-element{
+        padding-left: 0px;
+        padding-right: 0px;
+    }
+
+}
+
+@media (min-width: 1200px) {
+    .responsive-element{
+        padding-left: 90px;
+        padding-right: 90px;
+    }
+}
+
+@media (min-width: 1800px) {
+    .responsive-element{
+        padding-left: 0px;
+        padding-right: 0px;
+    }
+}
+
+@media (min-width: 1920px) {
+
+    // Hide on 4K
+    .hidden-4k {
+        background: none !important;
+        height: auto !important;
+    } // Hide on 4K
+    // Visible only on 4K
+    .visible-4k {
+        display: block !important;
+    } // End Visible only on 4K
+}
+
+@-webkit-keyframes animationRight {
+  from {
+    -webkit-transform: translateX(0);
+    transform: translateX(0);
+  }
+  50% {
+    -webkit-transform: translateX(6px);
+    transform: translateX(6px);
+  }
+  to {
+    -webkit-transform: translateX(0);
+    transform: translateX(0);
+  }
+}
+
+@keyframes animationRight {
+  from {
+    -webkit-transform: translateX(0);
+    transform: translateX(0);
+  }
+  50% {
+    -webkit-transform: translateX(6px);
+    transform: translateX(6px);
+  }
+  to {
+    -webkit-transform: translateX(0);
+    transform: translateX(0);
+  }
+}
+
+@keyframes Gradient {
+	0% {
+		background-position: 0% 50%
+	}
+	50% {
+		background-position: 100% 50%
+	}
+	100% {
+		background-position: 0% 50%
+	}
+}

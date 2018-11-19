@@ -1,0 +1,71 @@
+// -----------------------------------------------------------------------------
+// This file contains very basic styles.
+// -----------------------------------------------------------------------------
+
+body{
+  background-color: $body-color;
+  font-family: $primary-font;
+  font-style: normal;
+  font-size: 16px;
+  line-height: 30px;
+  color: $text-color;
+}
+
+::selection{
+    background: $fourth-color;
+    color: $white;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5{
+    font-family: $secondary-font;
+  color: $secondary-color;
+  text-transform: none;
+  font-weight: 700;
+}
+
+// Main titles
+h1, .internals-titles{
+  text-transform: uppercase;
+}
+
+p{
+  color: $text-color;
+  word-wrap: break-word;
+}
+
+// Basic styles for links
+a{
+  -webkit-transition: all 0.3s ease;
+  transition: all 0.3s ease;
+  color: $third-color;
+  text-decoration: none;
+
+  @include on-event{
+    text-decoration: underline;
+    color: $hover-color;
+  }
+}
+
+
+@media (min-width: 768px){
+  h1{
+  }
+}
+
+
+
+@keyframes Gradient {
+	0% {
+		background-position: 0% 50%
+	}
+	50% {
+		background-position: 100% 50%
+	}
+	100% {
+		background-position: 0% 50%
+	}
+}

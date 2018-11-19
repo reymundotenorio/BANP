@@ -1,0 +1,37 @@
+.social-items{
+    margin: 0px;
+    padding-top: 8px;
+
+    li{
+        padding: 0px;
+        line-height: 1;
+
+        +li{
+            margin-left: 10px;
+        }
+
+        .custom-social{
+            line-height: 1;
+            font-size: 16px;
+            padding: 8px 5px;
+            transition: all ease 0.5s;
+
+            color: $grey;
+
+            @include on-event{
+                &.facebook-icon{
+                    color: $facebook-color;
+                }
+                &.twitter-icon{
+                    color: $twitter-color;
+                }
+                &.linkedin-icon{
+                    color: $linkedin-color;
+                }
+                &.instagram-icon{
+                    color: $instagram-color;
+                }
+            }
+        }
+    }
+}

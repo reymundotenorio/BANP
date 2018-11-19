@@ -1,0 +1,78 @@
+// -----------------------------------------------------------------------------
+// This file contains all application-wide Sass variables.
+// -----------------------------------------------------------------------------
+
+///font-variables
+$primary-font: 'Montserrat', 'Open Sans', sans-serif;
+$secondary-font: 'Raleway', sans-serif;
+$third-font:'Cyclo', sans-serif;
+
+/// Copy text color
+/// @type Color
+$text-color: #222222 !default;
+
+//color on variables
+$white: #fff;
+$black: #000;
+$grey: #e8eaeb;
+$grey-divider: #ccc;
+$wrongurl-color: #eee;
+
+// *** External Vendor Design ***
+// $grey-divider: #eaeaea;
+// *** End External Vendor Design ***
+
+// Company color pallete
+$primary-color: #b24592; //violeta
+$secondary-color: #f15f79; //rosa
+$third-color: #23A6D5; //celeste
+$fourth-color: #23D5AB; //verde
+$btn-color: $third-color;
+$hover-color: $secondary-color;
+$facets-color: $secondary-color;
+$facets-title: $primary-color;
+$body-color: $white;
+
+$facebook-color: #3d5b9b;
+$twitter-color: #61a9db;
+$linkedin-color: #0e76b5;
+$youtube-color: #e52e2a;
+$pinterest-color: #cb2027;
+$glassdoo-color: #7cb229;
+$instagram-color: #ee1e7b;
+
+
+/// For full facets
+$full-facet: false;
+/// End For full facets
+
+/// For search box (Label inline)
+$label-inline: false;
+/// End For search box (Label inline)
+
+/// For search small (similar as the mobile search)
+$search-small: false;
+/// End For search small (similar as the mobile search)
+
+/// For search small (similar as the mobile search)
+$external-design: false;
+/// End For search small (similar as the mobile search)
+
+/// Container's maximum width
+/// @type Length
+/// $max-width: 1180px !default;
+
+/// Breakpoints map
+/// @prop{String} keys - Keys are identifiers mapped to a given length
+/// @prop{Map} values - Values are actual breakpoints expressed in pixels
+//// $breakpoints: (
+///   'small': 320px,
+///   'medium': 768px,
+///   'large': 1024px,
+//// ) !default;
+
+/// Relative or absolute URL where all assets are served from
+/// @type String
+/// @example scss - When using a CDN
+///   $base-url: 'http://cdn.example.com/assets/';
+$base-url: '/assets/' !default;
