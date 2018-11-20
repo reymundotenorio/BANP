@@ -629,13 +629,13 @@
 
       // Activated item
       li.active>a{
-        background-color: transparent;
-        color: $hover-color;
+        // background-color: transparent;
+        // color: $hover-color;
 
-        @include on-event{
-          background-color: transparent;
-          color: shade($third-color, 15%);
-        }
+        // @include on-event{
+        //   background-color: transparent;
+        //   color: shade($third-color, 15%);
+        // }
       }
       // End Activated item
 

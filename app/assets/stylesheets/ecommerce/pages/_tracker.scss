@@ -1,221 +1,250 @@
 .graphic{
-    width: 100%;
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-pack: justify;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  -webkit-box-align: start;
+  -ms-flex-align: start;
+  align-items: flex-start;
+
+  .item{
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: flex-start;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: row;
+    flex-direction: row;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    -webkit-box-align: end;
+    -ms-flex-align: end;
+    align-items: flex-end;
+    position: relative;
 
-    .item{
-        display: flex;
-        flex-direction: row;
-        justify-content: center;
-        align-items: flex-end;
-        position: relative;
+    width: 100%;
 
-        width: 100%;
+    padding-bottom: 30px;
+    padding-left: 0px;
 
-        padding-bottom: 30px;
-        padding-left: 0px;
-
-        +.item{
-            .checked{
-                &:before{
-                    content: '';
-                    height: 70px;
-                    width: 10px;
-                    background: #eeeeee;
-                    background-attachment: fixed;
-                    position: absolute;
-                    top: auto;
-                    bottom: 30px;
-                    left: calc(50% - 5px);
-                    right: auto;
-                    z-index: -2;
-                }
-            }
+    +.item{
+      .checked{
+        &:before{
+          content: '';
+          height: 70px;
+          width: 10px;
+          background: #eeeeee;
+          background-attachment: fixed;
+          position: absolute;
+          top: auto;
+          bottom: 30px;
+          left: calc(50% - 5px);
+          right: auto;
+          z-index: -2;
         }
-
-        &:first-child{
-            z-index: 3;
-        }
-        &:nth-child(2){
-            z-index: 2;
-        }
-        &:last-child{
-            z-index: 1;
-        }
-
-        &.active{
-            .checked{
-                background-color: #0499f2;
-                background-image: linear-gradient(180deg, #0499f2 0%, #26f596 95%);
-                background-attachment: fixed;
-
-                &::before{
-                    background-color: #0499f2;
-                    background-image: linear-gradient(180deg, #0499f2 0%, #26f596 95%);
-                }
-            }
-
-            .icon{
-                color: #0499f2;
-                -webkit-background-clip: text;
-                -webkit-text-fill-color: transparent;
-                background-image: linear-gradient(180deg, #0499f2 0%, #26f596 95%);
-                background-attachment: fixed;
-            }
-        }
-
-
+      }
     }
+
+    &:first-child{
+      z-index: 3;
+    }
+    &:nth-child(2){
+      z-index: 2;
+    }
+    &:last-child{
+      z-index: 1;
+    }
+
+    &.active{
+      .checked{
+        background-color: #0499f2;
+        background-image: -webkit-gradient(linear, left top, left bottom, from(#0499f2), color-stop(95%, #26f596));
+        background-image: linear-gradient(180deg, #0499f2 0%, #26f596 95%);
+        background-attachment: fixed;
+
+        &::before{
+          background-color: #0499f2;
+          background-image: -webkit-gradient(linear, left top, left bottom, from(#0499f2), color-stop(95%, #26f596));
+          background-image: linear-gradient(180deg, #0499f2 0%, #26f596 95%);
+        }
+      }
+
+      .icon{
+        color: #0499f2;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-image: -webkit-gradient(linear, left top, left bottom, from(#0499f2), color-stop(95%, #26f596));
+        background-image: linear-gradient(180deg, #0499f2 0%, #26f596 95%);
+        background-attachment: fixed;
+      }
+    }
+
+
+  }
 }
 
 .checked{
-    padding: 10px;
-    background: #eeeeee;
-    display: inline-block;
-    line-height: 1;
-    border-radius: 100%;
-    position: relative;
-    z-index: 1;
+  padding: 10px;
+  background: #eeeeee;
+  display: inline-block;
+  line-height: 1;
+  border-radius: 100%;
+  position: relative;
+  z-index: 1;
 
-    .fa, .fas{
-        line-height: 1;
-        font-size: 20px;
-        color: $white;
-    }
+  .fa, .fas{
+    line-height: 1;
+    font-size: 20px;
+    color: $white;
+  }
 
 
 }
 
 .icon{
-    padding-top: 15px;
-    text-align: center;
-    color: #eeeeee;
+  padding-top: 15px;
+  text-align: center;
+  color: #eeeeee;
 
-    width: 122px;
-    margin-left: 60px;
-    .fa, .fas{
-        font-size: 25px;
-        display: block;
-    }
-    span{
-        display: block;
-        font-size: 12px;
-        text-transform: uppercase;
-        font-weight: 700;
-        line-height: 1.3;
-        padding-top: 10px;
-    }
+  width: 122px;
+  margin-left: 60px;
+  .fa, .fas{
+    font-size: 25px;
+    display: block;
+  }
+  span{
+    display: block;
+    font-size: 12px;
+    text-transform: uppercase;
+    font-weight: 700;
+    line-height: 1.3;
+    padding-top: 10px;
+  }
 }
 
 .info{
-    padding-top: 30px;
-    .info-title{
-        margin-top: 0px;
-        color: $text-color;
-        font-weight: 300;
-        margin-bottom: 0px;
-        font-size: 25px;
-    }
-    .status{
-        margin-top: 5px;
-        color: $text-color
-    }
+  padding-top: 30px;
+  .info-title{
+    margin-top: 0px;
+    color: $text-color;
+    font-weight: 300;
+    margin-bottom: 0px;
+    font-size: 25px;
+  }
+  .status{
+    margin-top: 5px;
+    color: $text-color
+  }
 
-    .history{
-        padding-top: 30px;
+  .history{
+    padding-top: 30px;
+  }
+  .log{
+    padding-top: 15px;
+    p{
+      margin-bottom: 5px;
     }
-    .log{
-        padding-top: 15px;
-        p{
-            margin-bottom: 5px;
-        }
-    }
-    .label{
-        font-weight: 400;
-        width: 118.52px;
-        display: inline-block;
-        padding-top: 3.4px;
-    }
+  }
+  .label{
+    font-weight: 400;
+    width: 118.52px;
+    display: inline-block;
+    padding-top: 3.4px;
+  }
 }
 
 #shipment-info{
-    hr{
-        margin: 20px 0px;
+  hr{
+    margin: 20px 0px;
+  }
+  .ship-item{
+    h4{
+      line-height: 20px;
+      font-size: 16px;
+      color: $text-color;
+      text-transform: uppercase;
+      font-weight: 300;
+      margin-bottom: 5px;
     }
-    .ship-item{
-        h4{
-            line-height: 20px;
-            font-size: 16px;
-            color: $text-color;
-            text-transform: uppercase;
-            font-weight: 300;
-            margin-bottom: 5px;
-        }
-        p{
-            line-height: 20px;
-            font-size: 16px;
-            font-weight: 600;
-        }
+    p{
+      line-height: 20px;
+      font-size: 16px;
+      font-weight: 600;
     }
+  }
 }
 
 @media (min-width: 768px) {
-    .graphic{
-        flex-direction: row;
+  .graphic{
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: row;
+    flex-direction: row;
 
-        .item{
-            flex-direction: column;
-            align-items: center;
-            width: auto;
-            padding-bottom: 0px;
+    .item{
+      -webkit-box-orient: vertical;
+      -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+      flex-direction: column;
+      -webkit-box-align: center;
+      -ms-flex-align: center;
+      align-items: center;
+      width: auto;
+      padding-bottom: 0px;
 
-            +.item{
-                .checked:before{
-                    height: 10px;
-                    width: 275px;
-                    right: 30px;
-                    left: auto;
-                    top: calc(50% - 5px);
-                }
-            }
-
-            &.active{
-                .checked{
-                    background-image: linear-gradient(-315deg, #0499f2 0%, #26f596 74%);
-                    &::before{
-                        background-image: linear-gradient(-315deg, #0499f2 0%, #26f596 74%);
-                    }
-                }
-                .icon{
-                    background-image: linear-gradient(-315deg, #0499f2 0%, #26f596 74%);
-                }
-            }
+      +.item{
+        .checked:before{
+          height: 10px;
+          width: 275px;
+          right: 30px;
+          left: auto;
+          top: calc(50% - 5px);
         }
-    }
+      }
 
-    .icon{
-        width: auto;
-        margin-left: 0px;
-    }
-
-    .info{
-        padding-top: 50px;
-        .history{
-            padding-top: 0px;
+      &.active{
+        .checked{
+          background-image: linear-gradient(-315deg, #0499f2 0%, #26f596 74%);
+          &::before{
+            background-image: linear-gradient(-315deg, #0499f2 0%, #26f596 74%);
+          }
         }
+        .icon{
+          background-image: linear-gradient(-315deg, #0499f2 0%, #26f596 74%);
+        }
+      }
     }
+  }
+
+  .icon{
+    width: auto;
+    margin-left: 0px;
+  }
+
+  .info{
+    padding-top: 50px;
+    .history{
+      padding-top: 0px;
+    }
+  }
 }
 
 @media (min-width: 992px) {
-    .graphic .item + .item .checked:before{
-        width: 230px;
-    }
+  .graphic .item + .item .checked:before{
+    width: 230px;
+  }
 }
 
 @media (min-width: 1200px) {
-    .graphic .item + .item .checked:before{
-        width: 300px;
-    }
+  .graphic .item + .item .checked:before{
+    width: 300px;
+  }
 }

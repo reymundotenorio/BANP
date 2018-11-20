@@ -1,0 +1,13 @@
+.dropdown.lang-dropdown.text-right
+  %button#lang-dropdown-btn.dropdown-toggle{"aria-expanded": "false", "aria-haspopup": "true", "data-toggle": "dropdown", type: "button"}
+    %span.sr-only= t("views.navigation.language")
+    %i.fas.fa-language
+  %ul.dropdown-menu
+    %li
+      = link_to (change_language_path(:en)), class: "#{'active' if I18n.locale.to_s == 'en'}" do
+        %span.flag-icon.flag-icon-us
+        English
+    %li
+      = link_to (change_language_path(:es)), class: "#{'active' if I18n.locale.to_s == 'es'}" do
+        %span.flag-icon.flag-icon-es
+        Español

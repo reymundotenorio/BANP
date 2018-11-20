@@ -11,9 +11,14 @@ body{
   color: $text-color;
 }
 
+::-moz-selection{
+  background: $fourth-color;
+  color: $white;
+}
+
 ::selection{
-    background: $fourth-color;
-    color: $white;
+  background: $fourth-color;
+  color: $white;
 }
 
 h1,
@@ -21,7 +26,7 @@ h2,
 h3,
 h4,
 h5{
-    font-family: $secondary-font;
+  font-family: $secondary-font;
   color: $secondary-color;
   text-transform: none;
   font-weight: 700;
@@ -58,14 +63,28 @@ a{
 
 
 
+@-webkit-keyframes Gradient {
+  0% {
+    background-position: 0% 50%
+  }
+  50% {
+    background-position: 100% 50%
+  }
+  100% {
+    background-position: 0% 50%
+  }
+}
+
+
+
 @keyframes Gradient {
-	0% {
-		background-position: 0% 50%
-	}
-	50% {
-		background-position: 100% 50%
-	}
-	100% {
-		background-position: 0% 50%
-	}
+  0% {
+    background-position: 0% 50%
+  }
+  50% {
+    background-position: 100% 50%
+  }
+  100% {
+    background-position: 0% 50%
+  }
 }

@@ -1,180 +1,96 @@
 %body
-  #back-to-top.navbar-fixed-top.affix-top{"data-offset-top" => "1", "data-spy" => "affix"}
-  / Header
-  %header.navbar-fixed-top.affix-top{"data-offset-top" => "1", "data-spy" => "affix"}
-    / Top social
+  #back-to-top.navbar-fixed-top.affix-top{"data-offset-top": "1", "data-spy": "affix"}
+  
+  -# Header
+  %header.navbar-fixed-top.affix-top{"data-offset-top": "1", "data-spy": "affix"}
+    -# Top social
     %section.top-social.hidden-xs
       .container-fluid
         .row
-          / Social share
           .col-xs-12.col-sm-3
-            / Social icons
             .social-icons
               %ul.list-inline.social-items
                 %li
-                  %a.custom-social.facebook-icon{:href => "#", :target => "_blank", :title => "Facebook"}
+                  %a.custom-social.facebook-icon{href: "#", target: "_blank"}
                     %i.fab.fa-facebook-f
                 %li
-                  %a.custom-social.twitter-icon{:href => "#", :target => "_blank", :title => "Twitter"}
+                  %a.custom-social.twitter-icon{href: "#", target: "_blank"}
                     %i.fab.fa-twitter
                 %li
-                  %a.custom-social.linkedin-icon{:href => "#", :target => "_blank", :title => "LinkedIn"}
+                  %a.custom-social.linkedin-icon{href: "#", target: "_blank"}
                     %i.fab.fa-linkedin-in
                 %li
-                  %a.custom-social.instagram-icon{:href => "#", :target => "_blank", :title => "Instagram"}
+                  %a.custom-social.instagram-icon{href: "#", target: "_blank"}
                     %i.fab.fa-instagram
-            / End Social Icons
-          / End Social share
-          / Center Text
+                    
           .col-xs-12.col-sm-6
             %p.text-center.no-margin.top-center
-              Anywhere, Anytime, Fresh Produce on time!
-          / END OF Cenetr Text
-          / Language
+              = t("views.landing.motto")
+
           .col-xs-12.col-sm-3
-            .dropdown.lang-dropdown.text-right
-              %button#lang-dropdown-btn.dropdown-toggle{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", :type => "button"}
-                %span.sr-only Language
-                %i.fas.fa-language
-              %ul.dropdown-menu
-                %li
-                  %a{:href => "#", :title => "English"}
-                    %span.flag-icon.flag-icon-us
-                    English
-                %li
-                  %a{:href => "#", :title => "Español"}
-                    %span.flag-icon.flag-icon-es
-                    Español
-          / END OF Language
-    / End Top social
-    / Top navbar
+            -# Render languages
+            = render "layouts/languages_ecommerce"
+            -# End Render languages
+
+    -# Top navbar
     %section.top-navbar
-      / Navbar default
-      %nav.navbar.navbar-default{:role => "navigation"}
-        / Container
+      -# Navbar default
+      %nav.navbar.navbar-default{role: "navigation"}
         .container-fluid
-          / Navbar mobile
+          -# Navbar mobile
           .navbar-header
-            / Navbar toggle
-            %button.navbar-toggle.collapsed{"aria-expanded" => "false", "data-target" => "#navbar", "data-toggle" => "collapse", :type => "button"}
+            -# Navbar toggle
+            %button.navbar-toggle.collapsed{"aria-expanded": "false", "data-target": "#navbar", "data-toggle": "collapse", type: "button"}
               %span.sr-only Toggle navigation
               %span.icon-bar.top-bar
               %span.icon-bar.middle-bar
               %span.icon-bar.bottom-bar
-            / End Navbar toggle
-            / Logo mobile
-            %a.navbar-brand{:alt => "BANP", :href => "/", :title => "BANP"} BANP
-            / End Logo mobile
-          / End Navbar mobile
-          / Navbar collapse
+            
+            -# Logo
+            %a.navbar-brand{alt: "BANP", href: "/", title: "BANP"} BANP
+            
+          -# Navbar collapse
           #navbar.collapse.navbar-collapse
-            / Navbar nav
+            -# Navbar nav
             %ul.nav.navbar-nav
-              / Navigation
-              / ^navigation^
-              %li.active
-                %a{:href => "#", :target => ""}
-                  Home
-              %li
-                %a{:href => "#", :target => ""}
-                  How do we work
-              %li
-                %a{:href => "#", :target => ""}
-                  Our Products
-              %li
-                %a{:href => "#", :target => ""}
-                  Contact Us
-              %li.dropdown.visible-xs
-                %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#", :title => "Language"}
-                  %span.visible-xs
-                    Language 
-                    %i.fa.fa-angle-down
-                  %span.hidden-xs
-                    %i.fas.fa-language
-                %ul.dropdown-menu.language-dropbown
-                  %li
-                    %a{:href => "index.html", :target => "_self", :title => "English"}
-                      %span.flag-icon.flag-icon-us.hidden-xs
-                      English
-                  %li
-                    %a{:href => "index-es.html", :target => "_self", :title => "Español"}
-                      %span.flag-icon.flag-icon-es.hidden-xs
-                      Español
+              -# Navigation
+              %li{class: "#{'active' if controller_name == 'landing'}"}
+                = link_to t("views.navigation.home"), root_path
+                
+              %li{class: "#{'active' if controller_name == 'landing'}"}
+                = link_to t("views.landing.how_we_work"), root_path(anchor: "how-we-work")
+                
+              %li{class: "#{'active' if controller_name == 'products'}"}
+                = link_to t("views.navigation.all_products"), products_path
+                
+              %li{class: "#{'active' if controller_name == 'landing'}"}
+                = link_to t("views.landing.contact_us"), root_path(anchor: "contact-us")
+                  
+              -# Render languages
+              = render "layouts/languages_ecommerce_mobile"
+              -# End Render languages
+                      
               %li.dropdown.hidden-xs
-                %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
-                  %span.sr-only Cart
-                  %span
-                    %i.fas.fa-shopping-cart
-                  %span.counter 1
-                %ul.dropdown-menu
-                  %li
-                    %a.resume{:href => "#", :title => "View cart"}
-                      %span.quantity
-                        Products (1)
-                        /
-                          products q
-                          uantity here
-                      %span.amount
-                        $123.00
-                        / total amount here
-                  %li
-                    %a.check-out{:href => "#", :title => "Proceed to Checkout"}
-                      %i.fas.fa-check-circle
-                      Checkout
-                  %li
-                    %a.check-out{:href => "#", :title => "Clear cart"}
-                      %i.fas.fa-times-circle
-                      Clear cart
-              / End Navigation
-              %li.dropdown
-                %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#", :title => "User"}
-                  %span.visible-xs
-                    User 
-                    %i.fa.fa-angle-down
-                  %span.hidden-xs
-                    %i.fas.fa-user
-                %ul.dropdown-menu.user-dropbown
-                  %li.label
-                    %span.name
-                      Reymundo Tenorio
-                      / Your name here
-                  %li
-                    %a{:href => "#", :target => "_self", :title => "Configuration"}
-                      %i.fas.fa-cog.hidden-xs
-                      Configuration
-                  %li
-                    %a{:href => "#", :target => "_self", :title => "Lock"}
-                      %i.fas.fa-lock.hidden-xs
-                      Lock
-                  %li
-                    %a{:href => "#", :target => "_self", :title => "Sign off"}
-                      %i.fas.fa-sign-out-alt.hidden-xs
-                      Sign off
-            / End Navbar nav
-          / End Navbar collapse
-        / Container
+                %a.dropdown-toggle{"data-toggle": "dropdown", href: "#"}
+                  -# Render cart
+                  = render "layouts/cart"
+                  -# End Render cart
+                  
+                -# Render cart details
+                = render "layouts/cart_details"
+                -# End Render cart details
+
+              -# Render user
+              = render "layouts/user"
+              -# End Render user
+
         .dropdown.cart-dropdown.visible-xs
-          %button#cart-dropdown-btn.dropdown-toggle{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", :type => "button"}
-            %span.sr-only Cart
-            %i.fas.fa-shopping-cart
-            %span.counter 1
-          %ul.dropdown-menu
-            %li
-              %a.resume{:href => "#", :title => "View Cart"}
-                %span.quantity
-                  Products (1)
-                  / products quantity here
-                %span.amount
-                  $123.00
-                  / total amount here
-            %li
-              %a.check-out{:href => "#", :title => "Proceed to Checkout"}
-                %i.fas.fa-check-circle
-                Checkout
-            %li
-              %a.check-out{:href => "#", :title => "Clear cart"}
-                %i.fas.fa-times-circle
-                Clear cart
-      / End Navbar default
-    / End Top navbar
-  / End Header
+          %button#cart-dropdown-btn.dropdown-toggle{"aria-expanded": "false", "aria-haspopup": "true", "data-toggle": "dropdown", type: "button"}
+            -# Render cart
+            = render "layouts/cart"
+            -# End Render cart
+            
+          -# Render cart details
+          = render "layouts/cart_details"
+          -# End Render cart details
+

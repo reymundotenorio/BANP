@@ -21,13 +21,12 @@
         #navbar.collapse.navbar-collapse
           %ul.nav.navbar-nav.animated.opacity-down{"data-delay": "0", "data-scroll": "0"}
             -# Navigation
-            %li
+            %li.active
               = link_to t("views.navigation.home"), root_path
 
             %li
-              %a{href: "#", target: ""}
-                = t("views.navigation.all_products")
-
+              = link_to t("views.navigation.all_products"), products_path
+              
             -# Render languages
             = render "layouts/languages"
             -# End Render languages

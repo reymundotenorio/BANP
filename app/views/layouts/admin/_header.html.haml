@@ -9,7 +9,6 @@
               .logo-top
                 = link_to (admin_root_path) do
                   %p.banp-logo BANP
-              -# End Logo tablet and mobile
 
             .col-xs-12.col-sm-8.col-md-6
               -# Settings container
@@ -25,7 +24,6 @@
                 -# Render user
                 = render "layouts/admin/user"
                 -# End Render user
-              -# End Settings container
 
       -# Navbar default
       %nav.navbar.navbar-default{role: "navigation"}
@@ -38,15 +36,11 @@
               %span.icon-bar.top-bar
               %span.icon-bar.middle-bar
               %span.icon-bar.bottom-bar
-            -# End Navbar toggle
 
             -# Logo mobile
             = link_to (admin_root_path), class: "navbar-brand visible-xs" do
               %p.banp-logo BANP
-            -# End Logo mobile
-          -# End Navbar mobile
 
           -# Render navigation
           = render "layouts/admin/navigation"
           -# End Render navigation
-      -# End Navbar default

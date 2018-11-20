@@ -1,0 +1,17 @@
+%li.dropdown.visible-xs
+  %a.dropdown-toggle{"data-toggle": "dropdown", href: "#", title: "Language"}
+    %span.visible-xs
+      = t("views.navigation.language")
+      %i.fa.fa-angle-down
+    %span.hidden-xs
+      %i.fas.fa-language
+  %ul.dropdown-menu.language-dropbown
+    %li
+      = link_to (change_language_path(:en)), class: "#{'active' if I18n.locale.to_s == 'en'}" do
+        %span.flag-icon.flag-icon-us.hidden-xs
+        English
+    %li
+      = link_to (change_language_path(:es)), class: "#{'active' if I18n.locale.to_s == 'es'}" do
+        %span.flag-icon.flag-icon-es.hidden-xs
+        Español
+        

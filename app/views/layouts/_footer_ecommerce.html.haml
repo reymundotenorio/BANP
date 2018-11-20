@@ -4,27 +4,29 @@
       .row
         .col-xs-12.col-lg-10.info-col
           %p
-            %img{:alt => "USDA ORGANIC", :src => "img/usda-ecommerce.png"}/
+            = image_tag "img/usda-organic.png", class: "img-responsive hidden-xs", alt: "USDA Organic"
             © 2018 Better and Nice Produce Corp.
             %span
-              Designed and developed with
+              = t("views.landing.designed_developed")
               %i.fas.fa-heart
-              by Tenorio, Domínguez and Sánchez.
+              = t("views.landing.by")
+              Tenorio, Domínguez and Sánchez.
         .col-xs-12.col-lg-2.social-col
           .social-icons
             %ul.list-inline.social-items
               %li
-                %a.custom-social.facebook-icon{:href => "#", :target => "_blank", :title => "Facebook"}
+                %a.custom-social.facebook-icon{href: "#", target: "_blank"}
                   %i.fab.fa-facebook-f
               %li
-                %a.custom-social.twitter-icon{:href => "#", :target => "_blank", :title => "Twitter"}
+                %a.custom-social.twitter-icon{href: "#", target: "_blank"}
                   %i.fab.fa-twitter
               %li
-                %a.custom-social.linkedin-icon{:href => "#", :target => "_blank", :title => "LinkedIn"}
+                %a.custom-social.linkedin-icon{href: "#", target: "_blank"}
                   %i.fab.fa-linkedin-in
               %li
-                %a.custom-social.instagram-icon{:href => "#", :target => "_blank", :title => "Instagram"}
+                %a.custom-social.instagram-icon{href: "#", target: "_blank"}
                   %i.fab.fa-instagram
-%a#top-link.affix-top.scroll-to{"data-offset-top" => "50", "data-spy" => "affix", :href => "#back-to-top", :title => "Back to top"}
-  %i.fa.fa-chevron-up{"aria-hidden" => "true"}
+                  
+%a#top-link.affix-top.scroll-to{"data-offset-top": "50", "data-spy": "affix", href: "#back-to-top"}
+  %i.fa.fa-chevron-up{"aria-hidden": "true"}
   %span.sr-only Back to top
