@@ -1,0 +1,71 @@
+%section.wrap
+  .banner.grad-section
+    .container-fluid
+      .row
+        .col-xs-12
+          %h1.search-title.text-center All Products
+    .container
+      .row
+        .col-xs-12.col-sm-6.col-sm-offset-3
+          .search-container.animated.opacity-up{"data-delay" => "1500", "data-scroll" => "0"}
+            %form{:method => "post"}
+              .group
+                %input{:required => "required", :type => "text"}/
+                %span.highlight
+                %span.bar
+                %label Search Product
+              %button{:name => "Search", :type => "button"}
+                %span.sr-only Search
+                %i.fas.fa-search
+  #prp-content.main-content
+    .container
+      .row
+        .col-xs-12.col-md-4.col-lg-3
+          .filter-container
+            %p.text-center.visible-xs.visible-sm
+              %a.btn.btn-general.categories-btn.collapsed{"aria-controls" => "collapseCategories", "aria-expanded" => "false", "data-target" => "#collapseCategories", "data-toggle" => "collapse"}
+                Categories
+                %i.fas.fa-caret-square-down
+            #collapseCategories.collapse
+              %h2.categories-title.hidden-xs Categories
+              %ul.categories-list.aligned-text
+                %li
+                  %a.active{:href => "#", :title => "Anise"} All
+        .col-xs-12.col-md-8.col-lg-9
+          .cards-parent
+            .card
+              .card-image
+                %img.img-responsive{:alt => "Baby Fennel", :src => "https://s3.amazonaws.com/betterandnice/images/default/product-default.png"}/
+                .overlay
+                  %form.link-container.text-center{:action => "index.html", :method => "post"}
+                    .quantity
+                      %button.subtract{:name => "minus", :type => "button"}
+                        %span.sr-only minus
+                        %i.fas.fa-minus
+                      %input{:name => "quant-prod", :type => "number", :value => "1"}/
+                      %button.add{:name => "plus", :type => "button"}
+                        %span.sr-only plus
+                        %i.fas.fa-plus
+                    %button.btn.btn-general.add-btn{:name => "add", :title => "Add to cart", :type => "button"} Add to cart
+                .stock
+                  %p.no-margin Out of Stock
+              .card-body
+                %p.name.aligned-text
+                  %a{:href => "#", :title => "Baby Fennel"} Baby Fennel
+                %p.price.aligned-text
+                  $50.00
+                  %span.unit Per box.
+      .row
+        .col-xs-12.col-md-8.col-md-offset-4.col-lg-9.col-lg-offset-3
+          .pagination-container
+            %ul.pagination.pagination
+              %li.prev.disabled
+                %span Previous
+              %li.active
+                %span 1
+              %li
+                %a{"data-remote" => "true", :href => "#", :rel => "next"} 2
+              %li
+                %a{"data-remote" => "true", :href => "#"} 3
+              %li.next
+                %a{"data-remote" => "true", :href => "#", :rel => "next"} Next

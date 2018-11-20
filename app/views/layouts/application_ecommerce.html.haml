@@ -33,7 +33,7 @@
 
     -# Application assets
     = stylesheet_link_tag "application", media: "all", "data-turbolinks-track": "reload"
-    = stylesheet_link_tag "landing", media: "all", "data-turbolinks-track": "reload"
+    = stylesheet_link_tag "ecommerce", media: "all", "data-turbolinks-track": "reload"
     = javascript_include_tag "application", "data-turbolinks-track": "reload"
     -# End Application assets
 
@@ -43,21 +43,22 @@
 
   %body
     -# Render header
-    = render "layouts/header_landing"
+    = render "layouts/header_ecommerce"
     -# End Render header
-
+    
     -# Main content
     = yield
     -# End Main content
 
     -# Render footer
-    = render "layouts/footer_landing"
+    = render "layouts/footer_ecommerce"
     -# End Render footer
     
     -# TouchSwipe script
     = javascript_include_tag "https://cdnjs.cloudflare.com/ajax/libs/jquery.touchswipe/1.6.4/jquery.touchSwipe.min.js", "data-turbolinks-track": "reload"
     -# End TouchSwipe script
+    
+    -# E-commerce scripts
+    = javascript_include_tag "ecommerce", "data-turbolinks-track": "reload"
+    -# End E-commerce scripts
 
-    -# Landing scripts
-    = javascript_include_tag "landing", "data-turbolinks-track": "reload"
-    -# End Landing scripts

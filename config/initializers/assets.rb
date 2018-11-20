@@ -48,3 +48,9 @@ Rails.application.config.assets.precompile += %w( landing.scss )
 
 # Landing
 Rails.application.config.assets.precompile += %w( landing.js )
+
+# E-commerce
+Rails.application.config.assets.precompile += %w( ecommerce.css )
+
+# E-commerce
+Rails.application.config.assets.precompile += %w( ecommerce.js )

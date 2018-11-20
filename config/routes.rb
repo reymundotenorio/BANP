@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+  
+    # Change language
+  get "/change-language/:lang", to: "settings#change_lang", as: "change_language"
+  # End Change language
 
   # Errors pages
   match "/404", to: "errors#not_found", via: :all
@@ -8,10 +12,11 @@ Rails.application.routes.draw do
   # Root
   root "landing#index"
   # End Root
+  
+    # Products
+    get "/products", to: "products#index", as: "products"
+    # End Products
 
-  # Change language
-  get "/change-language/:lang", to: "settings#change_lang", as: "change_language"
-  # End Change language
 
   # Admin namespace
   namespace :admin do
