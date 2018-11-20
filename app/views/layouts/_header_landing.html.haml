@@ -1,0 +1,87 @@
+-# Render lava
+= render "layouts/lava"
+-# End Render lava
+
+%section.panel.search{"data-section-name": "search"}
+  %header
+    %nav.navbar.navbar-default.navbar-fixed-top.affix-top{"data-offset-top": "1", "data-spy": "affix", role: "navigation"}
+      .container-fluid
+        -# Navbar mobile
+        .navbar-header
+          %button.navbar-toggle.collapsed{"aria-expanded": "false", "data-target": "#navbar", "data-toggle": "collapse", type: "button"}
+            %span.sr-only Toggle navigation
+            %span.icon-bar.top-bar
+            %span.icon-bar.middle-bar
+            %span.icon-bar.bottom-bar
+
+          -# Logo
+          = link_to (root_path), class: "navbar-brand animated scale", "data-delay": "0s", "data-scroll": "0" do
+            BANP
+
+        #navbar.collapse.navbar-collapse
+          %ul.nav.navbar-nav.animated.opacity-down{"data-delay": "0", "data-scroll": "0"}
+            -# Navigation
+            %li
+              = link_to "Home", root_path
+
+            %li
+              %a{href: "#", target: "", title: "All Products"}
+                All Products
+
+            -# Render languages
+            = render "layouts/languages"
+            -# End Render languages
+
+            %li.dropdown.hidden-xs
+              %a.dropdown-toggle{"data-toggle": "dropdown", href: "#"}
+                -# Render cart
+                = render "layouts/cart"
+                -# End Render cart
+
+              -# Render cart details
+              = render "layouts/cart_details"
+              -# End Render cart details
+            -# End Navigation
+
+            -# Render user
+            = render "layouts/user"
+            -# End Render user
+
+      .dropdown.cart-dropdown.visible-xs
+        %button#cart-dropdown-btn.dropdown-toggle{"aria-expanded": "false", "aria-haspopup": "true", "data-toggle": "dropdown", type: "button"}
+          -# Render cart
+          = render "layouts/cart"
+          -# End Render cart
+
+        -# Render cart details
+        = render "layouts/cart_details"
+        -# End Render cart details
+
+
+  -# Render pagination
+  = render "layouts/pagination"
+  -# End Render pagination
+
+  .section-content
+    #container-tagline.container
+      .row
+        .col-xs-12.col-lg-10.col-lg-offset-1
+          %h1.tagline.text-center.animated.opacity-down{"data-delay": "500", "data-scroll": "0"}
+            Anywhere, Anytime, Fresh Produce on time!
+
+    .container
+      .row
+        .col-xs-12.col-sm-6.col-sm-offset-3
+          .search-container.animated.opacity-up{"data-delay": "1500", "data-scroll": "0"}
+            -# Render search_form
+            = render "layouts/search_form"
+            -# End Render search_form
+
+  .scroll-down.hidden-xs.animated.opacity-down{"data-delay": "2500", "data-scroll": "0"}
+    .container
+      .row
+        .col-xs-12
+          .scroll-container.text-center
+            %a.scroll-to{href: "#how-we-work", title: "Scroll down"}
+              %span Scroll down
+              %i.fas.fa-chevron-down

@@ -1,0 +1,23 @@
+%li.dropdown
+  %a.dropdown-toggle{"data-toggle": "dropdown", href: "#", title: "User"}
+    %span.visible-xs
+      User 
+      %i.fa.fa-angle-down
+    %span.hidden-xs
+      %i.fas.fa-user
+  %ul.dropdown-menu.user-dropbown
+    %li.label
+      %span.name
+        Reymundo Tenorio
+    %li
+      %a{href: "#", target: "_self", title: "Configuration"}
+        %i.fas.fa-cog.hidden-xs
+        Configuration
+    %li
+      %a{href: "#", target: "_self", title: "Lock"}
+        %i.fas.fa-lock.hidden-xs
+        Lock
+    %li
+      %a{href: "#", target: "_self", title: "Sign off"}
+        %i.fas.fa-sign-out-alt.hidden-xs
+        Sign off

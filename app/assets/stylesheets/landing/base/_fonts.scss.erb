@@ -1,0 +1,66 @@
+// -----------------------------------------------------------------------------
+// This file contains all @font-face declarations, if any.
+// -----------------------------------------------------------------------------
+
+// 100 - Thin
+// 200 - Extra Light, Ultra Light
+// 300 - Light
+// 400 - Normal, Book, Regular
+// 500 - Medium
+// 600 - Semi Bold, Demi Bold
+// 700 - Bold
+// 800 - Extra Bold, Ultra Bold
+// 900 - Black, Heavy
+
+// Open Sans
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700');
+
+// Moserrat
+@import url('https://fonts.googleapis.com/css?family=Montserrat:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i');
+
+// Raleway
+@import url('https://fonts.googleapis.com/css?family=Raleway:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i');
+
+// Font Awesome 5.3.1
+@import url("https://use.fontawesome.com/releases/v5.3.1/css/all.css");
+
+
+//Cyclo
+@font-face{
+  font-family: "Cyclo";
+
+  // Load local fonts on development
+  <% if Rails.env.development? %>
+
+  // Local fonts
+  // src: font-url("cyclo/cyclo.eot");
+  // src: font-url("cyclo/cyclo.eot?#iefix") format("embedded-opentype"),
+  // font-url("cyclo/cyclo.woff2") format("woff2"),
+  // font-url("cyclo/cyclo.woff") format("woff"),
+  // font-url("cyclo/cyclo.ttf") format("truetype"),
+  // font-url("cyclo/cyclo.svg#cycloregular") format("svg");
+
+  // Cloudynary
+  src: url("https://res.cloudinary.com/reymundotenorio/raw/upload/v1537065372/cyclo/cyclo.eot");
+  src: url("https://res.cloudinary.com/reymundotenorio/raw/upload/v1537065372/cyclo/cyclo.eot?#iefix") format("embedded-opentype"),
+  url("https://res.cloudinary.com/reymundotenorio/raw/upload/v1537065372/cyclo/cyclo.woff2") format("woff2"),
+  url("https://res.cloudinary.com/reymundotenorio/raw/upload/v1537065372/cyclo/cyclo.woff") format("woff"),
+  url("https://res.cloudinary.com/reymundotenorio/raw/upload/v1537065372/cyclo/cyclo.ttf") format("truetype");
+
+  // Load AWS fonts on productionhttps://res.cloudinary.com/reymundotenorio/raw/upload/v1537065372/cyclo/cyclo.eot
+  <% else %>
+
+  // AWS S3
+  src: url("https://s3.amazonaws.com/betterandnice/fonts/cyclo/cyclo.eot");
+  src: url("https://s3.amazonaws.com/betterandnice/fonts/cyclo/cyclo.eot?#iefix") format("embedded-opentype"),
+  url("https://s3.amazonaws.com/betterandnice/fonts/cyclo/cyclo.woff2") format("woff2"),
+  url("https://s3.amazonaws.com/betterandnice/fonts/cyclo/cyclo.woff") format("woff"),
+  url("https://s3.amazonaws.com/betterandnice/fonts/cyclo/cyclo.ttf") format("truetype"),
+  url("https://s3.amazonaws.com/betterandnice/fonts/cyclo/cyclo.svg#cycloregular") format("svg");
+
+  <% end %>
+
+  font-weight: normal;
+  font-style: normal;
+}
+//End Cyclo
