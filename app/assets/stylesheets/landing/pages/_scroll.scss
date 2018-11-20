@@ -1,318 +1,473 @@
 html{
-    // width: 100vw;
-    // height: 100vh;
-    background: linear-gradient(-45deg, $primary-color, $secondary-color, $third-color, $fourth-color);
-    background-size: 400vw 400vh;
-    animation: Gradient 45s ease infinite;
-    background-attachment: fixed;
+  // width: 100vw;
+  // height: 100vh;
+  background: linear-gradient(-45deg, $primary-color, $secondary-color, $third-color, $fourth-color);
+  background-size: 400vw 400vh;
+  -webkit-animation: Gradient 45s ease infinite;
+  animation: Gradient 45s ease infinite;
+  background-attachment: fixed;
 }
 
 body {
-    // width: 100vw;
-    // height: 100vh;
-    background: transparent;
-
+  // width: 100vw;
+  // height: 100vh;
+  background: transparent;
 }
 
 .panel {
-    background: transparent;
-    border: none;
-    position: relative;
-    box-shadow: none;
-
+  background: transparent;
+  border: none;
+  position: relative;
+  -webkit-box-shadow: none;
+  box-shadow: none;
 }
 
 .pagination{
-    position: fixed;
-    z-index: 1032;
-    right: 15px;
-    left: auto;
-    top: calc(50% - 62px);
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: flex-end;
-    margin: 0;
+  position: fixed;
+  z-index: 1032;
+  right: 15px;
+  left: auto;
+  top: calc(50% - 62px);
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-pack: justify;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  -webkit-box-align: end;
+  -ms-flex-align: end;
+  align-items: flex-end;
+  margin: 0;
 
-    li{
+  li{
 
-        a{
-            background: transparent;
-            border: none;
-            padding: 0px;
+    a{
+      background: transparent;
+      border: none;
+      padding: 0px;
 
+      .tomato{
+        background-color: #fff;
+        display: inline-block;
+        height: 14px;
+        width: 15px;
+        -webkit-transition: all ease 0s;
+        transition: all ease 0s;
+      }
 
-            .tomato{
-                background-color: #fff;
-                display: inline-block;
-                height: 14px;
-                width: 15px;
-                transition: all ease 0s;
-            }
-
-            @include on-event {
-                background: transparent;
-            }
-
-
-        }
+      @include on-event {
+        background: transparent;
+      }
     }
+  }
 
-    &.pagination-mobile{
-        li {
-            margin-bottom: 10px;
-            a {
-                transition: all ease 0.5s;
-                height: 14px;
-                width: 15px;
+  &.pagination-mobile{
+    li {
+      margin-bottom: 10px;
 
-                .tomato{
-                    background-color: $white;
-                    -webkit-mask: url("../img/tomato-mask.svg") no-repeat 50% 50%;
-                    mask: url("../img/tomato-mask.svg") no-repeat 50% 50%;
-                    -webkit-mask-size: cover;
-                            mask-size: cover;
-                }
+      a {
+        -webkit-transition: all ease 0.5s;
+        transition: all ease 0.5s;
+        height: 14px;
+        width: 15px;
 
-                @include on-event{
-                    .tomato{
-                        background-color: $white;
-                        -webkit-mask: url("../img/tomato-fill-mask.svg") no-repeat 50% 50%;
-                        mask: url("../img/tomato-fill-mask.svg") no-repeat 50% 50%;
-                        -webkit-mask-size: cover;
-                                mask-size: cover;
-                    }
-                }
-
-                &.active{
-
-                    .tomato{
-                        background-color: $white;
-                        -webkit-mask: url("../img/tomato-fill-mask.svg") no-repeat 50% 50%;
-                        mask: url("../img/tomato-fill-mask.svg") no-repeat 50% 50%;
-                        -webkit-mask-size: cover;
-                                mask-size: cover;
-                    }
-                }
-            }
+        .tomato{
+          background-color: $white;
+          -webkit-mask: url("img/tomato-mask.svg") no-repeat 50% 50%;
+          mask: url("img/tomato-mask.svg") no-repeat 50% 50%;
+          -webkit-mask-size: cover;
+          mask-size: cover;
         }
+
+        @include on-event{
+          .tomato{
+            background-color: $white;
+            -webkit-mask: url("img/tomato-fill-mask.svg") no-repeat 50% 50%;
+            mask: url("img/tomato-fill-mask.svg") no-repeat 50% 50%;
+            -webkit-mask-size: cover;
+            mask-size: cover;
+          }
+        }
+
+        &.active{
+
+          .tomato{
+            background-color: $white;
+            -webkit-mask: url("img/tomato-fill-mask.svg") no-repeat 50% 50%;
+            mask: url("img/tomato-fill-mask.svg") no-repeat 50% 50%;
+            -webkit-mask-size: cover;
+            mask-size: cover;
+          }
+        }
+      }
     }
+  }
 }
 
 @media (max-width: 767px) {
-    body{
-        overflow: scroll !important;
-    }
-    .panel{
-        height: auto !important;
-    }
+  body{
+    overflow: scroll !important;
+  }
+
+  .panel{
+    height: auto !important;
+  }
+
 }
 
 @media (min-width: 768px) {
-    html{
-        width: 100vw;
-        height: 100vh;
-    }
 
-    body{
-        width: 100vw;
-        height: 100vh;
-    }
+  html{
+    width: 100vw;
+    height: 100vh;
+  }
+
+  body{
+    width: 100vw;
+    height: 100vh;
+  }
+
 }
 
 @media (min-width: 1200px) {
-    .pagination {
-        right: 30px;
-        top: calc(50% - 125px);
+  .pagination {
+    right: 30px;
+    top: calc(50% - 125px);
 
-        li {
-            margin-bottom: 15px!important;
-            line-height: 30px;
+    li {
+      margin-bottom: 15px!important;
+      line-height: 30px;
 
-            &:nth-child(1) {
-                a{
-                    &:after {
-                        content: 'B';
-                    }
+      &:nth-child(1) {
+        a{
+          &:after {
+            content: 'B';
+          }
 
-                    @include on-event{
-                        &:after{
-                            animation: animationB 0.5s 1;
-                        }
-                    }
-                }
+          @include on-event{
+            &:after{
+              -webkit-animation: animationB 0.5s 1;
+              animation: animationB 0.5s 1;
             }
-            &:nth-child(2) {
-                a{
-                    &:after {
-                        content: 'A';
-                    }
-                    @include on-event{
-                        &:after{
-                            animation: animationA 0.5s 1;
-                        }
-                    }
-                }
-            }
-            &:nth-child(3) {
-                a{
-                    &:after {
-                        content: 'N';
-                    }
-                    @include on-event{
-                        &:after{
-                            animation: animationN 0.5s 1;
-                        }
-                    }
-                }
-            }
-            &:nth-child(4) {
-                a{
-                    &:after {
-                        content: 'P';
-                    }
-                    @include on-event{
-                        &:after{
-                            animation: animationP 0.5s 1;
-                        }
-                    }
-                }
-            }
-
-
-            a {
-                color: $white;
-                line-height: 30px;
-                font-family: $secondary-font;
-                font-weight: 700;
-                text-transform: uppercase;
-                font-size: 14px;
-                letter-spacing: 1px;
-                position: relative;
-                padding: 6px 12px;
-                padding-right: 40px;
-                @include on-event {
-                    background: transparent;
-                    color: $white;
-
-                    &:after{
-                        // animation: animationPagination 1s 1;
-                        content: '\f062';
-                        font-family: 'FontAwesome';
-                        transform: rotateX(0deg) rotate(90deg);
-                    }
-                }
-
-                &:before{
-                    content: '';
-                    // width: calc(100% - 52px);
-                    width: 0px;
-                    height: 5px;
-                    background: $white;
-                    display: block;
-                    position: absolute;
-                    bottom: 0px;
-                    left: calc(50% - 20px);
-                    right: auto;
-                    top: auto;
-                    transition: all ease 0.5s;
-                }
-
-                &:after {
-                    transition: all ease 0.5s;
-                    display: inline-block;
-                    font-family: $third-font;
-                    font-weight: normal;
-                    font-size: 16px;
-                    transform-origin: center;
-                    position: absolute;
-                    right: 0px;
-                }
-
-                &.active{
-                    &:before{
-                        width: calc(100% - 52px);
-                        left: 12px;
-                    }
-                }
-            }
+          }
         }
+      }
+
+      &:nth-child(2) {
+        a{
+          &:after {
+            content: 'A';
+          }
+          @include on-event{
+            &:after{
+              -webkit-animation: animationA 0.5s 1;
+              animation: animationA 0.5s 1;
+            }
+          }
+        }
+      }
+
+      &:nth-child(3) {
+        a{
+          &:after {
+            content: 'N';
+          }
+          @include on-event{
+            &:after{
+              -webkit-animation: animationN 0.5s 1;
+              animation: animationN 0.5s 1;
+            }
+          }
+        }
+      }
+
+      &:nth-child(4) {
+        a{
+          &:after {
+            content: 'P';
+          }
+          @include on-event{
+            &:after{
+              -webkit-animation: animationP 0.5s 1;
+              animation: animationP 0.5s 1;
+            }
+          }
+        }
+      }
+
+      a {
+        color: $white;
+        line-height: 30px;
+        font-family: $secondary-font;
+        font-weight: 700;
+        text-transform: uppercase;
+        font-size: 14px;
+        letter-spacing: 1px;
+        position: relative;
+        padding: 6px 12px;
+        padding-right: 40px;
+
+        @include on-event {
+          background: transparent;
+          color: $white;
+
+          &:after{
+            // animation: animationPagination 1s 1;
+            content: '\f062';
+            font-family: 'FontAwesome';
+            -webkit-transform: rotateX(0deg) rotate(90deg);
+            transform: rotateX(0deg) rotate(90deg);
+          }
+        }
+
+        &:before{
+          content: '';
+          // width: calc(100% - 52px);
+          width: 0px;
+          height: 5px;
+          background: $white;
+          display: block;
+          position: absolute;
+          bottom: 0px;
+          left: calc(50% - 20px);
+          right: auto;
+          top: auto;
+          -webkit-transition: all ease 0.5s;
+          transition: all ease 0.5s;
+        }
+
+        &:after {
+          -webkit-transition: all ease 0.5s;
+          transition: all ease 0.5s;
+          display: inline-block;
+          font-family: $third-font;
+          font-weight: normal;
+          font-size: 16px;
+          -webkit-transform-origin: center;
+          transform-origin: center;
+          position: absolute;
+          right: 0px;
+        }
+
+        &.active{
+          &:before{
+            width: calc(100% - 52px);
+            left: 12px;
+          }
+        }
+      }
     }
+  }
+}
+
+@-webkit-keyframes animationB {
+  0%{
+    content: "B";
+    font-family: $third-font;
+    -webkit-transform: rotateX(0deg) rotate(0deg);
+    transform: rotateX(0deg) rotate(0deg);
+  }
+
+  33.33%{
+    -webkit-transform: rotateX(85deg) rotate(0deg);
+    transform: rotateX(85deg) rotate(0deg);
+  }
+
+  80%{
+    -webkit-transform: rotateX(85deg) rotate(90deg);
+    transform: rotateX(85deg) rotate(90deg);
+    content: '\f062';
+    font-family: 'FontAwesome'
+  }
+
+  100%{
+    -webkit-transform: rotateX(0deg) rotate(90deg);
+    transform: rotateX(0deg) rotate(90deg);
+  }
 }
 
 @keyframes animationB {
-    0%{
-        content: "B";
-        font-family: $third-font;
-        transform: rotateX(0deg) rotate(0deg);
-    }
-    33.33%{
-        transform: rotateX(85deg) rotate(0deg);
-    }
-    80%{
-        transform: rotateX(85deg) rotate(90deg);
-        content: '\f062';
-        font-family: 'FontAwesome'
-    }
+  0%{
+    content: "B";
+    font-family: $third-font;
+    -webkit-transform: rotateX(0deg) rotate(0deg);
+    transform: rotateX(0deg) rotate(0deg);
+  }
 
-    100%{
-        transform: rotateX(0deg) rotate(90deg);
-    }
+  33.33%{
+    -webkit-transform: rotateX(85deg) rotate(0deg);
+    transform: rotateX(85deg) rotate(0deg);
+  }
+
+  80%{
+    -webkit-transform: rotateX(85deg) rotate(90deg);
+    transform: rotateX(85deg) rotate(90deg);
+    content: '\f062';
+    font-family: 'FontAwesome'
+  }
+
+  100%{
+    -webkit-transform: rotateX(0deg) rotate(90deg);
+    transform: rotateX(0deg) rotate(90deg);
+  }
 }
+
+@-webkit-keyframes animationA {
+  0%{
+    content: "A";
+    font-family: $third-font;
+    -webkit-transform: rotateX(0deg) rotate(0deg);
+    transform: rotateX(0deg) rotate(0deg);
+  }
+
+  33.33%{
+    -webkit-transform: rotateX(85deg) rotate(0deg);
+    transform: rotateX(85deg) rotate(0deg);
+  }
+
+  66.66%{
+    -webkit-transform: rotateX(85deg) rotate(90deg);
+    transform: rotateX(85deg) rotate(90deg);
+    content: '\f062';
+    font-family: 'FontAwesome'
+  }
+
+  100%{
+    -webkit-transform: rotateX(0deg) rotate(90deg);
+    transform: rotateX(0deg) rotate(90deg);
+  }
+}
+
 @keyframes animationA {
-    0%{
-        content: "A";
-        font-family: $third-font;
-        transform: rotateX(0deg) rotate(0deg);
-    }
-    33.33%{
-        transform: rotateX(85deg) rotate(0deg);
-    }
-    66.66%{
-        transform: rotateX(85deg) rotate(90deg);
-        content: '\f062';
-        font-family: 'FontAwesome'
-    }
+  0%{
+    content: "A";
+    font-family: $third-font;
+    -webkit-transform: rotateX(0deg) rotate(0deg);
+    transform: rotateX(0deg) rotate(0deg);
+  }
 
-    100%{
-        transform: rotateX(0deg) rotate(90deg);
-    }
+  33.33%{
+    -webkit-transform: rotateX(85deg) rotate(0deg);
+    transform: rotateX(85deg) rotate(0deg);
+  }
+
+  66.66%{
+    -webkit-transform: rotateX(85deg) rotate(90deg);
+    transform: rotateX(85deg) rotate(90deg);
+    content: '\f062';
+    font-family: 'FontAwesome'
+  }
+
+  100%{
+    -webkit-transform: rotateX(0deg) rotate(90deg);
+    transform: rotateX(0deg) rotate(90deg);
+  }
 }
+
+@-webkit-keyframes animationN {
+  0%{
+    content: "N";
+    font-family: $third-font;
+    -webkit-transform: rotateX(0deg) rotate(0deg);
+    transform: rotateX(0deg) rotate(0deg);
+  }
+
+  33.33%{
+    -webkit-transform: rotateX(85deg) rotate(0deg);
+    transform: rotateX(85deg) rotate(0deg);
+  }
+
+  66.66%{
+    -webkit-transform: rotateX(85deg) rotate(90deg);
+    transform: rotateX(85deg) rotate(90deg);
+    content: '\f062';
+    font-family: 'FontAwesome'
+  }
+
+  100%{
+    -webkit-transform: rotateX(0deg) rotate(90deg);
+    transform: rotateX(0deg) rotate(90deg);
+  }
+}
+
 @keyframes animationN {
-    0%{
-        content: "N";
-        font-family: $third-font;
-        transform: rotateX(0deg) rotate(0deg);
-    }
-    33.33%{
-        transform: rotateX(85deg) rotate(0deg);
-    }
-    66.66%{
-        transform: rotateX(85deg) rotate(90deg);
-        content: '\f062';
-        font-family: 'FontAwesome'
-    }
+  0%{
+    content: "N";
+    font-family: $third-font;
+    -webkit-transform: rotateX(0deg) rotate(0deg);
+    transform: rotateX(0deg) rotate(0deg);
+  }
 
-    100%{
-        transform: rotateX(0deg) rotate(90deg);
-    }
+  33.33%{
+    -webkit-transform: rotateX(85deg) rotate(0deg);
+    transform: rotateX(85deg) rotate(0deg);
+  }
+
+  66.66%{
+    -webkit-transform: rotateX(85deg) rotate(90deg);
+    transform: rotateX(85deg) rotate(90deg);
+    content: '\f062';
+    font-family: 'FontAwesome'
+  }
+
+  100%{
+    -webkit-transform: rotateX(0deg) rotate(90deg);
+    transform: rotateX(0deg) rotate(90deg);
+  }
 }
-@keyframes animationP {
-    0%{
-        content: "P";
-        font-family: $third-font;
-        transform: rotateX(0deg) rotate(0deg);
-    }
-    33.33%{
-        transform: rotateX(85deg) rotate(0deg);
-    }
-    66.66%{
-        transform: rotateX(85deg) rotate(90deg);
-        content: '\f062';
-        font-family: 'FontAwesome'
-    }
 
-    100%{
-        transform: rotateX(0deg) rotate(90deg);
-    }
+@-webkit-keyframes animationP {
+  0%{
+    content: "P";
+    font-family: $third-font;
+    -webkit-transform: rotateX(0deg) rotate(0deg);
+    transform: rotateX(0deg) rotate(0deg);
+  }
+
+  33.33%{
+    -webkit-transform: rotateX(85deg) rotate(0deg);
+    transform: rotateX(85deg) rotate(0deg);
+  }
+
+  66.66%{
+    -webkit-transform: rotateX(85deg) rotate(90deg);
+    transform: rotateX(85deg) rotate(90deg);
+    content: '\f062';
+    font-family: 'FontAwesome'
+  }
+
+  100%{
+    -webkit-transform: rotateX(0deg) rotate(90deg);
+    transform: rotateX(0deg) rotate(90deg);
+  }
+}
+
+@keyframes animationP {
+  0%{
+    content: "P";
+    font-family: $third-font;
+    -webkit-transform: rotateX(0deg) rotate(0deg);
+    transform: rotateX(0deg) rotate(0deg);
+  }
+
+  33.33%{
+    -webkit-transform: rotateX(85deg) rotate(0deg);
+    transform: rotateX(85deg) rotate(0deg);
+  }
+
+  66.66%{
+    -webkit-transform: rotateX(85deg) rotate(90deg);
+    transform: rotateX(85deg) rotate(90deg);
+    content: '\f062';
+    font-family: 'FontAwesome'
+  }
+
+  100%{
+    -webkit-transform: rotateX(0deg) rotate(90deg);
+    transform: rotateX(0deg) rotate(90deg);
+  }
 }

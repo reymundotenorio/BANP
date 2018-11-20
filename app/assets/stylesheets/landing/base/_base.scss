@@ -16,7 +16,7 @@ h2,
 h3,
 h4,
 h5{
-    font-family: $secondary-font;
+  font-family: $secondary-font;
   color: $primary-color;
   text-transform: none;
 }
@@ -24,13 +24,13 @@ h5{
 // *** Selection behavior ***
 
 ::selection {
- background: $fourth-color;
- color: $white;
+  background: $fourth-color;
+  color: $white;
 }
 
 ::-moz-selection {
- background: $fourth-color;
- color: $white;
+  background: $fourth-color;
+  color: $white;
 }
 
 // *** END OF Selection behavior ****

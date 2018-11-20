@@ -7,32 +7,32 @@ $slow:60s;
 
 
 @mixin trap {
-    top:0;right:0;bottom:0;left:0;
-    content:'';
-    position:absolute;
+  top:0;right:0;bottom:0;left:0;
+  content:'';
+  position:absolute;
 }
 
 .lava-container{
-    position: fixed;
-    pointer-events: none;
+  position: fixed;
+  pointer-events: none;
 }
 
 .mid .wrapper {
-    // width:158px;
-    // height:200px;
-    width:100vw;
-    height:100vh;
-    position:relative;
-    // left:121px;
-    // top:-12px;
+  // width:158px;
+  // height:200px;
+  width:100vw;
+  height:100vh;
+  position:relative;
+  // left:121px;
+  // top:-12px;
 
 }
 .glass {
-    @include trap;
-    // background: darken(hotpink,20%);
-    // transform: perspective(7px) rotateX(1deg);
-    // filter:contrast(18);
-    overflow:hidden;
+  @include trap;
+  // background: darken(hotpink,20%);
+  // transform: perspective(7px) rotateX(1deg);
+  // filter:contrast(18);
+  overflow:hidden;
 }
 
 // .goop {
@@ -46,87 +46,117 @@ $slow:60s;
 //     border-radius:50%;
 //     // filter:blur($lavablur);
 // }
+
 .top-goop {
-    top:-50px;
+  top:-50px;
 }
 .bot-goop {
-    bottom:-50px;
+  bottom:-50px;
 }
 .blob {
-    border-radius:50%;
-    position:absolute;
-    // background:$lavacolor;
-    background: linear-gradient(-60deg, $primary-color, $secondary-color, $third-color, $fourth-color);
-    background-size: 400vh 400vw;
-    background-attachment: fixed;
-    // filter:blur($lavablur);
-    max-width: 500px;
-    max-height: 500px;
-    background-repeat: no-repeat;
+  border-radius:50%;
+  position:absolute;
+  // background:$lavacolor;
+  background: linear-gradient(-60deg, $primary-color, $secondary-color, $third-color, $fourth-color);
+  background-size: 400vh 400vw;
+  background-attachment: fixed;
+  // filter:blur($lavablur);
+  max-width: 500px;
+  max-height: 500px;
+  background-repeat: no-repeat;
 }
 
 @mixin blobanimator ($anim, $dur){
-    animation: $anim $dur infinite ease-in;
+  -webkit-animation: $anim $dur infinite ease-in;
+  animation: $anim $dur infinite ease-in;
 }
 .blob:nth-of-type(1) {
-    height:50.63vw;
-    width:50.63vw;
-    @include blobanimator(from-bottom, $fast);
+  height:50.63vw;
+  width:50.63vw;
+  @include blobanimator(from-bottom, $fast);
 }
 .blob:nth-of-type(2) {
-    width:50.63vw;
-    height:50.63vw;
-    left:31.65vw;
-    @include blobanimator(from-bottom, $med);
-    // animation-delay:1s;
-    bottom:-40px;
+  width:50.63vw;
+  height:50.63vw;
+  left:31.65vw;
+  @include blobanimator(from-bottom, $med);
+  // animation-delay:1s;
+  bottom:-40px;
 }
 .blob:nth-of-type(3){
-    height:44.30vw;
-    width:44.30vw;
-    right:18.98vw;
-    @include blobanimator(from-top, $slow);
-    top:-50.63vw;
+  height:44.30vw;
+  width:44.30vw;
+  right:18.98vw;
+  @include blobanimator(from-top, $slow);
+  top:-50.63vw;
 }
 .blob:nth-of-type(4){
-    height:20.20vw;
-    width:20.20vw;
-    left:31.65vw;
-    @include blobanimator(from-top, $med);
-    top:-50.63vw;
-    animation-delay:3s;
+  height:20.20vw;
+  width:20.20vw;
+  left:31.65vw;
+  @include blobanimator(from-top, $med);
+  top:-50.63vw;
+  -webkit-animation-delay:3s;
+  animation-delay:3s;
 }
 .blob:nth-of-type(5){
-    height:56.96vw;
-    width:56.96vw;
-    left:9.50vw;
-    @include blobanimator(from-bottom, $slow);
+  height:56.96vw;
+  width:56.96vw;
+  left:9.50vw;
+  @include blobanimator(from-bottom, $slow);
+  bottom:-50.63vw;
+  -webkit-animation-delay:3s;
+  animation-delay:3s;
+}
+@-webkit-keyframes from-bottom {
+  0% {
     bottom:-50.63vw;
-    animation-delay:3s;
+    background-position: 0% 50%;
+  }
+  50%{
+    background-position: 100% 50%;
+  }
+  100% {
+    bottom:200vh;
+    background-position: 0% 50%;
+  }
 }
 @keyframes from-bottom {
-    0% {
-        bottom:-50.63vw;
-        background-position: 0% 50%;
-    }
-    50%{
-        background-position: 100% 50%;
-    }
-    100% {
-        bottom:200vh;
-        background-position: 0% 50%;
-    }
+  0% {
+    bottom:-50.63vw;
+    background-position: 0% 50%;
+  }
+  50%{
+    background-position: 100% 50%;
+  }
+  100% {
+    bottom:200vh;
+    background-position: 0% 50%;
+  }
+}
+@-webkit-keyframes from-top {
+  0% {
+    top:-50.63vw;
+    background-position: 0% 50%;
+  }
+  50%{
+    background-position: 100% 50%;
+  }
+  100% {
+    top:200vh;
+    background-position: 0% 50%;
+  }
 }
 @keyframes from-top {
-    0% {
-        top:-50.63vw;
-        background-position: 0% 50%;
-    }
-    50%{
-        background-position: 100% 50%;
-    }
-    100% {
-        top:200vh;
-        background-position: 0% 50%;
-    }
+  0% {
+    top:-50.63vw;
+    background-position: 0% 50%;
+  }
+  50%{
+    background-position: 100% 50%;
+  }
+  100% {
+    top:200vh;
+    background-position: 0% 50%;
+  }
 }

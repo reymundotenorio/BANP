@@ -1,0 +1,107 @@
+%section.panel.how-we-work{"data-section-name": "how-we-work"}
+  .center-content.section-center
+    .container
+      .row
+        .col-xs-12
+          %h2.section-title.text-center.animated.opacity-down{"data-delay": "0", "data-scroll": "auto"} How we work?
+        .col-xs-12.col-sm-10.col-sm-offset-1
+          .text-content.text-center.animated.opacity-up.responsive-element{"data-delay": "0", "data-scroll": "auto"}
+            %p With our new system, you can make your purchases easily and quickly, ensuring that you always get Anywhere, Anytime, fresh produce on time!
+
+        .col-xs-12.col-sm-10.col-sm-offset-1
+          .flow-chart.responsive-element
+            .flow-child.icon-container.icon-1.animated.opacity-up{"data-delay": "0", "data-scroll": "auto"}
+              .order 1
+              .img-container
+                = image_tag "img/icon-user.svg", class: "img-responsive", alt: "User"
+              %p.description.text-center
+                %a{href: "#", title: "Sign up"} Sign up
+                or just
+                %a{href: "#", title: "sign in"} sign in
+                if you already have an account.
+
+            .flow-child.icon-container.icon-2.animated.opacity-up{"data-delay": "0", "data-scroll": "auto"}
+              .order 2
+              .img-container
+                = image_tag "img/icon-select.svg", class: "img-responsive", alt: "Select"
+              %p.description.text-center
+                Select the
+                %a{href: "#", title: "Our Products"} products
+                that you need.
+
+            .flow-child.icon-container.icon-3.animated.opacity-up{"data-delay": "0", "data-scroll": "auto"}
+              .order 3
+              .img-container
+                = image_tag "img/icon-check.svg", class: "img-responsive", alt: "Check"
+              %p.description.text-center
+                Check out your
+                = succeed "." do
+                  %a{href: "#", title: "Checkout"} purchase order
+
+            .flow-child.icon-container.icon-4.animated.opacity-up{"data-delay": "0", "data-scroll": "auto"}
+              .order 4
+              .img-container
+                = image_tag "img/icon-card.svg", class: "img-responsive", alt: "Card"
+              %p.description.text-center
+                Pay your
+                = succeed "." do
+                  %a{href: "#", title: "Checkout"} purchase order
+
+            .flow-child.icon-container.icon-5.animated.opacity-up{"data-delay": "0", "data-scroll": "auto"}
+              .order 5
+              .img-container
+                = image_tag "img/icon-deliver.svg", class: "img-responsive", alt: "Deliver"
+              %p.description.text-center
+                Wait for the delivery.
+
+%section.panel.our-products{"data-section-name": "our-products"}
+  .center-content.section-center
+    .container
+      .row
+        .col-xs-12
+          %h2.section-title.text-center.animated.opacity-up{"data-delay": "0", "data-scroll": "auto"} Our Products
+
+    .container
+      .col-xs-12
+        .all-container
+          .rectangle.hidden-xs.animated.scale{"data-delay": "0", "data-scroll": "auto"}
+          .explosion-container.animated.opacity-down{"data-delay": "500", "data-scroll": "auto"}
+            = image_tag "img/fruits-basket.png", class: "img-responsive", alt: "Fruits Basket"
+
+          .produce-list.visible
+            %p.heading.text-center
+              %a.details.collapsed{"aria-expanded": "false", "data-toggle": "collapse", href: "#products-detail", title: "Details"} Details
+            #products-detail.details-list.collapse
+              .all-contains
+                %h3.text-center.list-title Categories
+                %ul.categories-list
+                  %li
+                    %a{href: "#", title: "Anise"} Anise
+                  %li
+                    %a{href: "#", title: "Apples"} Apples
+                  %li
+                    %a{href: "#", title: "Artichokes"} Artichokes
+                  %li
+                    %a{href: "#", title: "Asparagus"} Asparagus
+                  %li
+                    %a{href: "#", title: "Bananas"} Bananas
+                  %li
+                    %a{href: "#", title: "Beans"} Beans
+                  %li
+                    %a{href: "#", title: "Berries"} Berries
+                  %li
+                    %a{href: "#", title: "Carrots"} Carrots
+                  %li
+                    %a{href: "#", title: "Dried Chiles"} Dried Chiles
+                  %li
+                    %a{href: "#", title: "Fresh Chiles"} Fresh Chiles
+                  %li
+                    %a{href: "#", title: "Lettuce"} Lettuce
+                  %li
+                    %a{href: "#", title: "Asian Specialties"} Asian Specialties
+                  %li
+                    %a{href: "#", title: "Specialty Fruits"} Specialty Fruits
+                  %li
+                    %a{href: "#", title: "Specialty Vegetables"} Specialty Vegetables
+                %p.text-center.view-all-container
+                  %a.view-all{href: "#", title: "View all Products"} View all Products
