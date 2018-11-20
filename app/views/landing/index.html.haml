@@ -3,10 +3,10 @@
     .container
       .row
         .col-xs-12
-          %h2.section-title.text-center.animated.opacity-down{"data-delay": "0", "data-scroll": "auto"} How we work?
+          %h2.section-title.text-center.animated.opacity-down{"data-delay": "0", "data-scroll": "auto"}= t("views.landing.how_we_work")
         .col-xs-12.col-sm-10.col-sm-offset-1
           .text-content.text-center.animated.opacity-up.responsive-element{"data-delay": "0", "data-scroll": "auto"}
-            %p With our new system, you can make your purchases easily and quickly, ensuring that you always get Anywhere, Anytime, fresh produce on time!
+            %p= t("views.landing.how_we_work_description")
 
         .col-xs-12.col-sm-10.col-sm-offset-1
           .flow-chart.responsive-element
@@ -15,51 +15,49 @@
               .img-container
                 = image_tag "img/icon-user.svg", class: "img-responsive", alt: "User"
               %p.description.text-center
-                %a{href: "#", title: "Sign up"} Sign up
-                or just
-                %a{href: "#", title: "sign in"} sign in
-                if you already have an account.
+                %a{href: "#"}= t("views.landing.sign_up")
+                = t("views.landing.or_just")
+                %a{href: "#"}= t("views.landing.sign_in")
+                = t("views.landing.already_account")
 
             .flow-child.icon-container.icon-2.animated.opacity-up{"data-delay": "0", "data-scroll": "auto"}
               .order 2
               .img-container
                 = image_tag "img/icon-select.svg", class: "img-responsive", alt: "Select"
               %p.description.text-center
-                Select the
-                %a{href: "#", title: "Our Products"} products
-                that you need.
+                = t("views.landing.select_the")
+                %a{href: "#"}= t("views.landing.products")
+                = t("views.landing.that_need")
 
             .flow-child.icon-container.icon-3.animated.opacity-up{"data-delay": "0", "data-scroll": "auto"}
               .order 3
               .img-container
                 = image_tag "img/icon-check.svg", class: "img-responsive", alt: "Check"
               %p.description.text-center
-                Check out your
-                = succeed "." do
-                  %a{href: "#", title: "Checkout"} purchase order
+                = t("views.landing.check_out")
+                %a{href: "#"}= t("views.landing.purchase_order")
 
             .flow-child.icon-container.icon-4.animated.opacity-up{"data-delay": "0", "data-scroll": "auto"}
               .order 4
               .img-container
                 = image_tag "img/icon-card.svg", class: "img-responsive", alt: "Card"
               %p.description.text-center
-                Pay your
-                = succeed "." do
-                  %a{href: "#", title: "Checkout"} purchase order
+                = t("views.landing.pay_your")
+                %a{href: "#"}= t("views.landing.purchase_order")
 
             .flow-child.icon-container.icon-5.animated.opacity-up{"data-delay": "0", "data-scroll": "auto"}
               .order 5
               .img-container
                 = image_tag "img/icon-deliver.svg", class: "img-responsive", alt: "Deliver"
               %p.description.text-center
-                Wait for the delivery.
+                = t("views.landing.wait_delivery")
 
 %section.panel.our-products{"data-section-name": "our-products"}
   .center-content.section-center
     .container
       .row
         .col-xs-12
-          %h2.section-title.text-center.animated.opacity-up{"data-delay": "0", "data-scroll": "auto"} Our Products
+          %h2.section-title.text-center.animated.opacity-up{"data-delay": "0", "data-scroll": "auto"}= t("views.landing.our_products")
 
     .container
       .col-xs-12
@@ -70,10 +68,10 @@
 
           .produce-list.visible
             %p.heading.text-center
-              %a.details.collapsed{"aria-expanded": "false", "data-toggle": "collapse", href: "#products-detail", title: "Details"} Details
+              %a.details.collapsed{"aria-expanded": "false", "data-toggle": "collapse", href: "#products-detail"}= t("views.landing.details")
             #products-detail.details-list.collapse
               .all-contains
-                %h3.text-center.list-title Categories
+                %h3.text-center.list-title= t("views.landing.categories")
                 %ul.categories-list
                   %li
                     %a{href: "#", title: "Anise"} Anise
@@ -104,4 +102,4 @@
                   %li
                     %a{href: "#", title: "Specialty Vegetables"} Specialty Vegetables
                 %p.text-center.view-all-container
-                  %a.view-all{href: "#", title: "View all Products"} View all Products
+                  %a.view-all{href: "#"}= t("views.landing.view_all_products")

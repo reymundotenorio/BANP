@@ -22,11 +22,11 @@
           %ul.nav.navbar-nav.animated.opacity-down{"data-delay": "0", "data-scroll": "0"}
             -# Navigation
             %li
-              = link_to "Home", root_path
+              = link_to t("views.navigation.home"), root_path
 
             %li
-              %a{href: "#", target: "", title: "All Products"}
-                All Products
+              %a{href: "#", target: ""}
+                = t("views.navigation.all_products")
 
             -# Render languages
             = render "layouts/languages"
@@ -67,7 +67,7 @@
       .row
         .col-xs-12.col-lg-10.col-lg-offset-1
           %h1.tagline.text-center.animated.opacity-down{"data-delay": "500", "data-scroll": "0"}
-            Anywhere, Anytime, Fresh Produce on time!
+            = t("views.landing.motto")
 
     .container
       .row
@@ -82,6 +82,6 @@
       .row
         .col-xs-12
           .scroll-container.text-center
-            %a.scroll-to{href: "#how-we-work", title: "Scroll down"}
-              %span Scroll down
+            %a.scroll-to{href: "#how-we-work"}
+              %span= t("views.landing.scroll_down")
               %i.fas.fa-chevron-down

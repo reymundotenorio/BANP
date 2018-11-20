@@ -2,7 +2,7 @@ html{
   // width: 100vw;
   // height: 100vh;
   background: linear-gradient(-45deg, $primary-color, $secondary-color, $third-color, $fourth-color);
-  background-size: 400vw 400vh;
+  background-size: 400% 400%;
   -webkit-animation: Gradient 45s ease infinite;
   animation: Gradient 45s ease infinite;
   background-attachment: fixed;

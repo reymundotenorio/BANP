@@ -225,6 +225,46 @@ en:
       update_password: "Update password"
       requested_info: "The instructions were requested from the IP %{ip} with location in %{location}"
       token_expiration: "This link will be available for %{expiration_time} hours. If you did not request to reset your password, then you can just ignore this email; your password will not be change."
+    navigation:
+      home: "Home"
+      all_products: "All Products"
+      language: "Language"
+      user: "User"
+    cart:
+      cart: "Cart"
+      checkout: "Checkout"
+      clear_cart: "Clear cart"
+    landing:
+      motto: "Anywhere, Anytime, Fresh Produce on time!"
+      search_products: "Search Products"
+      scroll_down: "Scroll Down"
+      search: "Search"
+      how_we_work: "How do we work?"
+      our_products: "Our Products"
+      contanct_us: "Contact Us"
+      how_we_work: "How do we work?"
+      how_we_work_description: "With our new system, you can make your purchases easily and quickly, ensuring that you always get Anywhere, Anytime, fresh produce on time!"
+      sign_up: "Sign up"
+      or_just: "or just"
+      sign_in: "sign in"
+      already_account: "if you already have an account"
+      select_the: "Select the"
+      products: "products"
+      that_need: "that you need"
+      check_out: "Check out your"
+      purchase_order: "purchase order"
+      pay_your: "Pay your"
+      wait_delivery: "Wait for the delivery"
+      details: "Details"
+      categories: "Categories"
+      view_all_products: "View all Products"
+      contact_us: "Contact Us"
+      contact_us_description: "We carry everything you need, just get in touch with us"
+      is_located: "Better and Nice Produce is located at 1625 NW 20th Street Miami, Florida 33142"
+      designed_developed: "Designed and developed with"
+      by: "by"
+
+
 
 
 # Rails Default

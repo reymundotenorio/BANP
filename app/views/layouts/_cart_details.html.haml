@@ -1,15 +1,15 @@
 %ul.dropdown-menu
   %li
-    %a.resume{href: "#", title: "View cart"}
+    %a.resume{href: "#"}
       %span.quantity
         Products (1)
       %span.amount
         $123.00
   %li
-    %a.check-out{href: "#", title: "Proceed to Checkout"}
+    %a.check-out{href: "#"}
       %i.fas.fa-check-circle
-      Checkout
+      = t("views.cart.checkout")
   %li
-    %a.check-out{href: "#", title: "Clear cart"}
+    %a.check-out{href: "#"}
       %i.fas.fa-times-circle
-      Clear cart
+      = t("views.cart.clear_cart")

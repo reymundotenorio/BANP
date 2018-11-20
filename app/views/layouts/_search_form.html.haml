@@ -3,7 +3,7 @@
     %input{required: "required", type: "text"}/
     %span.highlight
     %span.bar
-    %label Search Products
-  %button{name: "Search", type: "button"}
-    %span.sr-only Search
+    %label= t("views.landing.search_products")
+  %button{name: "#{t('views.landing.search')}", type: "button"}
+    %span.sr-only= t("views.landing.search")
     %i.fas.fa-search

@@ -1,23 +1,23 @@
 %ul.pagination.pagination-desktop.hidden-xs.hidden-sm.hidden-md
   %li
-    %a.active{href: "#search"} Search
+    %a.active{href: "#search", target: "_self"}= t("views.landing.search")
   %li
-    %a{href: "#how-we-work"} How we work
+    %a{href: "#how-we-work", target: "_self"}= t("views.landing.how_we_work")
   %li
-    %a{href: "#our-products"} Our Products
+    %a{href: "#our-products", target: "_self"}= t("views.landing.our_products")
   %li
-    %a{href: "#contact-us"} Contact Us
+    %a{href: "#contact-us", target: "_self"}= t("views.landing.contanct_us")
 
 %ul.pagination.pagination-mobile.hidden-xs.hidden-lg
   %li
-    %a.active{href: "#search"}
+    %a.active{href: "#search", target: "_self"}
       .tomato
   %li
-    %a{href: "#how-we-work"}
+    %a{href: "#how-we-work", target: "_self"}
       .tomato
   %li
-    %a{href: "#our-products"}
+    %a{href: "#our-products", target: "_self"}
       .tomato
   %li
-    %a{href: "#contact-us"}
+    %a{href: "#contact-us", target: "_self"}
       .tomato

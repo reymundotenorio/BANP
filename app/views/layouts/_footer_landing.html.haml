@@ -3,11 +3,11 @@
     .container
       .row
         .col-xs-12
-          %h2.section-title.text-center.animated.opacity-down{"data-delay": "0", "data-scroll": "auto"} Contact Us
+          %h2.section-title.text-center.animated.opacity-down{"data-delay": "0", "data-scroll": "auto"}= t("views.landing.contact_us")
 
         .col-xs-12.col-sm-10.col-sm-offset-1
           .text-content.text-center.animated.opacity-up.responsive-element{"data-delay": "0", "data-scroll": "auto"}
-            %p We carry everything you need, just get in touch with us.
+            %p= t("views.landing.contact_us_description")
 
     .contact-information
       .container
@@ -16,27 +16,27 @@
             .social.animated.opacity-right{"data-delay": "0", "data-scroll": "auto"}
               %ul.social-list.list-inline.text-center
                 %li
-                  %a.fb{href: "#", target: "_blank", title: "Facebook"}
+                  %a.fb{href: "#", target: "_blank"}
                     %i.fab.fa-facebook-f
                 %li
-                  %a.tw{href: "#", target: "_blank", title: "Twitter"}
+                  %a.tw{href: "#", target: "_blank"}
                     %i.fab.fa-twitter
                 %li
-                  %a.in{href: "#", target: "_blank", title: "LinkedIn"}
+                  %a.in{href: "#", target: "_blank"}
                     %i.fab.fa-linkedin-in
                 %li
-                  %a.ig{href: "#", target: "_blank", title: "Instagram"}
+                  %a.ig{href: "#", target: "_blank"}
                     %i.fab.fa-instagram
             .phone
               %p.text-center
-                %a{href: "tel:+3055573700", title: "305-557-3700"} 305-557-3700
+                %a{href: "tel:+3055573700"} 305-557-3700
 
           .col-xs-12.col-sm-6.col-md-5.col-lg-4
             .map-container.animated.opacity{"data-delay": "0", "data-scroll": "auto"}
               #map
                 %iframe{allowfullscreen: "", frameborder: "0", height: "100%", src: "https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d3592.253194827384!2d-80.2243425!3d25.7952197!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x88d9b6d013855555%3A0x5800069f097d91d!2sBetter+and+Nice+Produce+Corp!5e0!3m2!1ses-419!2sni!4v1538183044678", width: "100%"}
               %p.text-center
-                Better and Nice Produce is located at 1625 NW 20th Street Miami, Florida 33142
+                = t("views.landing.is_located")
 
   %footer
     #footer.last-information
@@ -48,6 +48,7 @@
               = image_tag "img/usda-organic-mobile.png", class: "img-responsive visible-xs", alt: "USDA Organic"
               © 2018 Better and Nice Produce Corp.
               %span
-                Designed and developed with
+                = t("views.landing.designed_developed")
                 %i.fas.fa-heart
-                by Tenorio, Domínguez and Sánchez.
+                = t("views.landing.by")
+                Tenorio, Domínguez and Sánchez.
