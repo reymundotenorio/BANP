@@ -73,33 +73,13 @@
               .all-contains
                 %h3.text-center.list-title= t("views.landing.categories")
                 %ul.categories-list
-                  %li
-                    %a{href: "#", title: "Anise"} Anise
-                  %li
-                    %a{href: "#", title: "Apples"} Apples
-                  %li
-                    %a{href: "#", title: "Artichokes"} Artichokes
-                  %li
-                    %a{href: "#", title: "Asparagus"} Asparagus
-                  %li
-                    %a{href: "#", title: "Bananas"} Bananas
-                  %li
-                    %a{href: "#", title: "Beans"} Beans
-                  %li
-                    %a{href: "#", title: "Berries"} Berries
-                  %li
-                    %a{href: "#", title: "Carrots"} Carrots
-                  %li
-                    %a{href: "#", title: "Dried Chiles"} Dried Chiles
-                  %li
-                    %a{href: "#", title: "Fresh Chiles"} Fresh Chiles
-                  %li
-                    %a{href: "#", title: "Lettuce"} Lettuce
-                  %li
-                    %a{href: "#", title: "Asian Specialties"} Asian Specialties
-                  %li
-                    %a{href: "#", title: "Specialty Fruits"} Specialty Fruits
-                  %li
-                    %a{href: "#", title: "Specialty Vegetables"} Specialty Vegetables
+                  - @categories.each do |category|
+                    %li
+                      - if I18n.locale == :es
+                        = link_to category.name_spanish, admin_category_path(category)
+                        
+                      - else
+                        = link_to category.name, admin_category_path(category)
+                        
                 %p.text-center.view-all-container
                   %a.view-all{href: "#"}= t("views.landing.view_all_products")
