@@ -76,10 +76,10 @@
                   - @categories.each do |category|
                     %li
                       - if I18n.locale == :es
-                        = link_to category.name_spanish, admin_category_path(category)
-                        
+                        = link_to category.name_spanish, products_path(category: category.slug)
+
                       - else
-                        = link_to category.name, admin_category_path(category)
-                        
+                        = link_to category.name, products_path(category: category.slug)
+
                 %p.text-center.view-all-container
                   %a.view-all{href: "#"}= t("views.landing.view_all_products")
