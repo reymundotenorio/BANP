@@ -42,28 +42,29 @@
 
         .col-xs-12.col-md-8.col-lg-9
           .cards-parent
-            .card
-              .card-image
-                %img.img-responsive{alt: "Baby Fennel", src: "https://s3.amazonaws.com/betterandnice/images/default/product-default.png"}/
-                .overlay
-                  %form.link-container.text-center{action: "index.html", method: "post"}
-                    .quantity
-                      %button.subtract{name: "minus", type: "button"}
-                        %span.sr-only minus
-                        %i.fas.fa-minus
-                      %input{name: "quant-prod", type: "number", value: "1"}/
-                      %button.add{name: "plus", type: "button"}
-                        %span.sr-only plus
-                        %i.fas.fa-plus
-                    %button.btn.btn-general.add-btn{name: "add", title: "Add to cart", type: "button"} Add to cart
-                .stock
-                  %p.no-margin Out of Stock
-              .card-body
-                %p.name.aligned-text
-                  %a{href: "#", title: "Baby Fennel"} Baby Fennel
-                %p.price.aligned-text
-                  $50.00
-                  %span.unit Per box.
+            - @products.each do |product|
+              .card
+                .card-image
+                  %img.img-responsive{alt: "#{I18n.locale == :es ? product.name_spanish : product.name}", src: "https://s3.amazonaws.com/betterandnice/images/default/product-default.png"}/
+                  .overlay
+                    %form.link-container.text-center{action: "index.html", method: "post"}
+                      .quantity
+                        %button.subtract{name: "minus", type: "button"}
+                          %span.sr-only minus
+                          %i.fas.fa-minus
+                        %input{name: "quant-prod", type: "number", value: "1"}/
+                        %button.add{name: "plus", type: "button"}
+                          %span.sr-only plus
+                          %i.fas.fa-plus
+                      %button.btn.btn-general.add-btn{name: "add", title: "Add to cart", type: "button"} Add to cart
+                  .stock
+                    %p.no-margin Out of Stock
+                .card-body
+                  %p.name.aligned-text
+                    %a{href: "#"}= I18n.locale == :es ? product.name_spanish : product.name
+                  %p.price.aligned-text
+                    = number_to_currency(product.price, precision: 2, unit: "$", separator: ".", delimiter: ",")
+                    %span.unit Per box.
       .row
         .col-xs-12.col-md-8.col-md-offset-4.col-lg-9.col-lg-offset-3
           .pagination-container

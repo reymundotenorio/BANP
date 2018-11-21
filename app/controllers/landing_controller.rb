@@ -4,6 +4,6 @@ class LandingController < ApplicationController
   # End Landing layout
 
   def index
-  @categories = Category.all
+  @categories = Category.enabled
   end
 end

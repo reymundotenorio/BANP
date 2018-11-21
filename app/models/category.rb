@@ -13,12 +13,12 @@ class Category < ApplicationRecord
   # Search
   def self.search(search, show_all)
     if search
-
       if show_all == "enabled-only"
         query = "(name LIKE :search OR name_spanish LIKE :search OR description LIKE :search OR description_spanish LIKE :search) AND (state = true)"
-    else
-      query = "(name LIKE :search OR name_spanish LIKE :search OR description LIKE :search OR description_spanish LIKE :search)"
-    end
+
+      else
+        query = "(name LIKE :search OR name_spanish LIKE :search OR description LIKE :search OR description_spanish LIKE :search)"
+      end
 
       where(query, search: "%#{search}%")
 

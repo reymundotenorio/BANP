@@ -13,7 +13,13 @@ class Product < ApplicationRecord
   # Search
   def self.search(search, show_all)
     if search
-      query = "(name LIKE :search OR description LIKE :search)"
+      if show_all == "enabled-only"
+        query = "(name LIKE :search OR name_spanish LIKE :search OR description LIKE :search OR description_spanish LIKE :search) AND (state = true)"
+
+      else
+        query = "(name LIKE :search OR name_spanish LIKE :search OR description LIKE :search OR description_spanish LIKE :search)"
+      end
+
       where(query, search: "%#{search}%")
 
     elsif show_all == "all"
@@ -24,6 +30,10 @@ class Product < ApplicationRecord
     end
   end
   # End Search
+
+  def self.find_category(category_slug)
+    Product.joins(:category).where(categories: { slug: category_slug }).group(:id)
+  end
 
   ## Friendly_ID
 
