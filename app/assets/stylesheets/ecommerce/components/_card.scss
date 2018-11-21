@@ -1,56 +1,56 @@
 .jp-card.jp-card-safari.jp-card-identified .jp-card-front:before,
-.jp-card.jp-card-safari.jp-card-identified .jp-card-back:before {
+.jp-card.jp-card-safari.jp-card-identified .jp-card-back:before{
   background-image: repeating-linear-gradient(45deg, rgba(255, 255, 255, 0) 1px, rgba(255, 255, 255, 0.03) 2px, rgba(255, 255, 255, 0.04) 3px, rgba(255, 255, 255, 0.05) 4px), repeating-linear-gradient(135deg, rgba(255, 255, 255, 0.05) 1px, rgba(255, 255, 255, 0) 2px, rgba(255, 255, 255, 0.04) 3px, rgba(255, 255, 255, 0.03) 4px), repeating-linear-gradient(90deg, rgba(255, 255, 255, 0) 1px, rgba(255, 255, 255, 0.03) 2px, rgba(255, 255, 255, 0.04) 3px, rgba(255, 255, 255, 0.05) 4px), repeating-linear-gradient(210deg, rgba(255, 255, 255, 0) 1px, rgba(255, 255, 255, 0.03) 2px, rgba(255, 255, 255, 0.04) 3px, rgba(255, 255, 255, 0.05) 4px), linear-gradient(-25deg, rgba(255, 255, 255, 0) 50%, rgba(255, 255, 255, 0.2) 70%, rgba(255, 255, 255, 0) 90%)
 }
 
 .jp-card.jp-card-ie-10.jp-card-flipped,
-.jp-card.jp-card-ie-11.jp-card-flipped {
+.jp-card.jp-card-ie-11.jp-card-flipped{
   -webkit-transform: 0deg;
   transform: 0deg
 }
 
 .jp-card.jp-card-ie-10.jp-card-flipped .jp-card-front,
-.jp-card.jp-card-ie-11.jp-card-flipped .jp-card-front {
+.jp-card.jp-card-ie-11.jp-card-flipped .jp-card-front{
   -webkit-transform: rotateY(0deg);
   transform: rotateY(0deg)
 }
 
 .jp-card.jp-card-ie-10.jp-card-flipped .jp-card-back,
-.jp-card.jp-card-ie-11.jp-card-flipped .jp-card-back {
+.jp-card.jp-card-ie-11.jp-card-flipped .jp-card-back{
   -webkit-transform: rotateY(0deg);
   transform: rotateY(0deg)
 }
 
 .jp-card.jp-card-ie-10.jp-card-flipped .jp-card-back:after,
-.jp-card.jp-card-ie-11.jp-card-flipped .jp-card-back:after {
+.jp-card.jp-card-ie-11.jp-card-flipped .jp-card-back:after{
   left: 18%
 }
 
 .jp-card.jp-card-ie-10.jp-card-flipped .jp-card-back .jp-card-cvc,
-.jp-card.jp-card-ie-11.jp-card-flipped .jp-card-back .jp-card-cvc {
+.jp-card.jp-card-ie-11.jp-card-flipped .jp-card-back .jp-card-cvc{
   -webkit-transform: rotateY(180deg);
   transform: rotateY(180deg);
   left: 5%
 }
 
 .jp-card.jp-card-ie-10.jp-card-flipped .jp-card-back .jp-card-shiny,
-.jp-card.jp-card-ie-11.jp-card-flipped .jp-card-back .jp-card-shiny {
+.jp-card.jp-card-ie-11.jp-card-flipped .jp-card-back .jp-card-shiny{
   left: 84%
 }
 
 .jp-card.jp-card-ie-10.jp-card-flipped .jp-card-back .jp-card-shiny:after,
-.jp-card.jp-card-ie-11.jp-card-flipped .jp-card-back .jp-card-shiny:after {
+.jp-card.jp-card-ie-11.jp-card-flipped .jp-card-back .jp-card-shiny:after{
   left: -480%;
   -webkit-transform: rotateY(180deg);
   transform: rotateY(180deg)
 }
 
 .jp-card.jp-card-ie-10.jp-card-amex .jp-card-back,
-.jp-card.jp-card-ie-11.jp-card-amex .jp-card-back {
+.jp-card.jp-card-ie-11.jp-card-amex .jp-card-back{
   display: none
 }
 
-.jp-card-logo {
+.jp-card-logo{
   height: 36px;
   width: 60px;
   font-style: italic
@@ -58,12 +58,12 @@
 
 .jp-card-logo,
 .jp-card-logo:before,
-.jp-card-logo:after {
+.jp-card-logo:after{
   -webkit-box-sizing: border-box;
   box-sizing: border-box
 }
 
-.jp-card-logo.jp-card-amex {
+.jp-card-logo.jp-card-amex{
   text-transform: uppercase;
   font-size: 4px;
   font-weight: bold;
@@ -74,14 +74,14 @@
 }
 
 .jp-card-logo.jp-card-amex:before,
-.jp-card-logo.jp-card-amex:after {
+.jp-card-logo.jp-card-amex:after{
   width: 28px;
   display: block;
   position: absolute;
   left: 16px
 }
 
-.jp-card-logo.jp-card-amex:before {
+.jp-card-logo.jp-card-amex:before{
   height: 28px;
   content: "american";
   top: 3px;
@@ -91,37 +91,37 @@
   background: #267AC3
 }
 
-.jp-card-logo.jp-card-amex:after {
+.jp-card-logo.jp-card-amex:after{
   content: "express";
   bottom: 11px;
   text-align: right;
   padding-right: 2px
 }
 
-.jp-card.jp-card-amex.jp-card-flipped {
+.jp-card.jp-card-amex.jp-card-flipped{
   -webkit-transform: none;
   transform: none
 }
 
 .jp-card.jp-card-amex.jp-card-identified .jp-card-front:before,
-.jp-card.jp-card-amex.jp-card-identified .jp-card-back:before {
+.jp-card.jp-card-amex.jp-card-identified .jp-card-back:before{
   // background-color: #108168;
   background: linear-gradient(45deg, #9f7928, #D1B464)
 }
 
-.jp-card.jp-card-amex.jp-card-identified .jp-card-front .jp-card-logo.jp-card-amex {
+.jp-card.jp-card-amex.jp-card-identified .jp-card-front .jp-card-logo.jp-card-amex{
   opacity: 1
 }
 
-.jp-card.jp-card-amex.jp-card-identified .jp-card-front .jp-card-cvc {
+.jp-card.jp-card-amex.jp-card-identified .jp-card-front .jp-card-cvc{
   visibility: visible
 }
 
-.jp-card.jp-card-amex.jp-card-identified .jp-card-front:after {
+.jp-card.jp-card-amex.jp-card-identified .jp-card-front:after{
   opacity: 1
 }
 
-.jp-card-logo.jp-card-discover {
+.jp-card-logo.jp-card-discover{
   background: #f60;
   color: #111;
   text-transform: uppercase;
@@ -137,13 +137,13 @@
 }
 
 .jp-card-logo.jp-card-discover:before,
-.jp-card-logo.jp-card-discover:after {
+.jp-card-logo.jp-card-discover:after{
   content: " ";
   display: block;
   position: absolute
 }
 
-.jp-card-logo.jp-card-discover:before {
+.jp-card-logo.jp-card-discover:before{
   background: white;
   width: 200px;
   height: 200px;
@@ -153,7 +153,7 @@
   z-index: -1
 }
 
-.jp-card-logo.jp-card-discover:after {
+.jp-card-logo.jp-card-discover:after{
   width: 8px;
   height: 8px;
   border-radius: 4px;
@@ -167,22 +167,22 @@
   text-indent: -7px
 }
 
-.jp-card .jp-card-front .jp-card-logo.jp-card-discover {
+.jp-card .jp-card-front .jp-card-logo.jp-card-discover{
   right: 12%;
   top: 18%
 }
 
 .jp-card.jp-card-discover.jp-card-identified .jp-card-front:before,
-.jp-card.jp-card-discover.jp-card-identified .jp-card-back:before {
+.jp-card.jp-card-discover.jp-card-identified .jp-card-back:before{
 
   background: linear-gradient(315deg, #63a4ff 0%, #83eaf1 74%);
 }
 
-.jp-card.jp-card-discover.jp-card-identified .jp-card-logo.jp-card-discover {
+.jp-card.jp-card-discover.jp-card-identified .jp-card-logo.jp-card-discover{
   opacity: 1
 }
 
-.jp-card.jp-card-discover.jp-card-identified .jp-card-front:after {
+.jp-card.jp-card-discover.jp-card-identified .jp-card-front:after{
   -webkit-transition: 400ms;
   transition: 400ms;
   content: " ";
@@ -201,7 +201,7 @@
   box-shadow: inset 1px 1px 3px 1px rgba(0, 0, 0, 0.5)
 }
 
-.jp-card-logo.jp-card-visa {
+.jp-card-logo.jp-card-visa{
   text-transform: uppercase;
   color: white;
   text-align: center;
@@ -212,14 +212,14 @@
 }
 
 .jp-card-logo.jp-card-visa:before,
-.jp-card-logo.jp-card-visa:after {
+.jp-card-logo.jp-card-visa:after{
   content: " ";
   display: block;
   width: 100%;
   height: 25%
 }
 
-.jp-card-logo.jp-card-visa:before {
+.jp-card-logo.jp-card-visa:before{
   position: absolute;
   left: -4px;
   width: 0;
@@ -230,17 +230,17 @@
 }
 
 .jp-card.jp-card-visa.jp-card-identified .jp-card-front:before,
-.jp-card.jp-card-visa.jp-card-identified .jp-card-back:before {
+.jp-card.jp-card-visa.jp-card-identified .jp-card-back:before{
   background: linear-gradient(315deg, #08e1ae 0%, #98de5b 74%);
 }
 
-.jp-card.jp-card-visa.jp-card-identified .jp-card-logo.jp-card-visa {
+.jp-card.jp-card-visa.jp-card-identified .jp-card-logo.jp-card-visa{
   opacity: 1;
   -webkit-box-shadow: none;
   box-shadow: none
 }
 
-.jp-card-logo.jp-card-visaelectron {
+.jp-card-logo.jp-card-visaelectron{
   background: white;
   text-transform: uppercase;
   color: #1A1876;
@@ -251,22 +251,22 @@
 }
 
 .jp-card-logo.jp-card-visaelectron:before,
-.jp-card-logo.jp-card-visaelectron:after {
+.jp-card-logo.jp-card-visaelectron:after{
   content: " ";
   display: block;
   width: 100%;
   height: 25%
 }
 
-.jp-card-logo.jp-card-visaelectron:before {
+.jp-card-logo.jp-card-visaelectron:before{
   background: #1A1876
 }
 
-.jp-card-logo.jp-card-visaelectron:after {
+.jp-card-logo.jp-card-visaelectron:after{
   background: #E79800
 }
 
-.jp-card-logo.jp-card-visaelectron .elec {
+.jp-card-logo.jp-card-visaelectron .elec{
   float: right;
   font-family: arial;
   font-size: 9px;
@@ -276,15 +276,15 @@
 }
 
 .jp-card.jp-card-visaelectron.jp-card-identified .jp-card-front:before,
-.jp-card.jp-card-visaelectron.jp-card-identified .jp-card-back:before {
+.jp-card.jp-card-visaelectron.jp-card-identified .jp-card-back:before{
   background: linear-gradient(315deg, #f977ce 0%, #c373f2 74%);
 }
 
-.jp-card.jp-card-visaelectron.jp-card-identified .jp-card-logo.jp-card-visaelectron {
+.jp-card.jp-card-visaelectron.jp-card-identified .jp-card-logo.jp-card-visaelectron{
   opacity: 1
 }
 
-.jp-card-logo.jp-card-mastercard {
+.jp-card-logo.jp-card-mastercard{
   color: white;
   font-style: normal;
   text-transform: lowercase;
@@ -297,7 +297,7 @@
 }
 
 .jp-card-logo.jp-card-mastercard:before,
-.jp-card-logo.jp-card-mastercard:after {
+.jp-card-logo.jp-card-mastercard:after{
   content: " ";
   display: block;
   width: 36px;
@@ -307,36 +307,36 @@
   border-radius: 18px
 }
 
-.jp-card-logo.jp-card-mastercard:before {
+.jp-card-logo.jp-card-mastercard:before{
   left: 0;
   background: #EB001B;
   z-index: -1;
   opacity: 0.9
 }
 
-.jp-card-logo.jp-card-mastercard:after {
+.jp-card-logo.jp-card-mastercard:after{
   right: 0;
   background: #FF5F00;
   z-index: -2
 }
 
 .jp-card.jp-card-mastercard.jp-card-identified .jp-card-front .jp-card-logo.jp-card-mastercard,
-.jp-card.jp-card-mastercard.jp-card-identified .jp-card-back .jp-card-logo.jp-card-mastercard {
+.jp-card.jp-card-mastercard.jp-card-identified .jp-card-back .jp-card-logo.jp-card-mastercard{
   -webkit-box-shadow: none;
   box-shadow: none
 }
 
 .jp-card.jp-card-mastercard.jp-card-identified .jp-card-front:before,
-.jp-card.jp-card-mastercard.jp-card-identified .jp-card-back:before {
+.jp-card.jp-card-mastercard.jp-card-identified .jp-card-back:before{
   background: linear-gradient(315deg, #1fd1f9 0%, #b621fe 74%);
 
 }
 
-.jp-card.jp-card-mastercard.jp-card-identified .jp-card-logo.jp-card-mastercard {
+.jp-card.jp-card-mastercard.jp-card-identified .jp-card-logo.jp-card-mastercard{
   opacity: 1
 }
 
-.jp-card-logo.jp-card-maestro {
+.jp-card-logo.jp-card-maestro{
   color: white;
   font-style: normal;
   text-transform: lowercase;
@@ -349,7 +349,7 @@
 }
 
 .jp-card-logo.jp-card-maestro:before,
-.jp-card-logo.jp-card-maestro:after {
+.jp-card-logo.jp-card-maestro:after{
   content: " ";
   display: block;
   width: 36px;
@@ -359,13 +359,13 @@
   border-radius: 18px
 }
 
-.jp-card-logo.jp-card-maestro:before {
+.jp-card-logo.jp-card-maestro:before{
   left: 0;
   background: #EB001B;
   z-index: -2
 }
 
-.jp-card-logo.jp-card-maestro:after {
+.jp-card-logo.jp-card-maestro:after{
   right: 0;
   background: #00A2E5;
   z-index: -1;
@@ -373,21 +373,21 @@
 }
 
 .jp-card.jp-card-maestro.jp-card-identified .jp-card-front .jp-card-logo.jp-card-maestro,
-.jp-card.jp-card-maestro.jp-card-identified .jp-card-back .jp-card-logo.jp-card-maestro {
+.jp-card.jp-card-maestro.jp-card-identified .jp-card-back .jp-card-logo.jp-card-maestro{
   -webkit-box-shadow: none;
   box-shadow: none
 }
 
 .jp-card.jp-card-maestro.jp-card-identified .jp-card-front:before,
-.jp-card.jp-card-maestro.jp-card-identified .jp-card-back:before {
+.jp-card.jp-card-maestro.jp-card-identified .jp-card-back:before{
   background: linear-gradient(315deg, #7f53ac 0%, #647dee 74%);
 }
 
-.jp-card.jp-card-maestro.jp-card-identified .jp-card-logo.jp-card-maestro {
+.jp-card.jp-card-maestro.jp-card-identified .jp-card-logo.jp-card-maestro{
   opacity: 1
 }
 
-.jp-card-logo.jp-card-dankort {
+.jp-card-logo.jp-card-dankort{
   width: 60px;
   height: 36px;
   padding: 3px;
@@ -396,16 +396,16 @@
   background-color: #fff
 }
 
-.jp-card-logo.jp-card-dankort .dk {
+.jp-card-logo.jp-card-dankort .dk{
   position: relative;
   width: 100%;
   height: 100%;
   overflow: hidden
 }
 
-.jp-card-logo.jp-card-dankort .dk:before {
+.jp-card-logo.jp-card-dankort .dk:before{
   background-color: #ED1C24;
-  content: '';
+  content: "";
   position: absolute;
   width: 100%;
   height: 100%;
@@ -413,8 +413,8 @@
   border-radius: 6px
 }
 
-.jp-card-logo.jp-card-dankort .dk:after {
-  content: '';
+.jp-card-logo.jp-card-dankort .dk:after{
+  content: "";
   position: absolute;
   top: 50%;
   margin-top: -7.7px;
@@ -428,7 +428,7 @@
 }
 
 .jp-card-logo.jp-card-dankort .d,
-.jp-card-logo.jp-card-dankort .k {
+.jp-card-logo.jp-card-dankort .k{
   position: absolute;
   top: 50%;
   width: 50%;
@@ -438,13 +438,13 @@
   background: white
 }
 
-.jp-card-logo.jp-card-dankort .d {
+.jp-card-logo.jp-card-dankort .d{
   left: 0;
   border-radius: 0 8px 10px 0
 }
 
-.jp-card-logo.jp-card-dankort .d:before {
-  content: '';
+.jp-card-logo.jp-card-dankort .d:before{
+  content: "";
   position: absolute;
   top: 50%;
   left: 50%;
@@ -456,13 +456,13 @@
   margin: -3px 0 0 -4px
 }
 
-.jp-card-logo.jp-card-dankort .k {
+.jp-card-logo.jp-card-dankort .k{
   right: 0
 }
 
 .jp-card-logo.jp-card-dankort .k:before,
-.jp-card-logo.jp-card-dankort .k:after {
-  content: '';
+.jp-card-logo.jp-card-dankort .k:after{
+  content: "";
   position: absolute;
   right: 50%;
   width: 0;
@@ -471,28 +471,28 @@
   margin-right: -1px
 }
 
-.jp-card-logo.jp-card-dankort .k:before {
+.jp-card-logo.jp-card-dankort .k:before{
   top: 0;
   border-width: 8px 5px 0 0;
   border-color: #ED1C24 transparent transparent transparent
 }
 
-.jp-card-logo.jp-card-dankort .k:after {
+.jp-card-logo.jp-card-dankort .k:after{
   bottom: 0;
   border-width: 0 5px 8px 0;
   border-color: transparent transparent #ED1C24 transparent
 }
 
 .jp-card.jp-card-dankort.jp-card-identified .jp-card-front:before,
-.jp-card.jp-card-dankort.jp-card-identified .jp-card-back:before {
+.jp-card.jp-card-dankort.jp-card-identified .jp-card-back:before{
   background: linear-gradient(45deg, #C39191, #D5B2B2);
 }
 
-.jp-card.jp-card-dankort.jp-card-identified .jp-card-logo.jp-card-dankort {
+.jp-card.jp-card-dankort.jp-card-identified .jp-card-logo.jp-card-dankort{
   opacity: 1
 }
 
-.jp-card-logo.jp-card-elo {
+.jp-card-logo.jp-card-elo{
   height: 50px;
   width: 50px;
   border-radius: 100%;
@@ -509,17 +509,17 @@
 
 .jp-card-logo.jp-card-elo .e,
 .jp-card-logo.jp-card-elo .l,
-.jp-card-logo.jp-card-elo .o {
+.jp-card-logo.jp-card-elo .o{
   display: inline-block;
   position: relative
 }
 
-.jp-card-logo.jp-card-elo .e {
+.jp-card-logo.jp-card-elo .e{
   -webkit-transform: rotate(-15deg);
   transform: rotate(-15deg)
 }
 
-.jp-card-logo.jp-card-elo .o {
+.jp-card-logo.jp-card-elo .o{
   position: relative;
   display: inline-block;
   width: 12px;
@@ -534,7 +534,7 @@
   text-indent: -9999px
 }
 
-.jp-card-logo.jp-card-elo .o:before {
+.jp-card-logo.jp-card-elo .o:before{
   content: "";
   position: absolute;
   width: 49%;
@@ -547,15 +547,15 @@
 }
 
 .jp-card.jp-card-elo.jp-card-identified .jp-card-front:before,
-.jp-card.jp-card-elo.jp-card-identified .jp-card-back:before {
+.jp-card.jp-card-elo.jp-card-identified .jp-card-back:before{
   background: linear-gradient(147deg, #000000 0%, #434343 74%);
 }
 
-.jp-card.jp-card-elo.jp-card-identified .jp-card-logo.jp-card-elo {
+.jp-card.jp-card-elo.jp-card-identified .jp-card-logo.jp-card-elo{
   opacity: 1
 }
 
-.jp-card-logo.jp-card-jcb {
+.jp-card-logo.jp-card-jcb{
   border-radius: 5px 0px 5px 0px;
   -moz-border-radius: 5px 0px 5px 0px;
   -webkit-border-radius: 5px 0px 5px 0px;
@@ -566,7 +566,7 @@
   padding: 2px 0 0 2px
 }
 
-.jp-card-logo.jp-card-jcb>div {
+.jp-card-logo.jp-card-jcb>div{
   width: 15px;
   margin-right: 1px;
   display: inline-block;
@@ -578,42 +578,42 @@
 }
 
 .jp-card-logo.jp-card-jcb>div:before,
-.jp-card-logo.jp-card-jcb>div:after {
+.jp-card-logo.jp-card-jcb>div:after{
   content: " ";
   display: block;
   height: 8px
 }
 
-.jp-card-logo.jp-card-jcb>div.j {
+.jp-card-logo.jp-card-jcb>div.j{
   background-color: #000063;
   background-image: -webkit-gradient(linear, left top, right top, from(#000063), to(#008cff));
   background-image: linear-gradient(to right, #000063, #008cff)
 }
 
-.jp-card-logo.jp-card-jcb>div.c {
+.jp-card-logo.jp-card-jcb>div.c{
   background-color: #630000;
   background-image: -webkit-gradient(linear, left top, right top, from(#630000), to(#ff008d));
   background-image: linear-gradient(to right, #630000, #ff008d)
 }
 
-.jp-card-logo.jp-card-jcb>div.b {
+.jp-card-logo.jp-card-jcb>div.b{
   background-color: #006300;
   background-image: -webkit-gradient(linear, left top, right top, from(#006300), to(lime));
   background-image: linear-gradient(to right, #006300, lime)
 }
 
 .jp-card.jp-card-jcb.jp-card-identified .jp-card-front:before,
-.jp-card.jp-card-jcb.jp-card-identified .jp-card-back:before {
+.jp-card.jp-card-jcb.jp-card-identified .jp-card-back:before{
   background: linear-gradient(315deg, #045de9 0%, #09c6f9 74%);
 }
 
-.jp-card.jp-card-jcb.jp-card-identified .jp-card-logo.jp-card-jcb {
+.jp-card.jp-card-jcb.jp-card-identified .jp-card-logo.jp-card-jcb{
   opacity: 1;
   -webkit-box-shadow: none;
   box-shadow: none
 }
 
-.jp-card-logo.jp-card-dinersclub {
+.jp-card-logo.jp-card-dinersclub{
   font-family: serif;
   height: 40px;
   width: 100px;
@@ -624,37 +624,37 @@
 }
 
 .jp-card-logo.jp-card-dinersclub::before,
-.jp-card-logo.jp-card-dinersclub::after {
+.jp-card-logo.jp-card-dinersclub::after{
   display: block;
   position: relative
 }
 
-.jp-card-logo.jp-card-dinersclub::before {
-  content: 'Diners Club'
+.jp-card-logo.jp-card-dinersclub::before{
+  content: "Diners Club"
 }
 
-.jp-card-logo.jp-card-dinersclub::after {
-  content: 'International';
+.jp-card-logo.jp-card-dinersclub::after{
+  content: "International";
   text-transform: uppercase;
   font-size: 0.6em
 }
 
-.jp-card.jp-card-dinersclub .jp-card-front .jp-card-logo {
+.jp-card.jp-card-dinersclub .jp-card-front .jp-card-logo{
   -webkit-box-shadow: none !important;
   box-shadow: none !important
 }
 
 .jp-card.jp-card-dinersclub.jp-card-identified .jp-card-front:before,
-.jp-card.jp-card-dinersclub.jp-card-identified .jp-card-back:before {
+.jp-card.jp-card-dinersclub.jp-card-identified .jp-card-back:before{
   background: linear-gradient(315deg, #d3d3d3 0%, #7f8c8d 74%);
 
 }
 
-.jp-card.jp-card-dinersclub.jp-card-identified .jp-card-logo.jp-card-dinersclub {
+.jp-card.jp-card-dinersclub.jp-card-identified .jp-card-logo.jp-card-dinersclub{
   opacity: 1
 }
 
-.jp-card-container {
+.jp-card-container{
   -webkit-perspective: 1000px;
   perspective: 1000px;
   width: 350px;
@@ -665,7 +665,7 @@
   position: relative
 }
 
-.jp-card {
+.jp-card{
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   line-height: 1;
   position: relative;
@@ -681,19 +681,19 @@
 
 .jp-card>*,
 .jp-card>*:before,
-.jp-card>*:after {
+.jp-card>*:after{
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
   font-family: inherit
 }
 
-.jp-card.jp-card-flipped {
+.jp-card.jp-card-flipped{
   -webkit-transform: rotateY(180deg);
   transform: rotateY(180deg)
 }
 
 .jp-card .jp-card-front,
-.jp-card .jp-card-back {
+.jp-card .jp-card-back{
   -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
   -webkit-transform-style: preserve-3d;
@@ -711,7 +711,7 @@
 }
 
 .jp-card .jp-card-front:before,
-.jp-card .jp-card-back:before {
+.jp-card .jp-card-back:before{
   content: " ";
   display: block;
   position: absolute;
@@ -726,13 +726,13 @@
 }
 
 .jp-card .jp-card-front:after,
-.jp-card .jp-card-back:after {
+.jp-card .jp-card-back:after{
   content: " ";
   display: block
 }
 
 .jp-card .jp-card-front .jp-card-display,
-.jp-card .jp-card-back .jp-card-display {
+.jp-card .jp-card-back .jp-card-display{
   color: #fff;
   font-weight: normal;
   opacity: 0.5;
@@ -741,19 +741,19 @@
 }
 
 .jp-card .jp-card-front .jp-card-display.jp-card-focused,
-.jp-card .jp-card-back .jp-card-display.jp-card-focused {
+.jp-card .jp-card-back .jp-card-display.jp-card-focused{
   opacity: 1;
   font-weight: 700
 }
 
 .jp-card .jp-card-front .jp-card-cvc,
-.jp-card .jp-card-back .jp-card-cvc {
+.jp-card .jp-card-back .jp-card-cvc{
   font-family: "Bitstream Vera Sans Mono", Consolas, Courier, monospace;
   font-size: 14px
 }
 
 .jp-card .jp-card-front .jp-card-shiny,
-.jp-card .jp-card-back .jp-card-shiny {
+.jp-card .jp-card-back .jp-card-shiny{
   width: 50px;
   height: 35px;
   border-radius: 5px;
@@ -762,7 +762,7 @@
 }
 
 .jp-card .jp-card-front .jp-card-shiny:before,
-.jp-card .jp-card-back .jp-card-shiny:before {
+.jp-card .jp-card-back .jp-card-shiny:before{
   content: " ";
   display: block;
   width: 70%;
@@ -774,7 +774,7 @@
   top: 20%
 }
 
-.jp-card .jp-card-front .jp-card-logo {
+.jp-card .jp-card-front .jp-card-logo{
   position: absolute;
   opacity: 0;
   right: 5%;
@@ -783,35 +783,35 @@
   transition: 400ms
 }
 
-.jp-card .jp-card-front .jp-card-lower {
+.jp-card .jp-card-front .jp-card-lower{
   width: 80%;
   position: absolute;
   left: 10%;
   bottom: 30px
 }
 
-@media only screen and (max-width: 480px) {
-  .jp-card .jp-card-front .jp-card-lower {
+@media only screen and (max-width: 480px){
+  .jp-card .jp-card-front .jp-card-lower{
     width: 90%;
     left: 5%
   }
 }
 
-.jp-card .jp-card-front .jp-card-lower .jp-card-cvc {
+.jp-card .jp-card-front .jp-card-lower .jp-card-cvc{
   visibility: hidden;
   float: right;
   position: relative;
   bottom: 5px
 }
 
-.jp-card .jp-card-front .jp-card-lower .jp-card-number {
+.jp-card .jp-card-front .jp-card-lower .jp-card-number{
   font-family: "Bitstream Vera Sans Mono", Consolas, Courier, monospace;
   font-size: 24px;
   clear: both;
   margin-bottom: 30px
 }
 
-.jp-card .jp-card-front .jp-card-lower .jp-card-expiry {
+.jp-card .jp-card-front .jp-card-lower .jp-card-expiry{
   font-family: "Bitstream Vera Sans Mono", Consolas, Courier, monospace;
   letter-spacing: 0em;
   position: relative;
@@ -820,7 +820,7 @@
 }
 
 .jp-card .jp-card-front .jp-card-lower .jp-card-expiry:before,
-.jp-card .jp-card-front .jp-card-lower .jp-card-expiry:after {
+.jp-card .jp-card-front .jp-card-lower .jp-card-expiry:after{
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-weight: bold;
   font-size: 7px;
@@ -829,14 +829,14 @@
   opacity: .5
 }
 
-.jp-card .jp-card-front .jp-card-lower .jp-card-expiry:before {
+.jp-card .jp-card-front .jp-card-lower .jp-card-expiry:before{
   content: attr(data-before);
   margin-bottom: 2px;
   font-size: 7px;
   text-transform: uppercase
 }
 
-.jp-card .jp-card-front .jp-card-lower .jp-card-expiry:after {
+.jp-card .jp-card-front .jp-card-lower .jp-card-expiry:after{
   position: absolute;
   content: attr(data-after);
   text-align: right;
@@ -846,7 +846,7 @@
   bottom: 0
 }
 
-.jp-card .jp-card-front .jp-card-lower .jp-card-name {
+.jp-card .jp-card-front .jp-card-lower .jp-card-name{
   text-transform: uppercase;
   font-family: "Bitstream Vera Sans Mono", Consolas, Courier, monospace;
   font-size: 20px;
@@ -861,12 +861,12 @@
   text-overflow: ellipsis
 }
 
-.jp-card .jp-card-back {
+.jp-card .jp-card-back{
   -webkit-transform: rotateY(180deg);
   transform: rotateY(180deg)
 }
 
-.jp-card .jp-card-back .jp-card-bar {
+.jp-card .jp-card-back .jp-card-bar{
   background-color: #444;
   background-image: -webkit-gradient(linear, left top, left bottom, from(#444), to(#333));
   background-image: linear-gradient(#444, #333);
@@ -876,7 +876,7 @@
   top: 10%
 }
 
-.jp-card .jp-card-back:after {
+.jp-card .jp-card-back:after{
   content: " ";
   display: block;
   background-color: #fff;
@@ -889,7 +889,7 @@
   left: 2%
 }
 
-.jp-card .jp-card-back .jp-card-cvc {
+.jp-card .jp-card-back .jp-card-cvc{
   position: absolute;
   top: 40%;
   left: 85%;
@@ -897,13 +897,13 @@
   transition-delay: 600ms
 }
 
-.jp-card .jp-card-back .jp-card-shiny {
+.jp-card .jp-card-back .jp-card-shiny{
   position: absolute;
   top: 66%;
   left: 2%
 }
 
-.jp-card .jp-card-back .jp-card-shiny:after {
+.jp-card .jp-card-back .jp-card-shiny:after{
   content: "This card has been issued by Jesse Pollak and is licensed for anyone to use anywhere for free. It comes with no warranty. For support issues, please visit: github.com/jessepollak/card.";
   position: absolute;
   left: 120%;
@@ -914,19 +914,19 @@
   opacity: .5
 }
 
-.jp-card.jp-card-identified {
+.jp-card.jp-card-identified{
   -webkit-box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.3)
 }
 
 .jp-card.jp-card-identified .jp-card-front,
-.jp-card.jp-card-identified .jp-card-back {
+.jp-card.jp-card-identified .jp-card-back{
   background-color: #000;
   background-color: rgba(0, 0, 0, 0.5)
 }
 
 .jp-card.jp-card-identified .jp-card-front:before,
-.jp-card.jp-card-identified .jp-card-back:before {
+.jp-card.jp-card-identified .jp-card-back:before{
   -webkit-transition: all 400ms ease;
   transition: all 400ms ease;
   background-image: repeating-linear-gradient(45deg, rgba(255, 255, 255, 0) 1px, rgba(255, 255, 255, 0.03) 2px, rgba(255, 255, 255, 0.04) 3px, rgba(255, 255, 255, 0.05) 4px), repeating-linear-gradient(135deg, rgba(255, 255, 255, 0.05) 1px, rgba(255, 255, 255, 0) 2px, rgba(255, 255, 255, 0.04) 3px, rgba(255, 255, 255, 0.03) 4px), repeating-linear-gradient(90deg, rgba(255, 255, 255, 0) 1px, rgba(255, 255, 255, 0.03) 2px, rgba(255, 255, 255, 0.04) 3px, rgba(255, 255, 255, 0.05) 4px), repeating-linear-gradient(210deg, rgba(255, 255, 255, 0) 1px, rgba(255, 255, 255, 0.03) 2px, rgba(255, 255, 255, 0.04) 3px, rgba(255, 255, 255, 0.05) 4px), repeating-radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0) 1px, rgba(255, 255, 255, 0.03) 2px, rgba(255, 255, 255, 0.04) 3px, rgba(255, 255, 255, 0.05) 4px), repeating-radial-gradient(circle at 70% 70%, rgba(255, 255, 255, 0) 1px, rgba(255, 255, 255, 0.03) 2px, rgba(255, 255, 255, 0.04) 3px, rgba(255, 255, 255, 0.05) 4px), repeating-radial-gradient(circle at 90% 20%, rgba(255, 255, 255, 0) 1px, rgba(255, 255, 255, 0.03) 2px, rgba(255, 255, 255, 0.04) 3px, rgba(255, 255, 255, 0.05) 4px), repeating-radial-gradient(circle at 15% 80%, rgba(255, 255, 255, 0) 1px, rgba(255, 255, 255, 0.03) 2px, rgba(255, 255, 255, 0.04) 3px, rgba(255, 255, 255, 0.05) 4px), linear-gradient(-25deg, rgba(255, 255, 255, 0) 50%, rgba(255, 255, 255, 0.2) 70%, rgba(255, 255, 255, 0) 90%);
@@ -934,12 +934,12 @@
 }
 
 .jp-card.jp-card-identified .jp-card-front .jp-card-logo,
-.jp-card.jp-card-identified .jp-card-back .jp-card-logo {
+.jp-card.jp-card-identified .jp-card-back .jp-card-logo{
   -webkit-box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.3);
   box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.3)
 }
 
 .jp-card.jp-card-identified.no-radial-gradient .jp-card-front:before,
-.jp-card.jp-card-identified.no-radial-gradient .jp-card-back:before {
+.jp-card.jp-card-identified.no-radial-gradient .jp-card-back:before{
   background-image: repeating-linear-gradient(45deg, rgba(255, 255, 255, 0) 1px, rgba(255, 255, 255, 0.03) 2px, rgba(255, 255, 255, 0.04) 3px, rgba(255, 255, 255, 0.05) 4px), repeating-linear-gradient(135deg, rgba(255, 255, 255, 0.05) 1px, rgba(255, 255, 255, 0) 2px, rgba(255, 255, 255, 0.04) 3px, rgba(255, 255, 255, 0.03) 4px), repeating-linear-gradient(90deg, rgba(255, 255, 255, 0) 1px, rgba(255, 255, 255, 0.03) 2px, rgba(255, 255, 255, 0.04) 3px, rgba(255, 255, 255, 0.05) 4px), repeating-linear-gradient(210deg, rgba(255, 255, 255, 0) 1px, rgba(255, 255, 255, 0.03) 2px, rgba(255, 255, 255, 0.04) 3px, rgba(255, 255, 255, 0.05) 4px), linear-gradient(-25deg, rgba(255, 255, 255, 0) 50%, rgba(255, 255, 255, 0.2) 70%, rgba(255, 255, 255, 0) 90%)
 }

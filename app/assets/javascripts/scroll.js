@@ -16,7 +16,7 @@ function scroll_page(){
   act = window.innerWidth;
 }
 
-window.addEventListener('resize', function(event){
+window.addEventListener("resize", function(event){
   scroll_page();
 });
 
@@ -54,9 +54,9 @@ $(function() {
   if(window.innerWidth < 768) {
     $.scrollify.destroy();
   } else {
-    $('.icon-2').data('delay', '200')
-    $('.icon-3').data('delay', '400')
-    $('.icon-4').data('delay', '600')
-    $('.icon-5').data('delay', '800')
+    $(".icon-2").data("delay", "200")
+    $(".icon-3").data("delay", "400")
+    $(".icon-4").data("delay", "600")
+    $(".icon-5").data("delay", "800")
   }
 });

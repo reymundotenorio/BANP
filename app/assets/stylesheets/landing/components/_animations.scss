@@ -1,5 +1,5 @@
 /*KEYFRAMES*/
-@-webkit-keyframes moveDown {
+@-webkit-keyframes moveDown{
   from{
     -webkit-transform: translateY(0px);
     transform: translateY(0px);
@@ -13,7 +13,8 @@
     transform: translateY(0px);
   }
 }
-@keyframes moveDown {
+
+@keyframes moveDown{
   from{
     -webkit-transform: translateY(0px);
     transform: translateY(0px);
@@ -32,8 +33,10 @@
 .animated{
   -webkit-transition: all ease 1s;
   transition: all ease 1s;
+
   &.opacity{
     opacity: 0;
+
     &.in{
       opacity: 1;
     }
@@ -102,6 +105,7 @@
   &.scale{
     -webkit-transform: scale(0);
     transform: scale(0);
+
     &.in{
       -webkit-transform: scale(1);
       transform: scale(1);
@@ -116,7 +120,8 @@
   }
 }
 
-@media (min-width: 768px) {
+@media (min-width: 768px){
+
   .animated.opacity-arrow{
     opacity: 0;
     -webkit-transform: translateX(-50px) rotate(0deg);
@@ -128,4 +133,5 @@
       transform: translateX(0px) rotate(0deg);
     }
   }
+  
 }

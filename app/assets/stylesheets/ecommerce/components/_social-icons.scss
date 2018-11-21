@@ -20,15 +20,19 @@
       color: $grey;
 
       @include on-event{
+
         &.facebook-icon{
           color: $facebook-color;
         }
+        
         &.twitter-icon{
           color: $twitter-color;
         }
+        
         &.linkedin-icon{
           color: $linkedin-color;
         }
+        
         &.instagram-icon{
           color: $instagram-color;
         }

@@ -2,13 +2,12 @@ body{
   background: tint($secondary-color, 95%);
   min-height: 100vh;
 }
+
 .banner{
   height: 250px;
 
   display: -webkit-box;
-
   display: -ms-flexbox;
-
   display: flex;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
@@ -35,6 +34,7 @@ body{
   .categories-btn{
     text-transform: uppercase;
     display: block;
+
     .fas{
       -webkit-transform: rotateX(180deg);
       transform: rotateX(180deg);
@@ -67,12 +67,14 @@ body{
     text-transform: uppercase;
     // letter-spacing: 1px;
   }
+
   .categories-list{
     list-style: none;
     padding: 10px 0px;
     margin: 0px;
     text-transform: uppercase;
     letter-spacing: 1px;
+
     li{
       padding-bottom: 5px;
 
@@ -120,6 +122,7 @@ body{
 
   .card-image{
     position: relative;
+
     .stock{
       position: absolute;
       top: 15px;
@@ -138,8 +141,8 @@ body{
         padding-left: 20px;
       }
 
-      &::after{
-        content: '';
+      &:after{
+        content: "";
         width: 0px;
         height: 0px;
         border-right: 0px solid #710f06;
@@ -154,8 +157,8 @@ body{
         left: 0px;
         right: auto;
       }
-
     }
+
     .overlay{
       position: absolute;
       top: 0px;
@@ -186,6 +189,7 @@ body{
 
         .quantity{
           padding-bottom: 20px;
+
           input{
             width: 30px;
             background: transparent;
@@ -200,7 +204,6 @@ body{
               -webkit-appearance: none;
               margin: 0;
             }
-
           }
 
           button{
@@ -216,8 +219,6 @@ body{
             }
           }
         }
-
-
 
         .btn{
           text-transform: uppercase;
@@ -259,7 +260,8 @@ body{
   }
 }
 
-@media (max-width: 767px) {
+@media (max-width: 767px){
+
   .banner .container{
     width: 100%;
   }
@@ -268,9 +270,11 @@ body{
     margin-left: 10px;
     margin-right: 10px;
   }
+
 }
 
-@media (min-width: 768px) {
+@media (min-width: 768px){
+
   .main-content{
     padding: 60px 0px 40px 0px;
 
@@ -279,18 +283,15 @@ body{
     }
   }
 
-
   .cards-parent{
     -webkit-box-pack: justify;
     -ms-flex-pack: justify;
     justify-content: space-between;
-
   }
 
   .card{
     .card-image{
       .overlay{
-
         // background: rgba(0,0,0,0.5);
         background: transparent;
         -webkit-transition: all ease 0.5s;
@@ -302,8 +303,6 @@ body{
           opacity: 0;
           -webkit-transition: all ease 0.5s;
           transition: all ease 0.5s;
-
-
         }
       }
 
@@ -320,22 +319,27 @@ body{
       }
     }
   }
+
 }
 
-@media (min-width: 992px) {
+@media (min-width: 992px){
+
   #collapseCategories{
     display: block;
     height: auto !important;
     visibility: visible;
   }
+
   .cards-parent{
     padding-top: 0px;
-
   }
+
 }
 
-@media (min-width: 1200px) {
+@media (min-width: 1200px){
+
   .main-content#prp-content .pagination-container{
     text-align: left;
   }
+  
 }

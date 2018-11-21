@@ -2,14 +2,12 @@
 // This file contains all styles related to the header of the site/application.
 // -----------------------------------------------------------------------------
 
-
 // Affix header
 .navbar-fixed-bottom, .navbar-fixed-top{
   .navbar-collapse{
     // max-height: none;
   }
 }
-
 
 // Top navbar
 .top-navbar{
@@ -149,8 +147,6 @@
     transition: all ease 0.3s;
     // opacity: 0;
 
-
-
     // *** External Vendor Design ***
     // width: 230px;
     // position: absolute;
@@ -161,6 +157,7 @@
     // box-shadow: -8px 8px 15px -5px rgba(0,0,0,0.15);
     // margin: 0px;
     // *** End External Vendor Design ***
+
     &.in{
       height: 100% !important;
       // opacity: 1;
@@ -195,9 +192,7 @@
       flex-grow: 1;
 
       display: -webkit-box !important;
-
       display: -ms-flexbox !important;
-
       display: flex !important;
       -webkit-box-orient: vertical;
       -webkit-box-direction: normal;
@@ -233,8 +228,6 @@
         color: $white;
       }
     }
-
-
     // End Navigation items
 
     // Activated item
@@ -254,8 +247,6 @@
       // Dropdown hover
       @include on-event{
       }
-
-
 
       // Dropdown icon ▼
       i.fa.fa-angle-down{
@@ -302,6 +293,7 @@
                 color: rgba(255,255,255,0.7);
               }
             }
+
             >a{
               color: rgaba(255,255,255,0.7);
 
@@ -309,8 +301,6 @@
                 background-color: transparent;
                 color:  $white;
               }
-
-
             }
             // End Dropdown menu items
 
@@ -370,12 +360,14 @@
   z-index: 1037;
   padding: 15px;
   line-height: 1;
+  -webkit-transition: all ease 0.3s;
   transition: all ease 0.3s;
 
   .fa, .fas{
     color: $white;
     font-size: 18px;
     opacity: 0.7;
+    -webkit-transition: all ease 0.3s;
     transition: all ease 0.3s;
   }
 
@@ -392,10 +384,9 @@
     font-weight: 900;
     line-height: 1;
     border-radius: 100%;
+    -webkit-box-shadow: 0px 0px 5px rgba(0,0,0,0.3);
     box-shadow: 0px 0px 5px rgba(0,0,0,0.3);
   }
-
-
 }
 
 .cart-dropdown{
@@ -404,6 +395,7 @@
       opacity: 1;
     }
   }
+
   .dropdown-menu{
     position: fixed;
     z-index: 1038;
@@ -416,8 +408,9 @@
     border: none;
     border-radius: 0px;
     width: 200px;
+
     &:before{
-      content: '';
+      content: "";
       height: 0px;
       width: 0px;
       border-bottom: 10px solid $white;
@@ -431,17 +424,26 @@
       left: auto;
     }
 
-    li {
+    li{
       text-align: left;
 
       a{
         padding: 5px 15px;
         font-weight: 700;
+
         &.resume{
+          display: -webkit-box;
+          display: -ms-flexbox;
           display: flex;
+          -webkit-box-orient: horizontal;
+          -webkit-box-direction: normal;
+          -ms-flex-direction: row;
           flex-direction: row;
+          -webkit-box-pack: justify;
+          -ms-flex-pack: justify;
           justify-content: space-between;
           border-bottom: 1px solid $text-color;
+
           span{
             font-weight: 400;
           }
@@ -449,6 +451,7 @@
 
         .fa, .fas{
           padding-right: 5px;
+          -webkit-transition: all ease 0.5s;
           transition: all ease 0.5s;
         }
 
@@ -468,13 +471,13 @@
   }
 }
 
-@media (max-width: 767px) {
-  .navbar-default {
+@media (max-width: 767px){
+
+  .navbar-default{
     .navbar-header{
       background: transparent;
       -webkit-transition: background ease 1s;
       transition: background ease 1s;
-
     }
 
     &.affix{
@@ -483,6 +486,7 @@
       }
     }
   }
+
 }
 
 @media (min-width: 768px){
@@ -494,7 +498,7 @@
     padding-top: 30px;
     padding-bottom: 0px;
 
-    .navbar-header {
+    .navbar-header{
       padding-left: 15px;
       .navbar-brand{
         font-size: 30px;
@@ -503,7 +507,6 @@
         border-width: 3px;
       }
     }
-
 
     // Navbar collapse -> Mobile menu dropdown
     .navbar-collapse{
@@ -519,9 +522,7 @@
       right: auto;
 
       display: -webkit-box !important;
-
       display: -ms-flexbox !important;
-
       display: flex !important;
       -webkit-box-orient: horizontal;
       -webkit-box-direction: normal;
@@ -559,7 +560,6 @@
         display: none;
       }
 
-
       >li{
         @include flex-child;
         -webkit-box-flex: 0;
@@ -569,6 +569,8 @@
 
         // border-right: 1px solid shade($grey, 15%);
         &.hidden-xs{
+          display: -webkit-box !important;
+          display: -ms-flexbox !important;
           display: flex !important;
         }
 
@@ -584,7 +586,6 @@
         &.dropdown{
           margin-top: -6px;
 
-
           a .counter{
             font-size: 8px;
             position: absolute;
@@ -598,11 +599,10 @@
             font-weight: 900;
             line-height: 1;
             border-radius: 100%;
+            -webkit-box-shadow: 0px 0px 5px rgba(0,0,0,0.3);
             box-shadow: 0px 0px 5px rgba(0,0,0,0.3);
           }
         }
-
-
       }
 
       // Navigation items
@@ -612,7 +612,6 @@
         word-break: normal;
         white-space: nowrap;
         padding: 0px;
-
 
         .fa, .fas{
           font-size: 17px;
@@ -706,7 +705,7 @@
             }
 
             &:before{
-              content: '';
+              content: "";
               height: 0px;
               width: 0px;
               border-bottom: 10px solid $white;
@@ -736,8 +735,15 @@
               }
 
               .resume{
+                display: -webkit-box;
+                display: -ms-flexbox;
                 display: flex;
+                -webkit-box-orient: horizontal;
+                -webkit-box-direction: normal;
+                -ms-flex-direction: row;
                 flex-direction: row;
+                -webkit-box-pack: justify;
+                -ms-flex-pack: justify;
                 justify-content: space-between;
 
                 span{
@@ -765,7 +771,8 @@
                   line-height: 1;
                 }
 
-                .fa, .fas {
+                .fa, .fas{
+                  -webkit-transition: all ease 0.3s;
                   transition: all ease 0.3s;
                   padding-right: 5px;
                 }

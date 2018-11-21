@@ -6,10 +6,13 @@ $med:30s;
 $slow:60s;
 
 
-@mixin trap {
-  top:0;right:0;bottom:0;left:0;
-  content:'';
+@mixin trap{
+  content: "";
   position:absolute;
+  top:0;
+  right:0;
+  bottom:0;
+  left:0;
 }
 
 .lava-container{
@@ -17,7 +20,7 @@ $slow:60s;
   pointer-events: none;
 }
 
-.mid .wrapper {
+.mid .wrapper{
   // width:158px;
   // height:200px;
   width:100vw;
@@ -25,9 +28,9 @@ $slow:60s;
   position:relative;
   // left:121px;
   // top:-12px;
-
 }
-.glass {
+
+.glass{
   @include trap;
   // background: darken(hotpink,20%);
   // transform: perspective(7px) rotateX(1deg);
@@ -35,7 +38,7 @@ $slow:60s;
   overflow:hidden;
 }
 
-// .goop {
+// .goop{
 //     // background:$lavacolor;
 //     background: linear-gradient(-60deg, $primary-color, $secondary-color, $third-color, $fourth-color);
 //     background-size: 400vh 400vw;
@@ -47,13 +50,15 @@ $slow:60s;
 //     // filter:blur($lavablur);
 // }
 
-.top-goop {
+.top-goop{
   top:-50px;
 }
-.bot-goop {
+
+.bot-goop{
   bottom:-50px;
 }
-.blob {
+
+.blob{
   border-radius:50%;
   position:absolute;
   // background:$lavacolor;
@@ -70,12 +75,14 @@ $slow:60s;
   -webkit-animation: $anim $dur infinite ease-in;
   animation: $anim $dur infinite ease-in;
 }
-.blob:nth-of-type(1) {
+
+.blob:nth-of-type(1){
   height:50.63vw;
   width:50.63vw;
   @include blobanimator(from-bottom, $fast);
 }
-.blob:nth-of-type(2) {
+
+.blob:nth-of-type(2){
   width:50.63vw;
   height:50.63vw;
   left:31.65vw;
@@ -83,6 +90,7 @@ $slow:60s;
   // animation-delay:1s;
   bottom:-40px;
 }
+
 .blob:nth-of-type(3){
   height:44.30vw;
   width:44.30vw;
@@ -90,6 +98,7 @@ $slow:60s;
   @include blobanimator(from-top, $slow);
   top:-50.63vw;
 }
+
 .blob:nth-of-type(4){
   height:20.20vw;
   width:20.20vw;
@@ -99,6 +108,7 @@ $slow:60s;
   -webkit-animation-delay:3s;
   animation-delay:3s;
 }
+
 .blob:nth-of-type(5){
   height:56.96vw;
   width:56.96vw;
@@ -108,54 +118,58 @@ $slow:60s;
   -webkit-animation-delay:3s;
   animation-delay:3s;
 }
-@-webkit-keyframes from-bottom {
-  0% {
+
+@-webkit-keyframes from-bottom{
+  0%{
     bottom:-50.63vw;
     background-position: 0% 50%;
   }
   50%{
     background-position: 100% 50%;
   }
-  100% {
+  100%{
     bottom:200vh;
     background-position: 0% 50%;
   }
 }
-@keyframes from-bottom {
-  0% {
+
+@keyframes from-bottom{
+  0%{
     bottom:-50.63vw;
     background-position: 0% 50%;
   }
   50%{
     background-position: 100% 50%;
   }
-  100% {
+  100%{
     bottom:200vh;
     background-position: 0% 50%;
   }
 }
-@-webkit-keyframes from-top {
-  0% {
+
+@-webkit-keyframes from-top{
+  0%{
     top:-50.63vw;
     background-position: 0% 50%;
   }
   50%{
     background-position: 100% 50%;
   }
-  100% {
+  100%{
     top:200vh;
     background-position: 0% 50%;
   }
 }
-@keyframes from-top {
-  0% {
+
+@keyframes from-top{
+  0%{
     top:-50.63vw;
     background-position: 0% 50%;
   }
   50%{
     background-position: 100% 50%;
   }
-  100% {
+  100%{
     top:200vh;
     background-position: 0% 50%;
   }

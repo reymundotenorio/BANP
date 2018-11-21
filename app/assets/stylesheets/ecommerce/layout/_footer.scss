@@ -42,6 +42,7 @@ footer{
       margin-bottom: 20px;
       font-size: 14px;
       text-align: center;
+
       img{
         display: block;
         margin-bottom: 10px;
@@ -66,21 +67,24 @@ footer{
 
 
 @media (min-width: 768px){
+
   #top-link{
     bottom: 60px;
   }
+
 }
 
 @media (min-width: 992px){
-
 }
 
 @media (min-width: 1200px){
+
   footer{
     .info-col{
       p{
         margin-bottom: 0px;
         text-align: left;
+
         img{
           display: inline;
           margin-bottom: 0px;
@@ -98,4 +102,5 @@ footer{
       }
     }
   }
+  
 }

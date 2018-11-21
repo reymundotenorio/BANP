@@ -79,7 +79,7 @@
   font-weight: 900;
 
   &:after{
-    content: '';
+    content: "";
     height: 1px;
     width: 60px;
     background: $white;
@@ -127,7 +127,7 @@
       z-index: 1;
 
       &:after{
-        content: '';
+        content: "";
         height: 32px;
         width: 32px;
         border-radius: 100%;
@@ -149,10 +149,7 @@
       .img-container{
         max-width: 120px;
         margin: 0 auto;
-
-
       }
-
 
       .description{
         color: $white;
@@ -238,6 +235,7 @@
         padding: 0px;
         margin: 0px;
         list-style: none;
+
         li{
           text-align: center;
           text-transform: uppercase;
@@ -281,6 +279,7 @@
 
           @include on-event{
             text-decoration: none;
+
             &:before{
               -webkit-transform: rotate(-90deg);
               transform: rotate(-90deg);
@@ -290,7 +289,7 @@
         }
 
         &:after, &:before{
-          content: '';
+          content: "";
           display: block;
           height: 1px;
           width: 10px;
@@ -302,7 +301,6 @@
           right: auto;
           -webkit-transition: all ease 0.3s;
           transition: all ease 0.3s;
-
         }
 
         &:after{
@@ -314,8 +312,6 @@
           -webkit-transform: rotate(45deg);
           transform: rotate(45deg);
         }
-
-
 
         @include on-event{
           text-decoration: none;
@@ -448,7 +444,7 @@
   }
 }
 
-@media (min-width: 768px) {
+@media (min-width: 768px){
 
   .tagline{
     padding-top: 34vh;
@@ -481,6 +477,7 @@
 
     .flow-child{
       max-width: 150px;
+
       img{
         width: 80%;
       }
@@ -566,7 +563,7 @@
           -ms-flex-wrap: wrap;
           flex-wrap: wrap;
           // align-items:
-          height: 265px;
+          height: ;
           padding: 0px 15px;
 
           li{
@@ -637,7 +634,7 @@
 
 }
 
-@media (min-width: 992px) {
+@media (min-width: 992px){
 
   .tagline{
     font-size: 36px;
@@ -691,7 +688,7 @@
 
 }
 
-@media (min-width: 1800px) {
+@media (min-width: 1800px){
 
   .tagline{
     font-size: 45px;

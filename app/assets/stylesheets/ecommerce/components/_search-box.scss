@@ -1,9 +1,9 @@
 .search-container{
   margin-top: 30px;
+
   form{
     width: 100%;
     padding: 0px 15px;
-
     position: relative;
 
     button{
@@ -43,12 +43,12 @@
         position: relative;
         z-index: 2;
 
-        &:focus {
+        &:focus{
           outline: none;
         }
 
         &:focus ~ label,
-        &:valid ~ label {
+        &:valid ~ label{
           top: -14px;
           // left: 0px;
           font-size: 11px;
@@ -56,7 +56,7 @@
         }
 
         &:focus ~ .bar:before,
-        &:valid ~ .bar:before {
+        &:valid ~ .bar:before{
           width: 100%;
           left: 0%;
         }
@@ -80,7 +80,7 @@
         width: 100%;
 
         &:before{
-          content: '';
+          content: "";
           height: 2px;
           width: 0px;
           position: absolute;
@@ -95,13 +95,16 @@
   }
 }
 
-@media (min-width: 768px) {
+@media (min-width: 768px){
+
   .search-container{
     margin-top: 50px;
   }
+
 }
 
-@media (min-width: 1200px) {
+@media (min-width: 1200px){
+
   .search-container form .group{
     label{
       font-size: 16px;
@@ -109,6 +112,7 @@
 
     input{
       font-size: 16px;
+      
       &:focus, &:valid{
         & ~ label{
           font-size: 14px;
@@ -117,4 +121,5 @@
       }
     }
   }
+
 }
