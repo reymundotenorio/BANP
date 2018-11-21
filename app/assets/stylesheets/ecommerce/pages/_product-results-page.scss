@@ -74,6 +74,7 @@ body{
     margin: 0px;
     text-transform: uppercase;
     letter-spacing: 1px;
+    text-align: center;
 
     li{
       padding-bottom: 5px;
@@ -328,6 +329,10 @@ body{
     display: block;
     height: auto !important;
     visibility: visible;
+    
+    .categories-list{
+      text-align: left;
+    }
   }
 
   .cards-parent{

@@ -13,10 +13,13 @@
   border: none;
   border-radius: 0px;
 
-  white-space: pre-wrap;
-  white-space: -moz-pre-wrap;
-  white-space: -pre-wrap;
-  white-space: -o-pre-wrap;
+  // white-space: pre-wrap;
+  // white-space: -moz-pre-wrap;
+  // white-space: -pre-wrap;
+  // white-space: -o-pre-wrap;
+  white-space: normal;
+  word-wrap: break-word;
+  
   word-wrap: break-word;
   letter-spacing: 1px;
 

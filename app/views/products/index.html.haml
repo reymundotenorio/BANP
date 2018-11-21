@@ -3,20 +3,16 @@
     .container-fluid
       .row
         .col-xs-12
-          %h1.search-title.text-center All Products
+          %h1.search-title.text-center= t("views.navigation.all_products")
+          
     .container
       .row
         .col-xs-12.col-sm-6.col-sm-offset-3
           .search-container.animated.opacity-up{"data-delay": "1500", "data-scroll": "0"}
-            %form{method: "post"}
-              .group
-                %input{required: "required", type: "text"}/
-                %span.highlight
-                %span.bar
-                %label Search Product
-              %button{name: "Search", type: "button"}
-                %span.sr-only Search
-                %i.fas.fa-search
+            -# Render search_form
+            = render "layouts/search_form"
+            -# End Render search_form
+                
   #prp-content.main-content
     .container
       .row
@@ -26,11 +22,12 @@
               %a.btn.btn-general.categories-btn.collapsed{"aria-controls": "collapseCategories", "aria-expanded": "false", "data-target": "#collapseCategories", "data-toggle": "collapse"}
                 Categories
                 %i.fas.fa-caret-square-down
+                
             #collapseCategories.collapse
-              %h2.categories-title.hidden-xs Categories
-              %ul.categories-list.aligned-text
+              %h2.categories-title.hidden-xs.hidden-sm= t("views.landing.categories")
+              %ul.categories-list
                 %li
-                  = link_to "All", products_path, class: "#{'active' if @category_filter == ''}"
+                  = link_to t("views.products.all"), products_path, class: "#{'active' if @category_filter == ''}"
 
                 - @categories.each do |category|
                   %li
@@ -42,29 +39,11 @@
 
         .col-xs-12.col-md-8.col-lg-9
           .cards-parent
-            - @products.each do |product|
-              .card
-                .card-image
-                  %img.img-responsive{alt: "#{I18n.locale == :es ? product.name_spanish : product.name}", src: "https://s3.amazonaws.com/betterandnice/images/default/product-default.png"}/
-                  .overlay
-                    %form.link-container.text-center{action: "index.html", method: "post"}
-                      .quantity
-                        %button.subtract{name: "minus", type: "button"}
-                          %span.sr-only minus
-                          %i.fas.fa-minus
-                        %input{name: "quant-prod", type: "number", value: "1"}/
-                        %button.add{name: "plus", type: "button"}
-                          %span.sr-only plus
-                          %i.fas.fa-plus
-                      %button.btn.btn-general.add-btn{name: "add", title: "Add to cart", type: "button"} Add to cart
-                  .stock
-                    %p.no-margin Out of Stock
-                .card-body
-                  %p.name.aligned-text
-                    %a{href: "#"}= I18n.locale == :es ? product.name_spanish : product.name
-                  %p.price.aligned-text
-                    = number_to_currency(product.price, precision: 2, unit: "$", separator: ".", delimiter: ",")
-                    %span.unit Per box.
+            -# Data table Sync
+            = sync partial: "data_list_ecommerce", collection: @products
+            = sync_new partial: "data_list_ecommerce", resource: Product.new
+            -# End Data table Sync
+                                
       .row
         .col-xs-12.col-md-8.col-md-offset-4.col-lg-9.col-lg-offset-3
           .pagination-container

@@ -26,7 +26,7 @@
                 = image_tag "img/icon-select.svg", class: "img-responsive", alt: "Select"
               %p.description.text-center
                 = t("views.landing.select_the")
-                %a{href: "#"}= t("views.landing.products")
+                = link_to t("views.landing.products"), products_path
                 = t("views.landing.that_need")
 
             .flow-child.icon-container.icon-3.animated.opacity-up{"data-delay": "0", "data-scroll": "auto"}

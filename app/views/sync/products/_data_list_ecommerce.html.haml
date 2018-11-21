@@ -1,0 +1,38 @@
+.card
+  .card-image
+    -# Image
+    - if product.image.attached?
+      = image_tag url_for(product.image), class: "img-responsive"
+  
+    - else
+      = image_tag url_for("https://s3.amazonaws.com/betterandnice/images/default/product-default.png"), class: "img-responsive"
+      
+    .overlay
+      %form.link-container.text-center{action: "index.html", method: "post"}
+        .quantity
+        
+          -# Minus
+          %button.subtract{name: "minus", type: "button"}
+            %span.sr-only minus
+            %i.fas.fa-minus
+            
+          %input{name: "quant-prod", type: "number", value: "1"}/
+          
+          -# Plus
+          %button.add{name: "plus", type: "button"}
+            %span.sr-only plus
+            %i.fas.fa-plus
+            
+        %button.btn.btn-general.add-btn{name: "add", type: "button"}= t("views.products.add_cart")
+        
+    -# Out of Stock
+    .stock
+      %p.no-margin= t("views.products.out_stock")
+      
+  .card-body
+    %p.name.aligned-text
+      %a{href: "#"}= I18n.locale == :es ? product.name_spanish : product.name
+      
+    %p.price.aligned-text
+      = number_to_currency(product.price, precision: 2, unit: "$", separator: ".", delimiter: ",")
+      %span.unit= t("views.products.per_box")
