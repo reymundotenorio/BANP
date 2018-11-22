@@ -73,13 +73,10 @@
               .all-contains
                 %h3.text-center.list-title= t("views.landing.categories")
                 %ul.categories-list
-                  - @categories.each do |category|
-                    %li
-                      - if I18n.locale == :es
-                        = link_to category.name_spanish, products_path(category: category.slug)
-
-                      - else
-                        = link_to category.name, products_path(category: category.slug)
+                  -# Data table Sync
+                  = sync partial: "data_list_ecommerce", collection: @categories
+                  = sync_new partial: "data_list_ecommerce", resource: Category.new
+                  -# End Data table Sync
 
                 %p.text-center.view-all-container
                   %a.view-all{href: "#"}= t("views.landing.view_all_products")

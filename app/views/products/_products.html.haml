@@ -1,0 +1,38 @@
+.container
+  .row
+    .col-xs-12.col-md-4.col-lg-3
+      .filter-container
+        %p.text-center.visible-xs.visible-sm
+          %a.btn.btn-general.categories-btn.collapsed{"aria-controls": "collapseCategories", "aria-expanded": "false", "data-target": "#collapseCategories", "data-toggle": "collapse"}
+            = t("views.landing.categories")
+            %i.fas.fa-caret-square-down
+
+        #collapseCategories.collapse
+          %h2.categories-title.hidden-xs.hidden-sm= t("views.landing.categories")
+          %ul.categories-list
+            %li
+              = link_to t("views.products.all"), products_path, class: "#{'active' if @category_filter == ''}"
+
+              -# Data table Sync
+              = sync partial: "data_list_ecommerce", collection: @categories
+              = sync_new partial: "data_list_ecommerce", resource: Category.new
+              -# End Data table Sync
+
+    .col-xs-12.col-md-8.col-lg-9
+      .cards-parent
+        - if @products.present?
+          -# Data table Sync
+          = sync partial: "data_list_ecommerce", collection: @products
+          = sync_new partial: "data_list_ecommerce", resource: Product.new
+          -# End Data table Sync
+
+        -else
+          %p
+            %b No products found with the selected filter
+
+  .row
+    .col-xs-12.col-md-8.col-md-offset-4.col-lg-9.col-lg-offset-3
+      .pagination-container
+        -# Pagination
+        = will_paginate @products, renderer: BootstrapPagination::Rails
+        -# End Pagination

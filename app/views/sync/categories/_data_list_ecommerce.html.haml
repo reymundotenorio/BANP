@@ -1,0 +1,6 @@
+%li
+  - if I18n.locale == :es
+    = link_to category.name_spanish, products_path(category: category.slug), class: "#{'active' if @category_filter == category.slug}"
+
+  - else
+    = link_to category.name, products_path(category: category.slug), class: "#{'active' if @category_filter == category.slug}"

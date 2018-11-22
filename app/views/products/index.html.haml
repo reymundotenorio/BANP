@@ -4,7 +4,7 @@
       .row
         .col-xs-12
           %h1.search-title.text-center= t("views.navigation.all_products")
-          
+
     .container
       .row
         .col-xs-12.col-sm-6.col-sm-offset-3
@@ -12,49 +12,10 @@
             -# Render search_form
             = render "layouts/search_form"
             -# End Render search_form
-                
+
   #prp-content.main-content
-    .container
-      .row
-        .col-xs-12.col-md-4.col-lg-3
-          .filter-container
-            %p.text-center.visible-xs.visible-sm
-              %a.btn.btn-general.categories-btn.collapsed{"aria-controls": "collapseCategories", "aria-expanded": "false", "data-target": "#collapseCategories", "data-toggle": "collapse"}
-                Categories
-                %i.fas.fa-caret-square-down
-                
-            #collapseCategories.collapse
-              %h2.categories-title.hidden-xs.hidden-sm= t("views.landing.categories")
-              %ul.categories-list
-                %li
-                  = link_to t("views.products.all"), products_path, class: "#{'active' if @category_filter == ''}"
+    = render "products"
 
-                - @categories.each do |category|
-                  %li
-                    - if I18n.locale == :es
-                      = link_to category.name_spanish, products_path(category: category.slug), class: "#{'active' if @category_filter == category.slug}"
-
-                    - else
-                      = link_to category.name, products_path(category: category.slug), class: "#{'active' if @category_filter == category.slug}"
-
-        .col-xs-12.col-md-8.col-lg-9
-          .cards-parent
-            -# Data table Sync
-            = sync partial: "data_list_ecommerce", collection: @products
-            = sync_new partial: "data_list_ecommerce", resource: Product.new
-            -# End Data table Sync
-                                
-      .row
-        .col-xs-12.col-md-8.col-md-offset-4.col-lg-9.col-lg-offset-3
-          .pagination-container
-            %ul.pagination.pagination
-              %li.prev.disabled
-                %span Previous
-              %li.active
-                %span 1
-              %li
-                %a{"data-remote": "true", href: "#", rel: "next"} 2
-              %li
-                %a{"data-remote": "true", href: "#"} 3
-              %li.next
-                %a{"data-remote": "true", href: "#", rel: "next"} Next
+-# Pagination with Ajax script
+= javascript_include_tag "pagination-ajax", "data-turbolinks-track": "reload"
+-# End Pagination with Ajax script
