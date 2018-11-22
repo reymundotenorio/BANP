@@ -77,8 +77,20 @@ body{
 
         .tomato{
           background-color: $white;
+
+          // Load local images on development
+          <% if Rails.env.development? %>
+          // Local images
           -webkit-mask: url("img/tomato-mask.svg") no-repeat 50% 50%;
           mask: url("img/tomato-mask.svg") no-repeat 50% 50%;
+
+          // Load AWS images on production
+          <% else %>
+          // AWS S3
+          -webkit-mask: url("https://s3.amazonaws.com/betterandnice/images/default/tomato-mask.svg") no-repeat 50% 50%;
+          mask: url("https://s3.amazonaws.com/betterandnice/images/default/tomato-mask.svg") no-repeat 50% 50%;
+          <% end %>
+
           -webkit-mask-size: cover;
           mask-size: cover;
         }
@@ -86,8 +98,20 @@ body{
         @include on-event{
           .tomato{
             background-color: $white;
+
+            // Load local images on development
+            <% if Rails.env.development? %>
+            // Local images
             -webkit-mask: url("img/tomato-fill-mask.svg") no-repeat 50% 50%;
             mask: url("img/tomato-fill-mask.svg") no-repeat 50% 50%;
+
+            // Load AWS images on production
+            <% else %>
+            // AWS S3
+            -webkit-mask: url("https://s3.amazonaws.com/betterandnice/images/default/tomato-fill-mask.svg") no-repeat 50% 50%;
+            mask: url("https://s3.amazonaws.com/betterandnice/images/default/tomato-fill-mask.svg") no-repeat 50% 50%;
+            <% end %>
+
             -webkit-mask-size: cover;
             mask-size: cover;
           }
@@ -96,8 +120,20 @@ body{
         &.active{
           .tomato{
             background-color: $white;
+
+            // Load local images on development
+            <% if Rails.env.development? %>
+            // Local images
             -webkit-mask: url("img/tomato-fill-mask.svg") no-repeat 50% 50%;
             mask: url("img/tomato-fill-mask.svg") no-repeat 50% 50%;
+
+            // Load AWS images on production
+            <% else %>
+            // AWS S3
+            -webkit-mask: url("https://s3.amazonaws.com/betterandnice/images/default/tomato-fill-mask.svg") no-repeat 50% 50%;
+            mask: url("https://s3.amazonaws.com/betterandnice/images/default/tomato-fill-mask.svg") no-repeat 50% 50%;
+            <% end %>
+
             -webkit-mask-size: cover;
             mask-size: cover;
           }

@@ -13,7 +13,7 @@
             .flow-child.icon-container.icon-1.animated.opacity-up{"data-delay": "0", "data-scroll": "auto"}
               .order 1
               .img-container
-                = image_tag "img/icon-user.svg", class: "img-responsive", alt: "User"
+                = image_tag "#{Rails.env.development? ? 'img/icon-user.svg' : 'https://s3.amazonaws.com/betterandnice/images/default/icon-user.svg'}", class: "img-responsive"
               %p.description.text-center
                 %a{href: "#"}= t("views.landing.sign_up")
                 = t("views.landing.or_just")
@@ -23,7 +23,7 @@
             .flow-child.icon-container.icon-2.animated.opacity-up{"data-delay": "0", "data-scroll": "auto"}
               .order 2
               .img-container
-                = image_tag "img/icon-select.svg", class: "img-responsive", alt: "Select"
+                = image_tag "#{Rails.env.development? ? 'img/icon-select.svg' : 'https://s3.amazonaws.com/betterandnice/images/default/icon-select.svg.svg'}", class: "img-responsive"
               %p.description.text-center
                 = t("views.landing.select_the")
                 = link_to t("views.landing.products"), products_path
@@ -32,7 +32,7 @@
             .flow-child.icon-container.icon-3.animated.opacity-up{"data-delay": "0", "data-scroll": "auto"}
               .order 3
               .img-container
-                = image_tag "img/icon-check.svg", class: "img-responsive", alt: "Check"
+                = image_tag "#{Rails.env.development? ? 'img/icon-check.svg' : 'https://s3.amazonaws.com/betterandnice/images/default/icon-check.svg'}", class: "img-responsive"
               %p.description.text-center
                 = t("views.landing.check_out")
                 %a{href: "#"}= t("views.landing.purchase_order")
@@ -40,7 +40,7 @@
             .flow-child.icon-container.icon-4.animated.opacity-up{"data-delay": "0", "data-scroll": "auto"}
               .order 4
               .img-container
-                = image_tag "img/icon-card.svg", class: "img-responsive", alt: "Card"
+                = image_tag "#{Rails.env.development? ? 'img/icon-card.svg' : 'https://s3.amazonaws.com/betterandnice/images/default/icon-card.svg'}", class: "img-responsive"
               %p.description.text-center
                 = t("views.landing.pay_your")
                 %a{href: "#"}= t("views.landing.purchase_order")
@@ -48,7 +48,7 @@
             .flow-child.icon-container.icon-5.animated.opacity-up{"data-delay": "0", "data-scroll": "auto"}
               .order 5
               .img-container
-                = image_tag "img/icon-deliver.svg", class: "img-responsive", alt: "Deliver"
+                = image_tag "#{Rails.env.development? ? 'img/icon-deliver.svg' : 'https://s3.amazonaws.com/betterandnice/images/default/icon-deliver.svg'}", class: "img-responsive"
               %p.description.text-center
                 = t("views.landing.wait_delivery")
 
@@ -64,7 +64,7 @@
         .all-container
           .rectangle.hidden-xs.animated.scale{"data-delay": "0", "data-scroll": "auto"}
           .explosion-container.animated.opacity-down{"data-delay": "500", "data-scroll": "auto"}
-            = image_tag "img/fruits-basket.png", class: "img-responsive", alt: "Fruits Basket"
+            = image_tag "img/fruits-basket.png", class: "img-responsive"
 
           .produce-list.visible
             %p.heading.text-center
