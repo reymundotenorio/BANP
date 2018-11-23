@@ -1,0 +1,46 @@
+%section.wrap
+  .banner.grad-section
+    .container-fluid
+      .row
+        .col-xs-12
+          -# Category title Sync
+          = sync partial: "category_title", resource: @category
+          = sync_new partial: "category_title", resource: Category.new
+          -# End Category title Sync
+
+    .container
+      .row
+        .col-xs-12.col-sm-6.col-sm-offset-3
+          .search-container.animated.opacity-up{"data-delay": "1500", "data-scroll": "0"}
+            -# Render search_form
+            = render "layouts/search_form"
+            -# End Render search_form
+
+  #pdp-content.main-content
+    .container
+      .row.hidden-xs
+        .col-xs-12
+          .breadcrumb-container
+            %ol.breadcrumb
+              %li
+                = link_to t("views.navigation.all_products"), products_path
+                
+              -# Category link Sync
+              = sync partial: "breadcrumb_link", resource: @category
+              = sync_new partial: "breadcrumb_link", resource: Category.new
+              -# End Category link Sync
+              
+              -# Product name Sync
+              = sync partial: "breadcrumb_name", resource: @product
+              = sync_new partial: "breadcrumb_name", resource: Product.new
+              -# End Product name Sync
+              
+      -# Category title Sync
+      = sync partial: "data_details_ecommerce", resource: @product
+      = sync_new partial: "data_details_ecommerce", resource: Product.new
+      -# End Category title Sync
+      
+      -# Render related products
+      = render "related_products"
+      -# End Render related products
+    

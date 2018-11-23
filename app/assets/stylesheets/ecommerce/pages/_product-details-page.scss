@@ -10,6 +10,14 @@
         text-decoration: underline;
       }
     }
+
+    &.with-separator{
+      &:before {
+        content: "/ ";
+        padding: 0 5px;
+        color: #ccc;
+      }
+    }
   }
 }
 
@@ -258,5 +266,5 @@
       margin-bottom: 50px;
     }
   }
-  
+
 }
