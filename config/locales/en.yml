@@ -267,6 +267,7 @@ en:
       add_cart: "Add to cart"
       out_stock: "Out of Stock"
       per_box: "Per Box"
+      not_found: "No products found using the supplied criteria"
 
 # Rails Default
 

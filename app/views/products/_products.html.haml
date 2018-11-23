@@ -28,9 +28,8 @@
 
       -else
         %p.text-center
-          %b No products found with the provided criteria
-
-        = image_tag "img/sad-fruits.jpeg", class: "img-responsive"
+          %b= t("views.products.not_found")
+        = image_tag "img/products-not-found.png", class: "img-responsive not_found"
 
   .row
     .col-xs-12.col-md-8.col-md-offset-4.col-lg-9.col-lg-offset-3

@@ -51,6 +51,12 @@ body{
   }
 
   &#prp-content{
+    img{
+      &.not_found{
+        padding-top: 20px;
+      }
+    }
+    
     .pagination-container{
       text-align: center;
     }

@@ -267,6 +267,7 @@ es:
       add_cart: "Agregar al carrito"
       out_stock: "Agotado"
       per_box: "Por Caja"
+      not_found: "No se encontraron productos utilizando los criterios suministrados"
 
 
 # Rails default
