@@ -19,16 +19,18 @@
               -# End Data table Sync
 
     .col-xs-12.col-md-8.col-lg-9
-      .cards-parent
-        - if @products.present?
+      - if @products.present?
+        .cards-parent
           -# Data table Sync
           = sync partial: "data_list_ecommerce", collection: @products
           = sync_new partial: "data_list_ecommerce", resource: Product.new
           -# End Data table Sync
 
-        -else
-          %p
-            %b No products found with the selected filter
+      -else
+        %p.text-center
+          %b No products found with the provided criteria
+
+        = image_tag "img/sad-fruits.jpeg", class: "img-responsive"
 
   .row
     .col-xs-12.col-md-8.col-md-offset-4.col-lg-9.col-lg-offset-3
