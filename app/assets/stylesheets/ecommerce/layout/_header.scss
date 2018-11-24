@@ -4,8 +4,8 @@
 
 // Top social
 header{
-  -webkit-transition: all ease 0.3s;
-  transition: all ease 0.3s;
+  -webkit-transition: all ease 0.5s;
+  transition: all ease 0.5s;
 
   &.affix{
     -webkit-box-shadow: 0px 0px 10px rgba(0,0,0,0.5);
@@ -22,13 +22,13 @@ header{
 .top-social{
   background-color: #f5f5f5;
   max-height: 45px;
-  -webkit-transition: all ease 0.3s;
-  transition: all ease 0.3s;
+  -webkit-transition: all ease 0.5s;
+  transition: all ease 0.5s;
   // overflow: hidden;
 
   .social-icons{
-    -webkit-transition: all 0.3s ease;
-    transition: all 0.3s ease;
+    -webkit-transition: all 0.5s ease;
+    transition: all 0.5s ease;
     display: table;
     height: 45px;
   }
@@ -49,8 +49,8 @@ header{
     line-height: 30px;
     font-size: 18px;
     color: $grey;
-    -webkit-transition: all ease 0.3s;
-    transition: all ease 0.3s;
+    -webkit-transition: all ease 0.5s;
+    transition: all ease 0.5s;
     position: relative;
     z-index: 1000;
 
@@ -83,22 +83,34 @@ header{
       left: auto;
     }
 
-    li a{
-      padding: 7.5px 15px;
-      font-weight: 700;
-
-      .flag-icon{
-        margin-right: 10px;
-        -webkit-filter: grayscale(0.5);
-        filter: grayscale(0.5);
-      }
-
-      @include on-event{
-        background: #eeeeee;
+    li{
+      a{
+        padding: 7.5px 15px;
+        font-weight: 700;
 
         .flag-icon{
-          -webkit-filter: none;
-          filter: none;
+          margin-right: 10px;
+          -webkit-filter: grayscale(0.5);
+          filter: grayscale(0.5);
+        }
+
+        @include on-event{
+          background: #eeeeee;
+
+          .flag-icon{
+            -webkit-filter: none;
+            filter: none;
+          }
+        }
+
+        &.active{
+          color: tint($text-color, 30%);
+          cursor: not-allowed;
+          pointer-events: none;
+
+          span{
+            opacity: 0.5;
+          }
         }
       }
     }
@@ -184,8 +196,8 @@ header{
 
   // Navbar toggle
   .navbar-toggle{
-    -webkit-transition: all 0.3s ease;
-    transition: all 0.3s ease;
+    -webkit-transition: all 0.5s ease;
+    transition: all 0.5s ease;
     background-color: transparent;
     margin: 0px;
     top: 15px;
@@ -223,8 +235,8 @@ header{
 
     // Navbar toggle opened
     .icon-bar{
-      -webkit-transition: all 0.3s ease;
-      transition: all 0.3s ease;
+      -webkit-transition: all 0.5s ease;
+      transition: all 0.5s ease;
       background-color: $text-color;
       height: 3px;
       width: 25px;
@@ -267,8 +279,8 @@ header{
     z-index: 1036;
     max-height: none;
     height: 100% !important;
-    -webkit-transition: all ease 0.3s;
-    transition: all ease 0.3s;
+    -webkit-transition: all ease 0.5s;
+    transition: all ease 0.5s;
 
     &.in{
       height: 100% !important;
@@ -321,8 +333,8 @@ header{
 
     // Navigation items
     li a, .open ul.dropdown-menu>li>a, ul.dropdown-menu>li>a, li span{
-      -webkit-transition: all 0.3s ease;
-      transition: all 0.3s ease;
+      -webkit-transition: all 0.5s ease;
+      transition: all 0.5s ease;
       background-color: transparent;
       font-size: 25px;
       line-height: 35px;
@@ -470,15 +482,15 @@ header{
   z-index: 1037;
   padding: 15px;
   line-height: 1;
-  -webkit-transition: all ease 0.3s;
-  transition: all ease 0.3s;
+  -webkit-transition: all ease 0.5s;
+  transition: all ease 0.5s;
 
   .fa, .fas{
     color: $text-color;
     font-size: 18px;
     opacity: 1	;
-    -webkit-transition: all ease 0.3s;
-    transition: all ease 0.3s;
+    -webkit-transition: all ease 0.5s;
+    transition: all ease 0.5s;
   }
 
   .counter{
@@ -562,8 +574,8 @@ header{
 
         .fa, .fas{
           padding-right: 5px;
-          -webkit-transition: all ease 0.3s;
-          transition: all ease 0.3s;
+          -webkit-transition: all ease 0.5s;
+          transition: all ease 0.5s;
         }
 
         @include on-event{
@@ -587,8 +599,8 @@ header{
 
   #back-to-top{
     min-height: 130px;
-    -webkit-transition: all ease 0.3s;
-    transition: all ease 0.3s;
+    -webkit-transition: all ease 0.5s;
+    transition: all ease 0.5s;
 
     &.affix{
       min-height: 61px
@@ -609,8 +621,8 @@ header{
     }
 
     .navbar-default{
-      -webkit-transition: all ease 0.3s;
-      transition: all ease 0.3s;
+      -webkit-transition: all ease 0.5s;
+      transition: all ease 0.5s;
     }
 
     &.affix{
@@ -764,8 +776,8 @@ header{
           right: 0px;
           background: -webkit-gradient(linear, left top, right top, from($secondary-color), color-stop($primary-color), to($secondary-color));
           background: linear-gradient(90deg, $secondary-color, $primary-color, $secondary-color);
-          -webkit-transition: all ease 0.3s;
-          transition: all ease 0.3s;
+          -webkit-transition: all ease 0.5s;
+          transition: all ease 0.5s;
         }
 
         .fa, .fas{
@@ -947,8 +959,8 @@ header{
                 }
 
                 .fa, .fas{
-                  -webkit-transition: all ease 0.3s;
-                  transition: all ease 0.3s;
+                  -webkit-transition: all ease 0.5s;
+                  transition: all ease 0.5s;
                   padding-right: 5px;
                 }
 
@@ -1023,5 +1035,5 @@ header{
   .navbar-default ul.navbar-nav > li{
     padding: 0px 20px;
   }
-  
+
 }

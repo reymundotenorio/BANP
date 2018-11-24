@@ -68,9 +68,9 @@
         // Space between indicators
         margin: 0 5px;
         // End Space between indicators
-        -webkit-transition: all 0.3s ease;
-        -webkit-transition: all 0.3s ease;
-        transition: all 0.3s ease;
+        -webkit-transition: all 0.5s ease;
+        -webkit-transition: all 0.5s ease;
+        transition: all 0.5s ease;
 
         @include on-event{
           background-color: rgba($primary-color,0.5);

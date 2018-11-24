@@ -33,8 +33,8 @@
           box-shadow: 0 1px 0 0 tint($primary-color, 15%);
           border-bottom: 1px solid tint($primary-color, 15%);
 
-          -webkit-transition: all 0.3s ease;
-          transition: all 0.3s ease;
+          -webkit-transition: all 0.5s ease;
+          transition: all 0.5s ease;
         }
       }
 
@@ -187,8 +187,8 @@
         -ms-flex-align: stretch;
         align-items: stretch;
 
-        -webkit-transition: all 0.3s ease;
-        transition: all 0.3s ease;
+        -webkit-transition: all 0.5s ease;
+        transition: all 0.5s ease;
 
         // margin: 0px -15px;
         margin: 0 auto;

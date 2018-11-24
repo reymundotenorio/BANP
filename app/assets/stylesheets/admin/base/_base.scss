@@ -138,8 +138,8 @@ a{
       right: 17px;
       -webkit-transform: skew(-45deg);
       transform: skew(-45deg);
-      -webkit-transition: all 0.3s ease;
-      transition: all 0.3s ease;
+      -webkit-transition: all 0.5s ease;
+      transition: all 0.5s ease;
     }
 
     &.no-display{
@@ -166,8 +166,8 @@ a{
     right: auto;
     -webkit-transform: translateY(0px);
     transform: translateY(0px);
-    -webkit-transition: all 0.3s ease;
-    transition: all 0.3s ease;
+    -webkit-transition: all 0.5s ease;
+    transition: all 0.5s ease;
   }
 
   .border-bottom{
@@ -187,8 +187,8 @@ a{
       box-shadow: 0 1px 0 0 tint($primary-color, 15%);
       border-bottom: 1px solid tint($primary-color, 15%);
 
-      -webkit-transition: all 0.3s ease;
-      transition: all 0.3s ease;
+      -webkit-transition: all 0.5s ease;
+      transition: all 0.5s ease;
     }
   }
 
@@ -285,9 +285,9 @@ a{
           margin: 0px;
           cursor: pointer;
 
-          -webkit-transition: all 0.3s ease;
+          -webkit-transition: all 0.5s ease;
 
-          transition: all 0.3s ease;
+          transition: all 0.5s ease;
 
           @include on-event{
             color: $hover-color;

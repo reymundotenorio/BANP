@@ -1,4 +1,5 @@
-$(document).ready(function() {
+$(document).on("turbolinks:load", function() {
+  // $(document).ready(function() {
 
   // Inputs listener
   $("input.form-control").on("keyup change", function() {
@@ -47,8 +48,8 @@ $(document).ready(function() {
       $(this).addClass("with-value"); // Add class
     }
   });
-  
-    // Inputs change
+
+  // Inputs change
   $("input.form-control").change(function() {
     // If empty
     if($(this).val() == ""){

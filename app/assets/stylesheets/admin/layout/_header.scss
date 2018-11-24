@@ -15,8 +15,8 @@
   padding: 8px 8px 4px;
   margin: 0px;
   display: inline-block;
-  -webkit-transition: all 0.3s ease;
-  transition: all 0.3s ease;
+  -webkit-transition: all 0.5s ease;
+  transition: all 0.5s ease;
 
   // -webkit-box-shadow: 0px 0px 10px rgba($black, 0.5);
   // box-shadow: 0px 0px 10px rgba($black, 0.5);
@@ -118,8 +118,8 @@
     margin-bottom: -62px;
     position: relative;
     z-index: 10;
-    -webkit-transition: all 0.3s ease;
-    transition: all 0.3s ease;
+    -webkit-transition: all 0.5s ease;
+    transition: all 0.5s ease;
   }
   // End Header options
 
@@ -127,8 +127,8 @@
   .navbar-brand-top{
     text-align: center;
     padding-bottom: 8px;
-    -webkit-transition: all 0.3s ease;
-    transition: all 0.3s ease;
+    -webkit-transition: all 0.5s ease;
+    transition: all 0.5s ease;
 
     padding-top: 22px;
 
@@ -434,8 +434,8 @@
       margin-left: 15px;
       margin-top: 15px;
       margin-bottom: 15px;
-      -webkit-transition: all 0.3s ease;
-      transition: all 0.3s ease;
+      -webkit-transition: all 0.5s ease;
+      transition: all 0.5s ease;
 
       position: relative;
       z-index: 15;
@@ -450,8 +450,8 @@
 
   // Navbar toggle
   .navbar-toggle{
-    -webkit-transition: all 0.3s ease;
-    transition: all 0.3s ease;
+    -webkit-transition: all 0.5s ease;
+    transition: all 0.5s ease;
     background-color: $transparent;
     margin: 0px;
     top: 21px;
@@ -490,8 +490,8 @@
 
     // Navbar toggle opened
     .icon-bar{
-      -webkit-transition: all 0.3s ease;
-      transition: all 0.3s ease;
+      -webkit-transition: all 0.5s ease;
+      transition: all 0.5s ease;
       background-color: $text-color;
       height: 3px;
       width: 25px;
@@ -559,8 +559,8 @@
 
     // Navigation items
     li a, .open ul.dropdown-menu > li > a, ul.dropdown-menu > li > a{
-      -webkit-transition: all 0.3s ease;
-      transition: all 0.3s ease;
+      -webkit-transition: all 0.5s ease;
+      transition: all 0.5s ease;
       background-color: $transparent;
       font-size: 16px;
       font-weight: bold;
@@ -814,8 +814,8 @@
             display: block;
             padding-bottom: 5px;
             font-size: 16px;
-            -webkit-transition: font-size 0.3s ease;
-            transition: font-size 0.3s ease;
+            -webkit-transition: font-size 0.5s ease;
+            transition: font-size 0.5s ease;
           }
 
           &:before, &:after{
@@ -825,8 +825,8 @@
             top: auto;
             height: 4px;
             width: 0%;
-            -webkit-transition: all 0.3s ease;
-            transition: all 0.3s ease;
+            -webkit-transition: all 0.5s ease;
+            transition: all 0.5s ease;
           }
 
           &:before{

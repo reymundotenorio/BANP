@@ -60,8 +60,8 @@
 
   // Navbar toggle
   .navbar-toggle{
-    -webkit-transition: all 0.3s ease;
-    transition: all 0.3s ease;
+    -webkit-transition: all 0.5s ease;
+    transition: all 0.5s ease;
     background-color: transparent;
     margin: 0px;
     top: 15px;
@@ -99,8 +99,8 @@
 
     // Navbar toggle opened
     .icon-bar{
-      -webkit-transition: all 0.3s ease;
-      transition: all 0.3s ease;
+      -webkit-transition: all 0.5s ease;
+      transition: all 0.5s ease;
       background-color: rgba(255,255,255,1);
       height: 3px;
       width: 25px;
@@ -143,8 +143,8 @@
     z-index: 1036;
     max-height: none;
     height: 100% !important;
-    -webkit-transition: all ease 0.3s;
-    transition: all ease 0.3s;
+    -webkit-transition: all ease 0.5s;
+    transition: all ease 0.5s;
     // opacity: 0;
 
     // *** External Vendor Design ***
@@ -209,8 +209,8 @@
 
     // Navigation items
     li a, .open ul.dropdown-menu>li>a, ul.dropdown-menu>li>a, li span{
-      -webkit-transition: all 0.3s ease;
-      transition: all 0.3s ease;
+      -webkit-transition: all 0.5s ease;
+      transition: all 0.5s ease;
       background-color: transparent;
       font-size: 25px;
       line-height: 35px;
@@ -360,15 +360,15 @@
   z-index: 1037;
   padding: 15px;
   line-height: 1;
-  -webkit-transition: all ease 0.3s;
-  transition: all ease 0.3s;
+  -webkit-transition: all ease 0.5s;
+  transition: all ease 0.5s;
 
   .fa, .fas{
     color: $white;
     font-size: 18px;
     opacity: 0.7;
-    -webkit-transition: all ease 0.3s;
-    transition: all ease 0.3s;
+    -webkit-transition: all ease 0.5s;
+    transition: all ease 0.5s;
   }
 
   .counter{
@@ -772,8 +772,8 @@
                 }
 
                 .fa, .fas{
-                  -webkit-transition: all ease 0.3s;
-                  transition: all ease 0.3s;
+                  -webkit-transition: all ease 0.5s;
+                  transition: all ease 0.5s;
                   padding-right: 5px;
                 }
 
