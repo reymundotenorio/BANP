@@ -61,7 +61,7 @@ categories_list.each do |name, name_spanish|
 end
 
 puts "Seeding products"
-30.times do |count|
+80.times do |count|
   begin
     Product.create(
     id: (count + 1),
@@ -75,7 +75,7 @@ puts "Seeding products"
     recipes: "#{Faker::Food.dish}, #{Faker::Food.dish}, #{Faker::Food.dish}",
     recipes_spanish: "#{Faker::Food.dish}, #{Faker::Food.dish}, #{Faker::Food.dish}",
     state: Faker::Boolean.boolean(0.8),
-    category_id: Faker::Number.between(1, 10)
+    category_id: Faker::Number.between(1, 5)
     )
   rescue StandardError => e
     puts "Error found #{e.to_s}"

@@ -10,12 +10,12 @@
         =# sync partial: "related_first", resource: @products_first
         =# sync_new partial: "related_first", resource: Product.new
         -# End Related first Sync
-        
+
         -# Related list Sync
         =# sync partial: "related_list", collection: @products
         =# sync_new partial: "related_list", resource: Product.new
         -# End Related list Sync
-        
+
         -# First
         .item.active
           .col-xs-12.col-sm-6.col-md-4.col-lg-3
@@ -24,38 +24,38 @@
                 -# Image
                 - if @products_first.image.attached?
                   = image_tag url_for(@products_first.image), class: "img-responsive"
-        
+
                 - else
                   = image_tag url_for("https://s3.amazonaws.com/betterandnice/images/default/product-default.png"), class: "img-responsive"
-        
+
                 .overlay
                   %form.link-container.text-center{action: "index.html", method: "post"}
                     .quantity
-        
+
                       -# Minus
                       %button.subtract{name: "minus", type: "button"}
                         %span.sr-only minus
                         %i.fas.fa-minus
-        
+
                       %input{name: "quant-prod", type: "number", value: "1", min: "1"}/
-        
+
                       -# Plus
                       %button.add{name: "plus", type: "button"}
                         %span.sr-only plus
                         %i.fas.fa-plus
-        
+
                     %button.btn.btn-general.add-btn{name: "add", title: "Add to cart", type: "button"}= t("views.products.add_cart")
-        
+
               .card-body
                 %p.name.aligned-text
                   = link_to "#{I18n.locale == :es ? @products_first.name_spanish : @products_first.name}", product_path(@products_first)
-        
+
                 %p.price.aligned-text
                   = number_to_currency(@products_first.price, precision: 2, unit: "$", format: "%u %n", separator: ".", delimiter: ",")
                   %span.unit= t("views.products.per_box")
-                  
-        
-        -# Second          
+
+
+        -# Second
         - @products.each do |product|
           .item
             .col-xs-12.col-sm-6.col-md-4.col-lg-3
@@ -64,32 +64,32 @@
                   -# Image
                   - if product.image.attached?
                     = image_tag url_for(product.image), class: "img-responsive"
-          
+
                   - else
                     = image_tag url_for("https://s3.amazonaws.com/betterandnice/images/default/product-default.png"), class: "img-responsive"
-          
+
                   .overlay
                     %form.link-container.text-center{action: "index.html", method: "post"}
                       .quantity
-          
+
                         -# Minus
                         %button.subtract{name: "minus", type: "button"}
                           %span.sr-only minus
                           %i.fas.fa-minus
-          
+
                         %input{name: "quant-prod", type: "number", value: "1", min: "1"}/
-          
+
                         -# Plus
                         %button.add{name: "plus", type: "button"}
                           %span.sr-only plus
                           %i.fas.fa-plus
-          
+
                       %button.btn.btn-general.add-btn{name: "add", title: "Add to cart", type: "button"}= t("views.products.add_cart")
-          
+
                 .card-body
                   %p.name.aligned-text
                     = link_to "#{I18n.locale == :es ? product.name_spanish : product.name}", product_path(product)
-          
+
                   %p.price.aligned-text
                     = number_to_currency(product.price, precision: 2, unit: "$", format: "%u %n", separator: ".", delimiter: ",")
                     %span.unit= t("views.products.per_box")
@@ -97,6 +97,6 @@
       / Controls
       %a.left.carousel-control{"data-slide": "prev", href: "#carousel-related"}
         %i.fa.fa-chevron-left{"aria-hidden": "true"}
-        
+
       %a.right.carousel-control{"data-slide": "next", href: "#carousel-related"}
         %i.fa.fa-chevron-right{"aria-hidden": "true"}
