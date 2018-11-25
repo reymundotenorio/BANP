@@ -1,4 +1,5 @@
-$(document).ready(function() {
+$(document).on("turbolinks:load", function() {
+  // $(document).ready(function() {
 
   // Select Category
   $(".select-category").click(function() {

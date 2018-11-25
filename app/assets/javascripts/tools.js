@@ -1,4 +1,5 @@
 $(document).on("turbolinks:load", function() {
+  // $(document).ready(function() {
 
   $(".animated").each(function() {
     var item = $(this)

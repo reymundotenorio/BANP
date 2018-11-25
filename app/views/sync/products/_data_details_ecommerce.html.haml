@@ -1,4 +1,4 @@
-.row.product-row
+%div{class: "row product-row #{product.state}"}
   .col-xs-12.col-sm-6.col-lg-5
     -# Image
     - if product.image.attached?
@@ -15,27 +15,27 @@
       %p.price.aligned-text
         = number_to_currency(product.price, precision: 2, unit: "$", format: "%u %n", separator: ".", delimiter: ",")
         %span.unit= t("views.products.per_box")
-        
+
       %p.general.aligned-text
         = I18n.locale == :es ? product.content_spanish : product.content
-      
+
       %form.link-container.aligned-text{action: "index.html", method: "post"}
         .quantity
-        
+
           -# Minus
           %button.subtract{name: "minus", type: "button"}
             %span.sr-only minus
             %i.fas.fa-minus
-            
+
           %input{name: "quant-prod", type: "number", value: "1", min: "1"}/
-          
+
           -# Plus
           %button.add{name: "plus", type: "button"}
             %span.sr-only plus
             %i.fas.fa-plus
-            
+
         %button.btn.btn-general.add-btn{name: "add", title: "Add to cart", type: "button"}= t("views.products.add_cart")
-        
+
       #details-accordion.panel-group
         .panel.panel-default
           .panel-heading
@@ -43,20 +43,20 @@
               %a{"data-parent": "#description", "data-toggle": "collapse", href: "#description"}
                 = t("activerecord.attributes.product.description")
                 %i.fas.fa-plus
-                
+
           #description.panel-collapse.collapse.in
             .panel-body
               .text-container
                 %p.aligned-text
                   = I18n.locale == :es ? product.description_spanish : product.description
-        
+
         .panel.panel-default
           .panel-heading
             %h4.panel-title.aligned-text
               %a.collapsed{"data-parent": "#preparation", "data-toggle": "collapse", href: "#preparation"}
                 = t("activerecord.attributes.product.recipes")
                 %i.fas.fa-plus
-                
+
           #preparation.panel-collapse.collapse
             .panel-body
               .text-container

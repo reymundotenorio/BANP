@@ -105,7 +105,6 @@ class Admin::ProductsController < ApplicationController
     # Deleting blank spaces
     @product[:name] = @product[:name].strip
     @product[:name_spanish]= @product[:name_spanish].strip
-    # @product[:price] = @product[:price].strip
     @product[:content] = @product[:content].strip
     @product[:content_spanish] = @product[:content_spanish].strip
     @product[:description] = @product[:description].strip
@@ -113,6 +112,17 @@ class Admin::ProductsController < ApplicationController
     @product[:recipes] = @product[:recipes].strip
     @product[:recipes_spanish] = @product[:recipes_spanish].strip
     # End Deleting blank spaces
+
+    # Fixing price
+    if @product[:price]
+      begin
+        price = @product[:price].remove(",")
+        @product[:price] = price.to_d
+
+      rescue
+        @product[:price] = 0.00
+      end
+    end
 
     # If record was saved
     if @product.save
@@ -126,7 +136,20 @@ class Admin::ProductsController < ApplicationController
 
   # Update
   def update
-    if @product.update(product_params)
+    updated_params = product_params
+
+    # Fixing price
+    if updated_params[:price]
+      begin
+        price = updated_params[:price].remove(",")
+        updated_params[:price] = price.to_d
+
+      rescue
+        updated_params[:price] = 0.00
+      end
+    end
+
+    if @product.update(updated_params)
       redirect_to [:admin, @product], notice: t("alerts.updated", model: t("activerecord.models.product"))
 
     else

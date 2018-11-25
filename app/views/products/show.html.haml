@@ -4,8 +4,8 @@
       .row
         .col-xs-12
           -# Category title Sync
-          = sync partial: "category_title", resource: @category
-          = sync_new partial: "category_title", resource: Category.new
+          = sync partial: "product_title", resource: @product
+          = sync_new partial: "product_title", resource: Product.new
           -# End Category title Sync
 
     .container
@@ -24,23 +24,22 @@
             %ol.breadcrumb
               %li
                 = link_to t("views.navigation.all_products"), products_path
-                
+
               -# Category link Sync
               = sync partial: "breadcrumb_link", resource: @category
               = sync_new partial: "breadcrumb_link", resource: Category.new
               -# End Category link Sync
-              
+
               -# Product name Sync
               = sync partial: "breadcrumb_name", resource: @product
               = sync_new partial: "breadcrumb_name", resource: Product.new
               -# End Product name Sync
-              
+
       -# Category title Sync
       = sync partial: "data_details_ecommerce", resource: @product
       = sync_new partial: "data_details_ecommerce", resource: Product.new
       -# End Category title Sync
-      
+
       -# Render related products
       = render "related_products"
       -# End Render related products
-    

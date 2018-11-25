@@ -118,6 +118,9 @@
                     - elsif attribute == "category.name"
                       %p= product.category.name
 
+                    - elsif attribute == "price"
+                      %p= number_to_currency(product["#{attribute}"], precision: 2, unit: "$", format: "%u %n", separator: ".", delimiter: ",")
+
                     - else
                       %p= product["#{attribute}"]
         -# End Material card

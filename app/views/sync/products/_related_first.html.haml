@@ -1,4 +1,4 @@
-.card-image
+%div{class: "card-image #{product.state}"}
   -# Image
   - if product.image.attached?
     = image_tag url_for(product.image), class: "img-responsive"
@@ -24,7 +24,7 @@
 
       %button.btn.btn-general.add-btn{name: "add", title: "Add to cart", type: "button"}= t("views.products.add_cart")
 
-.card-body
+%div{class: "card-body #{product.state}"}
   %p.name.aligned-text
     = link_to "#{I18n.locale == :es ? product.name_spanish : product.name}", product_path(product)
 

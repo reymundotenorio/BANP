@@ -3,7 +3,14 @@
     .container-fluid
       .row
         .col-xs-12
-          %h1.search-title.text-center= t("views.navigation.all_products")
+          - if @category.present?
+            -# Category title Sync
+            = sync partial: "category_title", resource: @category
+            = sync_new partial: "category_title", resource: Category.new
+            -# End Category title Sync
+
+          - else
+            %h1.search-title.text-center= t("views.navigation.all_products")
 
     .container
       .row

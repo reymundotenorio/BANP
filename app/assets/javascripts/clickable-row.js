@@ -1,4 +1,5 @@
-$(document).ready(function() {
+$(document).on("turbolinks:load", function() {
+  // $(document).ready(function() {
 
   // Clickcable row
   $(".clickable-row").click(function() {

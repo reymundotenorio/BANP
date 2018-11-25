@@ -1,4 +1,5 @@
-$(document).ready(function() {
+$(document).on("turbolinks:load", function() {
+  // $(document).ready(function() {
 
   // Display on the text-input, the filename selected by the file-input
   $("input[type=file]").change(function(e) {
@@ -56,5 +57,4 @@ $(document).ready(function() {
 
   // Mask for price Input
   $(".price").mask("#,##0.00", {reverse: true});
-
 });
