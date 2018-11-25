@@ -1,6 +1,9 @@
 $(document).on("turbolinks:load", function() {
   // $(document).ready(function() {
 
+  // Mask for price Input
+  $(".price").mask("#,##0.00", {reverse: true});
+
   // Display on the text-input, the filename selected by the file-input
   $("input[type=file]").change(function(e) {
     filename = $(this).val();
@@ -55,6 +58,4 @@ $(document).on("turbolinks:load", function() {
     $("#role-dropdown .dropdown-menu li:first-child .dropdown-item").focus();
   });
 
-  // Mask for price Input
-  $(".price").mask("#,##0.00", {reverse: true});
 });

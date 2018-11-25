@@ -2,7 +2,7 @@
   -# Set attributes
   - if I18n.locale == :es
     - attributes = ["name_spanish", "price", "content_spanish"]
-    
+
   - else
     - attributes = ["name", "price", "content"]
 
@@ -13,4 +13,7 @@
   - attributes.each do |attribute|
     %td
       = link_to admin_product_path(product), class: "record-link", "data-header": t("activerecord.attributes.product.#{attribute}") do
-        %p= product["#{attribute}"]
+        - if attribute == "price"
+          %p= number_to_currency(product["#{attribute}"], precision: 2, unit: "$", format: "%u %n", separator: ".", delimiter: ",")
+        - else
+          %p= product["#{attribute}"]

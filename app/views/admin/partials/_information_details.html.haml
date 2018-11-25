@@ -29,6 +29,9 @@
               - if attribute == "state"
                 %p= resource["#{attribute}"] ? t("views.show.enabled") : t("views.show.disabled")
 
+              - elsif attribute == "price"
+                %p= number_to_currency(resource["#{attribute}"], precision: 2, unit: "$", format: "%u %n", separator: ".", delimiter: ",")
+
               - else
                 %p= resource["#{attribute}"]
 

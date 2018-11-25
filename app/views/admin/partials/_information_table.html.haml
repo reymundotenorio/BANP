@@ -1,7 +1,10 @@
 %tr{class: "#{resource.state}"}
   %td
     %p= resource.id
-    
+
   - attributes.each do |attribute|
     %td
-      %p= resource["#{attribute}"]
+      - if attribute == "price"
+        %p= number_to_currency(resource["#{attribute}"], precision: 2, unit: "$", format: "%u %n", separator: ".", delimiter: ",")
+      - else
+        %p= resource["#{attribute}"]
