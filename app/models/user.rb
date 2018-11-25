@@ -38,7 +38,6 @@ class User < ApplicationRecord
 
   ## End Friendly_ID
 
-
   ## Validations
 
   # Uniqueness validation

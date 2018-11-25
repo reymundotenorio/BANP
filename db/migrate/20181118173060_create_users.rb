@@ -35,7 +35,7 @@ class CreateUsers < ActiveRecord::Migration[5.2]
       t.boolean :two_factor_auth, default: false, null:false
       t.string :two_factor_auth_otp, unique: true
 
-      t.timestamps
+      t.timestamps # create_at & update_at
     end
 
     add_reference :users, :employee, index: true, foreign_key: true

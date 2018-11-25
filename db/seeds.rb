@@ -67,6 +67,7 @@ puts "Seeding products"
     id: (count + 1),
     name: Faker::Food.dish,
     name_spanish: Faker::Food.dish,
+    barcode: Faker::Code.ean,
     price: Faker::Number.decimal(4, 2),
     content: Faker::Food.measurement,
     content_spanish: Faker::Food.measurement,

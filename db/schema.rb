@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_11_18_173060) do
+ActiveRecord::Schema.define(version: 2018_11_25_180159) do
 
   create_table "active_storage_attachments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name", null: false
@@ -53,6 +53,24 @@ ActiveRecord::Schema.define(version: 2018_11_18_173060) do
     t.index ["created_at"], name: "index_audits_on_created_at"
     t.index ["request_uuid"], name: "index_audits_on_request_uuid"
     t.index ["user_id", "user_type"], name: "user_index"
+  end
+
+  create_table "cart_details", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.integer "quantity", default: 0, null: false
+    t.boolean "state", default: true, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "cart_id"
+    t.bigint "product_id"
+    t.index ["cart_id"], name: "index_cart_details_on_cart_id"
+    t.index ["product_id"], name: "index_cart_details_on_product_id"
+  end
+
+  create_table "carts", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "costumer_id"
+    t.index ["costumer_id"], name: "index_carts_on_costumer_id"
   end
 
   create_table "categories", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -111,6 +129,7 @@ ActiveRecord::Schema.define(version: 2018_11_18_173060) do
   create_table "products", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name", null: false
     t.string "name_spanish", null: false
+    t.string "barcode", null: false
     t.decimal "price", precision: 8, scale: 2, null: false
     t.string "content"
     t.string "content_spanish"
@@ -123,6 +142,7 @@ ActiveRecord::Schema.define(version: 2018_11_18_173060) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "category_id"
+    t.index ["barcode"], name: "index_products_on_barcode", unique: true
     t.index ["category_id"], name: "index_products_on_category_id"
     t.index ["slug"], name: "index_products_on_slug", unique: true
   end
@@ -173,6 +193,9 @@ ActiveRecord::Schema.define(version: 2018_11_18_173060) do
     t.index ["unlock_token"], name: "index_users_on_unlock_token", unique: true
   end
 
+  add_foreign_key "cart_details", "carts"
+  add_foreign_key "cart_details", "products"
+  add_foreign_key "carts", "costumers"
   add_foreign_key "products", "categories"
   add_foreign_key "users", "costumers"
   add_foreign_key "users", "employees"

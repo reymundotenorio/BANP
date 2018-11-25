@@ -9,7 +9,7 @@ class CreateEmployees < ActiveRecord::Migration[5.2]
       t.boolean :state, default: true, null: false
 
       t.string :slug # Friendly_id slug
-      t.timestamps
+      t.timestamps # create_at & update_at
     end
 
     add_index :employees, :email, unique: true
