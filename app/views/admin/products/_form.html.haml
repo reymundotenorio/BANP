@@ -56,6 +56,12 @@
                     .border-bottom
 
                   .form-group
+                    = f.text_field :barcode, class: "form-control input", placeholder: t("activerecord.attributes.product.barcode"), required: true
+                    %label
+                      %b= t("activerecord.attributes.product.barcode")
+                    .border-bottom
+
+                  .form-group
                     = f.text_field :price, class: "form-control input price", placeholder: t("activerecord.attributes.product.price"), required: true
                     %label
                       %b= t("activerecord.attributes.product.price")

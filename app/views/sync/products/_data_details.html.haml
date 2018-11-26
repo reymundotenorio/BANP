@@ -99,10 +99,10 @@
               %div{class: "detail-info #{product.state}"}
                 -# Set attributes
                 - if I18n.locale == :es
-                  - attributes = [["name_spanish", "name"], ["price", "price"], ["category.name_spanish", "category"], ["content_spanish", "content"], ["description_spanish", "description"], ["recipes_spanish", "recipes"], ["state", "state"]]
+                  - attributes = [["name_spanish", "name"], ["barcode", "barcode"], ["price", "price"], ["category.name_spanish", "category"], ["content_spanish", "content"], ["description_spanish", "description"], ["recipes_spanish", "recipes"], ["state", "state"]]
 
                 - else
-                  - attributes = [["name", "name"], ["price", "price"], ["category.name", "category"], ["content", "content"], ["description", "description"], ["recipes", "recipes"], ["state", "state"]]
+                  - attributes = [["name", "name"], ["barcode", "barcode"], ["price", "price"], ["category.name", "category"], ["content", "content"], ["description", "description"], ["recipes", "recipes"], ["state", "state"]]
 
                 - attributes.each do |attribute, title|
                   .info

@@ -89,6 +89,7 @@ es:
       product:
         name: "Nombre"
         name_spanish: "Nombre en Español"
+        barcode: "Código"
         price: "Precio"
         content: "Contenido"
         content_spanish: "Contenido en Español"

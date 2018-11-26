@@ -9,10 +9,10 @@
       - model = "product"
 
       - if I18n.locale == :es
-        - attributes = ["name_spanish", "price", "content_spanish", "description_spanish", "recipes_spanish", "state"]
-        
+        - attributes = ["name_spanish", "barcode", "price", "content_spanish", "description_spanish", "recipes_spanish", "state"]
+
       - else
-        - attributes = ["name", "price", "content", "description", "recipes", "state"]
+        - attributes = ["name", "barcode", "price", "content", "description", "recipes", "state"]
 
       -# Render details information
       = render partial: "admin/partials/information_details", locals: {model: model, resource: resource, attributes: attributes}

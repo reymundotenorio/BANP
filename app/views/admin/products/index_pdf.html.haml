@@ -16,14 +16,14 @@
               %table.table.table-pdf
                 -# Set attributes
                 - model = "product"
-                - attributes = ["name", "price", "content"]
+                - attributes = ["name", "barcode", "price", "content"]
 
                 -# Render table header
                 = render partial: "admin/partials/table_header", locals: {model: model, attributes: attributes}
 
                 -# Set attributes
                 - if I18n.locale == :es
-                  - attributes = ["name_spanish", "price", "content_spanish"]
+                  - attributes = ["name_spanish", "barcode", "price", "content_spanish"]
 
                 %tbody
                   - resource.each do |info|
