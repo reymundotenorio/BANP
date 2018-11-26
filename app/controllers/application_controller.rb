@@ -9,7 +9,7 @@ class ApplicationController < ActionController::Base
   # Domain global variable
   $max_failed_attempts = 4
 
-  if Rails.env == "development"
+  if Rails.env.development?
     $banp_domain = "http://localhost:3000/"
 
   else
