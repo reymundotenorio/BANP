@@ -34,6 +34,9 @@
             %span.sr-only plus
             %i.fas.fa-plus
 
+          %input#productId{name: "productId", type: "hidden", value: "#{product.id}"}/
+
+
         %button#addToCart.btn.btn-general.add-btn{name: "add", title: "Add to cart", type: "button"}= t("views.products.add_cart")
 
       #details-accordion.panel-group

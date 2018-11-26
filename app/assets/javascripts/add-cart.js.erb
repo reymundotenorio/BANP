@@ -1,9 +1,33 @@
 $(document).on("turbolinks:load", function() {
 
   $("#addToCart").click(function(){
-    var form = $(this).parents('form:first');
+    var form = $(this).parents("form:first");
     var quantity = form.find("#quantity");
-    alert(quantity.val());
+    var productId = form.find("#productId");
+
+    var jsonData = JSON.parse(localStorage.getItem("banpCart")) || {};
+    jsonData.cart = jsonData.cart || [];
+    jsonData.cart.push(
+      {
+        cartDetails:
+        {
+          id: productId.val(),
+          quantity: quantity.val()
+        },
+      }
+    );
+
+    jsonData.user = {
+      id: 5
+    };
+
+    localStorage.setItem("banpCart", JSON.stringify(jsonData))
+
+    var output = JSON.parse(localStorage.getItem("banpCart"));
+
+    $.each(output.cart, function(index, value) {
+      console.log("ID: " + value.cartDetails.id + " cantidad: " +   value.cartDetails.quantity);
+    });
   });
 
 });
