@@ -54,3 +54,6 @@ Rails.application.config.assets.precompile += %w( ecommerce.css )
 
 # E-commerce
 Rails.application.config.assets.precompile += %w( ecommerce.js )
+
+# Add to Cart
+Rails.application.config.assets.precompile += %w( add-cart.js )

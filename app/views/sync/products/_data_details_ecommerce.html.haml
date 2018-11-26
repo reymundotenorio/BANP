@@ -27,14 +27,14 @@
             %span.sr-only minus
             %i.fas.fa-minus
 
-          %input{name: "quant-prod", type: "number", value: "1", min: "1"}/
+          %input#quantity{name: "quantity", type: "number", value: "1", min: "1"}/
 
           -# Plus
           %button.add{name: "plus", type: "button"}
             %span.sr-only plus
             %i.fas.fa-plus
 
-        %button.btn.btn-general.add-btn{name: "add", title: "Add to cart", type: "button"}= t("views.products.add_cart")
+        %button#addToCart.btn.btn-general.add-btn{name: "add", title: "Add to cart", type: "button"}= t("views.products.add_cart")
 
       #details-accordion.panel-group
         .panel.panel-default
