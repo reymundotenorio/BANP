@@ -7,27 +7,51 @@ $(document).on("turbolinks:load", function() {
 
     var jsonData = JSON.parse(localStorage.getItem("banpCart")) || {};
     jsonData.cart = jsonData.cart || [];
-    jsonData.cart.push(
-      {
-        cartDetails:
-        {
-          id: productId.val(),
-          quantity: quantity.val()
-        },
-      }
-    );
 
-    jsonData.user = {
-      id: 5
-    };
+    var flag = true;
+
+
+    // If product exists on the cart
+    $.each(jsonData.cart, function(index, value) {
+      if (value.cartDetails.id == parseInt(productId.val()) ) {
+        flag = false;
+        jsonData.cart[index] =
+        {
+          cartDetails:
+          {
+            id: productId.val(),
+            quantity: value.cartDetails.quantity + parseInt(quantity.val())
+          },
+        };
+
+      }
+    });
+
+    // If product does not exist on the cart
+    if (flag){
+      jsonData.cart.push(
+        {
+          cartDetails:
+          {
+            id: parseInt(productId.val()),
+            quantity: parseInt(quantity.val())
+          },
+        }
+      );
+    }
+
+
+    // jsonData.user = {
+    //   id: 5
+    // };
 
     localStorage.setItem("banpCart", JSON.stringify(jsonData))
 
     var output = JSON.parse(localStorage.getItem("banpCart"));
 
-    $.each(output.cart, function(index, value) {
-      console.log("ID: " + value.cartDetails.id + " cantidad: " +   value.cartDetails.quantity);
-    });
+    // $.each(output.cart, function(index, value) {
+    //   console.log("ID: " + value.cartDetails.id + " cantidad: " +   value.cartDetails.quantity);
+    // });
   });
 
 });
