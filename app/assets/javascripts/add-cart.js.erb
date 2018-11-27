@@ -19,11 +19,10 @@ $(document).on("turbolinks:load", function() {
         {
           cartDetails:
           {
-            id: productId.val(),
+            id: parseInt(productId.val()),
             quantity: value.cartDetails.quantity + parseInt(quantity.val())
           },
         };
-
       }
     });
 
@@ -40,18 +39,27 @@ $(document).on("turbolinks:load", function() {
       );
     }
 
-
-    // jsonData.user = {
-    //   id: 5
-    // };
-
     localStorage.setItem("banpCart", JSON.stringify(jsonData))
 
-    var output = JSON.parse(localStorage.getItem("banpCart"));
 
     // $.each(output.cart, function(index, value) {
     //   console.log("ID: " + value.cartDetails.id + " cantidad: " +   value.cartDetails.quantity);
     // });
+  });
+
+
+
+  var output = JSON.parse(localStorage.getItem("banpCart"));
+
+  $("#cart-counter").text(output.cart.length)
+
+  $.each(output.cart, function(index, value) {
+
+  console.log(<%= Product.all.to_json %>);
+
+    var product = "<a class='resume' href= '#'><span class='quantity'> "+ products + "(" + value.cartDetails.quantity + ")" + " </span> " + "<span class='amount'> $123.00 </span>";
+
+    $("#cart-products").append(product);
   });
 
 });
