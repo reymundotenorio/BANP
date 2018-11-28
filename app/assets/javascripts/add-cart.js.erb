@@ -48,18 +48,19 @@ $(document).on("turbolinks:load", function() {
   });
 
 
-
   var output = JSON.parse(localStorage.getItem("banpCart"));
+  var products = <%= Product.all.to_json %>;
 
-  $("#cart-counter").text(output.cart.length)
+  $("#cart-counter").text(output.cart.length);
+
 
   $.each(output.cart, function(index, value) {
+    product = products.find(item => item.id === value.cartDetails.id);
+    console.log(product);
 
-  console.log(<%= Product.all.to_json %>);
+    var product_item = "<a class='resume' href= '/product/"+ product.slug + "'><span class='quantity'> "+ product.name + "(" + value.cartDetails.quantity + ")" + " </span> " + "<span class='amount'> $123.00 </span>";
 
-    var product = "<a class='resume' href= '#'><span class='quantity'> "+ products + "(" + value.cartDetails.quantity + ")" + " </span> " + "<span class='amount'> $123.00 </span>";
-
-    $("#cart-products").append(product);
+    $("#cart-products").append(product_item);
   });
 
 });
