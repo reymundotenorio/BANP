@@ -7,7 +7,6 @@ $(document).on("turbolinks:load", function() {
 
     var jsonData = JSON.parse(localStorage.getItem("banpCart")) || {};
     jsonData.cart = jsonData.cart || [];
-
     var flag = true;
 
 
@@ -15,12 +14,14 @@ $(document).on("turbolinks:load", function() {
     $.each(jsonData.cart, function(index, value) {
       if (value.cartDetails.id == parseInt(productId.val()) ) {
         flag = false;
+
         jsonData.cart[index] =
         {
           cartDetails:
           {
             id: parseInt(productId.val()),
-            quantity: value.cartDetails.quantity + parseInt(quantity.val())
+            quantity: value.cartDetails.quantity + parseInt(quantity.val()),
+            user_id: 5
           },
         };
       }
@@ -33,21 +34,18 @@ $(document).on("turbolinks:load", function() {
           cartDetails:
           {
             id: parseInt(productId.val()),
-            quantity: parseInt(quantity.val())
+            quantity: parseInt(quantity.val()),
+            user_id: 5
           },
         }
       );
     }
 
     localStorage.setItem("banpCart", JSON.stringify(jsonData))
-
-
-    // $.each(output.cart, function(index, value) {
-    //   console.log("ID: " + value.cartDetails.id + " cantidad: " +   value.cartDetails.quantity);
-    // });
   });
 
 
+  // Read and load the banpCart localStorage
   var output = JSON.parse(localStorage.getItem("banpCart"));
   var products = <%= Product.all.to_json %>;
 
@@ -58,7 +56,7 @@ $(document).on("turbolinks:load", function() {
     product = products.find(item => item.id === value.cartDetails.id);
     console.log(product);
 
-    var product_item = "<a class='resume' href= '/product/"+ product.slug + "'><span class='quantity'> "+ product.name + "(" + value.cartDetails.quantity + ")" + " </span> " + "<span class='amount'> $123.00 </span>";
+    var product_item = "<a class='resume'><span class='quantity'> "+ product.name + "(" + value.cartDetails.quantity + ")" + " </span> " + "<span class='amount'>" + "$ " +(product.price * value.cartDetails.quantity) + "</span></a>";
 
     $("#cart-products").append(product_item);
   });
