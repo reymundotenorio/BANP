@@ -1,5 +1,21 @@
 $(document).on("turbolinks:load", function() {
 
+  // Read and load the banpCart localStorage
+  var output = JSON.parse(localStorage.getItem("banpCart"));
+  var products = <%= Product.all.to_json %>;
+
+  $("#cart-counter").text(output.cart.length);
+
+
+  $.each(output.cart, function(index, value) {
+    product = products.find(item => item.id === value.cartDetails.id);
+    console.log(product);
+
+    var product_item = "<a class='resume'><span class='quantity'> "+ product.name + "(" + value.cartDetails.quantity + ")" + " </span> " + "<span class='amount'>" + "$ " +(product.price * value.cartDetails.quantity) + "</span></a>";
+
+    $("#cart-products").append(product_item);
+  });
+
   $("#addToCart").click(function(){
     var form = $(this).parents("form:first");
     var quantity = form.find("#quantity");
@@ -43,22 +59,4 @@ $(document).on("turbolinks:load", function() {
 
     localStorage.setItem("banpCart", JSON.stringify(jsonData))
   });
-
-
-  // Read and load the banpCart localStorage
-  var output = JSON.parse(localStorage.getItem("banpCart"));
-  var products = <%= Product.all.to_json %>;
-
-  $("#cart-counter").text(output.cart.length);
-
-
-  $.each(output.cart, function(index, value) {
-    product = products.find(item => item.id === value.cartDetails.id);
-    console.log(product);
-
-    var product_item = "<a class='resume'><span class='quantity'> "+ product.name + "(" + value.cartDetails.quantity + ")" + " </span> " + "<span class='amount'>" + "$ " +(product.price * value.cartDetails.quantity) + "</span></a>";
-
-    $("#cart-products").append(product_item);
-  });
-
 });

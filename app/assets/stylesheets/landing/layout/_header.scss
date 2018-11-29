@@ -444,8 +444,23 @@
           justify-content: space-between;
           border-bottom: 1px solid $text-color;
 
+          pointer-events: none;
+          cursor: default;
+
           span{
             font-weight: 400;
+
+            &.quantity{
+              -webkit-box-flex: 1;
+              -ms-flex: 1;
+              flex: 1;
+            }
+
+            &.amount{
+              min-width: 110px;
+              white-space: nowrap;
+              text-align: right;
+            }
           }
         }
 
@@ -746,8 +761,23 @@
                 -ms-flex-pack: justify;
                 justify-content: space-between;
 
+                pointer-events: none;
+                cursor: default;
+
                 span{
                   text-transform: none;
+
+                  &.quantity{
+                    -webkit-box-flex: 1;
+                    -ms-flex: 1;
+                    flex: 1;
+                  }
+
+                  &.amount{
+                    min-width: 110px;
+                    white-space: nowrap;
+                    text-align: right;
+                  }
                 }
               }
 

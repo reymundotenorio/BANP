@@ -566,12 +566,13 @@ header{
           -ms-flex-pack: justify;
           justify-content: space-between;
           border-bottom: 1px solid $text-color;
+
           pointer-events: none;
           cursor: default;
 
           span{
             font-weight: 400;
-            flex: 1;
+
 
             &.amount{
               white-space: nowrap;
