@@ -1,22 +1,38 @@
 $(document).on("turbolinks:load", function() {
 
-  // Read and load the banpCart localStorage
-  var output = JSON.parse(localStorage.getItem("banpCart"));
-  var products = <%= Product.all.to_json %>;
-
-  $("#cart-counter").text(output.cart.length);
-
-
-  $.each(output.cart, function(index, value) {
-    product = products.find(item => item.id === value.cartDetails.id);
-    console.log(product);
-
-    var product_item = "<a class='resume'><span class='quantity'> "+ product.name + "(" + value.cartDetails.quantity + ")" + " </span> " + "<span class='amount'>" + "$ " +(product.price * value.cartDetails.quantity) + "</span></a>";
-
-    $("#cart-products").append(product_item);
+  // Prevent submit of forms for Add to Cart
+  $("form.addCart").submit(function(e){
+    e.preventDefault();
   });
 
-  $("#addToCart").click(function(){
+  // Read and load the banpCart localStorage
+  var output = JSON.parse(localStorage.getItem("banpCart")) || null;
+  var products = <%= Product.all.to_json %>;
+
+  const formatter = new Intl.NumberFormat("en-US", {
+    style: "currency",
+    currency: "USD",
+    minimumFractionDigits: 2
+  });
+
+  if(output){
+    $(".cart-counter").css({"display": "block"});
+    $(".cart-counter").text(output.cart.length);
+
+    $.each(output.cart, function(index, value) {
+      product = products.find(item => item.id === value.cartDetails.id);
+
+      var product_item = "<a class='resume'><span class='quantity'> "+ product.name + "(" + value.cartDetails.quantity + ")" + " </span> " + "<span class='amount'>" + formatter.format((product.price * value.cartDetails.quantity)) + "</span></a>";
+
+      $(".cart-products").append(product_item);
+    });
+  }
+  else{
+    $(".cart-counter").css({"display": "none"});
+  }
+
+  // Fuction on the "Add to Cart" button
+  $(".addToCart").click(function(){
     var form = $(this).parents("form:first");
     var quantity = form.find("#quantity");
     var productId = form.find("#productId");

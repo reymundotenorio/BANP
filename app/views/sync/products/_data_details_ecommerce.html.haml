@@ -13,13 +13,13 @@
         = I18n.locale == :es ? product.name_spanish : product.name
 
       %p.price.aligned-text
-        = number_to_currency(product.price, precision: 2, unit: "$", format: "%u %n", separator: ".", delimiter: ",")
+        = number_to_currency(product.price, precision: 2, unit: "$", format: "%u%n", separator: ".", delimiter: ",")
         %span.unit= t("views.products.per_box")
 
       %p.general.aligned-text
         = I18n.locale == :es ? product.content_spanish : product.content
 
-      %form.link-container.aligned-text{action: "index.html", method: "post"}
+      %form.link-container.aligned-text.addCart{action: "", method: ""}
         .quantity
 
           -# Minus
@@ -36,8 +36,7 @@
 
           %input#productId{name: "productId", type: "hidden", value: "#{product.id}"}/
 
-
-        %button#addToCart.btn.btn-general.add-btn{name: "add", title: "Add to cart", type: "button"}= t("views.products.add_cart")
+        %button.addToCart.btn.btn-general.add-btn{name: "add", type: "button"}= t("views.products.add_cart")
 
       #details-accordion.panel-group
         .panel.panel-default

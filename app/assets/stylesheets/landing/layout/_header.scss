@@ -407,7 +407,7 @@
     font-size: 14px;
     border: none;
     border-radius: 0px;
-    width: 200px;
+    width: 250px;
 
     &:before{
       content: "";
@@ -449,11 +449,12 @@
 
           span{
             font-weight: 400;
-
+     
             &.quantity{
               -webkit-box-flex: 1;
               -ms-flex: 1;
               flex: 1;
+              white-space: normal;
             }
 
             &.amount{
@@ -771,6 +772,7 @@
                     -webkit-box-flex: 1;
                     -ms-flex: 1;
                     flex: 1;
+                    white-space: normal;
                   }
 
                   &.amount{

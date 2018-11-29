@@ -125,7 +125,7 @@
                       -# End Data table Sync
 
                     - elsif attribute == "price"
-                      %p= number_to_currency(product["#{attribute}"], precision: 2, unit: "$", format: "%u %n", separator: ".", delimiter: ",")
+                      %p= number_to_currency(product["#{attribute}"], precision: 2, unit: "$", format: "%u%n", separator: ".", delimiter: ",")
 
                     - else
                       %p= product["#{attribute}"]

@@ -5,6 +5,6 @@
   - attributes.each do |attribute|
     %td
       - if attribute == "price"
-        %p= number_to_currency(resource["#{attribute}"], precision: 2, unit: "$", format: "%u %n", separator: ".", delimiter: ",")
+        %p= number_to_currency(resource["#{attribute}"], precision: 2, unit: "$", format: "%u%n", separator: ".", delimiter: ",")
       - else
         %p= resource["#{attribute}"]
