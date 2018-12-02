@@ -145,3 +145,6 @@ gem "haml"
 
 # Haml-rails provides Haml generators
 gem "haml-rails", "~> 1.0"
+
+# Toastr notifications
+gem "toastr-rails"

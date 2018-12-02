@@ -20,4 +20,6 @@
 //
 //= require preloader
 //= require affix-top
+
+//= require toastr
 //  require_tree
