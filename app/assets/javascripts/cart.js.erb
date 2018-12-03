@@ -1,5 +1,7 @@
 $(document).on("turbolinks:load", function() {
 
+console.log("<%= I18n.locale %>");
+
   // Prevent submit of forms for Add to Cart
   $("form.addCart").submit(function(e){
     e.preventDefault();
@@ -45,7 +47,7 @@ $(document).on("turbolinks:load", function() {
     if(parseInt(quantity.val()) <= 0){
       toastr.options.progressBar = true;
 
-      toastr.error("Enter an amount greater than zero", "Amount not valid");
+      toastr.error("<%= I18n.t('views.cart.amount_greater') %>", "<%= I18n.t("views.cart.amount_not_valid") %>");
       return;
     }
 
@@ -82,7 +84,8 @@ $(document).on("turbolinks:load", function() {
 
     product_cart = products.find(item => item.id === parseInt(productId.val()));
 
-    toastr.success(product_cart.name+ " (" + parseInt(quantity.val()) + ")", "Product added to the cart");
+    toastr.success(product_cart.name+ " (" + parseInt(quantity.val()) + ")", "<%= I18n.t('views.cart.product_added') %>");
+
     localStorage.setItem("banpCart", JSON.stringify(jsonData))
   });
 });

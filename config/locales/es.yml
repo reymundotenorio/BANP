@@ -235,6 +235,9 @@ es:
       cart: "Carrito"
       checkout: "Confirmar"
       clear_cart: "Limpiar carrito"
+      product_added: "Producto añadido al carrito"
+      amount_greater: "Ingrese una cantidad mayor que cero"
+      amount_not_valid: "Cantidad no valida"
     landing:
       motto: "¡Donde y Cuando Sea, Productos a tiempo!"
       search_products: "Buscar Productos"
