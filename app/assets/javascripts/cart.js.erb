@@ -9,6 +9,7 @@ $(document).on("turbolinks:load", function() {
   var output = JSON.parse(localStorage.getItem("banpCart")) || null;
   var products = <%= Product.all.to_json %>;
 
+  // Format Currency
   const formatter = new Intl.NumberFormat("en-US", {
     style: "currency",
     currency: "USD",
@@ -22,7 +23,7 @@ $(document).on("turbolinks:load", function() {
     $.each(output.cart, function(index, value) {
       product = products.find(item => item.id === value.cartDetails.id);
 
-      var product_item = "<a class='resume'><span class='quantity'> "+ product.name + "(" + value.cartDetails.quantity + ")" + " </span> " + "<span class='amount'>" + formatter.format((product.price * value.cartDetails.quantity)) + "</span></a>";
+      var product_item = "<a class='resume'><span class='quantity'> "+ product.name + " (" + value.cartDetails.quantity + ")" + " </span> " + "<span class='amount'>" + formatter.format((product.price * value.cartDetails.quantity)) + "</span></a>";
 
       $(".cart-products").append(product_item);
     });
@@ -41,6 +42,12 @@ $(document).on("turbolinks:load", function() {
     jsonData.cart = jsonData.cart || [];
     var flag = true;
 
+    if(parseInt(quantity.val()) <= 0){
+      toastr.options.progressBar = true;
+
+      toastr.error("Enter an amount greater than zero", "Amount not valid");
+      return;
+    }
 
     // If product exists on the cart
     $.each(jsonData.cart, function(index, value) {
@@ -73,6 +80,9 @@ $(document).on("turbolinks:load", function() {
       );
     }
 
+    product_cart = products.find(item => item.id === parseInt(productId.val()));
+
+    toastr.success(product_cart.name+ " (" + parseInt(quantity.val()) + ")", "Product added to the cart");
     localStorage.setItem("banpCart", JSON.stringify(jsonData))
   });
 });

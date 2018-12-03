@@ -21,5 +21,6 @@
 //= require preloader
 //= require affix-top
 
-//= require toastr
+//= require toastr/toastr
+//= require notifications
 //  require_tree

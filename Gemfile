@@ -147,4 +147,4 @@ gem "haml"
 gem "haml-rails", "~> 1.0"
 
 # Toastr notifications
-gem "toastr-rails"
+# gem "toastr-rails"
