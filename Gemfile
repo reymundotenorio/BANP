@@ -146,5 +146,5 @@ gem "haml"
 # Haml-rails provides Haml generators
 gem "haml-rails", "~> 1.0"
 
-# Toastr notifications
-# gem "toastr-rails"
+# i18n - JS
+# gem "i18n-js", "~> 3.1.0"

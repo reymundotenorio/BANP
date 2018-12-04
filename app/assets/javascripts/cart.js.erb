@@ -1,6 +1,7 @@
 $(document).on("turbolinks:load", function() {
 
-console.log("<%= I18n.locale %>");
+  // Set current locale
+  var i18nLocale = $("body").data("locale");
 
   // Prevent submit of forms for Add to Cart
   $("form.addCart").submit(function(e){
@@ -33,7 +34,7 @@ console.log("<%= I18n.locale %>");
   else{
     $(".cart-counter").css({"display": "none"});
   }
-
+  
   // Fuction on the "Add to Cart" button
   $(".addToCart").click(function(){
     var form = $(this).parents("form:first");
@@ -47,7 +48,10 @@ console.log("<%= I18n.locale %>");
     if(parseInt(quantity.val()) <= 0){
       toastr.options.progressBar = true;
 
-      toastr.error("<%= I18n.t('views.cart.amount_greater') %>", "<%= I18n.t("views.cart.amount_not_valid") %>");
+      i18nLocale == "es" ? amountGreater = "Ingrese una cantidad mayor que cero" : amountGreater = "Enter an amount greater than zero";
+      i18nLocale == "es" ? amountNotValid = "Cantidad no valida" : amountNotValid = "Amount not valid";
+
+      toastr.error(amountGreater, amountNotValid);
       return;
     }
 
@@ -84,7 +88,8 @@ console.log("<%= I18n.locale %>");
 
     product_cart = products.find(item => item.id === parseInt(productId.val()));
 
-    toastr.success(product_cart.name+ " (" + parseInt(quantity.val()) + ")", "<%= I18n.t('views.cart.product_added') %>");
+    i18nLocale == "es" ? productAdded = "Producto añadido al carrito" : productAdded = "Product added to the cart";
+    toastr.success(product_cart.name+ " (" + parseInt(quantity.val()) + ")", productAdded);
 
     localStorage.setItem("banpCart", JSON.stringify(jsonData))
   });

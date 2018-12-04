@@ -23,4 +23,5 @@
 
 //= require toastr/toastr
 //= require notifications
-//  require_tree
+
+// require_tree

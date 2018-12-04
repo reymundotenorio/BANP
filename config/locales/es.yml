@@ -235,9 +235,6 @@ es:
       cart: "Carrito"
       checkout: "Confirmar"
       clear_cart: "Limpiar carrito"
-      product_added: "Producto añadido al carrito"
-      amount_greater: "Ingrese una cantidad mayor que cero"
-      amount_not_valid: "Cantidad no valida"
     landing:
       motto: "¡Donde y Cuando Sea, Productos a tiempo!"
       search_products: "Buscar Productos"
@@ -272,7 +269,6 @@ es:
       out_stock: "Agotado"
       per_box: "Por Caja"
       not_found: "No se encontraron productos utilizando los criterios suministrados"
-
 
 # Rails default
 
@@ -362,6 +358,9 @@ es:
       x_months:
         one: 1 mes
         other: "%{count} meses"
+      x_years:
+        one: 1 año
+        other: "%{count} años"
       x_seconds:
         one: 1 segundo
         other: "%{count} segundos"

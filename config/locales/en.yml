@@ -235,9 +235,6 @@ en:
       cart: "Cart"
       checkout: "Checkout"
       clear_cart: "Clear cart"
-      product_added: "Product added to the cart"
-      amount_greater: "Enter an amount greater than zero"
-      amount_not_valid: "Amount not valid"
     landing:
       motto: "Anywhere, Anytime, Fresh Produce on time!"
       search_products: "Search Products"
