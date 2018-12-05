@@ -1,9 +1,7 @@
 $(document).on("turbolinks:load", function() {
-
-  // Prevent submit of forms for Add to Cart
-  $("form.addCart").submit(function(e){
-    e.preventDefault();
-  });
+  // Set current locale
+  var i18nLocale = $("body").data("locale");
+  var products = <%= Product.all.to_json %>;
 
   // Format Currency
   const formatter = new Intl.NumberFormat("en-US", {
@@ -12,13 +10,13 @@ $(document).on("turbolinks:load", function() {
     minimumFractionDigits: 2
   });
 
-  // Set current locale
-  var i18nLocale = $("body").data("locale");
+  // Prevent submit of forms for Add to Cart
+  $("form.addCart").submit(function(e){
+    e.preventDefault();
+  });
 
-  var products = <%= Product.all.to_json %>;
-
-  // function updateCart(){
-
+  // Update Cart and cart details
+  function readCartInfo(){
     // Read and load the banpCart localStorage
     var output = JSON.parse(localStorage.getItem("banpCart")) || null;
 
@@ -27,18 +25,25 @@ $(document).on("turbolinks:load", function() {
       $(".cart-counter").text(output.cart.length);
 
       $.each(output.cart, function(index, value) {
-        product = products.find(item => item.id === value.cartDetails.id);
-        i18nLocale == "es" ? productName = product.name_spanish : productName = product.name;
+        if(index < 3){
+          product = products.find(item => item.id === value.cartDetails.id);
+          i18nLocale == "es" ? productName = product.name_spanish : productName = product.name;
 
-        var productItem = "<a class='resume'><span class='quantity'> "+ productName + " (" + value.cartDetails.quantity + ")" + " </span> " + "<span class='amount'>" + formatter.format((product.price * value.cartDetails.quantity)) + "</span></a>";
+          var productItem = "<a class='resume'><span class='quantity'> "+ productName + " (" + value.cartDetails.quantity + ")" + " </span> " + "<span class='amount'>" + formatter.format((product.price * value.cartDetails.quantity)) + "</span></a>";
 
-        $(".cart-products").append(productItem);
+          $(".cart-products").append(productItem);
+        }
+        else{
+          var productItem = "<a class='text-right' href='/products'><b>Ver mas</b></a>";
+          $(".cart-products").append(productItem);
+          return false;
+        }
       });
     }
     else{
       $(".cart-counter").css({"display": "none"});
     }
-  // }
+  }
 
   // Fuction on the "Add to Cart" button
   $(".addToCart").click(function(){
@@ -48,6 +53,7 @@ $(document).on("turbolinks:load", function() {
 
     var jsonData = JSON.parse(localStorage.getItem("banpCart")) || {};
     jsonData.cart = jsonData.cart || [];
+
     var flag = true;
 
     if(parseInt(quantity.val()) <= 0){
@@ -99,11 +105,9 @@ $(document).on("turbolinks:load", function() {
     toastr.success(productName + " (" + parseInt(quantity.val()) + ")", productAdded);
 
     localStorage.setItem("banpCart", JSON.stringify(jsonData));
-    // updateCart();
-
-    // Render cart
-     $("#banp-cart").append(<%= ActionController::Base.helpers.escape_javascript(Erubis::Eruby.new(File.read(File.join(Rails.root, "app/views","layouts/_cart.html.erb"))).result()) %>);
+    readCartInfo();
   });
 
-  // updateCart();
+  // Update Cart and cart details
+  readCartInfo();
 });

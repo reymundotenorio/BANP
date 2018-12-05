@@ -72,15 +72,13 @@
 
               %li.dropdown.hidden-xs
                 %a.dropdown-toggle{"data-toggle": "dropdown", href: "#"}
-                  .header-cart
-                    -# Render cart
-                    = render "layouts/cart"
-                    -# End Render cart
+                  -# Render cart
+                  = render "layouts/cart"
+                  -# End Render cart
 
-                .header-cart-details
-                  -# Render cart details
-                  = render "layouts/cart_details"
-                  -# End Render cart details
+                -# Render cart details
+                = render "layouts/cart_details"
+                -# End Render cart details
 
               -# Render user
               = render "layouts/user"
@@ -88,13 +86,10 @@
 
         .dropdown.cart-dropdown.visible-xs
           %button#cart-dropdown-btn.dropdown-toggle{"aria-expanded": "false", "aria-haspopup": "true", "data-toggle": "dropdown", type: "button"}
-            .header-cart
-              -# Render cart
-              = render "layouts/cart"
-              -# End Render cart
+            -# Render cart
+            = render "layouts/cart"
+            -# End Render cart
 
-          .header-cart-details
-            -# Render cart details
-            = render "layouts/cart_details"
-            -# End Render cart details
-
+          -# Render cart details
+          = render "layouts/cart_details"
+          -# End Render cart details

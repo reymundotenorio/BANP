@@ -146,7 +146,5 @@ gem "haml"
 # Haml-rails provides Haml generators
 gem "haml-rails", "~> 1.0"
 
-# i18n - JS
-# gem "i18n-js", "~> 3.1.0"
-
+# Erubis
 gem 'erubis', '~> 2.7'
