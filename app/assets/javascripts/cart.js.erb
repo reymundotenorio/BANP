@@ -102,8 +102,7 @@ $(document).on("turbolinks:load", function() {
     // updateCart();
 
     // Render cart
-    $("#header-cart").append(<%= escape_javascript( Haml::Engine.new(File.read(File.join(Rails.root, 'app/views/layouts/_cart.html.haml')) ).render) %>);
-    $("#header-cart-details").append(<%= escape_javascript( Haml::Engine.new(File.read(File.join(Rails.root, 'app/views/layouts_cart_details.html.haml')) ).render) %>);
+     $("#banp-cart").append(<%= ActionController::Base.helpers.escape_javascript(Erubis::Eruby.new(File.read(File.join(Rails.root, "app/views","layouts/_cart.html.erb"))).result()) %>);
   });
 
   // updateCart();
