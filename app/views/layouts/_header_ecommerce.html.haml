@@ -1,6 +1,6 @@
 %body
   #back-to-top.navbar-fixed-top.affix-top{"data-offset-top": "1", "data-spy": "affix"}
-  
+
   -# Header
   %header.navbar-fixed-top.affix-top{"data-offset-top": "1", "data-spy": "affix"}
     -# Top social
@@ -22,7 +22,7 @@
                 %li
                   %a.custom-social.instagram-icon{href: "#", target: "_blank"}
                     %i.fab.fa-instagram
-                    
+
           .col-xs-12.col-sm-6
             %p.text-center.no-margin.top-center
               = t("views.landing.motto")
@@ -45,10 +45,10 @@
               %span.icon-bar.top-bar
               %span.icon-bar.middle-bar
               %span.icon-bar.bottom-bar
-            
+
             -# Logo
             %a.navbar-brand{alt: "BANP", href: "/", title: "BANP"} BANP
-            
+
           -# Navbar collapse
           #navbar.collapse.navbar-collapse
             -# Navbar nav
@@ -56,29 +56,31 @@
               -# Navigation
               %li{class: "#{'active' if controller_name == 'landing'}"}
                 = link_to t("views.navigation.home"), root_path
-                
+
               %li{class: "#{'active' if controller_name == 'landing'}"}
                 = link_to t("views.landing.how_we_work"), root_path(anchor: "how-we-work")
-                
+
               %li{class: "#{'active' if controller_name == 'products'}"}
                 = link_to t("views.navigation.all_products"), products_path
-                
+
               %li{class: "#{'active' if controller_name == 'landing'}"}
                 = link_to t("views.landing.contact_us"), root_path(anchor: "contact-us")
-                  
+
               -# Render languages
               = render "layouts/languages_ecommerce_mobile"
               -# End Render languages
-                      
+
               %li.dropdown.hidden-xs
                 %a.dropdown-toggle{"data-toggle": "dropdown", href: "#"}
-                  -# Render cart
-                  = render "layouts/cart"
-                  -# End Render cart
-                  
-                -# Render cart details
-                = render "layouts/cart_details"
-                -# End Render cart details
+                  .header-cart
+                    -# Render cart
+                    = render "layouts/cart"
+                    -# End Render cart
+
+                .header-cart-details
+                  -# Render cart details
+                  = render "layouts/cart_details"
+                  -# End Render cart details
 
               -# Render user
               = render "layouts/user"
@@ -86,11 +88,13 @@
 
         .dropdown.cart-dropdown.visible-xs
           %button#cart-dropdown-btn.dropdown-toggle{"aria-expanded": "false", "aria-haspopup": "true", "data-toggle": "dropdown", type: "button"}
-            -# Render cart
-            = render "layouts/cart"
-            -# End Render cart
-            
-          -# Render cart details
-          = render "layouts/cart_details"
-          -# End Render cart details
+            .header-cart
+              -# Render cart
+              = render "layouts/cart"
+              -# End Render cart
+
+          .header-cart-details
+            -# Render cart details
+            = render "layouts/cart_details"
+            -# End Render cart details
 
