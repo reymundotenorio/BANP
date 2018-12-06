@@ -59,9 +59,8 @@ a{
   }
 }
 
-@media (min-width: 768px){
-
-  h1{
-  }
-  
+// Turbolinks progress bar
+.turbolinks-progress-bar{
+  background-color: $secondary-color;
 }
+// End Turbolinks progress bar

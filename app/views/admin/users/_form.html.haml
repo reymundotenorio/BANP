@@ -1,59 +1,46 @@
 -# Form
-= form_for @user, url: admin_update_password_path, html: {autocomplete: "off"} do |f|
+= form_for  @user, url: @form_url, html: {autocomplete: "off"} do |f|
   %section.form
     .container
       .row
         .col-xs-12.col-sm-10.col-sm-offset-1.col-md-8.col-md-offset-2
+          -# Show errors
+          = render partial: "admin/partials/form_errors", locals: {resource: @user, model: User}
+          -# End Show errors
+
+        .col-xs-12.col-sm-10.col-sm-offset-1.col-md-8.col-md-offset-2
           -# Material card
           %div{class: "material-card shadow-card #{@employee.state}"}
+            -# Table
             .row.no-margin
-              -# Flash notifications
-              = render "admin/partials/authentication_flash"
-              -# End Flash notifications
-
-              .col-xs-12.no-padding
-                -# Instructions
-                %h1.text-center= t("views.mailer.reset_password")
-                - if !@employee_password
-                  %p.text-center= t("views.authentication.password_reset", email: @user.email)
-                -# End Instructions
-
-              .col-xs-12.no-padding.auth-alerts
-                -# Show errors
-                = render partial: "admin/partials/form_errors", locals: {resource: @user, model: User}
-                -# End Show errors
-
               .col-xs-12.no-padding
                 .form-info
+                  -# Email
+                  = f.hidden_field :email, value: @employee.email
+                  -# End Email
+
                   .form-group
-                    = f.password_field :password, class: "form-control input", placeholder: t("activerecord.attributes.user.password"), required: true
+                    = f.password_field :password, class: "form-control input", placeholder: t("activerecord.attributes.employee.password"), required: true
                     %label
-                      %b= t("activerecord.attributes.user.password")
+                      %b= t("activerecord.attributes.employee.password")
                     .border-bottom
 
                   .form-group
-                    = f.password_field :password_confirmation, class: "form-control input", placeholder: t("activerecord.attributes.user.password_confirmation"), required: true
+                    = f.password_field :password_confirmation, class: "form-control input", placeholder: t("activerecord.attributes.employee.password_confirmation"), required: true
                     %label
-                      %b= t("activerecord.attributes.user.password_confirmation")
+                      %b= t("activerecord.attributes.employee.password_confirmation")
                     .border-bottom
 
-                  .form-group
-                    = f.check_box :two_factor_auth, {class: "form-control checkbox"}, true, false
-                    %label
-                      %b= t("activerecord.attributes.user.two_factor_auth")
-
-                  -# Token
-                  = hidden_field_tag "token", @token
-                  -# End Token
-
-                  -# Recaptcha
-                  .form-group.text-center
-                    = recaptcha_tags id: "recaptcha-center", hl: I18n.locale
-                  -# End Recaptcha
+                  .form-group.static
+                    %label.switch
+                      = f.check_box :two_factor_auth, {class: ""}, true, false
+                      %span.slider.round
+                    %label.checkbox
+                      %b= t("activerecord.attributes.employee.two_factor_auth")
 
                   -# Buttons
                   .main-buttons
-                    .col-xs-12.col-sm-12.button-container.center.no-padding
+                    .col-xs-12.col-sm-12.button-container.no-padding
                       = f.button class: "btn btn-general", data: {disable_with: "<i class='fas fa-spinner fa-spin'></i>"} do
                         %i.fas.fa-save
                         %span= t("views.form.save")

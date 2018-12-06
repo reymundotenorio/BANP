@@ -71,9 +71,9 @@ a{
     height: 80px;
     resize: none;
 
-+ label{
-    bottom: 50px;
-  }
+    + label{
+      bottom: 50px;
+    }
   }
 
   @include placeholder{
@@ -114,6 +114,11 @@ a{
 .form-group{
   position: relative;
   padding-top: 30px;
+
+  &.static{
+    // position: static;
+    padding-top: 30px + 65px + 15px;
+  }
 
   #display-password{
     position: absolute;
@@ -168,6 +173,12 @@ a{
     transform: translateY(0px);
     -webkit-transition: all 0.5s ease;
     transition: all 0.5s ease;
+
+    &.checkbox{
+      -webkit-transform: translateY(-30px - 15px);
+      transform: translateY(-30px - 15px);
+      // font-size: 14px;
+    }
   }
 
   .border-bottom{
@@ -309,6 +320,7 @@ a{
       }
     }
   }
+
 }
 // End Material inputs
 
@@ -317,6 +329,72 @@ a{
   background-color: $third-color;
 }
 // End Turbolinks progress bar
+
+
+// Checkbox switch
+.switch{
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+  position: relative;
+  opacity: 1;
+
+  input{
+    display: none;
+  }
+
+  input{
+    &:checked{
+      + .slider{
+        background-color: $primary-color;
+
+        &:before{
+          -webkit-transform: translateX(26px);
+          transform: translateX(26px);
+        }
+      }
+    }
+
+    &:focus{
+      + .slider{
+        -webkit-box-shadow: 0 0 1px #2196F3;
+        box-shadow: 0 0 1px #2196F3;
+      }
+    }
+  }
+}
+
+.slider{
+  position: absolute;
+  cursor: pointer;
+  top: 0px;
+  left: 0px;
+  right: 0px;
+  bottom: 0px;
+  background-color: rgba($text-color, 0.4);
+  -webkit-transition: all 0.3s ease;
+  transition: all 0.3s ease;
+
+  &.round{
+    border-radius: 34px;
+
+    &:before{
+      border-radius: 50%;
+    }
+  }
+
+  &:before{
+    position: absolute;
+    content: "";
+    height: 26px;
+    width: 26px;
+    left: 4px;
+    bottom: 4px;
+    background-color: $white;
+    -webkit-transition: all 0.3s ease;
+    transition: all 0.3s ease;
+  }
+}
 
 @media (min-width: 768px){
 
