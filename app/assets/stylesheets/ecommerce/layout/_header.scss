@@ -509,6 +509,8 @@ header{
     -webkit-box-shadow: none;
     box-shadow: none;
     word-break: keep-all;
+    white-space: nowrap;
+    letter-spacing: 1px;
   }
 }
 
@@ -771,6 +773,8 @@ header{
             border-radius: 100%;
             -webkit-box-shadow: 0px 0px 5px rgba(0,0,0,0.3);
             box-shadow: 0px 0px 5px rgba(0,0,0,0.3);
+            white-space: nowrap;
+            letter-spacing: 1px;
           }
         }
       }
@@ -951,14 +955,14 @@ header{
                 span{
                   text-transform: none;
                   white-space: normal;
-      
+
                   &.quantity{
                     -webkit-box-flex: 1;
                     -ms-flex: 1;
                     flex: 1;
                     white-space: normal;
                   }
-      
+
                   &.amount{
                     min-width: 110px;
                     white-space: nowrap;

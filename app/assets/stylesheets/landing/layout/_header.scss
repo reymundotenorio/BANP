@@ -386,6 +386,9 @@
     border-radius: 100%;
     -webkit-box-shadow: 0px 0px 5px rgba(0,0,0,0.3);
     box-shadow: 0px 0px 5px rgba(0,0,0,0.3);
+
+    white-space: nowrap;
+    letter-spacing: 1px;
   }
 }
 
@@ -449,7 +452,7 @@
 
           span{
             font-weight: 400;
-     
+
             &.quantity{
               -webkit-box-flex: 1;
               -ms-flex: 1;
@@ -617,6 +620,9 @@
             border-radius: 100%;
             -webkit-box-shadow: 0px 0px 5px rgba(0,0,0,0.3);
             box-shadow: 0px 0px 5px rgba(0,0,0,0.3);
+
+            white-space: nowrap;
+            letter-spacing: 1px;
           }
         }
       }

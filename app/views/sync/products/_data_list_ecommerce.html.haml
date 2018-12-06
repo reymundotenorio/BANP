@@ -1,5 +1,5 @@
-.card
-  %div{class: "card-image #{product.state}"}
+%div{class: "card #{product.state}"}
+  .card-image
     -# Image
     - if product.image.attached?
       = image_tag url_for(product.image), class: "img-responsive"
@@ -22,7 +22,7 @@
           %button.add{name: "plus", type: "button"}
             %span.sr-only plus
             %i.fas.fa-plus
-            
+
           %input#productId{name: "productId", type: "hidden", value: "#{product.id}"}/
 
         %button.addToCart.btn.btn-general.add-btn{name: "add", type: "button"}= t("views.products.add_cart")
