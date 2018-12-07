@@ -1,0 +1,2 @@
+module Authentication::SessionsHelper
+end
