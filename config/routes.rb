@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
   namespace :authentication do
+    get 'unlocks/new'
+    get 'unlocks/show'
+  end
+  namespace :authentication do
     get 'sessions/new'
     get 'sessions/two_factor'
   end
