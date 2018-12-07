@@ -32,9 +32,7 @@
                     .border-bottom
 
                   .form-group.static
-                    %label.switch
-                      = f.check_box :two_factor_auth, {class: ""}, true, false
-                      %span.slider.round
+                    = f.check_box :two_factor_auth, {class: ""}, "true", "false"
                     %label.checkbox
                       %b= t("activerecord.attributes.employee.two_factor_auth")
 

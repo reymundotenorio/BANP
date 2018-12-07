@@ -29,7 +29,16 @@ class Admin::UsersController < ApplicationController
   end
 
   def create_employee_user
-    @user = @employee.build_user(user_params)
+    create_params = user_params
+
+    if create_params[:two_factor_auth] == "true"
+      create_params[:two_factor_auth] = true
+      
+    else
+      create_params[:two_factor_auth] = false
+    end
+
+    @user = @employee.build_user(create_params)
 
     if @user.save
       send_confirmation_email
@@ -45,8 +54,15 @@ class Admin::UsersController < ApplicationController
   # Change password
   def employee_change_password
     @user = @employee.user
+    update_params = user_params
 
-    if @user.update(user_params)
+    if update_params[:two_factor_auth] == "true"
+      update_params[:two_factor_auth] = true
+    else
+      update_params[:two_factor_auth] = false
+    end
+
+    if @user.update(update_params)
       redirect_to [:admin, @employee], notice: t("views.mailer.password_updated")
 
     else
@@ -90,6 +106,6 @@ class Admin::UsersController < ApplicationController
 
   # User params
   def user_params
-    params.require(:user).permit(:email, :password, :password_confirmation)
+    params.require(:user).permit(:email, :password, :password_confirmation, :two_factor_auth)
   end
 end
