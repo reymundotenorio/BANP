@@ -16,7 +16,7 @@
 
             .col-xs-12.no-padding.form
               -# Form
-              = form_for :resend_confirmation, url: admin_resend_confirmation_path, html: {autocomplete: "on"} do |f|
+              = form_for :resend_confirmation, url: resend_confirmation_path, html: {autocomplete: "on"} do |f|
                 .col-xs-12.no-padding
                   .form-info
                     .form-group
@@ -42,7 +42,7 @@
             .col-xs-12.no-padding.redirect-container
               -# Redirect links
               %p
-                = link_to (admin_root_path), title: "t('views.errors.back_to_home')" do
+                = link_to (root_path), title: "t('views.errors.back_to_home')" do
                   %i.fas.fa-undo-alt
                   %span= t("views.errors.back_to_home")
               -# End Redirect links

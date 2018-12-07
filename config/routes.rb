@@ -1,4 +1,11 @@
 Rails.application.routes.draw do
+  namespace :authentication do
+    get 'notifications/index'
+  end
+  namespace :authentication do
+    get 'confirmations/new'
+    get 'confirmations/show'
+  end
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
   # Change language

@@ -1,27 +1,27 @@
-class Admin::Authentication::ConfirmationsController < ApplicationController
-  # Authentication layout
+class Authentication::ConfirmationsController < ApplicationController
+   # Authentication layout
   layout "admin/authentication"
   # End Authentication layout
 
-  # /confirm-employee-account
+  # /confirm-costumer-account
   def new
     @email = params[:email]
     @email = @email.blank? ? "" : @email.strip.downcase
   end
 
-  # /confirm-employee-account/:confirmation_token
+  # /confirm-costumer-account/:confirmation_token
   def show
     @token = params[:confirmation_token]
 
     # If token has been found
     if set_user
-      # Verify if user is not employee
-      if !user_is_employee?
+      # Verify if user is not costumer
+      if !user_is_costumer?
         return
       end
 
       # If user is disabled
-      if !employee_enabled?
+      if !costumer_enabled?
         return
       end
 
@@ -35,28 +35,16 @@ class Admin::Authentication::ConfirmationsController < ApplicationController
         @user.update(confirmed: true)
         @user.update(confirmation_sent: false)
 
-        # If user is not a costumer
-        generate_token_password
-        @user.update(reset_password_sent: false)
-        @user.update(reset_password_token: @token_password)
-        @user.update(reset_password_sent_at: nil)
-
+        # If user is a client
         # Render Sync with external controller
         sync_update @user
 
-        redirect_to admin_reset_employee_password_path(reset_password_token: @token_password, employee_password: true), notice: t("views.authentication.successfully_confirmed", email: @user.email)
+        redirect_to auth_notifications_path, notice: t("views.authentication.successfully_confirmed", email: @user.email)
         return
-
-        # If user is a costumer
-        # Render Sync with external controller
-        # sync_update @user
-
-        # redirect_to admin_auth_notifications_path, notice: t("views.authentication.successfully_confirmed", email: @user.email)
-        # return
 
         # If user is already confirmed
       else
-        redirect_to admin_auth_notifications_path, notice:  t("views.authentication.account_confirmed", email: @user.email)
+        redirect_to auth_notifications_path, notice:  t("views.authentication.account_confirmed", email: @user.email)
         return
       end
     end
@@ -69,7 +57,7 @@ class Admin::Authentication::ConfirmationsController < ApplicationController
       return true
 
     else
-      redirect_to admin_auth_notifications_path(source: "reset-password"), alert: t("views.authentication.token_not_found", token: @token)
+      redirect_to auth_notifications_path(source: "reset-password"), alert: t("views.authentication.token_not_found", token: @token)
       return false
     end
   end
@@ -81,19 +69,19 @@ class Admin::Authentication::ConfirmationsController < ApplicationController
 
     # Verify recaptcha
     if !verify_recaptcha
-      redirect_to admin_confirm_account_path(email: email), alert: t("views.form.recaptcha_error")
+      redirect_to confirm_account_path(email: email), alert: t("views.form.recaptcha_error")
       return
     end
 
     # If email has been found
     if @user = User.find_by(email: email)
-      # Verify if user is not employee
-      if !user_is_employee?
+      # Verify if user is not costumer
+      if !user_is_costumer?
         return
       end
 
-      # If employee is disabled
-      if !employee_enabled?
+      # If costumer is disabled
+      if !costumer_enabled?
         return
       end
 
@@ -104,7 +92,7 @@ class Admin::Authentication::ConfirmationsController < ApplicationController
 
       # If email has not been found
     else
-      redirect_to admin_auth_notifications_path(source: "confirmation"), alert: t("views.authentication.email_not_found", email: email)
+      redirect_to auth_notifications_path(source: "confirmation"), alert: t("views.authentication.email_not_found", email: email)
       return
     end
 
