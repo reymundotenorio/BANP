@@ -1,0 +1,2 @@
+module Authentication::PasswordsHelper
+end

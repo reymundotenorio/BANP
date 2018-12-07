@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
   namespace :authentication do
+    get 'passwords/new'
+    get 'passwords/show'
+  end
+  namespace :authentication do
     get 'notifications/index'
   end
   namespace :authentication do

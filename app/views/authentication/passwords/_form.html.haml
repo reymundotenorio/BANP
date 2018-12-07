@@ -1,0 +1,60 @@
+-# Form
+= form_for @user, url: update_password_path, html: {autocomplete: "off"} do |f|
+  %section.form
+    .container
+      .row
+        .col-xs-12.col-sm-10.col-sm-offset-1.col-md-8.col-md-offset-2
+          -# Material card
+          %div{class: "material-card shadow-card #{@costumer.state}"}
+            .row.no-margin
+              -# Flash notifications
+              = render "admin/partials/authentication_flash"
+              -# End Flash notifications
+
+              .col-xs-12.no-padding
+                -# Instructions
+                %h1.text-center= t("views.mailer.reset_password")
+                %p.text-center= t("views.authentication.password_reset", email: @user.email)
+                -# End Instructions
+
+              .col-xs-12.no-padding.auth-alerts
+                -# Show errors
+                = render partial: "admin/partials/form_errors", locals: {resource: @user, model: User}
+                -# End Show errors
+
+              .col-xs-12.no-padding
+                .form-info
+                  .form-group
+                    = f.password_field :password, class: "form-control input", placeholder: t("activerecord.attributes.user.password"), required: true
+                    %label
+                      %b= t("activerecord.attributes.user.password")
+                    .border-bottom
+
+                  .form-group
+                    = f.password_field :password_confirmation, class: "form-control input", placeholder: t("activerecord.attributes.user.password_confirmation"), required: true
+                    %label
+                      %b= t("activerecord.attributes.user.password_confirmation")
+                    .border-bottom
+
+                  -# Token
+                  = hidden_field_tag "token", @token
+                  -# End Token
+
+                  -# Recaptcha
+                  .form-group.text-center
+                    = recaptcha_tags id: "recaptcha-center", hl: I18n.locale
+                  -# End Recaptcha
+
+                  -# Buttons
+                  .main-buttons
+                    .col-xs-12.col-sm-12.button-container.center.no-padding
+                      = f.button class: "btn btn-general", data: {disable_with: "<i class='fas fa-spinner fa-spin'></i>"} do
+                        %i.fas.fa-save
+                        %span= t("views.form.save")
+                  -# End Buttons
+          -# End Material card
+-# End Form
+
+-# Form script
+= javascript_include_tag "form", "data-turbolinks-track": "reload"
+-# End Form script
