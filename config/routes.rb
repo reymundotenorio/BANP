@@ -1,23 +1,4 @@
 Rails.application.routes.draw do
-  namespace :authentication do
-    get 'unlocks/new'
-    get 'unlocks/show'
-  end
-  namespace :authentication do
-    get 'sessions/new'
-    get 'sessions/two_factor'
-  end
-  namespace :authentication do
-    get 'passwords/new'
-    get 'passwords/show'
-  end
-  namespace :authentication do
-    get 'notifications/index'
-  end
-  namespace :authentication do
-    get 'confirmations/new'
-    get 'confirmations/show'
-  end
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
   # Change language
@@ -37,6 +18,42 @@ Rails.application.routes.draw do
   get "/product/:id", to: "products#show", as: "product"
   # End Products
 
+  # Authentications
+
+  # Notifications
+  get "/authentication/notifications", to: "authentication/notifications#index", as: "auth_notifications"
+  # End Notifications
+
+  # Sessions
+  get "/sign-in", to: "authentication/sessions#new", as: "sign_in"
+  get "/two-factor", to: "authentication/sessions#two_factor", as: "two_factor"
+  post "/sign-in", to: "authentication/sessions#create", as: "sign_in_costumer"
+  post "/two-factor", to: "authentication/sessions#two_factor_auth", as: "two_factor_auth"
+  patch "/resend-otp", to: "authentication/sessions#resend_otp", as: "resend_otp"
+  delete "/sign-out", to: "authentication/sessions#destroy", as: "sign_out"
+  # End Sessions
+
+  # Confirmations
+  get '/confirm-account', to: 'authentication/confirmations#new', as: 'confirm_account'
+  get '/confirm-costumer-account/:confirmation_token', to: 'authentication/confirmations#show', as: 'confirm_costumer_account'
+  post "/confirm-account", to: "authentication/confirmations#send_confirmation_email", as: "resend_confirmation"
+  # End Confirmations
+
+  # Unlocks
+  get '/unlock-account', to: 'authentication/unlocks#new', as: 'unlock_account'
+  get '/unlock-costumer-account/:unlock_token', to: 'authentication/unlocks#show', as: 'unlock_costumer_account'
+  post "/unlock-account", to: "authentication/unlocks#send_unlock_email", as: "resend_unlock"
+  # End Unlocks
+  
+  # Passwords
+  get "/reset-password", to: "authentication/passwords#new", as: "reset_password"
+  get "/reset-costumer-password/:reset_password_token", to: "authentication/passwords#show", as: "reset_costumer_password"
+  post "/reset-password", to: "authentication/passwords#send_reset_password_email", as: "resend_reset_password"
+  patch "/reset-costumer-password", to: "authentication/passwords#update_password", as: "update_password"
+  # End Passwords
+
+  # End Authentications
+
   # Admin namespace
   namespace :admin do
     # Root
@@ -47,6 +64,7 @@ Rails.application.routes.draw do
 
     # Notifications
     get "/authentication/notifications", to: "authentication/notifications#index", as: "auth_notifications"
+    # End Notifications
 
     # Sessions
     get "/sign-in", to: "authentication/sessions#new", as: "sign_in"
@@ -55,22 +73,26 @@ Rails.application.routes.draw do
     post "/two-factor", to: "authentication/sessions#two_factor_auth", as: "two_factor_auth"
     patch "/resend-otp", to: "authentication/sessions#resend_otp", as: "resend_otp"
     delete "/sign-out", to: "authentication/sessions#destroy", as: "sign_out"
+    # End Sessions
 
     # Confirmations
     get '/confirm-account', to: 'authentication/confirmations#new', as: 'confirm_account'
     get '/confirm-employee-account/:confirmation_token', to: 'authentication/confirmations#show', as: 'confirm_employee_account'
     post "/confirm-account", to: "authentication/confirmations#send_confirmation_email", as: "resend_confirmation"
+    # End Confirmations
 
     # Unlocks
     get '/unlock-account', to: 'authentication/unlocks#new', as: 'unlock_account'
     get '/unlock-employee-account/:unlock_token', to: 'authentication/unlocks#show', as: 'unlock_employee_account'
     post "/unlock-account", to: "authentication/unlocks#send_unlock_email", as: "resend_unlock"
+    # End Unlocks
 
     # Passwords
     get "/reset-password", to: "authentication/passwords#new", as: "reset_password"
     get "/reset-employee-password/:reset_password_token", to: "authentication/passwords#show", as: "reset_employee_password"
     post "/reset-password", to: "authentication/passwords#send_reset_password_email", as: "resend_reset_password"
     patch "/reset-employee-password", to: "authentication/passwords#update_password", as: "update_password"
+    # End Passwords
 
     # End Authentications
 
