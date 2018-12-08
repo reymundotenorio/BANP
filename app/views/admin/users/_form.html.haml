@@ -5,7 +5,7 @@
       .row
         .col-xs-12.col-sm-10.col-sm-offset-1.col-md-8.col-md-offset-2
           -# Show errors
-          = render partial: "admin/partials/form_errors", locals: {resource: @user, model: User}
+          = render partial: "partials/form_errors", locals: {resource: @user, model: User}
           -# End Show errors
 
         .col-xs-12.col-sm-10.col-sm-offset-1.col-md-8.col-md-offset-2
@@ -20,21 +20,23 @@
                   -# End Email
 
                   .form-group
-                    = f.password_field :password, class: "form-control input", placeholder: t("activerecord.attributes.employee.password"), required: true
+                    = f.password_field :password, class: "form-control input", placeholder: t("activerecord.attributes.user.password"), required: @required
                     %label
-                      %b= t("activerecord.attributes.employee.password")
+                      %b= t("activerecord.attributes.user.password")
                     .border-bottom
 
                   .form-group
-                    = f.password_field :password_confirmation, class: "form-control input", placeholder: t("activerecord.attributes.employee.password_confirmation"), required: true
+                    = f.password_field :password_confirmation, class: "form-control input", placeholder: t("activerecord.attributes.user.password_confirmation"), required: @required
                     %label
-                      %b= t("activerecord.attributes.employee.password_confirmation")
+                      %b= t("activerecord.attributes.user.password_confirmation")
                     .border-bottom
 
                   .form-group.static
-                    = f.check_box :two_factor_auth, {class: ""}, "true", "false"
+                    .toggle#switcherToggle
+                      = f.check_box :two_factor_auth, {class: "check", id: "switcher"}, "true", "false"
+                      %b.b.switch
                     %label.checkbox
-                      %b= t("activerecord.attributes.employee.two_factor_auth")
+                      %b= t("activerecord.attributes.user.two_factor_auth")
 
                   -# Buttons
                   .main-buttons

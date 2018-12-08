@@ -3,7 +3,7 @@ class Admin::Authentication::NotificationsController < ApplicationController
   layout "admin/authentication"
   # End Authentication layout
 
-  # /authentication/notifications
+  # admin/authentication/notifications
   def index
     @source = params[:source]
     @source = "not-found" unless @source

@@ -8,7 +8,7 @@
 
 
         -# Render table header
-        = render partial: "admin/partials/table_header", locals: {model: model, attributes: attributes}
+        = render partial: "partials/table_header", locals: {model: model, attributes: attributes}
 
         - if I18n.locale == :es
           - attributes = ["name_spanish", "barcode", "price", "content_spanish"]

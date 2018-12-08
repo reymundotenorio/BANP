@@ -3,13 +3,13 @@ class Admin::Authentication::ConfirmationsController < ApplicationController
   layout "admin/authentication"
   # End Authentication layout
 
-  # /confirm-employee-account
+  # admin/confirm-employee-account
   def new
     @email = params[:email]
     @email = @email.blank? ? "" : @email.strip.downcase
   end
 
-  # /confirm-employee-account/:confirmation_token
+  # admin/confirm-employee-account/:confirmation_token
   def show
     @token = params[:confirmation_token]
 

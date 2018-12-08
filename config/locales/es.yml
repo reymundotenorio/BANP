@@ -217,7 +217,7 @@ es:
       unlock_account_link: "Puede desbloquear su cuenta haciendo clic en el siguiente enlace"
       reset_password_button_link: "Puede restablecer su contraseña haciendo clic en el botón o a través del enlace"
       reset_password_link: "Puede restablecer su contraseña haciendo clic en el siguiente enlace"
-      password_updated: "Su contraseña ha sido actualizada"
+      password_and_2FA_updated: "Su contraseña y la autenticación de dos factores ha sido actualizada"
       password_updated_button_link: "Si no fue la persona que cambió la contraseña de su cuenta, puede solicitar que se le reenvíen las instrucciones para restablecer su contraseña haciendo clic en el botón o a través del enlace"
       password_updated_link: "Su contraseña ha sido actualizada. Si usted no fue la persona que cambió la contraseña de su cuenta, puede solicitar que se le reenvíen las instrucciones para restablecer su contraseña haciendo clic en el siguiente enlace"
       confirm_account: "Confirmar cuenta"

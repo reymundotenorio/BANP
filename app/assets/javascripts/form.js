@@ -57,9 +57,29 @@ $(document).on("turbolinks:load", function() {
   });
 
   // Open dropdown on input focus and add focus to dropdown-menu first item
-  $( "#employee_role" ).focus(function() {
+  $("#employee_role").focus(function() {
     $("#role-dropdown").addClass("open");
     $("#role-dropdown .dropdown-menu li:first-child .dropdown-item").focus();
+  });
+
+
+  // Change iOS toggle status
+  $("#switcher").each(function(){
+    if (this.checked) {
+      $("#switcherToggle").addClass("active");
+    }
+    else{
+      $("#switcherToggle").removeClass("active");
+    }
+  });
+
+  $("#switcher").change(function(){
+    if (this.checked) {
+      $("#switcherToggle").addClass("active");
+    }
+    else{
+      $("#switcherToggle").removeClass("active");
+    }
   });
 
 });

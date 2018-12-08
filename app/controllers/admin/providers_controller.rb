@@ -15,7 +15,7 @@ class Admin::ProvidersController < ApplicationController
   # before_action :require_employee
   # End Authentication
 
-  # /providers
+  # admin/providers
   def index
     @providers = Provider.search(params[:search], params[:show]).paginate(page: params[:page], per_page: 15) # Providers with pagination
     @show_all = params[:show] == "all" ? true : false # View All (Enabled and Disabled)
@@ -41,12 +41,12 @@ class Admin::ProvidersController < ApplicationController
     end
   end
 
-  # /provider/new
+  # admin/provider/new
   def new
     @provider = Provider.new
   end
 
-  # /provider/:id)
+  # admin/provider/:id)
   def show
     # Provider found by before_action
 
@@ -70,12 +70,12 @@ class Admin::ProvidersController < ApplicationController
     end
   end
 
-  # /provider/:id/edit
+  # admin/provider/:id/edit
   def edit
     # Provider found by before_action
   end
 
-  # /provider/:id/history
+  # admin/provider/:id/history
   def history
     # Provider found by before_action
 

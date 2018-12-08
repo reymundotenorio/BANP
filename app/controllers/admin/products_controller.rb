@@ -15,7 +15,7 @@ class Admin::ProductsController < ApplicationController
   # before_action :require_employee
   # End Authentication
 
-  # /products
+  # admin/products
   def index
     @products = Product.search(params[:search], params[:show]).paginate(page: params[:page], per_page: 15) # Products with pagination
     @show_all = params[:show] == "all" ? true : false # View All (Enabled and Disabled)
@@ -41,7 +41,7 @@ class Admin::ProductsController < ApplicationController
     end
   end
 
-  # /product/new
+  # admin/product/new
   def new
     @product = Product.new
 
@@ -54,7 +54,7 @@ class Admin::ProductsController < ApplicationController
     end
   end
 
-  # /product/:id
+  # admin/product/:id
   def show
     # Product found by before_action
 
@@ -78,7 +78,7 @@ class Admin::ProductsController < ApplicationController
     end
   end
 
-  # /product/:id/edit
+  # admin/product/:id/edit
   def edit
     # Product found by before_action
 
@@ -91,7 +91,7 @@ class Admin::ProductsController < ApplicationController
     end
   end
 
-  # /product/:id/history
+  # admin/product/:id/history
   def history
     # Product found by before_action
 

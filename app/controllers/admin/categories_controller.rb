@@ -15,7 +15,7 @@ class Admin::CategoriesController < ApplicationController
   # before_action :require_employee
   # End Authentication
 
-  # /categories
+  # admin/categories
   def index
     @categories = Category.search(params[:search], params[:show]).paginate(page: params[:page], per_page: 15) # Categories with pagination
     @show_all = params[:show] == "all" ? true : false # View All (Enabled and Disabled)
@@ -41,12 +41,12 @@ class Admin::CategoriesController < ApplicationController
     end
   end
 
-  # /category/new
+  # admin/category/new
   def new
     @category = Category.new
   end
 
-  # /category/:id)
+  # admin/category/:id)
   def show
     # Category found by before_action
 
@@ -70,12 +70,12 @@ class Admin::CategoriesController < ApplicationController
     end
   end
 
-  # /category/:id/edit
+  # admin/category/:id/edit
   def edit
     # Category found by before_action
   end
 
-  # /category/:id/history
+  # admin/category/:id/history
   def history
     # Category found by before_action
 

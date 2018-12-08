@@ -3,13 +3,13 @@ class Admin::Authentication::UnlocksController < ApplicationController
   layout "admin/authentication"
   # End Authentication layout
 
-  # /unlock-employee-account
+  # admin/unlock-employee-account
   def new
     @email = params[:email]
     @email = @email.blank? ? "" : @email.strip.downcase
   end
 
-  # /unlock-employee-account/:unlock_token
+  # admin/unlock-employee-account/:unlock_token
   def show
     @token = params[:unlock_token]
 

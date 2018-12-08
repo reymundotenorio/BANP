@@ -8,7 +8,7 @@
           %div{class: "material-card shadow-card #{@employee.state}"}
             .row.no-margin
               -# Flash notifications
-              = render "admin/partials/authentication_flash"
+              = render "partials/authentication_flash"
               -# End Flash notifications
 
               .col-xs-12.no-padding
@@ -20,7 +20,7 @@
 
               .col-xs-12.no-padding.auth-alerts
                 -# Show errors
-                = render partial: "admin/partials/form_errors", locals: {resource: @user, model: User}
+                = render partial: "partials/form_errors", locals: {resource: @user, model: User}
                 -# End Show errors
 
               .col-xs-12.no-padding

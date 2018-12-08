@@ -217,7 +217,7 @@ en:
       unlock_account_link: "You can unlock your account by clicking on the following link"
       reset_password_button_link: "You can reset your password by clicking on the button or through the link"
       reset_password_link: "You can reset your password by clicking on the following link"
-      password_updated: "Your password has been updated"
+      password_and_2FA_updated: "Your password and the two factor authentication has been updated"
       password_updated_button_link: "If you were not the person who changed the password of your account, you can request to resend the instructions to reset your password by clicking on the button or through the link"
       password_updated_link: "Your password has been updated. If you were not the person who changed the password of your account, you can request to resend the instructions to reset your password by clicking on the following link"
       confirm_account: "Confirm account"

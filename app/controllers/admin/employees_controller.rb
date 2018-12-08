@@ -16,7 +16,7 @@ class Admin::EmployeesController < ApplicationController
   # before_action :require_employee
   # End Authentication
 
-  # /employees
+  # admin/employees
   def index
     @employees = Employee.search(params[:search], params[:show]).paginate(page: params[:page], per_page: 15) # Employees with pagination
     @show_all = params[:show] == "all" ? true : false # View All (Enabled and Disabled)
@@ -42,12 +42,12 @@ class Admin::EmployeesController < ApplicationController
     end
   end
 
-  # /employee/new
+  # admin/employee/new
   def new
     @employee = Employee.new
   end
 
-  # /employee/:id)
+  # admin/employee/:id)
   def show
     # Employee found by before_action
 
@@ -71,12 +71,12 @@ class Admin::EmployeesController < ApplicationController
     end
   end
 
-  # /employee/:id/edit
+  # admin/employee/:id/edit
   def edit
     # Employee found by before_action
   end
 
-  # /employee/:id/history
+  # admin/employee/:id/history
   def history
     # Employee found by before_action
 

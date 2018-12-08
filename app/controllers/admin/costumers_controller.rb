@@ -2,7 +2,7 @@ class Admin::CostumersController < ApplicationController
   # Admin layout
   layout "admin/application"
   # End Admin layout
-
+  
   # Find costumers with Friendly_ID
   before_action :set_costumer, only: [:show, :edit, :update, :active, :deactive, :history]
   # End Find costumers with Friendly_ID

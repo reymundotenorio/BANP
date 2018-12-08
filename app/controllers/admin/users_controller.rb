@@ -11,7 +11,7 @@ class Admin::UsersController < ApplicationController
   enable_sync only: [:create_employee_user, :employee_change_password, :send_confirmation_email]
   # End Sync model DSL
 
-  # /employee/:id/create-user
+  # admin/employee/:id/create-user
   def new_employee_user
     if @employee.user.present?
       redirect_to admin_employee_path(@employee), alert: t("views.authentication.employee_user_exists")
@@ -20,12 +20,14 @@ class Admin::UsersController < ApplicationController
 
     @user = User.new
     @form_url = admin_create_employee_user_path
+    @required = true
   end
 
-  # /employee/:id/update-password
+  # admin/employee/:id/update-password
   def employee_update_password
     @user = @employee.user
     @form_url = admin_change_password_employee_path
+    @required = false
   end
 
   def create_employee_user
@@ -33,7 +35,7 @@ class Admin::UsersController < ApplicationController
 
     if create_params[:two_factor_auth] == "true"
       create_params[:two_factor_auth] = true
-      
+
     else
       create_params[:two_factor_auth] = false
     end
@@ -63,7 +65,7 @@ class Admin::UsersController < ApplicationController
     end
 
     if @user.update(update_params)
-      redirect_to [:admin, @employee], notice: t("views.mailer.password_updated")
+      redirect_to [:admin, @employee], notice: t("views.mailer.password_and_2FA_updated")
 
     else
       @form_url = admin_change_password_employee_path

@@ -7,13 +7,13 @@ class Admin::Authentication::PasswordsController < ApplicationController
   before_action :require_employee, only: [:edit_password]
   # End Authentication
 
-  # /resend-reset-password
+  # admin/resend-reset-password
   def new
     @email = params[:email]
     @email = @email.blank? ? "" : @email.strip.downcase
   end
 
-  # /resend-reset-password/:reset_password_token
+  # admin/resend-reset-password/:reset_password_token
   def show
     @token = params[:reset_password_token]
     @employee_password = params[:employee_password]

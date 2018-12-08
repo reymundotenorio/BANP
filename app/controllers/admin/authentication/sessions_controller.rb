@@ -3,7 +3,7 @@ class Admin::Authentication::SessionsController < ApplicationController
   layout "admin/authentication"
   # End Authentication layout
 
-  # /sign-in
+  # admin/sign-in
   def new
     # Redirect if user is not authenticated with two factor yet
     if session[:employee_id] && session[:session_confirmed] == false
@@ -18,6 +18,23 @@ class Admin::Authentication::SessionsController < ApplicationController
 
     @email = params[:email]
     @email = @email.blank? ? "" : @email.strip.downcase
+  end
+  
+  # admin/sign-out
+  def destroy
+    @email = params[:email]
+
+    session[:employee_id] = nil
+    session[:session_confirmed] = nil
+
+    if @email
+      redirect_to admin_sign_in_path(email: @email), notice: t("views.authentication.locked_correctly")
+      return
+
+    else
+      redirect_to admin_sign_in_path, notice: t("views.authentication.signed_out_correctly")
+      return
+    end
   end
 
   # Sign in
@@ -305,22 +322,5 @@ class Admin::Authentication::SessionsController < ApplicationController
     sync_update @user
 
     failed_attempts
-  end
-
-  # /sign-out
-  def destroy
-    @email = params[:email]
-
-    session[:employee_id] = nil
-    session[:session_confirmed] = nil
-
-    if @email
-      redirect_to admin_sign_in_path(email: @email), notice: t("views.authentication.locked_correctly")
-      return
-
-    else
-      redirect_to admin_sign_in_path, notice: t("views.authentication.signed_out_correctly")
-      return
-    end
   end
 end

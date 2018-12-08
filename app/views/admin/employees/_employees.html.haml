@@ -7,7 +7,7 @@
         - attributes = ["first_name", "last_name", "email" ,"phone", "role"]
 
         -# Render table header
-        = render partial: "admin/partials/table_header", locals: {model: model, attributes: attributes}
+        = render partial: "partials/table_header", locals: {model: model, attributes: attributes}
 
       %tbody
         -# Data table Sync
