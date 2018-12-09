@@ -107,7 +107,7 @@ class Admin::Authentication::UnlocksController < ApplicationController
     location = Geocoder.search(ip).first.country
 
     # Send email
-    AuthenticationMailer.unlock_instructions(@user, @token, I18n.locale, ip, location).deliver
+    AdminAuthenticationMailer.unlock_instructions(@user, @token, I18n.locale, ip, location).deliver
 
     flash.now[:notice] = t("views.authentication.email_sent", email: @user.email)
     render :new

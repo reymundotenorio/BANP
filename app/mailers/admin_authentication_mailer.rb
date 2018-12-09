@@ -5,12 +5,12 @@ class AuthenticationMailer < ApplicationMailer
 
   # Default options
   default from: "betterandniceproduce@gmail.com"
-  default template_path: "authentication/mailer"
+  default template_path: "admin/authentication/mailer"
   # End Default options
 
   def confirmation_instructions(user, token, locale, ip, location)
     @user = user
-    @costumer = user.costumer
+    @employee = user.employee
     @token = token
     @ip = ip
     @location = location
@@ -22,7 +22,7 @@ class AuthenticationMailer < ApplicationMailer
 
   def unlock_instructions(user, token, locale, ip, location)
     @user = user
-    @costumer = user.costumer
+    @employee = user.employee
     @token = token
     @ip = ip
     @location = location
@@ -34,7 +34,7 @@ class AuthenticationMailer < ApplicationMailer
 
   def reset_password_instructions(user, token, locale, ip, location)
     @user = user
-    @costumer = user.costumer
+    @employee = user.employee
     @token = token
     @ip = ip
     @location = location
@@ -46,7 +46,7 @@ class AuthenticationMailer < ApplicationMailer
 
   def update_password(user, locale, ip, location)
     @user = user
-    @costumer = user.costumer
+    @employee = user.employee
     @ip = ip
     @location = location
 

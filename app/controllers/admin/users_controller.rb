@@ -155,7 +155,7 @@ class Admin::UsersController < ApplicationController
       @employee.user.update_attribute(:confirmation_token, @token)
 
       # Send email
-      AuthenticationMailer.confirmation_instructions(@employee.user, @token, I18n.locale, ip, location).deliver
+      AdminAuthenticationMailer.confirmation_instructions(@employee.user, @token, I18n.locale, ip, location).deliver
     end
 
     if @costumer
@@ -163,7 +163,7 @@ class Admin::UsersController < ApplicationController
       @costumer.user.update_attribute(:confirmation_token, @token)
       
       # Send email
-      AuthenticationMailer.confirmation_instructions(@costumer.user, @token, I18n.locale, ip, location).deliver
+      AdminAuthenticationMailer.confirmation_instructions(@costumer.user, @token, I18n.locale, ip, location).deliver
     end
   end
 

@@ -121,7 +121,7 @@ class Admin::Authentication::ConfirmationsController < ApplicationController
     location = Geocoder.search(ip).first.country
 
     # Send email
-    AuthenticationMailer.confirmation_instructions(@user, @token, I18n.locale, ip, location).deliver
+    AdminAuthenticationMailer.confirmation_instructions(@user, @token, I18n.locale, ip, location).deliver
 
     flash.now[:notice] = t("views.authentication.email_sent", email: @user.email)
     render :new

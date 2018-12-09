@@ -155,7 +155,7 @@ class Admin::Authentication::PasswordsController < ApplicationController
     location = Geocoder.search(ip).first.country
 
     # Send email
-    AuthenticationMailer.reset_password_instructions(@user, @token, I18n.locale, ip, location).deliver
+    AdminAuthenticationMailer.reset_password_instructions(@user, @token, I18n.locale, ip, location).deliver
 
     redirect_to admin_auth_notifications_path, notice: t("views.authentication.email_sent", email: @user.email)
   end
@@ -169,7 +169,7 @@ class Admin::Authentication::PasswordsController < ApplicationController
     send_sms(@employee.phone, "BANP - #{t('views.mailer.greetings')} #{@employee.first_name} #{@employee.last_name}, #{t('views.mailer.password_updated_link')}: #{admin_reset_password_url(email: @user.email)}")
 
     # Send email
-    AuthenticationMailer.update_password(@user, I18n.locale, ip, location).deliver
+    AdminAuthenticationMailer.update_password(@user, I18n.locale, ip, location).deliver
   end
 
   # Generate token

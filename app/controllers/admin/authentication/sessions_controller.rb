@@ -263,7 +263,7 @@ class Admin::Authentication::SessionsController < ApplicationController
     send_sms(@employee.phone, "BANP - #{t('views.mailer.greetings')} #{@employee.first_name}. #{t('views.mailer.unlock_account_link')}: #{admin_unlock_employee_account_url(unlock_token: @token)}")
 
     # Send email
-    AuthenticationMailer.unlock_instructions(@user, @token, I18n.locale, ip, location).deliver
+    AdminAuthenticationMailer.unlock_instructions(@user, @token, I18n.locale, ip, location).deliver
   end
 
   # Generate token
