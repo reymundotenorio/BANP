@@ -146,7 +146,6 @@ class Admin::UsersController < ApplicationController
     # Generate random token
     generate_token
 
-
     ip = request.remote_ip
     location = Geocoder.search(ip).first.country
 
@@ -161,9 +160,9 @@ class Admin::UsersController < ApplicationController
     if @costumer
       @costumer.user.update_attribute(:confirmation_sent, true)
       @costumer.user.update_attribute(:confirmation_token, @token)
-      
+
       # Send email
-      AdminAuthenticationMailer.confirmation_instructions(@costumer.user, @token, I18n.locale, ip, location).deliver
+      AuthenticationMailer.confirmation_instructions(@costumer.user, @token, I18n.locale, ip, location).deliver
     end
   end
 
