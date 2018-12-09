@@ -1,8 +1,8 @@
-$(document).on("turbolinks:load", function() {
-  // $(document).ready(function() {
+$(document).on("turbolinks:load", function(){
+  // $(document).ready(function(){
 
   // Select Category
-  $(".select-category").click(function() {
+  $(".select-category").click(function(){
     category_id = $(this).attr('data-id');
     category_name = $(this).attr('data-name');
 

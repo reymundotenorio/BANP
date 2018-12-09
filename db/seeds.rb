@@ -14,13 +14,13 @@ puts "Seeding employees"
 20.times do |count|
   begin
     Employee.create(
-    id: (count + 1),
-    first_name: Faker::Name.first_name,
-    last_name: Faker::Name.last_name,
-    email: Faker::Internet.email,
-    phone: "(#{Faker::Number.number(3)}) #{Faker::Number.number(3)}-#{Faker::Number.number(4)}",
-    role: ["Administrator", "Seller", "Driver"].sample,
-    state: Faker::Boolean.boolean(0.8)
+      id: (count + 1),
+      first_name: Faker::Name.first_name,
+      last_name: Faker::Name.last_name,
+      email: Faker::Internet.email,
+      phone: "(#{Faker::Number.number(3)}) #{Faker::Number.number(3)}-#{Faker::Number.number(4)}",
+      role: ["Administrator", "Seller", "Driver"].sample,
+      state: Faker::Boolean.boolean(0.8)
     )
   rescue StandardError => e
     puts "Error found #{e.to_s}"
@@ -31,13 +31,13 @@ puts "Seeding prodivers"
 30.times do |count|
   begin
     Provider.create(
-    id: (count + 1),
-    name: Faker::Company.name,
-    FEIN: "#{Faker::Number.number(2)}-#{Faker::Number.number(7)}",
-    phone: "(#{Faker::Number.number(3)}) #{Faker::Number.number(3)}-#{Faker::Number.number(4)}",
-    email: Faker::Internet.email,
-    address: "#{Faker::Address.street_address}. #{Faker::Address.city}, #{Faker::Address.state} #{Faker::Address.zip_code}",
-    state: Faker::Boolean.boolean(0.8)
+      id: (count + 1),
+      name: Faker::Company.name,
+      FEIN: "#{Faker::Number.number(2)}-#{Faker::Number.number(7)}",
+      phone: "(#{Faker::Number.number(3)}) #{Faker::Number.number(3)}-#{Faker::Number.number(4)}",
+      email: Faker::Internet.email,
+      address: "#{Faker::Address.street_address}. #{Faker::Address.city}, #{Faker::Address.state} #{Faker::Address.zip_code}",
+      state: Faker::Boolean.boolean(0.8)
     )
   rescue StandardError => e
     puts "Error found #{e.to_s}"
@@ -50,11 +50,11 @@ count = 0
 categories_list.each do |name, name_spanish|
   begin
     Category.create(
-    id: (count + 1),
-    name: name,
-    name_spanish: name_spanish
+      id: (count + 1),
+      name: name,
+      name_spanish: name_spanish
     )
-  count += 1
+    count += 1
   rescue StandardError => e
     puts "Error found #{e.to_s}"
   end
@@ -64,19 +64,19 @@ puts "Seeding products"
 80.times do |count|
   begin
     Product.create(
-    id: (count + 1),
-    name: Faker::Food.dish,
-    name_spanish: Faker::Food.dish,
-    barcode: Faker::Code.ean,
-    price: Faker::Number.decimal(4, 2),
-    content: Faker::Food.measurement,
-    content_spanish: Faker::Food.measurement,
-    description: Faker::Food.description,
-    description_spanish: Faker::Food.description,
-    recipes: "#{Faker::Food.dish}, #{Faker::Food.dish}, #{Faker::Food.dish}",
-    recipes_spanish: "#{Faker::Food.dish}, #{Faker::Food.dish}, #{Faker::Food.dish}",
-    state: Faker::Boolean.boolean(0.8),
-    category_id: Faker::Number.between(1, 5)
+      id: (count + 1),
+      name: Faker::Food.dish,
+      name_spanish: Faker::Food.dish,
+      barcode: Faker::Code.ean,
+      price: Faker::Number.decimal(4, 2),
+      content: Faker::Food.measurement,
+      content_spanish: Faker::Food.measurement,
+      description: Faker::Food.description,
+      description_spanish: Faker::Food.description,
+      recipes: "#{Faker::Food.dish}, #{Faker::Food.dish}, #{Faker::Food.dish}",
+      recipes_spanish: "#{Faker::Food.dish}, #{Faker::Food.dish}, #{Faker::Food.dish}",
+      state: Faker::Boolean.boolean(0.8),
+      category_id: Faker::Number.between(1, 5)
     )
   rescue StandardError => e
     puts "Error found #{e.to_s}"
@@ -87,14 +87,14 @@ puts "Seeding costumers"
 25.times do |count|
   begin
     Costumer.create(
-    id: (count + 1),
-    first_name: Faker::Name.first_name,
-    last_name: Faker::Name.last_name,
-    company: Faker::Company.name,
-    email: Faker::Internet.email,
-    phone: "(#{Faker::Number.number(3)}) #{Faker::Number.number(3)}-#{Faker::Number.number(4)}",
-    address: "#{Faker::Address.street_address}. #{Faker::Address.city}, #{Faker::Address.state} #{Faker::Address.zip_code}",
-    state: Faker::Boolean.boolean(0.8)
+      id: (count + 1),
+      first_name: Faker::Name.first_name,
+      last_name: Faker::Name.last_name,
+      company: Faker::Company.name,
+      email: Faker::Internet.email,
+      phone: "(#{Faker::Number.number(3)}) #{Faker::Number.number(3)}-#{Faker::Number.number(4)}",
+      address: "#{Faker::Address.street_address}. #{Faker::Address.city}, #{Faker::Address.state} #{Faker::Address.zip_code}",
+      state: Faker::Boolean.boolean(0.8)
     )
   rescue StandardError => e
     puts "Error found #{e.to_s}"

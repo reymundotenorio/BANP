@@ -1,4 +1,4 @@
-$(document).on("turbolinks:load", function() {
+$(document).on("turbolinks:load", function(){
   // Set current locale
   var i18nLocale = $("body").data("locale");
   var products = <%= Product.all.to_json %>;
@@ -24,7 +24,7 @@ $(document).on("turbolinks:load", function() {
       $(".cart-counter").css({"display": "block"});
       $(".cart-counter").text(output.cart.length);
 
-      $.each(output.cart, function(index, value) {
+      $.each(output.cart, function(index, value){
         if(index < 3){
           product = products.find(item => item.id === value.cartDetails.id);
           i18nLocale == "es" ? productName = product.name_spanish : productName = product.name;
@@ -67,8 +67,8 @@ $(document).on("turbolinks:load", function() {
     }
 
     // If product exists on the cart
-    $.each(jsonData.cart, function(index, value) {
-      if (value.cartDetails.id == parseInt(productId.val()) ) {
+    $.each(jsonData.cart, function(index, value){
+      if (value.cartDetails.id == parseInt(productId.val()) ){
         flag = false;
 
         jsonData.cart[index] =

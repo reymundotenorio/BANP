@@ -1,8 +1,8 @@
-$(document).on("turbolinks:load", function() {
-  // $(document).ready(function() {
+$(document).on("turbolinks:load", function(){
+  // $(document).ready(function(){
 
   // Clickcable row
-  $(".clickable-row").click(function() {
+  $(".clickable-row").click(function(){
     linkdata = $(this).attr("data-href");
     window.location.href = linkdata;
   });

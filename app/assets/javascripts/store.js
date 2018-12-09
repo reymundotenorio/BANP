@@ -1,4 +1,4 @@
-$(".add").click(function() {
+$(".add").click(function(){
   var $input = $(this).prev();
   var currentValue = parseInt($input.val());
 
@@ -9,7 +9,7 @@ $(".add").click(function() {
 
   $input.val(currentValue + 1);
 
-  if ($input.val().length <= 0) {
+  if ($input.val().length <= 0){
     $input.val(1)
   }
 
@@ -18,7 +18,7 @@ $(".add").click(function() {
   $totalSpan.text(total.toFixed(2).toString());
 });
 
-$(".subtract").click(function() {
+$(".subtract").click(function(){
   var $input = $(this).next();
   var currentValue = parseInt($input.val());
 
@@ -31,7 +31,7 @@ $(".subtract").click(function() {
     $input.val(currentValue - 1);
   }
 
-  if ($input.val().length <= 0) {
+  if ($input.val().length <= 0){
     $input.val(1)
   }
 
@@ -46,7 +46,7 @@ $(".q-input").focusout(function(){
   var price = parseFloat($colParent.prev().children("span").text());
   var total = $(this).val()*price;
 
-  if ($(this).val().length <= 0 || $(this).val() <= 0) {
+  if ($(this).val().length <= 0 || $(this).val() <= 0){
     $(this).val(1);
     total = $(this).val()*price;
     $totalSpan.text(total.toFixed(2).toString());

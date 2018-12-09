@@ -60,15 +60,19 @@ class Category < ApplicationRecord
 
   # Uniqueness validation
   validates :name, uniqueness: { case_sensitive: false }
+  validates :name_spanish, uniqueness: { case_sensitive: false }
   # End Uniqueness validation
 
   # Presence validation
   validates :name, presence: true
+  validates :name_spanish, presence: true
   # End  Presence validation
 
   # Length validation
   validates :name, length: { maximum: 255 }
+  validates :name_spanish, length: { maximum: 255 }
   validates :description, length: { maximum: 255 }, allow_blank: true
+  validates :description_spanish, length: { maximum: 255 }, allow_blank: true
   # End Length validation
 
   # Type validation

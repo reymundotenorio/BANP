@@ -28,7 +28,7 @@
                   .form-group
                     .input-group
                       %input#filename.form-control{readonly: "readonly", type: "text"}/
-                      
+
                       %span.input-group-btn
                         %span.btn.btn-general.btn-file
                           %i.fas.fa-upload
@@ -48,29 +48,29 @@
                     %label
                       %b= t("activerecord.attributes.employee.first_name")
                     .border-bottom
-                    
+
                   .form-group
                     = f.text_field :last_name, class: "form-control input", placeholder: t("activerecord.attributes.employee.last_name"), required: true
                     %label
                       %b= t("activerecord.attributes.employee.last_name")
                     .border-bottom
-                    
+
                   .form-group
                     = f.email_field :email, class: "form-control input", placeholder: t("activerecord.attributes.employee.email"), required: true
                     %label
                       %b= t("activerecord.attributes.employee.email")
                     .border-bottom
-                    
+
                   .form-group
                     -# < f.telephone_field :phone, class: "form-control input", "data-mask": "(000) 000-0000", placeholder: t("activerecord.attributes.employee.phone"), required: true >
                     = f.telephone_field :phone, class: "form-control input", placeholder: t("activerecord.attributes.employee.phone"), required: true
                     %label
                       %b= t("activerecord.attributes.employee.phone")
                     .border-bottom
-                    
+
                   .form-group
                     - role_options = ["Seller", "Driver", "Administrator"].sort;
-                    
+
                     #role-dropdown.dropdown
                       = f.text_field :role, class: "form-control input dropdown-toggle disabled", "data-toggle": "dropdown", placeholder: t("views.form.select_role"), readonly: true, required: true
                       %ul.dropdown-menu
@@ -80,25 +80,17 @@
                     %label
                       %b= t("activerecord.attributes.employee.role")
                     .border-bottom
-                  
-                  -# Buttons    
+
+                  -# Buttons
                   .main-buttons
                     .col-xs-12.col-sm-12.button-container.no-padding
                       = button_tag type: "reset", id: "reset-button", class: "btn btn-general" do
                         %i.fas.fa-eraser
                         %span= t("views.form.restart")
-                        
+
                       = f.button class: "btn btn-general", data: {disable_with: "<i class='fas fa-spinner fa-spin'></i>"} do
                         %i.fas.fa-save
                         %span= t("views.form.save")
                   -# End Buttons
           -# End Material card
 -# End Form
-
--# Form script
-= javascript_include_tag "form", "data-turbolinks-track": "reload"
--# End Form script
-
--# Jquery Mask script
-= javascript_include_tag "jquery-mask/jquery.mask", "data-turbolinks-track": "reload"
--# End Jquery Mask script

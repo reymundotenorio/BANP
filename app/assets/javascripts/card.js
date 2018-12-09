@@ -1,10 +1,10 @@
 var card =
-/******/ (function(modules) { // webpackBootstrap
+/******/ (function(modules){ // webpackBootstrap
 /******/ 	// The module cache
 /******/ 	var installedModules = {};
 
 /******/ 	// The require function
-/******/ 	function __webpack_require__(moduleId) {
+/******/ 	function __webpack_require__(moduleId){
 
 /******/ 		// Check if module is in cache
 /******/ 		if(installedModules[moduleId])
@@ -43,7 +43,7 @@ var card =
 /************************************************************************/
 /******/ ([
 /* 0 */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__){
 
 	var $, Card,
 	  slice = [].slice;
@@ -56,22 +56,22 @@ var card =
 
 	$.card.fn = {};
 
-	$.fn.card = function(opts) {
+	$.fn.card = function(opts){
 	  return $.card.fn.construct.apply(this, opts);
 	};
 
 	$.fn.extend({
-	  card: function() {
+	  card: function(){
 	    var args, option;
 	    option = arguments[0], args = 2 <= arguments.length ? slice.call(arguments, 1) : [];
-	    return this.each(function() {
+	    return this.each(function(){
 	      var $this, data;
 	      $this = $(this);
 	      data = $this.data('card');
-	      if (!data) {
-	        $.each(option, (function(_this) {
-	          return function(key, value) {
-	            if (value instanceof jQuery) {
+	      if (!data){
+	        $.each(option, (function(_this){
+	          return function(key, value){
+	            if (value instanceof jQuery){
 	              return option[key] = value[0];
 	            }
 	          };
@@ -79,7 +79,7 @@ var card =
 	        option['form'] = this;
 	        $this.data('card', (data = new Card(option)));
 	      }
-	      if (typeof option === 'string') {
+	      if (typeof option === 'string'){
 	        return data[option].apply(data, args);
 	      }
 	    });
@@ -89,9 +89,9 @@ var card =
 
 /***/ }),
 /* 1 */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__){
 
-	/* WEBPACK VAR INJECTION */(function(global) {var Card, QJ, extend, payment,
+	/* WEBPACK VAR INJECTION */(function(global){var Card, QJ, extend, payment,
 	  bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; };
 
 	__webpack_require__(2);
@@ -102,15 +102,15 @@ var card =
 
 	extend = __webpack_require__(8);
 
-	Card = (function() {
+	Card = (function(){
 	  var bindVal;
 
 	  Card.prototype.initializedDataAttr = "data-jp-card-initialized";
 
 	  Card.prototype.cardTemplate = '' + '<div class="jp-card-container">' + '<div class="jp-card">' + '<div class="jp-card-front">' + '<div class="jp-card-logo jp-card-elo">' + '<div class="e">e</div>' + '<div class="l">l</div>' + '<div class="o">o</div>' + '</div>' + '<div class="jp-card-logo jp-card-visa">Visa</div>' + '<div class="jp-card-logo jp-card-visaelectron">Visa<div class="elec">Electron</div></div>' + '<div class="jp-card-logo jp-card-mastercard">Mastercard</div>' + '<div class="jp-card-logo jp-card-maestro">Maestro</div>' + '<div class="jp-card-logo jp-card-amex"></div>' + '<div class="jp-card-logo jp-card-discover">discover</div>' + '<div class="jp-card-logo jp-card-dinersclub"></div>' + '<div class="jp-card-logo jp-card-dankort"><div class="dk"><div class="d"></div><div class="k"></div></div></div>' + '<div class="jp-card-logo jp-card-jcb">' + '<div class="j">J</div>' + '<div class="c">C</div>' + '<div class="b">B</div>' + '</div>' + '<div class="jp-card-lower">' + '<div class="jp-card-shiny"></div>' + '<div class="jp-card-cvc jp-card-display">{{cvc}}</div>' + '<div class="jp-card-number jp-card-display">{{number}}</div>' + '<div class="jp-card-name jp-card-display">{{name}}</div>' + '<div class="jp-card-expiry jp-card-display" data-before="{{monthYear}}" data-after="{{validDate}}">{{expiry}}</div>' + '</div>' + '</div>' + '<div class="jp-card-back">' + '<div class="jp-card-bar"></div>' + '<div class="jp-card-cvc jp-card-display">{{cvc}}</div>' + '<div class="jp-card-shiny"></div>' + '</div>' + '</div>' + '</div>';
 
-	  Card.prototype.template = function(tpl, data) {
-	    return tpl.replace(/\{\{(.*?)\}\}/g, function(match, key, str) {
+	  Card.prototype.template = function(tpl, data){
+	    return tpl.replace(/\{\{(.*?)\}\}/g, function(match, key, str){
 	      return data[key];
 	    });
 	  };
@@ -153,22 +153,22 @@ var card =
 	    debug: false
 	  };
 
-	  function Card(opts) {
+	  function Card(opts){
 	    this.maskCardNumber = bind(this.maskCardNumber, this);
 	    var toInitialize;
 	    this.options = extend(true, this.defaults, opts);
-	    if (!this.options.form) {
+	    if (!this.options.form){
 	      console.log("Please provide a form");
 	      return;
 	    }
 	    this.$el = QJ(this.options.form);
-	    if (!this.options.container) {
+	    if (!this.options.container){
 	      console.log("Please provide a container");
 	      return;
 	    }
 	    this.$container = QJ(this.options.container);
 	    toInitialize = QJ.isDOMElement(this.$container) ? this.$container : this.$container[0];
-	    if (toInitialize.getAttribute(this.initializedDataAttr)) {
+	    if (toInitialize.getAttribute(this.initializedDataAttr)){
 	      return;
 	    }
 	    toInitialize.setAttribute(this.initializedDataAttr, true);
@@ -177,52 +177,52 @@ var card =
 	    this.handleInitialPlaceholders();
 	  }
 
-	  Card.prototype.render = function() {
+	  Card.prototype.render = function(){
 	    var $cardContainer, baseWidth, name, obj, ref, ref1, selector, ua;
 	    QJ.append(this.$container, this.template(this.cardTemplate, extend({}, this.options.messages, this.options.placeholders)));
 	    ref = this.options.cardSelectors;
-	    for (name in ref) {
+	    for (name in ref){
 	      selector = ref[name];
 	      this["$" + name] = QJ.find(this.$container, selector);
 	    }
 	    ref1 = this.options.formSelectors;
-	    for (name in ref1) {
+	    for (name in ref1){
 	      selector = ref1[name];
 	      selector = this.options[name] ? this.options[name] : selector;
 	      obj = QJ.find(this.$el, selector);
-	      if (!obj.length && this.options.debug) {
+	      if (!obj.length && this.options.debug){
 	        console.error("Card can't find a " + name + " in your form.");
 	      }
 	      this["$" + name] = obj;
 	    }
-	    if (this.options.formatting) {
+	    if (this.options.formatting){
 	      Payment.formatCardNumber(this.$numberInput);
 	      Payment.formatCardCVC(this.$cvcInput);
 	      Payment.formatCardExpiry(this.$expiryInput);
 	    }
-	    if (this.options.width) {
+	    if (this.options.width){
 	      $cardContainer = QJ(this.options.cardSelectors.cardContainer)[0];
 	      baseWidth = parseInt($cardContainer.clientWidth || window.getComputedStyle($cardContainer).width);
 	      $cardContainer.style.transform = "scale(" + (this.options.width / baseWidth) + ")";
 	    }
-	    if (typeof navigator !== "undefined" && navigator !== null ? navigator.userAgent : void 0) {
+	    if (typeof navigator !== "undefined" && navigator !== null ? navigator.userAgent : void 0){
 	      ua = navigator.userAgent.toLowerCase();
-	      if (ua.indexOf('safari') !== -1 && ua.indexOf('chrome') === -1) {
+	      if (ua.indexOf('safari') !== -1 && ua.indexOf('chrome') === -1){
 	        QJ.addClass(this.$card, 'jp-card-safari');
 	      }
 	    }
-	    if (/MSIE 10\./i.test(navigator.userAgent)) {
+	    if (/MSIE 10\./i.test(navigator.userAgent)){
 	      QJ.addClass(this.$card, 'jp-card-ie-10');
 	    }
-	    if (/rv:11.0/i.test(navigator.userAgent)) {
+	    if (/rv:11.0/i.test(navigator.userAgent)){
 	      return QJ.addClass(this.$card, 'jp-card-ie-11');
 	    }
 	  };
 
-	  Card.prototype.attachHandlers = function() {
+	  Card.prototype.attachHandlers = function(){
 	    var expiryFilters, numberInputFilters;
 	    numberInputFilters = [this.validToggler('cardNumber')];
-	    if (this.options.masks.cardNumber) {
+	    if (this.options.masks.cardNumber){
 	      numberInputFilters.push(this.maskCardNumber);
 	    }
 	    bindVal(this.$numberInput, this.$numberDisplay, {
@@ -231,14 +231,14 @@ var card =
 	    });
 	    QJ.on(this.$numberInput, 'payment.cardType', this.handle('setCardType'));
 	    expiryFilters = [
-	      function(val) {
+	      function(val){
 	        return val.replace(/(\s+)/g, '');
 	      }
 	    ];
 	    expiryFilters.push(this.validToggler('cardExpiry'));
 	    bindVal(this.$expiryInput, this.$expiryDisplay, {
-	      join: function(text) {
-	        if (text[0].length === 2 || text[1]) {
+	      join: function(text){
+	        if (text[0].length === 2 || text[1]){
 	          return "/";
 	        } else {
 	          return "";
@@ -258,16 +258,16 @@ var card =
 	    });
 	  };
 
-	  Card.prototype.handleInitialPlaceholders = function() {
+	  Card.prototype.handleInitialPlaceholders = function(){
 	    var el, name, ref, results, selector;
 	    ref = this.options.formSelectors;
 	    results = [];
-	    for (name in ref) {
+	    for (name in ref){
 	      selector = ref[name];
 	      el = this["$" + name];
-	      if (QJ.val(el)) {
+	      if (QJ.val(el)){
 	        QJ.trigger(el, 'paste');
-	        results.push(setTimeout(function() {
+	        results.push(setTimeout(function(){
 	          return QJ.trigger(el, 'keyup');
 	        }));
 	      } else {
@@ -277,9 +277,9 @@ var card =
 	    return results;
 	  };
 
-	  Card.prototype.handle = function(fn) {
-	    return (function(_this) {
-	      return function(e) {
+	  Card.prototype.handle = function(fn){
+	    return (function(_this){
+	      return function(e){
 	        var args;
 	        args = Array.prototype.slice.call(arguments);
 	        args.unshift(e.target);
@@ -288,31 +288,31 @@ var card =
 	    })(this);
 	  };
 
-	  Card.prototype.validToggler = function(validatorName) {
+	  Card.prototype.validToggler = function(validatorName){
 	    var isValid;
-	    if (validatorName === "cardExpiry") {
-	      isValid = function(val) {
+	    if (validatorName === "cardExpiry"){
+	      isValid = function(val){
 	        var objVal;
 	        objVal = Payment.fns.cardExpiryVal(val);
 	        return Payment.fns.validateCardExpiry(objVal.month, objVal.year);
 	      };
-	    } else if (validatorName === "cardCVC") {
-	      isValid = (function(_this) {
-	        return function(val) {
+	    } else if (validatorName === "cardCVC"){
+	      isValid = (function(_this){
+	        return function(val){
 	          return Payment.fns.validateCardCVC(val, _this.cardType);
 	        };
 	      })(this);
-	    } else if (validatorName === "cardNumber") {
-	      isValid = function(val) {
+	    } else if (validatorName === "cardNumber"){
+	      isValid = function(val){
 	        return Payment.fns.validateCardNumber(val);
 	      };
-	    } else if (validatorName === "cardHolderName") {
-	      isValid = function(val) {
+	    } else if (validatorName === "cardHolderName"){
+	      isValid = function(val){
 	        return val !== "";
 	      };
 	    }
-	    return (function(_this) {
-	      return function(val, $in, $out) {
+	    return (function(_this){
+	      return function(val, $in, $out){
 	        var result;
 	        result = isValid(val);
 	        _this.toggleValidClass($in, result);
@@ -322,18 +322,18 @@ var card =
 	    })(this);
 	  };
 
-	  Card.prototype.toggleValidClass = function(el, test) {
+	  Card.prototype.toggleValidClass = function(el, test){
 	    QJ.toggleClass(el, this.options.classes.valid, test);
 	    return QJ.toggleClass(el, this.options.classes.invalid, !test);
 	  };
 
-	  Card.prototype.maskCardNumber = function(val, el, out) {
+	  Card.prototype.maskCardNumber = function(val, el, out){
 	    var mask, numbers;
 	    mask = this.options.masks.cardNumber;
 	    numbers = val.split(' ');
-	    if (numbers.length >= 3) {
-	      numbers.forEach(function(item, idx) {
-	        if (idx !== numbers.length - 1) {
+	    if (numbers.length >= 3){
+	      numbers.forEach(function(item, idx){
+	        if (idx !== numbers.length - 1){
 	          return numbers[idx] = numbers[idx].replace(/\d/g, mask);
 	        }
 	      });
@@ -344,10 +344,10 @@ var card =
 	  };
 
 	  Card.prototype.handlers = {
-	    setCardType: function($el, e) {
+	    setCardType: function($el, e){
 	      var cardType;
 	      cardType = e.data;
-	      if (!QJ.hasClass(this.$card, cardType)) {
+	      if (!QJ.hasClass(this.$card, cardType)){
 	        QJ.removeClass(this.$card, 'jp-card-unknown');
 	        QJ.removeClass(this.$card, this.cardTypes.join(' '));
 	        QJ.addClass(this.$card, "jp-card-" + cardType);
@@ -355,52 +355,52 @@ var card =
 	        return this.cardType = cardType;
 	      }
 	    },
-	    flipCard: function() {
+	    flipCard: function(){
 	      return QJ.addClass(this.$card, 'jp-card-flipped');
 	    },
-	    unflipCard: function() {
+	    unflipCard: function(){
 	      return QJ.removeClass(this.$card, 'jp-card-flipped');
 	    }
 	  };
 
-	  bindVal = function(el, out, opts) {
+	  bindVal = function(el, out, opts){
 	    var joiner, o, outDefaults;
-	    if (opts == null) {
+	    if (opts == null){
 	      opts = {};
 	    }
 	    opts.fill = opts.fill || false;
 	    opts.filters = opts.filters || [];
-	    if (!(opts.filters instanceof Array)) {
+	    if (!(opts.filters instanceof Array)){
 	      opts.filters = [opts.filters];
 	    }
 	    opts.join = opts.join || "";
-	    if (!(typeof opts.join === "function")) {
+	    if (!(typeof opts.join === "function")){
 	      joiner = opts.join;
-	      opts.join = function() {
+	      opts.join = function(){
 	        return joiner;
 	      };
 	    }
-	    outDefaults = (function() {
+	    outDefaults = (function(){
 	      var j, len, results;
 	      results = [];
-	      for (j = 0, len = out.length; j < len; j++) {
+	      for (j = 0, len = out.length; j < len; j++){
 	        o = out[j];
 	        results.push(o.textContent);
 	      }
 	      return results;
 	    })();
-	    QJ.on(el, 'focus', function() {
+	    QJ.on(el, 'focus', function(){
 	      return QJ.addClass(out, 'jp-card-focused');
 	    });
-	    QJ.on(el, 'blur', function() {
+	    QJ.on(el, 'blur', function(){
 	      return QJ.removeClass(out, 'jp-card-focused');
 	    });
-	    QJ.on(el, 'keyup change paste', function(e) {
+	    QJ.on(el, 'keyup change paste', function(e){
 	      var elem, filter, i, j, join, k, len, len1, outEl, outVal, ref, results, val;
-	      val = (function() {
+	      val = (function(){
 	        var j, len, results;
 	        results = [];
-	        for (j = 0, len = el.length; j < len; j++) {
+	        for (j = 0, len = el.length; j < len; j++){
 	          elem = el[j];
 	          results.push(QJ.val(elem));
 	        }
@@ -408,18 +408,18 @@ var card =
 	      })();
 	      join = opts.join(val);
 	      val = val.join(join);
-	      if (val === join) {
+	      if (val === join){
 	        val = "";
 	      }
 	      ref = opts.filters;
-	      for (j = 0, len = ref.length; j < len; j++) {
+	      for (j = 0, len = ref.length; j < len; j++){
 	        filter = ref[j];
 	        val = filter(val, el, out);
 	      }
 	      results = [];
-	      for (i = k = 0, len1 = out.length; k < len1; i = ++k) {
+	      for (i = k = 0, len1 = out.length; k < len1; i = ++k){
 	        outEl = out[i];
-	        if (opts.fill) {
+	        if (opts.fill){
 	          outVal = val + outDefaults[i].substring(val.length);
 	        } else {
 	          outVal = val || outDefaults[i];
@@ -439,11 +439,11 @@ var card =
 
 	global.Card = Card;
 
-	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
+	/* WEBPACK VAR INJECTION */}.call(exports, (function(){ return this; }())))
 
 /***/ }),
 /* 2 */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__){
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 
@@ -454,51 +454,51 @@ var card =
 	var update = __webpack_require__(5)(content, {});
 	if(content.locals) module.exports = content.locals;
 	// Hot Module Replacement
-	if(false) {
+	if(false){
 		// When the styles change, update the <style> tags
-		if(!content.locals) {
-			module.hot.accept("!!../../node_modules/css-loader/index.js!../../node_modules/sass-loader/index.js!./card.scss", function() {
+		if(!content.locals){
+			module.hot.accept("!!../../node_modules/css-loader/index.js!../../node_modules/sass-loader/index.js!./card.scss", function(){
 				var newContent = require("!!../../node_modules/css-loader/index.js!../../node_modules/sass-loader/index.js!./card.scss");
 				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
 				update(newContent);
 			});
 		}
 		// When the module is disposed, remove the <style> tags
-		module.hot.dispose(function() { update(); });
+		module.hot.dispose(function(){ update(); });
 	}
 
 /***/ }),
 /* 3 */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__){
 
 	exports = module.exports = __webpack_require__(4)();
 	// imports
 
 
 	// module
-	exports.push([module.id, ".jp-card.jp-card-safari.jp-card-identified .jp-card-front:before, .jp-card.jp-card-safari.jp-card-identified .jp-card-back:before {\n  background-image: repeating-linear-gradient(45deg, rgba(255, 255, 255, 0) 1px, rgba(255, 255, 255, 0.03) 2px, rgba(255, 255, 255, 0.04) 3px, rgba(255, 255, 255, 0.05) 4px), repeating-linear-gradient(135deg, rgba(255, 255, 255, 0.05) 1px, rgba(255, 255, 255, 0) 2px, rgba(255, 255, 255, 0.04) 3px, rgba(255, 255, 255, 0.03) 4px), repeating-linear-gradient(90deg, rgba(255, 255, 255, 0) 1px, rgba(255, 255, 255, 0.03) 2px, rgba(255, 255, 255, 0.04) 3px, rgba(255, 255, 255, 0.05) 4px), repeating-linear-gradient(210deg, rgba(255, 255, 255, 0) 1px, rgba(255, 255, 255, 0.03) 2px, rgba(255, 255, 255, 0.04) 3px, rgba(255, 255, 255, 0.05) 4px), -webkit-linear-gradient(-245deg, rgba(255, 255, 255, 0) 50%, rgba(255, 255, 255, 0.2) 70%, rgba(255, 255, 255, 0) 90%);\n  background-image: repeating-linear-gradient(45deg, rgba(255, 255, 255, 0) 1px, rgba(255, 255, 255, 0.03) 2px, rgba(255, 255, 255, 0.04) 3px, rgba(255, 255, 255, 0.05) 4px), repeating-linear-gradient(135deg, rgba(255, 255, 255, 0.05) 1px, rgba(255, 255, 255, 0) 2px, rgba(255, 255, 255, 0.04) 3px, rgba(255, 255, 255, 0.03) 4px), repeating-linear-gradient(90deg, rgba(255, 255, 255, 0) 1px, rgba(255, 255, 255, 0.03) 2px, rgba(255, 255, 255, 0.04) 3px, rgba(255, 255, 255, 0.05) 4px), repeating-linear-gradient(210deg, rgba(255, 255, 255, 0) 1px, rgba(255, 255, 255, 0.03) 2px, rgba(255, 255, 255, 0.04) 3px, rgba(255, 255, 255, 0.05) 4px), linear-gradient(-25deg, rgba(255, 255, 255, 0) 50%, rgba(255, 255, 255, 0.2) 70%, rgba(255, 255, 255, 0) 90%); }\n\n.jp-card.jp-card-ie-10.jp-card-flipped, .jp-card.jp-card-ie-11.jp-card-flipped {\n  -webkit-transform: 0deg;\n  -moz-transform: 0deg;\n  -ms-transform: 0deg;\n  -o-transform: 0deg;\n  transform: 0deg; }\n  .jp-card.jp-card-ie-10.jp-card-flipped .jp-card-front, .jp-card.jp-card-ie-11.jp-card-flipped .jp-card-front {\n    -webkit-transform: rotateY(0deg);\n    -moz-transform: rotateY(0deg);\n    -ms-transform: rotateY(0deg);\n    -o-transform: rotateY(0deg);\n    transform: rotateY(0deg); }\n  .jp-card.jp-card-ie-10.jp-card-flipped .jp-card-back, .jp-card.jp-card-ie-11.jp-card-flipped .jp-card-back {\n    -webkit-transform: rotateY(0deg);\n    -moz-transform: rotateY(0deg);\n    -ms-transform: rotateY(0deg);\n    -o-transform: rotateY(0deg);\n    transform: rotateY(0deg); }\n    .jp-card.jp-card-ie-10.jp-card-flipped .jp-card-back:after, .jp-card.jp-card-ie-11.jp-card-flipped .jp-card-back:after {\n      left: 18%; }\n    .jp-card.jp-card-ie-10.jp-card-flipped .jp-card-back .jp-card-cvc, .jp-card.jp-card-ie-11.jp-card-flipped .jp-card-back .jp-card-cvc {\n      -webkit-transform: rotateY(180deg);\n      -moz-transform: rotateY(180deg);\n      -ms-transform: rotateY(180deg);\n      -o-transform: rotateY(180deg);\n      transform: rotateY(180deg);\n      left: 5%; }\n    .jp-card.jp-card-ie-10.jp-card-flipped .jp-card-back .jp-card-shiny, .jp-card.jp-card-ie-11.jp-card-flipped .jp-card-back .jp-card-shiny {\n      left: 84%; }\n      .jp-card.jp-card-ie-10.jp-card-flipped .jp-card-back .jp-card-shiny:after, .jp-card.jp-card-ie-11.jp-card-flipped .jp-card-back .jp-card-shiny:after {\n        left: -480%;\n        -webkit-transform: rotateY(180deg);\n        -moz-transform: rotateY(180deg);\n        -ms-transform: rotateY(180deg);\n        -o-transform: rotateY(180deg);\n        transform: rotateY(180deg); }\n\n.jp-card.jp-card-ie-10.jp-card-amex .jp-card-back, .jp-card.jp-card-ie-11.jp-card-amex .jp-card-back {\n  display: none; }\n\n.jp-card-logo {\n  height: 36px;\n  width: 60px;\n  font-style: italic; }\n  .jp-card-logo, .jp-card-logo:before, .jp-card-logo:after {\n    box-sizing: border-box; }\n\n.jp-card-logo.jp-card-amex {\n  text-transform: uppercase;\n  font-size: 4px;\n  font-weight: bold;\n  color: white;\n  background-image: repeating-radial-gradient(circle at center, #FFF 1px, #999 2px);\n  background-image: repeating-radial-gradient(circle at center, #FFF 1px, #999 2px);\n  border: 1px solid #EEE; }\n  .jp-card-logo.jp-card-amex:before, .jp-card-logo.jp-card-amex:after {\n    width: 28px;\n    display: block;\n    position: absolute;\n    left: 16px; }\n  .jp-card-logo.jp-card-amex:before {\n    height: 28px;\n    content: \"american\";\n    top: 3px;\n    text-align: left;\n    padding-left: 2px;\n    padding-top: 11px;\n    background: #267AC3; }\n  .jp-card-logo.jp-card-amex:after {\n    content: \"express\";\n    bottom: 11px;\n    text-align: right;\n    padding-right: 2px; }\n\n.jp-card.jp-card-amex.jp-card-flipped {\n  -webkit-transform: none;\n  -moz-transform: none;\n  -ms-transform: none;\n  -o-transform: none;\n  transform: none; }\n\n.jp-card.jp-card-amex.jp-card-identified .jp-card-front:before, .jp-card.jp-card-amex.jp-card-identified .jp-card-back:before {\n  background-color: #108168; }\n\n.jp-card.jp-card-amex.jp-card-identified .jp-card-front .jp-card-logo.jp-card-amex {\n  opacity: 1; }\n\n.jp-card.jp-card-amex.jp-card-identified .jp-card-front .jp-card-cvc {\n  visibility: visible; }\n\n.jp-card.jp-card-amex.jp-card-identified .jp-card-front:after {\n  opacity: 1; }\n\n.jp-card-logo.jp-card-discover {\n  background: #FF6600;\n  color: #111;\n  text-transform: uppercase;\n  font-style: normal;\n  font-weight: bold;\n  font-size: 10px;\n  text-align: center;\n  overflow: hidden;\n  z-index: 1;\n  padding-top: 9px;\n  letter-spacing: .03em;\n  border: 1px solid #EEE; }\n  .jp-card-logo.jp-card-discover:before, .jp-card-logo.jp-card-discover:after {\n    content: \" \";\n    display: block;\n    position: absolute; }\n  .jp-card-logo.jp-card-discover:before {\n    background: white;\n    width: 200px;\n    height: 200px;\n    border-radius: 200px;\n    bottom: -5%;\n    right: -80%;\n    z-index: -1; }\n  .jp-card-logo.jp-card-discover:after {\n    width: 8px;\n    height: 8px;\n    border-radius: 4px;\n    top: 10px;\n    left: 27px;\n    background-color: #FF6600;\n    background-image: -webkit-radial-gradient(#FF6600, #fff);\n    background-image: radial-gradient(  #FF6600, #fff);\n    content: \"network\";\n    font-size: 4px;\n    line-height: 24px;\n    text-indent: -7px; }\n\n.jp-card .jp-card-front .jp-card-logo.jp-card-discover {\n  right: 12%;\n  top: 18%; }\n\n.jp-card.jp-card-discover.jp-card-identified .jp-card-front:before, .jp-card.jp-card-discover.jp-card-identified .jp-card-back:before {\n  background-color: #86B8CF; }\n\n.jp-card.jp-card-discover.jp-card-identified .jp-card-logo.jp-card-discover {\n  opacity: 1; }\n\n.jp-card.jp-card-discover.jp-card-identified .jp-card-front:after {\n  -webkit-transition: 400ms;\n  -moz-transition: 400ms;\n  transition: 400ms;\n  content: \" \";\n  display: block;\n  background-color: #FF6600;\n  background-image: -webkit-linear-gradient(#FF6600, #ffa366, #FF6600);\n  background-image: linear-gradient(#FF6600, #ffa366, #FF6600);\n  height: 50px;\n  width: 50px;\n  border-radius: 25px;\n  position: absolute;\n  left: 100%;\n  top: 15%;\n  margin-left: -25px;\n  box-shadow: inset 1px 1px 3px 1px rgba(0, 0, 0, 0.5); }\n\n.jp-card-logo.jp-card-visa {\n  text-transform: uppercase;\n  color: white;\n  text-align: center;\n  font-weight: bold;\n  font-size: 24px;\n  line-height: 18px;\n  margin-top: 5px; }\n  .jp-card-logo.jp-card-visa:before, .jp-card-logo.jp-card-visa:after {\n    content: \" \";\n    display: block;\n    width: 100%;\n    height: 25%; }\n  .jp-card-logo.jp-card-visa:before {\n    position: absolute;\n    left: -4px;\n    width: 0;\n    height: 0;\n    border-style: solid;\n    border-width: 0 12px 6px 0;\n    border-color: transparent #ffffff transparent transparent; }\n\n.jp-card.jp-card-visa.jp-card-identified .jp-card-front:before, .jp-card.jp-card-visa.jp-card-identified .jp-card-back:before {\n  background-color: #191278; }\n\n.jp-card.jp-card-visa.jp-card-identified .jp-card-logo.jp-card-visa {\n  opacity: 1;\n  box-shadow: none; }\n\n.jp-card-logo.jp-card-visaelectron {\n  background: white;\n  text-transform: uppercase;\n  color: #1A1876;\n  text-align: center;\n  font-weight: bold;\n  font-size: 15px;\n  line-height: 18px; }\n  .jp-card-logo.jp-card-visaelectron:before, .jp-card-logo.jp-card-visaelectron:after {\n    content: \" \";\n    display: block;\n    width: 100%;\n    height: 25%; }\n  .jp-card-logo.jp-card-visaelectron:before {\n    background: #1A1876; }\n  .jp-card-logo.jp-card-visaelectron:after {\n    background: #E79800; }\n  .jp-card-logo.jp-card-visaelectron .elec {\n    float: right;\n    font-family: arial;\n    font-size: 9px;\n    margin-right: 1px;\n    margin-top: -5px;\n    text-transform: none; }\n\n.jp-card.jp-card-visaelectron.jp-card-identified .jp-card-front:before, .jp-card.jp-card-visaelectron.jp-card-identified .jp-card-back:before {\n  background-color: #191278; }\n\n.jp-card.jp-card-visaelectron.jp-card-identified .jp-card-logo.jp-card-visaelectron {\n  opacity: 1; }\n\n.jp-card-logo.jp-card-mastercard {\n  color: white;\n  font-style: normal;\n  text-transform: lowercase;\n  font-weight: bold;\n  text-align: center;\n  font-size: 9px;\n  line-height: 84px;\n  z-index: 1;\n  text-shadow: 1px 1px rgba(0, 0, 0, 0.6); }\n  .jp-card-logo.jp-card-mastercard:before, .jp-card-logo.jp-card-mastercard:after {\n    content: \" \";\n    display: block;\n    width: 36px;\n    top: 0;\n    position: absolute;\n    height: 36px;\n    border-radius: 18px; }\n  .jp-card-logo.jp-card-mastercard:before {\n    left: 0;\n    background: #EB001B;\n    z-index: -1;\n    opacity: 0.9; }\n  .jp-card-logo.jp-card-mastercard:after {\n    right: 0;\n    background: #FF5F00;\n    z-index: -2; }\n\n.jp-card.jp-card-mastercard.jp-card-identified .jp-card-front .jp-card-logo.jp-card-mastercard, .jp-card.jp-card-mastercard.jp-card-identified .jp-card-back .jp-card-logo.jp-card-mastercard {\n  box-shadow: none; }\n\n.jp-card.jp-card-mastercard.jp-card-identified .jp-card-front:before, .jp-card.jp-card-mastercard.jp-card-identified .jp-card-back:before {\n  background-color: #0061A8; }\n\n.jp-card.jp-card-mastercard.jp-card-identified .jp-card-logo.jp-card-mastercard {\n  opacity: 1; }\n\n.jp-card-logo.jp-card-maestro {\n  color: white;\n  font-style: normal;\n  text-transform: lowercase;\n  font-weight: bold;\n  text-align: center;\n  font-size: 14px;\n  line-height: 84px;\n  z-index: 1;\n  text-shadow: 1px 1px rgba(0, 0, 0, 0.6); }\n  .jp-card-logo.jp-card-maestro:before, .jp-card-logo.jp-card-maestro:after {\n    content: \" \";\n    display: block;\n    width: 36px;\n    top: 0;\n    position: absolute;\n    height: 36px;\n    border-radius: 18px; }\n  .jp-card-logo.jp-card-maestro:before {\n    left: 0;\n    background: #EB001B;\n    z-index: -2; }\n  .jp-card-logo.jp-card-maestro:after {\n    right: 0;\n    background: #00A2E5;\n    z-index: -1;\n    opacity: 0.8; }\n\n.jp-card.jp-card-maestro.jp-card-identified .jp-card-front .jp-card-logo.jp-card-maestro, .jp-card.jp-card-maestro.jp-card-identified .jp-card-back .jp-card-logo.jp-card-maestro {\n  box-shadow: none; }\n\n.jp-card.jp-card-maestro.jp-card-identified .jp-card-front:before, .jp-card.jp-card-maestro.jp-card-identified .jp-card-back:before {\n  background-color: #0B2C5F; }\n\n.jp-card.jp-card-maestro.jp-card-identified .jp-card-logo.jp-card-maestro {\n  opacity: 1; }\n\n.jp-card-logo.jp-card-dankort {\n  width: 60px;\n  height: 36px;\n  padding: 3px;\n  border-radius: 8px;\n  border: #000000 1px solid;\n  background-color: #FFFFFF; }\n  .jp-card-logo.jp-card-dankort .dk {\n    position: relative;\n    width: 100%;\n    height: 100%;\n    overflow: hidden; }\n    .jp-card-logo.jp-card-dankort .dk:before {\n      background-color: #ED1C24;\n      content: '';\n      position: absolute;\n      width: 100%;\n      height: 100%;\n      display: block;\n      border-radius: 6px; }\n    .jp-card-logo.jp-card-dankort .dk:after {\n      content: '';\n      position: absolute;\n      top: 50%;\n      margin-top: -7.7px;\n      right: 0;\n      width: 0;\n      height: 0;\n      border-style: solid;\n      border-width: 7px 7px 10px 0;\n      border-color: transparent #ED1C24 transparent transparent;\n      z-index: 1; }\n  .jp-card-logo.jp-card-dankort .d, .jp-card-logo.jp-card-dankort .k {\n    position: absolute;\n    top: 50%;\n    width: 50%;\n    display: block;\n    height: 15.4px;\n    margin-top: -7.7px;\n    background: white; }\n  .jp-card-logo.jp-card-dankort .d {\n    left: 0;\n    border-radius: 0 8px 10px 0; }\n    .jp-card-logo.jp-card-dankort .d:before {\n      content: '';\n      position: absolute;\n      top: 50%;\n      left: 50%;\n      display: block;\n      background: #ED1C24;\n      border-radius: 2px 4px 6px 0px;\n      height: 5px;\n      width: 7px;\n      margin: -3px 0 0 -4px; }\n  .jp-card-logo.jp-card-dankort .k {\n    right: 0; }\n    .jp-card-logo.jp-card-dankort .k:before, .jp-card-logo.jp-card-dankort .k:after {\n      content: '';\n      position: absolute;\n      right: 50%;\n      width: 0;\n      height: 0;\n      border-style: solid;\n      margin-right: -1px; }\n    .jp-card-logo.jp-card-dankort .k:before {\n      top: 0;\n      border-width: 8px 5px 0 0;\n      border-color: #ED1C24 transparent transparent transparent; }\n    .jp-card-logo.jp-card-dankort .k:after {\n      bottom: 0;\n      border-width: 0 5px 8px 0;\n      border-color: transparent transparent #ED1C24 transparent; }\n\n.jp-card.jp-card-dankort.jp-card-identified .jp-card-front:before, .jp-card.jp-card-dankort.jp-card-identified .jp-card-back:before {\n  background-color: #0055C7; }\n\n.jp-card.jp-card-dankort.jp-card-identified .jp-card-logo.jp-card-dankort {\n  opacity: 1; }\n\n.jp-card-logo.jp-card-elo {\n  height: 50px;\n  width: 50px;\n  border-radius: 100%;\n  background: black;\n  color: white;\n  text-align: center;\n  text-transform: lowercase;\n  font-size: 21px;\n  font-style: normal;\n  letter-spacing: 1px;\n  font-weight: bold;\n  padding-top: 13px; }\n  .jp-card-logo.jp-card-elo .e, .jp-card-logo.jp-card-elo .l, .jp-card-logo.jp-card-elo .o {\n    display: inline-block;\n    position: relative; }\n  .jp-card-logo.jp-card-elo .e {\n    -webkit-transform: rotate(-15deg);\n    -moz-transform: rotate(-15deg);\n    -ms-transform: rotate(-15deg);\n    -o-transform: rotate(-15deg);\n    transform: rotate(-15deg); }\n  .jp-card-logo.jp-card-elo .o {\n    position: relative;\n    display: inline-block;\n    width: 12px;\n    height: 12px;\n    right: 0;\n    top: 7px;\n    border-radius: 100%;\n    background-image: -webkit-linear-gradient( yellow 50%, red 50%);\n    background-image: linear-gradient( yellow 50%, red 50%);\n    -webkit-transform: rotate(40deg);\n    -moz-transform: rotate(40deg);\n    -ms-transform: rotate(40deg);\n    -o-transform: rotate(40deg);\n    transform: rotate(40deg);\n    text-indent: -9999px; }\n    .jp-card-logo.jp-card-elo .o:before {\n      content: \"\";\n      position: absolute;\n      width: 49%;\n      height: 49%;\n      background: black;\n      border-radius: 100%;\n      text-indent: -99999px;\n      top: 25%;\n      left: 25%; }\n\n.jp-card.jp-card-elo.jp-card-identified .jp-card-front:before, .jp-card.jp-card-elo.jp-card-identified .jp-card-back:before {\n  background-color: #6F6969; }\n\n.jp-card.jp-card-elo.jp-card-identified .jp-card-logo.jp-card-elo {\n  opacity: 1; }\n\n.jp-card-logo.jp-card-jcb {\n  border-radius: 5px 0px 5px 0px;\n  -moz-border-radius: 5px 0px 5px 0px;\n  -webkit-border-radius: 5px 0px 5px 0px;\n  background-color: white;\n  font-style: normal;\n  color: white;\n  width: 50px;\n  padding: 2px 0 0 2px; }\n  .jp-card-logo.jp-card-jcb > div {\n    width: 15px;\n    margin-right: 1px;\n    display: inline-block;\n    text-align: center;\n    text-shadow: 1px 1px rgba(0, 0, 0, 0.6);\n    border-radius: 5px 0px 5px 0px;\n    -moz-border-radius: 5px 0px 5px 0px;\n    -webkit-border-radius: 5px 0px 5px 0px; }\n    .jp-card-logo.jp-card-jcb > div:before, .jp-card-logo.jp-card-jcb > div:after {\n      content: \" \";\n      display: block;\n      height: 8px; }\n    .jp-card-logo.jp-card-jcb > div.j {\n      background-color: #000063;\n      background-image: -webkit-linear-gradient(left, #000063, #008cff);\n      background-image: linear-gradient(to right,#000063, #008cff); }\n    .jp-card-logo.jp-card-jcb > div.c {\n      background-color: #630000;\n      background-image: -webkit-linear-gradient(left, #630000, #ff008d);\n      background-image: linear-gradient(to right,#630000, #ff008d); }\n    .jp-card-logo.jp-card-jcb > div.b {\n      background-color: #006300;\n      background-image: -webkit-linear-gradient(left, #006300, #00ff00);\n      background-image: linear-gradient(to right,#006300, #00ff00); }\n\n.jp-card.jp-card-jcb.jp-card-identified .jp-card-front:before, .jp-card.jp-card-jcb.jp-card-identified .jp-card-back:before {\n  background-color: #CB8000; }\n\n.jp-card.jp-card-jcb.jp-card-identified .jp-card-logo.jp-card-jcb {\n  opacity: 1;\n  box-shadow: none; }\n\n.jp-card-logo.jp-card-dinersclub {\n  font-family: serif;\n  height: 40px;\n  width: 100px;\n  color: white;\n  font-size: 17px;\n  font-style: normal;\n  letter-spacing: 1px; }\n  .jp-card-logo.jp-card-dinersclub::before, .jp-card-logo.jp-card-dinersclub::after {\n    display: block;\n    position: relative; }\n  .jp-card-logo.jp-card-dinersclub::before {\n    content: 'Diners Club'; }\n  .jp-card-logo.jp-card-dinersclub::after {\n    content: 'International';\n    text-transform: uppercase;\n    font-size: 0.6em; }\n\n.jp-card.jp-card-dinersclub .jp-card-front .jp-card-logo {\n  box-shadow: none !important; }\n\n.jp-card.jp-card-dinersclub.jp-card-identified .jp-card-front:before, .jp-card.jp-card-dinersclub.jp-card-identified .jp-card-back:before {\n  background-color: #999; }\n\n.jp-card.jp-card-dinersclub.jp-card-identified .jp-card-logo.jp-card-dinersclub {\n  opacity: 1; }\n\n.jp-card-container {\n  -webkit-perspective: 1000px;\n  -moz-perspective: 1000px;\n  perspective: 1000px;\n  width: 350px;\n  max-width: 100%;\n  height: 200px;\n  margin: auto;\n  z-index: 1;\n  position: relative; }\n\n.jp-card {\n  font-family: \"Helvetica Neue\", Helvetica, Arial, sans-serif;\n  line-height: 1;\n  position: relative;\n  width: 100%;\n  height: 100%;\n  min-width: 315px;\n  border-radius: 10px;\n  -webkit-transform-style: preserve-3d;\n  -moz-transform-style: preserve-3d;\n  -ms-transform-style: preserve-3d;\n  -o-transform-style: preserve-3d;\n  transform-style: preserve-3d;\n  -webkit-transition: all 400ms linear;\n  -moz-transition: all 400ms linear;\n  transition: all 400ms linear; }\n  .jp-card > *, .jp-card > *:before, .jp-card > *:after {\n    -moz-box-sizing: border-box;\n    -webkit-box-sizing: border-box;\n    box-sizing: border-box;\n    font-family: inherit; }\n  .jp-card.jp-card-flipped {\n    -webkit-transform: rotateY(180deg);\n    -moz-transform: rotateY(180deg);\n    -ms-transform: rotateY(180deg);\n    -o-transform: rotateY(180deg);\n    transform: rotateY(180deg); }\n  .jp-card .jp-card-front, .jp-card .jp-card-back {\n    -webkit-backface-visibility: hidden;\n    backface-visibility: hidden;\n    -webkit-transform-style: preserve-3d;\n    -moz-transform-style: preserve-3d;\n    -ms-transform-style: preserve-3d;\n    -o-transform-style: preserve-3d;\n    transform-style: preserve-3d;\n    -webkit-transition: all 400ms linear;\n    -moz-transition: all 400ms linear;\n    transition: all 400ms linear;\n    width: 100%;\n    height: 100%;\n    position: absolute;\n    top: 0;\n    left: 0;\n    overflow: hidden;\n    border-radius: 10px;\n    background: #DDD; }\n    .jp-card .jp-card-front:before, .jp-card .jp-card-back:before {\n      content: \" \";\n      display: block;\n      position: absolute;\n      width: 100%;\n      height: 100%;\n      top: 0;\n      left: 0;\n      opacity: 0;\n      border-radius: 10px;\n      -webkit-transition: all 400ms ease;\n      -moz-transition: all 400ms ease;\n      transition: all 400ms ease; }\n    .jp-card .jp-card-front:after, .jp-card .jp-card-back:after {\n      content: \" \";\n      display: block; }\n    .jp-card .jp-card-front .jp-card-display, .jp-card .jp-card-back .jp-card-display {\n      color: white;\n      font-weight: normal;\n      opacity: 0.5;\n      -webkit-transition: opacity 400ms linear;\n      -moz-transition: opacity 400ms linear;\n      transition: opacity 400ms linear; }\n      .jp-card .jp-card-front .jp-card-display.jp-card-focused, .jp-card .jp-card-back .jp-card-display.jp-card-focused {\n        opacity: 1;\n        font-weight: 700; }\n    .jp-card .jp-card-front .jp-card-cvc, .jp-card .jp-card-back .jp-card-cvc {\n      font-family: \"Bitstream Vera Sans Mono\", Consolas, Courier, monospace;\n      font-size: 14px; }\n    .jp-card .jp-card-front .jp-card-shiny, .jp-card .jp-card-back .jp-card-shiny {\n      width: 50px;\n      height: 35px;\n      border-radius: 5px;\n      background: #CCC;\n      position: relative; }\n      .jp-card .jp-card-front .jp-card-shiny:before, .jp-card .jp-card-back .jp-card-shiny:before {\n        content: \" \";\n        display: block;\n        width: 70%;\n        height: 60%;\n        border-top-right-radius: 5px;\n        border-bottom-right-radius: 5px;\n        background: #d9d9d9;\n        position: absolute;\n        top: 20%; }\n  .jp-card .jp-card-front .jp-card-logo {\n    position: absolute;\n    opacity: 0;\n    right: 5%;\n    top: 8%;\n    -webkit-transition: 400ms;\n    -moz-transition: 400ms;\n    transition: 400ms; }\n  .jp-card .jp-card-front .jp-card-lower {\n    width: 80%;\n    position: absolute;\n    left: 10%;\n    bottom: 30px; }\n    @media only screen and (max-width: 480px) {\n      .jp-card .jp-card-front .jp-card-lower {\n        width: 90%;\n        left: 5%; } }\n    .jp-card .jp-card-front .jp-card-lower .jp-card-cvc {\n      visibility: hidden;\n      float: right;\n      position: relative;\n      bottom: 5px; }\n    .jp-card .jp-card-front .jp-card-lower .jp-card-number {\n      font-family: \"Bitstream Vera Sans Mono\", Consolas, Courier, monospace;\n      font-size: 24px;\n      clear: both;\n      margin-bottom: 30px; }\n    .jp-card .jp-card-front .jp-card-lower .jp-card-expiry {\n      font-family: \"Bitstream Vera Sans Mono\", Consolas, Courier, monospace;\n      letter-spacing: 0em;\n      position: relative;\n      float: right;\n      width: 25%; }\n      .jp-card .jp-card-front .jp-card-lower .jp-card-expiry:before, .jp-card .jp-card-front .jp-card-lower .jp-card-expiry:after {\n        font-family: \"Helvetica Neue\", Helvetica, Arial, sans-serif;\n        font-weight: bold;\n        font-size: 7px;\n        white-space: pre;\n        display: block;\n        opacity: .5; }\n      .jp-card .jp-card-front .jp-card-lower .jp-card-expiry:before {\n        content: attr(data-before);\n        margin-bottom: 2px;\n        font-size: 7px;\n        text-transform: uppercase; }\n      .jp-card .jp-card-front .jp-card-lower .jp-card-expiry:after {\n        position: absolute;\n        content: attr(data-after);\n        text-align: right;\n        right: 100%;\n        margin-right: 5px;\n        margin-top: 2px;\n        bottom: 0; }\n    .jp-card .jp-card-front .jp-card-lower .jp-card-name {\n      text-transform: uppercase;\n      font-family: \"Bitstream Vera Sans Mono\", Consolas, Courier, monospace;\n      font-size: 20px;\n      max-height: 45px;\n      position: absolute;\n      bottom: 0;\n      width: 190px;\n      display: -webkit-box;\n      -webkit-line-clamp: 2;\n      -webkit-box-orient: horizontal;\n      overflow: hidden;\n      text-overflow: ellipsis; }\n  .jp-card .jp-card-back {\n    -webkit-transform: rotateY(180deg);\n    -moz-transform: rotateY(180deg);\n    -ms-transform: rotateY(180deg);\n    -o-transform: rotateY(180deg);\n    transform: rotateY(180deg); }\n    .jp-card .jp-card-back .jp-card-bar {\n      background-color: #444;\n      background-image: -webkit-linear-gradient(#444, #333);\n      background-image: linear-gradient(#444, #333);\n      width: 100%;\n      height: 20%;\n      position: absolute;\n      top: 10%; }\n    .jp-card .jp-card-back:after {\n      content: \" \";\n      display: block;\n      background-color: #FFF;\n      background-image: -webkit-linear-gradient(#FFF, #FFF);\n      background-image: linear-gradient(#FFF, #FFF);\n      width: 80%;\n      height: 16%;\n      position: absolute;\n      top: 40%;\n      left: 2%; }\n    .jp-card .jp-card-back .jp-card-cvc {\n      position: absolute;\n      top: 40%;\n      left: 85%;\n      -webkit-transition-delay: 600ms;\n      -moz-transition-delay: 600ms;\n      transition-delay: 600ms; }\n    .jp-card .jp-card-back .jp-card-shiny {\n      position: absolute;\n      top: 66%;\n      left: 2%; }\n      .jp-card .jp-card-back .jp-card-shiny:after {\n        content: \"This card has been issued by Jesse Pollak and is licensed for anyone to use anywhere for free. It comes with no warranty. For support issues, please visit: github.com/jessepollak/card.\";\n        position: absolute;\n        left: 120%;\n        top: 5%;\n        color: white;\n        font-size: 7px;\n        width: 230px;\n        opacity: .5; }\n  .jp-card.jp-card-identified {\n    box-shadow: 0 0 20px rgba(0, 0, 0, 0.3); }\n    .jp-card.jp-card-identified .jp-card-front, .jp-card.jp-card-identified .jp-card-back {\n      background-color: #000;\n      background-color: rgba(0, 0, 0, 0.5); }\n      .jp-card.jp-card-identified .jp-card-front:before, .jp-card.jp-card-identified .jp-card-back:before {\n        -webkit-transition: all 400ms ease;\n        -moz-transition: all 400ms ease;\n        transition: all 400ms ease;\n        background-image: repeating-linear-gradient(45deg, rgba(255, 255, 255, 0) 1px, rgba(255, 255, 255, 0.03) 2px, rgba(255, 255, 255, 0.04) 3px, rgba(255, 255, 255, 0.05) 4px), repeating-linear-gradient(135deg, rgba(255, 255, 255, 0.05) 1px, rgba(255, 255, 255, 0) 2px, rgba(255, 255, 255, 0.04) 3px, rgba(255, 255, 255, 0.03) 4px), repeating-linear-gradient(90deg, rgba(255, 255, 255, 0) 1px, rgba(255, 255, 255, 0.03) 2px, rgba(255, 255, 255, 0.04) 3px, rgba(255, 255, 255, 0.05) 4px), repeating-linear-gradient(210deg, rgba(255, 255, 255, 0) 1px, rgba(255, 255, 255, 0.03) 2px, rgba(255, 255, 255, 0.04) 3px, rgba(255, 255, 255, 0.05) 4px), repeating-radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0) 1px, rgba(255, 255, 255, 0.03) 2px, rgba(255, 255, 255, 0.04) 3px, rgba(255, 255, 255, 0.05) 4px), repeating-radial-gradient(circle at 70% 70%, rgba(255, 255, 255, 0) 1px, rgba(255, 255, 255, 0.03) 2px, rgba(255, 255, 255, 0.04) 3px, rgba(255, 255, 255, 0.05) 4px), repeating-radial-gradient(circle at 90% 20%, rgba(255, 255, 255, 0) 1px, rgba(255, 255, 255, 0.03) 2px, rgba(255, 255, 255, 0.04) 3px, rgba(255, 255, 255, 0.05) 4px), repeating-radial-gradient(circle at 15% 80%, rgba(255, 255, 255, 0) 1px, rgba(255, 255, 255, 0.03) 2px, rgba(255, 255, 255, 0.04) 3px, rgba(255, 255, 255, 0.05) 4px), -webkit-linear-gradient(-245deg, rgba(255, 255, 255, 0) 50%, rgba(255, 255, 255, 0.2) 70%, rgba(255, 255, 255, 0) 90%);\n        background-image: repeating-linear-gradient(45deg, rgba(255, 255, 255, 0) 1px, rgba(255, 255, 255, 0.03) 2px, rgba(255, 255, 255, 0.04) 3px, rgba(255, 255, 255, 0.05) 4px), repeating-linear-gradient(135deg, rgba(255, 255, 255, 0.05) 1px, rgba(255, 255, 255, 0) 2px, rgba(255, 255, 255, 0.04) 3px, rgba(255, 255, 255, 0.03) 4px), repeating-linear-gradient(90deg, rgba(255, 255, 255, 0) 1px, rgba(255, 255, 255, 0.03) 2px, rgba(255, 255, 255, 0.04) 3px, rgba(255, 255, 255, 0.05) 4px), repeating-linear-gradient(210deg, rgba(255, 255, 255, 0) 1px, rgba(255, 255, 255, 0.03) 2px, rgba(255, 255, 255, 0.04) 3px, rgba(255, 255, 255, 0.05) 4px), repeating-radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0) 1px, rgba(255, 255, 255, 0.03) 2px, rgba(255, 255, 255, 0.04) 3px, rgba(255, 255, 255, 0.05) 4px), repeating-radial-gradient(circle at 70% 70%, rgba(255, 255, 255, 0) 1px, rgba(255, 255, 255, 0.03) 2px, rgba(255, 255, 255, 0.04) 3px, rgba(255, 255, 255, 0.05) 4px), repeating-radial-gradient(circle at 90% 20%, rgba(255, 255, 255, 0) 1px, rgba(255, 255, 255, 0.03) 2px, rgba(255, 255, 255, 0.04) 3px, rgba(255, 255, 255, 0.05) 4px), repeating-radial-gradient(circle at 15% 80%, rgba(255, 255, 255, 0) 1px, rgba(255, 255, 255, 0.03) 2px, rgba(255, 255, 255, 0.04) 3px, rgba(255, 255, 255, 0.05) 4px), linear-gradient(-25deg, rgba(255, 255, 255, 0) 50%, rgba(255, 255, 255, 0.2) 70%, rgba(255, 255, 255, 0) 90%);\n        opacity: 1; }\n      .jp-card.jp-card-identified .jp-card-front .jp-card-logo, .jp-card.jp-card-identified .jp-card-back .jp-card-logo {\n        box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.3); }\n    .jp-card.jp-card-identified.no-radial-gradient .jp-card-front:before, .jp-card.jp-card-identified.no-radial-gradient .jp-card-back:before {\n      background-image: repeating-linear-gradient(45deg, rgba(255, 255, 255, 0) 1px, rgba(255, 255, 255, 0.03) 2px, rgba(255, 255, 255, 0.04) 3px, rgba(255, 255, 255, 0.05) 4px), repeating-linear-gradient(135deg, rgba(255, 255, 255, 0.05) 1px, rgba(255, 255, 255, 0) 2px, rgba(255, 255, 255, 0.04) 3px, rgba(255, 255, 255, 0.03) 4px), repeating-linear-gradient(90deg, rgba(255, 255, 255, 0) 1px, rgba(255, 255, 255, 0.03) 2px, rgba(255, 255, 255, 0.04) 3px, rgba(255, 255, 255, 0.05) 4px), repeating-linear-gradient(210deg, rgba(255, 255, 255, 0) 1px, rgba(255, 255, 255, 0.03) 2px, rgba(255, 255, 255, 0.04) 3px, rgba(255, 255, 255, 0.05) 4px), -webkit-linear-gradient(-245deg, rgba(255, 255, 255, 0) 50%, rgba(255, 255, 255, 0.2) 70%, rgba(255, 255, 255, 0) 90%);\n      background-image: repeating-linear-gradient(45deg, rgba(255, 255, 255, 0) 1px, rgba(255, 255, 255, 0.03) 2px, rgba(255, 255, 255, 0.04) 3px, rgba(255, 255, 255, 0.05) 4px), repeating-linear-gradient(135deg, rgba(255, 255, 255, 0.05) 1px, rgba(255, 255, 255, 0) 2px, rgba(255, 255, 255, 0.04) 3px, rgba(255, 255, 255, 0.03) 4px), repeating-linear-gradient(90deg, rgba(255, 255, 255, 0) 1px, rgba(255, 255, 255, 0.03) 2px, rgba(255, 255, 255, 0.04) 3px, rgba(255, 255, 255, 0.05) 4px), repeating-linear-gradient(210deg, rgba(255, 255, 255, 0) 1px, rgba(255, 255, 255, 0.03) 2px, rgba(255, 255, 255, 0.04) 3px, rgba(255, 255, 255, 0.05) 4px), linear-gradient(-25deg, rgba(255, 255, 255, 0) 50%, rgba(255, 255, 255, 0.2) 70%, rgba(255, 255, 255, 0) 90%); }\n", ""]);
+	exports.push([module.id, ".jp-card.jp-card-safari.jp-card-identified .jp-card-front:before, .jp-card.jp-card-safari.jp-card-identified .jp-card-back:before {\n  background-image: repeating-linear-gradient(45deg, rgba(255, 255, 255, 0) 1px, rgba(255, 255, 255, 0.03) 2px, rgba(255, 255, 255, 0.04) 3px, rgba(255, 255, 255, 0.05) 4px), repeating-linear-gradient(135deg, rgba(255, 255, 255, 0.05) 1px, rgba(255, 255, 255, 0) 2px, rgba(255, 255, 255, 0.04) 3px, rgba(255, 255, 255, 0.03) 4px), repeating-linear-gradient(90deg, rgba(255, 255, 255, 0) 1px, rgba(255, 255, 255, 0.03) 2px, rgba(255, 255, 255, 0.04) 3px, rgba(255, 255, 255, 0.05) 4px), repeating-linear-gradient(210deg, rgba(255, 255, 255, 0) 1px, rgba(255, 255, 255, 0.03) 2px, rgba(255, 255, 255, 0.04) 3px, rgba(255, 255, 255, 0.05) 4px), -webkit-linear-gradient(-245deg, rgba(255, 255, 255, 0) 50%, rgba(255, 255, 255, 0.2) 70%, rgba(255, 255, 255, 0) 90%);\n  background-image: repeating-linear-gradient(45deg, rgba(255, 255, 255, 0) 1px, rgba(255, 255, 255, 0.03) 2px, rgba(255, 255, 255, 0.04) 3px, rgba(255, 255, 255, 0.05) 4px), repeating-linear-gradient(135deg, rgba(255, 255, 255, 0.05) 1px, rgba(255, 255, 255, 0) 2px, rgba(255, 255, 255, 0.04) 3px, rgba(255, 255, 255, 0.03) 4px), repeating-linear-gradient(90deg, rgba(255, 255, 255, 0) 1px, rgba(255, 255, 255, 0.03) 2px, rgba(255, 255, 255, 0.04) 3px, rgba(255, 255, 255, 0.05) 4px), repeating-linear-gradient(210deg, rgba(255, 255, 255, 0) 1px, rgba(255, 255, 255, 0.03) 2px, rgba(255, 255, 255, 0.04) 3px, rgba(255, 255, 255, 0.05) 4px), linear-gradient(-25deg, rgba(255, 255, 255, 0) 50%, rgba(255, 255, 255, 0.2) 70%, rgba(255, 255, 255, 0) 90%); }\n\n.jp-card.jp-card-ie-10.jp-card-flipped, .jp-card.jp-card-ie-11.jp-card-flipped {\n  -webkit-transform: 0deg;\n  -moz-transform: 0deg;\n  -ms-transform: 0deg;\n  -o-transform: 0deg;\n  transform: 0deg; }\n  .jp-card.jp-card-ie-10.jp-card-flipped .jp-card-front, .jp-card.jp-card-ie-11.jp-card-flipped .jp-card-front {\n    -webkit-transform: rotateY(0deg);\n    -moz-transform: rotateY(0deg);\n    -ms-transform: rotateY(0deg);\n    -o-transform: rotateY(0deg);\n    transform: rotateY(0deg); }\n  .jp-card.jp-card-ie-10.jp-card-flipped .jp-card-back, .jp-card.jp-card-ie-11.jp-card-flipped .jp-card-back {\n    -webkit-transform: rotateY(0deg);\n    -moz-transform: rotateY(0deg);\n    -ms-transform: rotateY(0deg);\n    -o-transform: rotateY(0deg);\n    transform: rotateY(0deg); }\n    .jp-card.jp-card-ie-10.jp-card-flipped .jp-card-back:after, .jp-card.jp-card-ie-11.jp-card-flipped .jp-card-back:after {\n      left: 18%; }\n    .jp-card.jp-card-ie-10.jp-card-flipped .jp-card-back .jp-card-cvc, .jp-card.jp-card-ie-11.jp-card-flipped .jp-card-back .jp-card-cvc {\n      -webkit-transform: rotateY(180deg);\n      -moz-transform: rotateY(180deg);\n      -ms-transform: rotateY(180deg);\n      -o-transform: rotateY(180deg);\n      transform: rotateY(180deg);\n      left: 5%; }\n    .jp-card.jp-card-ie-10.jp-card-flipped .jp-card-back .jp-card-shiny, .jp-card.jp-card-ie-11.jp-card-flipped .jp-card-back .jp-card-shiny {\n      left: 84%; }\n      .jp-card.jp-card-ie-10.jp-card-flipped .jp-card-back .jp-card-shiny:after, .jp-card.jp-card-ie-11.jp-card-flipped .jp-card-back .jp-card-shiny:after {\n        left: -480%;\n        -webkit-transform: rotateY(180deg);\n        -moz-transform: rotateY(180deg);\n        -ms-transform: rotateY(180deg);\n        -o-transform: rotateY(180deg);\n        transform: rotateY(180deg); }\n\n.jp-card.jp-card-ie-10.jp-card-amex .jp-card-back, .jp-card.jp-card-ie-11.jp-card-amex .jp-card-back {\n  display: none; }\n\n.jp-card-logo {\n  height: 36px;\n  width: 60px;\n  font-style: italic; }\n  .jp-card-logo, .jp-card-logo:before, .jp-card-logo:after {\n    box-sizing: border-box; }\n\n.jp-card-logo.jp-card-amex {\n  text-transform: uppercase;\n  font-size: 4px;\n  font-weight: bold;\n  color: white;\n  background-image: repeating-radial-gradient(circle at center, #FFF 1px, #999 2px);\n  background-image: repeating-radial-gradient(circle at center, #FFF 1px, #999 2px);\n  border: 1px solid #EEE; }\n  .jp-card-logo.jp-card-amex:before, .jp-card-logo.jp-card-amex:after {\n    width: 28px;\n    display: block;\n    position: absolute;\n    left: 16px; }\n  .jp-card-logo.jp-card-amex:before {\n    height: 28px;\n    content: \"american\";\n    top: 3px;\n    text-align: left;\n    padding-left: 2px;\n    padding-top: 11px;\n    background: #267AC3; }\n  .jp-card-logo.jp-card-amex:after {\n    content: \"express\";\n    bottom: 11px;\n    text-align: right;\n    padding-right: 2px; }\n\n.jp-card.jp-card-amex.jp-card-flipped {\n  -webkit-transform: none;\n  -moz-transform: none;\n  -ms-transform: none;\n  -o-transform: none;\n  transform: none; }\n\n.jp-card.jp-card-amex.jp-card-identified .jp-card-front:before, .jp-card.jp-card-amex.jp-card-identified .jp-card-back:before {\n  background-color: #108168; }\n\n.jp-card.jp-card-amex.jp-card-identified .jp-card-front .jp-card-logo.jp-card-amex {\n  opacity: 1; }\n\n.jp-card.jp-card-amex.jp-card-identified .jp-card-front .jp-card-cvc {\n  visibility: visible; }\n\n.jp-card.jp-card-amex.jp-card-identified .jp-card-front:after {\n  opacity: 1; }\n\n.jp-card-logo.jp-card-discover {\n  background: #FF6600;\n  color: #111;\n  text-transform: uppercase;\n  font-style: normal;\n  font-weight: bold;\n  font-size: 10px;\n  text-align: center;\n  overflow: hidden;\n  z-index: 1;\n  padding-top: 9px;\n  letter-spacing: .03em;\n  border: 1px solid #EEE; }\n  .jp-card-logo.jp-card-discover:before, .jp-card-logo.jp-card-discover:after {\n    content: \" \";\n    display: block;\n    position: absolute; }\n  .jp-card-logo.jp-card-discover:before {\n    background: white;\n    width: 200px;\n    height: 200px;\n    border-radius: 200px;\n    bottom: -5%;\n    right: -80%;\n    z-index: -1; }\n  .jp-card-logo.jp-card-discover:after {\n    width: 8px;\n    height: 8px;\n    border-radius: 4px;\n    top: 10px;\n    left: 27px;\n    background-color: #FF6600;\n    background-image: -webkit-radial-gradient(#FF6600, #fff);\n    background-image: radial-gradient(  #FF6600, #fff);\n    content: \"network\";\n    font-size: 4px;\n    line-height: 24px;\n    text-indent: -7px; }\n\n.jp-card .jp-card-front .jp-card-logo.jp-card-discover {\n  right: 12%;\n  top: 18%; }\n\n.jp-card.jp-card-discover.jp-card-identified .jp-card-front:before, .jp-card.jp-card-discover.jp-card-identified .jp-card-back:before {\n  background-color: #86B8CF; }\n\n.jp-card.jp-card-discover.jp-card-identified .jp-card-logo.jp-card-discover {\n  opacity: 1; }\n\n.jp-card.jp-card-discover.jp-card-identified .jp-card-front:after {\n  -webkit-transition: 400ms;\n  -moz-transition: 400ms;\n  transition: 400ms;\n  content: \" \";\n  display: block;\n  background-color: #FF6600;\n  background-image: -webkit-linear-gradient(#FF6600, #ffa366, #FF6600);\n  background-image: linear-gradient(#FF6600, #ffa366, #FF6600);\n  height: 50px;\n  width: 50px;\n  border-radius: 25px;\n  position: absolute;\n  left: 100%;\n  top: 15%;\n  margin-left: -25px;\n  box-shadow: inset 1px 1px 3px 1px rgba(0, 0, 0, 0.5); }\n\n.jp-card-logo.jp-card-visa {\n  text-transform: uppercase;\n  color: white;\n  text-align: center;\n  font-weight: bold;\n  font-size: 24px;\n  line-height: 18px;\n  margin-top: 5px; }\n  .jp-card-logo.jp-card-visa:before, .jp-card-logo.jp-card-visa:after {\n    content: \" \";\n    display: block;\n    width: 100%;\n    height: 25%; }\n  .jp-card-logo.jp-card-visa:before {\n    position: absolute;\n    left: -4px;\n    width: 0;\n    height: 0;\n    border-style: solid;\n    border-width: 0 12px 6px 0;\n    border-color: transparent #ffffff transparent transparent; }\n\n.jp-card.jp-card-visa.jp-card-identified .jp-card-front:before, .jp-card.jp-card-visa.jp-card-identified .jp-card-back:before {\n  background-color: #191278; }\n\n.jp-card.jp-card-visa.jp-card-identified .jp-card-logo.jp-card-visa {\n  opacity: 1;\n  box-shadow: none; }\n\n.jp-card-logo.jp-card-visaelectron {\n  background: white;\n  text-transform: uppercase;\n  color: #1A1876;\n  text-align: center;\n  font-weight: bold;\n  font-size: 15px;\n  line-height: 18px; }\n  .jp-card-logo.jp-card-visaelectron:before, .jp-card-logo.jp-card-visaelectron:after {\n    content: \" \";\n    display: block;\n    width: 100%;\n    height: 25%; }\n  .jp-card-logo.jp-card-visaelectron:before {\n    background: #1A1876; }\n  .jp-card-logo.jp-card-visaelectron:after {\n    background: #E79800; }\n  .jp-card-logo.jp-card-visaelectron .elec {\n    float: right;\n    font-family: arial;\n    font-size: 9px;\n    margin-right: 1px;\n    margin-top: -5px;\n    text-transform: none; }\n\n.jp-card.jp-card-visaelectron.jp-card-identified .jp-card-front:before, .jp-card.jp-card-visaelectron.jp-card-identified .jp-card-back:before {\n  background-color: #191278; }\n\n.jp-card.jp-card-visaelectron.jp-card-identified .jp-card-logo.jp-card-visaelectron {\n  opacity: 1; }\n\n.jp-card-logo.jp-card-mastercard {\n  color: white;\n  font-style: normal;\n  text-transform: lowercase;\n  font-weight: bold;\n  text-align: center;\n  font-size: 9px;\n  line-height: 84px;\n  z-index: 1;\n  text-shadow: 1px 1px rgba(0, 0, 0, 0.6); }\n  .jp-card-logo.jp-card-mastercard:before, .jp-card-logo.jp-card-mastercard:after {\n    content: \" \";\n    display: block;\n    width: 36px;\n    top: 0;\n    position: absolute;\n    height: 36px;\n    border-radius: 18px; }\n  .jp-card-logo.jp-card-mastercard:before {\n    left: 0;\n    background: #EB001B;\n    z-index: -1;\n    opacity: 0.9; }\n  .jp-card-logo.jp-card-mastercard:after {\n    right: 0;\n    background: #FF5F00;\n    z-index: -2; }\n\n.jp-card.jp-card-mastercard.jp-card-identified .jp-card-front .jp-card-logo.jp-card-mastercard, .jp-card.jp-card-mastercard.jp-card-identified .jp-card-back .jp-card-logo.jp-card-mastercard {\n  box-shadow: none; }\n\n.jp-card.jp-card-mastercard.jp-card-identified .jp-card-front:before, .jp-card.jp-card-mastercard.jp-card-identified .jp-card-back:before {\n  background-color: #0061A8; }\n\n.jp-card.jp-card-mastercard.jp-card-identified .jp-card-logo.jp-card-mastercard {\n  opacity: 1; }\n\n.jp-card-logo.jp-card-maestro {\n  color: white;\n  font-style: normal;\n  text-transform: lowercase;\n  font-weight: bold;\n  text-align: center;\n  font-size: 14px;\n  line-height: 84px;\n  z-index: 1;\n  text-shadow: 1px 1px rgba(0, 0, 0, 0.6); }\n  .jp-card-logo.jp-card-maestro:before, .jp-card-logo.jp-card-maestro:after {\n    content: \" \";\n    display: block;\n    width: 36px;\n    top: 0;\n    position: absolute;\n    height: 36px;\n    border-radius: 18px; }\n  .jp-card-logo.jp-card-maestro:before {\n    left: 0;\n    background: #EB001B;\n    z-index: -2; }\n  .jp-card-logo.jp-card-maestro:after {\n    right: 0;\n    background: #00A2E5;\n    z-index: -1;\n    opacity: 0.8; }\n\n.jp-card.jp-card-maestro.jp-card-identified .jp-card-front .jp-card-logo.jp-card-maestro, .jp-card.jp-card-maestro.jp-card-identified .jp-card-back .jp-card-logo.jp-card-maestro {\n  box-shadow: none; }\n\n.jp-card.jp-card-maestro.jp-card-identified .jp-card-front:before, .jp-card.jp-card-maestro.jp-card-identified .jp-card-back:before {\n  background-color: #0B2C5F; }\n\n.jp-card.jp-card-maestro.jp-card-identified .jp-card-logo.jp-card-maestro {\n  opacity: 1; }\n\n.jp-card-logo.jp-card-dankort {\n  width: 60px;\n  height: 36px;\n  padding: 3px;\n  border-radius: 8px;\n  border: #000000 1px solid;\n  background-color: #FFFFFF; }\n  .jp-card-logo.jp-card-dankort .dk {\n    position: relative;\n    width: 100%;\n    height: 100%;\n    overflow: hidden; }\n    .jp-card-logo.jp-card-dankort .dk:before {\n      background-color: #ED1C24;\n      content: '';\n      position: absolute;\n      width: 100%;\n      height: 100%;\n      display: block;\n      border-radius: 6px; }\n    .jp-card-logo.jp-card-dankort .dk:after {\n      content: '';\n      position: absolute;\n      top: 50%;\n      margin-top: -7.7px;\n      right: 0;\n      width: 0;\n      height: 0;\n      border-style: solid;\n      border-width: 7px 7px 10px 0;\n      border-color: transparent #ED1C24 transparent transparent;\n      z-index: 1; }\n  .jp-card-logo.jp-card-dankort .d, .jp-card-logo.jp-card-dankort .k {\n    position: absolute;\n    top: 50%;\n    width: 50%;\n    display: block;\n    height: 15.4px;\n    margin-top: -7.7px;\n    background: white; }\n  .jp-card-logo.jp-card-dankort .d {\n    left: 0;\n    border-radius: 0 8px 10px 0; }\n    .jp-card-logo.jp-card-dankort .d:before {\n      content: '';\n      position: absolute;\n      top: 50%;\n      left: 50%;\n      display: block;\n      background: #ED1C24;\n      border-radius: 2px 4px 6px 0px;\n      height: 5px;\n      width: 7px;\n      margin: -3px 0 0 -4px; }\n  .jp-card-logo.jp-card-dankort .k {\n    right: 0; }\n    .jp-card-logo.jp-card-dankort .k:before, .jp-card-logo.jp-card-dankort .k:after {\n      content: '';\n      position: absolute;\n      right: 50%;\n      width: 0;\n      height: 0;\n      border-style: solid;\n      margin-right: -1px; }\n    .jp-card-logo.jp-card-dankort .k:before {\n      top: 0;\n      border-width: 8px 5px 0 0;\n      border-color: #ED1C24 transparent transparent transparent; }\n    .jp-card-logo.jp-card-dankort .k:after {\n      bottom: 0;\n      border-width: 0 5px 8px 0;\n      border-color: transparent transparent #ED1C24 transparent; }\n\n.jp-card.jp-card-dankort.jp-card-identified .jp-card-front:before, .jp-card.jp-card-dankort.jp-card-identified .jp-card-back:before {\n  background-color: #0055C7; }\n\n.jp-card.jp-card-dankort.jp-card-identified .jp-card-logo.jp-card-dankort {\n  opacity: 1; }\n\n.jp-card-logo.jp-card-elo {\n  height: 50px;\n  width: 50px;\n  border-radius: 100%;\n  background: black;\n  color: white;\n  text-align: center;\n  text-transform: lowercase;\n  font-size: 21px;\n  font-style: normal;\n  letter-spacing: 1px;\n  font-weight: bold;\n  padding-top: 13px; }\n  .jp-card-logo.jp-card-elo .e, .jp-card-logo.jp-card-elo .l, .jp-card-logo.jp-card-elo .o {\n    display: inline-block;\n    position: relative; }\n  .jp-card-logo.jp-card-elo .e {\n    -webkit-transform: rotate(-15deg);\n    -moz-transform: rotate(-15deg);\n    -ms-transform: rotate(-15deg);\n    -o-transform: rotate(-15deg);\n    transform: rotate(-15deg); }\n  .jp-card-logo.jp-card-elo .o {\n    position: relative;\n    display: inline-block;\n    width: 12px;\n    height: 12px;\n    right: 0;\n    top: 7px;\n    border-radius: 100%;\n    background-image: -webkit-linear-gradient( yellow 50%, red 50%);\n    background-image: linear-gradient( yellow 50%, red 50%);\n    -webkit-transform: rotate(40deg);\n    -moz-transform: rotate(40deg);\n    -ms-transform: rotate(40deg);\n    -o-transform: rotate(40deg);\n    transform: rotate(40deg);\n    text-indent: -9999px; }\n    .jp-card-logo.jp-card-elo .o:before {\n      content: \"\";\n      position: absolute;\n      width: 49%;\n      height: 49%;\n      background: black;\n      border-radius: 100%;\n      text-indent: -99999px;\n      top: 25%;\n      left: 25%; }\n\n.jp-card.jp-card-elo.jp-card-identified .jp-card-front:before, .jp-card.jp-card-elo.jp-card-identified .jp-card-back:before {\n  background-color: #6F6969; }\n\n.jp-card.jp-card-elo.jp-card-identified .jp-card-logo.jp-card-elo {\n  opacity: 1; }\n\n.jp-card-logo.jp-card-jcb {\n  border-radius: 5px 0px 5px 0px;\n  -moz-border-radius: 5px 0px 5px 0px;\n  -webkit-border-radius: 5px 0px 5px 0px;\n  background-color: white;\n  font-style: normal;\n  color: white;\n  width: 50px;\n  padding: 2px 0 0 2px; }\n  .jp-card-logo.jp-card-jcb > div {\n    width: 15px;\n    margin-right: 1px;\n    display: inline-block;\n    text-align: center;\n    text-shadow: 1px 1px rgba(0, 0, 0, 0.6);\n    border-radius: 5px 0px 5px 0px;\n    -moz-border-radius: 5px 0px 5px 0px;\n    -webkit-border-radius: 5px 0px 5px 0px; }\n    .jp-card-logo.jp-card-jcb > div:before, .jp-card-logo.jp-card-jcb > div:after {\n      content: \" \";\n      display: block;\n      height: 8px; }\n    .jp-card-logo.jp-card-jcb > div.j {\n      background-color: #000063;\n      background-image: -webkit-linear-gradient(left, #000063, #008cff);\n      background-image: linear-gradient(to right,#000063, #008cff); }\n    .jp-card-logo.jp-card-jcb > div.c {\n      background-color: #630000;\n      background-image: -webkit-linear-gradient(left, #630000, #ff008d);\n      background-image: linear-gradient(to right,#630000, #ff008d); }\n    .jp-card-logo.jp-card-jcb > div.b {\n      background-color: #006300;\n      background-image: -webkit-linear-gradient(left, #006300, #00ff00);\n      background-image: linear-gradient(to right,#006300, #00ff00); }\n\n.jp-card.jp-card-jcb.jp-card-identified .jp-card-front:before, .jp-card.jp-card-jcb.jp-card-identified .jp-card-back:before {\n  background-color: #CB8000; }\n\n.jp-card.jp-card-jcb.jp-card-identified .jp-card-logo.jp-card-jcb {\n  opacity: 1;\n  box-shadow: none; }\n\n.jp-card-logo.jp-card-dinersclub {\n  font-family: serif;\n  height: 40px;\n  width: 100px;\n  color: white;\n  font-size: 17px;\n  font-style: normal;\n  letter-spacing: 1px; }\n  .jp-card-logo.jp-card-dinersclub::before, .jp-card-logo.jp-card-dinersclub::after {\n    display: block;\n    position: relative; }\n  .jp-card-logo.jp-card-dinersclub::before {\n    content: 'Diners Club'; }\n  .jp-card-logo.jp-card-dinersclub::after {\n    content: 'International';\n    text-transform: uppercase;\n    font-size: 0.6em; }\n\n.jp-card.jp-card-dinersclub .jp-card-front .jp-card-logo {\n  box-shadow: none !important; }\n\n.jp-card.jp-card-dinersclub.jp-card-identified .jp-card-front:before, .jp-card.jp-card-dinersclub.jp-card-identified .jp-card-back:before {\n  background-color: #999; }\n\n.jp-card.jp-card-dinersclub.jp-card-identified .jp-card-logo.jp-card-dinersclub {\n  opacity: 1; }\n\n.jp-card-container {\n  -webkit-perspective: 1000px;\n  -moz-perspective: 1000px;\n  perspective: 1000px;\n  width: 350px;\n  max-width: 100%;\n  height: 200px;\n  margin: auto;\n  z-index: 1;\n  position: relative; }\n\n.jp-card {\n  font-family: \"Helvetica Neue\", Helvetica, Arial, sans-serif;\n  line-height: 1;\n  position: relative;\n  width: 100%;\n  height: 100%;\n  min-width: 315px;\n  border-radius: 10px;\n  -webkit-transform-style: preserve-3d;\n  -moz-transform-style: preserve-3d;\n  -ms-transform-style: preserve-3d;\n  -o-transform-style: preserve-3d;\n  transform-style: preserve-3d;\n  -webkit-transition: all 400ms linear;\n  -moz-transition: all 400ms linear;\n  transition: all 400ms linear; }\n  .jp-card > *, .jp-card > *:before, .jp-card > *:after {\n    -moz-box-sizing: border-box;\n    -webkit-box-sizing: border-box;\n    box-sizing: border-box;\n    font-family: inherit; }\n  .jp-card.jp-card-flipped {\n    -webkit-transform: rotateY(180deg);\n    -moz-transform: rotateY(180deg);\n    -ms-transform: rotateY(180deg);\n    -o-transform: rotateY(180deg);\n    transform: rotateY(180deg); }\n  .jp-card .jp-card-front, .jp-card .jp-card-back {\n    -webkit-backface-visibility: hidden;\n    backface-visibility: hidden;\n    -webkit-transform-style: preserve-3d;\n    -moz-transform-style: preserve-3d;\n    -ms-transform-style: preserve-3d;\n    -o-transform-style: preserve-3d;\n    transform-style: preserve-3d;\n    -webkit-transition: all 400ms linear;\n    -moz-transition: all 400ms linear;\n    transition: all 400ms linear;\n    width: 100%;\n    height: 100%;\n    position: absolute;\n    top: 0;\n    left: 0;\n    overflow: hidden;\n    border-radius: 10px;\n    background: #DDD; }\n    .jp-card .jp-card-front:before, .jp-card .jp-card-back:before {\n      content: \" \";\n      display: block;\n      position: absolute;\n      width: 100%;\n      height: 100%;\n      top: 0;\n      left: 0;\n      opacity: 0;\n      border-radius: 10px;\n      -webkit-transition: all 400ms ease;\n      -moz-transition: all 400ms ease;\n      transition: all 400ms ease; }\n    .jp-card .jp-card-front:after, .jp-card .jp-card-back:after {\n      content: \" \";\n      display: block; }\n    .jp-card .jp-card-front .jp-card-display, .jp-card .jp-card-back .jp-card-display {\n      color: white;\n      font-weight: normal;\n      opacity: 0.5;\n      -webkit-transition: opacity 400ms linear;\n      -moz-transition: opacity 400ms linear;\n      transition: opacity 400ms linear; }\n      .jp-card .jp-card-front .jp-card-display.jp-card-focused, .jp-card .jp-card-back .jp-card-display.jp-card-focused {\n        opacity: 1;\n        font-weight: 700; }\n    .jp-card .jp-card-front .jp-card-cvc, .jp-card .jp-card-back .jp-card-cvc {\n      font-family: \"Bitstream Vera Sans Mono\", Consolas, Courier, monospace;\n      font-size: 14px; }\n    .jp-card .jp-card-front .jp-card-shiny, .jp-card .jp-card-back .jp-card-shiny {\n      width: 50px;\n      height: 35px;\n      border-radius: 5px;\n      background: #CCC;\n      position: relative; }\n      .jp-card .jp-card-front .jp-card-shiny:before, .jp-card .jp-card-back .jp-card-shiny:before {\n        content: \" \";\n        display: block;\n        width: 70%;\n        height: 60%;\n        border-top-right-radius: 5px;\n        border-bottom-right-radius: 5px;\n        background: #d9d9d9;\n        position: absolute;\n        top: 20%; }\n  .jp-card .jp-card-front .jp-card-logo {\n    position: absolute;\n    opacity: 0;\n    right: 5%;\n    top: 8%;\n    -webkit-transition: 400ms;\n    -moz-transition: 400ms;\n    transition: 400ms; }\n  .jp-card .jp-card-front .jp-card-lower {\n    width: 80%;\n    position: absolute;\n    left: 10%;\n    bottom: 30px; }\n    @media only screen and (max-width: 480px){\n      .jp-card .jp-card-front .jp-card-lower {\n        width: 90%;\n        left: 5%; } }\n    .jp-card .jp-card-front .jp-card-lower .jp-card-cvc {\n      visibility: hidden;\n      float: right;\n      position: relative;\n      bottom: 5px; }\n    .jp-card .jp-card-front .jp-card-lower .jp-card-number {\n      font-family: \"Bitstream Vera Sans Mono\", Consolas, Courier, monospace;\n      font-size: 24px;\n      clear: both;\n      margin-bottom: 30px; }\n    .jp-card .jp-card-front .jp-card-lower .jp-card-expiry {\n      font-family: \"Bitstream Vera Sans Mono\", Consolas, Courier, monospace;\n      letter-spacing: 0em;\n      position: relative;\n      float: right;\n      width: 25%; }\n      .jp-card .jp-card-front .jp-card-lower .jp-card-expiry:before, .jp-card .jp-card-front .jp-card-lower .jp-card-expiry:after {\n        font-family: \"Helvetica Neue\", Helvetica, Arial, sans-serif;\n        font-weight: bold;\n        font-size: 7px;\n        white-space: pre;\n        display: block;\n        opacity: .5; }\n      .jp-card .jp-card-front .jp-card-lower .jp-card-expiry:before {\n        content: attr(data-before);\n        margin-bottom: 2px;\n        font-size: 7px;\n        text-transform: uppercase; }\n      .jp-card .jp-card-front .jp-card-lower .jp-card-expiry:after {\n        position: absolute;\n        content: attr(data-after);\n        text-align: right;\n        right: 100%;\n        margin-right: 5px;\n        margin-top: 2px;\n        bottom: 0; }\n    .jp-card .jp-card-front .jp-card-lower .jp-card-name {\n      text-transform: uppercase;\n      font-family: \"Bitstream Vera Sans Mono\", Consolas, Courier, monospace;\n      font-size: 20px;\n      max-height: 45px;\n      position: absolute;\n      bottom: 0;\n      width: 190px;\n      display: -webkit-box;\n      -webkit-line-clamp: 2;\n      -webkit-box-orient: horizontal;\n      overflow: hidden;\n      text-overflow: ellipsis; }\n  .jp-card .jp-card-back {\n    -webkit-transform: rotateY(180deg);\n    -moz-transform: rotateY(180deg);\n    -ms-transform: rotateY(180deg);\n    -o-transform: rotateY(180deg);\n    transform: rotateY(180deg); }\n    .jp-card .jp-card-back .jp-card-bar {\n      background-color: #444;\n      background-image: -webkit-linear-gradient(#444, #333);\n      background-image: linear-gradient(#444, #333);\n      width: 100%;\n      height: 20%;\n      position: absolute;\n      top: 10%; }\n    .jp-card .jp-card-back:after {\n      content: \" \";\n      display: block;\n      background-color: #FFF;\n      background-image: -webkit-linear-gradient(#FFF, #FFF);\n      background-image: linear-gradient(#FFF, #FFF);\n      width: 80%;\n      height: 16%;\n      position: absolute;\n      top: 40%;\n      left: 2%; }\n    .jp-card .jp-card-back .jp-card-cvc {\n      position: absolute;\n      top: 40%;\n      left: 85%;\n      -webkit-transition-delay: 600ms;\n      -moz-transition-delay: 600ms;\n      transition-delay: 600ms; }\n    .jp-card .jp-card-back .jp-card-shiny {\n      position: absolute;\n      top: 66%;\n      left: 2%; }\n      .jp-card .jp-card-back .jp-card-shiny:after {\n        content: \"This card has been issued by Jesse Pollak and is licensed for anyone to use anywhere for free. It comes with no warranty. For support issues, please visit: github.com/jessepollak/card.\";\n        position: absolute;\n        left: 120%;\n        top: 5%;\n        color: white;\n        font-size: 7px;\n        width: 230px;\n        opacity: .5; }\n  .jp-card.jp-card-identified {\n    box-shadow: 0 0 20px rgba(0, 0, 0, 0.3); }\n    .jp-card.jp-card-identified .jp-card-front, .jp-card.jp-card-identified .jp-card-back {\n      background-color: #000;\n      background-color: rgba(0, 0, 0, 0.5); }\n      .jp-card.jp-card-identified .jp-card-front:before, .jp-card.jp-card-identified .jp-card-back:before {\n        -webkit-transition: all 400ms ease;\n        -moz-transition: all 400ms ease;\n        transition: all 400ms ease;\n        background-image: repeating-linear-gradient(45deg, rgba(255, 255, 255, 0) 1px, rgba(255, 255, 255, 0.03) 2px, rgba(255, 255, 255, 0.04) 3px, rgba(255, 255, 255, 0.05) 4px), repeating-linear-gradient(135deg, rgba(255, 255, 255, 0.05) 1px, rgba(255, 255, 255, 0) 2px, rgba(255, 255, 255, 0.04) 3px, rgba(255, 255, 255, 0.03) 4px), repeating-linear-gradient(90deg, rgba(255, 255, 255, 0) 1px, rgba(255, 255, 255, 0.03) 2px, rgba(255, 255, 255, 0.04) 3px, rgba(255, 255, 255, 0.05) 4px), repeating-linear-gradient(210deg, rgba(255, 255, 255, 0) 1px, rgba(255, 255, 255, 0.03) 2px, rgba(255, 255, 255, 0.04) 3px, rgba(255, 255, 255, 0.05) 4px), repeating-radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0) 1px, rgba(255, 255, 255, 0.03) 2px, rgba(255, 255, 255, 0.04) 3px, rgba(255, 255, 255, 0.05) 4px), repeating-radial-gradient(circle at 70% 70%, rgba(255, 255, 255, 0) 1px, rgba(255, 255, 255, 0.03) 2px, rgba(255, 255, 255, 0.04) 3px, rgba(255, 255, 255, 0.05) 4px), repeating-radial-gradient(circle at 90% 20%, rgba(255, 255, 255, 0) 1px, rgba(255, 255, 255, 0.03) 2px, rgba(255, 255, 255, 0.04) 3px, rgba(255, 255, 255, 0.05) 4px), repeating-radial-gradient(circle at 15% 80%, rgba(255, 255, 255, 0) 1px, rgba(255, 255, 255, 0.03) 2px, rgba(255, 255, 255, 0.04) 3px, rgba(255, 255, 255, 0.05) 4px), -webkit-linear-gradient(-245deg, rgba(255, 255, 255, 0) 50%, rgba(255, 255, 255, 0.2) 70%, rgba(255, 255, 255, 0) 90%);\n        background-image: repeating-linear-gradient(45deg, rgba(255, 255, 255, 0) 1px, rgba(255, 255, 255, 0.03) 2px, rgba(255, 255, 255, 0.04) 3px, rgba(255, 255, 255, 0.05) 4px), repeating-linear-gradient(135deg, rgba(255, 255, 255, 0.05) 1px, rgba(255, 255, 255, 0) 2px, rgba(255, 255, 255, 0.04) 3px, rgba(255, 255, 255, 0.03) 4px), repeating-linear-gradient(90deg, rgba(255, 255, 255, 0) 1px, rgba(255, 255, 255, 0.03) 2px, rgba(255, 255, 255, 0.04) 3px, rgba(255, 255, 255, 0.05) 4px), repeating-linear-gradient(210deg, rgba(255, 255, 255, 0) 1px, rgba(255, 255, 255, 0.03) 2px, rgba(255, 255, 255, 0.04) 3px, rgba(255, 255, 255, 0.05) 4px), repeating-radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0) 1px, rgba(255, 255, 255, 0.03) 2px, rgba(255, 255, 255, 0.04) 3px, rgba(255, 255, 255, 0.05) 4px), repeating-radial-gradient(circle at 70% 70%, rgba(255, 255, 255, 0) 1px, rgba(255, 255, 255, 0.03) 2px, rgba(255, 255, 255, 0.04) 3px, rgba(255, 255, 255, 0.05) 4px), repeating-radial-gradient(circle at 90% 20%, rgba(255, 255, 255, 0) 1px, rgba(255, 255, 255, 0.03) 2px, rgba(255, 255, 255, 0.04) 3px, rgba(255, 255, 255, 0.05) 4px), repeating-radial-gradient(circle at 15% 80%, rgba(255, 255, 255, 0) 1px, rgba(255, 255, 255, 0.03) 2px, rgba(255, 255, 255, 0.04) 3px, rgba(255, 255, 255, 0.05) 4px), linear-gradient(-25deg, rgba(255, 255, 255, 0) 50%, rgba(255, 255, 255, 0.2) 70%, rgba(255, 255, 255, 0) 90%);\n        opacity: 1; }\n      .jp-card.jp-card-identified .jp-card-front .jp-card-logo, .jp-card.jp-card-identified .jp-card-back .jp-card-logo {\n        box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.3); }\n    .jp-card.jp-card-identified.no-radial-gradient .jp-card-front:before, .jp-card.jp-card-identified.no-radial-gradient .jp-card-back:before {\n      background-image: repeating-linear-gradient(45deg, rgba(255, 255, 255, 0) 1px, rgba(255, 255, 255, 0.03) 2px, rgba(255, 255, 255, 0.04) 3px, rgba(255, 255, 255, 0.05) 4px), repeating-linear-gradient(135deg, rgba(255, 255, 255, 0.05) 1px, rgba(255, 255, 255, 0) 2px, rgba(255, 255, 255, 0.04) 3px, rgba(255, 255, 255, 0.03) 4px), repeating-linear-gradient(90deg, rgba(255, 255, 255, 0) 1px, rgba(255, 255, 255, 0.03) 2px, rgba(255, 255, 255, 0.04) 3px, rgba(255, 255, 255, 0.05) 4px), repeating-linear-gradient(210deg, rgba(255, 255, 255, 0) 1px, rgba(255, 255, 255, 0.03) 2px, rgba(255, 255, 255, 0.04) 3px, rgba(255, 255, 255, 0.05) 4px), -webkit-linear-gradient(-245deg, rgba(255, 255, 255, 0) 50%, rgba(255, 255, 255, 0.2) 70%, rgba(255, 255, 255, 0) 90%);\n      background-image: repeating-linear-gradient(45deg, rgba(255, 255, 255, 0) 1px, rgba(255, 255, 255, 0.03) 2px, rgba(255, 255, 255, 0.04) 3px, rgba(255, 255, 255, 0.05) 4px), repeating-linear-gradient(135deg, rgba(255, 255, 255, 0.05) 1px, rgba(255, 255, 255, 0) 2px, rgba(255, 255, 255, 0.04) 3px, rgba(255, 255, 255, 0.03) 4px), repeating-linear-gradient(90deg, rgba(255, 255, 255, 0) 1px, rgba(255, 255, 255, 0.03) 2px, rgba(255, 255, 255, 0.04) 3px, rgba(255, 255, 255, 0.05) 4px), repeating-linear-gradient(210deg, rgba(255, 255, 255, 0) 1px, rgba(255, 255, 255, 0.03) 2px, rgba(255, 255, 255, 0.04) 3px, rgba(255, 255, 255, 0.05) 4px), linear-gradient(-25deg, rgba(255, 255, 255, 0) 50%, rgba(255, 255, 255, 0.2) 70%, rgba(255, 255, 255, 0) 90%); }\n", ""]);
 
 	// exports
 
 
 /***/ }),
 /* 4 */
-/***/ (function(module, exports) {
+/***/ (function(module, exports){
 
 	/*
 		MIT License http://www.opensource.org/licenses/mit-license.php
 		Author Tobias Koppers @sokra
 	*/
 	// css base code, injected by the css-loader
-	module.exports = function() {
+	module.exports = function(){
 		var list = [];
 
 		// return the list of modules as css string
-		list.toString = function toString() {
+		list.toString = function toString(){
 			var result = [];
-			for(var i = 0; i < this.length; i++) {
+			for(var i = 0; i < this.length; i++){
 				var item = this[i];
-				if(item[2]) {
+				if(item[2]){
 					result.push("@media " + item[2] + "{" + item[1] + "}");
 				} else {
 					result.push(item[1]);
@@ -508,25 +508,25 @@ var card =
 		};
 
 		// import a list of modules into the list
-		list.i = function(modules, mediaQuery) {
+		list.i = function(modules, mediaQuery){
 			if(typeof modules === "string")
 				modules = [[null, modules, ""]];
 			var alreadyImportedModules = {};
-			for(var i = 0; i < this.length; i++) {
+			for(var i = 0; i < this.length; i++){
 				var id = this[i][0];
 				if(typeof id === "number")
 					alreadyImportedModules[id] = true;
 			}
-			for(i = 0; i < modules.length; i++) {
+			for(i = 0; i < modules.length; i++){
 				var item = modules[i];
 				// skip already imported module
 				// this implementation is not 100% perfect for weird media query combinations
 				//  when a module is imported multiple times with different media queries.
 				//  I hope this will never occur (Hey this way we have smaller bundles)
-				if(typeof item[0] !== "number" || !alreadyImportedModules[item[0]]) {
-					if(mediaQuery && !item[2]) {
+				if(typeof item[0] !== "number" || !alreadyImportedModules[item[0]]){
+					if(mediaQuery && !item[2]){
 						item[2] = mediaQuery;
-					} else if(mediaQuery) {
+					} else if(mediaQuery){
 						item[2] = "(" + item[2] + ") and (" + mediaQuery + ")";
 					}
 					list.push(item);
@@ -539,32 +539,32 @@ var card =
 
 /***/ }),
 /* 5 */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__){
 
 	/*
 		MIT License http://www.opensource.org/licenses/mit-license.php
 		Author Tobias Koppers @sokra
 	*/
 	var stylesInDom = {},
-		memoize = function(fn) {
+		memoize = function(fn){
 			var memo;
-			return function () {
+			return function (){
 				if (typeof memo === "undefined") memo = fn.apply(this, arguments);
 				return memo;
 			};
 		},
-		isOldIE = memoize(function() {
+		isOldIE = memoize(function(){
 			return /msie [6-9]\b/.test(self.navigator.userAgent.toLowerCase());
 		}),
-		getHeadElement = memoize(function () {
+		getHeadElement = memoize(function (){
 			return document.head || document.getElementsByTagName("head")[0];
 		}),
 		singletonElement = null,
 		singletonCounter = 0,
 		styleElementsInsertedAtTop = [];
 
-	module.exports = function(list, options) {
-		if(false) {
+	module.exports = function(list, options){
+		if(false){
 			if(typeof document !== "object") throw new Error("The style-loader cannot be used in a non-browser environment");
 		}
 
@@ -579,21 +579,21 @@ var card =
 		var styles = listToStyles(list);
 		addStylesToDom(styles, options);
 
-		return function update(newList) {
+		return function update(newList){
 			var mayRemove = [];
-			for(var i = 0; i < styles.length; i++) {
+			for(var i = 0; i < styles.length; i++){
 				var item = styles[i];
 				var domStyle = stylesInDom[item.id];
 				domStyle.refs--;
 				mayRemove.push(domStyle);
 			}
-			if(newList) {
+			if(newList){
 				var newStyles = listToStyles(newList);
 				addStylesToDom(newStyles, options);
 			}
-			for(var i = 0; i < mayRemove.length; i++) {
+			for(var i = 0; i < mayRemove.length; i++){
 				var domStyle = mayRemove[i];
-				if(domStyle.refs === 0) {
+				if(domStyle.refs === 0){
 					for(var j = 0; j < domStyle.parts.length; j++)
 						domStyle.parts[j]();
 					delete stylesInDom[domStyle.id];
@@ -602,21 +602,21 @@ var card =
 		};
 	}
 
-	function addStylesToDom(styles, options) {
-		for(var i = 0; i < styles.length; i++) {
+	function addStylesToDom(styles, options){
+		for(var i = 0; i < styles.length; i++){
 			var item = styles[i];
 			var domStyle = stylesInDom[item.id];
-			if(domStyle) {
+			if(domStyle){
 				domStyle.refs++;
-				for(var j = 0; j < domStyle.parts.length; j++) {
+				for(var j = 0; j < domStyle.parts.length; j++){
 					domStyle.parts[j](item.parts[j]);
 				}
-				for(; j < item.parts.length; j++) {
+				for(; j < item.parts.length; j++){
 					domStyle.parts.push(addStyle(item.parts[j], options));
 				}
 			} else {
 				var parts = [];
-				for(var j = 0; j < item.parts.length; j++) {
+				for(var j = 0; j < item.parts.length; j++){
 					parts.push(addStyle(item.parts[j], options));
 				}
 				stylesInDom[item.id] = {id: item.id, refs: 1, parts: parts};
@@ -624,10 +624,10 @@ var card =
 		}
 	}
 
-	function listToStyles(list) {
+	function listToStyles(list){
 		var styles = [];
 		var newStyles = {};
-		for(var i = 0; i < list.length; i++) {
+		for(var i = 0; i < list.length; i++){
 			var item = list[i];
 			var id = item[0];
 			var css = item[1];
@@ -642,51 +642,51 @@ var card =
 		return styles;
 	}
 
-	function insertStyleElement(options, styleElement) {
+	function insertStyleElement(options, styleElement){
 		var head = getHeadElement();
 		var lastStyleElementInsertedAtTop = styleElementsInsertedAtTop[styleElementsInsertedAtTop.length - 1];
-		if (options.insertAt === "top") {
-			if(!lastStyleElementInsertedAtTop) {
+		if (options.insertAt === "top"){
+			if(!lastStyleElementInsertedAtTop){
 				head.insertBefore(styleElement, head.firstChild);
-			} else if(lastStyleElementInsertedAtTop.nextSibling) {
+			} else if(lastStyleElementInsertedAtTop.nextSibling){
 				head.insertBefore(styleElement, lastStyleElementInsertedAtTop.nextSibling);
 			} else {
 				head.appendChild(styleElement);
 			}
 			styleElementsInsertedAtTop.push(styleElement);
-		} else if (options.insertAt === "bottom") {
+		} else if (options.insertAt === "bottom"){
 			head.appendChild(styleElement);
 		} else {
 			throw new Error("Invalid value for parameter 'insertAt'. Must be 'top' or 'bottom'.");
 		}
 	}
 
-	function removeStyleElement(styleElement) {
+	function removeStyleElement(styleElement){
 		styleElement.parentNode.removeChild(styleElement);
 		var idx = styleElementsInsertedAtTop.indexOf(styleElement);
-		if(idx >= 0) {
+		if(idx >= 0){
 			styleElementsInsertedAtTop.splice(idx, 1);
 		}
 	}
 
-	function createStyleElement(options) {
+	function createStyleElement(options){
 		var styleElement = document.createElement("style");
 		styleElement.type = "text/css";
 		insertStyleElement(options, styleElement);
 		return styleElement;
 	}
 
-	function createLinkElement(options) {
+	function createLinkElement(options){
 		var linkElement = document.createElement("link");
 		linkElement.rel = "stylesheet";
 		insertStyleElement(options, linkElement);
 		return linkElement;
 	}
 
-	function addStyle(obj, options) {
+	function addStyle(obj, options){
 		var styleElement, update, remove;
 
-		if (options.singleton) {
+		if (options.singleton){
 			var styleIndex = singletonCounter++;
 			styleElement = singletonElement || (singletonElement = createStyleElement(options));
 			update = applyToSingletonTag.bind(null, styleElement, styleIndex, false);
@@ -696,10 +696,10 @@ var card =
 			typeof URL.createObjectURL === "function" &&
 			typeof URL.revokeObjectURL === "function" &&
 			typeof Blob === "function" &&
-			typeof btoa === "function") {
+			typeof btoa === "function"){
 			styleElement = createLinkElement(options);
 			update = updateLink.bind(null, styleElement);
-			remove = function() {
+			remove = function(){
 				removeStyleElement(styleElement);
 				if(styleElement.href)
 					URL.revokeObjectURL(styleElement.href);
@@ -707,15 +707,15 @@ var card =
 		} else {
 			styleElement = createStyleElement(options);
 			update = applyToTag.bind(null, styleElement);
-			remove = function() {
+			remove = function(){
 				removeStyleElement(styleElement);
 			};
 		}
 
 		update(obj);
 
-		return function updateStyle(newObj) {
-			if(newObj) {
+		return function updateStyle(newObj){
+			if(newObj){
 				if(newObj.css === obj.css && newObj.media === obj.media && newObj.sourceMap === obj.sourceMap)
 					return;
 				update(obj = newObj);
@@ -725,25 +725,25 @@ var card =
 		};
 	}
 
-	var replaceText = (function () {
+	var replaceText = (function (){
 		var textStore = [];
 
-		return function (index, replacement) {
+		return function (index, replacement){
 			textStore[index] = replacement;
 			return textStore.filter(Boolean).join('\n');
 		};
 	})();
 
-	function applyToSingletonTag(styleElement, index, remove, obj) {
+	function applyToSingletonTag(styleElement, index, remove, obj){
 		var css = remove ? "" : obj.css;
 
-		if (styleElement.styleSheet) {
+		if (styleElement.styleSheet){
 			styleElement.styleSheet.cssText = replaceText(index, css);
 		} else {
 			var cssNode = document.createTextNode(css);
 			var childNodes = styleElement.childNodes;
 			if (childNodes[index]) styleElement.removeChild(childNodes[index]);
-			if (childNodes.length) {
+			if (childNodes.length){
 				styleElement.insertBefore(cssNode, childNodes[index]);
 			} else {
 				styleElement.appendChild(cssNode);
@@ -751,29 +751,29 @@ var card =
 		}
 	}
 
-	function applyToTag(styleElement, obj) {
+	function applyToTag(styleElement, obj){
 		var css = obj.css;
 		var media = obj.media;
 
-		if(media) {
+		if(media){
 			styleElement.setAttribute("media", media)
 		}
 
-		if(styleElement.styleSheet) {
+		if(styleElement.styleSheet){
 			styleElement.styleSheet.cssText = css;
 		} else {
-			while(styleElement.firstChild) {
+			while(styleElement.firstChild){
 				styleElement.removeChild(styleElement.firstChild);
 			}
 			styleElement.appendChild(document.createTextNode(css));
 		}
 	}
 
-	function updateLink(linkElement, obj) {
+	function updateLink(linkElement, obj){
 		var css = obj.css;
 		var sourceMap = obj.sourceMap;
 
-		if(sourceMap) {
+		if(sourceMap){
 			// http://stackoverflow.com/a/26603875
 			css += "\n/*# sourceMappingURL=data:application/json;base64," + btoa(unescape(encodeURIComponent(JSON.stringify(sourceMap)))) + " */";
 		}
@@ -791,27 +791,27 @@ var card =
 
 /***/ }),
 /* 6 */
-/***/ (function(module, exports) {
+/***/ (function(module, exports){
 
 	// Generated by CoffeeScript 1.10.0
-	(function() {
+	(function(){
 	  var QJ, rreturn, rtrim;
 
-	  QJ = function(selector) {
-	    if (QJ.isDOMElement(selector)) {
+	  QJ = function(selector){
+	    if (QJ.isDOMElement(selector)){
 	      return selector;
 	    }
 	    return document.querySelectorAll(selector);
 	  };
 
-	  QJ.isDOMElement = function(el) {
+	  QJ.isDOMElement = function(el){
 	    return el && (el.nodeName != null);
 	  };
 
 	  rtrim = /^[\s\uFEFF\xA0]+|[\s\uFEFF\xA0]+$/g;
 
-	  QJ.trim = function(text) {
-	    if (text === null) {
+	  QJ.trim = function(text){
+	    if (text === null){
 	      return "";
 	    } else {
 	      return (text + "").replace(rtrim, "");
@@ -820,16 +820,16 @@ var card =
 
 	  rreturn = /\r/g;
 
-	  QJ.val = function(el, val) {
+	  QJ.val = function(el, val){
 	    var ret;
-	    if (arguments.length > 1) {
+	    if (arguments.length > 1){
 	      return el.value = val;
 	    } else {
 	      ret = el.value;
-	      if (typeof ret === "string") {
+	      if (typeof ret === "string"){
 	        return ret.replace(rreturn, "");
 	      } else {
-	        if (ret === null) {
+	        if (ret === null){
 	          return "";
 	        } else {
 	          return ret;
@@ -838,8 +838,8 @@ var card =
 	    }
 	  };
 
-	  QJ.preventDefault = function(eventObject) {
-	    if (typeof eventObject.preventDefault === "function") {
+	  QJ.preventDefault = function(eventObject){
+	    if (typeof eventObject.preventDefault === "function"){
 	      eventObject.preventDefault();
 	      return;
 	    }
@@ -847,110 +847,110 @@ var card =
 	    return false;
 	  };
 
-	  QJ.normalizeEvent = function(e) {
+	  QJ.normalizeEvent = function(e){
 	    var original;
 	    original = e;
 	    e = {
 	      which: original.which != null ? original.which : void 0,
 	      target: original.target || original.srcElement,
-	      preventDefault: function() {
+	      preventDefault: function(){
 	        return QJ.preventDefault(original);
 	      },
 	      originalEvent: original,
 	      data: original.data || original.detail
 	    };
-	    if (e.which == null) {
+	    if (e.which == null){
 	      e.which = original.charCode != null ? original.charCode : original.keyCode;
 	    }
 	    return e;
 	  };
 
-	  QJ.on = function(element, eventName, callback) {
+	  QJ.on = function(element, eventName, callback){
 	    var el, i, j, len, len1, multEventName, originalCallback, ref;
-	    if (element.length) {
-	      for (i = 0, len = element.length; i < len; i++) {
+	    if (element.length){
+	      for (i = 0, len = element.length; i < len; i++){
 	        el = element[i];
 	        QJ.on(el, eventName, callback);
 	      }
 	      return;
 	    }
-	    if (eventName.match(" ")) {
+	    if (eventName.match(" ")){
 	      ref = eventName.split(" ");
-	      for (j = 0, len1 = ref.length; j < len1; j++) {
+	      for (j = 0, len1 = ref.length; j < len1; j++){
 	        multEventName = ref[j];
 	        QJ.on(element, multEventName, callback);
 	      }
 	      return;
 	    }
 	    originalCallback = callback;
-	    callback = function(e) {
+	    callback = function(e){
 	      e = QJ.normalizeEvent(e);
 	      return originalCallback(e);
 	    };
-	    if (element.addEventListener) {
+	    if (element.addEventListener){
 	      return element.addEventListener(eventName, callback, false);
 	    }
-	    if (element.attachEvent) {
+	    if (element.attachEvent){
 	      eventName = "on" + eventName;
 	      return element.attachEvent(eventName, callback);
 	    }
 	    element['on' + eventName] = callback;
 	  };
 
-	  QJ.addClass = function(el, className) {
+	  QJ.addClass = function(el, className){
 	    var e;
-	    if (el.length) {
-	      return (function() {
+	    if (el.length){
+	      return (function(){
 	        var i, len, results;
 	        results = [];
-	        for (i = 0, len = el.length; i < len; i++) {
+	        for (i = 0, len = el.length; i < len; i++){
 	          e = el[i];
 	          results.push(QJ.addClass(e, className));
 	        }
 	        return results;
 	      })();
 	    }
-	    if (el.classList) {
+	    if (el.classList){
 	      return el.classList.add(className);
 	    } else {
 	      return el.className += ' ' + className;
 	    }
 	  };
 
-	  QJ.hasClass = function(el, className) {
+	  QJ.hasClass = function(el, className){
 	    var e, hasClass, i, len;
-	    if (el.length) {
+	    if (el.length){
 	      hasClass = true;
-	      for (i = 0, len = el.length; i < len; i++) {
+	      for (i = 0, len = el.length; i < len; i++){
 	        e = el[i];
 	        hasClass = hasClass && QJ.hasClass(e, className);
 	      }
 	      return hasClass;
 	    }
-	    if (el.classList) {
+	    if (el.classList){
 	      return el.classList.contains(className);
 	    } else {
 	      return new RegExp('(^| )' + className + '( |$)', 'gi').test(el.className);
 	    }
 	  };
 
-	  QJ.removeClass = function(el, className) {
+	  QJ.removeClass = function(el, className){
 	    var cls, e, i, len, ref, results;
-	    if (el.length) {
-	      return (function() {
+	    if (el.length){
+	      return (function(){
 	        var i, len, results;
 	        results = [];
-	        for (i = 0, len = el.length; i < len; i++) {
+	        for (i = 0, len = el.length; i < len; i++){
 	          e = el[i];
 	          results.push(QJ.removeClass(e, className));
 	        }
 	        return results;
 	      })();
 	    }
-	    if (el.classList) {
+	    if (el.classList){
 	      ref = className.split(' ');
 	      results = [];
-	      for (i = 0, len = ref.length; i < len; i++) {
+	      for (i = 0, len = ref.length; i < len; i++){
 	        cls = ref[i];
 	        results.push(el.classList.remove(cls));
 	      }
@@ -960,21 +960,21 @@ var card =
 	    }
 	  };
 
-	  QJ.toggleClass = function(el, className, bool) {
+	  QJ.toggleClass = function(el, className, bool){
 	    var e;
-	    if (el.length) {
-	      return (function() {
+	    if (el.length){
+	      return (function(){
 	        var i, len, results;
 	        results = [];
-	        for (i = 0, len = el.length; i < len; i++) {
+	        for (i = 0, len = el.length; i < len; i++){
 	          e = el[i];
 	          results.push(QJ.toggleClass(e, className, bool));
 	        }
 	        return results;
 	      })();
 	    }
-	    if (bool) {
-	      if (!QJ.hasClass(el, className)) {
+	    if (bool){
+	      if (!QJ.hasClass(el, className)){
 	        return QJ.addClass(el, className);
 	      }
 	    } else {
@@ -982,13 +982,13 @@ var card =
 	    }
 	  };
 
-	  QJ.append = function(el, toAppend) {
+	  QJ.append = function(el, toAppend){
 	    var e;
-	    if (el.length) {
-	      return (function() {
+	    if (el.length){
+	      return (function(){
 	        var i, len, results;
 	        results = [];
-	        for (i = 0, len = el.length; i < len; i++) {
+	        for (i = 0, len = el.length; i < len; i++){
 	          e = el[i];
 	          results.push(QJ.append(e, toAppend));
 	        }
@@ -998,23 +998,23 @@ var card =
 	    return el.insertAdjacentHTML('beforeend', toAppend);
 	  };
 
-	  QJ.find = function(el, selector) {
-	    if (el instanceof NodeList || el instanceof Array) {
+	  QJ.find = function(el, selector){
+	    if (el instanceof NodeList || el instanceof Array){
 	      el = el[0];
 	    }
 	    return el.querySelectorAll(selector);
 	  };
 
-	  QJ.trigger = function(el, name, data) {
+	  QJ.trigger = function(el, name, data){
 	    var e, error, ev;
 	    try {
 	      ev = new CustomEvent(name, {
 	        detail: data
 	      });
-	    } catch (error) {
+	    } catch (error){
 	      e = error;
 	      ev = document.createEvent('CustomEvent');
-	      if (ev.initCustomEvent) {
+	      if (ev.initCustomEvent){
 	        ev.initCustomEvent(name, true, true, data);
 	      } else {
 	        ev.initEvent(name, true, true, data);
@@ -1030,12 +1030,12 @@ var card =
 
 /***/ }),
 /* 7 */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__){
 
-	/* WEBPACK VAR INJECTION */(function(global) {// Generated by CoffeeScript 1.10.0
-	(function() {
+	/* WEBPACK VAR INJECTION */(function(global){// Generated by CoffeeScript 1.10.0
+	(function(){
 	  var Payment, QJ, cardFromNumber, cardFromType, cards, defaultFormat, formatBackCardNumber, formatBackExpiry, formatCardNumber, formatExpiry, formatForwardExpiry, formatForwardSlash, formatMonthExpiry, hasTextSelected, luhnCheck, reFormatCardNumber, restrictCVC, restrictCardNumber, restrictCombinedExpiry, restrictExpiry, restrictMonthExpiry, restrictNumeric, restrictYearExpiry, setCardType,
-	    indexOf = [].indexOf || function(item) { for (var i = 0, l = this.length; i < l; i++) { if (i in this && this[i] === item) return i; } return -1; };
+	    indexOf = [].indexOf || function(item){ for (var i = 0, l = this.length; i < l; i++){ if (i in this && this[i] === item) return i; } return -1; };
 
 	  QJ = __webpack_require__(6);
 
@@ -1136,39 +1136,39 @@ var card =
 	    }
 	  ];
 
-	  cardFromNumber = function(num) {
+	  cardFromNumber = function(num){
 	    var card, j, len;
 	    num = (num + '').replace(/\D/g, '');
-	    for (j = 0, len = cards.length; j < len; j++) {
+	    for (j = 0, len = cards.length; j < len; j++){
 	      card = cards[j];
-	      if (card.pattern.test(num)) {
+	      if (card.pattern.test(num)){
 	        return card;
 	      }
 	    }
 	  };
 
-	  cardFromType = function(type) {
+	  cardFromType = function(type){
 	    var card, j, len;
-	    for (j = 0, len = cards.length; j < len; j++) {
+	    for (j = 0, len = cards.length; j < len; j++){
 	      card = cards[j];
-	      if (card.type === type) {
+	      if (card.type === type){
 	        return card;
 	      }
 	    }
 	  };
 
-	  luhnCheck = function(num) {
+	  luhnCheck = function(num){
 	    var digit, digits, j, len, odd, sum;
 	    odd = true;
 	    sum = 0;
 	    digits = (num + '').split('').reverse();
-	    for (j = 0, len = digits.length; j < len; j++) {
+	    for (j = 0, len = digits.length; j < len; j++){
 	      digit = digits[j];
 	      digit = parseInt(digit, 10);
-	      if ((odd = !odd)) {
+	      if ((odd = !odd)){
 	        digit *= 2;
 	      }
-	      if (digit > 9) {
+	      if (digit > 9){
 	        digit -= 9;
 	      }
 	      sum += digit;
@@ -1176,26 +1176,26 @@ var card =
 	    return sum % 10 === 0;
 	  };
 
-	  hasTextSelected = function(target) {
+	  hasTextSelected = function(target){
 	    var e, error, ref;
 	    try {
-	      if ((target.selectionStart != null) && target.selectionStart !== target.selectionEnd) {
+	      if ((target.selectionStart != null) && target.selectionStart !== target.selectionEnd){
 	        return true;
 	      }
-	      if ((typeof document !== "undefined" && document !== null ? (ref = document.selection) != null ? ref.createRange : void 0 : void 0) != null) {
-	        if (document.selection.createRange().text) {
+	      if ((typeof document !== "undefined" && document !== null ? (ref = document.selection) != null ? ref.createRange : void 0 : void 0) != null){
+	        if (document.selection.createRange().text){
 	          return true;
 	        }
 	      }
-	    } catch (error) {
+	    } catch (error){
 	      e = error;
 	    }
 	    return false;
 	  };
 
-	  reFormatCardNumber = function(e) {
-	    return setTimeout((function(_this) {
-	      return function() {
+	  reFormatCardNumber = function(e){
+	    return setTimeout((function(_this){
+	      return function(){
 	        var target, value;
 	        target = e.target;
 	        value = QJ.val(target);
@@ -1206,11 +1206,11 @@ var card =
 	    })(this));
 	  };
 
-	  formatCardNumber = function(maxLength) {
-	    return function(e) {
+	  formatCardNumber = function(maxLength){
+	    return function(e){
 	      var card, digit, i, j, len, length, re, target, upperLength, upperLengths, value;
 	      digit = String.fromCharCode(e.which);
-	      if (!/^\d+$/.test(digit)) {
+	      if (!/^\d+$/.test(digit)){
 	        return;
 	      }
 	      target = e.target;
@@ -1218,32 +1218,32 @@ var card =
 	      card = cardFromNumber(value + digit);
 	      length = (value.replace(/\D/g, '') + digit).length;
 	      upperLengths = [16];
-	      if (card) {
+	      if (card){
 	        upperLengths = card.length;
 	      }
-	      if (maxLength) {
-	        upperLengths = upperLengths.filter(function(x) {
+	      if (maxLength){
+	        upperLengths = upperLengths.filter(function(x){
 	          return x <= maxLength;
 	        });
 	      }
-	      for (i = j = 0, len = upperLengths.length; j < len; i = ++j) {
+	      for (i = j = 0, len = upperLengths.length; j < len; i = ++j){
 	        upperLength = upperLengths[i];
-	        if (length >= upperLength && upperLengths[i + 1]) {
+	        if (length >= upperLength && upperLengths[i + 1]){
 	          continue;
 	        }
-	        if (length >= upperLength) {
+	        if (length >= upperLength){
 	          return;
 	        }
 	      }
-	      if (hasTextSelected(target)) {
+	      if (hasTextSelected(target)){
 	        return;
 	      }
-	      if (card && card.type === 'amex') {
+	      if (card && card.type === 'amex'){
 	        re = /^(\d{4}|\d{4}\s\d{6})$/;
 	      } else {
 	        re = /(?:^|\s)(\d{4})$/;
 	      }
-	      if (re.test(value)) {
+	      if (re.test(value)){
 	        e.preventDefault();
 	        QJ.val(target, value + ' ' + digit);
 	        return QJ.trigger(target, 'change');
@@ -1251,221 +1251,221 @@ var card =
 	    };
 	  };
 
-	  formatBackCardNumber = function(e) {
+	  formatBackCardNumber = function(e){
 	    var target, value;
 	    target = e.target;
 	    value = QJ.val(target);
-	    if (e.meta) {
+	    if (e.meta){
 	      return;
 	    }
-	    if (e.which !== 8) {
+	    if (e.which !== 8){
 	      return;
 	    }
-	    if (hasTextSelected(target)) {
+	    if (hasTextSelected(target)){
 	      return;
 	    }
-	    if (/\d\s$/.test(value)) {
+	    if (/\d\s$/.test(value)){
 	      e.preventDefault();
 	      QJ.val(target, value.replace(/\d\s$/, ''));
 	      return QJ.trigger(target, 'change');
-	    } else if (/\s\d?$/.test(value)) {
+	    } else if (/\s\d?$/.test(value)){
 	      e.preventDefault();
 	      QJ.val(target, value.replace(/\s\d?$/, ''));
 	      return QJ.trigger(target, 'change');
 	    }
 	  };
 
-	  formatExpiry = function(e) {
+	  formatExpiry = function(e){
 	    var digit, target, val;
 	    digit = String.fromCharCode(e.which);
-	    if (!/^\d+$/.test(digit)) {
+	    if (!/^\d+$/.test(digit)){
 	      return;
 	    }
 	    target = e.target;
 	    val = QJ.val(target) + digit;
-	    if (/^\d$/.test(val) && (val !== '0' && val !== '1')) {
+	    if (/^\d$/.test(val) && (val !== '0' && val !== '1')){
 	      e.preventDefault();
 	      QJ.val(target, "0" + val + " / ");
 	      return QJ.trigger(target, 'change');
-	    } else if (/^\d\d$/.test(val)) {
+	    } else if (/^\d\d$/.test(val)){
 	      e.preventDefault();
 	      QJ.val(target, val + " / ");
 	      return QJ.trigger(target, 'change');
 	    }
 	  };
 
-	  formatMonthExpiry = function(e) {
+	  formatMonthExpiry = function(e){
 	    var digit, target, val;
 	    digit = String.fromCharCode(e.which);
-	    if (!/^\d+$/.test(digit)) {
+	    if (!/^\d+$/.test(digit)){
 	      return;
 	    }
 	    target = e.target;
 	    val = QJ.val(target) + digit;
-	    if (/^\d$/.test(val) && (val !== '0' && val !== '1')) {
+	    if (/^\d$/.test(val) && (val !== '0' && val !== '1')){
 	      e.preventDefault();
 	      QJ.val(target, "0" + val);
 	      return QJ.trigger(target, 'change');
-	    } else if (/^\d\d$/.test(val)) {
+	    } else if (/^\d\d$/.test(val)){
 	      e.preventDefault();
 	      QJ.val(target, "" + val);
 	      return QJ.trigger(target, 'change');
 	    }
 	  };
 
-	  formatForwardExpiry = function(e) {
+	  formatForwardExpiry = function(e){
 	    var digit, target, val;
 	    digit = String.fromCharCode(e.which);
-	    if (!/^\d+$/.test(digit)) {
+	    if (!/^\d+$/.test(digit)){
 	      return;
 	    }
 	    target = e.target;
 	    val = QJ.val(target);
-	    if (/^\d\d$/.test(val)) {
+	    if (/^\d\d$/.test(val)){
 	      QJ.val(target, val + " / ");
 	      return QJ.trigger(target, 'change');
 	    }
 	  };
 
-	  formatForwardSlash = function(e) {
+	  formatForwardSlash = function(e){
 	    var slash, target, val;
 	    slash = String.fromCharCode(e.which);
-	    if (slash !== '/') {
+	    if (slash !== '/'){
 	      return;
 	    }
 	    target = e.target;
 	    val = QJ.val(target);
-	    if (/^\d$/.test(val) && val !== '0') {
+	    if (/^\d$/.test(val) && val !== '0'){
 	      QJ.val(target, "0" + val + " / ");
 	      return QJ.trigger(target, 'change');
 	    }
 	  };
 
-	  formatBackExpiry = function(e) {
+	  formatBackExpiry = function(e){
 	    var target, value;
-	    if (e.metaKey) {
+	    if (e.metaKey){
 	      return;
 	    }
 	    target = e.target;
 	    value = QJ.val(target);
-	    if (e.which !== 8) {
+	    if (e.which !== 8){
 	      return;
 	    }
-	    if (hasTextSelected(target)) {
+	    if (hasTextSelected(target)){
 	      return;
 	    }
-	    if (/\d(\s|\/)+$/.test(value)) {
+	    if (/\d(\s|\/)+$/.test(value)){
 	      e.preventDefault();
 	      QJ.val(target, value.replace(/\d(\s|\/)*$/, ''));
 	      return QJ.trigger(target, 'change');
-	    } else if (/\s\/\s?\d?$/.test(value)) {
+	    } else if (/\s\/\s?\d?$/.test(value)){
 	      e.preventDefault();
 	      QJ.val(target, value.replace(/\s\/\s?\d?$/, ''));
 	      return QJ.trigger(target, 'change');
 	    }
 	  };
 
-	  restrictNumeric = function(e) {
+	  restrictNumeric = function(e){
 	    var input;
-	    if (e.metaKey || e.ctrlKey) {
+	    if (e.metaKey || e.ctrlKey){
 	      return true;
 	    }
-	    if (e.which === 32) {
+	    if (e.which === 32){
 	      return e.preventDefault();
 	    }
-	    if (e.which === 0) {
+	    if (e.which === 0){
 	      return true;
 	    }
-	    if (e.which < 33) {
+	    if (e.which < 33){
 	      return true;
 	    }
 	    input = String.fromCharCode(e.which);
-	    if (!/[\d\s]/.test(input)) {
+	    if (!/[\d\s]/.test(input)){
 	      return e.preventDefault();
 	    }
 	  };
 
-	  restrictCardNumber = function(maxLength) {
-	    return function(e) {
+	  restrictCardNumber = function(maxLength){
+	    return function(e){
 	      var card, digit, length, target, value;
 	      target = e.target;
 	      digit = String.fromCharCode(e.which);
-	      if (!/^\d+$/.test(digit)) {
+	      if (!/^\d+$/.test(digit)){
 	        return;
 	      }
-	      if (hasTextSelected(target)) {
+	      if (hasTextSelected(target)){
 	        return;
 	      }
 	      value = (QJ.val(target) + digit).replace(/\D/g, '');
 	      card = cardFromNumber(value);
 	      length = 16;
-	      if (card) {
+	      if (card){
 	        length = card.length[card.length.length - 1];
 	      }
-	      if (maxLength) {
+	      if (maxLength){
 	        length = Math.min(length, maxLength);
 	      }
-	      if (!(value.length <= length)) {
+	      if (!(value.length <= length)){
 	        return e.preventDefault();
 	      }
 	    };
 	  };
 
-	  restrictExpiry = function(e, length) {
+	  restrictExpiry = function(e, length){
 	    var digit, target, value;
 	    target = e.target;
 	    digit = String.fromCharCode(e.which);
-	    if (!/^\d+$/.test(digit)) {
+	    if (!/^\d+$/.test(digit)){
 	      return;
 	    }
-	    if (hasTextSelected(target)) {
+	    if (hasTextSelected(target)){
 	      return;
 	    }
 	    value = QJ.val(target) + digit;
 	    value = value.replace(/\D/g, '');
-	    if (value.length > length) {
+	    if (value.length > length){
 	      return e.preventDefault();
 	    }
 	  };
 
-	  restrictCombinedExpiry = function(e) {
+	  restrictCombinedExpiry = function(e){
 	    return restrictExpiry(e, 6);
 	  };
 
-	  restrictMonthExpiry = function(e) {
+	  restrictMonthExpiry = function(e){
 	    return restrictExpiry(e, 2);
 	  };
 
-	  restrictYearExpiry = function(e) {
+	  restrictYearExpiry = function(e){
 	    return restrictExpiry(e, 4);
 	  };
 
-	  restrictCVC = function(e) {
+	  restrictCVC = function(e){
 	    var digit, target, val;
 	    target = e.target;
 	    digit = String.fromCharCode(e.which);
-	    if (!/^\d+$/.test(digit)) {
+	    if (!/^\d+$/.test(digit)){
 	      return;
 	    }
-	    if (hasTextSelected(target)) {
+	    if (hasTextSelected(target)){
 	      return;
 	    }
 	    val = QJ.val(target) + digit;
-	    if (!(val.length <= 4)) {
+	    if (!(val.length <= 4)){
 	      return e.preventDefault();
 	    }
 	  };
 
-	  setCardType = function(e) {
+	  setCardType = function(e){
 	    var allTypes, card, cardType, target, val;
 	    target = e.target;
 	    val = QJ.val(target);
 	    cardType = Payment.fns.cardType(val) || 'unknown';
-	    if (!QJ.hasClass(target, cardType)) {
-	      allTypes = (function() {
+	    if (!QJ.hasClass(target, cardType)){
+	      allTypes = (function(){
 	        var j, len, results;
 	        results = [];
-	        for (j = 0, len = cards.length; j < len; j++) {
+	        for (j = 0, len = cards.length; j < len; j++){
 	          card = cards[j];
 	          results.push(card.type);
 	        }
@@ -1479,15 +1479,15 @@ var card =
 	    }
 	  };
 
-	  Payment = (function() {
-	    function Payment() {}
+	  Payment = (function(){
+	    function Payment(){}
 
 	    Payment.fns = {
-	      cardExpiryVal: function(value) {
+	      cardExpiryVal: function(value){
 	        var month, prefix, ref, year;
 	        value = value.replace(/\s/g, '');
 	        ref = value.split('/', 2), month = ref[0], year = ref[1];
-	        if ((year != null ? year.length : void 0) === 2 && /^\d+$/.test(year)) {
+	        if ((year != null ? year.length : void 0) === 2 && /^\d+$/.test(year)){
 	          prefix = (new Date).getFullYear();
 	          prefix = prefix.toString().slice(0, 2);
 	          year = prefix + year;
@@ -1499,41 +1499,41 @@ var card =
 	          year: year
 	        };
 	      },
-	      validateCardNumber: function(num) {
+	      validateCardNumber: function(num){
 	        var card, ref;
 	        num = (num + '').replace(/\s+|-/g, '');
-	        if (!/^\d+$/.test(num)) {
+	        if (!/^\d+$/.test(num)){
 	          return false;
 	        }
 	        card = cardFromNumber(num);
-	        if (!card) {
+	        if (!card){
 	          return false;
 	        }
 	        return (ref = num.length, indexOf.call(card.length, ref) >= 0) && (card.luhn === false || luhnCheck(num));
 	      },
-	      validateCardExpiry: function(month, year) {
+	      validateCardExpiry: function(month, year){
 	        var currentTime, expiry, prefix, ref, ref1;
-	        if (typeof month === 'object' && 'month' in month) {
+	        if (typeof month === 'object' && 'month' in month){
 	          ref = month, month = ref.month, year = ref.year;
-	        } else if (typeof month === 'string' && indexOf.call(month, '/') >= 0) {
+	        } else if (typeof month === 'string' && indexOf.call(month, '/') >= 0){
 	          ref1 = Payment.fns.cardExpiryVal(month), month = ref1.month, year = ref1.year;
 	        }
-	        if (!(month && year)) {
+	        if (!(month && year)){
 	          return false;
 	        }
 	        month = QJ.trim(month);
 	        year = QJ.trim(year);
-	        if (!/^\d+$/.test(month)) {
+	        if (!/^\d+$/.test(month)){
 	          return false;
 	        }
-	        if (!/^\d+$/.test(year)) {
+	        if (!/^\d+$/.test(year)){
 	          return false;
 	        }
 	        month = parseInt(month, 10);
-	        if (!(month && month <= 12)) {
+	        if (!(month && month <= 12)){
 	          return false;
 	        }
-	        if (year.length === 2) {
+	        if (year.length === 2){
 	          prefix = (new Date).getFullYear();
 	          prefix = prefix.toString().slice(0, 2);
 	          year = prefix + year;
@@ -1544,43 +1544,43 @@ var card =
 	        expiry.setMonth(expiry.getMonth() + 1, 1);
 	        return expiry > currentTime;
 	      },
-	      validateCardCVC: function(cvc, type) {
+	      validateCardCVC: function(cvc, type){
 	        var ref, ref1;
 	        cvc = QJ.trim(cvc);
-	        if (!/^\d+$/.test(cvc)) {
+	        if (!/^\d+$/.test(cvc)){
 	          return false;
 	        }
-	        if (type && cardFromType(type)) {
+	        if (type && cardFromType(type)){
 	          return ref = cvc.length, indexOf.call((ref1 = cardFromType(type)) != null ? ref1.cvcLength : void 0, ref) >= 0;
 	        } else {
 	          return cvc.length >= 3 && cvc.length <= 4;
 	        }
 	      },
-	      cardType: function(num) {
+	      cardType: function(num){
 	        var ref;
-	        if (!num) {
+	        if (!num){
 	          return null;
 	        }
 	        return ((ref = cardFromNumber(num)) != null ? ref.type : void 0) || null;
 	      },
-	      formatCardNumber: function(num) {
+	      formatCardNumber: function(num){
 	        var card, groups, ref, upperLength;
 	        card = cardFromNumber(num);
-	        if (!card) {
+	        if (!card){
 	          return num;
 	        }
 	        upperLength = card.length[card.length.length - 1];
 	        num = num.replace(/\D/g, '');
 	        num = num.slice(0, upperLength);
-	        if (card.format.global) {
+	        if (card.format.global){
 	          return (ref = num.match(card.format)) != null ? ref.join(' ') : void 0;
 	        } else {
 	          groups = card.format.exec(num);
-	          if (groups == null) {
+	          if (groups == null){
 	            return;
 	          }
 	          groups.shift();
-	          groups = groups.filter(function(n) {
+	          groups = groups.filter(function(n){
 	            return n;
 	          });
 	          return groups.join(' ');
@@ -1588,24 +1588,24 @@ var card =
 	      }
 	    };
 
-	    Payment.restrictNumeric = function(el) {
+	    Payment.restrictNumeric = function(el){
 	      return QJ.on(el, 'keypress', restrictNumeric);
 	    };
 
-	    Payment.cardExpiryVal = function(el) {
+	    Payment.cardExpiryVal = function(el){
 	      return Payment.fns.cardExpiryVal(QJ.val(el));
 	    };
 
-	    Payment.formatCardCVC = function(el) {
+	    Payment.formatCardCVC = function(el){
 	      Payment.restrictNumeric(el);
 	      QJ.on(el, 'keypress', restrictCVC);
 	      return el;
 	    };
 
-	    Payment.formatCardExpiry = function(el) {
+	    Payment.formatCardExpiry = function(el){
 	      var month, year;
 	      Payment.restrictNumeric(el);
-	      if (el.length && el.length === 2) {
+	      if (el.length && el.length === 2){
 	        month = el[0], year = el[1];
 	        this.formatCardExpiryMultiple(month, year);
 	      } else {
@@ -1618,13 +1618,13 @@ var card =
 	      return el;
 	    };
 
-	    Payment.formatCardExpiryMultiple = function(month, year) {
+	    Payment.formatCardExpiryMultiple = function(month, year){
 	      QJ.on(month, 'keypress', restrictMonthExpiry);
 	      QJ.on(month, 'keypress', formatMonthExpiry);
 	      return QJ.on(year, 'keypress', restrictYearExpiry);
 	    };
 
-	    Payment.formatCardNumber = function(el, maxLength) {
+	    Payment.formatCardNumber = function(el, maxLength){
 	      Payment.restrictNumeric(el);
 	      QJ.on(el, 'keypress', restrictCardNumber(maxLength));
 	      QJ.on(el, 'keypress', formatCardNumber(maxLength));
@@ -1635,24 +1635,24 @@ var card =
 	      return el;
 	    };
 
-	    Payment.getCardArray = function() {
+	    Payment.getCardArray = function(){
 	      return cards;
 	    };
 
-	    Payment.setCardArray = function(cardArray) {
+	    Payment.setCardArray = function(cardArray){
 	      cards = cardArray;
 	      return true;
 	    };
 
-	    Payment.addToCardArray = function(cardObject) {
+	    Payment.addToCardArray = function(cardObject){
 	      return cards.push(cardObject);
 	    };
 
-	    Payment.removeFromCardArray = function(type) {
+	    Payment.removeFromCardArray = function(type){
 	      var key, value;
-	      for (key in cards) {
+	      for (key in cards){
 	        value = cards[key];
-	        if (value.type === type) {
+	        if (value.type === type){
 	          cards.splice(key, 1);
 	        }
 	      }
@@ -1669,11 +1669,11 @@ var card =
 
 	}).call(this);
 
-	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
+	/* WEBPACK VAR INJECTION */}.call(exports, (function(){ return this; }())))
 
 /***/ }),
 /* 8 */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__){
 
 	'use strict';
 
@@ -1682,7 +1682,7 @@ var card =
 
 /***/ }),
 /* 9 */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__){
 
 	'use strict';
 
@@ -1697,7 +1697,7 @@ var card =
 	 */
 	var is = __webpack_require__(10);
 
-	var extend = function extend() {
+	var extend = function extend(){
 	  var target = arguments[0] || {};
 	  var i = 1;
 	  var length = arguments.length;
@@ -1705,7 +1705,7 @@ var card =
 	  var options, name, src, copy, copyIsArray, clone;
 
 	  // Handle a deep copy situation
-	  if (typeof target === 'boolean') {
+	  if (typeof target === 'boolean'){
 	    deep = target;
 	    target = arguments[1] || {};
 	    // skip the boolean and the target
@@ -1713,30 +1713,30 @@ var card =
 	  }
 
 	  // Handle case when target is a string or something (possible in deep copy)
-	  if (typeof target !== 'object' && !is.fn(target)) {
+	  if (typeof target !== 'object' && !is.fn(target)){
 	    target = {};
 	  }
 
-	  for (; i < length; i++) {
+	  for (; i < length; i++){
 	    // Only deal with non-null/undefined values
 	    options = arguments[i];
-	    if (options != null) {
-	      if (typeof options === 'string') {
+	    if (options != null){
+	      if (typeof options === 'string'){
 	        options = options.split('');
 	      }
 	      // Extend the base object
-	      for (name in options) {
+	      for (name in options){
 	        src = target[name];
 	        copy = options[name];
 
 	        // Prevent never-ending loop
-	        if (target === copy) {
+	        if (target === copy){
 	          continue;
 	        }
 
 	        // Recurse if we're merging plain objects or arrays
-	        if (deep && copy && (is.hash(copy) || (copyIsArray = is.array(copy)))) {
-	          if (copyIsArray) {
+	        if (deep && copy && (is.hash(copy) || (copyIsArray = is.array(copy)))){
+	          if (copyIsArray){
 	            copyIsArray = false;
 	            clone = src && is.array(src) ? src : [];
 	          } else {
@@ -1747,7 +1747,7 @@ var card =
 	          target[name] = extend(deep, clone, copy);
 
 	        // Don't bring in undefined values
-	        } else if (typeof copy !== 'undefined') {
+	        } else if (typeof copy !== 'undefined'){
 	          target[name] = copy;
 	        }
 	      }
@@ -1771,7 +1771,7 @@ var card =
 
 /***/ }),
 /* 10 */
-/***/ (function(module, exports) {
+/***/ (function(module, exports){
 
 	/* globals window, HTMLElement */
 
@@ -1789,10 +1789,10 @@ var card =
 	var owns = objProto.hasOwnProperty;
 	var toStr = objProto.toString;
 	var symbolValueOf;
-	if (typeof Symbol === 'function') {
+	if (typeof Symbol === 'function'){
 	  symbolValueOf = Symbol.prototype.valueOf;
 	}
-	var isActualNaN = function (value) {
+	var isActualNaN = function (value){
 	  return value !== value;
 	};
 	var NON_HOST_TYPES = {
@@ -1825,7 +1825,7 @@ var card =
 	 * @api public
 	 */
 
-	is.a = is.type = function (value, type) {
+	is.a = is.type = function (value, type){
 	  return typeof value === type;
 	};
 
@@ -1838,7 +1838,7 @@ var card =
 	 * @api public
 	 */
 
-	is.defined = function (value) {
+	is.defined = function (value){
 	  return typeof value !== 'undefined';
 	};
 
@@ -1851,17 +1851,17 @@ var card =
 	 * @api public
 	 */
 
-	is.empty = function (value) {
+	is.empty = function (value){
 	  var type = toStr.call(value);
 	  var key;
 
-	  if (type === '[object Array]' || type === '[object Arguments]' || type === '[object String]') {
+	  if (type === '[object Array]' || type === '[object Arguments]' || type === '[object String]'){
 	    return value.length === 0;
 	  }
 
-	  if (type === '[object Object]') {
-	    for (key in value) {
-	      if (owns.call(value, key)) {
+	  if (type === '[object Object]'){
+	    for (key in value){
+	      if (owns.call(value, key)){
 	        return false;
 	      }
 	    }
@@ -1880,50 +1880,50 @@ var card =
 	 * @return {Boolean} true if `value` is equal to `other`, false otherwise
 	 */
 
-	is.equal = function equal(value, other) {
-	  if (value === other) {
+	is.equal = function equal(value, other){
+	  if (value === other){
 	    return true;
 	  }
 
 	  var type = toStr.call(value);
 	  var key;
 
-	  if (type !== toStr.call(other)) {
+	  if (type !== toStr.call(other)){
 	    return false;
 	  }
 
-	  if (type === '[object Object]') {
-	    for (key in value) {
-	      if (!is.equal(value[key], other[key]) || !(key in other)) {
+	  if (type === '[object Object]'){
+	    for (key in value){
+	      if (!is.equal(value[key], other[key]) || !(key in other)){
 	        return false;
 	      }
 	    }
-	    for (key in other) {
-	      if (!is.equal(value[key], other[key]) || !(key in value)) {
+	    for (key in other){
+	      if (!is.equal(value[key], other[key]) || !(key in value)){
 	        return false;
 	      }
 	    }
 	    return true;
 	  }
 
-	  if (type === '[object Array]') {
+	  if (type === '[object Array]'){
 	    key = value.length;
-	    if (key !== other.length) {
+	    if (key !== other.length){
 	      return false;
 	    }
-	    while (key--) {
-	      if (!is.equal(value[key], other[key])) {
+	    while (key--){
+	      if (!is.equal(value[key], other[key])){
 	        return false;
 	      }
 	    }
 	    return true;
 	  }
 
-	  if (type === '[object Function]') {
+	  if (type === '[object Function]'){
 	    return value.prototype === other.prototype;
 	  }
 
-	  if (type === '[object Date]') {
+	  if (type === '[object Date]'){
 	    return value.getTime() === other.getTime();
 	  }
 
@@ -1940,7 +1940,7 @@ var card =
 	 * @api public
 	 */
 
-	is.hosted = function (value, host) {
+	is.hosted = function (value, host){
 	  var type = typeof host[value];
 	  return type === 'object' ? !!host[value] : !NON_HOST_TYPES[type];
 	};
@@ -1954,7 +1954,7 @@ var card =
 	 * @api public
 	 */
 
-	is.instance = is['instanceof'] = function (value, constructor) {
+	is.instance = is['instanceof'] = function (value, constructor){
 	  return value instanceof constructor;
 	};
 
@@ -1967,7 +1967,7 @@ var card =
 	 * @api public
 	 */
 
-	is.nil = is['null'] = function (value) {
+	is.nil = is['null'] = function (value){
 	  return value === null;
 	};
 
@@ -1980,7 +1980,7 @@ var card =
 	 * @api public
 	 */
 
-	is.undef = is.undefined = function (value) {
+	is.undef = is.undefined = function (value){
 	  return typeof value === 'undefined';
 	};
 
@@ -1997,7 +1997,7 @@ var card =
 	 * @api public
 	 */
 
-	is.args = is.arguments = function (value) {
+	is.args = is.arguments = function (value){
 	  var isStandardArguments = toStr.call(value) === '[object Arguments]';
 	  var isOldArguments = !is.array(value) && is.arraylike(value) && is.object(value) && is.fn(value.callee);
 	  return isStandardArguments || isOldArguments;
@@ -2016,7 +2016,7 @@ var card =
 	 * @api public
 	 */
 
-	is.array = Array.isArray || function (value) {
+	is.array = Array.isArray || function (value){
 	  return toStr.call(value) === '[object Array]';
 	};
 
@@ -2028,7 +2028,7 @@ var card =
 	 * @return {Boolean} true if `value` is an empty arguments object, false otherwise
 	 * @api public
 	 */
-	is.args.empty = function (value) {
+	is.args.empty = function (value){
 	  return is.args(value) && value.length === 0;
 	};
 
@@ -2040,7 +2040,7 @@ var card =
 	 * @return {Boolean} true if `value` is an empty array, false otherwise
 	 * @api public
 	 */
-	is.array.empty = function (value) {
+	is.array.empty = function (value){
 	  return is.array(value) && value.length === 0;
 	};
 
@@ -2053,7 +2053,7 @@ var card =
 	 * @api public
 	 */
 
-	is.arraylike = function (value) {
+	is.arraylike = function (value){
 	  return !!value && !is.bool(value)
 	    && owns.call(value, 'length')
 	    && isFinite(value.length)
@@ -2074,7 +2074,7 @@ var card =
 	 * @api public
 	 */
 
-	is.bool = is['boolean'] = function (value) {
+	is.bool = is['boolean'] = function (value){
 	  return toStr.call(value) === '[object Boolean]';
 	};
 
@@ -2087,7 +2087,7 @@ var card =
 	 * @api public
 	 */
 
-	is['false'] = function (value) {
+	is['false'] = function (value){
 	  return is.bool(value) && Boolean(Number(value)) === false;
 	};
 
@@ -2100,7 +2100,7 @@ var card =
 	 * @api public
 	 */
 
-	is['true'] = function (value) {
+	is['true'] = function (value){
 	  return is.bool(value) && Boolean(Number(value)) === true;
 	};
 
@@ -2117,7 +2117,7 @@ var card =
 	 * @api public
 	 */
 
-	is.date = function (value) {
+	is.date = function (value){
 	  return toStr.call(value) === '[object Date]';
 	};
 
@@ -2128,7 +2128,7 @@ var card =
 	 * @param {Mixed} value value to test
 	 * @returns {Boolean} true if `value` is a valid date, false otherwise
 	 */
-	is.date.valid = function (value) {
+	is.date.valid = function (value){
 	  return is.date(value) && !isNaN(Number(value));
 	};
 
@@ -2145,7 +2145,7 @@ var card =
 	 * @api public
 	 */
 
-	is.element = function (value) {
+	is.element = function (value){
 	  return value !== undefined
 	    && typeof HTMLElement !== 'undefined'
 	    && value instanceof HTMLElement
@@ -2165,7 +2165,7 @@ var card =
 	 * @api public
 	 */
 
-	is.error = function (value) {
+	is.error = function (value){
 	  return toStr.call(value) === '[object Error]';
 	};
 
@@ -2182,9 +2182,9 @@ var card =
 	 * @api public
 	 */
 
-	is.fn = is['function'] = function (value) {
+	is.fn = is['function'] = function (value){
 	  var isAlert = typeof window !== 'undefined' && value === window.alert;
-	  if (isAlert) {
+	  if (isAlert){
 	    return true;
 	  }
 	  var str = toStr.call(value);
@@ -2204,7 +2204,7 @@ var card =
 	 * @api public
 	 */
 
-	is.number = function (value) {
+	is.number = function (value){
 	  return toStr.call(value) === '[object Number]';
 	};
 
@@ -2216,7 +2216,7 @@ var card =
 	 * @return {Boolean} true if `value` is positive or negative Infinity, false otherwise
 	 * @api public
 	 */
-	is.infinite = function (value) {
+	is.infinite = function (value){
 	  return value === Infinity || value === -Infinity;
 	};
 
@@ -2229,7 +2229,7 @@ var card =
 	 * @api public
 	 */
 
-	is.decimal = function (value) {
+	is.decimal = function (value){
 	  return is.number(value) && !isActualNaN(value) && !is.infinite(value) && value % 1 !== 0;
 	};
 
@@ -2243,7 +2243,7 @@ var card =
 	 * @api public
 	 */
 
-	is.divisibleBy = function (value, n) {
+	is.divisibleBy = function (value, n){
 	  var isDividendInfinite = is.infinite(value);
 	  var isDivisorInfinite = is.infinite(n);
 	  var isNonZeroNumber = is.number(value) && !isActualNaN(value) && is.number(n) && !isActualNaN(n) && n !== 0;
@@ -2259,7 +2259,7 @@ var card =
 	 * @api public
 	 */
 
-	is.integer = is['int'] = function (value) {
+	is.integer = is['int'] = function (value){
 	  return is.number(value) && !isActualNaN(value) && value % 1 === 0;
 	};
 
@@ -2273,16 +2273,16 @@ var card =
 	 * @api public
 	 */
 
-	is.maximum = function (value, others) {
-	  if (isActualNaN(value)) {
+	is.maximum = function (value, others){
+	  if (isActualNaN(value)){
 	    throw new TypeError('NaN is not a valid value');
-	  } else if (!is.arraylike(others)) {
+	  } else if (!is.arraylike(others)){
 	    throw new TypeError('second argument must be array-like');
 	  }
 	  var len = others.length;
 
-	  while (--len >= 0) {
-	    if (value < others[len]) {
+	  while (--len >= 0){
+	    if (value < others[len]){
 	      return false;
 	    }
 	  }
@@ -2300,16 +2300,16 @@ var card =
 	 * @api public
 	 */
 
-	is.minimum = function (value, others) {
-	  if (isActualNaN(value)) {
+	is.minimum = function (value, others){
+	  if (isActualNaN(value)){
 	    throw new TypeError('NaN is not a valid value');
-	  } else if (!is.arraylike(others)) {
+	  } else if (!is.arraylike(others)){
 	    throw new TypeError('second argument must be array-like');
 	  }
 	  var len = others.length;
 
-	  while (--len >= 0) {
-	    if (value > others[len]) {
+	  while (--len >= 0){
+	    if (value > others[len]){
 	      return false;
 	    }
 	  }
@@ -2326,7 +2326,7 @@ var card =
 	 * @api public
 	 */
 
-	is.nan = function (value) {
+	is.nan = function (value){
 	  return !is.number(value) || value !== value;
 	};
 
@@ -2339,7 +2339,7 @@ var card =
 	 * @api public
 	 */
 
-	is.even = function (value) {
+	is.even = function (value){
 	  return is.infinite(value) || (is.number(value) && value === value && value % 2 === 0);
 	};
 
@@ -2352,7 +2352,7 @@ var card =
 	 * @api public
 	 */
 
-	is.odd = function (value) {
+	is.odd = function (value){
 	  return is.infinite(value) || (is.number(value) && value === value && value % 2 !== 0);
 	};
 
@@ -2366,8 +2366,8 @@ var card =
 	 * @api public
 	 */
 
-	is.ge = function (value, other) {
-	  if (isActualNaN(value) || isActualNaN(other)) {
+	is.ge = function (value, other){
+	  if (isActualNaN(value) || isActualNaN(other)){
 	    throw new TypeError('NaN is not a valid value');
 	  }
 	  return !is.infinite(value) && !is.infinite(other) && value >= other;
@@ -2383,8 +2383,8 @@ var card =
 	 * @api public
 	 */
 
-	is.gt = function (value, other) {
-	  if (isActualNaN(value) || isActualNaN(other)) {
+	is.gt = function (value, other){
+	  if (isActualNaN(value) || isActualNaN(other)){
 	    throw new TypeError('NaN is not a valid value');
 	  }
 	  return !is.infinite(value) && !is.infinite(other) && value > other;
@@ -2400,8 +2400,8 @@ var card =
 	 * @api public
 	 */
 
-	is.le = function (value, other) {
-	  if (isActualNaN(value) || isActualNaN(other)) {
+	is.le = function (value, other){
+	  if (isActualNaN(value) || isActualNaN(other)){
 	    throw new TypeError('NaN is not a valid value');
 	  }
 	  return !is.infinite(value) && !is.infinite(other) && value <= other;
@@ -2417,8 +2417,8 @@ var card =
 	 * @api public
 	 */
 
-	is.lt = function (value, other) {
-	  if (isActualNaN(value) || isActualNaN(other)) {
+	is.lt = function (value, other){
+	  if (isActualNaN(value) || isActualNaN(other)){
 	    throw new TypeError('NaN is not a valid value');
 	  }
 	  return !is.infinite(value) && !is.infinite(other) && value < other;
@@ -2434,10 +2434,10 @@ var card =
 	 * @return {Boolean} true if 'value' is is within 'start' and 'finish'
 	 * @api public
 	 */
-	is.within = function (value, start, finish) {
-	  if (isActualNaN(value) || isActualNaN(start) || isActualNaN(finish)) {
+	is.within = function (value, start, finish){
+	  if (isActualNaN(value) || isActualNaN(start) || isActualNaN(finish)){
 	    throw new TypeError('NaN is not a valid value');
-	  } else if (!is.number(value) || !is.number(start) || !is.number(finish)) {
+	  } else if (!is.number(value) || !is.number(start) || !is.number(finish)){
 	    throw new TypeError('all arguments must be numbers');
 	  }
 	  var isAnyInfinite = is.infinite(value) || is.infinite(start) || is.infinite(finish);
@@ -2456,7 +2456,7 @@ var card =
 	 * @return {Boolean} true if `value` is an object, false otherwise
 	 * @api public
 	 */
-	is.object = function (value) {
+	is.object = function (value){
 	  return toStr.call(value) === '[object Object]';
 	};
 
@@ -2468,11 +2468,11 @@ var card =
 	 * @return {Boolean} true if `value` is a primitive, false otherwise
 	 * @api public
 	 */
-	is.primitive = function isPrimitive(value) {
-	  if (!value) {
+	is.primitive = function isPrimitive(value){
+	  if (!value){
 	    return true;
 	  }
-	  if (typeof value === 'object' || is.object(value) || is.fn(value) || is.array(value)) {
+	  if (typeof value === 'object' || is.object(value) || is.fn(value) || is.array(value)){
 	    return false;
 	  }
 	  return true;
@@ -2487,7 +2487,7 @@ var card =
 	 * @api public
 	 */
 
-	is.hash = function (value) {
+	is.hash = function (value){
 	  return is.object(value) && value.constructor === Object && !value.nodeType && !value.setInterval;
 	};
 
@@ -2504,7 +2504,7 @@ var card =
 	 * @api public
 	 */
 
-	is.regexp = function (value) {
+	is.regexp = function (value){
 	  return toStr.call(value) === '[object RegExp]';
 	};
 
@@ -2521,7 +2521,7 @@ var card =
 	 * @api public
 	 */
 
-	is.string = function (value) {
+	is.string = function (value){
 	  return toStr.call(value) === '[object String]';
 	};
 
@@ -2538,7 +2538,7 @@ var card =
 	 * @api public
 	 */
 
-	is.base64 = function (value) {
+	is.base64 = function (value){
 	  return is.string(value) && (!value.length || base64Regex.test(value));
 	};
 
@@ -2555,7 +2555,7 @@ var card =
 	 * @api public
 	 */
 
-	is.hex = function (value) {
+	is.hex = function (value){
 	  return is.string(value) && (!value.length || hexRegex.test(value));
 	};
 
@@ -2568,7 +2568,7 @@ var card =
 	 * @api public
 	 */
 
-	is.symbol = function (value) {
+	is.symbol = function (value){
 	  return typeof Symbol === 'function' && toStr.call(value) === '[object Symbol]' && typeof symbolValueOf.call(value) === 'symbol';
 	};
 
@@ -2577,7 +2577,7 @@ var card =
 
 /***/ }),
 /* 11 */
-/***/ (function(module, exports) {
+/***/ (function(module, exports){
 
 	module.exports = jQuery;
 

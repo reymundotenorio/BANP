@@ -66,7 +66,6 @@ class User < ApplicationRecord
 
   ## End Validations
 
-
   ## Scopes
   scope :enabled, -> { where(state: true) }
   ## End Scopes

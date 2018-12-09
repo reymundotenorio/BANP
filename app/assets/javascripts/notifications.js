@@ -1,4 +1,4 @@
-$(document).on("turbolinks:load", function() {
+$(document).on("turbolinks:load", function(){
 
   toastr.options = {
     "closeButton": false,

@@ -1,32 +1,25 @@
-$(document).on("turbolinks:load", function() {
-  // $(document).ready(function() {
-
-  try{
-    // Mask for price Input
-    $(".price").mask("#,##0.00", {reverse: true});
-  }catch(e){
-    console.error("Mask error" + e.message);
-  }
+$(document).on("turbolinks:load", function(){
+  // $(document).ready(function(){
 
   // Display on the text-input, the filename selected by the file-input
-  $("input[type=file]").change(function(e) {
+  $("input[type=file]").change(function(e){
     filename = $(this).val();
     $("#filename").attr("value", filename);
     $(this).attr("value", "");
   });
 
   // Reset the file-input and img-tag values
-  $("#reset-button").click(function() {
+  $("#reset-button").click(function(){
     $("#preview-image").attr("src", "https://s3.amazonaws.com/betterandnice/images/default/default.png"),
     $("#filename").attr("value", "");
   });
 
   // Display on the img-tag, the image selected by the file-input
-  function updateImageSelected(input) {
-    if (input.files && input.files[0] && input.files[0].type.match("image.*")) {
+  function updateImageSelected(input){
+    if (input.files && input.files[0] && input.files[0].type.match("image.*")){
       var reader = new FileReader();
 
-      reader.onload = function(e) {
+      reader.onload = function(e){
         $("#preview-image").attr("src", e.target.result);
       }
 
@@ -49,7 +42,7 @@ $(document).on("turbolinks:load", function() {
   });
 
   // Dropdown "Bootstrap" listener on pressing the "Enter" key
-  $(".dropdown-item").on("keypress", function(e) {
+  $(".dropdown-item").on("keypress", function(e){
     if(e.which === 13){
       $(".dropdown-toggle").val($.trim($(this).text()));
       $("#role-dropdown").removeClass("open");
@@ -57,29 +50,8 @@ $(document).on("turbolinks:load", function() {
   });
 
   // Open dropdown on input focus and add focus to dropdown-menu first item
-  $("#employee_role").focus(function() {
+  $("#employee_role").focus(function(){
     $("#role-dropdown").addClass("open");
     $("#role-dropdown .dropdown-menu li:first-child .dropdown-item").focus();
   });
-
-
-  // Change iOS toggle status
-  $("#switcher").each(function(){
-    if (this.checked) {
-      $("#switcherToggle").addClass("active");
-    }
-    else{
-      $("#switcherToggle").removeClass("active");
-    }
-  });
-
-  $("#switcher").change(function(){
-    if (this.checked) {
-      $("#switcherToggle").addClass("active");
-    }
-    else{
-      $("#switcherToggle").removeClass("active");
-    }
-  });
-
 });

@@ -6,7 +6,7 @@ function scroll_page(){
   }
 
   else if(act<768 && window.innerWidth>=768){
-    $(function() {
+    $(function(){
       $.scrollify({
         section : ".panel"
       });
@@ -22,24 +22,24 @@ window.addEventListener("resize", function(event){
 
 var aux_dalay;
 
-$(function() {
+$(function(){
   act = window.innerWidth;
   $.scrollify({
     section:".panel",
     scrollbars:false,
-    before:function(i,panels) {
+    before:function(i,panels){
       var ref = panels[i].attr("data-section-name");
 
       $(".pagination .active").removeClass("active");
 
       $(".pagination").find("a[href=\"#" + ref + "\"]").addClass("active");
     },
-    afterRender:function() {
+    afterRender:function(){
       var pagination = "<ul class=\"pagination\">";
       var activeClass = "";
-      $(".panel").each(function(i) {
+      $(".panel").each(function(i){
         activeClass = "";
-        if(i===0) {
+        if(i===0){
           activeClass = "active";
         }
       });
@@ -51,7 +51,7 @@ $(function() {
     }
   });
 
-  if(window.innerWidth < 768) {
+  if(window.innerWidth < 768){
     $.scrollify.destroy();
   } else {
     $(".icon-2").data("delay", "200")

@@ -1,9 +1,9 @@
 // Turbolinks loading
-$(document).on("turbolinks:click", function() {
+$(document).on("turbolinks:click", function(){
   $(".preloader").show();
 });
 
 // Turbolinks loaded
-$(document).on("turbolinks:load", function() {
+$(document).on("turbolinks:load", function(){
   $(".preloader").hide();
 });

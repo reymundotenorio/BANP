@@ -14,10 +14,10 @@ class Product < ApplicationRecord
   def self.search(search, show_all)
     if search
       if show_all == "enabled-only"
-        query = "(name LIKE :search OR name_spanish LIKE :search OR description LIKE :search OR description_spanish LIKE :search) AND (state = true)"
+        query = "(name LIKE :search OR name_spanish LIKE :search OR barcode LIKE :search OR description LIKE :search OR description_spanish LIKE :search) AND (state = true)"
 
       else
-        query = "(name LIKE :search OR name_spanish LIKE :search OR description LIKE :search OR description_spanish LIKE :search)"
+        query = "(name LIKE :search OR name_spanish LIKE :search OR barcode LIKE :search OR description LIKE :search OR description_spanish LIKE :search)"
       end
 
       where(query, search: "%#{search}%")
@@ -64,15 +64,27 @@ class Product < ApplicationRecord
 
   # Uniqueness validation
   validates :name, uniqueness: { case_sensitive: false }
+  validates :name_spanish, uniqueness: { case_sensitive: false }
+  validates :barcode, uniqueness: { case_sensitive: false }
   # End Uniqueness validation
 
   # Presence validation
   validates :name, presence: true
+  validates :name_spanish, presence: true
+  validates :barcode, presence: true
+  validates :price, presence: true
   # End  Presence validation
 
   # Length validation
   validates :name, length: { maximum: 255 }
+  validates :name_spanish, length: { maximum: 255 }
+  validates :barcode, length: { maximum: 255 }
+  validates :content, length: { maximum: 255 }, allow_blank: true
+  validates :content_spanish, length: { maximum: 255 }, allow_blank: true
   validates :description, length: { maximum: 255 }, allow_blank: true
+  validates :description_spanish, length: { maximum: 255 }, allow_blank: true
+  validates :recipes, length: { maximum: 255 }, allow_blank: true
+  validates :recipes_spanish, length: { maximum: 255 }, allow_blank: true
   # End Length validation
 
   # Type validation

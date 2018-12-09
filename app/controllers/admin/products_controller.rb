@@ -46,7 +46,7 @@ class Admin::ProductsController < ApplicationController
     @product = Product.new
 
     @search_form_path = admin_new_product_path(@product)
-    @categories = Category.search(params[:search], "enabled-only").paginate(page: params[:page], per_page: 15) # Categories with pagination
+    # @categories = Category.search(params[:search], "enabled-only").paginate(page: params[:page], per_page: 15) # Categories with pagination
 
     respond_to do |format|
       format.html
@@ -83,7 +83,7 @@ class Admin::ProductsController < ApplicationController
     # Product found by before_action
 
     @search_form_path = admin_edit_product_path(@product)
-    @categories = Category.search(params[:search], "enabled-only").paginate(page: params[:page], per_page: 15) # Categories with pagination
+    # @categories = Category.search(params[:search], "enabled-only").paginate(page: params[:page], per_page: 15) # Categories with pagination
 
     respond_to do |format|
       format.html
@@ -154,6 +154,7 @@ class Admin::ProductsController < ApplicationController
 
     else
       render :edit
+      # redirect_to admin_edit_product_path(@product), alert: @product.errors.full_messages.join(', ')
     end
   end
 
@@ -189,6 +190,6 @@ class Admin::ProductsController < ApplicationController
 
   # Product params
   def product_params
-    params.require(:product).permit(:name, :name_spanish, :price, :content, :content_spanish, :description, :description_spanish, :recipes, :recipes_spanish, :image, :category_id)
+    params.require(:product).permit(:name, :name_spanish, :barcode, :price, :content, :content_spanish, :description, :description_spanish, :recipes, :recipes_spanish, :image, :category_id)
   end
 end

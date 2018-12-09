@@ -10,13 +10,13 @@
 
         .col-xs-12.col-sm-10.col-sm-offset-1.col-md-8.col-md-offset-2
           -# Material card
-          %div{class: "material-card shadow-card #{@employee.state}"}
+          %div{class: "material-card shadow-card #{@employee ? @employee.state : @costumer.state}"}
             -# Table
             .row.no-margin
               .col-xs-12.no-padding
                 .form-info
                   -# Email
-                  = f.hidden_field :email, value: @employee.email
+                  = f.hidden_field :email, value: @employee ? @employee.email : @costumer.email
                   -# End Email
 
                   .form-group
@@ -47,7 +47,3 @@
                   -# End Buttons
           -# End Material card
 -# End Form
-
--# Form script
-= javascript_include_tag "form", "data-turbolinks-track": "reload"
--# End Form script
