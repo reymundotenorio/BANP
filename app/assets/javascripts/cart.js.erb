@@ -77,7 +77,7 @@ $(document).on("turbolinks:load", function(){
           {
             id: parseInt(productId.val()),
             quantity: value.cartDetails.quantity + parseInt(quantity.val()),
-            userId: 5
+            userId: <%= @current_costumer ? @current_costumer.id : 0 %>
           },
         };
       }
@@ -91,7 +91,7 @@ $(document).on("turbolinks:load", function(){
           {
             id: parseInt(productId.val()),
             quantity: parseInt(quantity.val()),
-            userId: 5
+            userId: <%= @current_costumer ? @current_costumer.id : 0 %>
           },
         }
       );

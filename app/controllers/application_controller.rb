@@ -8,71 +8,8 @@ class ApplicationController < ActionController::Base
 
   # Domain global variable
   $max_failed_attempts = 4
-
-  if Rails.env.development?
-    $banp_domain = "http://localhost:3000/"
-
-  else
-    $banp_domain = "http://www.betterandnice.com/"
-  end
+  Rails.env.development? ? $banp_domain = "http://localhost:3000/" : $banp_domain = "http://www.betterandnice.com/"
   # End Domain global variable
-
-  # Twilio send SMS
-  def send_sms(phone_number, message)
-    twilio = Twilio::REST::Client.new
-    twilio.messages.create({from: ENV["twilio_phone_number"], to: phone_number, body: message})
-  end
-
-  # Cookie set language
-  def set_lang
-    if cookies[:banp_lang] && I18n.available_locales.include?(cookies[:banp_lang].to_sym)
-      current_lang = cookies[:banp_lang].to_sym
-
-    else
-      current_lang = I18n.default_locale
-      cookies.permanent[:banp_lang] = current_lang
-    end
-
-    I18n.locale = current_lang
-  end
-  # End Cookie set language
-
-  # Redirect to back
-  def redirect_to_back(state, path, resource, type)
-    if state
-      if type == "success"
-        redirect_back fallback_location: path, notice: t("alerts.enabled", model: t("activerecord.models.#{resource}"))
-
-      elsif type == "error"
-        redirect_back fallback_location: path, alert: t("alerts.not_enabled", model: t("activerecord.models.#{resource}"))
-      end
-
-    else
-      if type == "success"
-        redirect_back fallback_location: path, notice: t("alerts.disabled", model: t("activerecord.models.#{resource}"))
-
-      elsif type == "error"
-        redirect_back fallback_location: path, alert: t("alerts.not_disabled", model: t("activerecord.models.#{resource}"))
-      end
-    end
-  end
-
-  # Render 404
-  def render_404
-    render file: "#{Rails.root}/public/404.html", layout: false, status: 404
-  end
-
-  # Render PDF
-  def to_pdf(name_pdf, template, resource, datetime, pdf_title)
-    render pdf: name_pdf,
-    template: template,
-    layout: "admin/application_pdf.html.haml",
-    page_size: "letter",
-    # orientation: "Landscape", # Portrait
-    margin: { top: 10, bottom: 15 },
-    footer: { content: render_to_string("layouts/admin/footer_pdf.html.haml", layout: nil, locals: { datetime: datetime }) },
-    locals: { resource: resource, pdf_title: pdf_title }
-  end
 
   ### Authentication methods
 
@@ -168,4 +105,56 @@ class ApplicationController < ActionController::Base
   end
 
   ### End Authentication methods
+
+  # Cookie set language
+  def set_lang
+    if cookies[:banp_lang] && I18n.available_locales.include?(cookies[:banp_lang].to_sym)
+      current_lang = cookies[:banp_lang].to_sym
+
+    else
+      current_lang = I18n.default_locale
+      cookies.permanent[:banp_lang] = current_lang
+    end
+
+    I18n.locale = current_lang
+  end
+  # End Cookie set language
+
+  # Twilio send SMS
+  def send_sms(phone_number, message)
+    twilio = Twilio::REST::Client.new
+    twilio.messages.create({from: ENV["twilio_phone_number"], to: phone_number, body: message})
+  end
+
+  # Redirect to back
+  def redirect_to_back(state, path, resource, type)
+    if state
+      if type == "success"
+        redirect_back fallback_location: path, notice: t("alerts.enabled", model: t("activerecord.models.#{resource}"))
+
+      elsif type == "error"
+        redirect_back fallback_location: path, alert: t("alerts.not_enabled", model: t("activerecord.models.#{resource}"))
+      end
+
+    else
+      if type == "success"
+        redirect_back fallback_location: path, notice: t("alerts.disabled", model: t("activerecord.models.#{resource}"))
+
+      elsif type == "error"
+        redirect_back fallback_location: path, alert: t("alerts.not_disabled", model: t("activerecord.models.#{resource}"))
+      end
+    end
+  end
+
+  # Render PDF
+  def to_pdf(name_pdf, template, resource, datetime, pdf_title)
+    render pdf: name_pdf,
+    template: template,
+    layout: "admin/application_pdf.html.haml",
+    page_size: "letter",
+    # orientation: "Landscape", # Portrait
+    margin: { top: 10, bottom: 15 },
+    footer: { content: render_to_string("layouts/admin/footer_pdf.html.haml", layout: nil, locals: { datetime: datetime }) },
+    locals: { resource: resource, pdf_title: pdf_title }
+  end
 end
