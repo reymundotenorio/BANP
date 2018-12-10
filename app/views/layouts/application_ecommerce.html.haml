@@ -54,6 +54,8 @@
     = render "layouts/footer_ecommerce"
     -# End Render footer
 
+    %input{type: "hidden", id: "currentCostumer", value: "#{current_costumer ? Base64.encode64(current_costumer.id.to_s) : ""}"}
+
     -# TouchSwipe script
     = javascript_include_tag "https://cdnjs.cloudflare.com/ajax/libs/jquery.touchswipe/1.6.4/jquery.touchSwipe.min.js", "data-turbolinks-track": "reload"
     -# End TouchSwipe script
@@ -61,8 +63,7 @@
     -# E-commerce scripts
     = javascript_include_tag "ecommerce", "data-turbolinks-track": "reload"
     -# End E-commerce scripts
-    
+
     -# Add to Cart script
     = javascript_include_tag "cart", "data-turbolinks-track": "reload"
     -# End Add to Cart script
-    
