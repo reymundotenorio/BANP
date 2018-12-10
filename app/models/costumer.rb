@@ -24,7 +24,7 @@ class Costumer < ApplicationRecord
   # Search
   def self.search(search, show_all)
     if search
-      query = "(first_name LIKE :search OR last_name LIKE :search OR company LIKE :search OR phone LIKE :search OR email LIKE :search)"
+      query = "(first_name LIKE :search OR last_name LIKE :search OR company LIKE :search OR phone LIKE :search OR email LIKE :search OR address LIKE :search)"
       where(query, search: "%#{search}%")
 
     elsif show_all == "all"
@@ -98,14 +98,14 @@ class Costumer < ApplicationRecord
   end
 
   # User email validation
-  validate  :user_email
+  validate :user_email
 
   # Validate that email does not exist in the users records
   def user_email
     if self.user.present?
       user = User.find_by(email: self.email)
 
-      if !user.nil? && user.user_id != self.id
+      if !user.nil? && user.costumer_id != self.id
         errors.add(:email, :blank, message: I18n.t("validates.user_email_taken"))
       end
     end

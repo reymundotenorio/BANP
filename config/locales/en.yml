@@ -217,6 +217,8 @@ en:
       otp_sms: "Your OTP is: %{otp}. Enter the OTP to access the system"
       employee_user_exists: "The employee is already associated with a user"
       locked_correctly: "You have locked the session correctly"
+      user_must_be_employee: "User must be an employee"
+      user_must_be_costumer: "User must be a costumer"
     errors:
       page_empty: "This page is empty"
       back_to_home: "Back to Home"

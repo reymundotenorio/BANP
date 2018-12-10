@@ -4,12 +4,12 @@
       .col-xs-12.col-md-6.col-lg-5
         = image_tag "img/not-found.png", class: "img-responsive"
       .col-xs-12.col-md-7
-        %h1 
+        %h1
           500
           -# %span>= image_tag "img/error-tomato.png", class: "img-responsive", alt: "0"
         %h2
           %span= t("views.errors.page_empty")
         %p
-          = link_to (admin_root_path), title: "t('views.errors.back_to_home')" do
+          = link_to (root_path), title: "t('views.errors.back_to_home')" do
             %i.fas.fa-undo-alt
             %span= t("views.errors.back_to_home")

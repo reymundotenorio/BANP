@@ -74,14 +74,19 @@ class ApplicationController < ActionController::Base
     locals: { resource: resource, pdf_title: pdf_title }
   end
 
-  # User methods
+  ### Authentication methods
 
   #Helper for the view
-  helper_method :current_employee
+  helper_method :current_employee, :current_costumer
 
   # Current employee
   def current_employee
     @current_employee ||= Employee.find(session[:employee_id]) if session[:employee_id]
+  end
+
+  # Current costumer
+  def current_costumer
+    @current_costumer ||= Costumer.find(session[:costumer_id]) if session[:costumer_id]
   end
 
   # Require employee
@@ -105,6 +110,17 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  # Verify costumer state
+  def costumer_enabled?
+    if @costumer.state
+      return true
+
+    else
+      redirect_to auth_notifications_path(found: false), alert: t("views.authentication.account_disabled", email: @costumer.email)
+      return false
+    end
+  end
+
   # Verify if user is employee
   def user_is_employee?
     if @user.employee.present?
@@ -112,7 +128,19 @@ class ApplicationController < ActionController::Base
       return true
 
     else
-      redirect_to admin_auth_notifications_path(found: false), alert: "User must be an employee"
+      redirect_to admin_auth_notifications_path(found: false), alert: t("views.authentication.user_must_be_employee")
+      return false
+    end
+  end
+
+  # Verify if user is costumer
+  def user_is_costumer?
+    if @user.costumer.present?
+      @costumer = @user.costumer
+      return true
+
+    else
+      redirect_to auth_notifications_path(found: false), alert: t("views.authentication.user)views.authentication.user_must_be_costumer")
       return false
     end
   end
@@ -139,5 +167,5 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  # End User methods
+  ### End Authentication methods
 end

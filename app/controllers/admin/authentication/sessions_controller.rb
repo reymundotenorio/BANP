@@ -19,7 +19,7 @@ class Admin::Authentication::SessionsController < ApplicationController
     @email = params[:email]
     @email = @email.blank? ? "" : @email.strip.downcase
   end
-  
+
   # admin/sign-out
   def destroy
     @email = params[:email]
@@ -94,7 +94,7 @@ class Admin::Authentication::SessionsController < ApplicationController
 
           session[:session_confirmed] = true
 
-          redirect_to admin_employees_path, notice: t("views.authentication.signed_in_correctly", first_name: @employee.first_name, last_name: @employee.last_name)
+          redirect_to admin_root_path, notice: t("views.authentication.signed_in_correctly", first_name: @employee.first_name, last_name: @employee.last_name)
 
           # If user exist but the password doesn't match
         else
@@ -146,7 +146,7 @@ class Admin::Authentication::SessionsController < ApplicationController
       end
 
       if session[:session_confirmed] == true
-        redirect_to admin_employees_path
+        redirect_to admin_root_path
         return
       end
     end
@@ -173,7 +173,7 @@ class Admin::Authentication::SessionsController < ApplicationController
 
       if @user.two_factor_auth_otp == otp
         session[:session_confirmed] = true
-        redirect_to admin_employees_path, notice: t("views.authentication.signed_in_correctly", first_name: @employee.first_name, last_name: @employee.last_name)
+        redirect_to admin_root_path, notice: t("views.authentication.signed_in_correctly", first_name: @employee.first_name, last_name: @employee.last_name)
 
       else
         remaining_attempts = $max_failed_attempts - increment_attempts

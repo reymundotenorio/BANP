@@ -94,9 +94,9 @@ class Employee < ApplicationRecord
       errors.add(:image, :blank, message: I18n.t("validates.image_format"))
     end
   end
-
+  
   # User email validation
-  validate  :user_email
+  validate :user_email
 
   # Validate that email does not exist in the users records
   def user_email
