@@ -101,7 +101,7 @@ en:
       product:
         name: "Name"
         name_spanish: "Name in Spanish"
-        barcode: "Code"
+        barcode: "Barcode"
         price: "Price"
         content: "Content"
         content_spanish: "Content in Spanish"

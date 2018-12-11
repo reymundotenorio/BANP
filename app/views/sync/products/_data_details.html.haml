@@ -99,10 +99,10 @@
               %div{class: "detail-info #{product.state}"}
                 -# Set attributes
                 - if I18n.locale == :es
-                  - attributes = [["name_spanish", "name"], ["barcode", "barcode"], ["price", "price"], ["category.name_spanish", "category"], ["content_spanish", "content"], ["description_spanish", "description"], ["recipes_spanish", "recipes"], ["state", "state"]]
+                  - attributes = [["name_spanish", "name"], ["price", "price"], ["category.name_spanish", "category"], ["content_spanish", "content"], ["description_spanish", "description"], ["recipes_spanish", "recipes"], ["state", "state"], ["barcode", "barcode"]]
 
                 - else
-                  - attributes = [["name", "name"], ["barcode", "barcode"], ["price", "price"], ["category.name", "category"], ["content", "content"], ["description", "description"], ["recipes", "recipes"], ["state", "state"]]
+                  - attributes = [["name", "name"], ["price", "price"], ["category.name", "category"], ["content", "content"], ["description", "description"], ["recipes", "recipes"], ["state", "state"], ["barcode", "barcode"]]
 
                 - attributes.each do |attribute, title|
                   .info
@@ -126,7 +126,10 @@
 
                     - elsif attribute == "price"
                       %p= number_to_currency(product["#{attribute}"], precision: 2, unit: "$", format: "%u%n", separator: ".", delimiter: ",")
-
+                      
+                    - elsif attribute == "barcode"
+                      %svg.barcode{"jsbarcode-format": "CODE128", "jsbarcode-value": "#{product[attribute]}", "jsbarcode-lineColor": "#333333", "jsbarcode-background": "#fff", "jsbarcode-fontSize": "16px", "jsbarcode-font": "Montserrat"}
+                
                     - else
                       %p= product["#{attribute}"]
         -# End Material card

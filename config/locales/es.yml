@@ -101,7 +101,7 @@ es:
       product:
         name: "Nombre"
         name_spanish: "Nombre en Español"
-        barcode: "Código"
+        barcode: "Código de barra"
         price: "Precio"
         content: "Contenido"
         content_spanish: "Contenido en Español"

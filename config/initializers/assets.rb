@@ -60,3 +60,6 @@ Rails.application.config.assets.precompile += %w( cart.js )
 
 # Notifications
 Rails.application.config.assets.precompile += %w( notifications.js )
+
+# Barcode
+Rails.application.config.assets.precompile += %w( barcode.js )

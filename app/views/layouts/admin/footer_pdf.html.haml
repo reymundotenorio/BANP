@@ -12,7 +12,7 @@
     -# PDF Stylesheet
     = wicked_pdf_stylesheet_link_tag "application"
     -# End PDF Stylesheet
-
+    
     -# Get page number
     :javascript
       function number_pages() {
@@ -31,7 +31,7 @@
           for(var j=0; j<y.length; ++j) y[j].textContent = vars[x[i]];
         }
       }
-
+  
   %body.body-pdf{onload: "number_pages()"}
     -# Footer
     %footer

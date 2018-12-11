@@ -146,5 +146,8 @@ gem "haml"
 # Haml-rails provides Haml generators
 gem "haml-rails", "~> 1.0"
 
-# Erubis
-gem 'erubis', '~> 2.7'
+# Erubis - Rendering Rails views on js.erb
+gem "erubis", "~> 2.7"
+
+# Barcode generator
+gem "barby"

@@ -82,6 +82,7 @@ GEM
       aws-sdk-kms (~> 1)
       aws-sigv4 (~> 1.0)
     aws-sigv4 (1.0.3)
+    barby (0.6.6)
     bcrypt (3.1.12)
     better_errors (2.4.0)
       coderay (>= 1.0.0)
@@ -325,6 +326,7 @@ PLATFORMS
 DEPENDENCIES
   audited (~> 4.7)
   aws-sdk-s3
+  barby
   bcrypt (~> 3.1.7)
   better_errors
   binding_of_caller

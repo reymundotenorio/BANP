@@ -395,6 +395,18 @@ a{
 }
 // End iOS toggle
 
+// Barcode
+svg{
+  &.barcode{
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+    margin-left: 0px;
+  }
+}
+// End Barcode
+
 @media (min-width: 768px){
 
   h1{

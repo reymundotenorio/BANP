@@ -31,7 +31,16 @@
     = wicked_pdf_stylesheet_link_tag "admin"
     -# End PDF Stylesheet
     
-  %body.body-pdf
+    = javascript_include_tag "https://code.jquery.com/jquery-1.12.4.min.js"
+    = javascript_include_tag "https://cdn.jsdelivr.net/npm/jsbarcode@3.11.0/dist/JsBarcode.all.min.js"
+    
+    -# Get page number
+    :javascript
+      function loadBarcode() {
+      JsBarcode(".barcode").init();
+      }
+
+  %body.body-pdf{onload: "loadBarcode()"}
     -# Header
     %header#back-top.header-top
       %section.top-navbar.top-navbar-pdf
