@@ -23,6 +23,7 @@ $(document).on("turbolinks:load", function(){
     if(output){
       $(".cart-counter").css({"display": "block"});
       $(".cart-counter").text(output.cart.length);
+      $(".cart-products").empty();
 
       $.each(output.cart, function(index, value){
         if(index < 3){
@@ -34,7 +35,7 @@ $(document).on("turbolinks:load", function(){
           $(".cart-products").append(productItem);
         }
         else{
-          var productItem = "<a class='text-right' href='/products'><b>Ver mas</b></a>";
+          var productItem = "<a class='text-right' href='/products'><b>Ver más</b></a>";
           $(".cart-products").append(productItem);
           return false;
         }
@@ -77,7 +78,7 @@ $(document).on("turbolinks:load", function(){
           {
             id: parseInt(productId.val()),
             quantity: value.cartDetails.quantity + parseInt(quantity.val()),
-            userId: atob($("#currentCostumer").val().trim())
+            userId: parseInt(atob($("#currentCostumer").val().trim()))
           },
         };
       }
@@ -91,7 +92,7 @@ $(document).on("turbolinks:load", function(){
           {
             id: parseInt(productId.val()),
             quantity: parseInt(quantity.val()),
-            userId: atob($("#currentCostumer").val().trim())
+            userId: parseInt(atob($("#currentCostumer").val().trim()))
           },
         }
       );
