@@ -56,6 +56,22 @@ $(document).on("turbolinks:load", function(){
     jsonData.cart = jsonData.cart || [];
 
     var flag = true;
+    var userID = parseInt(atob($("#currentCostumer").val().trim()));
+
+    if(userID == 0){
+      $(location).attr("href", "/sign-in?notification=sign-in-required");
+      return;
+    }
+
+    if(parseInt(quantity.val()) <= 0){
+      toastr.options.progressBar = true;
+
+      i18nLocale == "es" ? amountGreater = "Ingrese una cantidad mayor que cero" : amountGreater = "Enter an amount greater than zero";
+      i18nLocale == "es" ? amountNotValid = "Cantidad no valida" : amountNotValid = "Amount not valid";
+
+      toastr.error(amountGreater, amountNotValid);
+      return;
+    }
 
     if(parseInt(quantity.val()) <= 0){
       toastr.options.progressBar = true;
@@ -78,7 +94,7 @@ $(document).on("turbolinks:load", function(){
           {
             id: parseInt(productId.val()),
             quantity: value.cartDetails.quantity + parseInt(quantity.val()),
-            userId: parseInt(atob($("#currentCostumer").val().trim()))
+            userId: userID
           },
         };
       }
@@ -92,7 +108,7 @@ $(document).on("turbolinks:load", function(){
           {
             id: parseInt(productId.val()),
             quantity: parseInt(quantity.val()),
-            userId: parseInt(atob($("#currentCostumer").val().trim()))
+            userId: userID
           },
         }
       );
