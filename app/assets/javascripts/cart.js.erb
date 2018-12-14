@@ -19,27 +19,38 @@ $(document).on("turbolinks:load", function(){
   function readCartInfo(){
     // Read and load the banpCart localStorage
     var output = JSON.parse(localStorage.getItem("banpCart")) || null;
+    var userID = parseInt(atob($("#currentCostumer").val().trim()));
+    var counter = 0;
 
+    // Cart details
     if(output){
-      $(".cart-counter").css({"display": "block"});
-      $(".cart-counter").text(output.cart.length);
       $(".cart-products").empty();
 
       $.each(output.cart, function(index, value){
-        if(index < 3){
-          product = products.find(item => item.id === value.cartDetails.id);
-          i18nLocale == "es" ? productName = product.name_spanish : productName = product.name;
+        if(userID == value.cartDetails.userId){
+          counter++;
+          
+          if(counter <= 3){
+            product = products.find(item => item.id === value.cartDetails.id);
+            i18nLocale == "es" ? productName = product.name_spanish : productName = product.name;
 
-          var productItem = "<a class='resume'><span class='quantity'> "+ productName + " (" + value.cartDetails.quantity + ")" + " </span> " + "<span class='amount'>" + formatter.format((product.price * value.cartDetails.quantity)) + "</span></a>";
+            var productItem = "<a class='resume'><span class='quantity'> "+ productName + " (" + value.cartDetails.quantity + ")" + " </span> " + "<span class='amount'>" + formatter.format((product.price * value.cartDetails.quantity)) + "</span></a>";
 
-          $(".cart-products").append(productItem);
-        }
-        else{
-          var productItem = "<a class='text-right' href='/products'><b>Ver más</b></a>";
-          $(".cart-products").append(productItem);
-          return false;
+            $(".cart-products").append(productItem);
+          }
+          else if(counter == 4){
+            var productItem = "<a class='text-right' href='/products'><b>Ver más</b></a>";
+            $(".cart-products").append(productItem);
+            // return false;
+          }
         }
       });
+    }
+
+    // Counter
+    if(counter > 0){
+      $(".cart-counter").css({"display": "block"});
+      $(".cart-counter").text(counter);
     }
     else{
       $(".cart-counter").css({"display": "none"});
