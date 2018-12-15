@@ -27,21 +27,23 @@ $(document).on("turbolinks:load", function(){
       $(".cart-products").empty();
 
       $.each(output.cart, function(index, value){
-        if(userID == value.cartDetails.userId){
-          counter++;
-          
-          if(counter <= 3){
-            product = products.find(item => item.id === value.cartDetails.id);
-            i18nLocale == "es" ? productName = product.name_spanish : productName = product.name;
+        if(value !=  null){
+          if(userID == value.cartDetails.userId){
+            counter++;
 
-            var productItem = "<a class='resume'><span class='quantity'> "+ productName + " (" + value.cartDetails.quantity + ")" + " </span> " + "<span class='amount'>" + formatter.format((product.price * value.cartDetails.quantity)) + "</span></a>";
+            if(counter <= 3){
+              product = products.find(item => item.id === value.cartDetails.id);
+              i18nLocale == "es" ? productName = product.name_spanish : productName = product.name;
 
-            $(".cart-products").append(productItem);
-          }
-          else if(counter == 4){
-            var productItem = "<a class='text-right' href='/products'><b>Ver más</b></a>";
-            $(".cart-products").append(productItem);
-            // return false;
+              var productItem = "<a class='resume'><span class='quantity'> "+ productName + " (" + value.cartDetails.quantity + ")" + " </span> " + "<span class='amount'>" + formatter.format((product.price * value.cartDetails.quantity)) + "</span></a>";
+
+              $(".cart-products").append(productItem);
+            }
+            else if(counter == 4){
+              var productItem = "<a class='text-right' href='/products'><b>Ver más</b></a>";
+              $(".cart-products").append(productItem);
+              // return false;
+            }
           }
         }
       });
@@ -96,18 +98,20 @@ $(document).on("turbolinks:load", function(){
 
     // If product exists on the cart
     $.each(jsonData.cart, function(index, value){
-      if (value.cartDetails.id == parseInt(productId.val()) ){
-        flag = false;
+      if(value !=  null){
+        if (value.cartDetails.id == parseInt(productId.val()) ){
+          flag = false;
 
-        jsonData.cart[index] =
-        {
-          cartDetails:
+          jsonData.cart[index] =
           {
-            id: parseInt(productId.val()),
-            quantity: value.cartDetails.quantity + parseInt(quantity.val()),
-            userId: userID
-          },
-        };
+            cartDetails:
+            {
+              id: parseInt(productId.val()),
+              quantity: value.cartDetails.quantity + parseInt(quantity.val()),
+              userId: userID
+            },
+          };
+        }
       }
     });
 
@@ -131,6 +135,29 @@ $(document).on("turbolinks:load", function(){
     i18nLocale == "es" ? productName = productCart.name_spanish : productName = productCart.name;
 
     toastr.success(productName + " (" + parseInt(quantity.val()) + ")", productAdded);
+
+    localStorage.setItem("banpCart", JSON.stringify(jsonData));
+    readCartInfo();
+  });
+
+  // Fuction on the "Clear Cart" button
+  $(".clearCart").click(function(){
+    var jsonData = JSON.parse(localStorage.getItem("banpCart")) || {};
+    jsonData.cart = jsonData.cart || [];
+    var userID = parseInt(atob($("#currentCostumer").val().trim()));
+
+    if(userID == 0){
+      return;
+    }
+
+    // If product exists on the cart
+    $.each(jsonData.cart, function(index, value){
+      if(value !=  null){
+        if(userID == value.cartDetails.userId){
+          delete jsonData.cart[index];
+        }
+      }
+    });
 
     localStorage.setItem("banpCart", JSON.stringify(jsonData));
     readCartInfo();
