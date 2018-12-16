@@ -54,4 +54,17 @@ $(document).on("turbolinks:load", function(){
     $("#role-dropdown").addClass("open");
     $("#role-dropdown .dropdown-menu li:first-child .dropdown-item").focus();
   });
+
+
+  // Toast message error
+  var currentURL = document.URL;
+  var params = currentURL.extract();
+  var i18nLocale = $("body").data("locale");
+
+  if(params.notification == "sign-in-required"){
+    i18nLocale == "es" ? mustSignIn = "Debe iniciar sesión para continuar" : mustSignIn = "You must sign in to continue";
+
+    toastr.error("", mustSignIn, {timeOut: 5000, extendedTimeOut: 5000, preventDuplicates: true});
+  }
+
 });

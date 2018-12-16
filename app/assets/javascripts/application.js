@@ -24,4 +24,6 @@
 //= require toastr/toastr
 //= require notifications
 
+//= require dentist/dentist
+
 // require_tree

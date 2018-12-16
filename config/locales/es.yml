@@ -6,7 +6,7 @@ es:
       lock: "Bloquear"
       sign_off: "Cerrar sesión"
       sign_up: "Regístrate"
-      sign_in: "inicia sesión"
+      sign_in: "Inicia sesión"
     navigation:
       dashboard: "Panel de Control"
       providers: "Proveedores"

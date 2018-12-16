@@ -37,7 +37,7 @@
     = javascript_include_tag "application", "data-turbolinks-track": "reload"
     -# End Application assets
 
-  %body.auth
+  %body.auth{"data-locale": "#{I18n.locale}"}
     -# Preloader
     .preloader
       .spinner

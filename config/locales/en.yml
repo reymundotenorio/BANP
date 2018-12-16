@@ -6,7 +6,7 @@ en:
       lock: "Lock"
       sign_off: "Sign off"
       sign_up: "Sign up"
-      sign_in: "sign in"
+      sign_in: "Sign in"
     navigation:
       dashboard: "Dashboard"
       providers: "Providers"
