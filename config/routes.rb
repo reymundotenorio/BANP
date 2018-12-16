@@ -24,6 +24,10 @@ Rails.application.routes.draw do
   get "/authentication/notifications", to: "authentication/notifications#index", as: "auth_notifications"
   # End Notifications
 
+  # Registrations
+  get "/sign-up", to: "authentication/registrations#new", as: "sign_up"
+  # End Registrations
+
   # Sessions
   get "/sign-in", to: "authentication/sessions#new", as: "sign_in"
   get "/two-factor", to: "authentication/sessions#two_factor", as: "two_factor"
@@ -44,7 +48,7 @@ Rails.application.routes.draw do
   get '/unlock-costumer-account/:unlock_token', to: 'authentication/unlocks#show', as: 'unlock_costumer_account'
   post "/unlock-account", to: "authentication/unlocks#send_unlock_email", as: "resend_unlock"
   # End Unlocks
-  
+
   # Passwords
   get "/reset-password", to: "authentication/passwords#new", as: "reset_password"
   get "/reset-costumer-password/:reset_password_token", to: "authentication/passwords#show", as: "reset_costumer_password"

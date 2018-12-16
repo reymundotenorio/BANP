@@ -6,18 +6,28 @@
     %span.hidden-xs
       %i.fas.fa-user
   %ul.dropdown-menu.user-dropbown
-    %li.label
-      %span.name
-        Reymundo Tenorio
-    %li
-      %a{href: "#", target: "_self"}
-        %i.fas.fa-cog.hidden-xs
-        = t("header.user.configuration")
-    %li
-      %a{href: "#", target: "_self"}
-        %i.fas.fa-lock.hidden-xs
-        = t("header.user.lock")
-    %li
-      %a{href: "#", target: "_self"}
-        %i.fas.fa-sign-out-alt.hidden-xs
-        = t("header.user.sign_off")
+    - if current_costumer
+      %li.label
+        %span.name
+          Reymundo Tenorio
+      %li
+        %a{href: "#", target: "_self"}
+          %i.fas.fa-cog.hidden-xs
+          = t("header.user.configuration")
+      %li
+        %a{href: "#", target: "_self"}
+          %i.fas.fa-lock.hidden-xs
+          = t("header.user.lock")
+      %li
+        %a{href: "#", target: "_self"}
+          %i.fas.fa-sign-out-alt.hidden-xs
+          = t("header.user.sign_off")
+    - else
+      %li
+        = link_to (sign_in_path) do
+          %i.fas.fa-sign-in-alt.hidden-xs
+          = t("header.user.sign_in")
+      %li
+        = link_to (sign_up_path) do
+          %i.fas.fa-user-plus.hidden-xs
+          = t("header.user.sign_up")

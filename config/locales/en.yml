@@ -5,6 +5,8 @@ en:
       configuration: "Configuration"
       lock: "Lock"
       sign_off: "Sign off"
+      sign_up: "Sign up"
+      sign_in: "sign in"
     navigation:
       dashboard: "Dashboard"
       providers: "Providers"

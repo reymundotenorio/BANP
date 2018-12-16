@@ -59,6 +59,11 @@
           width: 100%;
           left: 0%;
         }
+
+        @include placeholder{
+          // color: tint($text-color, 40%);
+          color: $transparent;
+        }
       }
 
       label{

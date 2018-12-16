@@ -10,17 +10,26 @@ class ProductsController < ApplicationController
   def index
     @categories = Category.enabled
     @category_filter = params[:category]
+    @product_filter = params[:product]
 
     @category_filter = @category_filter.blank? ? "" : @category_filter.strip.downcase
+    @product_filter = @product_filter.blank? ? "" : @product_filter.strip
 
+    # If product filter is empty
+    if @product_filter == ""
+      # And if category filter is empty
+      if @category_filter == ""
+        @products = Product.enabled.paginate(page: params[:page], per_page: 6) # Products with pagination
 
-    # @products = Product.search(params[:search], "enabled-only").paginate(page: params[:page], per_page: 15) # Products with pagination
-    if @category_filter == ""
-      @products = Product.enabled.paginate(page: params[:page], per_page: 6) # Products with pagination
+        # if category filter is not empty
+      else
+        @products = Product.enabled.find_category(@category_filter).paginate(page: params[:page], per_page: 6) # Products with pagination
+        @category = Category.friendly.find(@category_filter)
+      end
 
+      # If product filter not is empty
     else
-      @products = Product.enabled.find_category(@category_filter).paginate(page: params[:page], per_page: 6) # Products with pagination
-      @category = Category.friendly.find(@category_filter)
+      @products = Product.search(@product_filter, "enabled-only").paginate(page: params[:page], per_page: 6) # Products with pagination
     end
 
     respond_to do |format|

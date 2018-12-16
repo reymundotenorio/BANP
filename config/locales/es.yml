@@ -5,6 +5,8 @@ es:
       configuration: "Configuración"
       lock: "Bloquear"
       sign_off: "Cerrar sesión"
+      sign_up: "Regístrate"
+      sign_in: "inicia sesión"
     navigation:
       dashboard: "Panel de Control"
       providers: "Proveedores"

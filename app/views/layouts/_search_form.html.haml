@@ -1,9 +1,11 @@
-%form{method: "post"}
+-# Form
+= form_tag products_path, method: "get", autocomplete:"on" do
   .group
-    %input{required: "required", type: "text"}/
+    = text_field_tag :product, params[:product], placeholder: t("views.index.search"), required: true
     %span.highlight
     %span.bar
     %label= t("views.landing.search_products")
-  %button{name: "#{t('views.landing.search')}", type: "button"}
+  = button_tag t("views.landing.search"), data: {disable_with: "<i class='fas fa-spinner fa-spin'></i>"} do
     %span.sr-only= t("views.landing.search")
     %i.fas.fa-search
+-# End Form
