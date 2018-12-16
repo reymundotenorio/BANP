@@ -7,21 +7,11 @@
       %i.fas.fa-user
   %ul.dropdown-menu.user-dropbown
     - if current_costumer
-      %li.label
-        %span.name
-          Reymundo Tenorio
-      %li
-        %a{href: "#", target: "_self"}
-          %i.fas.fa-cog.hidden-xs
-          = t("header.user.configuration")
-      %li
-        %a{href: "#", target: "_self"}
-          %i.fas.fa-lock.hidden-xs
-          = t("header.user.lock")
-      %li
-        %a{href: "#", target: "_self"}
-          %i.fas.fa-sign-out-alt.hidden-xs
-          = t("header.user.sign_off")
+      -# Costumer detail Sync
+      = sync partial: "costumer_info", resource: current_costumer
+      = sync_new partial: "costumer_info", resource: Costumer.new
+      -# End Costumer detail Sync
+
     - else
       %li
         = link_to (sign_in_path) do

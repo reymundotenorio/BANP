@@ -53,9 +53,11 @@ $(document).on("turbolinks:load", function(){
     if(counter > 0){
       $(".cart-counter").css({"display": "block"});
       $(".cart-counter").text(counter);
+      $(".cart-menu").removeClass("disabled");
     }
     else{
       $(".cart-counter").css({"display": "none"});
+      $(".cart-menu").addClass("disabled");
     }
   }
 

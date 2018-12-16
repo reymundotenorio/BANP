@@ -65,13 +65,13 @@
 
               %li{class: "#{'active' if controller_name == 'landing'}"}
                 = link_to t("views.landing.contact_us"), root_path(anchor: "contact-us")
-              
+
               -# Render languages
               = render "layouts/languages_ecommerce_mobile"
               -# End Render languages
 
               %li.dropdown.hidden-xs
-                %a.dropdown-toggle{"data-toggle": "dropdown", href: "#"}
+                %a.dropdown-toggle.cart-menu{"data-toggle": "dropdown"}
                   -# Render cart
                   = render "layouts/cart"
                   -# End Render cart
@@ -85,7 +85,7 @@
               -# End Render user
 
         .dropdown.cart-dropdown.visible-xs
-          %button#cart-dropdown-btn.dropdown-toggle{"aria-expanded": "false", "aria-haspopup": "true", "data-toggle": "dropdown", type: "button"}
+          %button#cart-dropdown-btn.dropdown-toggle.cart-menu{"aria-expanded": "false", "aria-haspopup": "true", "data-toggle": "dropdown", type: "button"}
             -# Render cart
             = render "layouts/cart"
             -# End Render cart
