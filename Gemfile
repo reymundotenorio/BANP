@@ -154,3 +154,6 @@ gem "barby"
 
 # Google charts
 gem "chartkick"
+
+# Group by date
+gem "groupdate"

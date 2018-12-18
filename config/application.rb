@@ -19,7 +19,7 @@ module Banp
     I18n.available_locales = [:en, :es] # Available locales (English and Spanish)
     config.i18n.default_locale = :en # English as default language
     config.time_zone = "Eastern Time (US & Canada)" # GTM-5 (Miami, Florida)
-    config.active_record.default_timezone = :local # Or :utc
+    config.active_record.default_timezone = :utc #:local # Or :utc
 
     # Paperclip S3
     # config.paperclip_defaults = {

@@ -20,6 +20,7 @@ class Admin::EmployeesController < ApplicationController
   def index
     @employees = Employee.search(params[:search], params[:show]).paginate(page: params[:page], per_page: 15) # Employees with pagination
     @show_all = params[:show] == "all" ? true : false # View All (Enabled and Disabled)
+    @count = @employees.count
 
     # PDF view configuration
     current_lang = params[:lang]

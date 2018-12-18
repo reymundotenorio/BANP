@@ -1,6 +1,5 @@
 Rails.application.routes.draw do
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
-
   # Change language
   get "/change-language/:lang", to: "settings#change_lang", as: "change_language"
   # End Change language
@@ -61,7 +60,7 @@ Rails.application.routes.draw do
   # Admin namespace
   namespace :admin do
     # Root
-    root "employees#index"
+    root "dashboard#index"
     # End Root
 
     # Authentications
