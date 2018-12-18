@@ -1,5 +1,8 @@
 class Admin::DashboardController < ApplicationController
+  # Admin layout
+  layout "admin/application"
+  # End Admin layout
+  
   def index
-    @product_count = Product.group_by_day(:created_at).count
   end
 end

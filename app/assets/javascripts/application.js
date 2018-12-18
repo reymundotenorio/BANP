@@ -26,4 +26,6 @@
 
 //= require dentist/dentist
 
+//= require chartkick
+
 // require_tree

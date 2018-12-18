@@ -57,6 +57,12 @@ Rails.application.routes.draw do
 
   # End Authentications
 
+  # Charts namespace
+  namespace :charts do
+    get "product-by-category", to: "product_by_category", as: "product_by_category"
+  end
+  # End Charts namespace
+
   # Admin namespace
   namespace :admin do
     # Root
