@@ -19,6 +19,7 @@ class Admin::CostumersController < ApplicationController
   def index
     @costumers = Costumer.search(params[:search], params[:show]).paginate(page: params[:page], per_page: 15) # Costumers with pagination
     @show_all = params[:show] == "all" ? true : false # View All (Enabled and Disabled)
+    @count = @costumers.count
 
     # PDF view configuration
     current_lang = params[:lang]

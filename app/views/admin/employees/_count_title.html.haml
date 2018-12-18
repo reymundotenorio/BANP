@@ -1,2 +1,2 @@
 %i.fas.fa-list-alt
-= "#{@count} #{@count > 1 ? t('header.navigation.employees') : t('activerecord.models.employee')}"
+= "#{@count} #{@count == 1 ? t('activerecord.models.employee') : t('header.navigation.employees')}"

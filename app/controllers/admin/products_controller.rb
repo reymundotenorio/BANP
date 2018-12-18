@@ -19,6 +19,7 @@ class Admin::ProductsController < ApplicationController
   def index
     @products = Product.search(params[:search], params[:show]).paginate(page: params[:page], per_page: 15) # Products with pagination
     @show_all = params[:show] == "all" ? true : false # View All (Enabled and Disabled)
+    @count = @products.count
 
     # PDF view configuration
     current_lang = params[:lang]

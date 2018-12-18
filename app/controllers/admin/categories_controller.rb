@@ -19,6 +19,7 @@ class Admin::CategoriesController < ApplicationController
   def index
     @categories = Category.search(params[:search], params[:show]).paginate(page: params[:page], per_page: 15) # Categories with pagination
     @show_all = params[:show] == "all" ? true : false # View All (Enabled and Disabled)
+    @count = @categories.count
 
     # PDF view configuration
     current_lang = params[:lang]

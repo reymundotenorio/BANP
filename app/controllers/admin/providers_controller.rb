@@ -19,6 +19,7 @@ class Admin::ProvidersController < ApplicationController
   def index
     @providers = Provider.search(params[:search], params[:show]).paginate(page: params[:page], per_page: 15) # Providers with pagination
     @show_all = params[:show] == "all" ? true : false # View All (Enabled and Disabled)
+    @count = @providers.count
 
     # PDF view configuration
     current_lang = params[:lang]
