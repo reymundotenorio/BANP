@@ -151,3 +151,6 @@ gem "erubis", "~> 2.7"
 
 # Barcode generator
 gem "barby"
+
+# Google charts
+gem "chartkick"
