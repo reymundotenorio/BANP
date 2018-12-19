@@ -19,7 +19,7 @@ $(document).on("turbolinks:load", function(){
   function readCartInfo(){
     // Read and load the banpCart localStorage
     var output = JSON.parse(localStorage.getItem("banpCart")) || null;
-    var userID = parseInt(atob($("#currentCostumer").val().trim()));
+    var userID = parseInt(atob($("#currentCustomer").val().trim()));
     var counter = 0;
 
     // Cart details
@@ -71,7 +71,7 @@ $(document).on("turbolinks:load", function(){
     jsonData.cart = jsonData.cart || [];
 
     var flag = true;
-    var userID = parseInt(atob($("#currentCostumer").val().trim()));
+    var userID = parseInt(atob($("#currentCustomer").val().trim()));
 
     if(userID == 0){
       $(location).attr("href", "/sign-in?notification=sign-in-required");
@@ -146,7 +146,7 @@ $(document).on("turbolinks:load", function(){
   $(".clearCart").click(function(){
     var jsonData = JSON.parse(localStorage.getItem("banpCart")) || {};
     jsonData.cart = jsonData.cart || [];
-    var userID = parseInt(atob($("#currentCostumer").val().trim()));
+    var userID = parseInt(atob($("#currentCustomer").val().trim()));
 
     if(userID == 0){
       return;

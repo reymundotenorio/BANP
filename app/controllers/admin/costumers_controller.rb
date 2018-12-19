@@ -1,25 +1,25 @@
-class Admin::CostumersController < ApplicationController
+class Admin::CustomersController < ApplicationController
   # Admin layout
   layout "admin/application"
   # End Admin layout
-  
-  # Find costumers with Friendly_ID
-  before_action :set_costumer, only: [:show, :edit, :update, :active, :deactive, :history]
-  # End Find costumers with Friendly_ID
+
+  # Find customers with Friendly_ID
+  before_action :set_customer, only: [:show, :edit, :update, :active, :deactive, :history]
+  # End Find customers with Friendly_ID
 
   # Sync model DSL
   enable_sync only: [:create, :update, :active, :deactive]
   # End Sync model DSL
 
   # Authentication
-  # before_action :require_costumer
+  # before_action :require_customer
   # End Authentication
 
-  # /costumers
+  # /customers
   def index
-    @costumers = Costumer.search(params[:search], params[:show]).paginate(page: params[:page], per_page: 15) # Costumers with pagination
+    @customers = Customer.search(params[:search], params[:show]).paginate(page: params[:page], per_page: 15) # Customers with pagination
     @show_all = params[:show] == "all" ? true : false # View All (Enabled and Disabled)
-    @count = @costumers.count
+    @count = @customers.count
 
     # PDF view configuration
     current_lang = params[:lang]
@@ -28,28 +28,28 @@ class Admin::CostumersController < ApplicationController
     datetime =  Time.zone.now
     file_time = datetime.strftime("%m%d%Y")
 
-    name_pdf = "costumers-#{file_time}"
-    template = "admin/costumers/index_pdf.html.haml"
-    title_pdf = t("header.navigation.costumers")
+    name_pdf = "customers-#{file_time}"
+    template = "admin/customers/index_pdf.html.haml"
+    title_pdf = t("header.navigation.customers")
     # End PDF view configuration
 
     respond_to do |format|
       format.html
       format.js
       format.pdf do
-        to_pdf(name_pdf, template, Costumer.all, I18n.l(datetime), title_pdf)
+        to_pdf(name_pdf, template, Customer.all, I18n.l(datetime), title_pdf)
       end
     end
   end
 
-  # /costumer/new
+  # /customer/new
   def new
-    @costumer = Costumer.new
+    @customer = Customer.new
   end
 
-  # /costumer/:id)
+  # /customer/:id)
   def show
-    # Costumer found by before_action
+    # Customer found by before_action
 
     # PDF view configuration
     current_lang = params[:lang]
@@ -58,47 +58,47 @@ class Admin::CostumersController < ApplicationController
     datetime =  Time.zone.now
     file_time = datetime.strftime("%m%d%Y")
 
-    name_pdf = "costumer-#{@costumer.slug}-#{file_time}"
-    template = "admin/costumers/show_pdf.html.haml"
-    title_pdf = t("activerecord.models.costumer")
+    name_pdf = "customer-#{@customer.slug}-#{file_time}"
+    template = "admin/customers/show_pdf.html.haml"
+    title_pdf = t("activerecord.models.customer")
     # End PDF view configuration
 
     respond_to do |format|
       format.html
       format.pdf do
-        to_pdf(name_pdf, template, @costumer, I18n.l(datetime), title_pdf)
+        to_pdf(name_pdf, template, @customer, I18n.l(datetime), title_pdf)
       end
     end
   end
 
-  # /costumer/:id/edit
+  # /customer/:id/edit
   def edit
-    # Costumer found by before_action
+    # Customer found by before_action
   end
 
-  # /costumer/:id/history
+  # /customer/:id/history
   def history
-    # Costumer found by before_action
+    # Customer found by before_action
 
-    @history = @costumer.associated_audits
-    @history.push(@costumer.audits)
+    @history = @customer.associated_audits
+    @history.push(@customer.audits)
   end
 
   # Create
   def create
-    @costumer = Costumer.new(costumer_params)
+    @customer = Customer.new(customer_params)
 
     # Deleting blank spaces
-    @costumer[:first_name] = @costumer[:first_name].strip
-    @costumer[:last_name]= @costumer[:last_name].strip
-    @costumer[:email] =  @costumer[:email].strip.downcase
-    @costumer[:phone] = @costumer[:phone].strip
-    @costumer[:address] = @costumer[:address].strip
+    @customer[:first_name] = @customer[:first_name].strip
+    @customer[:last_name]= @customer[:last_name].strip
+    @customer[:email] =  @customer[:email].strip.downcase
+    @customer[:phone] = @customer[:phone].strip
+    @customer[:address] = @customer[:address].strip
     # End Deleting blank spaces
 
     # If record was saved
-    if @costumer.save
-      redirect_to [:admin, @costumer], notice: t("alerts.created", model: t("activerecord.models.costumer"))
+    if @customer.save
+      redirect_to [:admin, @customer], notice: t("alerts.created", model: t("activerecord.models.customer"))
 
       # If record was not saved
     else
@@ -108,8 +108,8 @@ class Admin::CostumersController < ApplicationController
 
   # Update
   def update
-    if @costumer.update(costumer_params)
-      redirect_to [:admin, @costumer], notice: t("alerts.updated", model: t("activerecord.models.costumer"))
+    if @customer.update(customer_params)
+      redirect_to [:admin, @customer], notice: t("alerts.updated", model: t("activerecord.models.customer"))
 
     else
       render :edit
@@ -118,36 +118,36 @@ class Admin::CostumersController < ApplicationController
 
   # Active
   def active
-    if @costumer.update(state: true)
-      redirect_to_back(true, admin_costumers_path, "costumer", "success")
+    if @customer.update(state: true)
+      redirect_to_back(true, admin_customers_path, "customer", "success")
 
     else
-      redirect_to_back(true, admin_costumers_path, "costumer", "error")
+      redirect_to_back(true, admin_customers_path, "customer", "error")
     end
   end
 
   # Deactive
   def deactive
-    if @costumer.update(state: false)
-      redirect_to_back(false, admin_costumers_path, "costumer", "success")
+    if @customer.update(state: false)
+      redirect_to_back(false, admin_customers_path, "customer", "success")
 
     else
-      redirect_to_back(false, admin_costumers_path, "costumer", "error")
+      redirect_to_back(false, admin_customers_path, "customer", "error")
     end
   end
 
   private
 
-  # Set Costumer
-  def set_costumer
-    @costumer = Costumer.friendly.find(params[:id])
+  # Set Customer
+  def set_customer
+    @customer = Customer.friendly.find(params[:id])
 
   rescue
-    redirect_to admin_costumers_path, alert: t("alerts.not_found", model: t("activerecord.models.costumer"))
+    redirect_to admin_customers_path, alert: t("alerts.not_found", model: t("activerecord.models.customer"))
   end
 
-  # Costumer params
-  def costumer_params
-    params.require(:costumer).permit(:first_name, :last_name, :email, :phone, :address, :image)
+  # Customer params
+  def customer_params
+    params.require(:customer).permit(:first_name, :last_name, :email, :phone, :address, :image)
   end
 end

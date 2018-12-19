@@ -7,12 +7,12 @@ class Admin::UsersController < ApplicationController
   before_action :set_employee, only: [:new_employee_user, :create_employee_user, :employee_update_password, :employee_change_password]
   # End Find employee with Friendly_ID
 
-  # Find costumer with Friendly_ID
-  before_action :set_costumer, only: [:new_costumer_user, :create_costumer_user, :costumer_update_password, :costumer_change_password]
-  # End Find costumer with Friendly_ID
+  # Find customer with Friendly_ID
+  before_action :set_customer, only: [:new_customer_user, :create_customer_user, :customer_update_password, :customer_change_password]
+  # End Find customer with Friendly_ID
 
   # Sync model DSL
-  enable_sync only: [:create_employee_user, :create_costumer_user, :employee_change_password, :costumer_change_password, :send_confirmation_email]
+  enable_sync only: [:create_employee_user, :create_customer_user, :employee_change_password, :customer_change_password, :send_confirmation_email]
   # End Sync model DSL
 
   # admin/employee/:id/create-user
@@ -27,15 +27,15 @@ class Admin::UsersController < ApplicationController
     @required = true
   end
 
-  # admin/costumer/:id/create-user
-  def new_costumer_user
-    if @costumer.user.present?
-      redirect_to admin_costumer_path(@costumer), alert: t("views.authentication.employee_user_exists")
+  # admin/customer/:id/create-user
+  def new_customer_user
+    if @customer.user.present?
+      redirect_to admin_customer_path(@customer), alert: t("views.authentication.employee_user_exists")
       return
     end
 
     @user = User.new
-    @form_url = admin_create_costumer_user_path
+    @form_url = admin_create_customer_user_path
     @required = true
   end
 
@@ -46,10 +46,10 @@ class Admin::UsersController < ApplicationController
     @required = false
   end
 
-  # admin/costumer/:id/update-password
-  def costumer_update_password
-    @user = @costumer.user
-    @form_url = admin_change_password_costumer_path
+  # admin/customer/:id/update-password
+  def customer_update_password
+    @user = @customer.user
+    @form_url = admin_change_password_customer_path
     @required = false
   end
 
@@ -77,8 +77,8 @@ class Admin::UsersController < ApplicationController
     end
   end
 
-  # Create user to the costumer
-  def create_costumer_user
+  # Create user to the customer
+  def create_customer_user
     create_params = user_params
 
     if create_params[:two_factor_auth] == "true"
@@ -88,16 +88,16 @@ class Admin::UsersController < ApplicationController
       create_params[:two_factor_auth] = false
     end
 
-    @user = @costumer.build_user(create_params)
+    @user = @customer.build_user(create_params)
 
     if @user.save
       send_confirmation_email
-      redirect_to [:admin, @costumer], notice: "#{t('alerts.created', model: t('activerecord.models.costumer'))}. #{t('views.authentication.account_not_confirmed', email: @user.email)}"
+      redirect_to [:admin, @customer], notice: "#{t('alerts.created', model: t('activerecord.models.customer'))}. #{t('views.authentication.account_not_confirmed', email: @user.email)}"
 
       # If record was not saved
     else
-      @form_url = admin_create_costumer_user_path
-      render :new_costumer_user
+      @form_url = admin_create_customer_user_path
+      render :new_customer_user
     end
   end
 
@@ -121,9 +121,9 @@ class Admin::UsersController < ApplicationController
     end
   end
 
-  # Change costumer password
-  def costumer_change_password
-    @user = @costumer.user
+  # Change customer password
+  def customer_change_password
+    @user = @customer.user
     update_params = user_params
 
     if update_params[:two_factor_auth] == "true"
@@ -133,11 +133,11 @@ class Admin::UsersController < ApplicationController
     end
 
     if @user.update(update_params)
-      redirect_to [:admin, @costumer], notice: t("views.mailer.password_and_2FA_updated")
+      redirect_to [:admin, @customer], notice: t("views.mailer.password_and_2FA_updated")
 
     else
-      @form_url = admin_change_password_costumer_path
-      render :costumer_update_password
+      @form_url = admin_change_password_customer_path
+      render :customer_update_password
     end
   end
 
@@ -157,12 +157,12 @@ class Admin::UsersController < ApplicationController
       AdminAuthenticationMailer.confirmation_instructions(@employee.user, @token, I18n.locale, ip, location).deliver
     end
 
-    if @costumer
-      @costumer.user.update_attribute(:confirmation_sent, true)
-      @costumer.user.update_attribute(:confirmation_token, @token)
+    if @customer
+      @customer.user.update_attribute(:confirmation_sent, true)
+      @customer.user.update_attribute(:confirmation_token, @token)
 
       # Send email
-      AuthenticationMailer.confirmation_instructions(@costumer.user, @token, I18n.locale, ip, location).deliver
+      AuthenticationMailer.confirmation_instructions(@customer.user, @token, I18n.locale, ip, location).deliver
     end
   end
 
@@ -184,12 +184,12 @@ class Admin::UsersController < ApplicationController
     redirect_to admin_employees_path, alert: t("alerts.not_found", model: t("activerecord.models.employee"))
   end
 
-  # Set Costumer
-  def set_costumer
-    @costumer = Costumer.friendly.find(params[:id])
+  # Set Customer
+  def set_customer
+    @customer = Customer.friendly.find(params[:id])
 
   rescue
-    redirect_to admin_costumers_path, alert: t("alerts.not_found", model: t("activerecord.models.costumer"))
+    redirect_to admin_customers_path, alert: t("alerts.not_found", model: t("activerecord.models.customer"))
   end
 
   # User params

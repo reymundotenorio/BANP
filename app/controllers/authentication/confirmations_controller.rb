@@ -3,25 +3,25 @@ class Authentication::ConfirmationsController < ApplicationController
   layout "admin/authentication"
   # End Authentication layout
 
-  # /confirm-costumer-account
+  # /confirm-customer-account
   def new
     @email = params[:email]
     @email = @email.blank? ? "" : @email.strip.downcase
   end
 
-  # /confirm-costumer-account/:confirmation_token
+  # /confirm-customer-account/:confirmation_token
   def show
     @token = params[:confirmation_token]
 
     # If token has been found
     if set_user
-      # Verify if user is not costumer
-      if !user_is_costumer?
+      # Verify if user is not customer
+      if !user_is_customer?
         return
       end
 
       # If user is disabled
-      if !costumer_enabled?
+      if !customer_enabled?
         return
       end
 
@@ -75,13 +75,13 @@ class Authentication::ConfirmationsController < ApplicationController
 
     # If email has been found
     if @user = User.find_by(email: email)
-      # Verify if user is not costumer
-      if !user_is_costumer?
+      # Verify if user is not customer
+      if !user_is_customer?
         return
       end
 
-      # If costumer is disabled
-      if !costumer_enabled?
+      # If customer is disabled
+      if !customer_enabled?
         return
       end
 

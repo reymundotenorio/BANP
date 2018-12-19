@@ -14,16 +14,16 @@ class ApplicationController < ActionController::Base
   ### Authentication methods
 
   #Helper for the view
-  helper_method :current_employee, :current_costumer
+  helper_method :current_employee, :current_customer
 
   # Current employee
   def current_employee
     @current_employee ||= Employee.find(session[:employee_id]) if session[:employee_id]
   end
 
-  # Current costumer
-  def current_costumer
-    @current_costumer ||= Costumer.find(session[:costumer_id]) if session[:costumer_id]
+  # Current customer
+  def current_customer
+    @current_customer ||= Customer.find(session[:customer_id]) if session[:customer_id]
   end
 
   # Require employee
@@ -47,13 +47,13 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  # Verify costumer state
-  def costumer_enabled?
-    if @costumer.state
+  # Verify customer state
+  def customer_enabled?
+    if @customer.state
       return true
 
     else
-      redirect_to auth_notifications_path(found: false), alert: t("views.authentication.account_disabled", email: @costumer.email)
+      redirect_to auth_notifications_path(found: false), alert: t("views.authentication.account_disabled", email: @customer.email)
       return false
     end
   end
@@ -70,14 +70,14 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  # Verify if user is costumer
-  def user_is_costumer?
-    if @user.costumer.present?
-      @costumer = @user.costumer
+  # Verify if user is customer
+  def user_is_customer?
+    if @user.customer.present?
+      @customer = @user.customer
       return true
 
     else
-      redirect_to auth_notifications_path(found: false), alert: t("views.authentication.user)views.authentication.user_must_be_costumer")
+      redirect_to auth_notifications_path(found: false), alert: t("views.authentication.user)views.authentication.user_must_be_customer")
       return false
     end
   end

@@ -35,7 +35,7 @@ class Admin::Authentication::ConfirmationsController < ApplicationController
         @user.update(confirmed: true)
         @user.update(confirmation_sent: false)
 
-        # If user is not a costumer
+        # If user is not a customer
         generate_token_password
         @user.update(reset_password_sent: false)
         @user.update(reset_password_token: @token_password)
@@ -47,7 +47,7 @@ class Admin::Authentication::ConfirmationsController < ApplicationController
         redirect_to admin_reset_employee_password_path(reset_password_token: @token_password, employee_password: true), notice: t("views.authentication.successfully_confirmed", email: @user.email)
         return
 
-        # If user is a costumer
+        # If user is a customer
         # Render Sync with external controller
         # sync_update @user
 
