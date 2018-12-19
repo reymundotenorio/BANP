@@ -64,7 +64,7 @@ Rails.application.routes.draw do
   # End Charts namespace
 
   # Admin namespace
-  namespace :admin, constraints: {subdomain: "admin"} do
+  namespace :admin do
     # Root
     root "dashboard#index"
     # End Root
