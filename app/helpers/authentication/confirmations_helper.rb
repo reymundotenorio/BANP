@@ -1,2 +1,0 @@
-module Authentication::ConfirmationsHelper
-end
