@@ -3,7 +3,7 @@
     -# Table
     %table.table
       %thead
-        - model = "costumer"
+        - model = "customer"
         - attributes = ["first_name", "last_name", "company", "email" ,"phone"]
 
         -# Render table header
@@ -11,8 +11,8 @@
 
       %tbody
         -# Data table Sync
-        = sync partial: "data_table", collection: @costumers
-        = sync_new partial: "data_table", resource: Costumer.new
+        = sync partial: "data_table", collection: @customers
+        = sync_new partial: "data_table", resource: Customer.new
         -# End Data table Sync
     -# End Table
 
@@ -20,5 +20,5 @@
 .row.no-margin
   .col-xs-12.no-padding.text-center
     -# Pagination
-    = will_paginate @costumers, renderer: BootstrapPagination::Rails
+    = will_paginate @customers, renderer: BootstrapPagination::Rails
     -# End Pagination

@@ -4,7 +4,7 @@ class Authentication::PasswordsController < ApplicationController
   # End Authentication layout
 
   # Authentication
-  before_action :require_costumer, only: [:edit_password]
+  before_action :require_customer, only: [:edit_password]
   # End Authentication
 
   # /resend-reset-password
@@ -16,19 +16,19 @@ class Authentication::PasswordsController < ApplicationController
   # /resend-reset-password/:reset_password_token
   def show
     @token = params[:reset_password_token]
-    @costumer_password = params[:costumer_password]
+    @customer_password = params[:customer_password]
 
-    @costumer_password = @costumer_password.blank? ? false : true
+    @customer_password = @customer_password.blank? ? false : true
 
     # If token has been found
     if set_user
-      # Verify if user is not costumer
-      if !user_is_costumer?
+      # Verify if user is not customer
+      if !user_is_customer?
         return
       end
 
-      # If costumer is disabled
-      if !costumer_enabled?
+      # If customer is disabled
+      if !customer_enabled?
         return
       end
 
@@ -56,15 +56,15 @@ class Authentication::PasswordsController < ApplicationController
 
     # Verify recaptcha
     if !verify_recaptcha
-      redirect_to reset_costumer_password_path(reset_password_token: @token), alert: t("views.form.recaptcha_error")
+      redirect_to reset_customer_password_path(reset_password_token: @token), alert: t("views.form.recaptcha_error")
       return
     end
 
     # Set user by token found
     set_user
 
-    # Verify if user is not costumer
-    if !user_is_costumer?
+    # Verify if user is not customer
+    if !user_is_customer?
       return
     end
 
@@ -115,13 +115,13 @@ class Authentication::PasswordsController < ApplicationController
 
     # If email has been found
     if @user = User.find_by(email: email)
-      # Verify if user is not costumer
-      if !user_is_costumer?
+      # Verify if user is not customer
+      if !user_is_customer?
         return
       end
 
-      # If costumer is disabled
-      if !costumer_enabled?
+      # If customer is disabled
+      if !customer_enabled?
         return
       end
 
@@ -166,7 +166,7 @@ class Authentication::PasswordsController < ApplicationController
     location = Geocoder.search(ip).first.country
 
     # Send SMS
-    send_sms(@costumer.phone, "BANP - #{t('views.mailer.greetings')} #{@costumer.first_name} #{@costumer.last_name}, #{t('views.mailer.password_updated_link')}: #{reset_password_url(email: @user.email)}")
+    send_sms(@customer.phone, "BANP - #{t('views.mailer.greetings')} #{@customer.first_name} #{@customer.last_name}, #{t('views.mailer.password_updated_link')}: #{reset_password_url(email: @user.email)}")
 
     # Send email
     AuthenticationMailer.update_password(@user, I18n.locale, ip, location).deliver

@@ -1,4 +1,4 @@
-class Costumer < ApplicationRecord
+class Customer < ApplicationRecord
   # Association
   has_one :user
 
@@ -105,7 +105,7 @@ class Costumer < ApplicationRecord
     if self.user.present?
       user = User.find_by(email: self.email)
 
-      if !user.nil? && user.costumer_id != self.id
+      if !user.nil? && user.customer_id != self.id
         errors.add(:email, :blank, message: I18n.t("validates.user_email_taken"))
       end
     end

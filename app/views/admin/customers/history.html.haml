@@ -11,12 +11,12 @@
         -# End Heading
 
       .col-xs-12.col-lg-2
-        -# Costumer button
+        -# Customer button
         .btn-container
-          = link_to (admin_costumer_path(@costumer)), class: "btn btn-general" do
+          = link_to (admin_customer_path(@customer)), class: "btn btn-general" do
             %i.fas.fa-id-card
-            %span= t("activerecord.models.costumer")
-        -# End Costumer button
+            %span= t("activerecord.models.customer")
+        -# End Customer button
     -# End Title
 
     -# Breadcrumb
@@ -29,22 +29,22 @@
                 %i.fas.fa-tachometer-alt
                 %span= t("header.navigation.dashboard")
             %li
-              = link_to (admin_costumers_path) do
+              = link_to (admin_customers_path) do
                 %i.fas.fa-list-alt
-                %span= t("header.navigation.costumers")
+                %span= t("header.navigation.customers")
             %li
-              = link_to (admin_costumer_path(@costumer)) do
+              = link_to (admin_customer_path(@customer)) do
                 %i.fas.fa-id-card
                 %span
-                  = @costumer.first_name
-                  = @costumer.last_name
+                  = @customer.first_name
+                  = @customer.last_name
             %li.active
               %i.fas.fa-history
               = t("views.history.history")
     -# End Breadcrumb
 
     -# Render timeline
-    - model = Costumer
+    - model = Customer
     = render partial: "partials/timeline", locals: {model: model}
     -# End Render timeline
 -# End History

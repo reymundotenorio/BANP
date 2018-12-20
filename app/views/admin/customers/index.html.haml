@@ -13,7 +13,7 @@
       .col-xs-12.col-lg-2.text-right
         -# New button
         .btn-container.inline
-          = link_to (admin_new_costumer_path), class: "btn btn-general" do
+          = link_to (admin_new_customer_path), class: "btn btn-general" do
             %i.fas.fa-plus
             %span= t("views.index.new")
         -# End New button
@@ -30,7 +30,7 @@
                 %span= t("header.navigation.dashboard")
             %li.active
               %i.fas.fa-list-alt
-              = t("header.navigation.costumers")
+              = t("header.navigation.customers")
     -# End Breadcrumb
 
     .row
@@ -42,7 +42,7 @@
             .col-xs-12.col-md-6.no-padding
               #search-record.search-record
                 -# Form
-                = form_tag admin_costumers_path, method: "get", id: "search-form", autocomplete:"off", remote: true do
+                = form_tag admin_customers_path, method: "get", id: "search-form", autocomplete:"off", remote: true do
                   .input-group
                     = text_field_tag :search, params[:search], id: "search-input", class: "form-control", placeholder: t("views.index.search")
                     .border-bottom
@@ -61,7 +61,7 @@
 
               -# Export button
               .btn-container
-                = link_to (admin_costumers_path(format: "pdf", lang: I18n.locale)), target: "_blank", class: "btn btn-general btn-default" do
+                = link_to (admin_customers_path(format: "pdf", lang: I18n.locale)), target: "_blank", class: "btn btn-general btn-default" do
                   %i.fas.fa-download
                   %span= t("views.index.export")
               -# End Export button
@@ -69,7 +69,7 @@
 
           -# Render table and pagination with Ajax
           #render-data
-            = render "costumers"
+            = render "customers"
           -# End Render table and pagination with Ajax
         -# End Material card
 -# End Index

@@ -5,32 +5,32 @@
     .row.title-container
       .col-xs-12.col-sm-6.col-md-8
         -# Heading
-        %h1{class: "#{costumer.state}"}
+        %h1{class: "#{customer.state}"}
           %i.fas.fa-id-card
-          = costumer.first_name
-          = costumer.last_name
+          = customer.first_name
+          = customer.last_name
         -# End Heading
 
       .col-xs-12.col-sm-6.col-md-4.text-right
-        - if costumer.user.present?
+        - if customer.user.present?
           -# Update password button
           .btn-container.inline
-            = link_to (admin_update_password_costumer_path(costumer)), class: "btn btn-general" do
+            = link_to (admin_update_password_customer_path(customer)), class: "btn btn-general" do
               %i.fas.fa-key
               %span= t("views.edit.update_password")
           -# End Update password button
 
-        - elsif costumer.state
+        - elsif customer.state
           -# Create user button
           .btn-container.inline
-            = link_to (admin_new_costumer_user_path(costumer)), class: "btn btn-general" do
+            = link_to (admin_new_customer_user_path(customer)), class: "btn btn-general" do
               %i.fas.fa-user
               %span= t("views.show.create_user")
           -# End Create user button
 
         -# Export button
         .btn-container.inline
-          = link_to (admin_costumer_path(costumer, format: "pdf", lang: I18n.locale)), target: "_blank", class: "btn btn-general" do
+          = link_to (admin_customer_path(customer, format: "pdf", lang: I18n.locale)), target: "_blank", class: "btn btn-general" do
             %i.fas.fa-download
             %span= t("views.index.export")
         -# End Export button
@@ -46,56 +46,56 @@
                 %i.fas.fa-tachometer-alt
                 %span= t("header.navigation.dashboard")
             %li
-              = link_to (admin_costumers_path) do
+              = link_to (admin_customers_path) do
                 %i.fas.fa-list-alt
-                %span= t("header.navigation.costumers")
+                %span= t("header.navigation.customers")
             %li.active
               %i.fas.fa-id-card
-              = costumer.first_name
-              = costumer.last_name
+              = customer.first_name
+              = customer.last_name
     -# End Breadcrumb
 
     -# Information
     .row
       .col-xs-12.col-md-5.col-lg-4
         -# Material card
-        %div{class: "material-card shadow-card #{costumer.state}"}
+        %div{class: "material-card shadow-card #{customer.state}"}
           .row.no-margin
             .col-xs-12.no-padding
               -# General information
               .general-info
                 -# Image
                 .image-container
-                  - if costumer.image.attached?
-                    = image_tag url_for(costumer.image), class: "img-responsive"
+                  - if customer.image.attached?
+                    = image_tag url_for(customer.image), class: "img-responsive"
 
                   - else
                     = image_tag url_for("https://s3.amazonaws.com/betterandnice/images/default/default.png"), class: "img-responsive"
                 -# End Image
 
                 .main-info
-                  %p= t("views.show.created_at", time: time_ago_in_words(costumer.created_at))
-                  %p= t("views.show.updated_at", time: time_ago_in_words(costumer.updated_at))
+                  %p= t("views.show.created_at", time: time_ago_in_words(customer.created_at))
+                  %p= t("views.show.updated_at", time: time_ago_in_words(customer.updated_at))
 
                 .main-buttons
                   .col-xs-12.col-sm-4.col-md-6.button-container.no-padding
-                    = link_to (admin_edit_costumer_path(costumer)), class: "btn btn-general" do
+                    = link_to (admin_edit_customer_path(customer)), class: "btn btn-general" do
                       %i.fas.fa-edit
                       %span= t("views.show.edit")
 
                   .col-xs-12.col-sm-4.col-md-6.button-container.no-padding
-                    = link_to (admin_history_costumer_path(costumer)), class: "btn btn-general" do
+                    = link_to (admin_history_customer_path(customer)), class: "btn btn-general" do
                       %i.fas.fa-history
                       %span= t("views.show.history")
 
                   .col-xs-12.col-sm-4.col-md-12.button-container.no-padding
-                    - if(costumer.state)
-                      = link_to (admin_deactive_costumer_path(costumer)), method: "patch", class: "btn btn-general" do
+                    - if(customer.state)
+                      = link_to (admin_deactive_customer_path(customer)), method: "patch", class: "btn btn-general" do
                         %i.fas.fa-times
                         %span= t("views.show.disable")
 
                     - else
-                      = link_to (admin_active_costumer_path(costumer)), method: "patch", class: "btn btn-general" do
+                      = link_to (admin_active_customer_path(customer)), method: "patch", class: "btn btn-general" do
                         %i.fas.fa-check
                         %span= t("views.show.enable")
               -# End General information
@@ -103,40 +103,40 @@
 
       .col-xs-12.col-md-7.col-lg-8
         -# Material card
-        %div{class: "material-card shadow-card #{costumer.state}"}
+        %div{class: "material-card shadow-card #{customer.state}"}
           .row.no-margin
             .col-xs-12.no-padding
-              %div{class: "detail-info #{costumer.state}"}
+              %div{class: "detail-info #{customer.state}"}
                 -# Set attributes
                 - attributes = ["company", "email" ,"phone", "address", "state"]
 
                 - attributes.each do |attribute|
                   .info
                     %p.title
-                      %b= t("activerecord.attributes.costumer.#{attribute}")
+                      %b= t("activerecord.attributes.customer.#{attribute}")
 
                     - if attribute == "state"
-                      %p= costumer["#{attribute}"] ? t("views.show.enabled") : t("views.show.disabled")
+                      %p= customer["#{attribute}"] ? t("views.show.enabled") : t("views.show.disabled")
 
                     - else
-                      %p= costumer["#{attribute}"]
+                      %p= customer["#{attribute}"]
 
                 -# Set user attributes
                 - user_attributes = ["confirmed", "sign_in_count", "current_sign_in_at", "current_sign_in_ip", "last_sign_in_at", "last_sign_in_ip"]
 
-                  - user_attributes.each do |attribute| if costumer.user.present?
+                  - user_attributes.each do |attribute| if customer.user.present?
                     .info
                       %p.title
                         %b= t("activerecord.attributes.user.#{attribute}")
 
                       - if attribute == "confirmed"
-                        %p= costumer.user["#{attribute}"] ? t("views.show.confirmed") : t("views.show.not_confirmed")
+                        %p= customer.user["#{attribute}"] ? t("views.show.confirmed") : t("views.show.not_confirmed")
 
                       - elsif attribute == "current_sign_in_at" || attribute == "last_sign_in_at"
-                        %p= format_datetime(costumer.user["#{attribute}"])
+                        %p= format_datetime(customer.user["#{attribute}"])
 
                       - else
-                        %p= costumer.user["#{attribute}"]
+                        %p= customer.user["#{attribute}"]
         -# End Material card
     -# End Information
 -# End Details

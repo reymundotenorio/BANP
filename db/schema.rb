@@ -67,7 +67,7 @@ ActiveRecord::Schema.define(version: 2018_11_18_173060) do
     t.index ["slug"], name: "index_categories_on_slug", unique: true
   end
 
-  create_table "costumers", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "customers", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "first_name", null: false
     t.string "last_name", null: false
     t.string "company"
@@ -78,8 +78,8 @@ ActiveRecord::Schema.define(version: 2018_11_18_173060) do
     t.string "slug"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["email"], name: "index_costumers_on_email", unique: true
-    t.index ["slug"], name: "index_costumers_on_slug", unique: true
+    t.index ["email"], name: "index_customers_on_email", unique: true
+    t.index ["slug"], name: "index_customers_on_slug", unique: true
   end
 
   create_table "employees", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -165,9 +165,9 @@ ActiveRecord::Schema.define(version: 2018_11_18_173060) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "employee_id"
-    t.bigint "costumer_id"
+    t.bigint "customer_id"
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
-    t.index ["costumer_id"], name: "index_users_on_costumer_id"
+    t.index ["customer_id"], name: "index_users_on_customer_id"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["employee_id"], name: "index_users_on_employee_id"
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
@@ -176,6 +176,6 @@ ActiveRecord::Schema.define(version: 2018_11_18_173060) do
   end
 
   add_foreign_key "products", "categories"
-  add_foreign_key "users", "costumers"
+  add_foreign_key "users", "customers"
   add_foreign_key "users", "employees"
 end

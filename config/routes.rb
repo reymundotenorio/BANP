@@ -30,7 +30,7 @@ Rails.application.routes.draw do
   # Sessions
   get "/sign-in", to: "authentication/sessions#new", as: "sign_in"
   get "/two-factor", to: "authentication/sessions#two_factor", as: "two_factor"
-  post "/sign-in", to: "authentication/sessions#create", as: "sign_in_costumer"
+  post "/sign-in", to: "authentication/sessions#create", as: "sign_in_customer"
   post "/two-factor", to: "authentication/sessions#two_factor_auth", as: "two_factor_auth"
   patch "/resend-otp", to: "authentication/sessions#resend_otp", as: "resend_otp"
   delete "/sign-out", to: "authentication/sessions#destroy", as: "sign_out"
@@ -38,21 +38,21 @@ Rails.application.routes.draw do
 
   # Confirmations
   get '/confirm-account', to: 'authentication/confirmations#new', as: 'confirm_account'
-  get '/confirm-costumer-account/:confirmation_token', to: 'authentication/confirmations#show', as: 'confirm_costumer_account'
+  get '/confirm-customer-account/:confirmation_token', to: 'authentication/confirmations#show', as: 'confirm_customer_account'
   post "/confirm-account", to: "authentication/confirmations#send_confirmation_email", as: "resend_confirmation"
   # End Confirmations
 
   # Unlocks
   get '/unlock-account', to: 'authentication/unlocks#new', as: 'unlock_account'
-  get '/unlock-costumer-account/:unlock_token', to: 'authentication/unlocks#show', as: 'unlock_costumer_account'
+  get '/unlock-customer-account/:unlock_token', to: 'authentication/unlocks#show', as: 'unlock_customer_account'
   post "/unlock-account", to: "authentication/unlocks#send_unlock_email", as: "resend_unlock"
   # End Unlocks
 
   # Passwords
   get "/reset-password", to: "authentication/passwords#new", as: "reset_password"
-  get "/reset-costumer-password/:reset_password_token", to: "authentication/passwords#show", as: "reset_costumer_password"
+  get "/reset-customer-password/:reset_password_token", to: "authentication/passwords#show", as: "reset_customer_password"
   post "/reset-password", to: "authentication/passwords#send_reset_password_email", as: "resend_reset_password"
-  patch "/reset-costumer-password", to: "authentication/passwords#update_password", as: "update_password"
+  patch "/reset-customer-password", to: "authentication/passwords#update_password", as: "update_password"
   # End Passwords
 
   # End Authentications
@@ -136,24 +136,24 @@ Rails.application.routes.draw do
     patch "/providers/:id/deactive", to: "providers#deactive", as: "deactive_provider"
     # End Providers
 
-    # Costumers
-    get "/costumers", to: "costumers#index", as: "costumers"
-    get "/costumer/new", to: "costumers#new", as: "new_costumer"
-    get "/costumer/:id", to: "costumers#show", as: "costumer"
-    get "/costumer/:id/edit", to: "costumers#edit", as: "edit_costumer"
-    get "/costumer/:id/history", to: "costumers#history", as: "history_costumer"
-    post "/costumers", to: "costumers#create"
-    patch "/costumer/:id", to: "costumers#update", as: "update_costumer"
-    patch "/costumers/:id/active", to: "costumers#active", as: "active_costumer"
-    patch "/costumers/:id/deactive", to: "costumers#deactive", as: "deactive_costumer"
-    # End Costumers
+    # Customers
+    get "/customers", to: "customers#index", as: "customers"
+    get "/customer/new", to: "customers#new", as: "new_customer"
+    get "/customer/:id", to: "customers#show", as: "customer"
+    get "/customer/:id/edit", to: "customers#edit", as: "edit_customer"
+    get "/customer/:id/history", to: "customers#history", as: "history_customer"
+    post "/customers", to: "customers#create"
+    patch "/customer/:id", to: "customers#update", as: "update_customer"
+    patch "/customers/:id/active", to: "customers#active", as: "active_customer"
+    patch "/customers/:id/deactive", to: "customers#deactive", as: "deactive_customer"
+    # End Customers
 
-    # Costumers/Users
-    get "/costumer/:id/create-user", to: "users#new_costumer_user", as: "new_costumer_user"
-    get "/costumer/:id/update-password", to: "users#costumer_update_password", as: "update_password_costumer"
-    post "/costumer/:id/create-user", to: "users#create_costumer_user", as: "create_costumer_user"
-    patch "/costumer/:id/update-password", to: "users#costumer_change_password", as: "change_password_costumer"
-    # End Costumers/Users
+    # Customers/Users
+    get "/customer/:id/create-user", to: "users#new_customer_user", as: "new_customer_user"
+    get "/customer/:id/update-password", to: "users#customer_update_password", as: "update_password_customer"
+    post "/customer/:id/create-user", to: "users#create_customer_user", as: "create_customer_user"
+    patch "/customer/:id/update-password", to: "users#customer_change_password", as: "change_password_customer"
+    # End Customers/Users
 
     # Categories
     get "/categories", to: "categories#index", as: "categories"

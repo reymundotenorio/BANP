@@ -6,12 +6,12 @@ class Authentication::SessionsController < ApplicationController
   # /sign-in
   def new
     # Redirect if user is not authenticated with two factor yet
-    if session[:costumer_id] && session[:session_confirmed] == false
+    if session[:customer_id] && session[:session_confirmed] == false
       redirect_to two_factor_path
       return
 
       # Redirect if user is already authenticated
-    elsif session[:costumer_id] && session[:session_confirmed] == true
+    elsif session[:customer_id] && session[:session_confirmed] == true
       redirect_to root_path
       return
     end
@@ -30,13 +30,13 @@ class Authentication::SessionsController < ApplicationController
 
     # If user exists
     if set_user
-      # Verify if user is not costumer
-      if !user_is_costumer?
+      # Verify if user is not customer
+      if !user_is_customer?
         return
       end
 
       # If user is disabled
-      if !costumer_enabled?
+      if !customer_enabled?
         return
       end
 
@@ -61,7 +61,7 @@ class Authentication::SessionsController < ApplicationController
           reset_attemps
 
           session_info
-          session[:costumer_id] = @user.id
+          session[:customer_id] = @user.id
 
           # If user has two factor authentication enabled
           if @user.two_factor_auth
@@ -77,7 +77,7 @@ class Authentication::SessionsController < ApplicationController
 
           session[:session_confirmed] = true
 
-          redirect_to root_path, notice: t("views.authentication.signed_in_correctly", first_name: @costumer.first_name, last_name: @costumer.last_name)
+          redirect_to root_path, notice: t("views.authentication.signed_in_correctly", first_name: @customer.first_name, last_name: @customer.last_name)
 
           # If user exist but the password doesn't match
         else
@@ -94,20 +94,20 @@ class Authentication::SessionsController < ApplicationController
   # Verify if user has sign in correctly
   def two_factor
     # Redirect if user is already authenticated
-    if session[:costumer_id] && session[:session_confirmed] == true
+    if session[:customer_id] && session[:session_confirmed] == true
       redirect_to root_path
       return
     end
 
     # If user exists
     if set_user_with_two_factor
-      # Verify if user is not costumer
-      if !user_is_costumer?
+      # Verify if user is not customer
+      if !user_is_customer?
         return
       end
 
-      # If costumer is disabled
-      if !costumer_enabled?
+      # If customer is disabled
+      if !customer_enabled?
         return
       end
 
@@ -118,7 +118,7 @@ class Authentication::SessionsController < ApplicationController
 
       # If user has exceeded the max of failed attemps
       if @user.failed_attempts > $max_failed_attempts
-        session[:costumer_id] = nil
+        session[:customer_id] = nil
         session[:session_confirmed] = nil
 
         # If unlock email has not been sent
@@ -146,8 +146,8 @@ class Authentication::SessionsController < ApplicationController
 
     # If user exists
     if set_user_with_two_factor
-      # Verify if user is not costumer
-      if !user_is_costumer?
+      # Verify if user is not customer
+      if !user_is_customer?
         return
       end
 
@@ -156,7 +156,7 @@ class Authentication::SessionsController < ApplicationController
 
       if @user.two_factor_auth_otp == otp
         session[:session_confirmed] = true
-        redirect_to root_path, notice: t("views.authentication.signed_in_correctly", first_name: @costumer.first_name, last_name: @costumer.last_name)
+        redirect_to root_path, notice: t("views.authentication.signed_in_correctly", first_name: @customer.first_name, last_name: @customer.last_name)
 
       else
         remaining_attempts = $max_failed_attempts - increment_attempts
@@ -170,7 +170,7 @@ class Authentication::SessionsController < ApplicationController
 
   # Set user with two factor authentication
   def set_user_with_two_factor
-    @user = User.find(session[:costumer_id]) if session[:costumer_id] && session[:session_confirmed] == false
+    @user = User.find(session[:customer_id]) if session[:customer_id] && session[:session_confirmed] == false
 
     if @user
       return true
@@ -184,8 +184,8 @@ class Authentication::SessionsController < ApplicationController
   def resend_otp
     set_user_with_two_factor
 
-    # Verify if user is not costumer
-    if !user_is_costumer?
+    # Verify if user is not customer
+    if !user_is_customer?
       return
     end
 
@@ -208,7 +208,7 @@ class Authentication::SessionsController < ApplicationController
 
   # Send OTP by SMS
   def send_otp
-    send_sms(@costumer.phone, "BANP - #{t('views.authentication.otp_sms', otp: @OTP)}")
+    send_sms(@customer.phone, "BANP - #{t('views.authentication.otp_sms', otp: @OTP)}")
     return
   end
 
@@ -243,7 +243,7 @@ class Authentication::SessionsController < ApplicationController
 
 
     # Send SMS
-    send_sms(@costumer.phone, "BANP - #{t('views.mailer.greetings')} #{@costumer.first_name}. #{t('views.mailer.unlock_account_link')}: #{unlock_costumer_account_url(unlock_token: @token)}")
+    send_sms(@customer.phone, "BANP - #{t('views.mailer.greetings')} #{@customer.first_name}. #{t('views.mailer.unlock_account_link')}: #{unlock_customer_account_url(unlock_token: @token)}")
 
     # Send email
     AuthenticationMailer.unlock_instructions(@user, @token, I18n.locale, ip, location).deliver
@@ -311,7 +311,7 @@ class Authentication::SessionsController < ApplicationController
   def destroy
     @email = params[:email]
 
-    session[:costumer_id] = nil
+    session[:customer_id] = nil
     session[:session_confirmed] = nil
 
     if @email

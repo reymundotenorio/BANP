@@ -3,25 +3,25 @@ class Authentication::UnlocksController < ApplicationController
   layout "admin/authentication"
   # End Authentication layout
 
-  # /unlock-costumer-account
+  # /unlock-customer-account
   def new
     @email = params[:email]
     @email = @email.blank? ? "" : @email.strip.downcase
   end
 
-  # /unlock-costumer-account/:unlock_token
+  # /unlock-customer-account/:unlock_token
   def show
     @token = params[:unlock_token]
 
     # If token has been found
     if set_user
-      # Verify if user is not costumer
-      if !user_is_costumer?
+      # Verify if user is not customer
+      if !user_is_customer?
         return
       end
 
-      # If costumer is disabled
-      if !costumer_enabled?
+      # If customer is disabled
+      if !customer_enabled?
         return
       end
 
@@ -73,13 +73,13 @@ class Authentication::UnlocksController < ApplicationController
 
     # If email has been found
     if @user = User.find_by(email: email)
-      # Verify if user is not costumer
-      if !user_is_costumer?
+      # Verify if user is not customer
+      if !user_is_customer?
         return
       end
 
-      # If costumer is disabled
-      if !costumer_enabled?
+      # If customer is disabled
+      if !customer_enabled?
         return
       end
 

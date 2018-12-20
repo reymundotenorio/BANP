@@ -34,7 +34,7 @@ es:
       employee: "Empleado"
       user: "Usuario"
       provider: "Proveedor"
-      costumer: "Cliente"
+      customer: "Cliente"
       category: "Categoría"
       product: "Producto"
     attributes:
@@ -79,7 +79,7 @@ es:
         image_file_name: "Nombre de la imagen"
         image_content_type: "Tipo de archivo de la imagen"
         image_file_size: "Tamaño de la imagen"
-      costumer:
+      customer:
         first_name: "Nombre"
         last_name: "Apellido"
         company: "Compañía"
@@ -220,7 +220,7 @@ es:
       employee_user_exists: "El empleado ya está asociado con un usuario"
       locked_correctly: "Ha bloqueado la sesión correctamente"
       user_must_be_employee: "Usuario debe ser un empleado"
-      user_must_be_costumer: "Usuario debe ser un cliente"
+      user_must_be_customer: "Usuario debe ser un cliente"
     errors:
       page_empty: "Esta página está vacía"
       back_to_home: "Regresar a Inicio"

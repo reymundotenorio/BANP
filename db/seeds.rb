@@ -83,10 +83,10 @@ puts "Seeding products"
   end
 end
 
-puts "Seeding costumers"
+puts "Seeding customers"
 25.times do |count|
   begin
-    Costumer.create(
+    Customer.create(
       id: (count + 1),
       first_name: Faker::Name.first_name,
       last_name: Faker::Name.last_name,

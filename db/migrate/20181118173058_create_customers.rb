@@ -1,6 +1,6 @@
-class CreateCostumers < ActiveRecord::Migration[5.2]
+class CreateCustomers < ActiveRecord::Migration[5.2]
   def change
-    create_table :costumers do |t|
+    create_table :customers do |t|
       t.string :first_name, null: false
       t.string :last_name, null: false
       t.string :company
@@ -13,8 +13,8 @@ class CreateCostumers < ActiveRecord::Migration[5.2]
       t.timestamps # create_at & update_at
     end
 
-    add_index :costumers, :email, unique: true
-    # add_index :costumers, :phone, unique: true
-    add_index :costumers, :slug, unique: true
+    add_index :customers, :email, unique: true
+    # add_index :customers, :phone, unique: true
+    add_index :customers, :slug, unique: true
   end
 end

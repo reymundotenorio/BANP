@@ -10,7 +10,7 @@ class AuthenticationMailer < ApplicationMailer
 
   def confirmation_instructions(user, token, locale, ip, location)
     @user = user
-    @costumer = user.costumer
+    @customer = user.customer
     @token = token
     @ip = ip
     @location = location
@@ -22,7 +22,7 @@ class AuthenticationMailer < ApplicationMailer
 
   def unlock_instructions(user, token, locale, ip, location)
     @user = user
-    @costumer = user.costumer
+    @customer = user.customer
     @token = token
     @ip = ip
     @location = location
@@ -34,7 +34,7 @@ class AuthenticationMailer < ApplicationMailer
 
   def reset_password_instructions(user, token, locale, ip, location)
     @user = user
-    @costumer = user.costumer
+    @customer = user.customer
     @token = token
     @ip = ip
     @location = location
@@ -46,7 +46,7 @@ class AuthenticationMailer < ApplicationMailer
 
   def update_password(user, locale, ip, location)
     @user = user
-    @costumer = user.costumer
+    @customer = user.customer
     @ip = ip
     @location = location
 

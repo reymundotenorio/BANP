@@ -1,0 +1,12 @@
+%tr{class: "clickable-row #{customer.state}", "data-href": "#{admin_customer_path(customer)}"}
+  -# Set attributes
+  - attributes = ["first_name", "last_name", "company", "email" ,"phone"]
+
+  %td
+    = link_to admin_customer_path(customer), class: "record-link", "data-header": "No." do
+      %p= customer.id
+
+  - attributes.each do |attribute|
+    %td
+      = link_to admin_customer_path(customer), class: "record-link", "data-header": t("activerecord.attributes.customer.#{attribute}") do
+        %p= customer["#{attribute}"]

@@ -6,11 +6,11 @@
     %span.hidden-xs
       %i.fas.fa-user
   %ul.dropdown-menu.user-dropbown
-    - if current_costumer
-      -# Costumer detail Sync
-      = sync partial: "costumer_info", resource: current_costumer
-      = sync_new partial: "costumer_info", resource: Costumer.new
-      -# End Costumer detail Sync
+    - if current_customer
+      -# Customer detail Sync
+      = sync partial: "customer_info", resource: current_customer
+      = sync_new partial: "customer_info", resource: Customer.new
+      -# End Customer detail Sync
 
     - else
       %li

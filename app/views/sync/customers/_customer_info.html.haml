@@ -1,13 +1,13 @@
 %li.label
   %span.name
-    = costumer.first_name
-    = costumer.last_name
+    = customer.first_name
+    = customer.last_name
 %li
   %a{href: "#", target: "_self"}
     %i.fas.fa-cog.hidden-xs
     = t("header.user.configuration")
 %li
-  = link_to sign_out_path(email: costumer.email), method: "delete" do
+  = link_to sign_out_path(email: customer.email), method: "delete" do
     %i.fas.fa-lock.hidden-xs
     = t("header.user.lock")
 %li

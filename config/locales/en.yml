@@ -34,7 +34,7 @@ en:
       employee: "Employee"
       user: "User"
       provider: "Provider"
-      costumer: "Costumer"
+      customer: "Customer"
       category: "Category"
       product: "Product"
     attributes:
@@ -79,7 +79,7 @@ en:
         image_file_name: "Image file name"
         image_content_type: "Image content type"
         image_file_size: "Image file size"
-      costumer:
+      customer:
         first_name: "First name"
         last_name: "Last name"
         company: "Company"
@@ -220,7 +220,7 @@ en:
       employee_user_exists: "The employee is already associated with a user"
       locked_correctly: "You have locked the session correctly"
       user_must_be_employee: "User must be an employee"
-      user_must_be_costumer: "User must be a costumer"
+      user_must_be_customer: "User must be a customer"
     errors:
       page_empty: "This page is empty"
       back_to_home: "Back to Home"
