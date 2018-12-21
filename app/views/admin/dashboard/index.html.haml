@@ -1,2 +1,9 @@
-= pie_chart charts_product_by_category_path, colors: ["#eb3b5a", "#45aaf2", "#a55eea", "#20bf6b", "#778ca3", "#0fb9b1", "#fa8231", "#4b7bec", "#f7b731", "#d1d8e0"]
+= pie_chart charts_product_by_category_path, defer: true,  donut: true 
 
+= pie_chart charts_product_by_category_path, defer: true 
+
+= line_chart charts_product_by_category_path, defer: true, curve: true, xtitle: "Category", ytitle: "Quantity", thousands: ",", decimal: ".", messages: {empty: "No data"}
+
+= column_chart charts_product_by_category_path, defer: true 
+
+= area_chart charts_product_by_category_path, defer: true 

@@ -1,4 +1,4 @@
-%div{class: "card #{product.state}"}
+%div{class: "card card-container #{product.state}"}
   .card-image
     -# Image
     - if product.image.attached?
@@ -31,7 +31,7 @@
     .stock
       %p.no-margin= t("views.products.out_stock")
 
-  %div{class: "card-body #{product.state}"}
+  .card-body
     %p.name.aligned-text
       = link_to "#{I18n.locale == :es ? product.name_spanish : product.name}", product_path(product)
 

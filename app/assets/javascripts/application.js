@@ -26,6 +26,9 @@
 
 //= require dentist/dentist
 
+// require Chart.bundle
+
+//= require highcharts/highcharts
 //= require chartkick
 
 // require_tree

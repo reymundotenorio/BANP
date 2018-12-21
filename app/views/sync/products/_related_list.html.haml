@@ -21,12 +21,12 @@
         %button.add{name: "plus", type: "button"}
           %span.sr-only plus
           %i.fas.fa-plus
-          
+
         %input#productId{name: "productId", type: "hidden", value: "#{product.id}"}/
 
       %button.addToCart.btn.btn-general.add-btn{name: "add", type: "button"}= t("views.products.add_cart")
 
-%div{class: "card-body #{product.state}"}
+.card-body
   %p.name.aligned-text
     = link_to "#{I18n.locale == :es ? product.name_spanish : product.name}", product_path(product)
 
