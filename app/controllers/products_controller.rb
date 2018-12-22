@@ -1,7 +1,7 @@
 class ProductsController < ApplicationController
-  # Landing layout
+  # Ecommerce layout
   layout "application_ecommerce"
-  # End Landing layout
+  # End Ecommerce layout
 
   # Find products with Friendly_ID
   before_action :set_product, only: [:show]

@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'customers/new'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   # Change language
   get "/change-language/:lang", to: "settings#change_lang", as: "change_language"
@@ -23,9 +24,14 @@ Rails.application.routes.draw do
   get "/authentication/notifications", to: "authentication/notifications#index", as: "auth_notifications"
   # End Notifications
 
-  # Registrations
-  get "/sign-up", to: "authentication/registrations#new", as: "sign_up"
-  # End Registrations
+  # Customers
+  get "/sign-up", to: "customers#new", as: "sign_up"
+  get "/customer/:id", to: "customers#show", as: "customer"
+  get "/customer/:id/edit", to: "customers#edit", as: "edit_customer"
+  post "/customers", to: "customers#create"
+  patch "/customer/:id", to: "customers#update", as: "update_customer"
+  patch "/customers/:id/deactive", to: "customers#deactive", as: "deactive_customer"
+  # End Customers
 
   # Sessions
   get "/sign-in", to: "authentication/sessions#new", as: "sign_in"
