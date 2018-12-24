@@ -80,6 +80,30 @@
                       %b= t("activerecord.attributes.customer.address")
                     .border-bottom
 
+                  = f.fields_for :user do |u|
+                    -# Email
+                    = u.hidden_field :email, value: @customer.email
+                    -# End Email
+
+                    .form-group
+                      = u.password_field :password, class: "form-control input", placeholder: t("activerecord.attributes.user.password"), required: true
+                      %label
+                        %b= t("activerecord.attributes.user.password")
+                      .border-bottom
+
+                    .form-group
+                      = u.password_field :password_confirmation, class: "form-control input", placeholder: t("activerecord.attributes.user.password_confirmation"), required: true
+                      %label
+                        %b= t("activerecord.attributes.user.password_confirmation")
+                      .border-bottom
+
+                    .form-group.static
+                      .toggle#switcherToggle
+                        = u.check_box :two_factor_auth, {class: "check", id: "switcher"}, "true", "false"
+                        %b.b.switch
+                      %label.checkbox
+                        %b= t("activerecord.attributes.user.two_factor_auth")
+
 
                   -# Buttons
                   .main-buttons

@@ -2,6 +2,9 @@ class Customer < ApplicationRecord
   # Association
   has_one :user
 
+  # Nested attributes
+  accepts_nested_attributes_for :user
+
   # Audit
   has_associated_audits
   audited

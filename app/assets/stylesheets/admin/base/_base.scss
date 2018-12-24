@@ -53,6 +53,18 @@ a{
   }
 }
 
+// Selection
+::-moz-selection{
+  background: $primary-color;
+  color: $white;
+}
+
+::selection{
+  background: $primary-color;
+  color: $white;
+}
+//End Selection
+
 // Inputs
 .form-control{
   border-radius: 0px;
@@ -91,24 +103,6 @@ a{
   }
 }
 // End Inputs
-
-
-// Selection
-::-moz-selection{
-  background: $primary-color;
-  color: $white;
-}
-
-::-moz-selection{
-  background: $primary-color;
-  color: $white;
-}
-
-::selection{
-  background: $primary-color;
-  color: $white;
-}
-//End Selection
 
 // Material inputs
 .form-group{
@@ -323,13 +317,6 @@ a{
 }
 // End Material inputs
 
-// Turbolinks progress bar
-.turbolinks-progress-bar{
-  background-color: $third-color;
-}
-// End Turbolinks progress bar
-
-
 // iOS toggle
 .toggle{
   width: 60px;
@@ -406,6 +393,12 @@ svg{
   }
 }
 // End Barcode
+
+// Turbolinks progress bar
+.turbolinks-progress-bar{
+  background-color: $third-color;
+}
+// End Turbolinks progress bar
 
 @media (min-width: 768px){
 

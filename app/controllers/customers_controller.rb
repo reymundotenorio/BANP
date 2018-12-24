@@ -18,30 +18,12 @@ class CustomersController < ApplicationController
   # /customer/new
   def new
     @customer = Customer.new
+    @customer.build_user
   end
 
   # /customer/:id)
   def show
     # Customer found by before_action
-
-    # PDF view configuration
-    current_lang = params[:lang]
-    I18n.locale = current_lang
-
-    datetime =  Time.zone.now
-    file_time = datetime.strftime("%m%d%Y")
-
-    name_pdf = "customer-#{@customer.slug}-#{file_time}"
-    template = "admin/customers/show_pdf.html.haml"
-    title_pdf = t("activerecord.models.customer")
-    # End PDF view configuration
-
-    respond_to do |format|
-      format.html
-      format.pdf do
-        to_pdf(name_pdf, template, @customer, I18n.l(datetime), title_pdf)
-      end
-    end
   end
 
   # /customer/:id/edit
@@ -103,6 +85,6 @@ class CustomersController < ApplicationController
 
   # Customer params
   def customer_params
-    params.require(:customer).permit(:first_name, :last_name, :email, :phone, :address, :image)
+    params.require(:customer).permit(:first_name, :last_name, :company, :email, :phone, :address, :image, user_attributes: [:email, :password, :password_confirmation, :two_factor_auth])
   end
 end

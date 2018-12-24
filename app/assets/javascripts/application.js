@@ -13,12 +13,17 @@
 //= require jquery
 //= require jquery_ujs
 //= require rails-ujs
+
 //= require activestorage
+
 //= require turbolinks
+
 //= require bootstrap-sprockets
+
 //= require sync
-//
+
 //= require preloader
+
 //= require affix-top
 
 //= require toastr/toastr
@@ -27,7 +32,6 @@
 //= require dentist/dentist
 
 // require Chart.bundle
-
 //= require highcharts/highcharts
 //= require chartkick
 

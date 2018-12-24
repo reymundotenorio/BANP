@@ -42,7 +42,7 @@ $(document).on("turbolinks:load", function(){
   });
 
   // Dropdown "Bootstrap" listener on pressing the "Enter" key
-  $(".dropdown-item").on("keypress", function(e){
+  $(".dropdown-item").on("keyup", function(e){
     if(e.which === 13){
       $(".dropdown-toggle").val($.trim($(this).text()));
       $("#role-dropdown").removeClass("open");
@@ -55,6 +55,10 @@ $(document).on("turbolinks:load", function(){
     $("#role-dropdown .dropdown-menu li:first-child .dropdown-item").focus();
   });
 
+  // Copy costumer_email to value on user_email
+  $("#customer_email").on("change paste keyup", function(){
+    $("#user_email").val($(this).val());
+  });
 
   // Toast message error
   var currentURL = document.URL;
@@ -62,7 +66,7 @@ $(document).on("turbolinks:load", function(){
   var i18nLocale = $("body").data("locale");
 
   try{
-    
+
     if(params.notification == "sign-in-required"){
       i18nLocale == "es" ? mustSignIn = "Debe iniciar sesión para continuar" : mustSignIn = "You must sign in to continue";
 

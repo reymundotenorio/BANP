@@ -148,6 +148,6 @@ class Admin::CustomersController < ApplicationController
 
   # Customer params
   def customer_params
-    params.require(:customer).permit(:first_name, :last_name, :email, :phone, :address, :image)
+    params.require(:customer).permit(:first_name, :last_name, :company, :email, :phone, :address, :image)
   end
 end
