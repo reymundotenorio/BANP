@@ -1,7 +1,7 @@
 - @categories = Category.search(params[:search], "enabled-only").paginate(page: params[:page], per_page: 15) # Categories with pagination
 
 -# Form
-= form_for [:admin, @product],  html: {autocomplete: "off", multipart: true} do |f|
+= form_for [:admin, @product], html: {autocomplete: "off", multipart: true} do |f|
   %section.form
     .container
       .row

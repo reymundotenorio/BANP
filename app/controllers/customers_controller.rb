@@ -19,6 +19,9 @@ class CustomersController < ApplicationController
   def new
     @customer = Customer.new
     @customer.build_user
+    @new_record = true
+
+    # action_name == "new" || action_name == "create"
   end
 
   # /customer/:id)

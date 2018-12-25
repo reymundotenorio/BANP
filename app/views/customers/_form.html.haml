@@ -1,6 +1,6 @@
 -# Form
-= form_for @customer,  html: {autocomplete: "off", multipart: true} do |f|
-  %section.form
+= form_for @customer, html: {autocomplete: "off", multipart: true} do |f|
+  %section.form.sign-up
     .container
       .row
         .col-xs-12
@@ -8,7 +8,8 @@
           = render partial: "partials/form_errors", locals: {resource: @customer, model: Customer}
           -# End Show errors
 
-        .col-xs-12.col-md-5.col-lg-4
+        -# Only for new records
+        %div{class: "#{@new_record ? 'col-xs-12 col-md-6 col-md-offset-3 hidden' : 'col-xs-12 col-md-5 col-lg-4'}"}
           -# Material card
           %div{class: "material-card shadow-card #{@customer.state}"}
             .row.no-margin
@@ -35,7 +36,7 @@
                   -# End Input image
           -# End Material card
 
-        .col-xs-12.col-md-7.col-lg-8
+        %div{class: "#{@new_record ? 'col-xs-12 col-md-6' : 'col-xs-12 col-md-7 col-lg-8'}"}
           -# Material card
           %div{class: "material-card shadow-card #{@customer.state}"}
             .row.no-margin
@@ -77,42 +78,49 @@
                     %label
                       %b= t("activerecord.attributes.customer.address")
                     .border-bottom
-
-                  = f.fields_for :user do |u|
-                    -# Email
-                    = u.hidden_field :email, value: @customer.email
-                    -# End Email
-
-                    .form-group
-                      = u.password_field :password, class: "form-control input", placeholder: t("activerecord.attributes.user.password"), required: true
-                      %label
-                        %b= t("activerecord.attributes.user.password")
-                      .border-bottom
-
-                    .form-group
-                      = u.password_field :password_confirmation, class: "form-control input", placeholder: t("activerecord.attributes.user.password_confirmation"), required: true
-                      %label
-                        %b= t("activerecord.attributes.user.password_confirmation")
-                      .border-bottom
-
-                    .form-group.static
-                      .toggle#switcherToggle
-                        = u.check_box :two_factor_auth, {class: "check", id: "switcher"}, "true", "false"
-                        %b.b.switch
-                      %label.checkbox
-                        %b= t("activerecord.attributes.user.two_factor_auth")
-
-
-                  -# Buttons
-                  .main-buttons
-                    .col-xs-12.col-sm-12.button-container.no-padding
-                      = button_tag type: "reset", id: "reset-button", class: "btn btn-general" do
-                        %i.fas.fa-eraser
-                        %span= t("views.form.restart")
-
-                      = f.button class: "btn btn-general", data: {disable_with: "<i class='fas fa-spinner fa-spin'></i>"} do
-                        %i.fas.fa-save
-                        %span= t("views.form.save")
-                  -# End Buttons
           -# End Material card
+
+        - if @new_record
+          .col-xs-12.col-md-6
+            -# Material card
+            %div{class: "material-card shadow-card #{@customer.state}"}
+              .row.no-margin
+                .col-xs-12.no-padding
+                  .form-info
+                    = f.fields_for :user do |u|
+                      -# Email
+                      = u.hidden_field :email, value: @customer.email
+                      -# End Email
+
+                      .form-group
+                        = u.password_field :password, class: "form-control input", placeholder: t("activerecord.attributes.user.password"), required: true
+                        %label
+                          %b= t("activerecord.attributes.user.password")
+                        .border-bottom
+
+                      .form-group
+                        = u.password_field :password_confirmation, class: "form-control input", placeholder: t("activerecord.attributes.user.password_confirmation"), required: true
+                        %label
+                          %b= t("activerecord.attributes.user.password_confirmation")
+                        .border-bottom
+
+                      .form-group.static
+                        .toggle#switcherToggle
+                          = u.check_box :two_factor_auth, {class: "check", id: "switcher"}, "true", "false"
+                          %b.b.switch
+                        %label.checkbox
+                          %b= t("activerecord.attributes.user.two_factor_auth")
+
+                    -# Buttons
+                    .main-buttons
+                      .col-xs-12.col-sm-12.button-container.no-padding
+                        = button_tag type: "reset", id: "reset-button", class: "btn btn-general" do
+                          %i.fas.fa-eraser
+                          %span= t("views.form.restart")
+
+                        = f.button class: "btn btn-general", data: {disable_with: "<i class='fas fa-spinner fa-spin'></i>"} do
+                          %i.fas.fa-save
+                          %span= t("views.form.save")
+                    -# End Buttons
+            -# End Material card
 -# End Form

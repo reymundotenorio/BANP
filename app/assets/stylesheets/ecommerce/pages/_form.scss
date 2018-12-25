@@ -3,6 +3,11 @@
 // ------------------------------------------------------------
 
 .form{
+  &.sign-up{
+    padding-top: 25px;
+    padding-bottom: 25px;
+  }
+
   .alerts{
     padding-top: 20px;
   }
@@ -158,6 +163,11 @@
 @media (min-width: 768px){
 
   .form{
+    &.sign-up{
+      padding-top: 45px;
+      padding-bottom: 45px;
+    }
+
     .form-info{
       .main-buttons{
         .button-container{
