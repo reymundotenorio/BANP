@@ -62,7 +62,6 @@
         %div{class: "material-card shadow-card #{employee.state}"}
           .row.no-margin
             .col-xs-12.no-padding
-              -# General information
               .general-info
                 -# Image
                 .image-container
@@ -98,7 +97,6 @@
                       = link_to (admin_active_employee_path(employee)), method: "patch", class: "btn btn-general" do
                         %i.fas.fa-check
                         %span= t("views.show.enable")
-              -# End General information
         -# End Material card
 
       .col-xs-12.col-md-7.col-lg-8
@@ -123,7 +121,7 @@
 
                 -# Set user attributes
                 - user_attributes = ["confirmed", "sign_in_count", "current_sign_in_at", "current_sign_in_ip", "last_sign_in_at", "last_sign_in_ip"]
-                
+
                   - user_attributes.each do |attribute| if employee.user.present?
                     .info
                       %p.title

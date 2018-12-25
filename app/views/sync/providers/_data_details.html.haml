@@ -44,7 +44,6 @@
         %div{class: "material-card shadow-card #{provider.state}"}
           .row.no-margin
             .col-xs-12.no-padding
-              -# General information
               .general-info
                 -# Image
                 .image-container
@@ -80,7 +79,6 @@
                       = link_to (admin_active_provider_path(provider)), method: "patch", class: "btn btn-general" do
                         %i.fas.fa-check
                         %span= t("views.show.enable")
-              -# End General information
         -# End Material card
 
       .col-xs-12.col-md-7.col-lg-8
@@ -91,7 +89,7 @@
               %div{class: "detail-info #{provider.state}"}
                 -# Set attributes
                 - attributes = ["FEIN", "email" ,"phone", "address", "state"]
-                
+
                 - attributes.each do |attribute|
                   .info
                     %p.title

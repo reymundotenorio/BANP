@@ -3,7 +3,6 @@
   %div{class: "material-card material-card-pdf shadow-card shadow-card-pdf #{resource.state}"}
     .row.no-margin
       .col-xs-12.no-padding
-        -# General information
         .general-info
           -# Image
           .image-container
@@ -12,7 +11,6 @@
             - else
               = image_tag url_for("https://s3.amazonaws.com/betterandnice/images/default/default.png"), class: "img-responsive"
           -# End Image
-        -# End General information
   -# End Material card
 
 .col-xs-8
@@ -31,10 +29,10 @@
 
               - elsif attribute == "price"
                 %p= number_to_currency(resource["#{attribute}"], precision: 2, unit: "$", format: "%u%n", separator: ".", delimiter: ",")
-                
+
               - elsif attribute == "barcode"
                 %svg.barcode{"jsbarcode-format": "CODE128", "jsbarcode-value": "#{resource[attribute]}", "jsbarcode-lineColor": "#333333", "jsbarcode-background": "#fff", "jsbarcode-fontSize": "16px", "jsbarcode-font": "Montserrat"}
-                
+
               - else
                 %p= resource["#{attribute}"]
 
