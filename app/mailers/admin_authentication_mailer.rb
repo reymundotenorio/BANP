@@ -1,12 +1,7 @@
-class AuthenticationMailer < ApplicationMailer
+class AdminAuthenticationMailer < ApplicationMailer
   # Mailer layout
   layout "mailer"
   # End Mailer layout
-
-  # Default options
-  default from: "betterandniceproduce@gmail.com"
-  default template_path: "admin/authentication/mailer"
-  # End Default options
 
   def confirmation_instructions(user, token, locale, ip, location)
     @user = user

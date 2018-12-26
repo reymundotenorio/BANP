@@ -3,11 +3,6 @@ class AuthenticationMailer < ApplicationMailer
   layout "mailer"
   # End Mailer layout
 
-  # Default options
-  default from: "betterandniceproduce@gmail.com"
-  default template_path: "authentication/mailer"
-  # End Default options
-
   def confirmation_instructions(user, token, locale, ip, location)
     @user = user
     @customer = user.customer
