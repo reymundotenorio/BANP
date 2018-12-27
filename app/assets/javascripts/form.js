@@ -57,7 +57,7 @@ $(document).on("turbolinks:load", function(){
 
   // Copy costumer_email to value on user_email
   $("#customer_email").on("change paste keyup", function(){
-    $("#user_email").val($(this).val());
+    $("#customer_user_attributes_email").val($(this).val());
   });
 
   // Toast message error

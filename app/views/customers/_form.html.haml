@@ -9,7 +9,7 @@
           -# End Show errors
 
         -# Only for new records
-        %div{class: "#{@new_record ? 'col-xs-12 col-md-6 col-md-offset-3 hidden' : 'col-xs-12 col-md-5 col-lg-4'}"}
+        %div{class: "#{action_name == 'new' || action_name == 'create' ? 'col-xs-12 col-md-6 col-md-offset-3 hidden' : 'col-xs-12 col-md-5 col-lg-4'}"}
           -# Material card
           %div{class: "material-card shadow-card #{@customer.state}"}
             .row.no-margin
@@ -36,7 +36,7 @@
                   -# End Input image
           -# End Material card
 
-        %div{class: "#{@new_record ? 'col-xs-12 col-md-6' : 'col-xs-12 col-md-7 col-lg-8'}"}
+        %div{class: "#{action_name == 'new' || action_name == 'create' ? 'col-xs-12 col-md-6' : 'col-xs-12 col-md-7 col-lg-8'}"}
           -# Material card
           %div{class: "material-card shadow-card #{@customer.state}"}
             .row.no-margin
@@ -80,7 +80,7 @@
                     .border-bottom
           -# End Material card
 
-        - if @new_record
+        - if action_name == "new" || action_name == "create"
           .col-xs-12.col-md-6
             -# Material card
             %div{class: "material-card shadow-card #{@customer.state}"}
@@ -91,7 +91,7 @@
                       -# Email
                       = u.hidden_field :email, value: @customer.email
                       -# End Email
-
+                    
                       .form-group
                         = u.password_field :password, class: "form-control input", placeholder: t("activerecord.attributes.user.password"), required: true
                         %label

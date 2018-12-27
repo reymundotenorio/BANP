@@ -76,6 +76,10 @@ a{
     + label{
       bottom: 50px;
     }
+    
+    + grammarly-btn + label{
+      bottom: 50px;
+    }
   }
 
   @include placeholder{
@@ -223,7 +227,7 @@ a{
     // }
 
     &.with-value, &:focus{
-      + label{
+      + label, + grammarly-btn + label{
         -webkit-transform: translateY(-30px);
         transform: translateY(-30px);
         font-size: 14px;
