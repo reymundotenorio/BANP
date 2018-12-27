@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-  get 'customers/new'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   # Change language
   get "/change-language/:lang", to: "settings#change_lang", as: "change_language"
@@ -28,6 +27,7 @@ Rails.application.routes.draw do
   get "/sign-up", to: "customers#new", as: "sign_up"
   get "/customer/:id", to: "customers#show", as: "customer"
   get "/customer/:id/edit", to: "customers#edit", as: "edit_customer"
+  get "/customers", to: redirect("/sign-up")
   post "/customers", to: "customers#create"
   patch "/customer/:id", to: "customers#update", as: "update_customer"
   patch "/customers/:id/deactive", to: "customers#deactive", as: "deactive_customer"
@@ -43,14 +43,14 @@ Rails.application.routes.draw do
   # End Sessions
 
   # Confirmations
-  get '/confirm-account', to: 'authentication/confirmations#new', as: 'confirm_account'
-  get '/confirm-customer-account/:confirmation_token', to: 'authentication/confirmations#show', as: 'confirm_customer_account'
+  get "/confirm-account", to: "authentication/confirmations#new", as: "confirm_account"
+  get "/confirm-customer-account/:confirmation_token", to: "authentication/confirmations#show", as: "confirm_customer_account"
   post "/confirm-account", to: "authentication/confirmations#send_confirmation_email", as: "resend_confirmation"
   # End Confirmations
 
   # Unlocks
-  get '/unlock-account', to: 'authentication/unlocks#new', as: 'unlock_account'
-  get '/unlock-customer-account/:unlock_token', to: 'authentication/unlocks#show', as: 'unlock_customer_account'
+  get "/unlock-account", to: "authentication/unlocks#new", as: "unlock_account"
+  get "/unlock-customer-account/:unlock_token", to: "authentication/unlocks#show", as: "unlock_customer_account"
   post "/unlock-account", to: "authentication/unlocks#send_unlock_email", as: "resend_unlock"
   # End Unlocks
 
@@ -91,14 +91,14 @@ Rails.application.routes.draw do
     # End Sessions
 
     # Confirmations
-    get '/confirm-account', to: 'authentication/confirmations#new', as: 'confirm_account'
-    get '/confirm-employee-account/:confirmation_token', to: 'authentication/confirmations#show', as: 'confirm_employee_account'
+    get "/confirm-account", to: "authentication/confirmations#new", as: "confirm_account"
+    get "/confirm-employee-account/:confirmation_token", to: "authentication/confirmations#show", as: "confirm_employee_account"
     post "/confirm-account", to: "authentication/confirmations#send_confirmation_email", as: "resend_confirmation"
     # End Confirmations
 
     # Unlocks
-    get '/unlock-account', to: 'authentication/unlocks#new', as: 'unlock_account'
-    get '/unlock-employee-account/:unlock_token', to: 'authentication/unlocks#show', as: 'unlock_employee_account'
+    get "/unlock-account", to: "authentication/unlocks#new", as: "unlock_account"
+    get "/unlock-employee-account/:unlock_token", to: "authentication/unlocks#show", as: "unlock_employee_account"
     post "/unlock-account", to: "authentication/unlocks#send_unlock_email", as: "resend_unlock"
     # End Unlocks
 
