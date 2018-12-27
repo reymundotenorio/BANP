@@ -2,6 +2,9 @@
 
 $(document).on("turbolinks:load", function(){
   // $(document).ready(function(){
+  
+  // Init Bootstrap tooltips
+  $('[data-toggle="tooltip"]').tooltip();
 
   // Inputs listener
   $("input.form-control").on("keyup change", function(){
@@ -91,5 +94,5 @@ $(document).on("turbolinks:load", function(){
       e.preventDefault();
     }
   });
-
+  
 });
