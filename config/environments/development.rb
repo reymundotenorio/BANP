@@ -71,29 +71,8 @@ Rails.application.configure do
   # Set default host URL for email links
   config.action_mailer.default_url_options = { host: "localhost:3000" }
 
-  # Gmail configuration
+  # Mail configuration
   config.action_mailer.raise_delivery_errors = true
-  # config.action_mailer.delivery_method = :smtp
-  # config.action_mailer.smtp_settings = {
-  #   address:"smtp.gmail.com",
-  #   port: 587,
-  #   domain: "mail.google.com",
-  #   user_name: ENV["email_user"],
-  #   password: ENV["email_password"],
-  #   authentication: "plain",
-  #   enable_starttls_auto: true
-  # }
-  
-  config.action_mailer.delivery_method = :smtp
-  config.action_mailer.smtp_settings = {
-    address: "smtp.sendgrid.net",
-    port: 587,
-    domain: "betterandnice.com",
-    user_name: ENV["sendgrid_user"],
-    password: ENV["sendgrid_password"],
-    authentication: "plain",
-    enable_starttls_auto: true
-  }
 
   # Store files on Amazon S3.
   config.active_storage.service = :amazon
