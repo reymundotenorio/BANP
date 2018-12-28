@@ -184,6 +184,10 @@ en:
       select_role: "Select a role"
       recaptcha_error: "Verify that you are not a robot"
       resend_otp: "Resend the OTP"
+      show_password: "Show password"
+      close: "Close"
+      decrease: "Decrease"
+      increase: "Increase"
     authentication:
       incorrect_user_pwd: "Incorrect email or password"
       incorrect_pwd: "Incorrect password"

@@ -40,7 +40,7 @@
                     .border-bottom
 
                     -# Show/Hide password button
-                    %button#display-password{type: "button"}
+                    %button#display-password{type: "button", "data-toggle": "tooltip", "data-placement": "bottom", title: t("views.form.show_password")}
                       %i.fas.fa-eye
                     -# End Show/Hide password button
 
@@ -53,17 +53,17 @@
                   .main-buttons.sessions
                     .col-xs-12.col-sm-12.button-container.no-padding
                       -# Link hidden on mobile
-                      = link_to (reset_password_path), class: "forgot-pass hidden-xs" do
+                      = link_to (reset_password_path), class: "forgot-pass hidden-xs", "data-toggle": "tooltip", "data-placement": "bottom", title: t("views.form.forgot_password") do
                         %i.fas.fa-chalkboard-teacher
                         %span= t("views.form.forgot_password")
                       -# End Link hidden on mobile
 
-                      = f.button class: "btn btn-general", data: {disable_with: "<i class='fas fa-spinner fa-spin'></i>"} do
+                      = f.button class: "btn btn-general", data: {disable_with: "<i class='fas fa-spinner fa-spin'></i>"}, "data-toggle": "tooltip", "data-placement": "bottom", title: t("views.form.sign_in") do
                         %i.fas.fa-fingerprint
                         %span= t("views.form.sign_in")
 
                       -# Link visible only on mobile
-                      = link_to (reset_password_path), class: "forgot-pass visible-xs" do
+                      = link_to (reset_password_path), class: "forgot-pass visible-xs", "data-toggle": "tooltip", "data-placement": "bottom", title: t("views.form.forgot_password") do
                         %i.fas.fa-chalkboard-teacher
                         %span= t("views.form.forgot_password")
                       -# End Link visible only on mobile

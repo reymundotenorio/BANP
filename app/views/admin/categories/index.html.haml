@@ -13,7 +13,7 @@
       .col-xs-12.col-lg-2.text-right
         -# New button
         .btn-container.inline
-          = link_to (admin_new_category_path), class: "btn btn-general" do
+          = link_to (admin_new_category_path), class: "btn btn-general", "data-toggle": "tooltip", "data-placement": "bottom", title: t("views.index.new") do
             %i.fas.fa-plus
             %span= t("views.index.new")
         -# End New button
@@ -25,7 +25,7 @@
         .breadcrumb-container
           %ol.breadcrumb
             %li
-              = link_to (admin_root_path) do
+              = link_to (admin_root_path), "data-toggle": "tooltip", "data-placement": "bottom", title: t("header.navigation.dashboard") do
                 %i.fas.fa-tachometer-alt
                 %span= t("header.navigation.dashboard")
             %li.active
@@ -61,7 +61,7 @@
 
               -# Export button
               .btn-container
-                = link_to (admin_categories_path(format: "pdf", lang: I18n.locale)), target: "_blank", class: "btn btn-general btn-default" do
+                = link_to (admin_categories_path(format: "pdf", lang: I18n.locale)), target: "_blank", class: "btn btn-general btn-default", "data-toggle": "tooltip", "data-placement": "bottom", title: t("views.index.export") do
                   %i.fas.fa-download
                   %span= t("views.index.export")
               -# End Export button

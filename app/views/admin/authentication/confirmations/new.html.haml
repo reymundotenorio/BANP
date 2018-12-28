@@ -33,7 +33,7 @@
                     -# Buttons
                     .main-buttons.sessions
                       .col-xs-12.col-sm-12.button-container.center.no-padding
-                        = f.button class: "btn btn-general", data: {disable_with: "<i class='fas fa-spinner fa-spin'></i>"}, title: t("views.authentication.resend"), "data-toggle": "tooltip", "data-placement": "bottom" do
+                        = f.button class: "btn btn-general", data: {disable_with: "<i class='fas fa-spinner fa-spin'></i>"}, "data-toggle": "tooltip", "data-placement": "bottom", title: t("views.authentication.resend") do
                           %i.fas.fa-envelope
                           %span= t("views.authentication.resend")
                     -# End Buttons
@@ -42,7 +42,7 @@
             .col-xs-12.no-padding.redirect-container
               -# Redirect links
               %p
-                = link_to (admin_root_path), title: "t('views.errors.back_to_home')" do
+                = link_to (admin_root_path), "data-toggle": "tooltip", "data-placement": "bottom", title: "t('views.errors.back_to_home')" do
                   %i.fas.fa-undo-alt
                   %span= t("views.errors.back_to_home")
               -# End Redirect links

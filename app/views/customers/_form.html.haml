@@ -91,7 +91,7 @@
                       -# Email
                       = u.hidden_field :email, value: @customer.email
                       -# End Email
-                    
+
                       .form-group
                         = u.password_field :password, class: "form-control input", placeholder: t("activerecord.attributes.user.password"), required: true
                         %label
@@ -118,7 +118,7 @@
                           %i.fas.fa-eraser
                           %span= t("views.form.restart")
 
-                        = f.button class: "btn btn-general", data: {disable_with: "<i class='fas fa-spinner fa-spin'></i>"} do
+                        = f.button class: "btn btn-general", data: {disable_with: "<i class='fas fa-spinner fa-spin'></i>"}, "data-toggle": "tooltip", "data-placement": "bottom", title: t("views.form.save") do
                           %i.fas.fa-save
                           %span= t("views.form.save")
                     -# End Buttons

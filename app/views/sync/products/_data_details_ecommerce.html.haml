@@ -18,25 +18,25 @@
 
       %p.general.aligned-text
         = I18n.locale == :es ? product.content_spanish : product.content
-        
+
       %form.link-container.aligned-text.addCart{action: "", method: ""}
         .quantity
 
           -# Minus
-          %button.subtract{name: "minus", type: "button"}
+          %button.subtract{name: "minus", type: "button", "data-toggle": "tooltip", "data-placement": "bottom", title: t("views.form.decrease")}
             %span.sr-only minus
             %i.fas.fa-minus
 
           %input#quantity{name: "quantity", type: "number", value: "1", min: "1"}/
 
           -# Plus
-          %button.add{name: "plus", type: "button"}
+          %button.add{name: "plus", type: "button", "data-toggle": "tooltip", "data-placement": "bottom", title: t("views.form.increase")}
             %span.sr-only plus
             %i.fas.fa-plus
 
           %input#productId{name: "productId", type: "hidden", value: "#{product.id}"}/
 
-        %button.addToCart.btn.btn-general.add-btn{name: "add", type: "button"}= t("views.products.add_cart")
+        %button.addToCart.btn.btn-general.add-btn{name: "add", type: "button", "data-toggle": "tooltip", "data-placement": "bottom", title: t("views.products.add_cart")}= t("views.products.add_cart")
 
       #details-accordion.panel-group
         .panel.panel-default

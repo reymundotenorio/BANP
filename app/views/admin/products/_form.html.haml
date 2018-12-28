@@ -126,7 +126,7 @@
                         %i.fas.fa-eraser
                         %span= t("views.form.restart")
 
-                      = f.button class: "btn btn-general", data: {disable_with: "<i class='fas fa-spinner fa-spin'></i>"} do
+                      = f.button class: "btn btn-general", data: {disable_with: "<i class='fas fa-spinner fa-spin'></i>"}, "data-toggle": "tooltip", "data-placement": "bottom", title: t("views.form.save") do
                         %i.fas.fa-save
                         %span= t("views.form.save")
                   -# End Buttons
@@ -138,7 +138,7 @@
   .modal-dialog
     .modal-content
       .modal-body
-        %button.close{type: "button", "data-dismiss": "modal", "aria-hidden": "true"}
+        %button.close{type: "button", "data-dismiss": "modal", "aria-hidden": "true", "data-toggle": "tooltip", "data-placement": "bottom", title: t("views.form.close")}
           &times;
 
         -# Render categories list
