@@ -25,11 +25,11 @@
         .breadcrumb-container
           %ol.breadcrumb
             %li
-              = link_to (admin_root_path) do
+              = link_to (admin_root_path), "data-toggle": "tooltip", "data-placement": "bottom", title: t("header.navigation.dashboard") do
                 %i.fas.fa-tachometer-alt
                 %span= t("header.navigation.dashboard")
             %li
-              = link_to (admin_employees_path) do
+              = link_to (admin_employees_path), "data-toggle": "tooltip", "data-placement": "bottom", title: t("header.navigation.employees") do
                 %i.fas.fa-list-alt
                 %span= t("header.navigation.employees")
             %li

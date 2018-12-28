@@ -1,2 +1,2 @@
 %li.with-separator
-    = link_to "#{I18n.locale == :es ? category.name_spanish : category.name}", products_path(category: category.slug)
+    = link_to "#{I18n.locale == :es ? category.name_spanish : category.name}", products_path(category: category.slug), "data-toggle": "tooltip", "data-placement": "bottom", title: "#{I18n.locale == :es ? category.name_spanish : category.name}"

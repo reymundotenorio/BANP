@@ -3,10 +3,10 @@
   - attributes = ["first_name", "last_name", "email" ,"phone", "role"]
 
   %td
-    = link_to admin_employee_path(employee), class: "record-link", "data-header": "No." do
+    = link_to admin_employee_path(employee), class: "record-link", "data-header": "No.", "data-toggle": "tooltip", "data-placement": "bottom", title: employee.id do
       %p= employee.id
-      
+
   - attributes.each do |attribute|
     %td
-      = link_to admin_employee_path(employee), class: "record-link", "data-header": t("activerecord.attributes.employee.#{attribute}") do
+      = link_to admin_employee_path(employee), class: "record-link", "data-header": t("activerecord.attributes.employee.#{attribute}"), "data-toggle": "tooltip", "data-placement": "bottom", title: employee["#{attribute}"] do
         %p= employee["#{attribute}"]
