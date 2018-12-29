@@ -52,6 +52,20 @@
   &.select-category{
     line-height: 1;
     padding: 8px;
+
+    margin-top: 10px;
   }
 }
 // End Override btn default behavior
+
+@media (min-width: 992px) {
+
+  // Override buttons behavior
+  .btn-general{
+    &.select-category{
+      margin-top: 0px;
+    }
+  }
+  // End Override btn default behavior
+  
+}

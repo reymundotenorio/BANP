@@ -147,6 +147,8 @@ es:
       show_enabled: "Mostrar habilitados"
       export: "Exportar"
       options: "Opciones"
+      view_details: "Ver detalles"
+      select: "Seleccionar"
     show:
       export: "Exportar"
       created_at: "Creado hace %{time}"

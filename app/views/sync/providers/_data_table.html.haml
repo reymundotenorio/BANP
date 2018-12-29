@@ -3,10 +3,10 @@
   - attributes = ["name", "FEIN", "email" ,"phone"]
 
   %td
-    = link_to admin_provider_path(provider), class: "record-link", "data-header": "No.", "data-toggle": "tooltip", "data-placement": "bottom", title: provider.id do
+    = link_to admin_provider_path(provider), class: "record-link", "data-header": "No.", "data-toggle": "tooltip", "data-placement": "bottom", title: t("views.index.view_details") do
       %p= provider.id
 
   - attributes.each do |attribute|
     %td
-      = link_to admin_provider_path(provider), class: "record-link", "data-header": t("activerecord.attributes.provider.#{attribute}"), "data-toggle": "tooltip", "data-placement": "bottom", title: provider["#{attribute}"] do
+      = link_to admin_provider_path(provider), class: "record-link", "data-header": t("activerecord.attributes.provider.#{attribute}"), "data-toggle": "tooltip", "data-placement": "bottom", title: t("views.index.view_details") do
         %p= provider["#{attribute}"]

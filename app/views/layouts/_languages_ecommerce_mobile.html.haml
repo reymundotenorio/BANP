@@ -1,5 +1,5 @@
 %li.dropdown.visible-xs
-  %a.dropdown-toggle{"data-toggle": "dropdown", href: "#", title: "Language"}
+  %a.dropdown-toggle{"data-toggle": "dropdown", href: "#"}
     %span.visible-xs
       = t("views.navigation.language")
       %i.fa.fa-angle-down
@@ -14,4 +14,3 @@
       = link_to (change_language_path(:es)), class: "#{'active' if I18n.locale.to_s == 'es'}" do
         %span.flag-icon.flag-icon-es.hidden-xs
         Español
-        

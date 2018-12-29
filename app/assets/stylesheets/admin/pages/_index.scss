@@ -253,9 +253,10 @@
 
         >td{
           padding: 0px;
-          
+
           &.align-middle{
             vertical-align: middle;
+            padding: 5px 0px;
           }
 
           >.record-link{

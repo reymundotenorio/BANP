@@ -3,14 +3,14 @@
     = customer.first_name
     = customer.last_name
 %li
-  %a{href: "#", target: "_self", "data-toggle": "tooltip", "data-placement": "bottom", title: t("header.user.configuration")}
+  %a{href: "#", target: "_self"}
     %i.fas.fa-cog.hidden-xs
     = t("header.user.configuration")
 %li
-  = link_to sign_out_path(email: customer.email), method: "delete", "data-toggle": "tooltip", "data-placement": "bottom", title: t("header.user.lock") do
+  = link_to sign_out_path(email: customer.email), method: "delete" do
     %i.fas.fa-lock.hidden-xs
     = t("header.user.lock")
 %li
-  = link_to admin_sign_out_path, method: "delete", "data-toggle": "tooltip", "data-placement": "bottom", title: t("header.user.sign_off") do
+  = link_to admin_sign_out_path, method: "delete" do
     %i.fas.fa-sign-out-alt.hidden-xs
     = t("header.user.sign_off")

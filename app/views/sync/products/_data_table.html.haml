@@ -7,13 +7,14 @@
     - attributes = ["name", "barcode", "price", "content"]
 
   %td
-    = link_to admin_product_path(product), class: "record-link", "data-header": "No.", "data-toggle": "tooltip", "data-placement": "bottom", title: product.id do
+    = link_to admin_product_path(product), class: "record-link", "data-header": "No.", "data-toggle": "tooltip", "data-placement": "bottom", title: t("views.index.view_details") do
       %p= product.id
 
   - attributes.each do |attribute|
     %td
-      = link_to admin_product_path(product), class: "record-link", "data-header": t("activerecord.attributes.product.#{attribute}"), "data-toggle": "tooltip", "data-placement": "bottom", title: "#{attribute == "price" ? number_to_currency(product["#{attribute}"], precision: 2, unit: "$", format: "%u%n", separator: ".", delimiter: ",") : product["#{attribute}"]}" do
+      = link_to admin_product_path(product), class: "record-link", "data-header": t("activerecord.attributes.product.#{attribute}"), "data-toggle": "tooltip", "data-placement": "bottom", title: t("views.index.view_details") do
         - if attribute == "price"
           %p= number_to_currency(product["#{attribute}"], precision: 2, unit: "$", format: "%u%n", separator: ".", delimiter: ",")
+          
         - else
           %p= product["#{attribute}"]

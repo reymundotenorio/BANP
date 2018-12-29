@@ -73,11 +73,7 @@ a{
     height: 80px;
     resize: none;
 
-    + label{
-      bottom: 50px;
-    }
-    
-    + grammarly-btn + label{
+    + label, + grammarly-btn + label{
       bottom: 50px;
     }
   }

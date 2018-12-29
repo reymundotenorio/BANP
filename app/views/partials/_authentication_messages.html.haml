@@ -13,28 +13,28 @@
               -# Not found - back to home
               - if @source == "not-found"
                 %p
-                  = link_to (root_path), title: "t('views.errors.back_to_home')" do
+                  = link_to (root_path) do
                     %i.fas.fa-undo-alt
                     %span= t("views.errors.back_to_home")
 
                 -# Confirmation resend instructions
               - elsif @source == "confirmation"
                 %p
-                  = link_to (confirm_account_path), title: "t('views.authentication.resend_instructions')" do
+                  = link_to (confirm_account_path) do
                     %i.fas.fa-envelope
                     %span= t("views.authentication.resend_instructions")
 
                 -# Unlock resend instructions
               - elsif @source == "unlock"
                 %p
-                  = link_to (unlock_account_path), title: "t('views.authentication.resend_instructions')" do
+                  = link_to (unlock_account_path) do
                     %i.fas.fa-envelope
                     %span= t("views.authentication.resend_instructions")
 
                 -# Reset password resend instructions
               - elsif @source == "reset-password"
                 %p
-                  = link_to (reset_password_path), title: "t('views.authentication.resend_instructions')" do
+                  = link_to (reset_password_path) do
                     %i.fas.fa-envelope
                     %span= t("views.authentication.resend_instructions")
         -# End Material card

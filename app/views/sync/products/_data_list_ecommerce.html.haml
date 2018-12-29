@@ -25,7 +25,7 @@
 
           %input#productId{name: "productId", type: "hidden", value: "#{product.id}"}/
 
-        %button.addToCart.btn.btn-general.add-btn{name: "add", type: "button", "data-toggle": "tooltip", "data-placement": "bottom", title: t("views.products.add_cart")}= t("views.products.add_cart")
+        %button.addToCart.btn.btn-general.add-btn{name: "add", type: "button"}= t("views.products.add_cart")
 
     -# Out of Stock
     .stock
@@ -33,7 +33,7 @@
 
   .card-body
     %p.name.aligned-text
-      = link_to "#{I18n.locale == :es ? product.name_spanish : product.name}", product_path(product), "data-toggle": "tooltip", "data-placement": "bottom", title: "#{I18n.locale == :es ? product.name_spanish : product.name}"
+      = link_to "#{I18n.locale == :es ? product.name_spanish : product.name}", product_path(product)
 
     %p.price.aligned-text
       = number_to_currency(product.price, precision: 2, unit: "$", format: "%u%n", separator: ".", delimiter: ",")

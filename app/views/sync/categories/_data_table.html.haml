@@ -7,10 +7,10 @@
     - attributes = ["name", "description"]
 
   %td
-    = link_to admin_category_path(category), class: "record-link", "data-header": "No.", "data-toggle": "tooltip", "data-placement": "bottom", title: category.id do
+    = link_to admin_category_path(category), class: "record-link", "data-header": "No.", "data-toggle": "tooltip", "data-placement": "bottom", title: t("views.index.view_details") do
       %p= category.id
 
   - attributes.each do |attribute|
     %td
-      = link_to admin_category_path(category), class: "record-link", "data-header": t("activerecord.attributes.category.#{attribute}"), "data-toggle": "tooltip", "data-placement": "bottom", title: category["#{attribute}"] do
+      = link_to admin_category_path(category), class: "record-link", "data-header": t("activerecord.attributes.category.#{attribute}"), "data-toggle": "tooltip", "data-placement": "bottom", title: t("views.index.view_details") do
         %p= category["#{attribute}"]

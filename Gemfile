@@ -153,8 +153,8 @@ gem "erubis", "~> 2.7"
 gem "barby"
 
 # Charts
-# gem "chartkick"
-gem "chartkick", git: "https://github.com/reymundotenorio/chartkick", branch: "master"
+gem "chartkick"
+# gem "chartkick", git: "https://github.com/reymundotenorio/chartkick", branch: "master"
 
 # Group by date
 gem "groupdate"

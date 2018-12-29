@@ -114,11 +114,11 @@
                     -# Buttons
                     .main-buttons
                       .col-xs-12.col-sm-12.button-container.no-padding
-                        = button_tag type: "reset", id: "reset-button", class: "btn btn-general", title: t("views.form.restart"), "data-toggle": "tooltip", "data-placement": "bottom" do
+                        = button_tag type: "reset", id: "reset-button", class: "btn btn-general" do
                           %i.fas.fa-eraser
                           %span= t("views.form.restart")
 
-                        = f.button class: "btn btn-general", data: {disable_with: "<i class='fas fa-spinner fa-spin'></i>"}, "data-toggle": "tooltip", "data-placement": "bottom", title: t("views.form.save") do
+                        = f.button class: "btn btn-general", data: {disable_with: "<i class='fas fa-spinner fa-spin'></i>"} do
                           %i.fas.fa-save
                           %span= t("views.form.save")
                     -# End Buttons

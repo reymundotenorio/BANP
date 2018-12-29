@@ -201,6 +201,7 @@
   .modal-dialog{
     width: 100%;
     margin: 0px;
+    margin-top: 15px;
 
     .modal-content{
       background-color: $transparent;
@@ -213,6 +214,11 @@
         font-size: 32px;
         opacity: 1;
         margin-bottom: 5px;
+        margin-right: 10px;
+
+        @include on-event{
+          outline: inherit;
+        }
       }
 
       .modal-body{
@@ -282,6 +288,7 @@
     .modal-dialog{
       width: (750px - 15px);
       margin: 0px auto;
+      margin-top: 15px;
     }
   }
 

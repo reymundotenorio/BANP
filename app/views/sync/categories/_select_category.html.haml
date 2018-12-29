@@ -7,15 +7,13 @@
     - attributes = ["name", "description"]
 
   %td
-    = link_to admin_category_path(category), class: "record-link disable-link", "data-header": "No.", "data-toggle": "tooltip", "data-placement": "bottom", title: category.id do
-      %p= category.id
+    %p= category.id
 
   - attributes.each do |attribute|
     %td
-      = link_to admin_category_path(category), class: "record-link disable-link", "data-header": t("activerecord.attributes.category.#{attribute}"), "data-toggle": "tooltip", "data-placement": "bottom", title: category["#{attribute}"] do
-        %p= category["#{attribute}"]
+      %p= category["#{attribute}"]
 
   %td.align-middle
     %p
-      = button_tag class: "btn btn-general select-category", "data-id": category.id, "data-name": "#{I18n.locale == :es ? category.name_spanish : category.name}", "data-toggle": "tooltip", "data-placement": "bottom", title: "#{I18n.locale == :es ? category.name_spanish : category.name}" do
+      = button_tag class: "btn btn-general select-category", "data-id": category.id, "data-name": "#{I18n.locale == :es ? category.name_spanish : category.name}", "data-toggle": "tooltip", "data-placement": "bottom", title: t("views.index.select") do
         %i.fas.fa-check

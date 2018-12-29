@@ -34,17 +34,17 @@
                   .main-buttons.sessions
                     .col-xs-12.col-sm-12.button-container.no-padding
                       -# Link hidden on mobile
-                      = link_to (admin_resend_otp_path), class: "forgot-pass hidden-xs", method: "patch", "data-toggle": "tooltip", "data-placement": "bottom", title: t("views.form.resend_otp") do
+                      = link_to (admin_resend_otp_path), class: "forgot-pass hidden-xs", method: "patch" do
                         %i.fas.fa-comment
                         %span= t("views.form.resend_otp")
                       -# End Link hidden on mobile
 
-                      = f.button class: "btn btn-general", data: {disable_with: "<i class='fas fa-spinner fa-spin'></i>"}, "data-toggle": "tooltip", "data-placement": "bottom", title: t("views.form.verify") do
+                      = f.button class: "btn btn-general", data: {disable_with: "<i class='fas fa-spinner fa-spin'></i>"} do
                         %i.fas.fa-id-badge
                         %span= t("views.form.verify")
 
                       -# Link visible only on mobile
-                      = link_to (admin_resend_otp_path), class: "forgot-pass visible-xs", method: "patch", "data-toggle": "tooltip", "data-placement": "bottom", title: t("views.form.resend_otp") do
+                      = link_to (admin_resend_otp_path), class: "forgot-pass visible-xs", method: "patch" do
                         %i.fas.fa-comment
                         %span= t("views.form.resend_otp")
                       -# End Link visible only on mobile

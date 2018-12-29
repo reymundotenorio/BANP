@@ -1,11 +1,4 @@
 GIT
-  remote: https://github.com/reymundotenorio/chartkick
-  revision: f66311996fd1cc45e5bcc0613f7833d8ddabcf7f
-  branch: master
-  specs:
-    chartkick (3.0.1)
-
-GIT
   remote: https://github.com/reymundotenorio/render_sync
   revision: eb3ecc9b01094bbd5441e1b1c6692b78ceece86d
   branch: master
@@ -112,6 +105,7 @@ GEM
       rack (>= 1.6.0)
       rack-test (>= 0.6.3)
       xpath (~> 3.1)
+    chartkick (3.0.1)
     childprocess (0.9.0)
       ffi (~> 1.0, >= 1.0.11)
     choice (0.2.0)
@@ -343,7 +337,7 @@ DEPENDENCIES
   bootstrap-sass (~> 3.3.7)
   byebug
   capybara (>= 2.15)
-  chartkick!
+  chartkick
   chromedriver-helper
   coffee-rails (~> 4.2)
   device_detector

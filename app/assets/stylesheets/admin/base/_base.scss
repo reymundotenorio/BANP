@@ -88,7 +88,7 @@ a{
     height: 80px;
     resize: none;
 
-    + label{
+    + label, + grammarly-btn + label{
       bottom: 50px;
     }
   }
@@ -238,7 +238,7 @@ a{
     // }
 
     &.with-value, &:focus{
-      + label{
+      + label, + grammarly-btn + label{
         -webkit-transform: translateY(-30px);
         transform: translateY(-30px);
         font-size: 14px;

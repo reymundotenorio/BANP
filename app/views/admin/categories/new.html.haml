@@ -13,7 +13,7 @@
       .col-xs-12.col-lg-2
         -# Categories button
         .btn-container
-          = link_to (admin_categories_path), class: "btn btn-general", "data-toggle": "tooltip", "data-placement": "bottom", title: t("header.navigation.categories") do
+          = link_to (admin_categories_path), class: "btn btn-general" do
             %i.fas.fa-list-alt
             %span= t("header.navigation.categories")
         -# End Categories button
@@ -25,11 +25,11 @@
         .breadcrumb-container
           %ol.breadcrumb
             %li
-              = link_to (admin_root_path), "data-toggle": "tooltip", "data-placement": "bottom", title: t("header.navigation.dashboard") do
+              = link_to (admin_root_path) do
                 %i.fas.fa-tachometer-alt
                 %span= t("header.navigation.dashboard")
             %li
-              = link_to (admin_categories_path), "data-toggle": "tooltip", "data-placement": "bottom", title: t("header.navigation.categories") do
+              = link_to (admin_categories_path) do
                 %i.fas.fa-list-alt
                 %span= t("header.navigation.categories")
             %li.active

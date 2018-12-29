@@ -2,7 +2,7 @@
   %ul.nav.navbar-nav
     -# Dashboard
     %li
-      = link_to (admin_root_path), "data-toggle": "tooltip", "data-placement": "bottom", title: t("header.navigation.dashboard") do
+      = link_to (admin_root_path) do
         %i.fas.fa-tachometer-alt
         = t("header.navigation.dashboard")
     -# End Dashboard
@@ -16,7 +16,7 @@
 
     -# Customers
     %li
-      = link_to (admin_customers_path), class: "#{'active' if controller_name == 'customers'}", "data-toggle": "tooltip", "data-placement": "top", title: t("header.navigation.customers") do
+      = link_to (admin_customers_path), class: "#{'active' if controller_name == 'customers'}" do
         %i.fas.fa-users
         %span= t("header.navigation.customers")
     -# End Customers
@@ -31,7 +31,7 @@
       %ul.dropdown-menu
         -# Categories
         %li
-          = link_to (admin_categories_path), class: "#{'active' if controller_name == 'categories'}", "data-toggle": "tooltip", "data-placement": "bottom", title: t("header.navigation.categories") do
+          = link_to (admin_categories_path), class: "#{'active' if controller_name == 'categories'}" do
             %i.fas.fa-tags
             %span= t("header.navigation.categories")
         -# End categories
@@ -139,7 +139,7 @@
 
     -# Employees
     %li
-      = link_to (admin_employees_path), class: "#{'active' if controller_name == 'employees'}", "data-toggle": "tooltip", "data-placement": "bottom", title: t("header.navigation.employees") do
+      = link_to (admin_employees_path), class: "#{'active' if controller_name == 'employees'}" do
         %i.fas.fa-briefcase
         %span= t("header.navigation.employees")
     -# End Employees
