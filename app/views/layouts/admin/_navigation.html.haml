@@ -16,7 +16,7 @@
 
     -# Customers
     %li
-      = link_to (admin_customers_path), class: "#{'active' if controller_name == 'customers'}", "data-toggle": "tooltip", "data-placement": "bottom", title: t("header.navigation.customers") do
+      = link_to (admin_customers_path), class: "#{'active' if controller_name == 'customers'}", "data-toggle": "tooltip", "data-placement": "top", title: t("header.navigation.customers") do
         %i.fas.fa-users
         %span= t("header.navigation.customers")
     -# End Customers

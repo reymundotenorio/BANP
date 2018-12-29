@@ -59,6 +59,11 @@ a{
   color: $white;
 }
 
+::-moz-selection{
+  background: $primary-color;
+  color: $white;
+}
+
 ::selection{
   background: $primary-color;
   color: $white;
@@ -393,6 +398,50 @@ svg{
   }
 }
 // End Barcode
+
+// Tooltips
+.tooltip{
+  font-family: $secondary-font;
+
+  .tooltip-arrow{
+    // -webkit-box-shadow: 0px 5px 11px 0px rgba($black,.18), 0px 4px 15px 0px rgba($black,.15);
+    // box-shadow: 0px 5px 11px 0px rgba($black,.18), 0px 4px 15px 0px rgba($black,.15);
+  }
+
+  &.top{
+    .tooltip-arrow{
+      border-top-color: $black; //$text-color;
+    }
+  }
+
+  &.bottom{
+    .tooltip-arrow{
+      border-bottom-color: $black; //$text-color;
+    }
+  }
+
+  &.left{
+    .tooltip-arrow{
+      border-left-color: $black; //$text-color;
+    }
+  }
+
+  &.right{
+    .tooltip-arrow{
+      border-right-color: $black; //$text-color;
+    }
+  }
+
+  .tooltip-inner{
+    border-radius: 0px;
+    background-color: $black; //$text-color;
+
+    -webkit-box-shadow: 0px 5px 11px 0px rgba($black,.18), 0px 4px 15px 0px rgba($black,.15);
+    box-shadow: 0px 5px 11px 0px rgba($black,.18), 0px 4px 15px 0px rgba($black,.15);
+  }
+
+}
+// End Tooltips
 
 // Turbolinks progress bar
 .turbolinks-progress-bar{

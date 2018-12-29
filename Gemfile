@@ -152,8 +152,9 @@ gem "erubis", "~> 2.7"
 # Barcode generator
 gem "barby"
 
-# Google charts
-gem "chartkick"
+# Charts
+# gem "chartkick"
+gem "chartkick", git: "https://github.com/reymundotenorio/chartkick", branch: "master"
 
 # Group by date
 gem "groupdate"
