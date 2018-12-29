@@ -1,7 +1,7 @@
-$(document).on("turbolinks:load", function(){
+$(document).ready(function(){
 
-$(function(){
-  $(".pagination a").attr("data-remote", "true")
-});
+  $(function(){
+    $(".pagination a").attr("data-remote", "true")
+  });
 
 });

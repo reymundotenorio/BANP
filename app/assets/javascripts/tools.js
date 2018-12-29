@@ -1,6 +1,5 @@
-$(document).on("turbolinks:load", function(){
-  // $(document).ready(function(){
-
+$(document).ready(function(){
+  
   $(".animated").each(function(){
     var item = $(this)
     var delay = $(this).data("delay")

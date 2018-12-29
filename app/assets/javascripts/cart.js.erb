@@ -1,4 +1,5 @@
-$(document).on("turbolinks:load", function(){
+$(document).ready(function(){
+
   // Set current locale
   var i18nLocale = $("body").data("locale");
   var products = <%= Product.all.to_json %>;
@@ -167,4 +168,5 @@ $(document).on("turbolinks:load", function(){
 
   // Update Cart and cart details
   readCartInfo();
+  
 });

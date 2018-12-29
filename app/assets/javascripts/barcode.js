@@ -1,6 +1,6 @@
 //= require JsBarcode/JsBarcode.all.min
 
-$(document).on("turbolinks:load", function(){
+$(document).ready(function(){
 
 JsBarcode(".barcode").init();
 

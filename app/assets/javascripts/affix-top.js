@@ -1,4 +1,4 @@
-$(document).on("turbolinks:load", function(){
+$(document).ready(function(){
 
   var dataAffix = parseInt($("#back-top").attr("data-custom-affix"));
 
