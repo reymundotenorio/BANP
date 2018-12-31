@@ -33,12 +33,12 @@ class Authentication::PasswordsController < ApplicationController
       end
 
       # If user is not confirmed
-      if !user_confirmed?
+      if !user_confirmed?(true, false)
         return
       end
 
       # If user has exceeded the max of failed attemps
-      if user_locked?
+      if user_locked?(true, false)
         return
       end
 
@@ -126,12 +126,12 @@ class Authentication::PasswordsController < ApplicationController
       end
 
       # If user is not confirmed
-      if !user_confirmed?
+      if !user_confirmed?(true, false)
         return
       end
 
       # If user has exceeded the max of failed attemps
-      if user_locked?
+      if user_locked?(true, false)
         return
       end
 

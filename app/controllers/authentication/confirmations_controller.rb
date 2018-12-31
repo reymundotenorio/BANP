@@ -26,12 +26,12 @@ class Authentication::ConfirmationsController < ApplicationController
       end
 
       # If user has exceeded the max of failed attemps
-      if user_locked?
+      if user_locked?(true, false)
         return
       end
 
       # If user is not confirmed yet
-      if !user_confirmed?(false)
+      if !user_confirmed?(false, false)
         @user.update(confirmed: true)
         @user.update(confirmation_sent: false)
 
@@ -86,7 +86,7 @@ class Authentication::ConfirmationsController < ApplicationController
       end
 
       # If user has exceeded the max of failed attemps
-      if user_locked?
+      if user_locked?(true, false)
         return
       end
 

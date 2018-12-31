@@ -41,12 +41,12 @@ class Authentication::SessionsController < ApplicationController
       end
 
       # If user is not confirmed
-      if !user_confirmed?
+      if !user_confirmed?(true, false)
         return
       end
 
       # If user has exceeded the max of failed attemps
-      if user_locked?(false)
+      if user_locked?(false, false)
 
         # If unlock email has not been sent
         send_unlock_email unless @user.unlock_sent
@@ -112,7 +112,7 @@ class Authentication::SessionsController < ApplicationController
       end
 
       # If user is not confirmed
-      if !user_confirmed?
+      if !user_confirmed?(true, false)
         return
       end
 

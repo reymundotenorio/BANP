@@ -1,6 +1,7 @@
 class AdminAuthenticationMailer < ApplicationMailer
   # Mailer layout
   layout "mailer"
+  default template_path: "admin/authentication/mailer"
   # End Mailer layout
 
   def confirmation_instructions(user, token, locale, ip, location)

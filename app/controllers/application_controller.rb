@@ -83,20 +83,32 @@ class ApplicationController < ActionController::Base
   end
 
   # Verify user confirmation
-  def user_confirmed?(redirect_resend = true)
+  def user_confirmed?(redirect_resend = true, admin_path = true)
     if @user.confirmed
       return true
 
     else
-      redirect_to admin_confirm_account_path(email: @user.email), alert: t("views.authentication.account_not_confirmed_resend", email: @user.email) if redirect_resend
+      if admin_path
+        redirect_to admin_confirm_account_path(email: @user.email), alert: t("views.authentication.account_not_confirmed_resend", email: @user.email) if redirect_resend
+
+      else
+        redirect_to confirm_account_path(email: @user.email), alert: t("views.authentication.account_not_confirmed_resend", email: @user.email) if redirect_resend
+      end
+
       return false
     end
   end
 
   # Verify user block status
-  def user_locked?(redirect_resend = true)
+  def user_locked?(redirect_resend = true, admin_path = true)
     if @user.failed_attempts >= $max_failed_attempts
-      redirect_to admin_unlock_account_path(email: @user.email), alert: t("views.authentication.account_locked_resend", email: @user.email) if redirect_resend
+      if admin_path
+        redirect_to admin_unlock_account_path(email: @user.email), alert: t("views.authentication.account_locked_resend", email: @user.email) if redirect_resend
+
+      else
+        redirect_to unlock_account_path(email: @user.email), alert: t("views.authentication.account_locked_resend", email: @user.email) if redirect_resend
+      end
+
       return true
 
     else

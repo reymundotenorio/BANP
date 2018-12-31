@@ -8,7 +8,7 @@ class CustomersController < ApplicationController
   # End Find customers with Friendly_ID
 
   # Sync model DSL
-  enable_sync only: [:create, :update, :active]
+  enable_sync only: [:create, :update, :deactive, :send_confirmation_email]
   # End Sync model DSL
 
   # Authentication
@@ -45,6 +45,7 @@ class CustomersController < ApplicationController
 
     # If record was saved
     if @customer.save
+      send_confirmation_email
       redirect_to @customer, notice: t("alerts.created", model: t("activerecord.models.customer"))
 
       # If record was not saved
@@ -70,6 +71,29 @@ class CustomersController < ApplicationController
 
     else
       redirect_to_back(false, customer_path(@customer), "customer", "error")
+    end
+  end
+
+  # Send unlock email to the user
+  def send_confirmation_email
+    # Generate random token
+    generate_token
+
+    ip = request.remote_ip
+    location = Geocoder.search(ip).first.country
+
+    @customer.user.update_attribute(:confirmation_sent, true)
+    @customer.user.update_attribute(:confirmation_token, @token)
+
+    # Send email
+    AuthenticationMailer.confirmation_instructions(@customer.user, @token, I18n.locale, ip, location).deliver
+  end
+
+  # Generate token
+  def generate_token
+    loop do
+      @token = SecureRandom.hex(15)
+      break @token unless User.where(confirmation_token: @token).exists?
     end
   end
 
