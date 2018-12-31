@@ -5,7 +5,7 @@
         .col-xs-12.col-lg-10.info-col
           %p
             = image_tag "img/usda-organic.png", class: "img-responsive hidden-xs", alt: "USDA Organic"
-            © 2018 Better and Nice Produce Corp.
+            © #{Time.now.year} Better and Nice Produce Corp.
             %span
               = t("views.landing.designed_developed")
               %i.fas.fa-heart
@@ -15,18 +15,18 @@
           .social-icons
             %ul.list-inline.social-items
               %li
-                %a.custom-social.facebook-icon{href: "#", target: "_blank"}
+                %a.custom-social.facebook-icon{href: "#", target: "_blank", "data-toggle": "tooltip", "data-placement": "left", title: "Facebook"}
                   %i.fab.fa-facebook-f
               %li
-                %a.custom-social.twitter-icon{href: "#", target: "_blank"}
+                %a.custom-social.twitter-icon{href: "#", target: "_blank", "data-toggle": "tooltip", "data-placement": "left", title: "Twitter"}
                   %i.fab.fa-twitter
               %li
-                %a.custom-social.linkedin-icon{href: "#", target: "_blank"}
+                %a.custom-social.linkedin-icon{href: "#", target: "_blank", "data-toggle": "tooltip", "data-placement": "left", title: "LinkedIn"}
                   %i.fab.fa-linkedin-in
               %li
-                %a.custom-social.instagram-icon{href: "#", target: "_blank"}
+                %a.custom-social.instagram-icon{href: "#", target: "_blank", "data-toggle": "tooltip", "data-placement": "left", title: "Instagram"}
                   %i.fab.fa-instagram
 
-%a#top-link.affix-top.scroll-to{"data-offset-top": "50", "data-spy": "affix", href: "#back-to-top"}
+%a#top-link.affix-top.scroll-to{"data-offset-top": "50", "data-spy": "affix", href: "#back-to-top", "data-toggle": "tooltip", "data-placement": "left", title: t("views.landing.back_to_top")}
   %i.fa.fa-chevron-up{"aria-hidden": "true"}
-  %span.sr-only Back to top
+  %span.sr-only= t("views.landing.back_to_top")

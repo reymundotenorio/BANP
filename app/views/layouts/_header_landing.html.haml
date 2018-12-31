@@ -15,8 +15,7 @@
             %span.icon-bar.bottom-bar
 
           -# Logo
-          = link_to (root_path), class: "navbar-brand animated scale", "data-delay": "0s", "data-scroll": "0" do
-            BANP
+          = link_to "BANP", root_path, class: "navbar-brand animated scale", "data-delay": "0s", "data-scroll": "0"
 
         #navbar.collapse.navbar-collapse
           %ul.nav.navbar-nav.animated.opacity-down{"data-delay": "0", "data-scroll": "0"}
@@ -32,7 +31,7 @@
             -# End Render languages
 
             %li.dropdown.hidden-xs
-              %a.dropdown-toggle{"data-toggle": "dropdown", href: "#"}
+              %a.dropdown-toggle{"data-toggle": "dropdown", href: "#", "data-tooltip": "true", "data-placement": "left", title: t("views.cart.cart")}
                 -# Render cart
                 = render "layouts/cart"
                 -# End Render cart
@@ -47,7 +46,7 @@
             -# End Render user
 
       .dropdown.cart-dropdown.visible-xs
-        %button#cart-dropdown-btn.dropdown-toggle{"aria-expanded": "false", "aria-haspopup": "true", "data-toggle": "dropdown", type: "button"}
+        %button#cart-dropdown-btn.dropdown-toggle{"aria-expanded": "false", "aria-haspopup": "true", "data-toggle": "dropdown", type: "button", "data-tooltip": "true", "data-placement": "left", title: t("views.cart.cart")}
           -# Render cart
           = render "layouts/cart"
           -# End Render cart

@@ -11,16 +11,16 @@
             .social-icons
               %ul.list-inline.social-items
                 %li
-                  %a.custom-social.facebook-icon{href: "#", target: "_blank"}
+                  %a.custom-social.facebook-icon{href: "#", target: "_blank", "data-toggle": "tooltip", "data-placement": "right", title: "Facebook"}
                     %i.fab.fa-facebook-f
                 %li
-                  %a.custom-social.twitter-icon{href: "#", target: "_blank"}
+                  %a.custom-social.twitter-icon{href: "#", target: "_blank", "data-toggle": "tooltip", "data-placement": "right", title: "Twitter"}
                     %i.fab.fa-twitter
                 %li
-                  %a.custom-social.linkedin-icon{href: "#", target: "_blank"}
+                  %a.custom-social.linkedin-icon{href: "#", target: "_blank", "data-toggle": "tooltip", "data-placement": "right", title: "LinkedIn"}
                     %i.fab.fa-linkedin-in
                 %li
-                  %a.custom-social.instagram-icon{href: "#", target: "_blank"}
+                  %a.custom-social.instagram-icon{href: "#", target: "_blank", "data-toggle": "tooltip", "data-placement": "right", title: "Instagram"}
                     %i.fab.fa-instagram
 
           .col-xs-12.col-sm-6
@@ -47,7 +47,7 @@
               %span.icon-bar.bottom-bar
 
             -# Logo
-            %a.navbar-brand{alt: "BANP", href: "/"} BANP
+            = link_to "BANP", root_path, class: "navbar-brand"
 
           -# Navbar collapse
           #navbar.collapse.navbar-collapse
@@ -71,7 +71,7 @@
               -# End Render languages
 
               %li.dropdown.hidden-xs
-                %a.dropdown-toggle.cart-menu{"data-toggle": "dropdown"}
+                %a.dropdown-toggle.cart-menu{"data-toggle": "dropdown", "data-tooltip": "true", "data-placement": "left", title: t("views.cart.cart")}
                   -# Render cart
                   = render "layouts/cart"
                   -# End Render cart
@@ -85,7 +85,7 @@
               -# End Render user
 
         .dropdown.cart-dropdown.visible-xs
-          %button#cart-dropdown-btn.dropdown-toggle.cart-menu{"aria-expanded": "false", "aria-haspopup": "true", "data-toggle": "dropdown", type: "button"}
+          %button#cart-dropdown-btn.dropdown-toggle.cart-menu{"aria-expanded": "false", "aria-haspopup": "true", "data-toggle": "dropdown", type: "button", "data-tooltip": "true", "data-placement": "left", title: t("views.cart.cart")}
             -# Render cart
             = render "layouts/cart"
             -# End Render cart

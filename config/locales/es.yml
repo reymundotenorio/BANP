@@ -25,6 +25,7 @@ es:
       quotes: "Cotizaciones"
       reports: "Reportes"
       employees: "Empleados"
+      notifications: "Notificaciones"
     search:
       search: "Buscar..."
 
@@ -285,6 +286,7 @@ es:
       is_located: "Better and Nice Produce está ubicado en 1625 NW 20th Street Miami, Florida 33142"
       designed_developed: "Diseñado y desarrollado con"
       by: "por"
+      back_to_top: "Volver arriba"
     products:
       all: "Todos"
       add_cart: "Agregar al carrito"
