@@ -5,7 +5,7 @@
     %span.highlight
     %span.bar
     %label= t("views.landing.search_products")
-  = button_tag t("views.landing.search"), data: {disable_with: "<i class='fas fa-spinner fa-spin'></i>"} do
+  = button_tag t("views.landing.search"), data: {disable_with: "<i class='fas fa-spinner fa-spin'></i>"}, "data-toggle": "tooltip", "data-placement": "top", title: t("views.landing.search") do
     %span.sr-only= t("views.landing.search")
     %i.fas.fa-search
 -# End Form

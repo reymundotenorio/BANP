@@ -58,6 +58,13 @@
 }
 // End Override btn default behavior
 
+// Override outline
+button{
+  @include on-event(true){
+    outline: 0px solid $transparent;
+  }
+}
+
 @media (min-width: 992px) {
 
   // Override buttons behavior
@@ -67,5 +74,5 @@
     }
   }
   // End Override btn default behavior
-  
+
 }

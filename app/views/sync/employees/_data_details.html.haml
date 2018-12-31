@@ -23,7 +23,7 @@
         - elsif employee.state
           -# Create user button
           .btn-container.inline
-            = link_to (admin_new_employee_user_path(employee)), class: "btn btn-general", do
+            = link_to (admin_new_employee_user_path(employee)), class: "btn btn-general" do
               %i.fas.fa-user
               %span= t("views.show.create_user")
           -# End Create user button
