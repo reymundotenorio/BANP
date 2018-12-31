@@ -1,14 +1,20 @@
 $(document).ready(function(){
-  
+
   // Select Category
-  $(".select-category").click(function(){
-    category_id = $(this).attr('data-id');
-    category_name = $(this).attr('data-name');
+  $(".select-category").each(function(){
 
-    $("#product_category").val(category_name).change();
-    $("#product_category_id").val(category_id);
+    $(this).click(function(){
+      category_id = $(this).attr("data-id");
+      category_name = $(this).attr("data-name");
 
-    $('#getCategories').modal('hide');
+      $("#product_category").val(category_name).change();
+      $("#product_category_id").val(category_id);
+
+      $("#search-input").val("");
+      $("#getCategories").modal("hide");
+    });
+
   });
+
 
 });

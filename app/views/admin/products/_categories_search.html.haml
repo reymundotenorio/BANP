@@ -11,7 +11,7 @@
 
         - if I18n.locale == :es
           - attributes = ["name_spanish", "description_spanish"]
-          
+
         - else
           - attributes = ["name", "description"]
 
@@ -27,3 +27,15 @@
     -# Pagination
     = will_paginate @categories, renderer: BootstrapPagination::Rails
     -# End Pagination
+
+-# Auto search script
+= javascript_include_tag "auto-search", "data-turbolinks-track": "reload"
+-# End Auto search script
+
+-# Pagination with Ajax script
+= javascript_include_tag "pagination-ajax", "data-turbolinks-track": "reload"
+-# End Pagination with Ajax script
+
+-# Select category
+= javascript_include_tag "select-category", "data-turbolinks-track": "reload"
+-# End Select category
