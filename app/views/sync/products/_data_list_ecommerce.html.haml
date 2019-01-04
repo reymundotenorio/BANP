@@ -12,14 +12,14 @@
         .quantity
 
           -# Minus
-          %button.subtract{name: "minus", type: "button", "data-toggle": "tooltip", "data-placement": "bottom", title: t("views.form.decrease")}
+          %button.subtract{name: "minus", type: "button", "data-toggle": "tooltip", "data-placement": "top", title: t("views.form.decrease")}
             %span.sr-only minus
             %i.fas.fa-minus
 
           %input#quantity{name: "quantity", type: "number", value: "1", min: "1"}/
 
           -# Plus
-          %button.add{name: "plus", type: "button", "data-toggle": "tooltip", "data-placement": "bottom", title: t("views.form.increase")}
+          %button.add{name: "plus", type: "button", "data-toggle": "tooltip", "data-placement": "top", title: t("views.form.increase")}
             %span.sr-only plus
             %i.fas.fa-plus
 

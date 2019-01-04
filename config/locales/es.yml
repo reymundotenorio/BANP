@@ -263,6 +263,13 @@ es:
       price: "Precio"
       quantity: "Cantidad"
       total: "Total"
+      view_more: "Ver más"
+      current_address: "Dirección actual"
+      summary: "Resumen"
+      subtotal: "Subtotal:"
+      shipping: "Envío:"
+      different_address: "Use una dirección de envío diferente"
+      shipping_address: "Dirección de envío"
     landing:
       motto: "¡Donde y Cuando Sea, Productos a tiempo!"
       search_products: "Buscar Productos"

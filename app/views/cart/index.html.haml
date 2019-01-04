@@ -12,7 +12,7 @@
             -# Render search_form
             = render "layouts/search_form"
             -# End Render search_form
-          
+
   #cart-content.main-content
     .container
       .row
@@ -30,61 +30,43 @@
                     %span= t("views.cart.quantity")
                   .total-column
                     %span= t("views.cart.total")
-              
+
               -# Product list
               .cart-list
-                .table-row
-                  .image-column
-                    %img.img-responsive{:alt => "Arkansas Black Apple", :src => "img/product-arkansas-black-apple.png"}/
-                  .info
-                    .name-column.info-column
-                      %span Arkansas Black Apple
-                    .price-column.info-column
-                      %span 80.00
-                    .quantity-column.info-column
-                      %form.link-container{:action => "index.html", :method => "post"}
-                        .quantity
-                          %button.subtract{:name => "minus", :type => "button"}
-                            %span.sr-only minus
-                            %i.fas.fa-minus
-                          %input.q-input{:name => "quant-prod", :type => "number", :value => "1"}/
-                          %button.add{:name => "plus", :type => "button"}
-                            %span.sr-only plus
-                            %i.fas.fa-plus
-                    .total-column.info-column
-                      %span 80.00
-                  %button.remove-btn{:name => "Remove", :type => "button"}
-                    %i.far.fa-trash-alt
-                  
+                
         .col-xs-12.col-md-4
           #paid-detail-card.white-card
             .summary
-              %h2.summary-title Summary
+              %h2.summary-title= t("views.cart.summary")
               .summary-detail
                 .summary-item.sub-total
-                  %span.description Subtotal:
-                  %span.mount 167.00
+                  %span.description= t("views.cart.subtotal")
+                  %span.mount#subtotal 167.00
                 .summary-item.shipping
-                  %span.description Shipping:
-                  %span.mount 10.00
+                  %span.description= t("views.cart.shipping")
+                  %span.mount#shipping 10.00
                 %hr/
                 .summary-item.total
-                  %span.description Total:
-                  %span.mount 177.00
+                  %span.description= t("views.cart.total")
+                  %span.mount#total 177.00
             .direction
               .default-group
-                %span#default-title Current Address
-                %span#default-address Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor.
+                - if current_customer
+                  -# Customer detail Sync
+                  = sync partial: "current_address", resource: current_customer
+                  = sync_new partial: "current_address", resource: Customer.new
+                  -# End Customer detail Sync
+                  
               %label.new-check.collapsed{"aria-controls" => "address-group", "aria-expanded" => "false", "data-target" => "#address-group", "data-toggle" => "collapse"}
                 %input{:type => "checkbox"}/
-                %span Use a different shipping address
+                %span= t("views.cart.different_address")
               #address-group.new-group.collapse
                 .pad
-                  .group
-                    %input#address-field{:name => "New Address", :required => "required", :title => "Shipping Address", :type => "text"}/
-                    %span.highlight
-                    %span.bar
-                    %label Shipping Address
+                  .form-group
+                    %textarea.form-control.input.text-area.address#address-field{:name => "New Address", :required => "required"}
+                    %label= t("views.cart.shipping_address")
+                    .border-bottom
+                    
             .payment
               %a#btn-stripe.btn.btn-general.btn-paid.collapsed{"aria-controls" => "stripe", "aria-expanded" => "false", "data-target" => "#stripe", "data-toggle" => "collapse", :title => "Pay with credit card"} Pay with credit card
               #stripe.collapse

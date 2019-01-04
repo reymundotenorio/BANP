@@ -6,7 +6,7 @@ $(document).ready(function(){
   var i18nLocale = $("body").data("locale");
   // var products = <= Product.all.to_json >;
 
-  <% product_url = "https://5181c494.ngrok.io/products.json" %>
+  <% product_url = "https://5ce477e4.ngrok.io/products.json" %>
   var products = <%= JSON.pretty_generate(JSON.parse((HTTParty.get(product_url)).body)) %>;
 
   // console.log(products);
@@ -48,12 +48,12 @@ $(document).ready(function(){
               product = products.find(item => item.id === value.cartDetails.id);
               i18nLocale == "es" ? productName = product.name_spanish : productName = product.name;
 
-              var productItem = "<a class='resume'><span class='quantity'> "+ productName + " (" + value.cartDetails.quantity + ")" + " </span> " + "<span class='amount'>" + formatter.format((product.price * value.cartDetails.quantity)) + "</span></a>";
+              var productItem = "<a class='resume'> <span class='quantity'> "+ productName + " (" + value.cartDetails.quantity + ")" + " </span> " + "<span class='amount'>" + formatter.format((product.price * value.cartDetails.quantity)) + "</span> </a>";
 
               $(".cart-products").append(productItem);
             }
             else if(counter == 4){
-              var productItem = "<a class='text-right' href='/products'><b>Ver más</b></a>";
+              var productItem = "<a class='text-right' href='/cart'><b>" + i18nLocale == "es" ? "Ver más" : "View more" + "</b></a>";
               $(".cart-products").append(productItem);
               // return false;
             }
@@ -78,7 +78,10 @@ $(document).ready(function(){
     // Read and load the banpCart localStorage
     var output = JSON.parse(localStorage.getItem("banpCart")) || null;
     var userID = parseInt(atob($("#currentCustomer").val().trim()));
-    var counter = 0;
+    // var subtotal = parseFloat(0);
+
+    i18nLocale == 'es' ? decrease = 'Disminuir' : decrease = 'Decrease';
+    i18nLocale == 'es' ? increase = 'Aumentar' : increase = 'Increase'
 
     // Cart details
     if(output){
@@ -87,21 +90,21 @@ $(document).ready(function(){
       $.each(output.cart, function(index, value){
         if(value !=  null){
           if(userID == value.cartDetails.userId){
+            // subtotal = subtotal + parseFloat(parseFloat(product.price) * parseInt(value.cartDetails.quantity));
 
             product = products.find(item => item.id === value.cartDetails.id);
             i18nLocale == "es" ? productName = product.name_spanish : productName = product.name;
 
-            var productItem = "<a class='resume'><span class='quantity'> "+ productName + " (" + value.cartDetails.quantity + ")" + " </span> " + "<span class='amount'>" + formatter.format((product.price * value.cartDetails.quantity)) + "</span></a>";
 
-
-
+            var productItem = "<div class='table-row'><div class='image-column'> <img class='img-responsive' src='" + product.image_url + "'> </div> <div class='info'> <div class='name-column info-column'><span>" + productName + "</span></div> <div class='price-column info-column'><span>" + formatter.format(product.price) + "</span></div> <div class='quantity-column info-column'><form action='' class='link-container' method=''><div class='quantity'> <button id='minus-btn' class='subtract' name='minus' type='button' data-placement='top' data-toggle='tooltip' title='" + decrease + "'><span class='sr-only'>minus</span><i class='fas fa-minus'></i></button> <input id='quantity' class='q-input' name='quant-prod' type='number' value='" + value.cartDetails.quantity + "' min='1'> <button id='plus-btn' class='add' name='plus' type='button' data-placement='top' data-toggle='tooltip' title='" + increase + "'><span class='sr-only'>plus</span> <i class='fas fa-plus'></i></button></div></form></div> <div class='total-column info-column'><span>" + formatter.format((product.price * value.cartDetails.quantity)) + "</span></div> </div> <button class='remove-btn' name='Remove' type='button'><i class='far fa-trash-alt'></i></button> </div>";
 
             $(".cart-list").append(productItem);
-
           }
         }
       });
     }
+
+    // $("#subtotal").text(subtotal);
   }
 
   // Fuction on the "Add to Cart" button

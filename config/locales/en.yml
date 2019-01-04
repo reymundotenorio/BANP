@@ -263,6 +263,13 @@ en:
       price: "Price"
       quantity: "Quantity"
       total: "Total"
+      view_more: "View more"
+      current_address: "Current address"
+      summary: "Summary"
+      Subtotal: "Subtotal:"
+      Shipping: "Shipping:"
+      different_address: "Use a different shipping address"
+      shipping_address: "Shipping Address"
     landing:
       motto: "Anywhere, Anytime, Fresh Produce on time!"
       search_products: "Search Products"

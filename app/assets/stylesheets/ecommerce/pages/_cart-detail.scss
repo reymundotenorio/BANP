@@ -96,7 +96,7 @@
 
       &.price-column, &.total-column{
         span::before{
-          content: "$";
+          // content: "$";
         }
       }
     }
@@ -254,7 +254,7 @@
 
     .mount{
       &:before{
-        content: "$";
+        // content: "$";
       }
     }
 

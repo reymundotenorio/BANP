@@ -73,6 +73,12 @@ a{
     height: 80px;
     resize: none;
 
+    &.address{
+      + label, + grammarly-btn + label{
+        font-size: 12px;
+      }
+    }
+
     + label, + grammarly-btn + label{
       bottom: 50px;
     }
@@ -221,6 +227,14 @@ a{
     //     }
     //   }
     // }
+
+    &.address{
+      &.with-value, &:focus{
+        + label, + grammarly-btn + label{
+          font-size: 10px;
+        }
+      }
+    }
 
     &.with-value, &:focus{
       + label, + grammarly-btn + label{
