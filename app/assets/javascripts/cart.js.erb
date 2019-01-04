@@ -1,8 +1,15 @@
 $(document).ready(function(){
 
+  <% require "httparty" %>
+
   // Set current locale
   var i18nLocale = $("body").data("locale");
-  var products = <%= Product.all.to_json %>;
+  // var products = <= Product.all.to_json >;
+
+  <% product_url = "https://5181c494.ngrok.io/products.json" %>
+  var products = <%= JSON.pretty_generate(JSON.parse((HTTParty.get(product_url)).body)) %>;
+
+  // console.log(products);
 
   // Format Currency
   const formatter = new Intl.NumberFormat("en-US", {
@@ -18,6 +25,11 @@ $(document).ready(function(){
 
   // Update Cart and cart details
   function readCartInfo(){
+    updateCartDropdown();
+    updateCartPage();
+  }
+
+  function updateCartDropdown(){
     // Read and load the banpCart localStorage
     var output = JSON.parse(localStorage.getItem("banpCart")) || null;
     var userID = parseInt(atob($("#currentCustomer").val().trim()));
@@ -59,6 +71,36 @@ $(document).ready(function(){
     else{
       $(".cart-counter").css({"display": "none"});
       $(".cart-menu").addClass("disabled");
+    }
+  }
+
+  function updateCartPage(){
+    // Read and load the banpCart localStorage
+    var output = JSON.parse(localStorage.getItem("banpCart")) || null;
+    var userID = parseInt(atob($("#currentCustomer").val().trim()));
+    var counter = 0;
+
+    // Cart details
+    if(output){
+      $(".cart-list").empty();
+
+      $.each(output.cart, function(index, value){
+        if(value !=  null){
+          if(userID == value.cartDetails.userId){
+
+            product = products.find(item => item.id === value.cartDetails.id);
+            i18nLocale == "es" ? productName = product.name_spanish : productName = product.name;
+
+            var productItem = "<a class='resume'><span class='quantity'> "+ productName + " (" + value.cartDetails.quantity + ")" + " </span> " + "<span class='amount'>" + formatter.format((product.price * value.cartDetails.quantity)) + "</span></a>";
+
+
+
+
+            $(".cart-list").append(productItem);
+
+          }
+        }
+      });
     }
   }
 
@@ -168,5 +210,5 @@ $(document).ready(function(){
 
   // Update Cart and cart details
   readCartInfo();
-  
+
 });

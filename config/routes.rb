@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'cart/index'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   # Change language
   get "/change-language/:lang", to: "settings#change_lang", as: "change_language"
@@ -18,6 +19,10 @@ Rails.application.routes.draw do
   # End Products
 
   # Authentications
+  
+  # Cart
+  get "/cart", to: "cart#index", as: "cart"
+  # End Cart
 
   # Notifications
   get "/authentication/notifications", to: "authentication/notifications#index", as: "auth_notifications"

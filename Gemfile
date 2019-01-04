@@ -158,3 +158,11 @@ gem "chartkick"
 
 # Group by date
 gem "groupdate"
+
+# JSON
+gem 'json', '~> 1.8'
+
+# HTTParty
+gem 'httparty', '~> 0.13.7'
+
+

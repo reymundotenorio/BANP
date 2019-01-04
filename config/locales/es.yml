@@ -259,6 +259,10 @@ es:
       cart: "Carrito"
       checkout: "Confirmar"
       clear_cart: "Limpiar carrito"
+      product: "Producto"
+      price: "Precio"
+      quantity: "Cantidad"
+      total: "Total"
     landing:
       motto: "¡Donde y Cuando Sea, Productos a tiempo!"
       search_products: "Buscar Productos"

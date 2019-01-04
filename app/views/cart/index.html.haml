@@ -1,0 +1,125 @@
+%section.wrap
+  .banner.grad-section
+    .container-fluid
+      .row
+        .col-xs-12
+          %h1.search-title.text-center= t("views.cart.cart")
+
+    .container
+      .row
+        .col-xs-12.col-sm-6.col-sm-offset-3
+          .search-container.animated.opacity-up{"data-delay": "1500", "data-scroll": "0"}
+            -# Render search_form
+            = render "layouts/search_form"
+            -# End Render search_form
+          
+  #cart-content.main-content
+    .container
+      .row
+        .col-xs-12.col-md-8
+          #cart-detail-card.white-card
+            .cart-table
+              .table-head.hidden-xs
+                .image-column
+                .info
+                  .name-column
+                    %span= t("views.cart.product")
+                  .price-column
+                    %span= t("views.cart.price")
+                  .quantity-column
+                    %span= t("views.cart.quantity")
+                  .total-column
+                    %span= t("views.cart.total")
+              
+              -# Product list
+              .cart-list
+                .table-row
+                  .image-column
+                    %img.img-responsive{:alt => "Arkansas Black Apple", :src => "img/product-arkansas-black-apple.png"}/
+                  .info
+                    .name-column.info-column
+                      %span Arkansas Black Apple
+                    .price-column.info-column
+                      %span 80.00
+                    .quantity-column.info-column
+                      %form.link-container{:action => "index.html", :method => "post"}
+                        .quantity
+                          %button.subtract{:name => "minus", :type => "button"}
+                            %span.sr-only minus
+                            %i.fas.fa-minus
+                          %input.q-input{:name => "quant-prod", :type => "number", :value => "1"}/
+                          %button.add{:name => "plus", :type => "button"}
+                            %span.sr-only plus
+                            %i.fas.fa-plus
+                    .total-column.info-column
+                      %span 80.00
+                  %button.remove-btn{:name => "Remove", :type => "button"}
+                    %i.far.fa-trash-alt
+                  
+        .col-xs-12.col-md-4
+          #paid-detail-card.white-card
+            .summary
+              %h2.summary-title Summary
+              .summary-detail
+                .summary-item.sub-total
+                  %span.description Subtotal:
+                  %span.mount 167.00
+                .summary-item.shipping
+                  %span.description Shipping:
+                  %span.mount 10.00
+                %hr/
+                .summary-item.total
+                  %span.description Total:
+                  %span.mount 177.00
+            .direction
+              .default-group
+                %span#default-title Current Address
+                %span#default-address Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor.
+              %label.new-check.collapsed{"aria-controls" => "address-group", "aria-expanded" => "false", "data-target" => "#address-group", "data-toggle" => "collapse"}
+                %input{:type => "checkbox"}/
+                %span Use a different shipping address
+              #address-group.new-group.collapse
+                .pad
+                  .group
+                    %input#address-field{:name => "New Address", :required => "required", :title => "Shipping Address", :type => "text"}/
+                    %span.highlight
+                    %span.bar
+                    %label Shipping Address
+            .payment
+              %a#btn-stripe.btn.btn-general.btn-paid.collapsed{"aria-controls" => "stripe", "aria-expanded" => "false", "data-target" => "#stripe", "data-toggle" => "collapse", :title => "Pay with credit card"} Pay with credit card
+              #stripe.collapse
+                .payment-form
+                  %form#card-form{:action => "index.html", :method => "post"}
+                    #name-group.group
+                      %input#name-field{:name => "name", :required => "required", :title => "Cardholder Name", :type => "text"}/
+                      %span.highlight
+                      %span.bar
+                      %label Name
+                    #number-group.group
+                      %input#number-field{:name => "number", :required => "required", :title => "Card Number", :type => "tel"}/
+                      %span.highlight
+                      %span.bar
+                      %label Card Number
+                    .inline
+                      #expiry-group.group
+                        %input#expiry-field{:name => "expiry", :required => "required", :title => "Expiration", :type => "tel"}/
+                        %span.highlight
+                        %span.bar
+                        %label Expiration (mm/yy)
+                      #cvc-group.group
+                        %input#cvc-field{:name => "cvc", :required => "required", :title => "Security Code", :type => "number"}/
+                        %span.highlight
+                        %span.bar
+                        %label Security Code
+                    %button#proceed-btn.btn.btn-general{:name => "proceed", :title => "Proceed", :type => "button"} Proceed
+                  .cc-container
+                    .card-wrapper
+              %p.text-center.divider - OR -
+              %button#btn-paypal.btn.btn-general.btn-paid{:name => "paypal", :title => "Checkout with PayPal", :type => "button"}
+                Checkout with
+                %img.hidden-xs.hidden-md{:alt => "PayPal", :src => "img/paypal.svg"}/
+                %img.hidden-sm.hidden-lg{:alt => "PayPal", :src => "img/paypal-vertical.svg"}/
+              %p.text-center.skep-container
+                %a{:href => "#", :title => "Skip and pay cash after the delivery >>"}
+                  Skip and pay cash after the delivery
+                  %i.fas.fa-angle-double-right

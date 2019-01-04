@@ -55,7 +55,13 @@ $(".q-input").focusout(function(){
   }
 });
 
-new Card({
-  form: document.querySelector("#card-form"),
-  container: ".card-wrapper"
-});
+try{
+  
+  new Card({
+    form: document.querySelector("#card-form"),
+    container: ".card-wrapper"
+  });
+
+} catch (error){
+  // console.log(error.message);
+}
