@@ -111,6 +111,12 @@
                         %label.checkbox
                           %b= t("activerecord.attributes.user.two_factor_auth")
 
+                      - if action_name == 'new' || action_name == 'create'
+                        -# Recaptcha
+                        .form-group.text-center
+                          = recaptcha_tags id: "recaptcha-center", hl: I18n.locale
+                        -# End Recaptcha
+
                     -# Buttons
                     .main-buttons
                       .col-xs-12.col-sm-12.button-container.no-padding

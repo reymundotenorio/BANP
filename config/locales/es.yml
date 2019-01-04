@@ -228,6 +228,7 @@ es:
       locked_correctly: "Ha bloqueado la sesión correctamente"
       user_must_be_employee: "Usuario debe ser un empleado"
       user_must_be_customer: "Usuario debe ser un cliente"
+      account_created_successfully: "Su cuenta ha sido creada con éxito"
     errors:
       page_empty: "Esta página está vacía"
       back_to_home: "Regresar a Inicio"

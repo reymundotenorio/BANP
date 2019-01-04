@@ -35,6 +35,14 @@ class CustomersController < ApplicationController
   def create
     @customer = Customer.new(customer_params)
 
+    # Verify recaptcha
+    if !verify_recaptcha
+      # redirect_to sign_up_path, alert: t("views.form.recaptcha_error")
+      flash.now[:alert] = t("views.form.recaptcha_error")
+      render :new
+      return
+    end
+
     # Deleting blank spaces
     @customer[:first_name] = @customer[:first_name].strip
     @customer[:last_name]= @customer[:last_name].strip
@@ -46,7 +54,7 @@ class CustomersController < ApplicationController
     # If record was saved
     if @customer.save
       send_confirmation_email
-      redirect_to @customer, notice: t("alerts.created", model: t("activerecord.models.customer"))
+      redirect_to auth_notifications_path(source: "sign-up"), notice: "#{t('views.authentication.account_created_successfully')}. #{t('views.authentication.account_not_confirmed', email: @customer.email)}"
 
       # If record was not saved
     else

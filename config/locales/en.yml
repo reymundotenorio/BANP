@@ -228,6 +228,7 @@ en:
       locked_correctly: "You have locked the session correctly"
       user_must_be_employee: "User must be an employee"
       user_must_be_customer: "User must be a customer"
+      account_created_successfully: "Your account has been created successfully"
     errors:
       page_empty: "This page is empty"
       back_to_home: "Back to Home"
