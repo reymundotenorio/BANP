@@ -11,4 +11,5 @@
 // about supported directives.
 
 //= require tools
+//= require card
 //= require store

@@ -33,7 +33,7 @@
 
               -# Product list
               .cart-list
-                
+
         .col-xs-12.col-md-4
           #paid-detail-card.white-card
             .summary
@@ -41,14 +41,14 @@
               .summary-detail
                 .summary-item.sub-total
                   %span.description= t("views.cart.subtotal")
-                  %span.mount#subtotal 167.00
+                  %span.mount#subtotal
                 .summary-item.shipping
                   %span.description= t("views.cart.shipping")
-                  %span.mount#shipping 10.00
+                  %span.mount#shipping
                 %hr/
                 .summary-item.total
                   %span.description= t("views.cart.total")
-                  %span.mount#total 177.00
+                  %span.mount#total
             .direction
               .default-group
                 - if current_customer
@@ -56,52 +56,56 @@
                   = sync partial: "current_address", resource: current_customer
                   = sync_new partial: "current_address", resource: Customer.new
                   -# End Customer detail Sync
-                  
-              %label.new-check.collapsed{"aria-controls" => "address-group", "aria-expanded" => "false", "data-target" => "#address-group", "data-toggle" => "collapse"}
-                %input{:type => "checkbox"}/
+
+              %label.new-check.collapsed{"aria-controls": "address-group", "aria-expanded": "false", "data-target": "#address-group", "data-toggle": "collapse"}
+                %input{type: "checkbox"}/
                 %span= t("views.cart.different_address")
               #address-group.new-group.collapse
                 .pad
                   .form-group
-                    %textarea.form-control.input.text-area.address#address-field{:name => "New Address", :required => "required"}
+                    %textarea.form-control.input.text-area.address#address-field{name: "new_address", required: "required"}
                     %label= t("views.cart.shipping_address")
                     .border-bottom
-                    
+
             .payment
-              %a#btn-stripe.btn.btn-general.btn-paid.collapsed{"aria-controls" => "stripe", "aria-expanded" => "false", "data-target" => "#stripe", "data-toggle" => "collapse", :title => "Pay with credit card"} Pay with credit card
+              %a#btn-stripe.btn.btn-general.btn-paid.collapsed{"aria-controls": "stripe", "aria-expanded": "false", "data-target": "#stripe", "data-toggle": "collapse"}= t("views.cart.pay_credit_card")
               #stripe.collapse
                 .payment-form
-                  %form#card-form{:action => "index.html", :method => "post"}
+                  %form#card-form{action: "", method: ""}
                     #name-group.group
-                      %input#name-field{:name => "name", :required => "required", :title => "Cardholder Name", :type => "text"}/
+                      %input#name-field{name: "name", required: "required", type: "text"}/
                       %span.highlight
                       %span.bar
-                      %label Name
+                      %label= t("views.cart.name")
                     #number-group.group
-                      %input#number-field{:name => "number", :required => "required", :title => "Card Number", :type => "tel"}/
+                      %input#number-field{name: "number", required: "required", type: "tel"}/
                       %span.highlight
                       %span.bar
-                      %label Card Number
+                      %label= t("views.cart.card_number")
                     .inline
                       #expiry-group.group
-                        %input#expiry-field{:name => "expiry", :required => "required", :title => "Expiration", :type => "tel"}/
+                        %input#expiry-field{name: "expiry", required: "required", type: "tel"}/
                         %span.highlight
                         %span.bar
-                        %label Expiration (mm/yy)
+                        %label= t("views.cart.expiration")
                       #cvc-group.group
-                        %input#cvc-field{:name => "cvc", :required => "required", :title => "Security Code", :type => "number"}/
+                        %input#cvc-field{name: "cvc", required: "required", type: "number"}/
                         %span.highlight
                         %span.bar
-                        %label Security Code
-                    %button#proceed-btn.btn.btn-general{:name => "proceed", :title => "Proceed", :type => "button"} Proceed
+                        %label= t("views.cart.security_code")
+                    %button#proceed-btn.btn.btn-general{name: "proceed", type: "submit"}= t("views.cart.proceed")
                   .cc-container
                     .card-wrapper
-              %p.text-center.divider - OR -
-              %button#btn-paypal.btn.btn-general.btn-paid{:name => "paypal", :title => "Checkout with PayPal", :type => "button"}
-                Checkout with
-                %img.hidden-xs.hidden-md{:alt => "PayPal", :src => "img/paypal.svg"}/
-                %img.hidden-sm.hidden-lg{:alt => "PayPal", :src => "img/paypal-vertical.svg"}/
+              %p.text-center.divider= t("views.cart.or")
+              %form#paypal-form{action: "/", method: "GET"}
+                #paypal-products
+                %button#btn-paypal.btn.btn-general.btn-paid{name: "paypal", type: "submit"}
+                  = t("views.cart.checkout_paypal")
+                  = image_tag "#{Rails.env.development? ? 'img/paypal.svg' : 'https://s3.amazonaws.com/betterandnice/images/default/paypal.svg'}", class: "hidden-xs hidden-md"
+
+                  = image_tag "#{Rails.env.development? ? 'img/paypal-vertical.svg' : 'https://s3.amazonaws.com/betterandnice/images/default/paypal-vertical.svg'}", class: "hidden-sm hidden-lg"
+
               %p.text-center.skep-container
-                %a{:href => "#", :title => "Skip and pay cash after the delivery >>"}
-                  Skip and pay cash after the delivery
+                %a{href: "#"}
+                  = t("views.cart.skip_cash")
                   %i.fas.fa-angle-double-right

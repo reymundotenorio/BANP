@@ -351,6 +351,10 @@ header{
       @include on-event{
         color: $primary-color;
       }
+
+      &.cart-menu{
+        cursor: pointer;
+      }
     }
     // End Navigation items
 

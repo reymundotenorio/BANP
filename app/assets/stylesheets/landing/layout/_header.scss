@@ -224,6 +224,10 @@
       white-space: normal;
       line-height: 30px;
 
+      &.cart-menu{
+        cursor: pointer;
+      }
+
       @include on-event{
         color: $white;
       }

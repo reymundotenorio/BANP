@@ -6,7 +6,7 @@ $(document).ready(function(){
   var i18nLocale = $("body").data("locale");
   // var products = <= Product.all.to_json >;
 
-  <% products_url = "http://localhost:3000/products.json" %>
+  <% products_url = "http://www.betterandnice.com/products.json" %>
   <%= products_json = JSON.pretty_generate(JSON.parse((HTTParty.get(products_url)).body)) rescue "{}" %>;
   var products = <%= products_json %>;
 
@@ -45,19 +45,21 @@ $(document).ready(function(){
           if(userID == value.cartDetails.userId){
             counter++;
 
-            if(counter <= 3){
-              product = products.find(item => item.id === value.cartDetails.id);
-              i18nLocale == "es" ? productName = product.name_spanish : productName = product.name;
-
-              var productItem = "<a class='resume'> <span class='quantity'> "+ productName + " (" + value.cartDetails.quantity + ")" + " </span> " + "<span class='amount'>" + formatter.format((product.price * value.cartDetails.quantity)) + "</span> </a>";
-
-              $(".cart-products").append(productItem);
-            }
-            else if(counter == 4){
-              var productItem = "<a class='text-right' href='/cart'><b>" + i18nLocale == "es" ? "Ver más" : "View more" + "</b></a>";
-              $(".cart-products").append(productItem);
-              // return false;
-            }
+            // if(counter <= 3){
+            //   product = products.find(item => item.id === value.cartDetails.id);
+            //   productName = i18nLocale == "es" ? product.name_spanish : product.name;
+            //
+            //   var productItem = "<a class='resume'> <span class='quantity'> "+ productName + " (" + value.cartDetails.quantity + ")" + " </span> " + "<span class='amount'>" + formatter.format((product.price * value.cartDetails.quantity)) + "</span> </a>";
+            //
+            //   $(".cart-products").append(productItem);
+            // }
+            // else if(counter == 4){
+            //   viewMore = i18nLocale == "es" ? "Ver más" : "View more";
+            //
+            //   var productItem = "<a class='text-right' href='/cart'><b>" + viewMore + "</b></a>";
+            //   $(".cart-products").append(productItem);
+            //   // return false;
+            // }
           }
         }
       });
@@ -79,10 +81,8 @@ $(document).ready(function(){
     // Read and load the banpCart localStorage
     var output = JSON.parse(localStorage.getItem("banpCart")) || null;
     var userID = parseInt(atob($("#currentCustomer").val().trim()));
-    // var subtotal = parseFloat(0);
-
-    // i18nLocale == 'es' ? decrease = 'Disminuir' : decrease = 'Decrease';
-    // i18nLocale == 'es' ? increase = 'Aumentar' : increase = 'Increase'
+    var subtotal = 0;
+    var counter = 0;
 
     // Cart details
     if(output){
@@ -91,21 +91,27 @@ $(document).ready(function(){
       $.each(output.cart, function(index, value){
         if(value !=  null){
           if(userID == value.cartDetails.userId){
-            // subtotal = subtotal + parseFloat(parseFloat(product.price) * parseInt(value.cartDetails.quantity));
 
             product = products.find(item => item.id === value.cartDetails.id);
-            i18nLocale == "es" ? productName = product.name_spanish : productName = product.name;
+            productName = i18nLocale == "es" ? product.name_spanish : product.name;
 
+            subtotal += (product.price * value.cartDetails.quantity);
+            counter ++;
 
-            // var productItem = "<div class='table-row'> <div class='image-column'><img class='img-responsive' src='" + product.image_url + "'></div> <div class='info'> <div class='name-column info-column'><span>" + productName + "</span></div> <div class='price-column info-column'><span>" + formatter.format(product.price) + "</span></div> <div class='quantity-column info-column'><form action='' class='link-container' method=''><div class='quantity'> <button id='minus-btn' class='' name='minus' type='button' data-placement='top' data-toggle='tooltip' title='" + decrease + "'><span class='sr-only'>minus</span><i class='fas fa-minus'></i></button> <input id='quantity' class='q-input' name='quant-prod' type='number' value='" + value.cartDetails.quantity + "' min='1'> <button id='plus-btn' class='' name='plus' type='button' data-placement='top' data-toggle='tooltip' title='" + increase + "'><span class='sr-only'>plus</span> <i class='fas fa-plus'></i></button></div> </form></div> <div class='total-column info-column'><span>" + formatter.format((product.price * value.cartDetails.quantity)) + "</span></div> </div> <button class='remove-btn' name='Remove' type='button'><i class='far fa-trash-alt'></i></button> </div>";
-            //
-            // $(".cart-list").append(productItem);
+            var productItem = "<div class='table-row'> <div class='image-column'><img class='img-responsive' src='" + product.image_url + "'></div> <div class='info cart-info'> <div class='name-column info-column'><span>" + productName + "</span></div> <div class='price-column info-column'><span>" + formatter.format(product.price) + "</span></div> <div class='quantity-column info-column'><form action='' class='link-container' method=''><div class='quantity'> <button id='minus-btn' class='' name='minus' type='button'><span class='sr-only'>minus</span><i class='fas fa-minus'></i></button> <input id='quantity' class='q-input' name='quant-prod' type='number' value='" + value.cartDetails.quantity + "' min='1'> <button id='plus-btn' class='' name='plus' type='button'><span class='sr-only'>plus</span> <i class='fas fa-plus'></i></button></div> <input id='productId' name='productId' type='hidden' value='" + product.id + "'> </form></div> <div class='total-column info-column'><span>" + formatter.format((product.price * value.cartDetails.quantity)) + "</span></div> </div> <button class='remove-btn' name='Remove' type='button'><i class='far fa-trash-alt'></i></button> </div>";
+
+            var productInfo = "<div class='productItem'><input id='productId_" + counter + "' name='productId_" + counter + "' type='hidden' value='" + product.id + "'> <input id='productQuantity_" + counter + "' name='productQuantity_" + counter + "' type='hidden' value='" + value.cartDetails.quantity + "'></div>"
+
+            $("#paypal-products").append(productInfo);
+            $(".cart-list").append(productItem);
           }
         }
       });
     }
 
-    // $("#subtotal").text(subtotal);
+    $("#subtotal").text(formatter.format(subtotal));
+    $("#shipping").text(formatter.format(subtotal * 0.01));
+    $("#total").text(formatter.format(subtotal * 1.01));
   }
 
   // Fuction on the "Add to Cart" button
@@ -128,8 +134,8 @@ $(document).ready(function(){
     if(parseInt(quantity.val()) <= 0){
       toastr.options.progressBar = true;
 
-      i18nLocale == "es" ? amountGreater = "Ingrese una cantidad mayor que cero" : amountGreater = "Enter an amount greater than zero";
-      i18nLocale == "es" ? amountNotValid = "Cantidad no valida" : amountNotValid = "Amount not valid";
+      amountGreater = i18nLocale == "es" ? "Ingrese una cantidad mayor que cero" : "Enter an amount greater than zero";
+      amountNotValid = i18nLocale == "es" ? "Cantidad no valida" : "Amount not valid";
 
       toastr.error(amountGreater, amountNotValid);
       return;
@@ -138,8 +144,8 @@ $(document).ready(function(){
     if(parseInt(quantity.val()) <= 0){
       toastr.options.progressBar = true;
 
-      i18nLocale == "es" ? amountGreater = "Ingrese una cantidad mayor que cero" : amountGreater = "Enter an amount greater than zero";
-      i18nLocale == "es" ? amountNotValid = "Cantidad no valida" : amountNotValid = "Amount not valid";
+      amountGreater = i18nLocale == "es" ? "Ingrese una cantidad mayor que cero" : "Enter an amount greater than zero";
+      amountNotValid = i18nLocale == "es" ? "Cantidad no valida" : "Amount not valid";
 
       toastr.error(amountGreater, amountNotValid);
       return;
@@ -180,8 +186,8 @@ $(document).ready(function(){
 
     productCart = products.find(item => item.id === parseInt(productId.val()));
 
-    i18nLocale == "es" ? productAdded = "Producto añadido al carrito" : productAdded = "Product added to the cart";
-    i18nLocale == "es" ? productName = productCart.name_spanish : productName = productCart.name;
+    productAdded = i18nLocale == "es" ? "Producto añadido al carrito" : "Product added to the cart";
+    productName = i18nLocale == "es" ? productCart.name_spanish : productCart.name;
 
     toastr.success(productName + " (" + parseInt(quantity.val()) + ")", productAdded);
 

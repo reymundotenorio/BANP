@@ -2,7 +2,7 @@
   %li.cart-products
   -# Loading products
   %li
-    %a.check-out{href: "#"}
+    = link_to cart_path, class: "check-out" do
       %i.fas.fa-check-circle
       = t("views.cart.checkout")
   %li

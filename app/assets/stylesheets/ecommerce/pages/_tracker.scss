@@ -133,6 +133,10 @@
 .info{
   padding-top: 30px;
 
+  &.cart-info{
+    padding-top: 0px;
+  }
+
   .info-title{
     margin-top: 0px;
     color: $text-color;
@@ -245,7 +249,7 @@
       padding-top: 0px;
     }
   }
-  
+
 }
 
 @media (min-width: 992px){

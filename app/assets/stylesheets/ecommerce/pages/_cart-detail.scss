@@ -417,6 +417,7 @@
 
         .jp-card-name{
           font-size: 16px;
+          width: 170px;
         }
 
         .jp-card-cvc{
@@ -592,8 +593,9 @@
 
       .jp-card-front{
         .jp-card-lower{
-          width: 100% !important;
+          width: auto !important;
           left: 5% !important;
+          right: 5% !important;
 
           .jp-card-number{
             font-size: 22px;
@@ -665,7 +667,7 @@
       .inline{
         .group{
           &#cvc-group{
-            width: 110px;
+            width: 140px;
           }
 
           &#expiry-group{
