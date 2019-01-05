@@ -6,8 +6,9 @@ $(document).ready(function(){
   var i18nLocale = $("body").data("locale");
   // var products = <= Product.all.to_json >;
 
-  <% product_url = "https://5ce477e4.ngrok.io/products.json" %>
-  var products = <%= JSON.pretty_generate(JSON.parse((HTTParty.get(product_url)).body)) %>;
+  <% products_url = "http://localhost:3000/products.json" %>
+  <%= products_json = JSON.pretty_generate(JSON.parse((HTTParty.get(products_url)).body)) rescue "{}" %>;
+  var products = <%= products_json %>;
 
   // console.log(products);
 
@@ -80,8 +81,8 @@ $(document).ready(function(){
     var userID = parseInt(atob($("#currentCustomer").val().trim()));
     // var subtotal = parseFloat(0);
 
-    i18nLocale == 'es' ? decrease = 'Disminuir' : decrease = 'Decrease';
-    i18nLocale == 'es' ? increase = 'Aumentar' : increase = 'Increase'
+    // i18nLocale == 'es' ? decrease = 'Disminuir' : decrease = 'Decrease';
+    // i18nLocale == 'es' ? increase = 'Aumentar' : increase = 'Increase'
 
     // Cart details
     if(output){
@@ -96,9 +97,9 @@ $(document).ready(function(){
             i18nLocale == "es" ? productName = product.name_spanish : productName = product.name;
 
 
-            var productItem = "<div class='table-row'><div class='image-column'> <img class='img-responsive' src='" + product.image_url + "'> </div> <div class='info'> <div class='name-column info-column'><span>" + productName + "</span></div> <div class='price-column info-column'><span>" + formatter.format(product.price) + "</span></div> <div class='quantity-column info-column'><form action='' class='link-container' method=''><div class='quantity'> <button id='minus-btn' class='subtract' name='minus' type='button' data-placement='top' data-toggle='tooltip' title='" + decrease + "'><span class='sr-only'>minus</span><i class='fas fa-minus'></i></button> <input id='quantity' class='q-input' name='quant-prod' type='number' value='" + value.cartDetails.quantity + "' min='1'> <button id='plus-btn' class='add' name='plus' type='button' data-placement='top' data-toggle='tooltip' title='" + increase + "'><span class='sr-only'>plus</span> <i class='fas fa-plus'></i></button></div></form></div> <div class='total-column info-column'><span>" + formatter.format((product.price * value.cartDetails.quantity)) + "</span></div> </div> <button class='remove-btn' name='Remove' type='button'><i class='far fa-trash-alt'></i></button> </div>";
-
-            $(".cart-list").append(productItem);
+            // var productItem = "<div class='table-row'> <div class='image-column'><img class='img-responsive' src='" + product.image_url + "'></div> <div class='info'> <div class='name-column info-column'><span>" + productName + "</span></div> <div class='price-column info-column'><span>" + formatter.format(product.price) + "</span></div> <div class='quantity-column info-column'><form action='' class='link-container' method=''><div class='quantity'> <button id='minus-btn' class='' name='minus' type='button' data-placement='top' data-toggle='tooltip' title='" + decrease + "'><span class='sr-only'>minus</span><i class='fas fa-minus'></i></button> <input id='quantity' class='q-input' name='quant-prod' type='number' value='" + value.cartDetails.quantity + "' min='1'> <button id='plus-btn' class='' name='plus' type='button' data-placement='top' data-toggle='tooltip' title='" + increase + "'><span class='sr-only'>plus</span> <i class='fas fa-plus'></i></button></div> </form></div> <div class='total-column info-column'><span>" + formatter.format((product.price * value.cartDetails.quantity)) + "</span></div> </div> <button class='remove-btn' name='Remove' type='button'><i class='far fa-trash-alt'></i></button> </div>";
+            //
+            // $(".cart-list").append(productItem);
           }
         }
       });
