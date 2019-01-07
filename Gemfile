@@ -74,6 +74,9 @@ group :development do
   gem "rails-erd", "~> 1.4", ">= 1.4.7"
   # Create models for ActiveRecord
   gem "railroady", "~> 1.4", ">= 1.4.2"
+
+  # Console colorize
+  gem "colorize"
 end
 
 # Use jquery as the JavaScript library
@@ -160,9 +163,13 @@ gem "chartkick"
 gem "groupdate"
 
 # JSON
-gem 'json', '~> 1.8'
+gem "json", "~> 1.8"
 
-# HTTParty
-gem 'httparty', '~> 0.13.7'
+# HTTParty - Request HTTP
+gem "httparty", "~> 0.13.7"
 
+# Stripe Payments
+gem "stripe"
 
+# Paypal SDK
+gem "paypal-sdk-rest"

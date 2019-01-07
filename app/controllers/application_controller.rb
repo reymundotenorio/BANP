@@ -36,6 +36,16 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  # Require customer
+  def require_customer
+    if session[:customer_id] && session[:session_confirmed] == false
+      redirect_to two_factor_path, alert: t("views.authentication.otp_required")
+
+    elsif session[:customer_id] == nil && session[:session_confirmed] == nil
+      redirect_to sign_in_path, alert: t("views.authentication.sign_in_required") unless current_customer
+    end
+  end
+
   # Verify employee state
   def employee_enabled?
     if @employee.state
