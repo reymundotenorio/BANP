@@ -15,6 +15,15 @@ class CartController < ApplicationController
   end
 
   def show
+    params[:products].each do |id, attributes|
+      # if family = Family.find_by_id(id)
+      #   family.update_attributes(attributes)
+      #   @families << family
+
+      puts "TEST: #{id} - #{attributes}"
+    end
+
+
     # # Generate URL to Get Authorize code
     # @token = Tokeninfo.authorize_url(scopes: "openid profile")
 
