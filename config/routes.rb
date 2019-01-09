@@ -19,10 +19,11 @@ Rails.application.routes.draw do
   # End Products
 
   # Authentications
-
+  
   # Cart
   get "/cart", to: "cart#index", as: "cart"
   get "/paypal", to: "cart#show", as: "paypal"
+  post "/paypal", to: "cart#test", as: "paypal_checkout"
   # End Cart
 
   # Notifications

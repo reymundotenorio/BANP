@@ -97,9 +97,10 @@
                   .cc-container
                     .card-wrapper
               %p.text-center.divider= t("views.cart.or")
-              %form#paypal-form{action: "/paypal", method: "POST"}
+              = form_tag paypal_checkout_path, method: :post, id: "paypal-form" do
+                -# Loading cart productss
                 #paypal-products
-                =# text_field_tag "families[1][name]", "Hola"
+
                 %button#btn-paypal.btn.btn-general.btn-paid{name: "paypal", type: "submit"}
                   = t("views.cart.checkout_paypal")
                   = image_tag "#{Rails.env.development? ? 'img/paypal.svg' : 'https://s3.amazonaws.com/betterandnice/images/default/paypal.svg'}", class: "hidden-xs hidden-md"
