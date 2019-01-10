@@ -22,8 +22,8 @@ Rails.application.routes.draw do
   
   # Cart
   get "/cart", to: "cart#index", as: "cart"
-  get "/paypal", to: "cart#show", as: "paypal"
-  post "/paypal", to: "cart#test", as: "paypal_checkout"
+  get "/paypal/sign-in", to: "cart#paypal_sign_in", as: "paypal_sign_in"
+  post "/paypal/sign-in", to: "cart#paypal_auth", as: "paypal_auth"
   # End Cart
 
   # Notifications

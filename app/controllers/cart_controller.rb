@@ -16,12 +16,11 @@ class CartController < ApplicationController
     @token = Tokeninfo.authorize_url(scopes: "openid profile")
   end
 
-  def show
-    # Generate URL to Get Authorize code
-    # @token = Tokeninfo.authorize_url(scopes: "openid profile")
+  def paypal_sign_in
+    code = params[:code]
 
-    # # Get token information with the authorize code
-    # tokeninfo = Tokeninfo.create("")
+    # Get token information with the authorize code
+    tokeninfo = Tokeninfo.create(code)
     # puts "TOKEN INFO: #{tokeninfo.to_hash}"
 
     # # Refresh tokeninfo object
@@ -78,12 +77,16 @@ class CartController < ApplicationController
   end
 
   def paypal_auth
-    params[:products].each do |id, attributes|
-      # if family = Family.find_by_id(id)
-      #   family.update_attributes(attributes)
-      #   @families << family
+            # Generate URL to Get Authorize code
+    auth_url = Tokeninfo.authorize_url(scopes: "openid profile")
+    redirect_to auth_url
+    
+    # params[:products].each do |id, attributes|
+    #   # if family = Family.find_by_id(id)
+    #   #   family.update_attributes(attributes)
+    #   #   @families << family
 
-      puts "TEST: #{id} - #{attributes}"
-    end
+    #   puts "TEST: #{id} - #{attributes}"
+    # end
   end
 end

@@ -97,7 +97,7 @@
                   .cc-container
                     .card-wrapper
               %p.text-center.divider= t("views.cart.or")
-              = form_tag paypal_checkout_path, method: "post", id: "paypal-form" do
+              = form_tag paypal_auth_path, method: "post", id: "paypal-form" do
                 -# Loading cart productss
                 #paypal-products
 
