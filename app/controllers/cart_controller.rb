@@ -12,6 +12,8 @@ class CartController < ApplicationController
   # End Authentication
 
   def index
+    # Generate URL to Get Authorize code
+    @token = Tokeninfo.authorize_url(scopes: "openid profile")
   end
 
   def show
@@ -75,7 +77,7 @@ class CartController < ApplicationController
 
   end
 
-  def test
+  def paypal_auth
     params[:products].each do |id, attributes|
       # if family = Family.find_by_id(id)
       #   family.update_attributes(attributes)
