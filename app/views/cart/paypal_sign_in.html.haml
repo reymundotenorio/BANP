@@ -1,6 +1,8 @@
 %h3
   %a{href: "#{@token}", target: "_blank"}= @token if @token
 
+
+%p= @tokeninfo.to_hash if @tokeninfo
 %p= @tokeninfo.userinfo.to_hash if @tokeninfo
 
 - if @payment
