@@ -173,3 +173,7 @@ gem "stripe"
 
 # Paypal SDK
 gem "paypal-sdk-rest"
+
+
+# Get Zip code information
+gem "zip-codes"

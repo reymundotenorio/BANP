@@ -19,12 +19,16 @@ Rails.application.routes.draw do
   # End Products
 
   # Authentications
-  
+
   # Cart
   get "/cart", to: "cart#index", as: "cart"
-  get "/paypal/sign-in", to: "cart#paypal_sign_in", as: "paypal_sign_in"
-  post "/paypal/sign-in", to: "cart#paypal_auth", as: "paypal_auth"
   # End Cart
+
+  # PayPal
+  get "/paypal/payment", to: "paypal#paypal_payment", as: "paypal_payment"
+  get "/paypal/sign-in", to: "paypal#paypal_sign_in", as: "paypal_sign_in"
+  post "/paypal/sign-in", to: "paypal#paypal_auth", as: "paypal_auth"
+  # End PayPal
 
   # Notifications
   get "/authentication/notifications", to: "authentication/notifications#index", as: "auth_notifications"

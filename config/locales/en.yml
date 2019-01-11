@@ -279,6 +279,8 @@ en:
       expiration: "Expiration (mm/yyyy)"
       security_code: "Security Code"
       proceed: "Proceed"
+      paypal_note_payer: "Contact us for any questions on your order."
+      paypal_description: "Payment of the shopping cart in Better and Nice Produce Corp"
     landing:
       motto: "Anywhere, Anytime, Fresh Produce on time!"
       search_products: "Search Products"

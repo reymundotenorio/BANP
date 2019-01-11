@@ -279,6 +279,8 @@ es:
       expiration: "Expiración (mm/aaaa)"
       security_code: "Código de seguridad"
       proceed: "Proceder"
+      paypal_note_payer: "Contáctenos para cualquier consulta sobre su pedido."
+      paypal_description: "Pago del carrito de compra en Better and Nice Produce Corp"
     landing:
       motto: "¡Donde y Cuando Sea, Productos a tiempo!"
       search_products: "Buscar Productos"

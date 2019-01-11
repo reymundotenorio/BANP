@@ -6,4 +6,4 @@
 %p= @tokeninfo.userinfo.to_hash if @tokeninfo
 
 - if @payment
-  = link_to @payment.links.find{|v| v.rel == "approval_url" }.href, @payment.links.find{|v| v.rel == "approval_url" }.href
+  =# link_to @payment.links.find{|v| v.rel == "approval_url" }.href, @payment.links.find{|v| v.rel == "approval_url" }.href
