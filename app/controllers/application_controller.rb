@@ -18,12 +18,12 @@ class ApplicationController < ActionController::Base
 
   # Current employee
   def current_employee
-    @current_employee ||= Employee.find(session[:employee_id]) if session[:employee_id]
+    @current_employee ||= User.find(session[:employee_id]).employee if session[:employee_id]
   end
 
   # Current customer
   def current_customer
-    @current_customer ||= Customer.find(session[:customer_id]) if session[:customer_id]
+    @current_customer ||= User.find(session[:customer_id]).customer if session[:customer_id]
   end
 
   # Require employee

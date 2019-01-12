@@ -27,7 +27,10 @@ Rails.application.routes.draw do
   # PayPal
   get "/paypal/payment", to: "paypal#paypal_payment", as: "paypal_payment"
   get "/paypal/sign-in", to: "paypal#paypal_sign_in", as: "paypal_sign_in"
+  get "/paypal/checkout", to: "paypal#paypal_order", as: "paypal_order"
+  post "/paypal/checkout", to: "paypal#paypal_checkout", as: "paypal_checkout"
   post "/paypal/sign-in", to: "paypal#paypal_auth", as: "paypal_auth"
+
   # End PayPal
 
   # Notifications

@@ -13,6 +13,15 @@ class PaypalController < ApplicationController
 
   def paypal_sign_in
     code = params[:code]
+    redirect_to paypal_order_path(code: code)
+    return
+  end
+
+  def paypal_order
+  end
+
+  def paypal_checkout
+    code = params[:code]
 
     # If code param is present
     if code
@@ -42,22 +51,24 @@ class PaypalController < ApplicationController
       # puts tokeninfo.logout_url
 
       product_items = Array.new
+
+      params[:products].each do |id, attributes|
+        product = Product.find(attributes["id"])
+
+        item = { name: I18n.locale == :es ? "#{product.name} #{attributes['quantity']}" : "#{product.name_spanish} #{attributes['quantity']}", description: I18n.locale == :es ? product.description : product.description_spanish , sku: product.barcode, price: "#{product.price}", currency: "USD", quantity: attributes['quantity'] }
+
+        ALGO PASA AQUI
+
+        product_items.push(item)
+      end
+
+      # product = Product.find(1)
       #
-      # params[:products].each do |id, attributes|
-      #   product = Product.find(attributes.id)
+      # item = { name: I18n.locale == :es ? "#{product.name} (1)" : "#{product.name_spanish} (1)", description: I18n.locale == :es ? product.description : product.description_spanish , sku: product.barcode, price: "#{product.price}", currency: "USD", quantity: "1" }
       #
-      #   item = {name: I18n.locale == :es ? product.name : product.name_spanish, description: I18n.locale == :es ? product.description : product.description_spanish , sku: product.barcode, price: "#{product.price}", tax: "0.00", currency: "USD", quantity: attributes.quantity }
+      # product_items.push(item)
       #
-      #   product_items.push item
-      # end
-
-      product = Product.find(1)
-
-      item = { name: I18n.locale == :es ? "#{product.name} (1)" : "#{product.name_spanish} (1)", description: I18n.locale == :es ? product.description : product.description_spanish , sku: product.barcode, price: "#{product.price}", currency: "USD", quantity: "1" }
-
-      product_items.push(item)
-
-      puts "PRODUCTS #{product_items}".red
+      # puts "PRODUCTS #{product_items}".red
 
       # Calculations
       items_subtotal = product_items.inject(0) {|sum, hash| sum + ((hash[:price]).to_f * (hash[:quantity]).to_i)}
@@ -80,43 +91,43 @@ class PaypalController < ApplicationController
 
       # Build Payment object
       @payment = Payment.new(
-      {
-        intent: "sale",
-        payer: {
-          payment_method: "paypal"
-        },
-        transactions: [
-          {
-            amount: {
-              total: "#{items_subtotal}",
-              currency: "USD"
-              # details: {
-              #   subtotal: "#{items_subtotal}",
-              #   shipping: "#{items_shipping}",
-              #   shipping_discount: "#{items_discount}"
-              # }
-            },
-            description: I18n.t("views.cart.paypal_description"),
-            item_list: {
-              items: product_items,
-              shipping_address: {
-                recipient_name: "#{current_customer.first_name} #{current_customer.last_name}",
-                line1: @current_customer.address,
-                city: zip_info[:city],
-                state: zip_info[:state_code],
-                phone: @current_customer.phone,
-                postal_code: zip_code,
-                country_code: "US"
+        {
+          intent: "sale",
+          payer: {
+            payment_method: "paypal"
+          },
+          transactions: [
+            {
+              amount: {
+                total: "#{items_subtotal}",
+                currency: "USD"
+                # details: {
+                #   subtotal: "#{items_subtotal}",
+                #   shipping: "#{items_shipping}",
+                #   shipping_discount: "#{items_discount}"
+                # }
+              },
+              description: I18n.t("views.cart.paypal_description"),
+              item_list: {
+                items: product_items,
+                shipping_address: {
+                  recipient_name: "#{current_customer.first_name} #{current_customer.last_name}",
+                  line1: @current_customer.address,
+                  city: zip_info[:city],
+                  state: zip_info[:state_code],
+                  phone: @current_customer.phone,
+                  postal_code: zip_code,
+                  country_code: "US"
+                }
               }
             }
+          ],
+          note_to_payer: I18n.t("views.cart.paypal_note_payer"),
+          redirect_urls: {
+            return_url: paypal_payment_url,
+            cancel_url: cart_url
           }
-        ],
-        note_to_payer: I18n.t("views.cart.paypal_note_payer"),
-        redirect_urls: {
-          return_url: paypal_payment_url,
-          cancel_url: cart_url
         }
-      }
       )
 
       if @payment.create
@@ -125,7 +136,7 @@ class PaypalController < ApplicationController
 
       else
         @payment.error  # Error Hash
-        puts "ERROOOOOOORRR : #{@payment.error}".red
+        puts "Paypal error: #{@payment.error}".red
       end
 
       # If code param is not present

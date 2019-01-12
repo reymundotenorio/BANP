@@ -2,6 +2,6 @@
 
 $(document).ready(function(){
 
-JsBarcode(".barcode").init();
+  JsBarcode(".barcode").init();
 
 });
