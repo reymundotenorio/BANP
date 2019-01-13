@@ -53,11 +53,11 @@ class PaypalController < ApplicationController
       product_items = Array.new
 
       params[:products].each do |id, attributes|
-        product = Product.find(attributes["id"])
+        product = Product.find(attributes["id"].to_i)
 
         item = { name: I18n.locale == :es ? "#{product.name} #{attributes['quantity']}" : "#{product.name_spanish} #{attributes['quantity']}", description: I18n.locale == :es ? product.description : product.description_spanish , sku: product.barcode, price: "#{product.price}", currency: "USD", quantity: attributes['quantity'] }
 
-        ALGO PASA AQUI
+        # ALGO PASA AQUI
 
         product_items.push(item)
       end
