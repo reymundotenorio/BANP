@@ -27,7 +27,7 @@ class PaypalController < ApplicationController
     if code
       # Get token information with the authorize code
       begin
-        @tokeninfo = Tokeninfo.create(code) if code
+        tokeninfo = Tokeninfo.create(code) if code
 
       rescue PayPal::SDK::Core::Exceptions::BadRequest => e # Token not found or expired
         paypal_auth
@@ -36,11 +36,11 @@ class PaypalController < ApplicationController
       # puts tokeninfo.to_hash
 
       # Refresh tokeninfo object
-      # @tokeninfo = @tokeninfo.refresh
+      # tokeninfo = tokeninfo.refresh
       # puts tokeninfo.to_hash
 
       # Create tokeninfo by using refresh token
-      # tokeninfo = Tokeninfo.refresh(@tokeninfo.refresh_token)
+      # tokeninfo = Tokeninfo.refresh(tokeninfo.refresh_token)
       # puts tokeninfo.to_hash
 
       # Get Userinfo
@@ -55,20 +55,20 @@ class PaypalController < ApplicationController
       params[:products].each do |id, attributes|
         product = Product.find(attributes["id"].to_i)
 
-        item = { name: I18n.locale == :es ? "#{product.name} #{attributes['quantity']}" : "#{product.name_spanish} #{attributes['quantity']}", description: I18n.locale == :es ? product.description : product.description_spanish , sku: product.barcode, price: "#{product.price}", currency: "USD", quantity: attributes['quantity'] }
-
-        # ALGO PASA AQUI
+        item =
+        {
+          name: I18n.locale == :es ? "#{product.name} (#{attributes['quantity']})" : "#{product.name_spanish} (#{attributes['quantity']})",
+          description: I18n.locale == :es ? product.description : product.description_spanish,
+          sku: product.barcode,
+          price: "#{product.price}",
+          currency: "USD",
+          quantity: attributes["quantity"]
+        }
 
         product_items.push(item)
       end
 
-      # product = Product.find(1)
-      #
-      # item = { name: I18n.locale == :es ? "#{product.name} (1)" : "#{product.name_spanish} (1)", description: I18n.locale == :es ? product.description : product.description_spanish , sku: product.barcode, price: "#{product.price}", currency: "USD", quantity: "1" }
-      #
-      # product_items.push(item)
-      #
-      # puts "PRODUCTS #{product_items}".red
+      # puts "Product items: #{product_items}".red
 
       # Calculations
       items_subtotal = product_items.inject(0) {|sum, hash| sum + ((hash[:price]).to_f * (hash[:quantity]).to_i)}
@@ -90,7 +90,7 @@ class PaypalController < ApplicationController
       puts "Zip code: #{zip_info}".red
 
       # Build Payment object
-      @payment = Payment.new(
+      payment = Payment.new(
         {
           intent: "sale",
           payer: {
@@ -130,13 +130,15 @@ class PaypalController < ApplicationController
         }
       )
 
-      if @payment.create
-        # @payment.id
-        redirect_to @payment.links.find{|v| v.rel == "approval_url" }.href
+      if payment.create
+        # payment.id
+        redirect_to payment.links.find{|v| v.rel == "approval_url" }.href
 
       else
-        @payment.error  # Error Hash
-        puts "Paypal error: #{@payment.error}".red
+        payment.error  # Error Hash
+        puts "Paypal error: #{payment.error}".red
+        redirect_to cart_path, alert: "Payment error"
+        return
       end
 
       # If code param is not present
@@ -147,16 +149,29 @@ class PaypalController < ApplicationController
   end
 
   def paypal_payment
-    # payment = Payment.find("PAY-3Y6463124N7564924LQZWDAI")
-    # paypal/payment?paymentId=PAY-1EJ440536S2412328LQ4RASA&token=EC-55019199AD015184J&PayerID=K7775TQ6ULH24
+    payment_id = params[:paymentId]
+    token = params[:token]
+    payer_id = params[:PayerID]
 
-    # if payment.execute( :payer_id => "DUFRQ8GWYMJXC" )
-    #   # Success Message
-    #   # Note that you'll need to `Payment.find` the payment again to access user info like shipping address
+    if payment_id && payer_id
+      payment = Payment.find(payment_id)
 
-    # else
-    #   payment.error # Error Hash
-    # end
+      if payment.execute(payer_id: payer_id)
+        # Success Message
+        redirect_to root_path(msj: "YESSS"), notice: "Payment error"
+        return
+
+      else
+        payment.error # Error Hash
+        puts "Paypal error: #{payment.error}".red
+        redirect_to cart_path, alert: "Payment error"
+        return
+      end
+
+    else
+      redirect_to cart_path, alert: "Invalid Payment and Payer"
+      return
+    end
   end
 
   def paypal_auth
