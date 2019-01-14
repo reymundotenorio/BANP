@@ -13,7 +13,7 @@
   }
 
   .logo-container{
-    padding: 15px 0px 20px;
+    padding: 10px 0px 20px;
   }
 
   #recaptcha-center{
@@ -118,7 +118,7 @@
       padding-top: 15px;
 
       &.sessions{
-        padding: 40px 0px 15px;
+        padding: 20px 0px 15px;
       }
 
       .button-container{
@@ -163,6 +163,10 @@
 @media (min-width: 768px){
 
   .form{
+    .logo-container{
+      padding: 15px 0px 20px;
+    }
+
     &.sign-up{
       padding-top: 45px;
       padding-bottom: 45px;

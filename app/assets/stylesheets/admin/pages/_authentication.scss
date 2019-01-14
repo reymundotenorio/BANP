@@ -129,6 +129,7 @@ body{
     // Sign in
     .sign-in-form{
       .form{
+        padding-top: 25px;
         padding-bottom: 0px;
 
         .auth-alerts{
@@ -185,4 +186,20 @@ body{
     }
 
   }
+}
+
+
+@media (min-width: 768px) {
+
+  body{
+    &.auth{
+      // Sign in
+      .sign-in-form{
+        .form{
+          padding-top: 0px;
+        }
+      }
+    }
+  }
+
 }

@@ -86,8 +86,8 @@ class PaypalController < ApplicationController
       # items_total = items_subtotal + items_shipping + items_discount
       # items_total = items_total.round(2)
 
-      puts "Subtotal: #{items_subtotal}".red
-      puts "Zip code: #{zip_info}".red
+      # puts "Subtotal: #{items_subtotal}".red
+      # puts "Zip code: #{zip_info}".red
 
       # Build Payment object
       payment = Payment.new(
@@ -130,46 +130,57 @@ class PaypalController < ApplicationController
         }
       )
 
+      # If the payment was correctly created
       if payment.create
         # payment.id
         redirect_to payment.links.find{|v| v.rel == "approval_url" }.href
 
+        # If the payment was not correctly created
       else
-        payment.error  # Error Hash
-        puts "Paypal error: #{payment.error}".red
-        redirect_to cart_path, alert: "Payment error"
+        # payment.error  # Error Hash
+        redirect_to cart_path, alert: "Hubo un problema al crear el pago: #{payment.error}"
         return
       end
 
       # If code param is not present
     else
-      redirect_to cart_path, alert: "Invalid code"
+      redirect_to cart_path, alert: "Los parametros recibidos (code) son incorrectos, por favor, intente nuevamente ejecutar el pago"
       return
     end
   end
 
   def paypal_payment
     payment_id = params[:paymentId]
-    token = params[:token]
+    # token = params[:token]
     payer_id = params[:PayerID]
 
+    # If Payment ID and Payer ID are present
     if payment_id && payer_id
       payment = Payment.find(payment_id)
 
+      # If payment was executed correctly
       if payment.execute(payer_id: payer_id)
         # Success Message
-        redirect_to root_path(msj: "YESSS"), notice: "Payment error"
+
+        # Decrease inventory
+        # Save sale / transaction
+        # Trigger notification to admin / saler
+        # Add sale to delivery queue
+        # Show PDF invoice (new tab) and redirect to delivery tracking
+
+        redirect_to root_path(msj: "successful-payment"), notice: "El pago fue ejecutado correctamente"
         return
 
+        # If payment was not executed correctly
       else
-        payment.error # Error Hash
-        puts "Paypal error: #{payment.error}".red
-        redirect_to cart_path, alert: "Payment error"
+        # payment.error # Error Hash
+        redirect_to cart_path, alert: "Hubo un problema al ejecutar el pago: #{payment.error}"
         return
       end
 
+      # If Payment ID and Payer ID are not present
     else
-      redirect_to cart_path, alert: "Invalid Payment and Payer"
+      redirect_to cart_path, alert: "Los paramentros recibidos (Paymente ID | Payer ID) son incorrectos, por favor, intente nuevamente ejecutar el pago"
       return
     end
   end
