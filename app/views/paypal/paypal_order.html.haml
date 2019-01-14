@@ -1,4 +1,15 @@
-= form_tag paypal_checkout_path, method: "post", id: "paypal-checkout" do
+-# Preloader
+.preloader.only-loader
+  .spinner
+    .bounce1
+    .bounce2
+    .bounce3
+-# End Preloader
+
+-# Fill height
+.fill-height
+
+= form_tag paypal_checkout_path, method: "post", id: "paypal-checkout", class: "hidden" do
   -# Loading cart productss
   #paypal-products
 
@@ -10,6 +21,3 @@
 
     = image_tag "#{Rails.env.development? ? 'img/paypal-vertical.svg' : 'https://s3.amazonaws.com/betterandnice/images/default/paypal-vertical.svg'}", class: "hidden-sm hidden-lg"
 
--# PayPal checkout script
-= javascript_include_tag "paypal-checkout", "data-turbolinks-track": "reload"
--# End PayPal checkout script

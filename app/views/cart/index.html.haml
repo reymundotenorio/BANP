@@ -16,7 +16,19 @@
   #cart-content.main-content
     .container
       .row
-        .col-xs-12.col-md-8
+        .col-xs-12.cart-empty
+          %p.text-center
+            %b= t("views.cart.empty")
+
+          %p.text-center
+            = link_to products_path do
+              %b
+                %i.fas.fa-undo-alt
+                %span= t("views.cart.view_all_products")
+
+          = image_tag "img/empty-cart.png", class: "img-responsive empty-cart"
+
+        .col-xs-12.col-md-8.cart-column
           #cart-detail-card.white-card
             .cart-table
               .table-head.hidden-xs
@@ -34,7 +46,7 @@
               -# Product list
               .cart-list
 
-        .col-xs-12.col-md-4
+        .col-xs-12.col-md-4.cart-column
           #paid-detail-card.white-card
             .summary
               %h2.summary-title= t("views.cart.summary")

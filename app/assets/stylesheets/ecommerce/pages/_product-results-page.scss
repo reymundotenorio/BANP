@@ -31,6 +31,16 @@ body{
 .main-content{
   padding: 40px 0px 20px 0px;
 
+  .cart-empty{
+    display: none;
+    
+    img{
+      &.empty-cart{
+        padding: 42px 0px;
+      }
+    }
+  }
+
   .categories-btn{
     text-transform: uppercase;
     display: block;
@@ -52,7 +62,7 @@ body{
 
   &#prp-content{
     img{
-      &.not_found{
+      &.not-found{
         padding-top: 20px;
       }
     }

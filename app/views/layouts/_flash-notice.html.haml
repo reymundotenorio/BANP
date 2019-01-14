@@ -1,0 +1,9 @@
+- if !flash[:notice].blank?
+  .alert.alert-success.alert-dismissible.shadow-card{role: "alert"}
+    %button.close{"data-dismiss": "alert", type: "button", "data-toggle": "tooltip", "data-placement": "top", title: t("views.form.close")}
+      %span{"aria-hidden": "true"}
+        %i.fas.fa-times-circle
+    %strong
+      %p
+        %i.fas.fa-info-circle
+        = flash[:notice]

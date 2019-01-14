@@ -17,10 +17,6 @@
     -# End Favicon settings
 
     -# OpenGraph info
-    %meta{content: "Better and Nice Produce Corp", property: "og:title"}/
-    %meta{content: "Better and Nice Produce is at the forefront of produce quality, whit more than 20 years in the business. Serving all the South Florida with the best in gourmet, organic, and specialty pershibles. Better and Nice Produce continues to push the envelopment in quality and Service. Better and Nice Produce is committed to live by its motto, 'Anywhere, anytime, fresh produce on time'.", property: "og:description"}/
-    %meta{content: "http://www.betterandnice.com", property: "og:url"}/
-    %meta{content: "http://www.betterandnice.com/favicon.png", property: "og:image"}/
     -# End OpenGraph info
 
     -# CSRF Tags
@@ -46,6 +42,18 @@
     = render "layouts/header_landing"
     -# End Render header
 
+    -# Render alerts
+    = render "layouts/alerts"
+    -# End Render alerts
+
+    -# Preloader
+    .preloader
+      .spinner
+        .bounce1
+        .bounce2
+        .bounce3
+    -# End Preloader
+
     -# Main content
     = yield
     -# End Main content
@@ -59,7 +67,7 @@
     -# TouchSwipe script
     = javascript_include_tag "https://cdnjs.cloudflare.com/ajax/libs/jquery.touchswipe/1.6.4/jquery.touchSwipe.min.js", "data-turbolinks-track": "reload"
     -# End TouchSwipe script
-    
+
     -# Add to Cart script
     = javascript_include_tag "cart", "data-turbolinks-track": "reload"
     -# End Add to Cart script

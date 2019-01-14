@@ -1,9 +1,10 @@
-%h3
-  %a{href: "#{@token}", target: "_blank"}= @token if @token
+-# Preloader
+.preloader.only-loader
+  .spinner
+    .bounce1
+    .bounce2
+    .bounce3
+-# End Preloader
 
-
-%p= @tokeninfo.to_hash if @tokeninfo
-%p= @tokeninfo.userinfo.to_hash if @tokeninfo
-
-- if @payment
-  =# link_to @payment.links.find{|v| v.rel == "approval_url" }.href, @payment.links.find{|v| v.rel == "approval_url" }.href
+-# Fill height
+.fill-height
