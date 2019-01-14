@@ -168,11 +168,11 @@ gem "json", "~> 1.8"
 # HTTParty - Request HTTP
 gem "httparty", "~> 0.13.7"
 
-# Stripe Payments
-gem "stripe"
-
 # Paypal SDK
 gem "paypal-sdk-rest"
 
 # Get Zip code information
 gem "zip-codes"
+
+# Stripe Payments
+gem "stripe"
