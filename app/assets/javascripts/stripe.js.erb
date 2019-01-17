@@ -1,15 +1,18 @@
+// Set current locale
+var i18nLocale = $("body").data("locale");
+
 // Create a Stripe client.
 var stripe = Stripe("<%= ENV["stripe_publishable_key"] %>");
 
 // Create an instance of Elements.
-var elements = stripe.elements({locale: "es"});
+var elements = stripe.elements({locale: i18nLocale == "es" ? "es" : "en"});
 
 // Custom styling can be passed to options when creating an Element.
 // (Note that this demo uses a wider set of styles than the guide below.)
 var style = {
   base: {
     color: "#555555",
-    lineHeight: "30px",
+    lineHeight: "19.2px",
     fontFamily: "'Montserrat', 'Open Sans', sans-serif",
     fontSmoothing: "antialiased",
     fontSize: "16px",

@@ -1,0 +1,13 @@
+= form_tag stripe_checkout_path, method: "post", id: "payment-form" do
+  .form-row
+    %label{for: "card-element"}= t("views.cart.credit_debit_card")
+
+    #card-element
+      -# A Stripe Element will be inserted here
+
+    -# Used to display form errors.
+    #card-errors{role: "alert"}
+
+  %button
+    %span= t("views.cart.submit_payment")
+    %i.fab.fa-stripe-s

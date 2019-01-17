@@ -55,7 +55,7 @@ $(".subtract").click(function(){
 //   }
 // });
 
-new Card({
-  form: document.querySelector("#card-form"),
-  container: ".card-wrapper"
-});
+// new Card({
+//   form: document.querySelector("#card-form"),
+//   container: ".card-wrapper"
+// });

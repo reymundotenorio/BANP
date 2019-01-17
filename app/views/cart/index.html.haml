@@ -28,12 +28,12 @@
 
           = image_tag "img/empty-cart.png", class: "img-responsive empty-cart"
 
-        .col-xs-12.col-md-8.cart-column
+        .col-xs-12.col-md-7.cart-column
           #cart-detail-card.white-card
             .cart-table
               .table-head.hidden-xs
                 .image-column
-                .info
+                .info.cart-table
                   .name-column
                     %span= t("views.cart.product")
                   .price-column
@@ -46,7 +46,7 @@
               -# Product list
               .cart-list
 
-        .col-xs-12.col-md-4.cart-column
+        .col-xs-12.col-md-5.cart-column
           #paid-detail-card.white-card
             .summary
               %h2.summary-title= t("views.cart.summary")
@@ -82,32 +82,9 @@
             .payment
               %a#btn-stripe.btn.btn-general.btn-paid.collapsed{"aria-controls": "stripe", "aria-expanded": "false", "data-target": "#stripe", "data-toggle": "collapse"}= t("views.cart.pay_credit_card")
               #stripe.collapse
-                .payment-form
-                  %form#card-form{action: "", method: ""}
-                    #name-group.group
-                      %input#name-field{name: "name", required: "required", type: "text"}/
-                      %span.highlight
-                      %span.bar
-                      %label= t("views.cart.name")
-                    #number-group.group
-                      %input#number-field{name: "number", required: "required", type: "tel"}/
-                      %span.highlight
-                      %span.bar
-                      %label= t("views.cart.card_number")
-                    .inline
-                      #expiry-group.group
-                        %input#expiry-field{name: "expiry", required: "required", type: "tel"}/
-                        %span.highlight
-                        %span.bar
-                        %label= t("views.cart.expiration")
-                      #cvc-group.group
-                        %input#cvc-field{name: "cvc", required: "required", type: "number"}/
-                        %span.highlight
-                        %span.bar
-                        %label= t("views.cart.security_code")
-                    %button#proceed-btn.btn.btn-general{name: "proceed", type: "submit"}= t("views.cart.proceed")
-                  .cc-container
-                    .card-wrapper
+                -# Render Stripe form
+                = render "stripe/payment-form"
+
               %p.text-center.divider= t("views.cart.or")
               = form_tag paypal_auth_path, method: "post", id: "paypal-form" do
                 -# Loading cart productss
@@ -123,6 +100,3 @@
                 %a{href: "#"}
                   = t("views.cart.skip_cash")
                   %i.fas.fa-angle-double-right
-                  
-              %script.stripe-button{"data-amount": "500", "data-description": "A month's subscription", "data-key": "#{Rails.configuration.stripe[:publishable_key]}", "data-locale": "auto", src: "https://checkout.stripe.com/checkout.js"}
-

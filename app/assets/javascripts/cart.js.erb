@@ -1,10 +1,23 @@
 $(document).ready(function(){
-
   <% require "httparty" %>
 
   // Set current locale
   var i18nLocale = $("body").data("locale");
   // var products = <= Product.all.to_json >;
+
+  // Toast message error
+  var currentURL = document.URL;
+  var params = currentURL.extract();
+
+  try{
+    if(params.stripe_receipt != undefined){
+      receipt = "<a href='"+ params.stripe_receipt +"' id='stripe-receipt' target='_blank' class='hidden'"
+      $("#back-to-top").prepend(receipt);
+      $("#stripe-receipt").click();
+    }
+  } catch (error){
+    // console.log(error.message);
+  }
 
   <% products_url = "http://www.betterandnice.com/products.json" %>
   <%= products_json = JSON.pretty_generate(JSON.parse((HTTParty.get(products_url)).body)) rescue "{}" %>;
@@ -103,8 +116,10 @@ $(document).ready(function(){
     }
 
     $("#subtotal").text(formatter.format(subtotal));
-    $("#shipping").text(formatter.format(subtotal * 0.01));
-    $("#total").text(formatter.format(subtotal * 1.01));
+    $("#shipping").text(formatter.format(0));
+    $("#total").text(formatter.format(subtotal + 0));
+    // $("#shipping").text(formatter.format(subtotal * 0.01));
+    // $("#total").text(formatter.format(subtotal * 1.01));
   }
 
   // Fuction on the "Add to Cart" button
@@ -120,7 +135,7 @@ $(document).ready(function(){
     var userID = parseInt(atob($("#currentCustomer").val().trim()));
 
     if(userID == 0){
-      $(location).attr("href", "/sign-in?notification=sign-in-required");
+      $(location).attr("href", "/sign-in?notification=sign-in-required&redirect=" + window.location.pathname);
       return;
     }
 

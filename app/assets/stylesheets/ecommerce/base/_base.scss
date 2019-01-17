@@ -202,6 +202,8 @@ a{
 
       + .border-bottom{
         &:after{
+          -webkit-box-shadow: 0 1px 0 0 tint($sixth-color, 15%);
+          box-shadow: 0 1px 0 0 tint($sixth-color, 15%);
           border-bottom-color: $sixth-color;
           width: 100%;
         }

@@ -1,5 +1,5 @@
 $(document).ready(function(){
-  
+
   // Display on the text-input, the filename selected by the file-input
   $("input[type=file]").change(function(e){
     filename = $(this).val();
@@ -65,13 +65,11 @@ $(document).ready(function(){
   var i18nLocale = $("body").data("locale");
 
   try{
-
     if(params.notification == "sign-in-required"){
       i18nLocale == "es" ? mustSignIn = "Debe iniciar sesión para continuar" : mustSignIn = "You must sign in to continue";
 
       toastr.error("", mustSignIn, {timeOut: 5000, extendedTimeOut: 5000, preventDuplicates: true});
     }
-
   } catch (error){
     // console.log(error.message);
   }

@@ -283,6 +283,8 @@ en:
       paypal_description: "Payment of the shopping cart in Better and Nice Produce Corp"
       empty: "Your cart is currently empty"
       view_all_products: "View all products"
+      submit_payment: "Submit payment with"
+      credit_debit_card: "Credit or debit card"
     landing:
       motto: "Anywhere, Anytime, Fresh Produce on time!"
       search_products: "Search Products"

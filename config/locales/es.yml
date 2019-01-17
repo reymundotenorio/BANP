@@ -283,6 +283,8 @@ es:
       paypal_description: "Pago del carrito de compra en Better and Nice Produce Corp"
       empty: "Su carrito actualmente está vacío"
       view_all_products: "Ver todos los productos"
+      submit_payment: "Realizar pago con"
+      credit_debit_card: "Tarjeta de crédito o débito"
     landing:
       motto: "¡Donde y Cuando Sea, Productos a tiempo!"
       search_products: "Buscar Productos"
