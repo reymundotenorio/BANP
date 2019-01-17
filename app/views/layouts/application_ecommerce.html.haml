@@ -37,6 +37,10 @@
     = include_sync_config
     -# End Render sync config
 
+    -# Stripe V3 script
+    = javascript_include_tag "https://js.stripe.com/v3/", "data-turbolinks-track": "reload"
+    -# End Stripe V3 script
+
   %body{"data-locale": "#{I18n.locale}"}
     -# Render header
     = render "layouts/header_ecommerce"
@@ -87,3 +91,7 @@
     -# Form script
     = javascript_include_tag "form", "data-turbolinks-track": "reload"
     -# End Form script
+
+    -# Stripe script
+    = javascript_include_tag "stripe", "data-turbolinks-track": "reload"
+    -# End Stripe script

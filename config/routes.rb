@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-  get 'stripe/checkout'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   # Change language
   get "/change-language/:lang", to: "settings#change_lang", as: "change_language"
@@ -23,6 +22,11 @@ Rails.application.routes.draw do
   # Cart
   get "/cart", to: "cart#index", as: "cart"
   # End Cart
+
+  # Stripe
+  get "/stripe/checkout", to: "stripe#payment", as: "stripe_payment"
+  post "/stripe/checkout", to: "stripe#checkout", as: "stripe_checkout"
+  # End Stripe
 
   # PayPal
   get "/paypal/payment", to: "paypal#paypal_payment", as: "paypal_payment"

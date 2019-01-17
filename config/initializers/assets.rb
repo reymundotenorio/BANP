@@ -63,3 +63,6 @@ Rails.application.config.assets.precompile += %w( notifications.js )
 
 # Barcode
 Rails.application.config.assets.precompile += %w( barcode.js )
+
+# Stripe
+Rails.application.config.assets.precompile += %w( stripe.js )
