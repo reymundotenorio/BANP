@@ -11,3 +11,7 @@
   %button
     %span= t("views.cart.submit_payment")
     %i.fab.fa-stripe-s
+
+-# Stripe script
+= javascript_include_tag "stripe", "data-turbolinks-track": "reload"
+-# End Stripe script

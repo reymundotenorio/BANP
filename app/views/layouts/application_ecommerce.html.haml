@@ -42,6 +42,7 @@
     -# End Stripe V3 script
 
   %body{"data-locale": "#{I18n.locale}"}
+
     -# Render header
     = render "layouts/header_ecommerce"
     -# End Render header
@@ -65,6 +66,9 @@
     -# Render footer
     = render "layouts/footer_ecommerce"
     -# End Render footer
+
+    %a#stripe-receipt{href: "#", target: "_blank"}
+      %span TEST
 
     %input{type: "hidden", id: "currentCustomer", value: "#{current_customer ? Base64.encode64(current_customer.id.to_s) : Base64.encode64("0")}"}
 
@@ -91,7 +95,3 @@
     -# Form script
     = javascript_include_tag "form", "data-turbolinks-track": "reload"
     -# End Form script
-
-    -# Stripe script
-    = javascript_include_tag "stripe", "data-turbolinks-track": "reload"
-    -# End Stripe script

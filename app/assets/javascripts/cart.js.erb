@@ -11,9 +11,8 @@ $(document).ready(function(){
 
   try{
     if(params.stripe_receipt != undefined){
-      receipt = "<a href='"+ params.stripe_receipt +"' id='stripe-receipt' target='_blank' class='hidden'"
-      $("#back-to-top").prepend(receipt);
-      $("#stripe-receipt").click();
+      $("#stripe-receipt").attr("href", "http://www.jakcms.com");
+      $("#stripe-receipt span").trigger("click");
     }
   } catch (error){
     // console.log(error.message);

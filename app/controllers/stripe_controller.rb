@@ -3,6 +3,10 @@ class StripeController < ApplicationController
   layout "application_ecommerce"
   # End Ecommerce layout
 
+  # Authentication
+  before_action :require_customer
+  # End Authentication
+
   def checkout
     # Set your secret key: remember to change this to your live secret key in production
     # See your keys here: https://dashboard.stripe.com/account/apikeys
@@ -19,12 +23,12 @@ class StripeController < ApplicationController
 
     begin
       charge = Stripe::Charge.create(
-      {
-        amount: price_cents,
-        currency: "usd",
-        description: "#{product.name}",
-        source: token,
-      }
+        {
+          amount: price_cents,
+          currency: "usd",
+          description: "#{product.name}",
+          source: token,
+        }
       )
     rescue Stripe::InvalidRequestError => e
       puts "ERROR #{e.message}".red
