@@ -67,9 +67,6 @@
     = render "layouts/footer_ecommerce"
     -# End Render footer
 
-    %a#stripe-receipt{href: "#", target: "_blank"}
-      %span TEST
-
     %input{type: "hidden", id: "currentCustomer", value: "#{current_customer ? Base64.encode64(current_customer.id.to_s) : Base64.encode64("0")}"}
 
     -# TouchSwipe script

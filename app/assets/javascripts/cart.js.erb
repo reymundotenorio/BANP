@@ -5,19 +5,6 @@ $(document).ready(function(){
   var i18nLocale = $("body").data("locale");
   // var products = <= Product.all.to_json >;
 
-  // Toast message error
-  var currentURL = document.URL;
-  var params = currentURL.extract();
-
-  try{
-    if(params.stripe_receipt != undefined){
-      $("#stripe-receipt").attr("href", "http://www.jakcms.com");
-      $("#stripe-receipt span").trigger("click");
-    }
-  } catch (error){
-    // console.log(error.message);
-  }
-
   <% products_url = "http://www.betterandnice.com/products.json" %>
   <%= products_json = JSON.pretty_generate(JSON.parse((HTTParty.get(products_url)).body)) rescue "{}" %>;
   var products = <%= products_json %>;
