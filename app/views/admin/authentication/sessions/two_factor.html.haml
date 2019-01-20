@@ -30,6 +30,10 @@
                     = recaptcha_tags id: "recaptcha-center", hl: I18n.locale
                   -# End Recaptcha
 
+                  -# Redirect URL
+                  = f.hidden_field :redirect, value: @redirect_url
+                  -# End Redirect URL
+
                   -# Buttons
                   .main-buttons.sessions
                     .col-xs-12.col-sm-12.button-container.no-padding

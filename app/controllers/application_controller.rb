@@ -28,21 +28,25 @@ class ApplicationController < ActionController::Base
 
   # Require employee
   def require_employee
+    redirect_url = request.fullpath
+
     if session[:employee_id] && session[:session_confirmed] == false
-      redirect_to admin_two_factor_path, alert: t("views.authentication.otp_required")
+      redirect_to admin_two_factor_path(redirect: redirect_url), alert: t("views.authentication.otp_required")
 
     elsif session[:employee_id] == nil && session[:session_confirmed] == nil
-      redirect_to admin_sign_in_path, alert: t("views.authentication.sign_in_required") unless current_employee
+      redirect_to admin_sign_in_path(redirect: redirect_url), alert: t("views.authentication.sign_in_required") unless current_employee
     end
   end
 
   # Require customer
   def require_customer
+    redirect_url = request.fullpath
+
     if session[:customer_id] && session[:session_confirmed] == false
-      redirect_to two_factor_path, alert: t("views.authentication.otp_required")
+      redirect_to two_factor_path(redirect: redirect_url), alert: t("views.authentication.otp_required")
 
     elsif session[:customer_id] == nil && session[:session_confirmed] == nil
-      redirect_to sign_in_path, alert: t("views.authentication.sign_in_required") unless current_customer
+      redirect_to sign_in_path(redirect: redirect_url), alert: t("views.authentication.sign_in_required") unless current_customer
     end
   end
 

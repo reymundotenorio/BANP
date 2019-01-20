@@ -18,6 +18,57 @@ class Admin::Authentication::SessionsController < ApplicationController
 
     @email = params[:email]
     @email = @email.blank? ? "" : @email.strip.downcase
+
+    @redirect_url = params[:redirect]
+    @redirect_url = @redirect_url.blank? ? "" : @redirect_url.strip.downcase
+  end
+
+  # admin/two-factor
+  def two_factor
+    # Redirect if user is already authenticated
+    if session[:employee_id] && session[:session_confirmed] == true
+      redirect_to admin_root_path
+      return
+    end
+
+      # If user exists
+    if set_user_with_two_factor
+      # Verify if user is not employee
+      if !user_is_employee?
+        return
+      end
+
+      # If employee is disabled
+      if !employee_enabled?
+        return
+      end
+
+      # If user is not confirmed
+      if !user_confirmed?
+        return
+      end
+
+      # If user has exceeded the max of failed attemps
+      if @user.failed_attempts > $max_failed_attempts
+        session[:employee_id] = nil
+        session[:session_confirmed] = nil
+
+        # If unlock email has not been sent
+        send_unlock_email unless @user.unlock_sent
+
+        redirect_to admin_auth_notifications_path(source: "unlock"), alert: t("views.authentication.account_locked", email: @user.email)
+        return
+      end
+
+      if session[:session_confirmed] == true
+        redirect_to admin_root_path
+        return
+      end
+    end
+    # End if user exists
+
+    @redirect_url = params[:redirect]
+    @redirect_url = @redirect_url.blank? ? "" : @redirect_url.strip.downcase
   end
 
   # admin/sign-out
@@ -44,6 +95,10 @@ class Admin::Authentication::SessionsController < ApplicationController
       redirect_to admin_sign_in_path, alert: t("views.form.recaptcha_error")
       return
     end
+
+    # Redirect URL
+    redirect_url = params[:sign_in][:redirect]
+    redirect_url = redirect_url.blank? ? admin_root_path : redirect_url.strip.downcase
 
     # If user exists
     if set_user
@@ -88,66 +143,21 @@ class Admin::Authentication::SessionsController < ApplicationController
             @user.update(two_factor_auth_otp: @OTP)
 
             send_otp
-            redirect_to admin_two_factor_path
+            redirect_to admin_two_factor_path(redirect: redirect_url)
             return
           end
 
           session[:session_confirmed] = true
 
-          redirect_to admin_root_path, notice: t("views.authentication.signed_in_correctly", first_name: @employee.first_name, last_name: @employee.last_name)
+          redirect_to redirect_url, notice: t("views.authentication.signed_in_correctly", first_name: @employee.first_name, last_name: @employee.last_name)
 
           # If user exist but the password doesn't match
         else
           remaining_attempts = $max_failed_attempts - increment_attempts
           remaining_attempts += 1
 
-          redirect_to admin_sign_in_path, alert: "#{t('views.authentication.incorrect_pwd')}, #{remaining_attempts} #{remaining_attempts == 1 ? t('views.authentication.remaining_attempt') : t('views.authentication.remaining_attempts')}"
+          redirect_to admin_sign_in_path(redirect: redirect_url), alert: "#{t('views.authentication.incorrect_pwd')}, #{remaining_attempts} #{remaining_attempts == 1 ? t('views.authentication.remaining_attempt') : t('views.authentication.remaining_attempts')}"
         end
-      end
-    end
-    # End if user exists
-  end
-
-  # Verify if user has sign in correctly
-  def two_factor
-    # Redirect if user is already authenticated
-    if session[:employee_id] && session[:session_confirmed] == true
-      redirect_to admin_root_path
-      return
-    end
-
-    # If user exists
-    if set_user_with_two_factor
-      # Verify if user is not employee
-      if !user_is_employee?
-        return
-      end
-
-      # If employee is disabled
-      if !employee_enabled?
-        return
-      end
-
-      # If user is not confirmed
-      if !user_confirmed?
-        return
-      end
-
-      # If user has exceeded the max of failed attemps
-      if @user.failed_attempts > $max_failed_attempts
-        session[:employee_id] = nil
-        session[:session_confirmed] = nil
-
-        # If unlock email has not been sent
-        send_unlock_email unless @user.unlock_sent
-
-        redirect_to admin_auth_notifications_path(source: "unlock"), alert: t("views.authentication.account_locked", email: @user.email)
-        return
-      end
-
-      if session[:session_confirmed] == true
-        redirect_to admin_root_path
-        return
       end
     end
     # End if user exists
@@ -161,6 +171,10 @@ class Admin::Authentication::SessionsController < ApplicationController
       return
     end
 
+    # Redirect URL
+    redirect_url = params[:two_factor][:redirect]
+    redirect_url = redirect_url.blank? ? admin_root_path : redirect_url.strip.downcase
+
     # If user exists
     if set_user_with_two_factor
       # Verify if user is not employee
@@ -173,13 +187,13 @@ class Admin::Authentication::SessionsController < ApplicationController
 
       if @user.two_factor_auth_otp == otp
         session[:session_confirmed] = true
-        redirect_to admin_root_path, notice: t("views.authentication.signed_in_correctly", first_name: @employee.first_name, last_name: @employee.last_name)
+        redirect_to redirect_url, notice: t("views.authentication.signed_in_correctly", first_name: @employee.first_name, last_name: @employee.last_name)
 
       else
         remaining_attempts = $max_failed_attempts - increment_attempts
         remaining_attempts += 1
 
-        redirect_to admin_two_factor_path, alert: "#{t('views.authentication.incorrect_otp')}, #{remaining_attempts} #{remaining_attempts == 1 ? t('views.authentication.remaining_attempt') : t('views.authentication.remaining_attempts')}"
+        redirect_to admin_two_factor_path(redirect: redirect_url), alert: "#{t('views.authentication.incorrect_otp')}, #{remaining_attempts} #{remaining_attempts == 1 ? t('views.authentication.remaining_attempt') : t('views.authentication.remaining_attempts')}"
       end
     end
     # End if user exists

@@ -250,6 +250,7 @@ es:
       update_password: "Actualización de contraseña"
       requested_info: "Las instrucciones fueron solicitadas desde el IP %{ip} con ubicación en %{location}"
       token_expiration: "Este enlace estará disponible por %{expiration_time} horas. Si no solicitó restablecer su contraseña, simplemente puede ignorar este correo electrónico; Su contraseña no será cambiada."
+      password_updated: "Su contraseña ha sido actualizada con éxito"
     navigation:
       home: "Inicio"
       all_products: "Todos los Productos"

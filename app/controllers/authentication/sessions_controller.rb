@@ -23,6 +23,54 @@ class Authentication::SessionsController < ApplicationController
     @redirect_url = @redirect_url.blank? ? "" : @redirect_url.strip.downcase
   end
 
+  # /two-factor
+  def two_factor
+    # Redirect if user is already authenticated
+    if session[:customer_id] && session[:session_confirmed] == true
+      redirect_to root_path
+      return
+    end
+
+    # If user exists
+    if set_user_with_two_factor
+      # Verify if user is not customer
+      if !user_is_customer?
+        return
+      end
+
+      # If customer is disabled
+      if !customer_enabled?
+        return
+      end
+
+      # If user is not confirmed
+      if !user_confirmed?(true, false)
+        return
+      end
+
+      # If user has exceeded the max of failed attemps
+      if @user.failed_attempts > $max_failed_attempts
+        session[:customer_id] = nil
+        session[:session_confirmed] = nil
+
+        # If unlock email has not been sent
+        send_unlock_email unless @user.unlock_sent
+
+        redirect_to auth_notifications_path(source: "unlock"), alert: t("views.authentication.account_locked", email: @user.email)
+        return
+      end
+
+      if session[:session_confirmed] == true
+        redirect_to root_path
+        return
+      end
+    end
+    # End if user exists
+
+    @redirect_url = params[:redirect]
+    @redirect_url = @redirect_url.blank? ? "" : @redirect_url.strip.downcase
+  end
+
   # /sign-out
   def destroy
     @email = params[:email]
@@ -50,7 +98,7 @@ class Authentication::SessionsController < ApplicationController
 
     # Redirect URL
     redirect_url = params[:sign_in][:redirect]
-    redirect_url = redirect_url.blank? ? "" : redirect_url.strip.downcase
+    redirect_url = redirect_url.blank? ? root_path : redirect_url.strip.downcase
 
     # If user exists
     if set_user
@@ -108,59 +156,11 @@ class Authentication::SessionsController < ApplicationController
           remaining_attempts = $max_failed_attempts - increment_attempts
           remaining_attempts += 1
 
-          redirect_to sign_in_path, alert: "#{t('views.authentication.incorrect_pwd')}, #{remaining_attempts} #{remaining_attempts == 1 ? t('views.authentication.remaining_attempt') : t('views.authentication.remaining_attempts')}"
+          redirect_to sign_in_path(redirect: redirect_url), alert: "#{t('views.authentication.incorrect_pwd')}, #{remaining_attempts} #{remaining_attempts == 1 ? t('views.authentication.remaining_attempt') : t('views.authentication.remaining_attempts')}"
         end
       end
     end
     # End if user exists
-  end
-
-  # Verify if user has sign in correctly
-  def two_factor
-    # Redirect if user is already authenticated
-    if session[:customer_id] && session[:session_confirmed] == true
-      redirect_to root_path
-      return
-    end
-
-    # If user exists
-    if set_user_with_two_factor
-      # Verify if user is not customer
-      if !user_is_customer?
-        return
-      end
-
-      # If customer is disabled
-      if !customer_enabled?
-        return
-      end
-
-      # If user is not confirmed
-      if !user_confirmed?(true, false)
-        return
-      end
-
-      # If user has exceeded the max of failed attemps
-      if @user.failed_attempts > $max_failed_attempts
-        session[:customer_id] = nil
-        session[:session_confirmed] = nil
-
-        # If unlock email has not been sent
-        send_unlock_email unless @user.unlock_sent
-
-        redirect_to auth_notifications_path(source: "unlock"), alert: t("views.authentication.account_locked", email: @user.email)
-        return
-      end
-
-      if session[:session_confirmed] == true
-        redirect_to root_path
-        return
-      end
-    end
-    # End if user exists
-
-    @redirect_url = params[:redirect]
-    @redirect_url = @redirect_url.blank? ? "" : @redirect_url.strip.downcase
   end
 
   # Validating the two factor otp
@@ -173,7 +173,7 @@ class Authentication::SessionsController < ApplicationController
 
     # Redirect URL
     redirect_url = params[:two_factor][:redirect]
-    redirect_url = redirect_url.blank? ? "" : redirect_url.strip.downcase
+    redirect_url = redirect_url.blank? ? root_path : redirect_url.strip.downcase
 
     # If user exists
     if set_user_with_two_factor
@@ -193,7 +193,7 @@ class Authentication::SessionsController < ApplicationController
         remaining_attempts = $max_failed_attempts - increment_attempts
         remaining_attempts += 1
 
-        redirect_to two_factor_path, alert: "#{t('views.authentication.incorrect_otp')}, #{remaining_attempts} #{remaining_attempts == 1 ? t('views.authentication.remaining_attempt') : t('views.authentication.remaining_attempts')}"
+        redirect_to two_factor_path(redirect: redirect_url), alert: "#{t('views.authentication.incorrect_otp')}, #{remaining_attempts} #{remaining_attempts == 1 ? t('views.authentication.remaining_attempt') : t('views.authentication.remaining_attempts')}"
       end
     end
     # End if user exists

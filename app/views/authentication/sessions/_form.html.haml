@@ -29,10 +29,6 @@
                       %b= t("activerecord.attributes.user.email")
                     .border-bottom
 
-                  -# Redirect URL
-                  = f.hidden_field :redirect, value: @redirect_url
-                  -# End Redirect URL
-
                   .form-group
                     - if @email != ""
                       = f.password_field :password, class: "form-control input", placeholder: t("activerecord.attributes.user.password_digest"), required: true, autofocus: true
@@ -52,6 +48,10 @@
                   .form-group.text-center
                     = recaptcha_tags id: "recaptcha-center", hl: I18n.locale
                   -# End Recaptcha
+
+                  -# Redirect URL
+                  = f.hidden_field :redirect, value: @redirect_url
+                  -# End Redirect URL
 
                   -# Buttons
                   .main-buttons.sessions

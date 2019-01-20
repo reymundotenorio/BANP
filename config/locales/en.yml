@@ -250,6 +250,7 @@ en:
       update_password: "Update password"
       requested_info: "The instructions were requested from the IP %{ip} with location in %{location}"
       token_expiration: "This link will be available for %{expiration_time} hours. If you did not request to reset your password, then you can just ignore this email; your password will not be change."
+      password_updated: "Your password has been updated successfully"
     navigation:
       home: "Home"
       all_products: "All Products"
