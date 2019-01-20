@@ -198,6 +198,7 @@ class Admin::Authentication::SessionsController < ApplicationController
     end
   end
 
+  # Resend SMS with OTP
   def resend_otp
     set_user_with_two_factor
 

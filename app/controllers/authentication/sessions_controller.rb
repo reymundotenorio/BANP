@@ -18,6 +18,26 @@ class Authentication::SessionsController < ApplicationController
 
     @email = params[:email]
     @email = @email.blank? ? "" : @email.strip.downcase
+
+    @redirect_url = params[:redirect]
+    @redirect_url = @redirect_url.blank? ? "" : @redirect_url.strip.downcase
+  end
+
+  # /sign-out
+  def destroy
+    @email = params[:email]
+
+    session[:customer_id] = nil
+    session[:session_confirmed] = nil
+
+    if @email
+      redirect_to sign_in_path(email: @email), notice: t("views.authentication.locked_correctly")
+      return
+
+    else
+      redirect_to sign_in_path, notice: t("views.authentication.signed_out_correctly")
+      return
+    end
   end
 
   # Sign in
@@ -27,6 +47,10 @@ class Authentication::SessionsController < ApplicationController
       redirect_to sign_in_path, alert: t("views.form.recaptcha_error")
       return
     end
+
+    # Redirect URL
+    redirect_url = params[:sign_in][:redirect]
+    redirect_url = redirect_url.blank? ? "" : redirect_url.strip.downcase
 
     # If user exists
     if set_user
@@ -71,13 +95,13 @@ class Authentication::SessionsController < ApplicationController
             @user.update(two_factor_auth_otp: @OTP)
 
             send_otp
-            redirect_to two_factor_path
+            redirect_to two_factor_path(redirect: redirect_url)
             return
           end
 
           session[:session_confirmed] = true
 
-          redirect_to root_path, notice: t("views.authentication.signed_in_correctly", first_name: @customer.first_name, last_name: @customer.last_name)
+          redirect_to redirect_url, notice: t("views.authentication.signed_in_correctly", first_name: @customer.first_name, last_name: @customer.last_name)
 
           # If user exist but the password doesn't match
         else
@@ -134,6 +158,9 @@ class Authentication::SessionsController < ApplicationController
       end
     end
     # End if user exists
+
+    @redirect_url = params[:redirect]
+    @redirect_url = @redirect_url.blank? ? "" : @redirect_url.strip.downcase
   end
 
   # Validating the two factor otp
@@ -143,6 +170,10 @@ class Authentication::SessionsController < ApplicationController
       redirect_to two_factor_path, alert: t("views.form.recaptcha_error")
       return
     end
+
+    # Redirect URL
+    redirect_url = params[:two_factor][:redirect]
+    redirect_url = redirect_url.blank? ? "" : redirect_url.strip.downcase
 
     # If user exists
     if set_user_with_two_factor
@@ -156,7 +187,7 @@ class Authentication::SessionsController < ApplicationController
 
       if @user.two_factor_auth_otp == otp
         session[:session_confirmed] = true
-        redirect_to root_path, notice: t("views.authentication.signed_in_correctly", first_name: @customer.first_name, last_name: @customer.last_name)
+        redirect_to redirect_url, notice: t("views.authentication.signed_in_correctly", first_name: @customer.first_name, last_name: @customer.last_name)
 
       else
         remaining_attempts = $max_failed_attempts - increment_attempts
@@ -181,6 +212,7 @@ class Authentication::SessionsController < ApplicationController
     end
   end
 
+  # Resend SMS with OTP
   def resend_otp
     set_user_with_two_factor
 
@@ -305,22 +337,5 @@ class Authentication::SessionsController < ApplicationController
     sync_update @user
 
     failed_attempts
-  end
-
-  # /sign-out
-  def destroy
-    @email = params[:email]
-
-    session[:customer_id] = nil
-    session[:session_confirmed] = nil
-
-    if @email
-      redirect_to sign_in_path(email: @email), notice: t("views.authentication.locked_correctly")
-      return
-
-    else
-      redirect_to sign_in_path, notice: t("views.authentication.signed_out_correctly")
-      return
-    end
   end
 end
