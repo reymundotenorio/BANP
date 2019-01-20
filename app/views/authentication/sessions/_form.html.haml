@@ -57,6 +57,12 @@
                   .main-buttons.sessions
                     .col-xs-12.col-sm-12.button-container.no-padding
                       -# Link hidden on mobile
+                      = link_to (sign_up_path), class: "forgot-pass hidden-xs" do
+                        %i.fas.fa-user-plus
+                        %span= t("header.user.sign_up")
+                      -# End Link hidden on mobile
+
+                      -# Link hidden on mobile
                       = link_to (reset_password_path), class: "forgot-pass hidden-xs" do
                         %i.fas.fa-chalkboard-teacher
                         %span= t("views.form.forgot_password")
@@ -65,6 +71,12 @@
                       = f.button class: "btn btn-general", data: {disable_with: "<i class='fas fa-spinner fa-spin'></i>"} do
                         %i.fas.fa-fingerprint
                         %span= t("views.form.sign_in")
+
+                      -# Link visible only on mobile
+                      = link_to (sign_up_path), class: "forgot-pass visible-xs" do
+                        %i.fas.fa-user-plus
+                        %span= t("header.user.sign_up")
+                      -# End Link visible only on mobile
 
                       -# Link visible only on mobile
                       = link_to (reset_password_path), class: "forgot-pass visible-xs" do
