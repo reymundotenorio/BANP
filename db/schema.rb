@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_11_18_173060) do
+ActiveRecord::Schema.define(version: 2019_01_20_211908) do
 
   create_table "active_storage_attachments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name", null: false
@@ -142,6 +142,36 @@ ActiveRecord::Schema.define(version: 2018_11_18_173060) do
     t.index ["slug"], name: "index_providers_on_slug", unique: true
   end
 
+  create_table "purchase_details", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.decimal "price", precision: 8, scale: 2, null: false
+    t.integer "quantity", null: false
+    t.integer "stock", null: false
+    t.string "status", default: "received", null: false
+    t.boolean "state", default: true, null: false
+    t.string "slug"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "purchase_id"
+    t.bigint "product_id"
+    t.index ["product_id"], name: "index_purchase_details_on_product_id"
+    t.index ["purchase_id"], name: "index_purchase_details_on_purchase_id"
+    t.index ["slug"], name: "index_purchase_details_on_slug", unique: true
+  end
+
+  create_table "purchases", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "receipt_number", null: false
+    t.string "status", default: "ordered", null: false
+    t.boolean "state", default: true, null: false
+    t.string "slug"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "provider_id"
+    t.bigint "user_id"
+    t.index ["provider_id"], name: "index_purchases_on_provider_id"
+    t.index ["slug"], name: "index_purchases_on_slug", unique: true
+    t.index ["user_id"], name: "index_purchases_on_user_id"
+  end
+
   create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "email", null: false
     t.string "slug"
@@ -176,6 +206,10 @@ ActiveRecord::Schema.define(version: 2018_11_18_173060) do
   end
 
   add_foreign_key "products", "categories"
+  add_foreign_key "purchase_details", "products"
+  add_foreign_key "purchase_details", "purchases"
+  add_foreign_key "purchases", "providers"
+  add_foreign_key "purchases", "users"
   add_foreign_key "users", "customers"
   add_foreign_key "users", "employees"
 end
