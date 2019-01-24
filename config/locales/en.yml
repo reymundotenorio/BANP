@@ -86,6 +86,7 @@ en:
         company: "Company"
         email: "Email"
         phone: "Phone"
+        zipcode: "Zip code"
         address: "Address"
         state: "State"
         image_file_name: "Image file name"

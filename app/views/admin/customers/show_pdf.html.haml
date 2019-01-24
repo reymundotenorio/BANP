@@ -7,7 +7,7 @@
 
       -# Set attributes
       - model = "customers"
-      - attributes = ["first_name", "last_name", "company", "email" ,"phone", "address", "state"]
+      - attributes = ["first_name", "last_name", "company", "email" ,"phone", "zipcode", "address", "state"]
 
       -# Render details information
       = render partial: "partials/information_details", locals: {model: model, resource: resource, attributes: attributes}

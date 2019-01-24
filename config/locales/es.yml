@@ -86,6 +86,7 @@ es:
         company: "Compañía"
         email: "Correo electrónico"
         phone: "Teléfono"
+        zipcode: "Código postal"
         address: "Dirección"
         state: "Estado"
         image_file_name: "Nombre de la imagen"

@@ -11,7 +11,7 @@
 
 = form_tag paypal_checkout_path, method: "post", id: "paypal-checkout", class: "hidden" do
   -# Loading cart productss
-  #paypal-products
+  #cart-products
 
   = hidden_field_tag "code", params[:code] ? params[:code] : nil
 

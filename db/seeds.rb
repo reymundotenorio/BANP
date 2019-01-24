@@ -93,7 +93,8 @@ puts "Seeding customers"
       company: Faker::Company.name,
       email: Faker::Internet.email,
       phone: "(#{Faker::Number.number(3)}) #{Faker::Number.number(3)}-#{Faker::Number.number(4)}",
-      address: "#{Faker::Address.street_address}. #{Faker::Address.city}, #{Faker::Address.state} #{Faker::Address.zip_code}",
+      zipcode: Faker::Address.zip_code,
+      address: "#{Faker::Address.street_address}. #{Faker::Address.city}, #{Faker::Address.state}",
       state: Faker::Boolean.boolean(0.8)
     )
   rescue StandardError => e

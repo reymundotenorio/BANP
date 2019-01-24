@@ -72,6 +72,12 @@
                     %label
                       %b= t("activerecord.attributes.customer.phone")
                     .border-bottom
+                    
+                  .form-group
+                    = f.text_field :zipcode, class: "form-control input", placeholder: t("activerecord.attributes.customer.zipcode"), "data-mask": "00000", required: true
+                    %label
+                      %b= t("activerecord.attributes.customer.zipcode")
+                    .border-bottom
 
                   .form-group
                     = f.text_area :address, class: "form-control input text-area",placeholder: t("activerecord.attributes.customer.address"), required: true

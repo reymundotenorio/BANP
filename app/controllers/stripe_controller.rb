@@ -17,26 +17,60 @@ class StripeController < ApplicationController
     token = params[:stripeToken]
     product = Product.first
 
+
+    product_items = Array.new
+    products_description = ""
+
+    params[:products].each do |id, attributes|
+      product = Product.find(attributes["id"].to_i)
+
+      item =
+      {
+        name: I18n.locale == :es ? "#{product.name} (#{attributes['quantity']})" : "#{product.name_spanish} (#{attributes['quantity']})",
+        price: "#{product.price}",
+        quantity: attributes["quantity"]
+      }
+
+      product_items.push(item)
+
+      if id == "1"
+        products_description = I18n.locale == :es ? "#{product.name} (#{attributes['quantity']})" : "#{product.name_spanish} (#{attributes['quantity']})"
+
+      else
+        products_description += ", "
+        products_description += I18n.locale == :es ? "#{product.name} (#{attributes['quantity']})" : "#{product.name_spanish} (#{attributes['quantity']})"
+      end
+
+    end
+
+    # Calculations
+    items_subtotal = product_items.inject(0) {|sum, hash| sum + ((hash[:price]).to_f * (hash[:quantity]).to_i)}
+    items_subtotal = items_subtotal.round(2)
+
     # Fixing price
-    price_cents = dollars_to_cents(product.price.to_s)
-    puts "PRICE #{price_cents}".red
+    price_cents = dollars_to_cents(items_subtotal.to_s)
+    # puts "PRICE #{price_cents}".red
 
     begin
       charge = Stripe::Charge.create(
-        {
-          amount: price_cents,
-          currency: "usd",
-          description: "#{product.name}",
-          source: token,
-        }
+      {
+        amount: price_cents,
+        currency: "usd",
+        description: products_description,
+        source: token,
+      }
       )
     rescue Stripe::InvalidRequestError => e
       puts "ERROR #{e.message}".red
+      redirect_to cart_path
+      return
     end
 
     if charge
-      puts "CHARGE #{charge}".red
-      redirect_to cart_path(stripe_receipt: charge.receipt_url)
+      # puts "CHARGE #{charge}".red
+      redirect_to charge.receipt_url
+      # redirect_to cart_path(stripe_receipt: charge.receipt_url)
+      return
     else
     end
 

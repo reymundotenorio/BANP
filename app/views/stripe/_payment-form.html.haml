@@ -1,4 +1,7 @@
 = form_tag stripe_checkout_path, method: "post", id: "payment-form" do
+  -# Loading cart productss
+  #cart-products
+  
   .form-row
     %label{for: "card-element"}= t("views.cart.credit_debit_card")
 

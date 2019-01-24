@@ -50,7 +50,7 @@ class PaypalController < ApplicationController
       # Get logout url
       # puts tokeninfo.logout_url
 
-      product_items = Array.new
+      product_items = Array.new 
 
       params[:products].each do |id, attributes|
         product = Product.find(attributes["id"].to_i)
@@ -74,7 +74,7 @@ class PaypalController < ApplicationController
       items_subtotal = product_items.inject(0) {|sum, hash| sum + ((hash[:price]).to_f * (hash[:quantity]).to_i)}
       items_subtotal = items_subtotal.round(2)
 
-      zip_code = "95131"
+      zip_code = @current_customer.zipcode
       zip_info = ZipCodes.identify(zip_code)
 
       # items_shipping = items_subtotal * 0.05
