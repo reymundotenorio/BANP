@@ -6,6 +6,7 @@ class CreateCustomers < ActiveRecord::Migration[5.2]
       t.string :company
       t.string :email, null: false
       t.string :phone, limit: 14, null: false, unique: true # Phone number format (000) 000-0000
+      t.string :zipcode, null: false, limit: 5
       t.string :address, null: false
       t.boolean :state, default: true, null: false
 

@@ -27,7 +27,7 @@ class Customer < ApplicationRecord
   # Search
   def self.search(search, show_all)
     if search
-      query = "(first_name LIKE :search OR last_name LIKE :search OR company LIKE :search OR phone LIKE :search OR email LIKE :search OR address LIKE :search)"
+      query = "(first_name LIKE :search OR last_name LIKE :search OR company LIKE :search OR phone LIKE :search OR email LIKE :search OR address LIKE :search OR zipcode LIKE :search)"
       where(query, search: "%#{search}%")
 
     elsif show_all == "all"
@@ -77,6 +77,7 @@ class Customer < ApplicationRecord
   validates :last_name, presence: true
   validates :email, presence: true
   validates :phone, presence: true
+  validates :zipcode, presence: true
   validates :address, presence: true
   # End  Presence validation
 
@@ -86,6 +87,7 @@ class Customer < ApplicationRecord
   validates :company, length: { maximum: 255 }
   validates :email, length: { maximum: 255 }
   # validates :phone, length: { is: 14 }, allow_blank: true # Avoid phone validation
+  validates :zipcode, length: { is: 5 }
   validates :address, length: { maximum: 255 }
   # End Length validation
 

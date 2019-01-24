@@ -73,6 +73,7 @@ ActiveRecord::Schema.define(version: 2019_01_20_211908) do
     t.string "company"
     t.string "email", null: false
     t.string "phone", limit: 14, null: false
+    t.string "zipcode", limit: 5, null: false
     t.string "address", null: false
     t.boolean "state", default: true, null: false
     t.string "slug"

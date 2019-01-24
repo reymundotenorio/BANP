@@ -93,6 +93,7 @@ class Admin::CustomersController < ApplicationController
     @customer[:last_name]= @customer[:last_name].strip
     @customer[:email] =  @customer[:email].strip.downcase
     @customer[:phone] = @customer[:phone].strip
+    @customer[:zipcode] = @customer[:zipcode].strip
     @customer[:address] = @customer[:address].strip
     # End Deleting blank spaces
 
@@ -148,6 +149,6 @@ class Admin::CustomersController < ApplicationController
 
   # Customer params
   def customer_params
-    params.require(:customer).permit(:first_name, :last_name, :company, :email, :phone, :address, :image)
+    params.require(:customer).permit(:first_name, :last_name, :company, :email, :phone, :zipcode, :address, :image)
   end
 end
