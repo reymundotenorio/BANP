@@ -90,7 +90,7 @@ $(document).ready(function(){
             subtotal += (product.price * value.cartDetails.quantity);
             counter ++;
 
-            var productItem = "<div class='table-row'> <div class='image-column'><img class='img-responsive' src='" + product.image_url + "'></div> <div class='info cart-info'> <div class='name-column info-column'><span>" + productName + "</span></div> <div class='price-column info-column'><span>" + formatter.format(product.price) + "</span></div> <div class='quantity-column info-column'><form action='' class='cart-form' method=''><div class='quantity'> <button class='subtract' name='minus' type='button'><span class='sr-only'>minus</span><i class='fas fa-minus'></i></button> <input id='quantity' class='q-input q-cart' name='quant-prod' type='number' value='" + value.cartDetails.quantity + "' min='1'> <button class='add' name='plus' type='button'><span class='sr-only'>plus</span> <i class='fas fa-plus'></i></button></div> <input id='productId' name='productId' type='hidden' value='" + product.id + "'> </form></div> <div class='total-column info-column'><span>" + formatter.format((product.price * value.cartDetails.quantity)) + "</span></div> </div> <button class='remove-btn' name='Remove' type='button'><i class='far fa-trash-alt'></i></button> </div>";
+            var productItem = "<div class='table-row'> <div class='image-column'><img class='img-responsive' src='" + product.image_url + "'></div> <div class='info cart-info'> <div class='name-column info-column'><span>" + productName + "</span></div> <div class='price-column info-column'><span>" + formatter.format(product.price) + "</span></div> <div class='quantity-column info-column'><form action='' class='cart-form' method=''><div class='quantity'> <button class='subtract' name='minus' type='button'><span class='sr-only'>minus</span><i class='fas fa-minus'></i></button> <input id='quantity' class='q-input q-cart' name='quant-prod' type='number' value='" + value.cartDetails.quantity + "' min='1'> <button class='add' name='plus' type='button'><span class='sr-only'>plus</span> <i class='fas fa-plus'></i></button></div> <input id='productId' name='productId' type='hidden' value='" + product.id + "'> </form></div> <div class='total-column info-column'><span>" + formatter.format((product.price * value.cartDetails.quantity)) + "</span></div> </div> <button class='remove-btn removeFromCart' name='Remove' type='button'><i class='far fa-trash-alt'></i></button> </div>";
 
             var productInfo = "<div class='item'><input id='products_" + counter + "_id' name='products[" + counter + "][id]' type='hidden' value='" + product.id + "'> <input id='products_" + counter + "_quantity' name='products[" + counter + "][quantity]' type='hidden' value='" + value.cartDetails.quantity + "'></div>"
 
@@ -179,6 +179,29 @@ $(document).ready(function(){
     readCartInfo();
   });
 
+  // Fuction on the "Clear Cart" button
+  $(".clearCart").click(function(){
+    var jsonData = JSON.parse(localStorage.getItem("banpCart")) || {};
+    jsonData.cart = jsonData.cart || [];
+    var userID = parseInt(atob($("#currentCustomer").val().trim()));
+
+    if(userID == 0){
+      return;
+    }
+
+    // If product exists on the cart
+    $.each(jsonData.cart, function(index, value){
+      if(value !=  null){
+        if(userID == value.cartDetails.userId){
+          delete jsonData.cart[index];
+        }
+      }
+    });
+
+    localStorage.setItem("banpCart", JSON.stringify(jsonData));
+    readCartInfo();
+  });
+
   // Validate if is a number
   function isNumber(n) {
     return !isNaN(parseInt(n)) && isFinite(n);
@@ -186,6 +209,36 @@ $(document).ready(function(){
 
   // Add Mask and Event to Input
   function addEventMaskInput(){
+
+    // Fuction on the "Remove from cart" button
+    $(".removeFromCart").click(function(){
+      var form = $(this).parents(".table-row:first");
+      var productId = form.find("#productId");
+
+      var jsonData = JSON.parse(localStorage.getItem("banpCart")) || {};
+      jsonData.cart = jsonData.cart || [];
+
+      var userID = parseInt(atob($("#currentCustomer").val().trim()));
+
+      if(userID == 0){
+        $(location).attr("href", "/sign-in?notification=sign-in-required&redirect=" + window.location.pathname);
+        return;
+      }
+
+      // If product exists on the cart
+      $.each(jsonData.cart, function(index, value){
+        if(value !=  null){
+          if(userID == value.cartDetails.userId){
+            if (value.cartDetails.id == parseInt(productId.val()) ){
+              delete jsonData.cart[index];
+            }
+          }
+        }
+      });
+
+      localStorage.setItem("banpCart", JSON.stringify(jsonData));
+      readCartInfo();
+    });
 
     // Prevent enter on cart forms
     $("form.cart-form").submit(function(e){
@@ -208,7 +261,7 @@ $(document).ready(function(){
       if(e.charCode < 48 || e.charCode > 57) return false;
     });
 
-    // Fuction on the "Add to Cart" button
+    // Focus out in quantity field on cart list
     $(".q-input.q-cart").focusout(function(){
       var form = $(this).parents("form:first");
       var quantity = form.find("#quantity");
@@ -269,66 +322,7 @@ $(document).ready(function(){
 
     // Mask only numbers
     $(".q-input").mask("0#");
-
-    // $(".add").click(function(){
-    //   var $input = $(this).prev();
-    //   var currentValue = parseInt($input.val());
-    //
-    //   var $colParent = $(this).closest(".info-column");
-    //   var $totalSpan = $colParent.next().children("span");
-    //   var price = parseFloat($colParent.prev().children("span").text());
-    //
-    //   $input.val(currentValue + 1);
-    //
-    //   if ($input.val().length <= 0){
-    //     $input.val(1)
-    //   }
-    //
-    //   $input.trigger("change");
-    // });
-    //
-    // $(".subtract").click(function(){
-    //   var $input = $(this).next();
-    //   var currentValue = parseInt($input.val());
-    //
-    //   var $colParent = $(this).closest(".info-column");
-    //   var $totalSpan = $colParent.next().children("span");
-    //   var price = parseFloat($colParent.prev().children("span").text());
-    //
-    //   if(currentValue > 1){
-    //     $input.val(currentValue - 1);
-    //   }
-    //
-    //   if ($input.val().length <= 0){
-    //     $input.val(1)
-    //   }
-    //
-    //   $input.trigger("change");
-    // });
   }
-
-  // Fuction on the "Clear Cart" button
-  $(".clearCart").click(function(){
-    var jsonData = JSON.parse(localStorage.getItem("banpCart")) || {};
-    jsonData.cart = jsonData.cart || [];
-    var userID = parseInt(atob($("#currentCustomer").val().trim()));
-
-    if(userID == 0){
-      return;
-    }
-
-    // If product exists on the cart
-    $.each(jsonData.cart, function(index, value){
-      if(value !=  null){
-        if(userID == value.cartDetails.userId){
-          delete jsonData.cart[index];
-        }
-      }
-    });
-
-    localStorage.setItem("banpCart", JSON.stringify(jsonData));
-    readCartInfo();
-  });
 
   // Update Cart and cart details
   readCartInfo();
