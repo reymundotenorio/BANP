@@ -13,5 +13,5 @@ json.state product.state
 json.slug product.slug
 # json.created_at product.created_at
 # json.updated_at product.updated_at
-json.category_id product.category_id
+#json.category_id product.category_id
 json.image_url product.image.attached? ? url_for(product.image) : "https://s3.amazonaws.com/betterandnice/images/default/product-default.png"
