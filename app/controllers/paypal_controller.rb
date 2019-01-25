@@ -187,7 +187,7 @@ class PaypalController < ApplicationController
 
   def paypal_auth
     # Generate URL to Get Authorize code
-    auth_url = Tokeninfo.authorize_url(scopes: "openid profile") # scopes: "openid profile"
+    auth_url = Tokeninfo.authorize_url() # scopes: "openid profile"
     redirect_to auth_url
   end
 end
