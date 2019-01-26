@@ -33,6 +33,10 @@ class PaypalController < ApplicationController
         paypal_auth
         return
       end
+
+      puts "****************************************".red
+      puts "PASO #1".red
+      puts "****************************************".red
       # puts tokeninfo.to_hash
 
       # Refresh tokeninfo object
@@ -50,7 +54,11 @@ class PaypalController < ApplicationController
       # Get logout url
       # puts tokeninfo.logout_url
 
-      product_items = Array.new 
+      product_items = Array.new
+
+      puts "****************************************".red
+      puts "PASO #2".red
+      puts "****************************************".red
 
       params[:products].each do |id, attributes|
         product = Product.find(attributes["id"].to_i)
@@ -68,14 +76,26 @@ class PaypalController < ApplicationController
         product_items.push(item)
       end
 
+      puts "****************************************".red
+      puts "PASO #3".red
+      puts "****************************************".red
+
       # puts "Product items: #{product_items}".red
 
       # Calculations
       items_subtotal = product_items.inject(0) {|sum, hash| sum + ((hash[:price]).to_f * (hash[:quantity]).to_i)}
       items_subtotal = items_subtotal.round(2)
 
-      zip_code = @current_customer.zipcode
+      puts "****************************************".red
+      puts "PASO #4".red
+      puts "****************************************".red
+
+      zip_code = "33151" #@current_customer.zipcode
       zip_info = ZipCodes.identify(zip_code)
+
+      puts "****************************************".red
+      puts "PASO #5".red
+      puts "****************************************".red
 
       # items_shipping = items_subtotal * 0.05
       # items_shipping = items_shipping.round(2)
@@ -130,21 +150,37 @@ class PaypalController < ApplicationController
         }
       )
 
+      puts "****************************************".red
+      puts "PASO #6".red
+      puts "****************************************".red
+
       # If the payment was correctly created
       if payment.create
         # payment.id
         redirect_to payment.links.find{|v| v.rel == "approval_url" }.href
 
+        puts "****************************************".red
+        puts "PASO #7".red
+        puts "****************************************".red
+
         # If the payment was not correctly created
       else
         # payment.error  # Error Hash
         redirect_to cart_path, alert: "Hubo un problema al crear el pago: #{payment.error}"
+
+        puts "****************************************".red
+        puts "PASO #8".red
+        puts "****************************************".red
         return
       end
 
       # If code param is not present
     else
       redirect_to cart_path, alert: "Los parametros recibidos (code) son incorrectos, por favor, intente nuevamente ejecutar el pago"
+
+      puts "****************************************".red
+      puts "PASO #9".red
+      puts "****************************************".red
       return
     end
   end
