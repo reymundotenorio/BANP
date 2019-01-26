@@ -34,9 +34,9 @@ class PaypalController < ApplicationController
         return
       end
 
-      puts "****************************************".red
-      puts "PASO #1".red
-      puts "****************************************".red
+      puts "****************************************"
+      puts "PASO #1"
+      puts "****************************************"
       # puts tokeninfo.to_hash
 
       # Refresh tokeninfo object
@@ -56,9 +56,9 @@ class PaypalController < ApplicationController
 
       product_items = Array.new
 
-      puts "****************************************".red
-      puts "PASO #2".red
-      puts "****************************************".red
+      puts "****************************************"
+      puts "PASO #2"
+      puts "****************************************"
 
       params[:products].each do |id, attributes|
         product = Product.find(attributes["id"].to_i)
@@ -76,9 +76,9 @@ class PaypalController < ApplicationController
         product_items.push(item)
       end
 
-      puts "****************************************".red
-      puts "PASO #3".red
-      puts "****************************************".red
+      puts "****************************************"
+      puts "PASO #3"
+      puts "****************************************"
 
       # puts "Product items: #{product_items}".red
 
@@ -86,16 +86,16 @@ class PaypalController < ApplicationController
       items_subtotal = product_items.inject(0) {|sum, hash| sum + ((hash[:price]).to_f * (hash[:quantity]).to_i)}
       items_subtotal = items_subtotal.round(2)
 
-      puts "****************************************".red
-      puts "PASO #4".red
-      puts "****************************************".red
+      puts "****************************************"
+      puts "PASO #4"
+      puts "****************************************"
 
       zip_code = "33151" #@current_customer.zipcode
       zip_info = ZipCodes.identify(zip_code)
 
-      puts "****************************************".red
-      puts "PASO #5".red
-      puts "****************************************".red
+      puts "****************************************"
+      puts "PASO #5"
+      puts "****************************************"
 
       # items_shipping = items_subtotal * 0.05
       # items_shipping = items_shipping.round(2)
@@ -150,27 +150,27 @@ class PaypalController < ApplicationController
         }
       )
 
-      puts "****************************************".red
-      puts "PASO #6".red
-      puts "****************************************".red
+      puts "****************************************"
+      puts "PASO #6"
+      puts "****************************************"
 
       # If the payment was correctly created
       if payment.create
         # payment.id
         redirect_to payment.links.find{|v| v.rel == "approval_url" }.href
 
-        puts "****************************************".red
-        puts "PASO #7".red
-        puts "****************************************".red
+        puts "****************************************"
+        puts "PASO #7"
+        puts "****************************************"
 
         # If the payment was not correctly created
       else
         # payment.error  # Error Hash
         redirect_to cart_path, alert: "Hubo un problema al crear el pago: #{payment.error}"
 
-        puts "****************************************".red
-        puts "PASO #8".red
-        puts "****************************************".red
+        puts "****************************************"
+        puts "PASO #8"
+        puts "****************************************"
         return
       end
 
@@ -178,9 +178,9 @@ class PaypalController < ApplicationController
     else
       redirect_to cart_path, alert: "Los parametros recibidos (code) son incorrectos, por favor, intente nuevamente ejecutar el pago"
 
-      puts "****************************************".red
-      puts "PASO #9".red
-      puts "****************************************".red
+      puts "****************************************"
+      puts "PASO #9"
+      puts "****************************************"
       return
     end
   end
