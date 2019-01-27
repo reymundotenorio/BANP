@@ -1,15 +1,17 @@
 $(document).ready(function(){
+
   <% require "httparty" %>
 
   // Set current locale
   var i18nLocale = $("body").data("locale");
-  // var products = <= Product.all.to_json >;
 
-  <% products_url = "http://www.betterandnice.com/products.json" %>
+  // Get Products Json
+  <% products_url = Rails.env.development? ? "http://localhost:3000/products.json" : "http://www.betterandnice.com/products.json" %>
   <%= products_json = JSON.pretty_generate(JSON.parse((HTTParty.get(products_url)).body)) rescue "{}" %>;
   var products = <%= products_json %>;
 
-  console.log(products);
+  // console.log("<%= products_url %>");
+  // console.log(products);
 
   // Format Currency
   const formatter = new Intl.NumberFormat("en-US", {
@@ -17,13 +19,15 @@ $(document).ready(function(){
     currency: "USD",
     minimumFractionDigits: 2
   });
+  // End Format Currency
 
-  // Prevent submit of forms for Add to Cart
+  // Prevent submit on "Add to Cart" forms
   $("form.addCart").submit(function(e){
     e.preventDefault();
   });
+  // End Prevent submit on "Add to Cart" forms
 
-  // Update Cart and cart details
+  // Update cart, cart details, cart events and PayPal form
   function readCartInfo(){
     updateCartDropdown();
     updateCartPage();
@@ -31,7 +35,9 @@ $(document).ready(function(){
     addEventMaskInput();
     $("#paypal-checkout").submit();
   }
+  // End Update cart, cart details, cart events and PayPal form
 
+  // Update cart dropdown information
   function updateCartDropdown(){
     // Read and load the banpCart localStorage
     var output = JSON.parse(localStorage.getItem("banpCart")) || null;
@@ -50,6 +56,7 @@ $(document).ready(function(){
         }
       });
     }
+    // End Cart details
 
     // Counter
     if(counter > 0){
@@ -60,6 +67,7 @@ $(document).ready(function(){
       $(".cart-column").css({"display": "block"});
       $(".cart-empty").css({"display": "none"});
     }
+
     else{
       $(".cart-counter").css({"display": "none"});
       $(".cart-menu").addClass("disabled");
@@ -68,7 +76,9 @@ $(document).ready(function(){
       $(".cart-empty").css({"display": "block"});
     }
   }
+  // Update cart dropdown information
 
+  // Update cart page information
   function updateCartPage(){
     // Read and load the banpCart localStorage
     var output = JSON.parse(localStorage.getItem("banpCart")) || null;
@@ -80,6 +90,7 @@ $(document).ready(function(){
     if(output){
       $(".cart-list").empty();
 
+      // Filling cart details list
       $.each(output.cart, function(index, value){
         if(value !=  null){
           if(userID == value.cartDetails.userId){
@@ -90,7 +101,7 @@ $(document).ready(function(){
             subtotal += (product.price * value.cartDetails.quantity);
             counter ++;
 
-            var productItem = "<div class='table-row'> <div class='image-column'><img class='img-responsive' src='" + product.image_url + "'></div> <div class='info cart-info'> <div class='name-column info-column'><span>" + productName + "</span></div> <div class='price-column info-column'><span>" + formatter.format(product.price) + "</span></div> <div class='quantity-column info-column'><form action='' class='cart-form' method=''><div class='quantity'> <button class='subtract' name='minus' type='button'><span class='sr-only'>minus</span><i class='fas fa-minus'></i></button> <input id='quantity' class='q-input q-cart' name='quant-prod' type='number' value='" + value.cartDetails.quantity + "' min='1'> <button class='add' name='plus' type='button'><span class='sr-only'>plus</span> <i class='fas fa-plus'></i></button></div> <input id='productId' name='productId' type='hidden' value='" + product.id + "'> </form></div> <div class='total-column info-column'><span>" + formatter.format((product.price * value.cartDetails.quantity)) + "</span></div> </div> <button class='remove-btn removeFromCart' name='Remove' type='button'><i class='far fa-trash-alt'></i></button> </div>";
+            var productItem = "<div class='table-row'> <div class='image-column'><img class='img-responsive' src='" + product.image_url + "'></div> <div class='info cart-info'> <div class='name-column info-column'><span>" + productName + "</span></div> <div class='price-column info-column'><span>" + formatter.format(product.price) + "</span></div> <div class='quantity-column info-column'><form action='' class='cart-form' method=''><div class='quantity'> <button class='subtract-cart' name='minus' type='button'><span class='sr-only'>minus</span><i class='fas fa-minus'></i></button> <input id='quantity' class='q-input q-cart' name='quant-prod' type='number' value='" + value.cartDetails.quantity + "' min='1'> <button class='add-cart' name='plus' type='button'><span class='sr-only'>plus</span> <i class='fas fa-plus'></i></button></div> <input id='productId' name='productId' type='hidden' value='" + product.id + "'> </form></div> <div class='total-column info-column'><span>" + formatter.format((product.price * value.cartDetails.quantity)) + "</span></div> </div> <button class='remove-btn removeFromCart' name='Remove' type='button'><i class='far fa-trash-alt'></i></button> </div>";
 
             var productInfo = "<div class='item'><input id='products_" + counter + "_id' name='products[" + counter + "][id]' type='hidden' value='" + product.id + "'> <input id='products_" + counter + "_quantity' name='products[" + counter + "][quantity]' type='hidden' value='" + value.cartDetails.quantity + "'></div>"
 
@@ -99,7 +110,9 @@ $(document).ready(function(){
           }
         }
       });
+      // End Filling cart details list
     }
+    // End Cart details
 
     $("#subtotal").text(formatter.format(subtotal));
     $("#shipping").text(formatter.format(0));
@@ -107,6 +120,7 @@ $(document).ready(function(){
     // $("#shipping").text(formatter.format(subtotal * 0.01));
     // $("#total").text(formatter.format(subtotal * 1.01));
   }
+  // End Update cart page information
 
   // Fuction on the "Add to Cart" button
   $(".addToCart").click(function(){
@@ -153,6 +167,7 @@ $(document).ready(function(){
         }
       }
     });
+    // End If product exists on the cart
 
     // If product does not exist on the cart
     if (flag){
@@ -167,6 +182,7 @@ $(document).ready(function(){
         }
       );
     }
+    // End If product does not exist on the cart
 
     productCart = products.find(item => item.id === parseInt(productId.val()));
 
@@ -178,6 +194,7 @@ $(document).ready(function(){
     localStorage.setItem("banpCart", JSON.stringify(jsonData));
     readCartInfo();
   });
+  // End Fuction on the "Add to Cart" button
 
   // Fuction on the "Clear Cart" button
   $(".clearCart").click(function(){
@@ -197,19 +214,21 @@ $(document).ready(function(){
         }
       }
     });
+    // End If product exists on the cart
 
     localStorage.setItem("banpCart", JSON.stringify(jsonData));
     readCartInfo();
   });
+  // End Fuction on the "Clear Cart" button
 
   // Validate if is a number
   function isNumber(n) {
     return !isNaN(parseInt(n)) && isFinite(n);
   }
+  // End Validate if is a number
 
   // Add Mask and Event to Input
   function addEventMaskInput(){
-
     // Fuction on the "Remove from cart" button
     $(".removeFromCart").click(function(){
       var form = $(this).parents(".table-row:first");
@@ -239,11 +258,13 @@ $(document).ready(function(){
       localStorage.setItem("banpCart", JSON.stringify(jsonData));
       readCartInfo();
     });
+    // End Fuction on the "Remove from cart" button
 
-    // Prevent enter on cart forms
+    // Prevent submit on cart details
     $("form.cart-form").submit(function(e){
       e.preventDefault();
     });
+    // End Prevent submit on cart details
 
     // Validate numbers on quantity input
     $(".q-input").on("keyup change", function(){
@@ -255,11 +276,13 @@ $(document).ready(function(){
         return;
       }
     });
+    // End Validate numbers on quantity input
 
-    // Avoid enter text and symbols
+    // Avoid enter letters and symbols
     $(".q-input").keypress(function(e) {
       if(e.charCode < 48 || e.charCode > 57) return false;
     });
+    // End Avoid enter letters and symbols
 
     // Focus out in quantity field on cart list
     $(".q-input.q-cart").focusout(function(){
@@ -308,22 +331,60 @@ $(document).ready(function(){
           }
         }
       });
+      // End If product exists on the cart
 
-      productCart = products.find(item => item.id === parseInt(productId.val()));
-
-      productAdded = i18nLocale == "es" ? "Producto añadido al carrito" : "Product added to the cart";
-      productName = i18nLocale == "es" ? productCart.name_spanish : productCart.name;
-
-      toastr.success(productName + " (" + parseInt(quantity.val()) + ")", productAdded);
+      // productCart = products.find(item => item.id === parseInt(productId.val()));
+      //
+      // productAdded = i18nLocale == "es" ? "Producto añadido al carrito" : "Product added to the cart";
+      // productName = i18nLocale == "es" ? productCart.name_spanish : productCart.name;
+      //
+      // toastr.success(productName + " (" + parseInt(quantity.val()) + ")", productAdded);
 
       localStorage.setItem("banpCart", JSON.stringify(jsonData));
       readCartInfo();
     });
+    // End Focus out in quantity field on cart list
 
     // Mask only numbers
     $(".q-input").mask("0#");
+    // End Mask only numbers
+
+    // Substract button on cart details
+    $(".subtract-cart").click(function(){
+      var $input = $(this).next();
+      var currentValue = parseInt($input.val());
+
+      if(currentValue > 1){
+        $input.val(currentValue - 1);
+      }
+
+      if ($input.val().length <= 0){
+        $input.val(1);
+      }
+
+      $input.trigger("focusout");
+    });
+    // End Substract button on cart details
+
+    // Add button on cart details
+    $(".add-cart").click(function(){
+      var $input = $(this).prev();
+      var currentValue = parseInt($input.val());
+
+      $input.val(currentValue + 1);
+
+      if ($input.val().length <= 0){
+        $input.val(1);
+      }
+
+      $input.trigger("focusout");
+    });
+    // End Add button on cart details
   }
+  // End Add Mask and Event to Input
 
   // Update Cart and cart details
   readCartInfo();
+  // End Update Cart and cart details
+  
 });

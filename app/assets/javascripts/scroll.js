@@ -53,7 +53,9 @@ $(function(){
 
   if(window.innerWidth < 768){
     $.scrollify.destroy();
-  } else {
+  }
+
+  else {
     $(".icon-2").data("delay", "200")
     $(".icon-3").data("delay", "400")
     $(".icon-4").data("delay", "600")

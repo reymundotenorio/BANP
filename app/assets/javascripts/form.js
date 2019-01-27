@@ -24,6 +24,7 @@ $(document).ready(function(){
 
       reader.readAsDataURL(input.files[0]);
     }
+
     else{
       $("#preview-image").attr("src", "https://s3.amazonaws.com/betterandnice/images/default/default.png"),
       $("#filename").attr("value", "");

@@ -1,7 +1,7 @@
 //= require jquery-mask/jquery.mask
 
 $(document).ready(function(){
-  
+
   // Init Bootstrap tooltips
   $('[data-toggle="tooltip"]').tooltip();
   $('[data-tooltip="true"]').tooltip();
@@ -75,6 +75,7 @@ $(document).ready(function(){
     if (this.checked){
       $("#switcherToggle").addClass("active");
     }
+
     else{
       $("#switcherToggle").removeClass("active");
     }
@@ -84,6 +85,7 @@ $(document).ready(function(){
     if (this.checked){
       $("#switcherToggle").addClass("active");
     }
+
     else{
       $("#switcherToggle").removeClass("active");
     }

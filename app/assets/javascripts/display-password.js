@@ -5,6 +5,7 @@ $(document).ready(function(){
       $("#sign_in_password").prop("type", "text");
       $("#display-password").addClass("no-display");
     }
+    
     else{
       $("#sign_in_password").prop("type", "password");
       $("#display-password").removeClass("no-display");
