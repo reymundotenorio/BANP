@@ -17,5 +17,15 @@ $(document).ready(function(){
     "showMethod": "fadeIn",
     "hideMethod": "fadeOut"
   };
-
+  
+  // Flash alert
+  if($("#flash-alert").length){
+    toastr.error($("#flash-alert").text(), "", {closeButton: true, timeOut: 0, extendedTimeOut: 0});
+  }
+  
+  // Flash notice
+  if($("#flash-notice").length){
+    toastr.success($("#flash-notice").text(), "", {closeButton: true, timeOut: 0, extendedTimeOut: 0});
+  }
+  
 });

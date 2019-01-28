@@ -13,6 +13,14 @@
 
   #recaptcha-center{
     display: inline-block;
+
+    // -webkit-transform:scale(0.77);
+    // transform:scale(0.77);
+    // -webkit-transform-origin: 0px 0px;
+    // transform-origin: 0px 0px;
+
+    -webkit-transition: all 0.3s ease;
+    transition: all 0.3s ease;
   }
 
   .general-info{
@@ -160,6 +168,11 @@
   .form{
     .logo-container{
       padding: 15px 0px 20px;
+    }
+
+    #recaptcha-center{
+      -webkit-transform:scale(1);
+      transform:scale(1);
     }
 
     .form-info{

@@ -442,6 +442,14 @@ svg{
     box-shadow: 0px 5px 11px 0px rgba($black,.18), 0px 4px 15px 0px rgba($black,.15);
   }
 }
+
+@media (max-width: 767px){
+  
+  .tooltip{
+    display: none !important;
+  }
+  
+}
 // End Tooltips
 
 // Turbolinks progress bar

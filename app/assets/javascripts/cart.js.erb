@@ -6,7 +6,8 @@ $(document).ready(function(){
   var i18nLocale = $("body").data("locale");
 
   // Get Products Json
-  <% products_url = Rails.env.development? ? "http://localhost:3000/products.json" : "http://www.betterandnice.com/products.json" %>
+  <% #products_url = Rails.env.development? ? "http://localhost:3000/products.json" : "http://www.betterandnice.com/products.json" %>
+  <% products_url = "http://www.betterandnice.com/products.json" %>
   <%= products_json = JSON.pretty_generate(JSON.parse((HTTParty.get(products_url)).body)) rescue "{}" %>;
   var products = <%= products_json %>;
 
@@ -140,8 +141,6 @@ $(document).ready(function(){
     }
 
     if(parseInt(quantity.val()) <= 0){
-      toastr.options.progressBar = true;
-
       amountGreater = i18nLocale == "es" ? "Ingrese una cantidad mayor que cero" : "Enter an amount greater than zero";
       amountNotValid = i18nLocale == "es" ? "Cantidad no valida" : "Amount not valid";
 
@@ -306,8 +305,6 @@ $(document).ready(function(){
       }
 
       if(parseInt(quantity.val()) <= 0){
-        toastr.options.progressBar = true;
-
         amountGreater = i18nLocale == "es" ? "Ingrese una cantidad mayor que cero" : "Enter an amount greater than zero";
         amountNotValid = i18nLocale == "es" ? "Cantidad no valida" : "Amount not valid";
 
