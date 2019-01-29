@@ -13,7 +13,7 @@ class StripeController < ApplicationController
     Stripe.api_key = "#{ENV["stripe_secret_key"]}"
 
     # Token is created using Checkout or Elements!
-    # Get the payment token ID submitted by the form:
+    # Get the payment token ID submitted by the form
     token = params[:stripeToken]
     product = Product.first
 
@@ -49,27 +49,26 @@ class StripeController < ApplicationController
 
     # Fixing price
     price_cents = dollars_to_cents(items_subtotal.to_s)
-    # puts "PRICE #{price_cents}".red
 
     begin
+
       charge = Stripe::Charge.create(
-      {
-        amount: price_cents,
-        currency: "usd",
-        description: products_description,
-        source: token,
-      }
+        {
+          amount: price_cents,
+          currency: "usd",
+          description: products_description,
+          source: token,
+        }
       )
+
     rescue Stripe::InvalidRequestError => e
-      puts "ERROR #{e.message}".red
-      redirect_to cart_path
+      redirect_to cart_path, alert: e.message
       return
     end
 
     if charge
-      # puts "CHARGE #{charge}".red
-      redirect_to charge.receipt_url
-      # redirect_to cart_path(stripe_receipt: charge.receipt_url)
+      # redirect_to charge.receipt_url
+      redirect_to cart_path, notice: charge.receipt_url
       return
     else
     end

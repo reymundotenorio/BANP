@@ -30,6 +30,7 @@ class PaypalController < ApplicationController
         tokeninfo = Tokeninfo.create(code) if code
 
       rescue PayPal::SDK::Core::Exceptions::BadRequest => e # Token not found or expired
+        flash.now[:alert] = e.message
         paypal_auth
         return
       end
@@ -68,13 +69,11 @@ class PaypalController < ApplicationController
         product_items.push(item)
       end
 
-      # puts "Product items: #{product_items}".red
-
       # Calculations
       items_subtotal = product_items.inject(0) {|sum, hash| sum + ((hash[:price]).to_f * (hash[:quantity]).to_i)}
       items_subtotal = items_subtotal.round(2)
 
-      zip_code = "33151" #@current_customer.zipcode
+      zip_code = current_customer.zipcode
       zip_info = ZipCodes.identify(zip_code)
 
       # items_shipping = items_subtotal * 0.05
@@ -138,13 +137,13 @@ class PaypalController < ApplicationController
         # If the payment was not correctly created
       else
         # payment.error  # Error Hash
-        redirect_to cart_path, alert: "Hubo un problema al crear el pago: #{payment.error}"
+        redirect_to cart_path, alert: "#{t('views.cart.problem_payment_creating')}: #{payment.error}"
         return
       end
 
       # If code param is not present
     else
-      redirect_to cart_path, alert: "Los parametros recibidos (code) son incorrectos, por favor, intente nuevamente ejecutar el pago"
+      redirect_to cart_path, alert: t("views.cart.param_code_incorrect")
       return
     end
   end
@@ -168,19 +167,19 @@ class PaypalController < ApplicationController
         # Add sale to delivery queue
         # Show PDF invoice (new tab) and redirect to delivery tracking
 
-        redirect_to root_path(msj: "successful-payment"), notice: "El pago fue ejecutado correctamente"
+        redirect_to root_path(msj: "successful-payment"), notice: t("views.cart.payment_correctly")
         return
 
         # If payment was not executed correctly
       else
         # payment.error # Error Hash
-        redirect_to cart_path, alert: "Hubo un problema al ejecutar el pago: #{payment.error}"
+        redirect_to cart_path, alert: "#{t('views.cart.problem_payment_executing')}: #{payment.error}"
         return
       end
 
       # If Payment ID and Payer ID are not present
     else
-      redirect_to cart_path, alert: "Los paramentros recibidos (Paymente ID | Payer ID) son incorrectos, por favor, intente nuevamente ejecutar el pago"
+      redirect_to cart_path, alert: t("views.cart.param_payer_payment_incorrect")
       return
     end
   end

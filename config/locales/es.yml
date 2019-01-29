@@ -287,6 +287,11 @@ es:
       view_all_products: "Ver todos los productos"
       submit_payment: "Realizar pago con"
       credit_debit_card: "Tarjeta de crédito o débito"
+      problem_payment_creating: "Hubo un problema creando el pago"
+      problem_payment_executing: "Hubo un problema al ejecutar el pago"
+      param_code_incorrect: "El parámetro recibido (Code) es incorrecto, intente ejecutar el pago nuevamente"
+      param_payer_payment_incorrect: "Los parámetros recibidos (Payment ID | Payer ID) son incorrectos, intente ejecutar el pago nuevamente"
+      payment_correctly: "El pago fue realizado correctamente"
     landing:
       motto: "¡Donde y Cuando Sea, Productos a tiempo!"
       search_products: "Buscar Productos"

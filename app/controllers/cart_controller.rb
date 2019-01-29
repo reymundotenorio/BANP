@@ -8,5 +8,12 @@ class CartController < ApplicationController
   # End Authentication
 
   def index
+    # token = params[:token]
+    #
+    # # If token param is present
+    # if token
+    #   flash.now[:alert] = token
+    #   render :index
+    # end
   end
 end

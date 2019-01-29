@@ -6,9 +6,9 @@ $(document).ready(function(){
   var i18nLocale = $("body").data("locale");
 
   // Get Products Json
-  <% #products_url = Rails.env.development? ? "http://localhost:3000/products.json" : "http://www.betterandnice.com/products.json" %>
-  <% products_url = "http://www.betterandnice.com/products.json" %>
-  <%= products_json = JSON.pretty_generate(JSON.parse((HTTParty.get(products_url)).body)) rescue "{}" %>;
+  <% products_url = Rails.env.development? ? "http://localhost:3000/products.json" : "http://www.betterandnice.com/products.json" %>
+  <% #products_url = "http://www.betterandnice.com/products.json" %>
+  <% products_json = JSON.pretty_generate(JSON.parse((HTTParty.get(products_url)).body)) rescue "{}" %>;
   var products = <%= products_json %>;
 
   // console.log("<%= products_url %>");
@@ -383,5 +383,5 @@ $(document).ready(function(){
   // Update Cart and cart details
   readCartInfo();
   // End Update Cart and cart details
-  
+
 });

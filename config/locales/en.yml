@@ -287,6 +287,11 @@ en:
       view_all_products: "View all products"
       submit_payment: "Submit payment with"
       credit_debit_card: "Credit or debit card"
+      problem_payment_creating: "There was a problem creating the payment"
+      problem_payment_executing: "There was a problem executing the payment"
+      param_code_incorrect: "The parameter received (Code) is incorrect, please try to execute the payment again"
+      param_payer_payment_incorrect: "The parameters received (Payment ID | Payer ID) are incorrect, please try to execute the payment again"
+      payment_correctly: "The payment was made correctly"
     landing:
       motto: "Anywhere, Anytime, Fresh Produce on time!"
       search_products: "Search Products"
