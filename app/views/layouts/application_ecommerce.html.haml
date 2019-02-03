@@ -41,7 +41,7 @@
     = javascript_include_tag "https://js.stripe.com/v3/", "data-turbolinks-track": "reload"
     -# End Stripe V3 script
 
-  %body{"data-locale": "#{I18n.locale}"}
+  %body{"data-locale": "#{I18n.locale}", "data-host": "#{$banp_domain}"}
 
     -# Render header
     = render "layouts/header_ecommerce"

@@ -4,12 +4,17 @@ class ApplicationController < ActionController::Base
 
   # Always run set_lang
   before_action :set_lang
+  before_action :get_host_port
   # End Always run set_lang
 
   # Domain global variable
   $max_failed_attempts = 4
-  Rails.env.development? ? $banp_domain = "http://localhost:3000/" : $banp_domain = "http://www.betterandnice.com/"
+  $banp_domain = ""
   # End Domain global variable
+
+  def get_host_port
+    $banp_domain = "#{request.protocol}#{request.host_with_port}"
+  end
 
   ### Authentication methods
 

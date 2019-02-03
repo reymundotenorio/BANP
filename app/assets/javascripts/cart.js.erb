@@ -6,13 +6,12 @@ $(document).ready(function(){
   var i18nLocale = $("body").data("locale");
 
   // Get Products Json
-  <% products_url = Rails.env.development? ? "http://localhost:3000/products.json" : "http://www.betterandnice.com/products.json" %>
-  <% #products_url = "http://www.betterandnice.com/products.json" %>
+  <% products_url = "#{$banp_domain}/products.json" %>
   <% products_json = JSON.pretty_generate(JSON.parse((HTTParty.get(products_url)).body)) rescue "{}" %>;
   var products = <%= products_json %>;
 
-  // console.log("<%= products_url %>");
-  // console.log(products);
+  console.log("<%= products_url %>");
+  console.log(products);
 
   // Format Currency
   const formatter = new Intl.NumberFormat("en-US", {
