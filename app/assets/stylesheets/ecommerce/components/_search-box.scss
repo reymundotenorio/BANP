@@ -33,7 +33,7 @@
       input{
         width: 100%;
         background: none;
-        font-size: 14px;
+        font-size: 16px;
         padding: 10px 30px 0px 10px;
         display: block;
         border: none;
@@ -47,18 +47,31 @@
           outline: none;
         }
 
-        &:focus ~ label,
-        &:valid ~ label{
-          top: -14px;
-          // left: 0px;
-          font-size: 11px;
-          color: $white;
-        }
+        // &:focus ~ label,
+        // &:valid ~ label{
+        //   top: -14px;
+        //   // left: 0px;
+        //   font-size: 11px;
+        //   color: $white;
+        // }
+        //
+        // &:focus ~ .bar:before,
+        // &:valid ~ .bar:before{
+        //   width: 100%;
+        //   left: 0%;
+        // }
 
-        &:focus ~ .bar:before,
-        &:valid ~ .bar:before{
-          width: 100%;
-          left: 0%;
+        &.with-value, &:focus{
+          &  ~ label {
+            top: -18px;
+            font-size: 14px;
+            color: $white;
+          }
+
+          & ~ .bar:before{
+            width: 100%;
+            left: 0%;
+          }
         }
 
         @include placeholder{
@@ -69,11 +82,11 @@
 
       label{
         color: #dddddd;
-        font-size: 14px;
-        font-weight: normal;
+        font-size: 16px;
+        font-weight: bold;
         position: absolute;
         top: 10px;
-        left: 5px;
+        left: 10px;
         -webkit-transition: all ease 0.5s;
         transition: all ease 0.5s;
         z-index: 1;
@@ -110,21 +123,21 @@
 
 @media (min-width: 1200px){
 
-  .search-container form .group{
-    label{
-      font-size: 16px;
-    }
-
-    input{
-      font-size: 16px;
-
-      &:focus, &:valid{
-        & ~ label{
-          font-size: 14px;
-          top: -18px;
-        }
-      }
-    }
-  }
+  // .search-container form .group{
+  //   label{
+  //     font-size: 16px;
+  //   }
+  //
+  //   input{
+  //     font-size: 16px;
+  //
+  //     &:focus, &:valid{
+  //       & ~ label{
+  //         font-size: 14px;
+  //         top: -18px;
+  //       }
+  //     }
+  //   }
+  // }
 
 }

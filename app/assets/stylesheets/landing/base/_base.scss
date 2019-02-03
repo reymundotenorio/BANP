@@ -24,6 +24,14 @@ h5{
 
 // *** Selection behavior ***
 
+::-moz-selection{
+  background: $fourth-color;
+  color: $white;
+}
+
+
+// *** Selection behavior ***
+
 ::selection{
   background: $fourth-color;
   color: $white;
@@ -102,11 +110,11 @@ a{
 }
 
 @media (max-width: 767px){
-  
+
   .tooltip{
     display: none !important;
   }
-  
+
 }
 // End Tooltips
 
@@ -115,3 +123,15 @@ a{
   background-color: $secondary-color;
 }
 // End Turbolinks progress bar
+
+
+// Number inputs
+input[type='number'] {
+  -moz-appearance: textfield; /*For FireFox*/
+
+  &::-webkit-inner-spin-button { /*For Webkits like Chrome and Safari*/
+    -webkit-appearance: none;
+    // margin: 0;
+  }
+}
+// End Number inputs

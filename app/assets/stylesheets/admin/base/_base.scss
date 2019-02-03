@@ -444,11 +444,11 @@ svg{
 }
 
 @media (max-width: 767px){
-  
+
   .tooltip{
     display: none !important;
   }
-  
+
 }
 // End Tooltips
 
@@ -457,6 +457,17 @@ svg{
   background-color: $third-color;
 }
 // End Turbolinks progress bar
+
+// Number inputs
+input[type='number'] {
+  -moz-appearance: textfield; /*For FireFox*/
+
+  &::-webkit-inner-spin-button { /*For Webkits like Chrome and Safari*/
+    -webkit-appearance: none;
+    // margin: 0;
+  }
+}
+// End Number inputs
 
 @media (min-width: 768px){
 
