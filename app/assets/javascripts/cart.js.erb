@@ -7,10 +7,10 @@ $(document).ready(function(){
 
   // Get Products Json
   <% products_url = "#{$banp_domain}/products.json" %>
+  console.log("<%= products_url %>");
+
   <% products_json = JSON.pretty_generate(JSON.parse((HTTParty.get(products_url)).body)) rescue "{}" %>;
   var products = <%= products_json %>;
-
-  console.log("<%= products_url %>");
   console.log(products);
 
   // Format Currency
@@ -379,8 +379,37 @@ $(document).ready(function(){
   }
   // End Add Mask and Event to Input
 
-  // Update Cart and cart details
+  // Update address localStorage
+  function updateAddress(){
+    if( $("#different-address").prop("checked") ){
+      localStorage.setItem("paypalAddress", $("#address-field").val() || "");
+    }
+
+    else{
+      localStorage.setItem("paypalAddress",  $("#default-address").text() || "");
+    }
+  }
+  // Update address localStorage
+
+  // Update address on checkbox change
+  $("#different-address").on("change", function(){
+    updateAddress();
+  });
+  // End Update address on checkbox change
+
+  // Update address on address field change
+  $("#address-field").on("keyup change", function(){
+    updateAddress();
+  });
+  // End Update address on address field change
+
+
+  // Update cart and cart details
   readCartInfo();
-  // End Update Cart and cart details
+  // End Update cart and cart details
+
+  // Update address
+  updateAddress();
+  // End Update address
 
 });
