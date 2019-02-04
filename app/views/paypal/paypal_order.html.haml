@@ -13,6 +13,7 @@
   -# Loading cart productss
   #cart-products
 
+  = hidden_field_tag "address", "", id: "paypal-address"
   = hidden_field_tag "code", params[:code] ? params[:code] : nil
 
   %button#btn-paypal.btn.btn-general.btn-paid{name: "paypal", type: "submit"}
@@ -20,4 +21,3 @@
     = image_tag "#{Rails.env.development? ? 'img/paypal.svg' : 'https://s3.amazonaws.com/betterandnice/images/default/paypal.svg'}", class: "hidden-xs hidden-md"
 
     = image_tag "#{Rails.env.development? ? 'img/paypal-vertical.svg' : 'https://s3.amazonaws.com/betterandnice/images/default/paypal-vertical.svg'}", class: "hidden-sm hidden-lg"
-

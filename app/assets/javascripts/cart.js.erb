@@ -1,13 +1,13 @@
 $(document).ready(function(){
-
+  
   <% require "httparty" %>
+
+  // Get Products Json
+  <% products_url = Rails.env.development? ? "http://localhost:3000/products.json": "#{$banp_domain}/products.json" %>
+  console.log("<%= products_url %>");
 
   // Set current locale
   var i18nLocale = $("body").data("locale");
-
-  // Get Products Json
-  <% products_url = "#{$banp_domain}/products.json" %>
-  console.log("<%= products_url %>");
 
   <% products_json = JSON.pretty_generate(JSON.parse((HTTParty.get(products_url)).body)) rescue "{}" %>;
   var products = <%= products_json %>;
@@ -105,6 +105,7 @@ $(document).ready(function(){
 
             var productInfo = "<div class='item'><input id='products_" + counter + "_id' name='products[" + counter + "][id]' type='hidden' value='" + product.id + "'> <input id='products_" + counter + "_quantity' name='products[" + counter + "][quantity]' type='hidden' value='" + value.cartDetails.quantity + "'></div>"
 
+            $("#paypal-address").val(localStorage.getItem("paypalAddress") || "");
             $("#cart-products").append(productInfo);
             $(".cart-list").append(productItem);
           }
@@ -381,12 +382,24 @@ $(document).ready(function(){
 
   // Update address localStorage
   function updateAddress(){
-    if( $("#different-address").prop("checked") ){
-      localStorage.setItem("paypalAddress", $("#address-field").val() || "");
-    }
+    // If checkbox exists
+    if($("#different-address").length){
+      // If checkbox is selected
+      if($("#different-address").prop("checked")){
 
-    else{
-      localStorage.setItem("paypalAddress",  $("#default-address").text() || "");
+        if($("#address-field").val().trim() == ""){
+          localStorage.setItem("paypalAddress", $("#default-address").text() || "");
+        }
+        else{
+          localStorage.setItem("paypalAddress", $("#address-field").val() || "");
+        }
+      }
+      // If checkbox is not selected
+      else{
+        localStorage.setItem("paypalAddress", $("#default-address").text() || "");
+      }
+
+      $("#paypal-address").val(localStorage.getItem("paypalAddress") || "");
     }
   }
   // Update address localStorage
@@ -402,7 +415,6 @@ $(document).ready(function(){
     updateAddress();
   });
   // End Update address on address field change
-
 
   // Update cart and cart details
   readCartInfo();

@@ -87,11 +87,6 @@
 
               %p.text-center.divider= t("views.cart.or")
               = form_tag paypal_auth_path, method: "post", id: "paypal-form" do
-                -# Loading cart products
-                -# #paypal-products
-
-                -# Address
-                = hidden_field_tag "address", id: "paypal-address"
 
                 %button#btn-paypal.btn.btn-general.btn-paid{name: "paypal", type: "submit"}
                   = t("views.cart.checkout_paypal")

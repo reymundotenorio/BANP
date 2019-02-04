@@ -22,6 +22,7 @@ class PaypalController < ApplicationController
 
   def paypal_checkout
     code = params[:code]
+    address = params[:address] || @current_customer.address
 
     # If code param is present
     if code
@@ -85,8 +86,8 @@ class PaypalController < ApplicationController
       # items_total = items_subtotal + items_shipping + items_discount
       # items_total = items_total.round(2)
 
-      # puts "Subtotal: #{items_subtotal}".red
-      # puts "Zip code: #{zip_info}".red
+      # puts "Subtotal: #{items_subtotal}"
+      # puts "Zip code: #{zip_info}"
 
       # Build Payment object
       payment = Payment.new(
@@ -111,7 +112,7 @@ class PaypalController < ApplicationController
                 items: product_items,
                 shipping_address: {
                   recipient_name: "#{current_customer.first_name} #{current_customer.last_name}",
-                  line1: @current_customer.address,
+                  line1: address, #@current_customer.address,
                   city: zip_info[:city],
                   state: zip_info[:state_code],
                   phone: @current_customer.phone,

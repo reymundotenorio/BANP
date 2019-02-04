@@ -17,6 +17,7 @@ class StripeController < ApplicationController
     token = params[:stripeToken]
     product = Product.first
 
+    address = params[:address] || @current_customer.address
 
     product_items = Array.new
     products_description = ""
