@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_01_20_211908) do
+ActiveRecord::Schema.define(version: 2019_02_05_120100) do
 
   create_table "active_storage_attachments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name", null: false
@@ -109,6 +109,18 @@ ActiveRecord::Schema.define(version: 2019_01_20_211908) do
     t.index ["sluggable_type"], name: "index_friendly_id_slugs_on_sluggable_type"
   end
 
+  create_table "notifications", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "message", null: false
+    t.string "path"
+    t.string "authorized_roles"
+    t.text "read_by"
+    t.boolean "state", default: true, null: false
+    t.string "slug"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["slug"], name: "index_notifications_on_slug", unique: true
+  end
+
   create_table "products", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name", null: false
     t.string "name_spanish", null: false
@@ -162,15 +174,47 @@ ActiveRecord::Schema.define(version: 2019_01_20_211908) do
   create_table "purchases", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "receipt_number", null: false
     t.string "status", default: "ordered", null: false
+    t.decimal "discount", precision: 8, scale: 2, null: false
+    t.string "observations"
     t.boolean "state", default: true, null: false
     t.string "slug"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "provider_id"
-    t.bigint "user_id"
+    t.bigint "employee_id"
+    t.index ["employee_id"], name: "index_purchases_on_employee_id"
     t.index ["provider_id"], name: "index_purchases_on_provider_id"
     t.index ["slug"], name: "index_purchases_on_slug", unique: true
-    t.index ["user_id"], name: "index_purchases_on_user_id"
+  end
+
+  create_table "sale_details", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.decimal "price", precision: 8, scale: 2, null: false
+    t.integer "quantity", null: false
+    t.string "status", default: "received", null: false
+    t.boolean "state", default: true, null: false
+    t.string "slug"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "sale_id"
+    t.bigint "product_id"
+    t.index ["product_id"], name: "index_sale_details_on_product_id"
+    t.index ["sale_id"], name: "index_sale_details_on_sale_id"
+    t.index ["slug"], name: "index_sale_details_on_slug", unique: true
+  end
+
+  create_table "sales", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "status", default: "ordered", null: false
+    t.decimal "discount", precision: 8, scale: 2, null: false
+    t.string "observations"
+    t.boolean "state", default: true, null: false
+    t.string "slug"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "customer_id"
+    t.bigint "user_id"
+    t.index ["customer_id"], name: "index_sales_on_customer_id"
+    t.index ["slug"], name: "index_sales_on_slug", unique: true
+    t.index ["user_id"], name: "index_sales_on_user_id"
   end
 
   create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -209,8 +253,12 @@ ActiveRecord::Schema.define(version: 2019_01_20_211908) do
   add_foreign_key "products", "categories"
   add_foreign_key "purchase_details", "products"
   add_foreign_key "purchase_details", "purchases"
+  add_foreign_key "purchases", "employees"
   add_foreign_key "purchases", "providers"
-  add_foreign_key "purchases", "users"
+  add_foreign_key "sale_details", "products"
+  add_foreign_key "sale_details", "sales"
+  add_foreign_key "sales", "customers"
+  add_foreign_key "sales", "users"
   add_foreign_key "users", "customers"
   add_foreign_key "users", "employees"
 end
