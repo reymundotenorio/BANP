@@ -1,17 +1,7 @@
 $(document).ready(function(){
-  
-  <% require "httparty" %>
-
-  // Get Products Json
-  <% products_url = Rails.env.development? ? "http://localhost:3000/products.json": "#{$banp_domain}/products.json" %>
-  console.log("<%= products_url %>");
 
   // Set current locale
   var i18nLocale = $("body").data("locale");
-
-  <% products_json = JSON.pretty_generate(JSON.parse((HTTParty.get(products_url)).body)) rescue "{}" %>;
-  var products = <%= products_json %>;
-  console.log(products);
 
   // Format Currency
   const formatter = new Intl.NumberFormat("en-US", {
@@ -26,6 +16,19 @@ $(document).ready(function(){
     e.preventDefault();
   });
   // End Prevent submit on "Add to Cart" forms
+
+  function setProductsJson(){
+    <% require "httparty" %>
+
+    // Get Products Json
+    <% #products_url = Rails.env.development? ? "http://localhost:3000/products.json": "#{$banp_domain}/products.json" %>
+    <% products_url = "#{$banp_domain}/products.json" %>
+    console.log("<%= products_url %>");
+
+    <% products_json = JSON.pretty_generate(JSON.parse((HTTParty.get(products_url)).body)) rescue "{}" %>;
+    var products = <%= products_json %>;
+    console.log(products);
+  }
 
   // Update cart, cart details, cart events and PayPal form
   function readCartInfo(){
@@ -415,6 +418,10 @@ $(document).ready(function(){
     updateAddress();
   });
   // End Update address on address field change
+
+  // Set products Json
+  setProductsJson();
+  // End Set products Json
 
   // Update cart and cart details
   readCartInfo();
