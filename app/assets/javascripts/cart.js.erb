@@ -21,12 +21,16 @@ $(document).ready(function(){
     <% require "httparty" %>
 
     // Get Products Json
-    <% #products_url = Rails.env.development? ? "http://localhost:3000/products.json": "#{$banp_domain}/products.json" %>
     <% products_url = "#{$banp_domain}/products.json" %>
     console.log("<%= products_url %>");
 
-    <% products_json = JSON.pretty_generate(JSON.parse((HTTParty.get(products_url)).body)) rescue "{}" %>;
-    var products = <%= products_json %>;
+    var products = "{}"
+
+    while (products == "{}") {
+      <% products_json = JSON.pretty_generate(JSON.parse((HTTParty.get(products_url)).body)) rescue "{}" %>;
+      var products = <%= products_json %>;
+    }
+
     console.log(products);
   }
 
