@@ -12,6 +12,7 @@ class ApplicationController < ActionController::Base
   $banp_domain = ""
   # End Domain global variable
 
+  # Get host with port
   def get_host_port
     $banp_domain = "#{request.protocol}#{request.host_with_port}"
   end

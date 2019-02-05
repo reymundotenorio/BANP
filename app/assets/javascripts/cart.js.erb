@@ -21,7 +21,7 @@ $(document).ready(function(){
     <% require "httparty" %>
 
     // Get Products Json
-    <% products_url = "#{$banp_domain}/products.json" %>
+    <% products_url = ENV["products_json_url"] %>
     console.log("<%= products_url %>");
 
     var products = "{}"
