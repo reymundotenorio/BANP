@@ -4,7 +4,7 @@ class CreatePurchaseDetails < ActiveRecord::Migration[5.2]
       t.decimal :price, null: false, precision: 8, scale: 2
       t.integer :quantity, null: false
       t.integer :stock, null: false
-      t.string :status, default: "received", null: false # ordered, received, returned
+      t.string :status # returned
       t.boolean :state, default: true, null: false
 
       t.string :slug # Friendly_id slug
@@ -13,7 +13,7 @@ class CreatePurchaseDetails < ActiveRecord::Migration[5.2]
 
     add_reference :purchase_details, :purchase, index: true, foreign_key: true
     add_reference :purchase_details, :product, index: true, foreign_key: true
-    
+
     add_index :purchase_details, :slug, unique: true
   end
 end

@@ -159,7 +159,7 @@ ActiveRecord::Schema.define(version: 2019_02_05_120100) do
     t.decimal "price", precision: 8, scale: 2, null: false
     t.integer "quantity", null: false
     t.integer "stock", null: false
-    t.string "status", default: "received", null: false
+    t.string "status"
     t.boolean "state", default: true, null: false
     t.string "slug"
     t.datetime "created_at", null: false
@@ -172,6 +172,7 @@ ActiveRecord::Schema.define(version: 2019_02_05_120100) do
   end
 
   create_table "purchases", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.datetime "purchase_datetime"
     t.string "receipt_number", null: false
     t.string "status", default: "ordered", null: false
     t.decimal "discount", precision: 8, scale: 2, null: false
@@ -190,7 +191,7 @@ ActiveRecord::Schema.define(version: 2019_02_05_120100) do
   create_table "sale_details", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.decimal "price", precision: 8, scale: 2, null: false
     t.integer "quantity", null: false
-    t.string "status", default: "received", null: false
+    t.string "status"
     t.boolean "state", default: true, null: false
     t.string "slug"
     t.datetime "created_at", null: false
@@ -203,7 +204,9 @@ ActiveRecord::Schema.define(version: 2019_02_05_120100) do
   end
 
   create_table "sales", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.datetime "sale_datetime"
     t.string "status", default: "ordered", null: false
+    t.string "delivery_status", default: "in_queue", null: false
     t.decimal "discount", precision: 8, scale: 2, null: false
     t.string "observations"
     t.boolean "state", default: true, null: false

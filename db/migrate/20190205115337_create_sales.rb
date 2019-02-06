@@ -1,7 +1,9 @@
 class CreateSales < ActiveRecord::Migration[5.2]
   def change
     create_table :sales do |t|
-      t.string :status, default: "ordered", null: false # ordered, invoiced, returned
+      t.datetime :sale_datetime
+      t.string :status, default: "ordered", null: false # ordered, invoiced, delivered, returned
+      t.string :delivery_status, default: "in_queue", null: false # in_queue, invoiced, on_the_way, delivered, returned
       t.decimal :discount, null: false, precision: 8, scale: 2
       t.string :observations
       t.boolean :state, default: true, null: false

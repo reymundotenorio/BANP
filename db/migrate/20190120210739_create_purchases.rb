@@ -1,6 +1,7 @@
 class CreatePurchases < ActiveRecord::Migration[5.2]
   def change
     create_table :purchases do |t|
+      t.datetime :purchase_datetime
       t.string :receipt_number, null: false, unique: true
       t.string :status, default: "ordered", null: false # ordered, received, returned
       t.decimal :discount, null: false, precision: 8, scale: 2

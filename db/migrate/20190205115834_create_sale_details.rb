@@ -3,7 +3,7 @@ class CreateSaleDetails < ActiveRecord::Migration[5.2]
     create_table :sale_details do |t|
       t.decimal :price, null: false, precision: 8, scale: 2
       t.integer :quantity, null: false
-      t.string :status, default: "received", null: false # ordered, received, returned
+      t.string :status # returned
       t.boolean :state, default: true, null: false
 
       t.string :slug # Friendly_id slug
