@@ -33,3 +33,7 @@
 
 //= require highcharts/highcharts
 //= require chartkick
+
+//= require moment
+//= require bootstrap-datetimepicker
+//= require moment/es
