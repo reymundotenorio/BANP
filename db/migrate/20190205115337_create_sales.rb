@@ -12,8 +12,9 @@ class CreateSales < ActiveRecord::Migration[5.2]
     end
 
     add_reference :sales, :customer, index: true, foreign_key: true
-    add_reference :sales, :user, index: true, foreign_key: true
+    add_reference :sales, :employee, index: true, foreign_key: true
 
     add_index :sales, :slug, unique: true
   end
 end
+ 

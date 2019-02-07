@@ -1,4 +1,8 @@
 class Provider < ApplicationRecord
+  # Associations
+  belongs_to :purchase
+  # End Associations
+  
   # Audit
   audited
   # End Audit

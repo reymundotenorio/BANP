@@ -1,6 +1,7 @@
 class Product < ApplicationRecord
   # Associations
   belongs_to :category
+  # End Associations
 
   # Audit
   audited

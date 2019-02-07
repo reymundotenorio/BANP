@@ -1,16 +1,17 @@
 class Sale < ApplicationRecord
-  # Association
+  # Associations
   has_many :sale_details
-
-  # Nested attributes
-  accepts_nested_attributes_for :sale_details
-
+  has_one :customer
+  has_one :employee
+  # End Associations
+  
   # Audit
-  has_associated_audits
   audited
+  audited associated_with: :sale_details
   # End Audit
 
   # Render sync
   sync :all
+  sync_touch :sale_details
   # End Render sync
 end

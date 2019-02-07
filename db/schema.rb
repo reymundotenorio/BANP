@@ -214,10 +214,10 @@ ActiveRecord::Schema.define(version: 2019_02_05_120100) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "customer_id"
-    t.bigint "user_id"
+    t.bigint "employee_id"
     t.index ["customer_id"], name: "index_sales_on_customer_id"
+    t.index ["employee_id"], name: "index_sales_on_employee_id"
     t.index ["slug"], name: "index_sales_on_slug", unique: true
-    t.index ["user_id"], name: "index_sales_on_user_id"
   end
 
   create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -261,7 +261,7 @@ ActiveRecord::Schema.define(version: 2019_02_05_120100) do
   add_foreign_key "sale_details", "products"
   add_foreign_key "sale_details", "sales"
   add_foreign_key "sales", "customers"
-  add_foreign_key "sales", "users"
+  add_foreign_key "sales", "employees"
   add_foreign_key "users", "customers"
   add_foreign_key "users", "employees"
 end

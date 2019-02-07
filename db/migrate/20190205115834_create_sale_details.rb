@@ -13,6 +13,6 @@ class CreateSaleDetails < ActiveRecord::Migration[5.2]
     add_reference :sale_details, :sale, index: true, foreign_key: true
     add_reference :sale_details, :product, index: true, foreign_key: true
 
-    add_index :sale_details, :slug, unique: true
+    add_index :sale_details, :slug, unique: true 
   end
 end

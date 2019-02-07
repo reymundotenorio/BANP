@@ -1,6 +1,8 @@
 class Employee < ApplicationRecord
-  # Association
+  # Associations
   has_one :user
+  belongs_to :purchase
+  # End Associations
 
   # Audit
   has_associated_audits
