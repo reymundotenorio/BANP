@@ -1,7 +1,7 @@
 $(document).ready(function(){
-
   // Set current locale
   var i18nLocale = $("body").data("locale");
+  var products;
 
   // Format Currency
   const formatter = new Intl.NumberFormat("en-US", {
@@ -22,20 +22,19 @@ $(document).ready(function(){
 
     // Get Products Json
     <% products_url = ENV["products_json_url"] %>
-    console.log("<%= products_url %>");
 
-    var products = "{}"
-
-    while (products == "{}") {
+    while (products == undefined) {
       <% products_json = JSON.pretty_generate(JSON.parse((HTTParty.get(products_url)).body)) rescue "{}" %>;
-      var products = <%= products_json %>;
+      products = <%= products_json %>;
     }
 
+    console.log("<%= products_url %>");
     console.log(products);
   }
 
   // Update cart, cart details, cart events and PayPal form
   function readCartInfo(){
+    setProductsJson();
     updateCartDropdown();
     updateCartPage();
 
@@ -422,10 +421,6 @@ $(document).ready(function(){
     updateAddress();
   });
   // End Update address on address field change
-
-  // Set products Json
-  setProductsJson();
-  // End Set products Json
 
   // Update cart and cart details
   readCartInfo();
