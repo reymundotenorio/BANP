@@ -70,26 +70,28 @@
               = render "layouts/languages_ecommerce_mobile"
               -# End Render languages
 
-              %li.dropdown.hidden-xs
-                %a.dropdown-toggle.cart-menu{"data-toggle": "dropdown", "data-tooltip": "true", "data-placement": "bottom", title: t("views.cart.cart")}
-                  -# Render cart
-                  = render "layouts/cart"
-                  -# End Render cart
+              - if current_customer
+                %li.dropdown.hidden-xs
+                  %a.dropdown-toggle.cart-menu{"data-toggle": "dropdown", "data-tooltip": "true", "data-placement": "bottom", title: t("views.cart.cart")}
+                    -# Render cart
+                    = render "layouts/cart"
+                    -# End Render cart
 
-                -# Render cart details
-                = render "layouts/cart_details"
-                -# End Render cart details
+                  -# Render cart details
+                  = render "layouts/cart_details"
+                  -# End Render cart details
 
               -# Render user
               = render "layouts/user"
               -# End Render user
 
-        .dropdown.cart-dropdown.visible-xs
-          %button#cart-dropdown-btn.dropdown-toggle.cart-menu{"aria-expanded": "false", "aria-haspopup": "true", "data-toggle": "dropdown", type: "button", "data-tooltip": "true", "data-placement": "bottom", title: t("views.cart.cart")}
-            -# Render cart
-            = render "layouts/cart"
-            -# End Render cart
+        - if current_customer
+          .dropdown.cart-dropdown.visible-xs
+            %button#cart-dropdown-btn.dropdown-toggle.cart-menu{"aria-expanded": "false", "aria-haspopup": "true", "data-toggle": "dropdown", type: "button", "data-tooltip": "true", "data-placement": "bottom", title: t("views.cart.cart")}
+              -# Render cart
+              = render "layouts/cart"
+              -# End Render cart
 
-          -# Render cart details
-          = render "layouts/cart_details"
-          -# End Render cart details
+            -# Render cart details
+            = render "layouts/cart_details"
+            -# End Render cart details
