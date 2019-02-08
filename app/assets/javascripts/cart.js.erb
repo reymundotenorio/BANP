@@ -21,10 +21,11 @@ $(document).ready(function(){
     <% require "httparty" %>
 
     // Get Products Json
-    <% products_url = ENV["products_json_url"] %>
+    <% #products_url = ENV["products_json_url"] %>
+    <% products_url = "http://www.betterandnice.com/products.json" %>
 
     while (products == undefined) {
-      <% products_json = JSON.pretty_generate(JSON.parse((HTTParty.get(products_url)).body)) rescue "{}" %>;
+      <% products_json = JSON.pretty_generate(JSON.parse((HTTParty.get(products_url)).body)) rescue undefined %>;
       products = <%= products_json %>;
     }
 
