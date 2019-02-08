@@ -18,18 +18,18 @@ $(document).ready(function(){
   // End Prevent submit on "Add to Cart" forms
 
   function setProductsJson(){
-    <% require "httparty" %>
+    <% ENV['products_json_url'] %>
 
-    // Get Products Json
-    <% #products_url = ENV["products_json_url"] %>
-    <% products_url = "http://www.betterandnice.com/products.json" %>
+    $.getJSON("http://localhost:3000/products.json", function(err, data) {
+      //data is the JSON string
+      if (err) {
+        console.error("Something went wrong: " + err);
 
-    while (products == undefined) {
-      <% products_json = JSON.pretty_generate(JSON.parse((HTTParty.get(products_url)).body)) rescue undefined %>;
-      products = <%= products_json %>;
-    }
+      } else {
+        products = data;
+      }
+    });
 
-    console.log("<%= products_url %>");
     console.log(products);
   }
 
