@@ -15,7 +15,7 @@ body{
     justify-content: center;
 
     min-height: 100vh;
-    
+
     overflow-x: hidden;
 
     .background-container{
@@ -31,7 +31,7 @@ body{
 
     .auth-languages{
       position: fixed;
-      top: 15px;
+      top: 5px;
       bottom: auto;
       left: 0px;
       right: 0px;
@@ -137,6 +137,18 @@ body{
         .auth-alerts{
           padding-top: 20px;
         }
+
+        .form-group{
+          padding-top: 20px;
+        }
+
+        .form-info{
+          .main-buttons {
+            &.sessions{
+              padding: 10px 0px 15px;
+            }
+          }
+        }
       }
     }
 
@@ -187,6 +199,11 @@ body{
       }
     }
 
+    #toast-container{
+      &.toast-top-center, &.toast-bottom-center{
+        top: 40px;
+      }
+    }
   }
 }
 
@@ -195,10 +212,38 @@ body{
 
   body{
     &.auth{
+
+      .auth-languages{
+        top: 15px;
+      }
+
       // Sign in
       .sign-in-form{
         .form{
           padding-top: 0px;
+        }
+
+        .form-group{
+          padding-top: 30px;
+        }
+
+        .form-info{
+          .main-buttons {
+            &.sessions{
+              padding: 20px 0px 15px;
+            }
+          }
+        }
+      }
+
+      #toast-container{
+        &.toast-top-center, &.toast-bottom-center{
+          top: 55px;
+
+          > div{
+            margin-left: auto;
+            margin-right: auto;
+          }
         }
       }
     }

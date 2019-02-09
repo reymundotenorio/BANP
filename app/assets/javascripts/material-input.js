@@ -6,7 +6,6 @@ $(document).ready(function(){
   $('[data-toggle="tooltip"]').tooltip();
   $('[data-tooltip="true"]').tooltip();
 
-
   // Inputs listener
   $("input.form-control").on("keyup change", function(){
     // If empty

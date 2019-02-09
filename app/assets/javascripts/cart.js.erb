@@ -316,12 +316,12 @@ $(document).ready(function(){
       });
       // End If product exists on the cart
 
-      // productCart = products.find(item => item.id === parseInt(productId.val()));
-      //
-      // productAdded = i18nLocale == "es" ? "Producto añadido al carrito" : "Product added to the cart";
-      // productName = i18nLocale == "es" ? productCart.name_spanish : productCart.name;
-      //
-      // toastr.success(productName + " (" + parseInt(quantity.val()) + ")", productAdded);
+      productCart = products.find(item => item.id === parseInt(productId.val()));
+
+      productAdded = i18nLocale == "es" ? "Cantidad actualizada" : "Quantity updated";
+      productName = i18nLocale == "es" ? productCart.name_spanish : productCart.name;
+
+      toastr.success(productName + " (" + parseInt(quantity.val()) + ")", productAdded);
 
       localStorage.setItem("banpCart", JSON.stringify(jsonData));
       getProductsJson();
