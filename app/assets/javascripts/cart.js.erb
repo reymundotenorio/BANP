@@ -1,7 +1,6 @@
 $(document).ready(function(){
   // Set current locale
   var i18nLocale = $("body").data("locale");
-  var products;
 
   // Format Currency
   const formatter = new Intl.NumberFormat("en-US", {
@@ -17,32 +16,113 @@ $(document).ready(function(){
   });
   // End Prevent submit on "Add to Cart" forms
 
-  function setProductsJson(){
-    <% ENV['products_json_url'] %>
+  function getProductsJson(){
+    $.ajax({
+      url: "/products.json",
+      type: "GET",
+      contentType: "application/json; charset=utf-8",
 
-    $.getJSON("http://localhost:3000/products.json", function(err, data) {
-      //data is the JSON string
-      if (err) {
-        console.error("Something went wrong: " + err);
+      success: function(jsonData) {
+        // Update cart and cart details
+        updateCartInfo(jsonData);
+        // End Update cart and cart details
+      },
+      error : function(jqXHR, status, error) {
+        console.error("Something went wrong: " + error + ", status:" + status);
+      },
 
-      } else {
-        products = data;
-      }
+      timeout: 120000,
     });
-
-    console.log(products);
   }
 
-  // Update cart, cart details, cart events and PayPal form
-  function readCartInfo(){
-    setProductsJson();
+  // Update add to cart, cart, cart details, cart events and PayPal form
+  function updateCartInfo(jsonData){
+    addCartEvents(jsonData);
     updateCartDropdown();
-    updateCartPage();
-
+    updateCartPage(jsonData);
     addEventMaskInput();
     $("#paypal-checkout").submit();
   }
-  // End Update cart, cart details, cart events and PayPal form
+  // End Update add to cart, cart, cart details, cart events and PayPal form
+
+  // Load cart events
+  function addCartEvents(jsonData){
+    var products = jsonData;
+    $(".addToCart").off("click");
+
+    // Fuction on the "Add to Cart" button
+    $(".addToCart").click(function(){
+      var form = $(this).parents("form:first");
+      var quantity = form.find("#quantity");
+      var productId = form.find("#productId");
+
+      var jsonData = JSON.parse(localStorage.getItem("banpCart")) || {};
+      jsonData.cart = jsonData.cart || [];
+
+      var flag = true;
+      var userID = parseInt(atob($("#currentCustomer").val().trim()));
+
+      if(userID == 0){
+        $(location).attr("href", "/sign-in?notification=sign-in-required&redirect=" + window.location.pathname);
+        return;
+      }
+
+      if(parseInt(quantity.val()) <= 0){
+        amountGreater = i18nLocale == "es" ? "Ingrese una cantidad mayor que cero" : "Enter an amount greater than zero";
+        amountNotValid = i18nLocale == "es" ? "Cantidad no valida" : "Amount not valid";
+
+        toastr.error(amountGreater, amountNotValid);
+        return;
+      }
+
+      // If product exists on the cart
+      $.each(jsonData.cart, function(index, value){
+        if(value !=  null){
+          if (value.cartDetails.id == parseInt(productId.val()) ){
+            flag = false;
+
+            jsonData.cart[index] =
+            {
+              cartDetails:
+              {
+                id: parseInt(productId.val()),
+                quantity: value.cartDetails.quantity + parseInt(quantity.val()),
+                userId: userID
+              },
+            };
+          }
+        }
+      });
+      // End If product exists on the cart
+
+      // If product does not exist on the cart
+      if (flag){
+        jsonData.cart.push(
+          {
+            cartDetails:
+            {
+              id: parseInt(productId.val()),
+              quantity: parseInt(quantity.val()),
+              userId: userID
+            },
+          }
+        );
+      }
+      // End If product does not exist on the cart
+
+      productCart = products.find(item => item.id === parseInt(productId.val()));
+
+      productAdded = i18nLocale == "es" ? "Producto añadido al carrito" : "Product added to the cart";
+      productName = i18nLocale == "es" ? productCart.name_spanish : productCart.name;
+
+      toastr.success(productName + " (" + parseInt(quantity.val()) + ")", productAdded);
+
+      localStorage.setItem("banpCart", JSON.stringify(jsonData));
+      getProductsJson();
+    });
+    // End Fuction on the "Add to Cart" button
+  }
+  // End Load cart events
 
   // Update cart dropdown information
   function updateCartDropdown(){
@@ -86,7 +166,9 @@ $(document).ready(function(){
   // Update cart dropdown information
 
   // Update cart page information
-  function updateCartPage(){
+  function updateCartPage(jsonData){
+    var products = jsonData;
+
     // Read and load the banpCart localStorage
     var output = JSON.parse(localStorage.getItem("banpCart")) || null;
     var userID = parseInt(atob($("#currentCustomer").val().trim()));
@@ -130,109 +212,6 @@ $(document).ready(function(){
   }
   // End Update cart page information
 
-  // Fuction on the "Add to Cart" button
-  $(".addToCart").click(function(){
-    var form = $(this).parents("form:first");
-    var quantity = form.find("#quantity");
-    var productId = form.find("#productId");
-
-    var jsonData = JSON.parse(localStorage.getItem("banpCart")) || {};
-    jsonData.cart = jsonData.cart || [];
-
-    var flag = true;
-    var userID = parseInt(atob($("#currentCustomer").val().trim()));
-
-    if(userID == 0){
-      $(location).attr("href", "/sign-in?notification=sign-in-required&redirect=" + window.location.pathname);
-      return;
-    }
-
-    if(parseInt(quantity.val()) <= 0){
-      amountGreater = i18nLocale == "es" ? "Ingrese una cantidad mayor que cero" : "Enter an amount greater than zero";
-      amountNotValid = i18nLocale == "es" ? "Cantidad no valida" : "Amount not valid";
-
-      toastr.error(amountGreater, amountNotValid);
-      return;
-    }
-
-    // If product exists on the cart
-    $.each(jsonData.cart, function(index, value){
-      if(value !=  null){
-        if (value.cartDetails.id == parseInt(productId.val()) ){
-          flag = false;
-
-          jsonData.cart[index] =
-          {
-            cartDetails:
-            {
-              id: parseInt(productId.val()),
-              quantity: value.cartDetails.quantity + parseInt(quantity.val()),
-              userId: userID
-            },
-          };
-        }
-      }
-    });
-    // End If product exists on the cart
-
-    // If product does not exist on the cart
-    if (flag){
-      jsonData.cart.push(
-        {
-          cartDetails:
-          {
-            id: parseInt(productId.val()),
-            quantity: parseInt(quantity.val()),
-            userId: userID
-          },
-        }
-      );
-    }
-    // End If product does not exist on the cart
-
-    productCart = products.find(item => item.id === parseInt(productId.val()));
-
-    productAdded = i18nLocale == "es" ? "Producto añadido al carrito" : "Product added to the cart";
-    productName = i18nLocale == "es" ? productCart.name_spanish : productCart.name;
-
-    toastr.success(productName + " (" + parseInt(quantity.val()) + ")", productAdded);
-
-    localStorage.setItem("banpCart", JSON.stringify(jsonData));
-    readCartInfo();
-  });
-  // End Fuction on the "Add to Cart" button
-
-  // Fuction on the "Clear Cart" button
-  $(".clearCart").click(function(){
-    var jsonData = JSON.parse(localStorage.getItem("banpCart")) || {};
-    jsonData.cart = jsonData.cart || [];
-    var userID = parseInt(atob($("#currentCustomer").val().trim()));
-
-    if(userID == 0){
-      return;
-    }
-
-    // If product exists on the cart
-    $.each(jsonData.cart, function(index, value){
-      if(value !=  null){
-        if(userID == value.cartDetails.userId){
-          delete jsonData.cart[index];
-        }
-      }
-    });
-    // End If product exists on the cart
-
-    localStorage.setItem("banpCart", JSON.stringify(jsonData));
-    readCartInfo();
-  });
-  // End Fuction on the "Clear Cart" button
-
-  // Validate if is a number
-  function isNumber(n) {
-    return !isNaN(parseInt(n)) && isFinite(n);
-  }
-  // End Validate if is a number
-
   // Add Mask and Event to Input
   function addEventMaskInput(){
     // Fuction on the "Remove from cart" button
@@ -262,7 +241,7 @@ $(document).ready(function(){
       });
 
       localStorage.setItem("banpCart", JSON.stringify(jsonData));
-      readCartInfo();
+      getProductsJson();
     });
     // End Fuction on the "Remove from cart" button
 
@@ -278,7 +257,7 @@ $(document).ready(function(){
       var quantity = form.find("#quantity");
 
       if (!isNumber(quantity.val())) {
-        // readCartInfo();
+        // getProductsJson();
         return;
       }
     });
@@ -297,7 +276,7 @@ $(document).ready(function(){
       var productId = form.find("#productId");
 
       if (!isNumber(quantity.val())) {
-        readCartInfo();
+        getProductsJson();
         return;
       }
 
@@ -345,7 +324,7 @@ $(document).ready(function(){
       // toastr.success(productName + " (" + parseInt(quantity.val()) + ")", productAdded);
 
       localStorage.setItem("banpCart", JSON.stringify(jsonData));
-      readCartInfo();
+      getProductsJson();
     });
     // End Focus out in quantity field on cart list
 
@@ -411,24 +390,54 @@ $(document).ready(function(){
   }
   // Update address localStorage
 
-  // Update address on checkbox change
+  // Fuction on the "Clear Cart" button
+  $(".clearCart").click(function(){
+    var jsonData = JSON.parse(localStorage.getItem("banpCart")) || {};
+    jsonData.cart = jsonData.cart || [];
+    var userID = parseInt(atob($("#currentCustomer").val().trim()));
+
+    if(userID == 0){
+      return;
+    }
+
+    // If product exists on the cart
+    $.each(jsonData.cart, function(index, value){
+      if(value !=  null){
+        if(userID == value.cartDetails.userId){
+          delete jsonData.cart[index];
+        }
+      }
+    });
+    // End If product exists on the cart
+
+    localStorage.setItem("banpCart", JSON.stringify(jsonData));
+    getProductsJson();
+  });
+  // End Fuction on the "Clear Cart" button
+
+  // Validate if is a number
+  function isNumber(n) {
+    return !isNaN(parseInt(n)) && isFinite(n);
+  }
+  // End Validate if is a number
+
+  // Update address information on checkbox change
   $("#different-address").on("change", function(){
     updateAddress();
   });
-  // End Update address on checkbox change
+  // End Update address information on checkbox change
 
-  // Update address on address field change
+  // Update address information on address field change
   $("#address-field").on("keyup change", function(){
     updateAddress();
   });
-  // End Update address on address field change
+  // End Update address information on address field change
 
-  // Update cart and cart details
-  readCartInfo();
-  // End Update cart and cart details
+  // Get products from API
+  getProductsJson();
+  // Get products from API
 
-  // Update address
+  // Update address information
   updateAddress();
-  // End Update address
-
+  // End Update address information
 });
