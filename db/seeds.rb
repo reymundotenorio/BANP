@@ -12,6 +12,18 @@ require "faker"
 
 puts "Seeding employees"
 20.times do |count|
+  # if count == 0
+  #   Employee.create(
+  #     id: (count + 1),
+  #     first_name: "Reymundo",
+  #     last_name: "Tenorio",
+  #     email: "reymundotenorio@gmail.com",
+  #     phone: "88888888",
+  #     role: "Administrator",
+  #     state: true
+  #   )
+  # end
+
   begin
     Employee.create(
       id: (count + 1),
@@ -20,7 +32,7 @@ puts "Seeding employees"
       email: Faker::Internet.email,
       phone: "(#{Faker::Number.number(3)}) #{Faker::Number.number(3)}-#{Faker::Number.number(4)}",
       role: ["Administrator", "Seller", "Driver"].sample,
-      state: Faker::Boolean.boolean(0.8)
+      state: Faker::Boolean.boolean(0.9)
     )
   rescue StandardError => e
     puts "Error found #{e.to_s}"
@@ -37,7 +49,7 @@ puts "Seeding prodivers"
       phone: "(#{Faker::Number.number(3)}) #{Faker::Number.number(3)}-#{Faker::Number.number(4)}",
       email: Faker::Internet.email,
       address: "#{Faker::Address.street_address}. #{Faker::Address.city}, #{Faker::Address.state} #{Faker::Address.zip_code}",
-      state: Faker::Boolean.boolean(0.8)
+      state: Faker::Boolean.boolean(0.9)
     )
   rescue StandardError => e
     puts "Error found #{e.to_s}"
@@ -103,5 +115,34 @@ puts "Seeding customers"
 end
 
 puts "Seeding users"
+# SOON
+
+
+puts "Seeding purchase orders"
+80.times do |count|
+  begin
+    Purchase.create(
+      id: (count + 1),
+      purchase_datetime: Faker::Date.between(2.years.ago, Date.today),
+      receipt_number: Faker::Invoice.reference,
+      status: "order",
+      discount: Faker::Number.between(1, 10),
+      provider_id: Faker::Number.between(1, 25),
+      employee_id: Faker::Number.between(1, 15),
+      observations: "",
+      state: Faker::Boolean.boolean(0.8)
+    )
+  rescue StandardError => e
+    puts "Error found #{e.to_s}"
+  end
+end
 
 puts "The information have been seeded"
+
+#
+# rails db:drop
+# rails db:create
+# rails db:migrate
+# rails db:seed
+#
+# Purchase.create(purchase_datetime: Faker::Date.between(2.years.ago, Date.today), receipt_number: Faker::Invoice.reference, status: "order", discount: Faker::Number.between(1,  10), provider_id: Faker::Number.between(1,  25), employee_id: Faker::Number.between(1,  15), observations: "")

@@ -1,0 +1,24 @@
+.row.no-margin
+  .col-xs-12.no-padding
+    -# Table
+    %table.table
+      %thead
+        - model = "purchase"
+        - attributes = ["receipt_number", "purchase_datetime", "provider", "employee", "status", "discount" ,"observations"]
+
+        -# Render table header
+        = render partial: "partials/table_header", locals: {model: model, attributes: attributes}
+
+      %tbody
+        -# Data table Sync
+        = sync partial: "purchase_orders/data_table", collection: @orders
+        = sync_new partial: "purchase_orders/data_table", resource: Purchase.new
+        -# End Data table Sync
+    -# End Table
+
+
+.row.no-margin
+  .col-xs-12.no-padding.text-center
+    -# Pagination
+    = will_paginate @orders, renderer: BootstrapPagination::Rails
+    -# End Pagination

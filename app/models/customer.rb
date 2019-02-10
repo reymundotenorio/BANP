@@ -1,6 +1,7 @@
 class Customer < ApplicationRecord
   # Associations
   has_one :user
+  has_many :sale_details
   # End Associations
 
   # Nested attributes

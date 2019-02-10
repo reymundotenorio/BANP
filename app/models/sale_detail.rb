@@ -1,11 +1,11 @@
 class SaleDetail < ApplicationRecord
   # Associations
-  has_one :product
+  belongs_to :product
   belongs_to :sale
   # End Associations
-  
+
   # Nested attributes
-  accepts_nested_attributes_for :sale 
+  accepts_nested_attributes_for :sale
   # End Nested attributes
 
   # Audit

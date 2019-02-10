@@ -1,1 +1,1 @@
-json.array! Product.all, partial: "products_data", as: :product
+json.array! Product.enabled, partial: "products_data", as: :product

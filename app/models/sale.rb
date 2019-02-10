@@ -1,10 +1,10 @@
 class Sale < ApplicationRecord
   # Associations
   has_many :sale_details
-  has_one :customer
-  has_one :employee
+  belongs_to :customer
+  belongs_to :employee
   # End Associations
-  
+
   # Audit
   audited
   audited associated_with: :sale_details

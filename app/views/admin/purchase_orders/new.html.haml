@@ -1,0 +1,43 @@
+-# Form Title
+%section.form-title
+  .container
+    -# Title
+    .row.title-container
+      .col-xs-12.col-lg-10
+        -# Heading
+        %h1
+          %i.fas.fa-plus
+          = t("views.new.new")
+        -# End Heading
+
+      .col-xs-12.col-lg-2
+        -# Providers button
+        .btn-container
+          = link_to (admin_providers_path), class: "btn btn-general" do
+            %i.fas.fa-list-alt
+            %span= t("header.navigation.providers")
+        -# End Providers button
+    -# End Title
+
+    -# Breadcrumb
+    .row
+      .col-xs-12.hidden-xs
+        .breadcrumb-container
+          %ol.breadcrumb
+            %li
+              = link_to (admin_root_path) do
+                %i.fas.fa-tachometer-alt
+                %span= t("header.navigation.dashboard")
+            %li
+              = link_to (admin_providers_path) do
+                %i.fas.fa-list-alt
+                %span= t("header.navigation.providers")
+            %li.active
+              %i.fas.fa-plus
+              = t("views.new.new")
+    -# End Breadcrumb
+-# End Form Title
+
+-# Render form
+= render "form"
+-# End Render form

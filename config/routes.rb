@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  namespace :admin do
+    get 'purchase_orders/new'
+    get 'purchase_orders/index'
+  end
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   # Change language
   get "/change-language/:lang", to: "settings#change_lang", as: "change_language"
@@ -202,6 +206,18 @@ Rails.application.routes.draw do
     patch "/products/:id/active", to: "products#active", as: "active_product"
     patch "/products/:id/deactive", to: "products#deactive", as: "deactive_product"
     # End Products
+
+    # Purchase Orders
+    get "/purchase-orders", to: "purchase_orders#index", as: "purchase_orders"
+    get "/purchase-order/new", to: "purchase_orders#new", as: "new_purchase_order"
+    get "/purchase-order/:id", to: "purchase_orders#show", as: "purchase_order"
+    get "/purchase-order/:id/edit", to: "purchase_orders#edit", as: "edit_purchase_order"
+    get "/purchase-order/:id/history", to: "purchase_orders#history", as: "history_purchase_order"
+    post "/purchase-orders", to: "purchase_orders#create"
+    patch "/purchase-order/:id", to: "purchase_orders#update", as: "update_purchase_order"
+    patch "/purchase-orders/:id/active", to: "purchase_orders#active", as: "active_purchase_order"
+    patch "/purchase-orders/:id/deactive", to: "purchase_orders#deactive", as: "deactive_purchase_order"
+    # End Purchase Orders
   end
   # End Admin namespace
 

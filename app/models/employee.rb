@@ -1,7 +1,7 @@
 class Employee < ApplicationRecord
   # Associations
   has_one :user
-  belongs_to :purchase
+  has_many :purchases
   # End Associations
 
   # Audit
@@ -96,7 +96,7 @@ class Employee < ApplicationRecord
       errors.add(:image, :blank, message: I18n.t("validates.image_format"))
     end
   end
-  
+
   # User email validation
   validate :user_email
 
