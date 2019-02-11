@@ -203,18 +203,18 @@ Rails.application.routes.draw do
     patch "/products/:id/active", to: "products#active", as: "active_product"
     patch "/products/:id/deactive", to: "products#deactive", as: "deactive_product"
     # End Products
-
-    # Purchase Orders
-    get "/purchase-orders", to: "purchase_orders#index", as: "purchase_orders"
-    get "/purchase-order/new", to: "purchase_orders#new", as: "new_purchase_order"
-    get "/purchase-order/:id", to: "purchase_orders#show", as: "purchase_order"
-    get "/purchase-order/:id/edit", to: "purchase_orders#edit", as: "edit_purchase_order"
-    get "/purchase-order/:id/history", to: "purchase_orders#history", as: "history_purchase_order"
-    post "/purchase-orders", to: "purchase_orders#create"
-    patch "/purchase-order/:id", to: "purchase_orders#update", as: "update_purchase_order"
-    patch "/purchase-orders/:id/active", to: "purchase_orders#active", as: "active_purchase_order"
-    patch "/purchase-orders/:id/deactive", to: "purchase_orders#deactive", as: "deactive_purchase_order"
-    # End Purchase Orders
+    
+    # Purchases orders
+    get "/purchases/orders", to: "purchase_orders#index", as: "purchase_orders"
+    get "/purchases/order/new", to: "purchase_orders#new", as: "new_purchase_order"
+    get "/purchases/order/:id", to: "purchase_orders#show", as: "purchase_order"
+    get "/purchases/order/:id/edit", to: "purchase_orders#edit", as: "edit_purchase_order"
+    get "/purchases/order/:id/history", to: "purchase_orders#history", as: "history_purchase_order"
+    post "/purchases/orders", to: "purchase_orders#create"
+    patch "/purchases/order/:id", to: "purchase_orders#update", as: "update_purchase_order"
+    patch "/purchases/orders/:id/active", to: "purchase_orders#active", as: "active_purchase_order"
+    patch "/purchases/orders/:id/deactive", to: "purchase_orders#deactive", as: "deactive_purchase_order"
+    # End Purchases orders
   end
   # End Admin namespace
 
