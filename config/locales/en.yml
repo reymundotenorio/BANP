@@ -38,6 +38,7 @@ en:
       customer: "Customer"
       category: "Category"
       product: "Product"
+      purchase: "Purchase"
     attributes:
       employee:
         first_name: "First name"
@@ -118,6 +119,20 @@ en:
         image_file_name: "Image file name"
         image_content_type: "Image content type"
         image_file_size: "Image file size"
+      purchase:
+        receipt_number: "Receipt number"
+        purchase_datetime: "Date"
+        provider: "Provider"
+        employee: "Employee"
+        status: "Status"
+        discount: "Discount"
+        observations: "Observations"
+        state: "State"
+
+  # Purchase
+  purchase:
+    order: "Purchase order"
+    orders: "Purchase orders"
 
   # Will paginate
   will_paginate:

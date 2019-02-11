@@ -16,10 +16,10 @@ class Product < ApplicationRecord
   def self.search(search, show_all)
     if search
       if show_all == "enabled-only"
-        query = "(name LIKE :search OR name_spanish LIKE :search OR barcode LIKE :search OR description LIKE :search OR description_spanish LIKE :search) AND (state = true)"
+        query = self.joins(:category).where("(name LIKE :search OR name_spanish LIKE :search OR barcode LIKE :search OR description LIKE :search OR description_spanish LIKE :search) AND (state = true)", search: "%#{search}%")
 
       else
-        query = "(name LIKE :search OR name_spanish LIKE :search OR barcode LIKE :search OR description LIKE :search OR description_spanish LIKE :search)"
+        query = self.joins(:category).where("name LIKE :search OR name_spanish LIKE :search OR barcode LIKE :search OR description LIKE :search OR description_spanish LIKE :search", search: "%#{search}%")
       end
 
       where(query, search: "%#{search}%")

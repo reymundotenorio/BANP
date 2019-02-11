@@ -2,19 +2,21 @@
     %input.form-control{type: "text"}
     %span.input-group-addon
         %span.glyphicon.glyphicon-calendar
-        
+
 :javascript
     $(function () {
         $('#datetimepicker1').datetimepicker();
     });
 
 
-= pie_chart charts_product_by_category_path, defer: true,  donut: true 
+= column_chart charts_purchases_by_provider_path, defer: true
 
-= pie_chart charts_product_by_category_path, defer: true 
+= pie_chart charts_product_by_category_path, defer: true,  donut: true
+
+= pie_chart charts_product_by_category_path, defer: true
 
 = line_chart charts_product_by_category_path, defer: true, curve: true, xtitle: "Category", ytitle: "Quantity", thousands: ",", decimal: ".", messages: {empty: "No data"}
 
-= column_chart charts_product_by_category_path, defer: true 
+= column_chart charts_product_by_category_path, defer: true
 
-= area_chart charts_product_by_category_path, defer: true 
+= area_chart charts_product_by_category_path, defer: true

@@ -7,11 +7,7 @@
         -# Heading
         %h1{class: "#{category.state}"}
           %i.fas.fa-id-card
-          - if I18n.locale == :es
-            = category.name_spanish
-
-          -else
-            = category.name
+          = I18n.locale == :es ? category.name_spanish : category.name
         -# End Heading
 
       .col-xs-12.col-sm-6.col-md-4.text-right
@@ -38,11 +34,7 @@
                 %span= t("header.navigation.categories")
             %li.active
               %i.fas.fa-id-card
-              - if I18n.locale == :es
-                = category.name_spanish
-
-              -else
-                = category.name
+              = I18n.locale == :es ? category.name_spanish : category.name
     -# End Breadcrumb
 
     -# Information
@@ -96,10 +88,7 @@
             .col-xs-12.no-padding
               %div{class: "detail-info #{category.state}"}
                 -# Set attributes
-                - if I18n.locale == :es
-                  - attributes = [["name", "name_spanish"], ["description", "description_spanish"], ["state", "state"]]
-                - else
-                  - attributes = [["name", "name"], ["description", "description"], ["state", "state"]]
+                - attributes = I18n.locale == :es ? [["name", "name_spanish"], ["description", "description_spanish"], ["state", "state"]] : [["name", "name"], ["description", "description"], ["state", "state"]]
 
                 - attributes.each do |title, attribute|
                   .info

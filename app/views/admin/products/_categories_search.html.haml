@@ -9,11 +9,7 @@
         -# Render table header
         = render partial: "partials/table_header", locals: {model: model, attributes: attributes}
 
-        - if I18n.locale == :es
-          - attributes = ["name_spanish", "description_spanish"]
-
-        - else
-          - attributes = ["name", "description"]
+        - attributes = I18n.locale == :es ? ["name_spanish", "description_spanish"] : ["name", "description"]
 
       %tbody
         -# Data table Sync

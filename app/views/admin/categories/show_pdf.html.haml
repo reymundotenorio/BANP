@@ -8,11 +8,7 @@
       -# Set attributes
       - model = "category"
 
-      - if I18n.locale == :es
-        - attributes = ["name_spanish", "description_spanish", "state"]
-        
-      - else
-        - attributes = ["name", "description", "state"]
+      - attributes = I18n.locale == :es ? ["name_spanish", "description_spanish", "state"] : ["name", "description", "state"]
 
       -# Render details information
       = render partial: "partials/information_details", locals: {model: model, resource: resource, attributes: attributes}

@@ -1,8 +1,4 @@
 Rails.application.routes.draw do
-  namespace :admin do
-    get 'purchase_orders/new'
-    get 'purchase_orders/index'
-  end
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   # Change language
   get "/change-language/:lang", to: "settings#change_lang", as: "change_language"
@@ -88,6 +84,7 @@ Rails.application.routes.draw do
   # Charts namespace
   namespace :charts do
     get "product-by-category", to: "product_by_category", as: "product_by_category"
+    get "purchases-by-provider", to: "purchases_by_provider", as: "purchases_by_provider"
   end
   # End Charts namespace
 

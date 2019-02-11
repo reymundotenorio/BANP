@@ -18,8 +18,7 @@ class Purchase < ApplicationRecord
   # Search
   def self.search_order(search, show_all)
     if search
-      query = "(purchase_datetime LIKE :search OR receipt_number LIKE :search) AND (status = 'order')"
-      where(query, search: "%#{search}%")
+      self.joins(:provider).joins(:employee).where("(receipt_number LIKE :search or name LIKE :search or first_name LIKE :search or last_name LIKE :search) AND (status = 'order')", search: "%#{search}%")
 
     elsif show_all == "all"
       orders

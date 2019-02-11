@@ -8,11 +8,7 @@
       -# Set attributes
       - model = "product"
 
-      - if I18n.locale == :es
-        - attributes = ["name_spanish", "price", "content_spanish", "description_spanish", "recipes_spanish", "state", "barcode"]
-
-      - else
-        - attributes = ["name", "price", "content", "description", "recipes", "state", "barcode"]
+      - attributes = I18n.locale == :es ? ["name_spanish", "price", "content_spanish", "description_spanish", "recipes_spanish", "state", "barcode"] : ["name", "price", "content", "description", "recipes", "state", "barcode"]
 
       -# Render details information
       = render partial: "partials/information_details", locals: {model: model, resource: resource, attributes: attributes}

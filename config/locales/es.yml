@@ -16,6 +16,7 @@ es:
       products: "Productos"
       purchases: "Compras"
       orders: "Pedidos"
+      order: "Pedido"
       receptions: "Recepciones"
       inventory: "Inventario"
       returns: "Devoluciones"
@@ -38,6 +39,7 @@ es:
       customer: "Cliente"
       category: "Categoría"
       product: "Producto"
+      purchase: "Compra"
     attributes:
       employee:
         first_name: "Nombre"
@@ -118,6 +120,20 @@ es:
         image_file_name: "Nombre de la imagen"
         image_content_type: "Tipo de archivo de la imagen"
         image_file_size: "Tamaño de la imagen"
+      purchase:
+        receipt_number: "Número de recibo"
+        purchase_datetime: "Fecha"
+        provider: "Proveedor"
+        employee: "Empleado"
+        status: "Condición"
+        discount: "Descuento"
+        observations: "Observaciones"
+        state: "Estado"
+
+  # Purchase
+  purchase:
+    order: "Orden de compra"
+    orders: "Ordenes de compra"
 
   # Will paginate
   will_paginate:

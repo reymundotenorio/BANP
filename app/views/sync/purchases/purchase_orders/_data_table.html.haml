@@ -1,6 +1,6 @@
 %tr{class: "clickable-row #{purchase.state}", "data-href": "#{admin_purchase_order_path(purchase)}"}
   -# Set attributes
-  - attributes = ["receipt_number", "purchase_datetime", "provider", "employee", "status", "discount" ,"observations"]
+  - attributes = ["receipt_number", "purchase_datetime", "provider", "employee"]
 
   %td
     = link_to admin_purchase_order_path(purchase), class: "record-link", "data-header": "No.", "data-toggle": "tooltip", "data-placement": "bottom", title: t("views.index.view_details") do

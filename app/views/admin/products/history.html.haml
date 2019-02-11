@@ -36,11 +36,7 @@
               = link_to (admin_product_path(@product)) do
                 %i.fas.fa-id-card
                 %span
-                  - if I18n.locale == :es
-                    = @product.name_spanish
-
-                  - else
-                    = @product.name
+                  = I18n.locale == :es ? @product.name_spanish : @product.name
             %li.active
               %i.fas.fa-history
               = t("views.history.history")

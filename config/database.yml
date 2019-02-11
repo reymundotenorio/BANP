@@ -16,6 +16,8 @@ default: &default
   username: <%= ENV["database_username"] %>
   password: <%= ENV["database_password"] %>
   socket: /var/run/mysqld/mysqld.sock
+  variables:
+    sql_mode: TRADITIONAL
 
 development:
   <<: *default
