@@ -125,12 +125,30 @@ puts "Seeding purchase orders"
       id: (count + 1),
       purchase_datetime: Faker::Date.between(2.years.ago, Date.today),
       receipt_number: Faker::Invoice.reference,
-      status: "order",
+      status: "ordered",
       discount: Faker::Number.between(1, 10),
       provider_id: Faker::Number.between(1, 25),
       employee_id: Faker::Number.between(1, 15),
       observations: "",
-      state: Faker::Boolean.boolean(0.8)
+      state: Faker::Boolean.boolean(0.95)
+    )
+  rescue StandardError => e
+    puts "Error found #{e.to_s}"
+  end
+end
+
+puts "Seeding purchase details"
+500.times do |count|
+  begin
+    PurchaseDetail.create(
+      id: (count + 1),
+      purchase_id: Faker::Number.between(1, 70),
+      price: Faker::Number.decimal(4, 2),
+      quantity: Faker::Number.between(1, 100),
+      stock: Faker::Number.between(1, 100),
+      status: "ordered",
+      product_id: Faker::Number.between(1, 60),
+      state: Faker::Boolean.boolean(0.95)
     )
   rescue StandardError => e
     puts "Error found #{e.to_s}"

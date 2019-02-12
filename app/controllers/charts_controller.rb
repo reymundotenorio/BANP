@@ -9,7 +9,6 @@ class ChartsController < ApplicationController
 
   def purchases_by_provider
     provider_name = "providers.name"
-    render json: Purchase.left_joins(:provider).group(provider_name).order("COUNT(#{provider_name}) DESC").limit(10).count
+    render json: Purchase.joins(:provider).group(provider_name).order("COUNT(#{provider_name}) DESC").limit(10).count
   end
-
 end
