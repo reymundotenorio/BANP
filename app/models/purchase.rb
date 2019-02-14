@@ -18,7 +18,7 @@ class Purchase < ApplicationRecord
   # Search
   def self.search_order(search, show_all)
     if search
-      self.joins(:provider).joins(:employee).where("(receipt_number LIKE :search or name LIKE :search or first_name LIKE :search or last_name LIKE :search) AND (status = 'ordered')", search: "%#{search}%")
+      self.joins(:provider).joins(:employee).where("(receipt_number LIKE :search OR name LIKE :search OR first_name LIKE :search OR last_name LIKE :search) AND (status = 'ordered')", search: "%#{search}%")
 
     elsif show_all == "all"
       orders
@@ -47,9 +47,6 @@ class Purchase < ApplicationRecord
   # End Update Friendly_ID slug
 
   ## End Friendly_ID
-
-  # Uniqueness validation
-  # End Uniqueness validation
 
   # Presence validation
   validates :receipt_number, presence: true
