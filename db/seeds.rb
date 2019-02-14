@@ -146,7 +146,7 @@ puts "Seeding purchase details"
       price: Faker::Number.decimal(4, 2),
       quantity: Faker::Number.between(1, 100),
       stock: Faker::Number.between(1, 100),
-      status: "ordered",
+      status: "",
       product_id: Faker::Number.between(1, 60),
       state: Faker::Boolean.boolean(0.95)
     )

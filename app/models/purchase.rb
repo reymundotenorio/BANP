@@ -18,7 +18,7 @@ class Purchase < ApplicationRecord
   # Search
   def self.search_order(search, show_all)
     if search
-      self.joins(:provider).joins(:employee).where("(receipt_number LIKE :search OR name LIKE :search OR first_name LIKE :search OR last_name LIKE :search) AND (status = 'ordered')", search: "%#{search}%")
+      self.joins(:provider).joins(:employee).where("(receipt_number LIKE :search OR providers.name LIKE :search OR employees.first_name LIKE :search OR employees.last_name LIKE :search) AND (status = 'ordered')", search: "%#{search}%")
 
     elsif show_all == "all"
       orders

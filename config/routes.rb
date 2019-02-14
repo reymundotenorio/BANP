@@ -203,7 +203,7 @@ Rails.application.routes.draw do
     patch "/products/:id/active", to: "products#active", as: "active_product"
     patch "/products/:id/deactive", to: "products#deactive", as: "deactive_product"
     # End Products
-    
+
     # Purchases orders
     get "/purchases/orders", to: "purchase_orders#index", as: "purchase_orders"
     get "/purchases/order/new", to: "purchase_orders#new", as: "new_purchase_order"
@@ -215,6 +215,17 @@ Rails.application.routes.draw do
     patch "/purchases/orders/:id/active", to: "purchase_orders#active", as: "active_purchase_order"
     patch "/purchases/orders/:id/deactive", to: "purchase_orders#deactive", as: "deactive_purchase_order"
     # End Purchases orders
+
+
+    # Purchases details
+    get "/purchases/:id/details", to: "purchase_details#show", as: "purchase_details"
+
+    get "/purchases/detail/:id/edit", to: "purchase_details#edit", as: "edit_purchase_detail"
+    get "/purchases/detail/:id/history", to: "purchase_details#history", as: "history_purchase_detail"
+    patch "/purchases/detail/:id", to: "purchase_details#update", as: "update_purchase_detail"
+    patch "/purchases/details/:id/active", to: "purchase_details#active", as: "active_purchase_detail"
+    patch "/purchases/details/:id/deactive", to: "purchase_details#deactive", as: "deactive_purchase_detail"
+    # End Purchases details
   end
   # End Admin namespace
 

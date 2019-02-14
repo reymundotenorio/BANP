@@ -1,0 +1,24 @@
+%tr{class: "clickable-row #{purchase_detail.state}"}
+  -# Set attributes
+  - attributes = ["purchase_id", "product_id", "price", "quantity", "stock", "status"]
+
+  %td
+    %a.record-link
+      %p= purchase_detail.id
+
+  - attributes.each do |attribute|
+    %td
+      %a.record-link
+        %p
+          - if attribute == "provider"
+            %p= purchase_detail.provider.name
+
+          - elsif attribute == "employee"
+            %p= "#{purchase_detail.employee.first_name} #{purchase_detail.employee.last_name}"
+
+          - elsif attribute == "purchase_detail_datetime"
+            -# %p= I18n.l(purchase_detail["#{attribute}"], format: :short)
+            %p= I18n.locale == :es ? purchase_detail["#{attribute}"].strftime("%d/%m/%Y") : purchase_detail["#{attribute}"].strftime("%m/%d/%Y")
+
+          - else
+            %p= purchase_detail["#{attribute}"]

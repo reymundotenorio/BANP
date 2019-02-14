@@ -19,16 +19,17 @@ class PurchaseDetail < ApplicationRecord
   # End Render sync
 
   # Search
-  def self.search_order(purchase_id, search, show_all)
+  def self.search(purchase_id, search, show_all)
     if search
-      self.joins(:purchase).joins(:product).where("(status LIKE :search OR name name :search OR name_spanish LIKE :search) AND (purchase_id = :purchase_id)", search: "%#{search}%", purchase_id: "%#{purchase_id}%")
+      puts "ID: #{purchase_id}"
+
+      self.joins(:purchase).joins(:product).where("(products.name LIKE :search OR products.name_spanish LIKE :search OR purchase_details.status LIKE :search) AND (purchase_details.purchase_id = :purchase_id)", purchase_id: purchase_id, search: "%#{search}%")
 
     elsif show_all == "all"
-      query = "purchase_id = :purchase_id"
-      where(query, purchase_id: "%#{purchase_id}%")
+      self.where("purchase_id = :purchase_id", purchase_id: purchase_id)
 
     else
-      enabled
+      self.where("purchase_id = :purchase_id", purchase_id: purchase_id).enabled
     end
   end
   # End Search
