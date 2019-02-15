@@ -21,8 +21,6 @@ class PurchaseDetail < ApplicationRecord
   # Search
   def self.search(purchase_id, search, show_all)
     if search
-      puts "ID: #{purchase_id}"
-
       self.joins(:purchase).joins(:product).where("(products.name LIKE :search OR products.name_spanish LIKE :search OR purchase_details.status LIKE :search) AND (purchase_details.purchase_id = :purchase_id)", purchase_id: purchase_id, search: "%#{search}%")
 
     elsif show_all == "all"
