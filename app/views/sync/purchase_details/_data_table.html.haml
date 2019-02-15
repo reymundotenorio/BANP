@@ -1,6 +1,6 @@
 %tr{class: "clickable-row #{purchase_detail.state}"}
   -# Set attributes
-  - attributes = ["purchase_id", "product_id", "price", "quantity", "stock", "status"]
+  - attributes = ["purchase_id", "product", "price", "quantity", "total", "stock", "status"] 
 
   %td
     %a.record-link
@@ -10,15 +10,14 @@
     %td
       %a.record-link
         %p
-          - if attribute == "provider"
-            %p= purchase_detail.provider.name
+          - if attribute == "product"
+            %p= I18n.locale == :es ? purchase_detail.product.name_spanish : purchase_detail.product.name
 
-          - elsif attribute == "employee"
-            %p= "#{purchase_detail.employee.first_name} #{purchase_detail.employee.last_name}"
+          - elsif attribute == "price"
+            %p= number_to_currency(purchase_detail.price, precision: 2, unit: "$", format: "%u%n", separator: ".", delimiter: ",")
 
-          - elsif attribute == "purchase_detail_datetime"
-            -# %p= I18n.l(purchase_detail["#{attribute}"], format: :short)
-            %p= I18n.locale == :es ? purchase_detail["#{attribute}"].strftime("%d/%m/%Y") : purchase_detail["#{attribute}"].strftime("%m/%d/%Y")
+          - elsif attribute == "total"
+            %p= number_to_currency((purchase_detail.price * purchase_detail.quantity), precision: 2, unit: "$", format: "%u%n", separator: ".", delimiter: ",")
 
           - else
             %p= purchase_detail["#{attribute}"]

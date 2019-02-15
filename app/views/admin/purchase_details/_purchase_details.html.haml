@@ -4,7 +4,7 @@
     %table.table
       %thead
         - model = "purchase_details"
-        - attributes = ["purchase_id", "product_id", "price", "quantity", "stock", "status"]
+        - attributes = ["purchase_id", "product_id", "price", "quantity", "total", "stock", "status"] 
 
         -# Render table header
         = render partial: "partials/table_header", locals: {model: model, attributes: attributes}

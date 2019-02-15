@@ -1,6 +1,6 @@
 %tr{class: "clickable-row #{purchase.state}", "data-href": "#{admin_purchase_order_path(purchase)}"}
   -# Set attributes
-  - attributes = ["receipt_number", "purchase_datetime", "provider", "employee"]
+  - attributes = ["receipt_number", "purchase_datetime", "total", "provider", "employee"]
 
   %td
     = link_to admin_purchase_details_path(purchase.id), class: "record-link", "data-header": "No.", "data-toggle": "tooltip", "data-placement": "bottom", title: t("views.index.view_details") do
@@ -9,15 +9,18 @@
   - attributes.each do |attribute|
     %td
       = link_to admin_purchase_details_path(purchase.id), class: "record-link", "data-header": t("activerecord.attributes.purchase.#{attribute}"), "data-toggle": "tooltip", "data-placement": "bottom", title: t("views.index.view_details") do
-        - if attribute == "provider"
+        - if attribute == "purchase_datetime"
+          -# %p= I18n.l(purchase["#{attribute}"], format: :short)
+          %p= I18n.locale == :es ? purchase["#{attribute}"].strftime("%d/%m/%Y") : purchase["#{attribute}"].strftime("%m/%d/%Y")
+          
+        - elsif attribute == "total"
+          %p= number_to_currency(Purchase.total(purchase.id), precision: 2, unit: "$", format: "%u%n", separator: ".", delimiter: ",")
+          
+        - elsif attribute == "provider"
           %p= purchase.provider.name
 
         - elsif attribute == "employee"
           %p= "#{purchase.employee.first_name} #{purchase.employee.last_name}"
-
-        - elsif attribute == "purchase_datetime"
-          -# %p= I18n.l(purchase["#{attribute}"], format: :short)
-          %p= I18n.locale == :es ? purchase["#{attribute}"].strftime("%d/%m/%Y") : purchase["#{attribute}"].strftime("%m/%d/%Y")
 
         - else
           %p= purchase["#{attribute}"]
