@@ -9,14 +9,16 @@
     });
 
 
-= column_chart charts_purchases_by_provider_path, defer: true, prefix: "$", thousands: ",", decimal: ".", messages: {empty: "No information"}, refresh: 60, stacked: false
+= column_chart charts_purchases_by_providers_path, defer: true, prefix: "$", thousands: ",", decimal: ".", messages: {empty: "No information"}, refresh: 60, stacked: false
 
-= column_chart charts_purchases_by_provider_path, defer: true, prefix: "$", thousands: ",", decimal: ".", messages: {empty: "No information"}, refresh: 60, stacked: false
+= column_chart charts_purchases_by_employees_path, defer: true, prefix: "$", thousands: ",", decimal: ".", messages: {empty: "No information"}, refresh: 60, stacked: false
 
-= column_chart charts_purchases_by_provider_path, defer: true, prefix: "$", thousands: ",", decimal: ".", messages: {empty: "No information"}, refresh: 60, stacked: false
+= column_chart charts_purchases_by_products_path, defer: true, prefix: "$", thousands: ",", decimal: ".", messages: {empty: "No information"}, refresh: 60, stacked: false
 
-= pie_chart charts_product_by_category_path, defer: true,  donut: true
+= column_chart charts_purchases_by_categories_path, defer: true, prefix: "$", thousands: ",", decimal: ".", messages: {empty: "No information"}, refresh: 60, stacked: false
 
-= line_chart charts_product_by_category_path, defer: true, curve: true, xtitle: "Category", ytitle: "Quantity", thousands: ",", decimal: ".", messages: {empty: "No data"}
+= pie_chart charts_product_by_categories_path, defer: true,  donut: true
 
-= area_chart charts_product_by_category_path, defer: true
+= line_chart charts_product_by_categories_path, defer: true, curve: true, xtitle: "Category", ytitle: "Quantity", thousands: ",", decimal: ".", messages: {empty: "No data"}
+
+= area_chart charts_product_by_categories_path, defer: true

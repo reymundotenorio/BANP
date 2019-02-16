@@ -83,8 +83,11 @@ Rails.application.routes.draw do
 
   # Charts namespace
   namespace :charts do
-    get "product-by-category", to: "product_by_category", as: "product_by_category"
-    get "purchases-by-provider", to: "purchases_by_provider", as: "purchases_by_provider"
+    get "product-by-categories", to: "product_by_categories", as: "product_by_categories"
+    get "purchases-by-providers", to: "purchases_by_providers", as: "purchases_by_providers"
+    get "purchases-by-employees", to: "purchases_by_employees", as: "purchases_by_employees"
+    get "purchases-by-products", to: "purchases_by_products", as: "purchases_by_products"
+    get "purchases-by-categories", to: "purchases_by_categories", as: "purchases_by_categories"
   end
   # End Charts namespace
 
