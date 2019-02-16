@@ -61,8 +61,11 @@ puts "Seeding prodivers"
 end
 
 puts "Seeding categories"
-categories_list = [["Anise", "Anís"], ["Apples", "Manzanas"], ["Artichokes", "Alcachofas"], ["Asparagus", "Esparragos"], ["Bananas", "Bananas"], ["Beans", "Frijoles"], ["Berries", "Bayas"], ["Carrots", "Zanahorias"], ["Dried Chiles", "Chiles Secos"], ["Fresh Chiles", "Chiles Frescos"], ["Lettuce", "Lechugas"], ["Asian Specialties", "Especialidades Asiáticas"], ["Specialty Fruits", "Frutas Especiales"], ["Specialty Vegetables", "Vegetales Especiales"]];
+
+categories_list = [["Anise", "Anís"], ["Apples", "Manzanas"], ["Artichokes", "Alcachofas"], ["Asparagus", "Esparragos"], ["Bananas", "Bananas"], ["Beans", "Frijoles"], ["Berries", "Bayas"], ["Carrots", "Zanahorias"], ["Dried Chiles", "Chiles Secos"], ["Fresh Chiles", "Chiles Frescos"], ["Lettuce", "Lechugas"], ["Asian Specialties", "Especialidades Asiáticas"], ["Specialty Fruits", "Frutas Especiales"], ["Specialty Vegetables", "Vegetales Especiales"]]
+
 count = 0
+
 categories_list.each do |name, name_spanish|
   begin
     Category.create(
@@ -142,7 +145,7 @@ puts "Seeding purchase orders"
 end
 
 puts "Seeding purchase details"
-500.times do |count|
+150.times do |count|
   begin
     PurchaseDetail.create(
       id: (count + 1),
