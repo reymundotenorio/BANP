@@ -145,10 +145,8 @@ puts "Seeding purchase details"
       purchase_id: Faker::Number.between(1, 70),
       price: Faker::Number.decimal(4, 2),
       quantity: Faker::Number.between(1, 100),
-      stock: Faker::Number.between(1, 100),
       status: "",
-      product_id: Faker::Number.between(1, 60),
-      state: Faker::Boolean.boolean(0.95)
+      product_id: Faker::Number.between(1, 60)
     )
   rescue StandardError => e
     puts "Error found #{e.to_s}"

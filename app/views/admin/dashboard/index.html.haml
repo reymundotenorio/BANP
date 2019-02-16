@@ -9,14 +9,14 @@
     });
 
 
-= column_chart charts_purchases_by_provider_path, defer: true
+= column_chart charts_purchases_by_provider_path, defer: true, prefix: "$", thousands: ",", decimal: ".", messages: {empty: "No information"}, refresh: 60, stacked: false
+
+= column_chart charts_purchases_by_provider_path, defer: true, prefix: "$", thousands: ",", decimal: ".", messages: {empty: "No information"}, refresh: 60, stacked: false
+
+= column_chart charts_purchases_by_provider_path, defer: true, prefix: "$", thousands: ",", decimal: ".", messages: {empty: "No information"}, refresh: 60, stacked: false
 
 = pie_chart charts_product_by_category_path, defer: true,  donut: true
 
-= pie_chart charts_product_by_category_path, defer: true
-
 = line_chart charts_product_by_category_path, defer: true, curve: true, xtitle: "Category", ytitle: "Quantity", thousands: ",", decimal: ".", messages: {empty: "No data"}
-
-= column_chart charts_product_by_category_path, defer: true
 
 = area_chart charts_product_by_category_path, defer: true

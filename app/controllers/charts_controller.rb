@@ -9,6 +9,13 @@ class ChartsController < ApplicationController
 
   def purchases_by_provider
     provider_name = "providers.name"
-    render json: Purchase.joins(:provider).group(provider_name).order("COUNT(#{provider_name}) DESC").limit(10).count
+    # render json: PurchaseDetail.joins(:purchase).sum("price * quantity")
+    # render json: Purchase.joins(:provider).group(provider_name).order("COUNT(#{provider_name}) DESC").limit(10).count
+
+    # render json: Purchase.joins(:provider).joins(:purchase_details).group(provider_name).sum("price * quantity")
+
+    # render json: Purchase.joins(:provider).joins(:purchase_details).group(provider_name).select("#{provider_name}, SUM(price * quantity) as Total").order("Total DESC")
+
+    render json: Purchase.enabled.joins(:provider).joins(:purchase_details).group(provider_name).order('SUM(price * quantity) DESC').limit(10).sum("price * quantity")
   end
 end

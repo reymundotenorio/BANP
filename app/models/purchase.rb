@@ -28,10 +28,10 @@ class Purchase < ApplicationRecord
     end
   end
   # End Search
-  
+
   # Total
   def self.total(id)
-    self.find(id).purchase_details.where("state = true").sum("price * quantity")
+    self.find(id).purchase_details.sum("price * quantity")
   end
   # End Total
 

@@ -5,6 +5,7 @@ class CreateProducts < ActiveRecord::Migration[5.2]
       t.string :name_spanish, null: false, unique: true
       t.string :barcode, null: false
       t.decimal :price, null: false, precision: 8, scale: 2
+      t.integer :stock, null: false, default: 0
       t.string :content
       t.string :content_spanish
       t.string :description
