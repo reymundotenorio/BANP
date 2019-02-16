@@ -114,7 +114,7 @@
                       %b= t("activerecord.attributes.employee.#{attribute}")
 
                     - if attribute == "state"
-                      %p= employee["#{attribute}"] ? t("views.show.enabled") : t("views.show.disabled")
+                      %p= employee.state ? t("views.show.enabled") : t("views.show.disabled")
 
                     - else
                       %p= employee["#{attribute}"]
@@ -128,7 +128,7 @@
                         %b= t("activerecord.attributes.user.#{attribute}")
 
                       - if attribute == "confirmed"
-                        %p= employee.user["#{attribute}"] ? t("views.show.confirmed") : t("views.show.not_confirmed")
+                        %p= employee.user.confirmed ? t("views.show.confirmed") : t("views.show.not_confirmed")
 
                       - elsif attribute == "current_sign_in_at" || attribute == "last_sign_in_at"
                         %p= format_datetime(employee.user["#{attribute}"])

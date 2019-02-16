@@ -22,12 +22,12 @@ class ChartsController < ApplicationController
   def purchases_by_products
     product_name =   I18n.locale == :es ? "products.name_spanish" : "products.name"
 
-    render json: PurchaseDetail.joins(:product).enabled.group(product_name).order('SUM(purchase_details.price * quantity) DESC').limit(10).sum("purchase_details.price * quantity")
+    render json: PurchaseDetail.joins(:product).where("products.state = true").group(product_name).order('SUM(purchase_details.price * quantity) DESC').limit(10).sum("purchase_details.price * quantity")
   end
 
   def purchases_by_categories
     category_name = I18n.locale == :es ? "categories.name_spanish" : "categories.name"
 
-    render json: PurchaseDetail.joins(:product).enabled.joins("LEFT JOIN categories ON products.category_id = categories.id").enabled.group(category_name).order('SUM(purchase_details.price * quantity) DESC').limit(10).sum("purchase_details.price * quantity")
+    render json: PurchaseDetail.joins(:product).where("products.state = true").joins("LEFT JOIN categories ON products.category_id = categories.id").where("categories.state = true").group(category_name).order('SUM(purchase_details.price * quantity) DESC').limit(10).sum("purchase_details.price * quantity")
   end
 end

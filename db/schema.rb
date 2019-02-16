@@ -126,6 +126,7 @@ ActiveRecord::Schema.define(version: 2019_02_05_120100) do
     t.string "name_spanish", null: false
     t.string "barcode", null: false
     t.decimal "price", precision: 8, scale: 2, null: false
+    t.integer "stock", default: 0, null: false
     t.string "content"
     t.string "content_spanish"
     t.string "description"
@@ -158,9 +159,7 @@ ActiveRecord::Schema.define(version: 2019_02_05_120100) do
   create_table "purchase_details", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.decimal "price", precision: 8, scale: 2, null: false
     t.integer "quantity", null: false
-    t.integer "stock", null: false
     t.string "status"
-    t.boolean "state", default: true, null: false
     t.string "slug"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -192,7 +191,6 @@ ActiveRecord::Schema.define(version: 2019_02_05_120100) do
     t.decimal "price", precision: 8, scale: 2, null: false
     t.integer "quantity", null: false
     t.string "status"
-    t.boolean "state", default: true, null: false
     t.string "slug"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

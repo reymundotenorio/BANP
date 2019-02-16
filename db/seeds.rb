@@ -12,30 +12,34 @@ require "faker"
 
 puts "Seeding employees"
 20.times do |count|
-  # if count == 0
-  #   Employee.create(
-  #     id: (count + 1),
-  #     first_name: "Reymundo",
-  #     last_name: "Tenorio",
-  #     email: "reymundotenorio@gmail.com",
-  #     phone: "88888888",
-  #     role: "Administrator",
-  #     state: true
-  #   )
-  # end
+  if count == 0
 
-  begin
     Employee.create(
       id: (count + 1),
-      first_name: Faker::Name.first_name,
-      last_name: Faker::Name.last_name,
-      email: Faker::Internet.email,
-      phone: "(#{Faker::Number.number(3)}) #{Faker::Number.number(3)}-#{Faker::Number.number(4)}",
-      role: ["Administrator", "Seller", "Driver"].sample,
-      state: Faker::Boolean.boolean(0.9)
+      first_name: "Reymundo",
+      last_name: "Tenorio",
+      email: "reymundotenorio@gmail.com",
+      phone: "88888888",
+      role: "Administrator",
+      state: true
     )
-  rescue StandardError => e
-    puts "Error found #{e.to_s}"
+
+  else
+
+    begin
+      Employee.create(
+        id: (count + 1),
+        first_name: Faker::Name.first_name,
+        last_name: Faker::Name.last_name,
+        email: Faker::Internet.email,
+        phone: "(#{Faker::Number.number(3)}) #{Faker::Number.number(3)}-#{Faker::Number.number(4)}",
+        role: ["Administrator", "Seller", "Driver"].sample,
+        state: Faker::Boolean.boolean(0.9)
+      )
+    rescue StandardError => e
+      puts "Error found #{e.to_s}"
+    end
+
   end
 end
 

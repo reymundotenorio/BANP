@@ -27,7 +27,7 @@ class PurchaseDetail < ApplicationRecord
       self.where("purchase_id = :purchase_id", purchase_id: purchase_id)
 
     else
-      self.where("purchase_id = :purchase_id", purchase_id: purchase_id).enabled
+      self.where("purchase_id = :purchase_id", purchase_id: purchase_id)
     end
   end
   # End Search
@@ -53,7 +53,6 @@ class PurchaseDetail < ApplicationRecord
   validates :product_id, presence: true
   validates :price, presence: true
   validates :quantity, presence: true
-  validates :stock, presence: true
   # End  Presence validation
 
   # Length validation
@@ -61,9 +60,7 @@ class PurchaseDetail < ApplicationRecord
   # End Length validation
 
   ## Scopes
-  scope :enabled, -> { where(state: true) }
   scope :returned, -> { where(status: "returned") }
   ## End Scopes
-
 
 end

@@ -25,13 +25,16 @@
                 %b= t("activerecord.attributes.#{model}.#{attribute}")
 
               - if attribute == "state"
-                %p= resource["#{attribute}"] ? t("views.show.enabled") : t("views.show.disabled")
+                %p= resource.state ? t("views.show.enabled") : t("views.show.disabled")
 
               - elsif attribute == "price"
-                %p= number_to_currency(resource["#{attribute}"], precision: 2, unit: "$", format: "%u%n", separator: ".", delimiter: ",")
+                %p= number_to_currency(resource.price, precision: 2, unit: "$", format: "%u%n", separator: ".", delimiter: ",")
 
               - elsif attribute == "barcode"
-                %svg.barcode{"jsbarcode-format": "CODE128", "jsbarcode-value": "#{resource[attribute]}", "jsbarcode-lineColor": "#333333", "jsbarcode-background": "#fff", "jsbarcode-fontSize": "16px", "jsbarcode-font": "Montserrat"}
+                %svg.barcode{"jsbarcode-format": "CODE128", "jsbarcode-value": "#{resource.barcode}", "jsbarcode-lineColor": "#333333", "jsbarcode-background": "#fff", "jsbarcode-fontSize": "16px", "jsbarcode-font": "Montserrat"}
+
+              - elsif attribute == "category"
+                %p= I18n.locale == :es ? resource.category.name_spanish : resource.category.name
 
               - else
                 %p= resource["#{attribute}"]
@@ -48,7 +51,7 @@
                     %b= t("activerecord.attributes.user.#{attribute}")
 
                   - if attribute == "confirmed"
-                    %p= resource.user["#{attribute}"] ? t("views.show.confirmed") : t("views.show.not_confirmed")
+                    %p= resource.user.confirmed ? t("views.show.confirmed") : t("views.show.not_confirmed")
 
                   - elsif attribute == "current_sign_in_at" || attribute == "last_sign_in_at"
                     %p= format_datetime(resource.user["#{attribute}"])

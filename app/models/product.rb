@@ -75,6 +75,7 @@ class Product < ApplicationRecord
   validates :name_spanish, presence: true
   validates :barcode, presence: true
   validates :price, presence: true
+  # validates :stock, presence: true
   # End  Presence validation
 
   # Length validation

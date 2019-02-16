@@ -88,7 +88,7 @@
             .col-xs-12.no-padding
               %div{class: "detail-info #{product.state}"}
                 -# Set attributes
-                - attributes = I18n.locale == :es ? [["name_spanish", "name"], ["price", "price"], ["category.name_spanish", "category"], ["content_spanish", "content"], ["description_spanish", "description"], ["recipes_spanish", "recipes"], ["state", "state"], ["barcode", "barcode"]] : [["name", "name"], ["price", "price"], ["category.name", "category"], ["content", "content"], ["description", "description"], ["recipes", "recipes"], ["state", "state"], ["barcode", "barcode"]]
+                - attributes = I18n.locale == :es ? [["name_spanish", "name"], ["price", "price"], ["category.name_spanish", "category"], ["stock", "stock"], ["content_spanish", "content"], ["description_spanish", "description"], ["recipes_spanish", "recipes"], ["state", "state"], ["barcode", "barcode"]] : [["name", "name"], ["price", "price"], ["stock", "stock"], ["category.name", "category"], ["content", "content"], ["description", "description"], ["recipes", "recipes"], ["state", "state"], ["barcode", "barcode"]]
 
                 - attributes.each do |attribute, title|
                   .info
@@ -96,7 +96,7 @@
                       %b= t("activerecord.attributes.product.#{title}")
 
                     - if attribute == "state"
-                      %p= product["#{attribute}"] ? t("views.show.enabled") : t("views.show.disabled")
+                      %p= product.state ? t("views.show.enabled") : t("views.show.disabled")
 
                     - elsif attribute == "category.name_spanish"
                       -# Data table Sync
@@ -111,10 +111,10 @@
                       -# End Data table Sync
 
                     - elsif attribute == "price"
-                      %p= number_to_currency(product["#{attribute}"], precision: 2, unit: "$", format: "%u%n", separator: ".", delimiter: ",")
+                      %p= number_to_currency(product.price, precision: 2, unit: "$", format: "%u%n", separator: ".", delimiter: ",")
 
                     - elsif attribute == "barcode"
-                      %svg.barcode{"jsbarcode-format": "CODE128", "jsbarcode-value": "#{product[attribute]}", "jsbarcode-lineColor": "#333333", "jsbarcode-background": "#fff", "jsbarcode-fontSize": "16px", "jsbarcode-font": "Montserrat"}
+                      %svg.barcode{"jsbarcode-format": "CODE128", "jsbarcode-value": "#{product.barcode}", "jsbarcode-lineColor": "#333333", "jsbarcode-background": "#fff", "jsbarcode-fontSize": "16px", "jsbarcode-font": "Montserrat"}
 
                     - else
                       %p= product["#{attribute}"]

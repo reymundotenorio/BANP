@@ -5,6 +5,10 @@
   - attributes.each do |attribute|
     %td
       - if attribute == "price"
-        %p= number_to_currency(resource["#{attribute}"], precision: 2, unit: "$", format: "%u%n", separator: ".", delimiter: ",")
+        %p= number_to_currency(resource.price, precision: 2, unit: "$", format: "%u%n", separator: ".", delimiter: ",")
+
+      - elsif attribute == "category"
+        %p= I18n.locale == :es ? resource.category.name_spanish : resource.category.name
+
       - else
         %p= resource["#{attribute}"]

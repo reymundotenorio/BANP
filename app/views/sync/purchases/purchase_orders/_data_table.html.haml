@@ -11,11 +11,11 @@
       = link_to admin_purchase_details_path(purchase.id), class: "record-link", "data-header": t("activerecord.attributes.purchase.#{attribute}"), "data-toggle": "tooltip", "data-placement": "bottom", title: t("views.index.view_details") do
         - if attribute == "purchase_datetime"
           -# %p= I18n.l(purchase["#{attribute}"], format: :short)
-          %p= I18n.locale == :es ? purchase["#{attribute}"].strftime("%d/%m/%Y") : purchase["#{attribute}"].strftime("%m/%d/%Y")
-          
+          %p= I18n.locale == :es ? purchase.purchase_datetime.strftime("%d/%m/%Y") : purchase.purchase_datetime.strftime("%m/%d/%Y")
+
         - elsif attribute == "total"
           %p= number_to_currency(Purchase.total(purchase.id), precision: 2, unit: "$", format: "%u%n", separator: ".", delimiter: ",")
-          
+
         - elsif attribute == "provider"
           %p= purchase.provider.name
 

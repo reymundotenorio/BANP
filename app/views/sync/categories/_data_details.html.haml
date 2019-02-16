@@ -96,7 +96,7 @@
                       %b= t("activerecord.attributes.category.#{title}")
 
                     - if attribute == "state"
-                      %p= category["#{attribute}"] ? t("views.show.enabled") : t("views.show.disabled")
+                      %p= category.state ? t("views.show.enabled") : t("views.show.disabled")
 
                     - else
                       %p= category["#{attribute}"]
