@@ -171,7 +171,7 @@ ActiveRecord::Schema.define(version: 2019_02_05_120100) do
   end
 
   create_table "purchases", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.datetime "purchase_datetime", default: -> { "CURRENT_TIMESTAMP" }
+    t.datetime "purchase_datetime", null: false
     t.string "receipt_number", null: false
     t.string "status", default: "ordered", null: false
     t.decimal "discount", precision: 8, scale: 2, null: false
@@ -202,7 +202,7 @@ ActiveRecord::Schema.define(version: 2019_02_05_120100) do
   end
 
   create_table "sales", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.datetime "sale_datetime"
+    t.datetime "sale_datetime", null: false
     t.string "status", default: "ordered", null: false
     t.string "delivery_status", default: "in_queue", null: false
     t.decimal "discount", precision: 8, scale: 2, null: false

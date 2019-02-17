@@ -145,7 +145,7 @@ puts "Seeding purchase orders"
 end
 
 puts "Seeding purchase details"
-150.times do |count|
+100.times do |count|
   begin
     PurchaseDetail.create(
       id: (count + 1),

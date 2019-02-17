@@ -16,6 +16,12 @@
                 .form-info
 
                   .form-group
+                    = f.datetime_local_field :purchase_datetime, class: "form-control input", placeholder: t("activerecord.attributes.purchase.purchase_datetime"), required: true
+                    %label
+                      %b= t("activerecord.attributes.purchase.purchase_datetime")
+                    .border-bottom
+
+                  .form-group
                     = f.text_field :receipt_number, class: "form-control input", placeholder: t("activerecord.attributes.purchase.receipt_number")
                     %label
                       %b= t("activerecord.attributes.purchase.receipt_number")

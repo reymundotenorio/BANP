@@ -1,7 +1,7 @@
 class CreatePurchases < ActiveRecord::Migration[5.2]
   def change
     create_table :purchases do |t|
-      t.datetime :purchase_datetime, default: -> { "CURRENT_TIMESTAMP" }
+      t.datetime :purchase_datetime, null: false #, default: -> { "CURRENT_TIMESTAMP" }
       t.string :receipt_number, null: false
       t.string :status, null: false , default: "ordered" # ordered, received, returned
       t.decimal :discount, null: false, precision: 8, scale: 2
