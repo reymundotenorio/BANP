@@ -4,10 +4,6 @@ class PurchaseDetail < ApplicationRecord
   belongs_to :product
   # End Associations
 
-  # Nested attributes
-  accepts_nested_attributes_for :purchase
-  # End Nested attributes
-
   # Audit
   audited
   # End Audit

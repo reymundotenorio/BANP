@@ -15,10 +15,7 @@ class Admin::PurchaseOrdersController < ApplicationController
   # before_action :require_employee
   # End Authentication
 
-  def new
-
-  end
-
+  # /admin/purchases/orders
   def index
     @orders = Purchase.search_order(params[:search], params[:show]).paginate(page: params[:page], per_page: 15) # Orders with pagination
     @show_all = params[:show] == "all" ? true : false # View All (Enabled and Disabled)
@@ -43,5 +40,31 @@ class Admin::PurchaseOrdersController < ApplicationController
         to_pdf(name_pdf, template, Provider.all, I18n.l(datetime), title_pdf)
       end
     end
+  end
+
+  # /purchases/order/new
+  def new
+    @order = Purchase.new
+    # @search_form_path = admin_new_product_path(@order)
+    # @categories = Category.search(params[:search], "enabled-only").paginate(page: params[:page], per_page: 5) # Categories with pagination
+
+    respond_to do |format|
+      format.html
+      format.js
+    end
+  end
+
+  private
+
+  # Set Purchase
+  def set_purchase_order
+    @order = Purchase.friendly.find(params[:id])
+
+  rescue
+    redirect_to admin_purchase_orders_path, alert: t("alerts.not_found", model: t("activerecord.models.purchase_order"))
+  end
+
+  def purchase_params
+    params.require(:purchase).permit(:purchase_datetime, :receipt_number, :status, :discount, :provider_id, :employee_id, :observations, purchase_details_attributes: [:id, :product_id, :price, :quantity, :status, :_destroy])
   end
 end

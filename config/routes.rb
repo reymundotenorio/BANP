@@ -213,7 +213,7 @@ Rails.application.routes.draw do
     get "/purchases/order/:id", to: "purchase_orders#show", as: "purchase_order"
     get "/purchases/order/:id/edit", to: "purchase_orders#edit", as: "edit_purchase_order"
     get "/purchases/order/:id/history", to: "purchase_orders#history", as: "history_purchase_order"
-    post "/purchases/orders", to: "purchase_orders#create"
+    post "/purchases", to: "purchase_orders#create"
     patch "/purchases/order/:id", to: "purchase_orders#update", as: "update_purchase_order"
     patch "/purchases/orders/:id/active", to: "purchase_orders#active", as: "active_purchase_order"
     patch "/purchases/orders/:id/deactive", to: "purchase_orders#deactive", as: "deactive_purchase_order"

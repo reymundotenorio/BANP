@@ -1,9 +1,13 @@
 class Purchase < ApplicationRecord
   # Associations
-  has_many :purchase_details
+  has_many :purchase_details, inverse_of: :purchase
   belongs_to :provider
   belongs_to :employee
   # End Associations
+
+  # Nested attributes
+  accepts_nested_attributes_for :purchase_details, reject_if: :all_blank
+  # End Nested attributes
 
   # Audit
   audited

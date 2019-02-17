@@ -150,10 +150,10 @@ puts "Seeding purchase details"
     PurchaseDetail.create(
       id: (count + 1),
       purchase_id: Faker::Number.between(1, 70),
+      product_id: Faker::Number.between(1, 60),
       price: Faker::Number.decimal(4, 2),
       quantity: Faker::Number.between(1, 100),
-      status: "",
-      product_id: Faker::Number.between(1, 60)
+      status: ""
     )
   rescue StandardError => e
     puts "Error found #{e.to_s}"

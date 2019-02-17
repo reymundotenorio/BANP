@@ -42,5 +42,4 @@ class Admin::PurchaseDetailsController < ApplicationController
       end
     end
   end
-
 end

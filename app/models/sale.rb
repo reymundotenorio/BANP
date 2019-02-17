@@ -1,6 +1,6 @@
 class Sale < ApplicationRecord
   # Associations
-  has_many :sale_details
+  has_many :sale_details, inverse_of: :sale
   belongs_to :customer
   belongs_to :employee
   # End Associations

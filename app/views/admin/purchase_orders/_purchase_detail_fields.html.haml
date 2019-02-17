@@ -1,0 +1,22 @@
+.nested-fields
+  .field
+    = f.label :product_id
+    %br
+    = f.text_field :product_id
+
+  .field
+    = f.label :price
+    %br
+    = f.text_field :price
+
+  .field
+    = f.label :quantity
+    %br
+    = f.text_field :quantity
+
+  .field
+    = f.label :status
+    %br
+    = f.text_field :status
+
+  = link_to_remove_association "Remove detail", f

@@ -1,7 +1,7 @@
 class SaleDetail < ApplicationRecord
   # Associations
-  belongs_to :product
   belongs_to :sale
+  belongs_to :product
   # End Associations
 
   # Nested attributes
