@@ -209,25 +209,21 @@ Rails.application.routes.draw do
 
     # Purchases orders
     get "/purchases/orders", to: "purchase_orders#index", as: "purchase_orders"
-    get "/purchases/order/new", to: "purchase_orders#new", as: "new_purchase_order"
-    get "/purchases/order/:id", to: "purchase_orders#show", as: "purchase_order"
-    get "/purchases/order/:id/edit", to: "purchase_orders#edit", as: "edit_purchase_order"
-    get "/purchases/order/:id/history", to: "purchase_orders#history", as: "history_purchase_order"
+    get "/purchase/new", to: "purchase_orders#new", as: "new_purchase"
+    get "/purchase/:id", to: "purchase_orders#show", as: "purchase"
+    get "/purchase/:id/edit", to: "purchase_orders#edit", as: "edit_purchase"
+    get "/purchases/:id/history", to: "purchase_orders#history", as: "history_purchase"
     post "/purchases", to: "purchase_orders#create"
-    patch "/purchases/order/:id", to: "purchase_orders#update", as: "update_purchase_order"
-    patch "/purchases/orders/:id/active", to: "purchase_orders#active", as: "active_purchase_order"
-    patch "/purchases/orders/:id/deactive", to: "purchase_orders#deactive", as: "deactive_purchase_order"
+    patch "/purchases/:id", to: "purchase_orders#update", as: "update_purchase"
+    patch "/purchases/:id/active", to: "purchase_orders#active", as: "active_purchase"
+    patch "/purchases/:id/deactive", to: "purchase_orders#deactive", as: "deactive_purchase"
     # End Purchases orders
-
 
     # Purchases details
     get "/purchases/:id/details", to: "purchase_details#show", as: "purchase_details"
-
-    get "/purchases/detail/:id/edit", to: "purchase_details#edit", as: "edit_purchase_detail"
-    get "/purchases/detail/:id/history", to: "purchase_details#history", as: "history_purchase_detail"
+    get "/purchase/detail/:id/edit", to: "purchase_details#edit", as: "edit_purchase_detail"
+    get "/purchase/detail/:id/history", to: "purchase_details#history", as: "history_purchase_detail"
     patch "/purchases/detail/:id", to: "purchase_details#update", as: "update_purchase_detail"
-    patch "/purchases/details/:id/active", to: "purchase_details#active", as: "active_purchase_detail"
-    patch "/purchases/details/:id/deactive", to: "purchase_details#deactive", as: "deactive_purchase_detail"
     # End Purchases details
   end
   # End Admin namespace

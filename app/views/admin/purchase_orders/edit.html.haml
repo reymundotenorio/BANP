@@ -5,7 +5,7 @@
     .row.title-container
       .col-xs-12.col-sm-4.col-lg-8
         -# Heading
-        %h1{class: "#{@provider.state}"}
+        %h1{class: "#{@order.state}"}
           %i.fas.fa-edit
           = t("views.edit.edit")
         -# End Heading
@@ -13,7 +13,7 @@
       .col-xs-12.col-sm-8.col-lg-4.text-right
         -# Provider button
         .btn-container
-          = link_to (admin_provider_path(@provider)), class: "btn btn-general" do
+          = link_to (admin_provider_path(@order)), class: "btn btn-general" do
             %i.fas.fa-id-card
             %span= t("activerecord.models.provider")
         -# End Provider button
@@ -33,10 +33,10 @@
                 %i.fas.fa-list-alt
                 %span= t("header.navigation.providers")
             %li
-              = link_to (admin_provider_path(@provider)) do
+              = link_to (admin_provider_path(@order)) do
                 %i.fas.fa-id-card
                 %span
-                  = @provider.name
+                  = @order.receipt_number
             %li.active
               %i.fas.fa-edit
               = t("views.edit.edit")

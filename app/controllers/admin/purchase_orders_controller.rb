@@ -8,7 +8,7 @@ class Admin::PurchaseOrdersController < ApplicationController
   # End Find purchase order with Friendly_ID
 
   # Sync model DSL
-  enable_sync only: [:create, :update, :active, :deactive]
+  enable_sync only: [:create, :update]
   # End Sync model DSL
 
   # Authentication
@@ -42,10 +42,23 @@ class Admin::PurchaseOrdersController < ApplicationController
     end
   end
 
-  # /purchases/order/new
+  # admin/purchases/order/new
   def new
     @order = Purchase.new
     # @search_form_path = admin_new_product_path(@order)
+    # @categories = Category.search(params[:search], "enabled-only").paginate(page: params[:page], per_page: 5) # Categories with pagination
+
+    respond_to do |format|
+      format.html
+      format.js
+    end
+  end
+
+  # admin/purchases/order/:id/edit
+  def edit
+    # Order found by before_action
+
+    # @search_form_path = admin_edit_product_path(@product)
     # @categories = Category.search(params[:search], "enabled-only").paginate(page: params[:page], per_page: 5) # Categories with pagination
 
     respond_to do |format|
@@ -91,21 +104,21 @@ class Admin::PurchaseOrdersController < ApplicationController
     updated_params = purchase_order_params
 
     # Fixing price
-    if updated_params[:price]
-      begin
-        price = updated_params[:price].remove(",")
-        updated_params[:price] = price.to_d
-
-      rescue
-        updated_params[:price] = 0.00
-      end
-    end
+    # if updated_params[:price]
+    #   begin
+    #     price = updated_params[:price].remove(",")
+    #     updated_params[:price] = price.to_d
+    #
+    #   rescue
+    #     updated_params[:price] = 0.00
+    #   end
+    # end
 
     if @order.update(updated_params)
       redirect_to [:admin, @order], notice: t("alerts.updated", model: t("purchase.order"))
 
     else
-      @categories = Category.search(params[:search], "enabled-only").paginate(page: params[:page], per_page: 5) # Categories with pagination
+      # @categories = Category.search(params[:search], "enabled-only").paginate(page: params[:page], per_page: 5) # Categories with pagination
       render :edit
     end
   end

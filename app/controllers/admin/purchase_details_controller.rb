@@ -4,11 +4,11 @@ class Admin::PurchaseDetailsController < ApplicationController
   # End Admin layout
 
   # Find providers with Friendly_ID
-  # before_action :set_provider, only: [:show, :edit, :update, :active, :deactive, :history]
+  # before_action :set_provider, only: [:show, :history]
   # End Find providers with Friendly_ID
 
   # Sync model DSL
-  enable_sync only: [:create, :update, :active, :deactive]
+  enable_sync only: [:create, :update]
   # End Sync model DSL
 
   # Authentication
