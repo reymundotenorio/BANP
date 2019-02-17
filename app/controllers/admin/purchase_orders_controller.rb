@@ -54,6 +54,63 @@ class Admin::PurchaseOrdersController < ApplicationController
     end
   end
 
+  # Create
+  def create
+    @order = Purchase.new(purchase_order_params)
+
+    # Deleting blank spaces
+    @order[:receipt_number]= @order[:receipt_number].strip
+    @order[:status] = @order[:status].strip
+    @order[:observations] = @order[:observations].strip
+    # End Deleting blank spaces
+
+    # Fixing price
+    # if @order[:price]
+    #   begin
+    #     price = @order[:price].remove(",")
+    #     @order[:price] = price.to_d
+    #
+    #   rescue
+    #     @order[:price] = 0.00
+    #   end
+    # end
+
+    # If record was saved
+    if @order.save
+      redirect_to [:admin, @order], notice: t("alerts.created", model: t("purchase.order"))
+
+      # If record was not saved
+    else
+      # @categories = Category.search(params[:search], "enabled-only").paginate(page: params[:page], per_page: 5) # Categories with pagination
+      render :new
+    end
+  end
+
+  # Update
+  def update
+    updated_params = purchase_order_params
+
+    # Fixing price
+    if updated_params[:price]
+      begin
+        price = updated_params[:price].remove(",")
+        updated_params[:price] = price.to_d
+
+      rescue
+        updated_params[:price] = 0.00
+      end
+    end
+
+    if @order.update(updated_params)
+      redirect_to [:admin, @order], notice: t("alerts.updated", model: t("purchase.order"))
+
+    else
+      @categories = Category.search(params[:search], "enabled-only").paginate(page: params[:page], per_page: 5) # Categories with pagination
+      render :edit
+    end
+  end
+
+
   private
 
   # Set Purchase
@@ -64,7 +121,7 @@ class Admin::PurchaseOrdersController < ApplicationController
     redirect_to admin_purchase_orders_path, alert: t("alerts.not_found", model: t("activerecord.models.purchase_order"))
   end
 
-  def purchase_params
-    params.require(:purchase).permit(:purchase_datetime, :receipt_number, :status, :discount, :provider_id, :employee_id, :observations, purchase_details_attributes: [:id, :product_id, :price, :quantity, :status, :_destroy])
+  def purchase_order_params
+    params.require(:purchase).permit(:purchase_datetime, :receipt_number, :status, :discount, :provider_id, :employee_id, :observations, purchase_details_attributes: PurchaseDetail.attribute_names.map(&:to_sym).push(:_destroy))
   end
 end

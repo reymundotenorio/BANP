@@ -5,7 +5,7 @@ class CreateCategories < ActiveRecord::Migration[5.2]
       t.string :name_spanish, null: false, unique: true
       t.string :description
       t.string :description_spanish
-      t.boolean :state, default: true, null: false
+      t.boolean :state, null: false, default: true
 
       t.string :slug # Friendly_id slug
       t.timestamps # create_at & update_at

@@ -5,7 +5,7 @@ class CreateNotifications < ActiveRecord::Migration[5.2]
       t.string :path
       t.string :authorized_roles
       t.text :read_by
-      t.boolean :state, default: true, null: false
+      t.boolean :state, null: false, default: true
       t.string :slug # Friendly_id slug
       t.timestamps # create_at & update_at
     end

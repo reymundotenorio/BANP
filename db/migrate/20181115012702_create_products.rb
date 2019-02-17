@@ -12,7 +12,7 @@ class CreateProducts < ActiveRecord::Migration[5.2]
       t.string :description_spanish
       t.string :recipes
       t.string :recipes_spanish
-      t.boolean :state, default: true, null: false
+      t.boolean :state, null: false, default: true
 
       t.string :slug # Friendly_id slug
       t.timestamps # create_at & update_at

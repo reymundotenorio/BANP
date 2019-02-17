@@ -11,28 +11,28 @@ class CreateUsers < ActiveRecord::Migration[5.2]
 
       # Recoverable
       t.string :reset_password_token
-      t.boolean :reset_password_sent, default: false, null: false
+      t.boolean :reset_password_sent, null: false, default: false
       t.datetime :reset_password_sent_at
 
       # Trackable
-      t.integer :sign_in_count, default: 0, null: false
+      t.integer :sign_in_count, null: false, default: 0
       t.datetime :current_sign_in_at
       t.datetime :last_sign_in_at
       t.string :current_sign_in_ip
       t.string :last_sign_in_ip
 
       # Confirmable
-      t.boolean :confirmed, default: false, null: false
+      t.boolean :confirmed, null: false, default: false
       t.string :confirmation_token
-      t.boolean :confirmation_sent, default: false, null: false
+      t.boolean :confirmation_sent, null: false, default: false
 
       # Lockable
-      t.integer :failed_attempts, default: 0, null: false
+      t.integer :failed_attempts, null: false, default: 0
       t.string :unlock_token # Unlock by email or text code
-      t.boolean :unlock_sent, default: false, null: false
+      t.boolean :unlock_sent, null: false, default: false
 
       # Two factor authentication
-      t.boolean :two_factor_auth, default: false, null:false
+      t.boolean :two_factor_auth, null:false, default: false
       t.string :two_factor_auth_otp, unique: true
 
       t.timestamps # create_at & update_at

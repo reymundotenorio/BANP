@@ -1,13 +1,13 @@
 class CreatePurchases < ActiveRecord::Migration[5.2]
   def change
     create_table :purchases do |t|
-      t.datetime :purchase_datetime
+      t.datetime :purchase_datetime, default: -> { "CURRENT_TIMESTAMP" }
       t.string :receipt_number, null: false
-      t.string :status, default: "order", null: false # ordered, received, returned
+      t.string :status, null: false , default: "ordered" # ordered, received, returned
       t.decimal :discount, null: false, precision: 8, scale: 2
       t.string :observations
-      t.boolean :state, default: true, null: false
-      
+      t.boolean :state, null: false, default: true
+
       t.string :slug # Friendly_id slug
       t.timestamps # create_at & update_at
     end

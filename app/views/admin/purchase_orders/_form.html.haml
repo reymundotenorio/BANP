@@ -14,11 +14,6 @@
             .row.no-margin
               .col-xs-12.no-padding
                 .form-info
-                  .form-group
-                    = f.datetime_local_field :purchase_datetime, class: "form-control input", placeholder: t("activerecord.attributes.purchase.purchase_datetime"), required: true
-                    %label
-                      %b= t("activerecord.attributes.purchase.purchase_datetime")
-                    .border-bottom
 
                   .form-group
                     = f.text_field :receipt_number, class: "form-control input", placeholder: t("activerecord.attributes.purchase.receipt_number")
@@ -83,5 +78,5 @@
             = f.fields_for :purchase_details do |detail|
               = render "purchase_detail_fields", f: detail
             .links
-              = link_to_add_association "Add Detail", f, :purchase_details
+              = link_to_add_association "Add Detail", f, :purchase_details, class: "btn btn-general", data: { association_insertion_node: "#purchase_details", association_insertion_method: :prepend}
 -# End Form

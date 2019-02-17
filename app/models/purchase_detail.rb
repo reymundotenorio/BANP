@@ -81,7 +81,7 @@ class PurchaseDetail < ApplicationRecord
   # End Update Friendly_ID slug
 
   # Presence validation
-  validates :purchase_id, presence: true
+  # validates :purchase_id, presence: true
   validates :product_id, presence: true
   validates :price, presence: true
   validates :quantity, presence: true

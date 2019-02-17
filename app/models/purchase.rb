@@ -6,7 +6,7 @@ class Purchase < ApplicationRecord
   # End Associations
 
   # Nested attributes
-  accepts_nested_attributes_for :purchase_details, reject_if: :all_blank
+  accepts_nested_attributes_for :purchase_details
   # End Nested attributes
 
   # Audit

@@ -6,7 +6,7 @@ class CreateEmployees < ActiveRecord::Migration[5.2]
       t.string :email, null: false
       t.string :phone, limit: 14, unique: true # Phone number format (000) 000-0000
       t.string :role, null: false
-      t.boolean :state, default: true, null: false
+      t.boolean :state, null: false, default: true
 
       t.string :slug # Friendly_id slug
       t.timestamps # create_at & update_at

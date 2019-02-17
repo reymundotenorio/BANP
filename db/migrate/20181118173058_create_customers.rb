@@ -8,7 +8,7 @@ class CreateCustomers < ActiveRecord::Migration[5.2]
       t.string :phone, limit: 14, null: false, unique: true # Phone number format (000) 000-0000
       t.string :zipcode, null: false, limit: 5
       t.string :address, null: false
-      t.boolean :state, default: true, null: false
+      t.boolean :state, null: false, default: true
 
       t.string :slug # Friendly_id slug
       t.timestamps # create_at & update_at
