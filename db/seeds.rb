@@ -167,5 +167,5 @@ puts "The information have been seeded"
 # rails db:create
 # rails db:migrate
 # rails db:seed
-#
-# Purchase.create(purchase_datetime: Faker::Date.between(2.years.ago, Date.today), receipt_number: Faker::Invoice.reference, status: "order", discount: Faker::Number.between(1,  10), provider_id: Faker::Number.between(1,  25), employee_id: Faker::Number.between(1,  15), observations: "")
+
+PurchaseDetail.create(purchase_id: 1, price: Faker::Number.decimal(4,  2), quantity: 20, status: "returned", product_id: 1)

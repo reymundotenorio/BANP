@@ -18,6 +18,42 @@ class PurchaseDetail < ApplicationRecord
   sync_touch :product
   # End Render sync
 
+  ## Callbacks
+
+  # Before destroy
+  before_destroy :not_permit_destroy
+
+  # After save and update
+  after_save :update_stock #, on: [ :create, :update ]
+
+  # Before_destroy callback, avoid destroy information
+  def not_permit_destroy
+    false
+  end
+
+  # Update product stock
+  def update_stock
+    product = Product.find(self.product_id)
+
+    if product
+      if self.status == "returned"
+        product.stock = product.stock - self.quantity
+
+      else
+        product.stock = product.stock + self.quantity
+      end
+
+      if product.save
+        puts "Product stock UPDATED"
+
+      else
+        puts "Product stock NOT UPDATED"
+      end
+    end
+  end
+
+  ## End Callbacks
+
   # Search
   def self.search(purchase_id, search, show_all)
     if search

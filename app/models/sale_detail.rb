@@ -17,4 +17,16 @@ class SaleDetail < ApplicationRecord
   sync_touch :product
   sync_touch :sale
   # End Render sync
+
+  ## Callbacks
+
+  # Before destroy
+  before_destroy :not_permit_destroy
+
+  # Before_destroy callback, avoid destroy information
+  def not_permit_destroy
+    false
+  end
+
+  ## End Callbacks
 end
