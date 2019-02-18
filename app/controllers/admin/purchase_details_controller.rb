@@ -20,7 +20,7 @@ class Admin::PurchaseDetailsController < ApplicationController
     @show_all = params[:show] == "all" ? true : false # View All (Enabled and Disabled)
     @count = @details.count
 
-    @purchase_id = params[:id]
+    @purchase = Purchase.find(params[:id]) || nil
 
     # PDF view configuration
     current_lang = params[:lang]

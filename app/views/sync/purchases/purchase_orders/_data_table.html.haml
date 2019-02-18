@@ -14,7 +14,7 @@
           %p= I18n.locale == :es ? purchase.purchase_datetime.strftime("%d/%m/%Y") : purchase.purchase_datetime.strftime("%m/%d/%Y")
 
         - elsif attribute == "total"
-          %p= number_to_currency(Purchase.total(purchase.id), precision: 2, unit: "$", format: "%u%n", separator: ".", delimiter: ",")
+          %p= number_to_currency((Purchase.total(purchase.id) - (Purchase.total(purchase.id) * (purchase.discount / 100))), precision: 2, unit: '$', format: '%u%n', separator: '.', delimiter: ',')
 
         - elsif attribute == "provider"
           %p= purchase.provider.name

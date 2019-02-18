@@ -9,11 +9,11 @@
     });
 
 %h2 Compras por mes
-= line_chart charts_purchases_by_month_path, defer: true, curve: true, xtitle: "Month", ytitle: "Dollars", thousands: ",", decimal: ".", messages: {empty: "No data"}
+= line_chart charts_purchases_by_month_path, defer: true, curve: true, xtitle: "Month", ytitle: "Dollars", prefix: "$", thousands: ",", decimal: ".", messages: {empty: "No data"}, discrete: true
 %br
 
 %h2 Compras por mes
-= area_chart charts_purchases_by_month_path, defer: true, curve: true, xtitle: "Month", ytitle: "Dollars", thousands: ",", decimal: ".", messages: {empty: "No data"}
+= area_chart charts_purchases_by_month_path, defer: true, curve: true, xtitle: "Month", ytitle: "Dollars", prefix: "$", thousands: ",", decimal: ".", messages: {empty: "No data"}
 %br
 
 %h2 Compras por proveedor

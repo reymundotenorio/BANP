@@ -13,7 +13,6 @@ require "faker"
 puts "Seeding employees"
 20.times do |count|
   if count == 0
-
     Employee.create(
       id: (count + 1),
       first_name: "Reymundo",
@@ -25,7 +24,6 @@ puts "Seeding employees"
     )
 
   else
-
     begin
       Employee.create(
         id: (count + 1),
@@ -39,7 +37,6 @@ puts "Seeding employees"
     rescue StandardError => e
       puts "Error found #{e.to_s}"
     end
-
   end
 end
 
@@ -130,7 +127,7 @@ puts "Seeding purchase orders"
   begin
     Purchase.create(
       id: (count + 1),
-      purchase_datetime: Faker::Date.between(2.years.ago, Date.today),
+      purchase_datetime: Faker::Date.between(1.years.ago, Date.today),
       receipt_number: "N/A",
       status: "ordered",
       discount: Faker::Number.between(1, 10),
@@ -145,7 +142,7 @@ puts "Seeding purchase orders"
 end
 
 puts "Seeding purchase details"
-100.times do |count|
+1000.times do |count|
   begin
     PurchaseDetail.create(
       id: (count + 1),
@@ -153,7 +150,7 @@ puts "Seeding purchase details"
       product_id: Faker::Number.between(1, 60),
       price: Faker::Number.decimal(4, 2),
       quantity: Faker::Number.between(1, 100),
-      status: "ordered"
+      status: ["ordered", "returned"].sample
     )
   rescue StandardError => e
     puts "Error found #{e.to_s}"
@@ -167,6 +164,6 @@ puts "The information have been seeded"
 # rails db:migrate
 # rails db:seed
 # rails s
-#
+
 
 PurchaseDetail.create(purchase_id: 1, price: Faker::Number.decimal(4,  2), quantity: 20, status: "returned", product_id: 1)
