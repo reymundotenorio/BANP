@@ -3,21 +3,20 @@
   - attributes = ["product", "price", "quantity", "total", "status"]
 
   %td
-    %a.record-link
+    = link_to "#", class: "record-link", "data-header": "No." do
       %p= purchase_detail.id
 
   - attributes.each do |attribute|
     %td
-      %a.record-link
-        %p
-          - if attribute == "product"
-            %p= I18n.locale == :es ? purchase_detail.product.name_spanish : purchase_detail.product.name
+      = link_to "#", class: "record-link", "data-header": t("activerecord.attributes.purchase_detail.#{attribute}") do
+        - if attribute == "product"
+          %p= I18n.locale == :es ? purchase_detail.product.name_spanish : purchase_detail.product.name
 
-          - elsif attribute == "price"
-            %p= number_to_currency(purchase_detail.price, precision: 2, unit: "$", format: "%u%n", separator: ".", delimiter: ",")
+        - elsif attribute == "price"
+          %p= number_to_currency(purchase_detail.price, precision: 2, unit: "$", format: "%u%n", separator: ".", delimiter: ",")
 
-          - elsif attribute == "total"
-            %p= number_to_currency((purchase_detail.price * purchase_detail.quantity), precision: 2, unit: "$", format: "%u%n", separator: ".", delimiter: ",")
+        - elsif attribute == "total"
+          %p= number_to_currency((purchase_detail.price * purchase_detail.quantity), precision: 2, unit: "$", format: "%u%n", separator: ".", delimiter: ",")
 
-          - else
-            %p= purchase_detail["#{attribute}"]
+        - else
+          %p= purchase_detail["#{attribute}"]

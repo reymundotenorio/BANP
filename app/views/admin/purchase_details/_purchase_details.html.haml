@@ -3,8 +3,8 @@
     -# Table
     %table.table
       %thead
-        - model = "purchase_details"
-        - attributes = ["product_id", "price", "quantity", "total", "status"] 
+        - model = "purchase_detail"
+        - attributes = ["product", "price", "quantity", "total", "status"]
 
         -# Render table header
         = render partial: "partials/table_header", locals: {model: model, attributes: attributes}

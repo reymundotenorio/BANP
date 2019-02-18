@@ -130,12 +130,14 @@ en:
         observations: "Observations"
         state: "State"
         total_purchase: "Total"
+        total: "Total"
       purchase_detail:
         product: "Product"
         price: "Price"
         quantity: "Quantity"
         total_purchase_detail: "Total"
         status: "Status"
+        total: "Total"
 
   # Purchase
   purchase:

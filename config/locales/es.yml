@@ -131,12 +131,14 @@ es:
         observations: "Observaciones"
         state: "Estado"
         total_purchase: "Total"
+        total: "Total"
       purchase_detail:
         product: "Producto"
         price: "Precio"
         quantity: "Cantidad"
         total_purchase_detail: "Total"
         status: "Condición"
+        total: "Total"
 
   # Purchase
   purchase:

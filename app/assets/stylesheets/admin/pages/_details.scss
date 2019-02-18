@@ -15,6 +15,11 @@
         text-align: center;
         margin: 0px;
 
+        &.with-tooltip{
+          cursor: pointer;
+          display: inline-block;
+        }
+
         i{
           padding-right: 2px;
         }
