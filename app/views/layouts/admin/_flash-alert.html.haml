@@ -1,7 +1,7 @@
 - if !flash[:alert].blank?
   .alert.alert-danger.alert-dismissible.shadow-card{role: "alert"}
     %button.close{"data-dismiss": "alert", type: "button", "data-toggle": "tooltip", "data-placement": "top", title: t("views.form.close")}
-      %span{"aria-hidden": "true"}
+      %span
         %i.fas.fa-times-circle
     %strong
       %p

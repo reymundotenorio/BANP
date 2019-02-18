@@ -1,13 +1,13 @@
 - if @show_all
   -# Enabled button
   = button_to admin_purchase_details_path(@purchase_id), method: "get", remote: true, params: {}, class: "btn btn-general" do
-    %i.fa.fa-list-ul{"aria-hidden": "true"}
+    %i.fa.fa-list-ul
     %span= t("views.index.show_enabled")
   -# End Enabled button
 
 - else
   -# All button
   = button_to admin_purchase_details_path(@purchase_id), method: "get", remote: true, params: { show: "all" }, class: "btn btn-general btn-danger" do
-    %i.fa.fa-list-alt{"aria-hidden": "true"}
+    %i.fa.fa-list-alt
     %span= t("views.index.show_all")
   -# End All button

@@ -30,15 +30,15 @@ class Admin::PurchaseDetailsController < ApplicationController
     file_time = datetime.strftime("%m%d%Y")
 
     name_pdf = "purchase-details-#{file_time}"
-    template = "admin/purchase-orders/index_pdf.html.haml"
-    title_pdf = t("header.navigation.purchase_orders")
+    template = "admin/purchase_details/show_pdf.html.haml"
+    title_pdf = "#{t('purchase.order_details')} ##{@purchase_id}"
     # End PDF view configuration
 
     respond_to do |format|
       format.html
       format.js
       format.pdf do
-        to_pdf(name_pdf, template, Provider.all, I18n.l(datetime), title_pdf)
+        to_pdf(name_pdf, template, @details, I18n.l(datetime), title_pdf)
       end
     end
   end

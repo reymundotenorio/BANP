@@ -1,4 +1,4 @@
-%tr{class: "#{resource.state}"}
+%tr{class: "#{resource.state if resource.class != PurchaseDetail}"}
   %td
     %p= resource.id
 
@@ -9,6 +9,27 @@
 
       - elsif attribute == "category"
         %p= I18n.locale == :es ? resource.category.name_spanish : resource.category.name
+
+      - elsif attribute == "purchase_datetime"
+        %p= I18n.locale == :es ? resource.purchase_datetime.strftime("%d/%m/%Y") : resource.purchase_datetime.strftime("%m/%d/%Y")
+
+      - elsif attribute == "total_purchase"
+        %p= number_to_currency(Purchase.total(resource.id), precision: 2, unit: "$", format: "%u%n", separator: ".", delimiter: ",")
+
+      - elsif attribute == "total_purchase_detail"
+        %p= number_to_currency((resource.price * resource.quantity), precision: 2, unit: "$", format: "%u%n", separator: ".", delimiter: ",")
+
+      - elsif attribute == "status"
+        %p= resource["#{attribute}"].capitalize
+
+      - elsif attribute == "product"
+        %p= I18n.locale == :es ? resource.product.name_spanish : resource.product.name
+
+      - elsif attribute == "provider"
+        %p= resource.provider.name
+
+      - elsif attribute == "employee"
+        %p= "#{resource.employee.first_name} #{resource.employee.last_name}"
 
       - else
         %p= resource["#{attribute}"]

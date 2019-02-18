@@ -131,7 +131,7 @@ puts "Seeding purchase orders"
     Purchase.create(
       id: (count + 1),
       purchase_datetime: Faker::Date.between(2.years.ago, Date.today),
-      receipt_number: Faker::Invoice.reference,
+      receipt_number: "N/A",
       status: "ordered",
       discount: Faker::Number.between(1, 10),
       provider_id: Faker::Number.between(1, 25),
@@ -153,7 +153,7 @@ puts "Seeding purchase details"
       product_id: Faker::Number.between(1, 60),
       price: Faker::Number.decimal(4, 2),
       quantity: Faker::Number.between(1, 100),
-      status: ""
+      status: "ordered"
     )
   rescue StandardError => e
     puts "Error found #{e.to_s}"
@@ -162,10 +162,11 @@ end
 
 puts "The information have been seeded"
 
-#
 # rails db:drop
 # rails db:create
 # rails db:migrate
 # rails db:seed
+# rails s
+#
 
 PurchaseDetail.create(purchase_id: 1, price: Faker::Number.decimal(4,  2), quantity: 20, status: "returned", product_id: 1)

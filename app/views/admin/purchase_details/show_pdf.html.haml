@@ -15,8 +15,8 @@
               -# Table
               %table.table.table-pdf
                 -# Set attributes
-                - model = "purchase"
-                - attributes = ["receipt_number", "purchase_datetime", "total_purchase", "provider", "employee"]
+                - model = "purchase_detail"
+                - attributes = ["product", "price", "quantity", "total_purchase_detail", "status"]
 
                 -# Render table header
                 = render partial: "partials/table_header", locals: {model: model, attributes: attributes}

@@ -40,6 +40,7 @@ es:
       category: "Categoría"
       product: "Producto"
       purchase: "Compra"
+      purchase_detail: "Detalle de compra"
     attributes:
       employee:
         first_name: "Nombre"
@@ -129,11 +130,22 @@ es:
         discount: "Descuento"
         observations: "Observaciones"
         state: "Estado"
+        total_purchase: "Total"
+      purchase_detail:
+        product: "Producto"
+        price: "Precio"
+        quantity: "Cantidad"
+        total_purchase_detail: "Total"
+        status: "Condición"
 
   # Purchase
   purchase:
     order: "Orden de compra"
     orders: "Ordenes de compra"
+    order_detail: "Detalle de orden de compra"
+    order_details: "Detalles de orden de compra"
+    show_orders: "Mostrar ordenes de compra"
+    hide_returned: "Ocultar devueltos"
 
   # Will paginate
   will_paginate:

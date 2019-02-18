@@ -32,18 +32,21 @@ class PurchaseDetail < ApplicationRecord
     product = Product.find(self.product_id)
 
     if product
-      if self.status == "returned"
-        product.stock = product.stock - self.quantity
+      # If purchase is a reception
+      if self.purchase.status == "received"
+        if self.status == "returned"
+          product.stock = product.stock - self.quantity
 
-      else
-        product.stock = product.stock + self.quantity
-      end
+        else
+          product.stock = product.stock + self.quantity
+        end
 
-      if product.save
-        puts "Product stock UPDATED"
+        if product.save
+          puts "Product stock UPDATED"
 
-      else
-        puts "Product stock NOT UPDATED"
+        else
+          puts "Product stock NOT UPDATED"
+        end
       end
     end
   end
@@ -59,7 +62,7 @@ class PurchaseDetail < ApplicationRecord
       self.where("purchase_id = :purchase_id", purchase_id: purchase_id)
 
     else
-      self.where("purchase_id = :purchase_id", purchase_id: purchase_id)
+      self.where("purchase_id = :purchase_id", purchase_id: purchase_id).not_returned
     end
   end
   # End Search
@@ -92,6 +95,7 @@ class PurchaseDetail < ApplicationRecord
   # End Length validation
 
   ## Scopes
+  scope :not_returned, -> { where("(status != 'returned')") }
   scope :returned, -> { where(status: "returned") }
   ## End Scopes
 

@@ -4,7 +4,7 @@
     %table.table
       %thead
         - model = "purchase"
-        - attributes = ["receipt_number", "purchase_datetime", "Total", "provider", "employee"]
+        - attributes = ["receipt_number", "purchase_datetime", "total", "provider", "employee"]
 
         -# Render table header
         = render partial: "partials/table_header", locals: {model: model, attributes: attributes}

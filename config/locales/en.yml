@@ -39,6 +39,7 @@ en:
       category: "Category"
       product: "Product"
       purchase: "Purchase"
+      purchase_detail: "Purchase detail"
     attributes:
       employee:
         first_name: "First name"
@@ -128,11 +129,22 @@ en:
         discount: "Discount"
         observations: "Observations"
         state: "State"
+        total_purchase: "Total"
+      purchase_detail:
+        product: "Product"
+        price: "Price"
+        quantity: "Quantity"
+        total_purchase_detail: "Total"
+        status: "Status"
 
   # Purchase
   purchase:
     order: "Purchase order"
     orders: "Purchase orders"
+    order_detail: "Purchase order detail"
+    order_details: "Purchase order details"
+    show_orders: "Show purchase orders"
+    hide_returned: "Hide returned"
 
   # Will paginate
   will_paginate:
