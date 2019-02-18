@@ -8,17 +8,30 @@
         $('#datetimepicker1').datetimepicker();
     });
 
+%h2 Compras por mes
+= line_chart charts_purchases_by_month_path, defer: true, curve: true, xtitle: "Month", ytitle: "Dollars", thousands: ",", decimal: ".", messages: {empty: "No data"}
+%br
 
-= column_chart charts_purchases_by_providers_path, defer: true, prefix: "$", thousands: ",", decimal: ".", messages: {empty: "No information"}, refresh: 60, stacked: false
+%h2 Compras por mes
+= area_chart charts_purchases_by_month_path, defer: true, curve: true, xtitle: "Month", ytitle: "Dollars", thousands: ",", decimal: ".", messages: {empty: "No data"}
+%br
 
-= column_chart charts_purchases_by_employees_path, defer: true, prefix: "$", thousands: ",", decimal: ".", messages: {empty: "No information"}, refresh: 60, stacked: false
+%h2 Compras por proveedor
+= column_chart charts_purchases_by_providers_path, defer: true, prefix: "$", thousands: ",", decimal: ".", messages: {empty: "No information"}, stacked: false
+%br
 
-= column_chart charts_purchases_by_products_path, defer: true, prefix: "$", thousands: ",", decimal: ".", messages: {empty: "No information"}, refresh: 60, stacked: false
+%h2 Compras por empleado
+= column_chart charts_purchases_by_employees_path, defer: true, prefix: "$", thousands: ",", decimal: ".", messages: {empty: "No information"}, stacked: false
+%br
 
-= column_chart charts_purchases_by_categories_path, defer: true, prefix: "$", thousands: ",", decimal: ".", messages: {empty: "No information"}, refresh: 60, stacked: false
+%h2 Compras por product
+= column_chart charts_purchases_by_products_path, defer: true, prefix: "$", thousands: ",", decimal: ".", messages: {empty: "No information"}, stacked: false
+%br
 
+%h2 Compras por categoria
+= column_chart charts_purchases_by_categories_path, defer: true, prefix: "$", thousands: ",", decimal: ".", messages: {empty: "No information"}, stacked: false
+%br
+
+%h2 Productos por categoria
 = pie_chart charts_product_by_categories_path, defer: true,  donut: true
-
-= line_chart charts_product_by_categories_path, defer: true, curve: true, xtitle: "Category", ytitle: "Quantity", thousands: ",", decimal: ".", messages: {empty: "No data"}
-
-= area_chart charts_product_by_categories_path, defer: true
+%br

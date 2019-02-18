@@ -30,4 +30,8 @@ class ChartsController < ApplicationController
 
     render json: PurchaseDetail.joins(:product).where("products.state = true").joins("LEFT JOIN categories ON products.category_id = categories.id").where("categories.state = true").group(category_name).order('SUM(purchase_details.price * quantity) DESC').limit(10).sum("purchase_details.price * quantity")
   end
+
+  def purchases_by_month
+    render json: Purchase.enabled.joins(:purchase_details).group_by_month(:purchase_datetime).order('SUM(price * quantity) DESC').sum("price * quantity")
+  end
 end
