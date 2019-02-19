@@ -14,48 +14,62 @@
             .row.no-margin
               .col-xs-12.no-padding
                 .form-info
-
-                  .form-group
-                    = f.datetime_local_field :purchase_datetime, class: "form-control input", placeholder: t("activerecord.attributes.purchase.purchase_datetime"), required: true
-                    %label
-                      %b= t("activerecord.attributes.purchase.purchase_datetime")
-                    .border-bottom
-
+                
                   .form-group
                     = f.text_field :receipt_number, class: "form-control input", placeholder: t("activerecord.attributes.purchase.receipt_number")
                     %label
                       %b= t("activerecord.attributes.purchase.receipt_number")
                     .border-bottom
+                    
+                  .col-xs-12.col-md-7
+                  
+                    .form-group
+                      .input-btn-group
+                        = f.hidden_field :provider_id, required: true
+                        = f.text_field :provider, value: @order.provider_id.nil? ? "" : "#{@order.order.name}", class: "form-control input", placeholder: t("activerecord.attributes.product.category"), required: true, disabled: true
+                        %label
+                          %b= t("activerecord.attributes.purchase.provider")
+                        .border-bottom
+  
+                        = link_to "", class: "btn btn-general", "data-toggle": "modal", "data-target": "#getProviders" do
+                          %i.fas.fa-search
+              
+                    .col-xs-12.col-md-4 
+                      .form-group
+                        = f.number_field :discount, class: "form-control input", placeholder: t("activerecord.attributes.purchase.discount"), step: "1", min: "0", max: "100"
+                        %label
+                          %b= "#{t('activerecord.attributes.purchase.discount')} %"
+                        .border-bottom
+                        
+                    .col-xs-12.col-md-8
+                      .form-group
+                        .input-group.date#datetimepicker
+                          = f.text_field :purchase_datetime, class: "form-control input date-field", placeholder: t("activerecord.attributes.purchase.purchase_datetime"), required: true
+                          %span.input-group-addon.btn.btn-general
+                            %span.glyphicon.glyphicon-calendar
+                          %label
+                            %b= t("activerecord.attributes.purchase.purchase_datetime")
+                          .border-bottom
 
-                  .form-group
-                    = f.text_field :status, class: "form-control input", placeholder: t("activerecord.attributes.purchase.status")
-                    %label
-                      %b= t("activerecord.attributes.purchase.status")
-                    .border-bottom
+                    .form-group.hidden
+                      = f.text_field :status, class: "form-control input", placeholder: t("activerecord.attributes.purchase.status")
+                      %label
+                        %b= t("activerecord.attributes.purchase.status")
+                      .border-bottom
 
-                  .form-group
-                    = f.number_field :discount, class: "form-control input", placeholder: t("activerecord.attributes.purchase.discount"), step: "1", min: "0", max: "100"
-                    %label
-                      %b= t("activerecord.attributes.purchase.discount")
-                    .border-bottom
-
-                  .form-group
-                    = f.text_field :provider_id, class: "form-control input", placeholder: t("activerecord.attributes.purchase.provider_id")
-                    %label
-                      %b= t("activerecord.attributes.purchase.provider_id")
-                    .border-bottom
-
-                  .form-group
-                    = f.text_field :employee_id, class: "form-control input", placeholder: t("activerecord.attributes.purchase.employee_id")
-                    %label
-                      %b= t("activerecord.attributes.purchase.employee_id")
-                    .border-bottom
-
-                  .form-group
-                    = f.text_area :observations, class: "form-control input text-area",placeholder: t("activerecord.attributes.purchase.observations")
-                    %label
-                      %b= t("activerecord.attributes.purchase.observations")
-                    .border-bottom
+                    .form-group.hidden
+                      = f.text_field :employee_id, class: "form-control input", placeholder: t("activerecord.attributes.purchase.employee_id")
+                      %label
+                        %b= t("activerecord.attributes.purchase.employee_id")
+                      .border-bottom
+                      
+                      
+                  .col-xs-12.col-md-5
+                    .form-group
+                      = f.text_area :observations, class: "form-control input text-area",placeholder: t("activerecord.attributes.purchase.observations")
+                      %label
+                        %b= t("activerecord.attributes.purchase.observations")
+                      .border-bottom
 
                   -# Buttons
                   .main-buttons

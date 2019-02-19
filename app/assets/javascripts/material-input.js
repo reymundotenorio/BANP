@@ -1,6 +1,24 @@
 //= require jquery-mask/jquery.mask
 
 $(document).ready(function(){
+  
+  var i18nLocale = $("body").data("locale");
+  var dateFormat = i18nLocale == "es" ? "DD/MM/YYYY hh:mm A" : "MM/DD/YYYY hh:mm A";
+  
+   // Init Datepicker
+   $("#datetimepicker").datetimepicker(
+     {
+       locale: i18nLocale == "es" ? 'es' : 'en',
+       format: dateFormat,
+       useCurrent: false,
+       defaultDate: moment().toDate(),
+       maxDate: moment().toDate()
+    });
+
+// Disable paste and write on date field
+ $(".date-field").bind("paste keypress", function(e) {
+   e.preventDefault();
+ });
 
   // Init Bootstrap tooltips
   $('[data-toggle="tooltip"]').tooltip();
