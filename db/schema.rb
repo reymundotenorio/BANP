@@ -126,7 +126,6 @@ ActiveRecord::Schema.define(version: 2019_02_05_120100) do
     t.string "name_spanish", null: false
     t.string "barcode", null: false
     t.decimal "price", precision: 8, scale: 2, null: false
-    t.integer "stock", default: 0, null: false
     t.string "content"
     t.string "content_spanish"
     t.string "description"
@@ -159,7 +158,9 @@ ActiveRecord::Schema.define(version: 2019_02_05_120100) do
   create_table "purchase_details", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.decimal "price", precision: 8, scale: 2, null: false
     t.integer "quantity", null: false
+    t.integer "stock", null: false
     t.string "status"
+    t.boolean "state", default: true, null: false
     t.string "slug"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -171,9 +172,9 @@ ActiveRecord::Schema.define(version: 2019_02_05_120100) do
   end
 
   create_table "purchases", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.datetime "purchase_datetime", null: false
+    t.datetime "purchase_datetime"
     t.string "receipt_number", null: false
-    t.string "status", default: "ordered", null: false
+    t.string "status", default: "order", null: false
     t.decimal "discount", precision: 8, scale: 2, null: false
     t.string "observations"
     t.boolean "state", default: true, null: false
@@ -191,6 +192,7 @@ ActiveRecord::Schema.define(version: 2019_02_05_120100) do
     t.decimal "price", precision: 8, scale: 2, null: false
     t.integer "quantity", null: false
     t.string "status"
+    t.boolean "state", default: true, null: false
     t.string "slug"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -202,7 +204,7 @@ ActiveRecord::Schema.define(version: 2019_02_05_120100) do
   end
 
   create_table "sales", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.datetime "sale_datetime", null: false
+    t.datetime "sale_datetime"
     t.string "status", default: "ordered", null: false
     t.string "delivery_status", default: "in_queue", null: false
     t.decimal "discount", precision: 8, scale: 2, null: false
