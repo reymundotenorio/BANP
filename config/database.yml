@@ -47,7 +47,13 @@ test:
 # You can use this database configuration with:
 #
 production:
-  url: <%= ENV["database_url"] %>
+  # url: <%= ENV["database_url"] %>
+  database: <%= ENV["database_name"] %>
+  username: <%= ENV["database_username"] %>
+  password: <%= ENV["database_password"] %>
+  host: <%= ENV["database_host"] %>
+  port: <%= ENV["database_port"] %>
+
 #
 # production:
 #   <<: *default
