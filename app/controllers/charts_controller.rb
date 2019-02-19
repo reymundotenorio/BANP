@@ -10,28 +10,28 @@ class ChartsController < ApplicationController
   def purchases_by_providers
     provider_name = "providers.name"
 
-    render json: Purchase.enabled.joins(:provider).enabled.joins(:purchase_details).group(provider_name).order('SUM(price * quantity) DESC').limit(10).sum("price * quantity")
+    render json: Purchase.enabled.joins(:provider).enabled.joins(:purchase_details).group(provider_name).order('( SUM(price * quantity) - (SUM(price * quantity) * (discount / 100)) ) DESC').limit(10).pluck("#{provider_name}, ( SUM(price * quantity) - (SUM(price * quantity) * (discount / 100)) ) as 'Total'")
   end
 
   def purchases_by_employees
     employee_name = "CONCAT_WS(' ', employees.first_name, employees.last_name)"
 
-    render json: Purchase.enabled.joins(:employee).enabled.joins(:purchase_details).group(employee_name).order('SUM(price * quantity) DESC').limit(10).sum("price * quantity")
+    render json: Purchase.enabled.joins(:employee).enabled.joins(:purchase_details).group(employee_name).order('( SUM(price * quantity) - (SUM(price * quantity) * (discount / 100)) ) DESC').limit(10).pluck("#{employee_name}, ( SUM(price * quantity) - (SUM(price * quantity) * (discount / 100)) ) as 'Total'")
   end
 
   def purchases_by_products
     product_name =   I18n.locale == :es ? "products.name_spanish" : "products.name"
 
-    render json: PurchaseDetail.joins(:product).where("products.state = true").group(product_name).order('SUM(purchase_details.price * quantity) DESC').limit(10).sum("purchase_details.price * quantity")
+    render json: PurchaseDetail.joins(:product).where("products.state = true").joins(:purchase).where("purchases.state = true").group(product_name).order('( SUM(purchase_details.price * quantity) - (SUM(purchase_details.price * quantity) * (discount / 100)) ) DESC').limit(10).pluck("#{product_name}, ( SUM(purchase_details.price * quantity) - (SUM(purchase_details.price * quantity) * (discount / 100)) ) as 'Total'")
   end
 
   def purchases_by_categories
     category_name = I18n.locale == :es ? "categories.name_spanish" : "categories.name"
 
-    render json: PurchaseDetail.joins(:product).where("products.state = true").joins("LEFT JOIN categories ON products.category_id = categories.id").where("categories.state = true").group(category_name).order('SUM(purchase_details.price * quantity) DESC').limit(10).sum("purchase_details.price * quantity")
+    render json: PurchaseDetail.joins(:product).where("products.state = true").joins(:purchase).where("purchases.state = true").joins("LEFT JOIN categories ON products.category_id = categories.id").where("categories.state = true").group(category_name).order('( SUM(purchase_details.price * quantity) - (SUM(purchase_details.price * quantity) * (discount / 100)) ) DESC').limit(10).pluck("#{category_name}, ( SUM(purchase_details.price * quantity) - (SUM(purchase_details.price * quantity) * (discount / 100)) ) as 'Total'")
   end
 
   def purchases_by_month
-    render json: Purchase.enabled.joins(:purchase_details).group_by_month(:purchase_datetime).order('SUM(price * quantity) DESC').sum("price * quantity")
+    render json: Purchase.enabled.joins(:purchase_details).group_by_month(:purchase_datetime).order('( SUM(price * quantity) - (SUM(price * quantity) * (discount / 100)) ) DESC').pluck("purchase_datetime, ( SUM(price * quantity) - (SUM(price * quantity) * (discount / 100)) ) as 'Total'")
   end
 end
