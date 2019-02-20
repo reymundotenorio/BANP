@@ -1,4 +1,4 @@
-class Admin::PurchaseOrdersController < ApplicationController
+class Admin::PurchasesController < ApplicationController
   # Admin layout
   layout "admin/application"
   # End Admin layout
