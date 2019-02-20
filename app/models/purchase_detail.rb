@@ -11,13 +11,12 @@ class PurchaseDetail < ApplicationRecord
   # Render sync
   sync :all
   sync_touch :purchase
-  sync_touch :product
   # End Render sync
 
   ## Callbacks
 
   # Before destroy
-  before_destroy :not_permit_destroy
+  # before_destroy :not_permit_destroy
 
   # After save and update
   after_save :update_stock #, on: [ :create, :update ]
@@ -29,29 +28,53 @@ class PurchaseDetail < ApplicationRecord
 
   # Update product stock
   def update_stock
-    product = Product.find(self.product_id)
+    product = Product.find(self.product_id) || nil
 
+    # If product has been found
     if product
-      # If purchase is a reception
-      if self.purchase.status == "received"
-        if self.status == "returned"
-          product.stock = product.stock - self.quantity
+      # If purchase is active
+      if self.purchase.state
+        # If purchase is a reception
+        if self.purchase.status == "received"
+          # If purchase details has been returned
+          if self.status == "returned"
+            product.stock = product.stock - self.quantity
 
-        else
-          product.stock = product.stock + self.quantity
+            # If purchase details has been received
+          else
+            product.stock = product.stock + self.quantity
+          end
+
+          # Trigger saving successfully
+          if product.save
+            puts "Product stock UPDATED"
+
+            # Trigger saving failed
+          else
+            puts "Product stock NOT UPDATED"
+          end
         end
-
-        if product.save
-          puts "Product stock UPDATED"
-
-        else
-          puts "Product stock NOT UPDATED"
-        end
+        # End If purchase is a reception
       end
+      # End If purchase is active
     end
   end
 
   ## End Callbacks
+
+  # Search orders
+  def self.search_orders(purchase_id, search, show_all)
+    if search
+      self.joins(:purchase).joins(:product).where("(products.name LIKE :search OR products.name_spanish LIKE :search OR purchase_details.status LIKE :search) AND (purchase_details.purchase_id = :purchase_id)", purchase_id: purchase_id, search: "%#{search}%").not_returned
+
+    elsif show_all == "all"
+      self.where("purchase_id = :purchase_id", purchase_id: purchase_id).not_returned
+
+    else
+      self.where("purchase_id = :purchase_id", purchase_id: purchase_id).not_returned
+    end
+  end
+  # End Search orders
 
   # Search
   def self.search(purchase_id, search, show_all)
@@ -95,8 +118,8 @@ class PurchaseDetail < ApplicationRecord
   # End Length validation
 
   ## Scopes
-  scope :not_returned, -> { where("(status != 'returned')") }
-  scope :returned, -> { where(status: "returned") }
+  scope :not_returned, -> { where("(purchase_details.status != 'returned')") }
+  scope :returned, -> { where("(purchase_details.status = 'returned')") }
   ## End Scopes
 
 end

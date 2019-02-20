@@ -1,6 +1,7 @@
 class Product < ApplicationRecord
   # Associations
   belongs_to :category
+  has_many :purchase_details
   has_many :sale_details
   # End Associations
 
@@ -10,20 +11,18 @@ class Product < ApplicationRecord
 
   # Render sync
   sync :all
+  sync_touch :purchase_details, :sale_details
   # End Render sync
 
   # Search
   def self.search(search, show_all)
     if search
       if show_all == "enabled-only"
-        query = self.joins(:category).where("(name LIKE :search OR name_spanish LIKE :search OR barcode LIKE :search OR description LIKE :search OR description_spanish LIKE :search) AND (state = true)", search: "%#{search}%")
+        self.joins(:category).where("(products.name LIKE :search OR products.name_spanish LIKE :search OR categories.name LIKE :search OR categories.name_spanish LIKE :search OR barcode LIKE :search OR products.description LIKE :search OR products.description_spanish LIKE :search) AND (products.state = true)", search: "%#{search}%")
 
       else
-        query = self.joins(:category).where("name LIKE :search OR name_spanish LIKE :search OR barcode LIKE :search OR description LIKE :search OR description_spanish LIKE :search", search: "%#{search}%")
+        self.joins(:category).where("products.name LIKE :search OR products.name_spanish LIKE :search OR categories.name LIKE :search OR categories.name_spanish LIKE :search OR barcode LIKE :search OR products.description LIKE :search OR products.description_spanish LIKE :search", search: "%#{search}%")
       end
-
-      where(query, search: "%#{search}%")
-
     elsif show_all == "all"
       all
 

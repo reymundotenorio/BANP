@@ -1,105 +1,67 @@
--# Details
-%section.details
-  .container
-    -# Title
-    .row.title-container
-      .col-xs-12.col-sm-6.col-md-8
-        -# Heading
-        %h1{class: "#{provider.state}"}
-          %i.fas.fa-id-card
-          = provider.name
-        -# End Heading
+.general-info
+  .main-info
+    %p= I18n.l(purchase.purchase_datetime, format: I18n.locale == :es ? "%A, %d #{t('purchase.of')} %B #{t('purchase.of')} %Y" : "%A, %B %d, %Y")
+    %p= I18n.l(purchase.purchase_datetime, format: "%I:%M:%S %p")
 
-      .col-xs-12.col-sm-6.col-md-4.text-right
-        -# Export button
-        .btn-container.inline
-          = link_to (admin_provider_path(provider, format: "pdf", lang: I18n.locale)), target: "_blank", class: "btn btn-general" do
-            %i.fas.fa-download
-            %span= t("views.index.export")
-        -# End Export button
-    -# End Title
+  %br
 
-    -# Breadcrumb
-    .row
-      .col-xs-12.hidden-xs
-        .breadcrumb-container
-          %ol.breadcrumb
-            %li
-              = link_to (admin_root_path) do
-                %i.fas.fa-tachometer-alt
-                %span= t("header.navigation.dashboard")
-            %li
-              = link_to (admin_providers_path) do
-                %i.fas.fa-list-alt
-                %span= t("header.navigation.providers")
-            %li.active
-              %i.fas.fa-id-card
-              = provider.name
-    -# End Breadcrumb
+  .main-info.text-left-right
+    %p.text-left
+      %b
+        %i.fas.fa-building
+        %span= t("activerecord.models.provider")
+    %p.text-right= purchase.provider.name
 
-    -# Information
-    .row
-      .col-xs-12.col-md-5.col-lg-4
-        -# Material card
-        %div{class: "material-card shadow-card #{provider.state}"}
-          .row.no-margin
-            .col-xs-12.no-padding
-              .general-info
-                -# Image
-                .image-container
-                  - if provider.image.attached?
-                    = image_tag url_for(provider.image), class: "img-responsive"
+  .main-info.text-left-right
 
-                  - else
-                    = image_tag url_for("https://s3.amazonaws.com/betterandnice/images/default/default.png"), class: "img-responsive"
-                -# End Image
+    %p.text-left
+      %b
+        %i.fas.fa-briefcase
+        %span= t("activerecord.models.employee")
+    %p.text-right= "#{purchase.employee.first_name} #{purchase.employee.last_name}"
 
-                .main-info
-                  %p= t("views.show.created_at", time: time_ago_in_words(provider.created_at))
-                  %p= t("views.show.updated_at", time: time_ago_in_words(provider.updated_at))
+  %br
 
-                .main-buttons
-                  .col-xs-12.col-sm-4.col-md-6.button-container.no-padding
-                    = link_to (admin_edit_provider_path(provider)), class: "btn btn-general" do
-                      %i.fas.fa-edit
-                      %span= t("views.show.edit")
+  .main-info.text-left-right
+    %p.text-left
+      %b Subtotal
+    %p.text-right= "#{number_to_currency(Purchase.total(purchase.id), precision: 2, unit: '$', format: '%u%n', separator: '.', delimiter: ',')}"
 
-                  .col-xs-12.col-sm-4.col-md-6.button-container.no-padding
-                    = link_to (admin_history_provider_path(provider)), class: "btn btn-general" do
-                      %i.fas.fa-history
-                      %span= t("views.show.history")
+  .main-info.text-left-right
+    %p.text-left
+      %b= "#{t('activerecord.attributes.purchase.discount')} (#{purchase.discount}%)"
+    %p.text-right="- #{number_to_currency((Purchase.total(purchase.id) * (purchase.discount / 100)), precision: 2, unit: '$', format: '%u%n', separator: '.', delimiter: ',')}"
 
-                  .col-xs-12.col-sm-4.col-md-12.button-container.no-padding
-                    - if(provider.state)
-                      = link_to (admin_deactive_provider_path(provider)), method: "patch", class: "btn btn-general" do
-                        %i.fas.fa-times
-                        %span= t("views.show.disable")
+  .main-info.text-left-right
+    .divider
 
-                    - else
-                      = link_to (admin_active_provider_path(provider)), method: "patch", class: "btn btn-general" do
-                        %i.fas.fa-check
-                        %span= t("views.show.enable")
-        -# End Material card
+  .main-info.text-left-right
+    %p.text-left
+      %b Total
+    %p.text-right= number_to_currency((Purchase.total(purchase.id) - (Purchase.total(purchase.id) * (purchase.discount / 100))), precision: 2, unit: "$", format: "%u%n", separator: ".", delimiter: ",")
 
-      .col-xs-12.col-md-7.col-lg-8
-        -# Material card
-        %div{class: "material-card shadow-card #{provider.state}"}
-          .row.no-margin
-            .col-xs-12.no-padding
-              %div{class: "detail-info #{provider.state}"}
-                -# Set attributes
-                - attributes = ["FEIN", "email" ,"phone", "address", "state"]
+  .main-info
+    %p= t("views.show.created_at", time: time_ago_in_words(purchase.created_at))
+    %p= t("views.show.updated_at", time: time_ago_in_words(purchase.updated_at))
 
-                - attributes.each do |attribute|
-                  .info
-                    %p.title
-                      %b= t("activerecord.attributes.provider.#{attribute}")
+  .main-buttons
+    .col-xs-12.col-sm-4.col-md-6.button-container.no-padding
+      = link_to (admin_edit_purchase_path(purchase)), class: "btn btn-general" do
+        %i.fas.fa-edit
+        %span= t("views.show.edit")
 
-                    - if attribute == "state"
-                      %p= provider.state ? t("views.show.enabled") : t("views.show.disabled")
+    .col-xs-12.col-sm-4.col-md-6.button-container.no-padding
+      = link_to (admin_history_purchase_path(purchase)), class: "btn btn-general" do
+        %i.fas.fa-history
+        %span= t("views.show.history")
 
-                    - else
-                      %p= provider["#{attribute}"]
-        -# End Material card
-    -# End Information
--# End Details
+    .col-xs-12.col-sm-4.col-md-12.button-container.no-padding
+      - if(purchase.state)
+        = link_to (admin_deactive_purchase_path(purchase)), method: "patch", class: "btn btn-general" do
+          %i.fas.fa-times
+          %span= t("views.show.disable")
+
+      - else
+        = link_to (admin_active_purchase_path(purchase)), method: "patch", class: "btn btn-general" do
+          %i.fas.fa-check
+          %span= t("views.show.enable")

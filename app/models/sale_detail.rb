@@ -14,7 +14,6 @@ class SaleDetail < ApplicationRecord
 
   # Render sync
   sync :all
-  sync_touch :product
   sync_touch :sale
   # End Render sync
 

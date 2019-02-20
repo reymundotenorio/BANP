@@ -58,7 +58,7 @@ class Admin::PurchaseOrdersController < ApplicationController
   def edit
     # Order found by before_action
 
-    # @search_form_path = admin_edit_product_path(@product)
+    # @search_form_path = admin_edit_product_path(@order)
     # @categories = Category.search(params[:search], "enabled-only").paginate(page: params[:page], per_page: 5) # Categories with pagination
 
     respond_to do |format|
@@ -123,6 +123,25 @@ class Admin::PurchaseOrdersController < ApplicationController
     end
   end
 
+  # Active
+  def active
+    if @order.update(state: true)
+      redirect_to_back(true, admin_purchase_orders_path, "purchase", "success")
+
+    else
+      redirect_to_back(true, admin_purchase_orders_path, "purchase", "error")
+    end
+  end
+
+  # Deactive
+  def deactive
+    if @order.update(state: false)
+      redirect_to_back(false, admin_purchase_orders_path, "purchase", "success")
+
+    else
+      redirect_to_back(false, admin_purchase_orders_path, "purchase", "error")
+    end
+  end
 
   private
 

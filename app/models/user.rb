@@ -13,8 +13,7 @@ class User < ApplicationRecord
 
   # Render sync
   sync :all
-  sync_touch :employee
-  sync_touch :customer
+  sync_touch :employee, :customer
   # End Render sync
 
   ## Friendly_ID

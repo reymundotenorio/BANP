@@ -20,101 +20,25 @@
     -# End Title
 
     -# Breadcrumb
-    .row
-      .col-xs-12.hidden-xs
-        .breadcrumb-container
-          %ol.breadcrumb
-            %li
-              = link_to (admin_root_path) do
-                %i.fas.fa-tachometer-alt
-                %span= t("header.navigation.dashboard")
-            %li
-              = link_to (admin_purchase_orders_path) do
-                %i.far.fa-newspaper
-                %span= t("purchase.orders")
-            %li.active
-              %i.fa.fa-list-alt
-              = "#{@count == 1 ? t('purchase.order_detail') : t('purchase.order_details')} ##{@purchase.id}"
+    = sync partial: "purchase_orders/data_breadcrumb", resource: @purchase
+    = sync_new partial: "purchase_orders/data_breadcrumb", resource: Purchase.new
     -# End Breadcrumb
 
     .row
       .col-xs-12.col-md-4
         -# Material card
-        .material-card.shadow-card
+        %div{class: "material-card shadow-card #{@purchase.state}"}
           .row.no-margin
             .col-xs-12.no-padding.details
-              .general-info
-                .main-info
-                  %p= I18n.l(@purchase.purchase_datetime, format: I18n.locale == :es ? "%A, %d #{t('purchase.of')} %B #{t('purchase.of')} %Y" : "%A, %B %d, %Y")
-                  %p= I18n.l(@purchase.purchase_datetime, format: "%I:%M:%S %p")
-
-                %br
-
-                .main-info.text-left-right
-                  %p.text-left
-                    %b
-                      %i.fas.fa-building
-                      %span= t("activerecord.models.provider")
-                  %p.text-right= @purchase.provider.name
-
-                .main-info.text-left-right
-
-                  %p.text-left
-                    %b
-                      %i.fas.fa-briefcase
-                      %span= t("activerecord.models.employee")
-                  %p.text-right= "#{@purchase.employee.first_name} #{@purchase.employee.last_name}"
-
-                %br
-
-                .main-info.text-left-right
-                  %p.text-left
-                    %b Subtotal
-                  %p.text-right= "#{number_to_currency(Purchase.total(@purchase.id), precision: 2, unit: '$', format: '%u%n', separator: '.', delimiter: ',')}"
-
-                .main-info.text-left-right
-                  %p.text-left
-                    %b= "#{t('activerecord.attributes.purchase.discount')} (#{@purchase.discount}%)"
-                  %p.text-right="- #{number_to_currency((Purchase.total(@purchase.id) * (@purchase.discount / 100)), precision: 2, unit: '$', format: '%u%n', separator: '.', delimiter: ',')}"
-
-                .main-info.text-left-right
-                  .divider
-
-                .main-info.text-left-right
-                  %p.text-left
-                    %b Total
-                  %p.text-right= number_to_currency((Purchase.total(@purchase.id) - (Purchase.total(@purchase.id) * (@purchase.discount / 100))), precision: 2, unit: "$", format: "%u%n", separator: ".", delimiter: ",")
-
-                .main-info
-                  %p= t("views.show.created_at", time: time_ago_in_words(@purchase.created_at))
-                  %p= t("views.show.updated_at", time: time_ago_in_words(@purchase.updated_at))
-
-                .main-buttons
-                  .col-xs-12.col-sm-4.col-md-6.button-container.no-padding
-                    = link_to (admin_edit_purchase_path(@purchase)), class: "btn btn-general" do
-                      %i.fas.fa-edit
-                      %span= t("views.show.edit")
-
-                  .col-xs-12.col-sm-4.col-md-6.button-container.no-padding
-                    = link_to (admin_history_purchase_path(@purchase)), class: "btn btn-general" do
-                      %i.fas.fa-history
-                      %span= t("views.show.history")
-
-                  .col-xs-12.col-sm-4.col-md-12.button-container.no-padding
-                    - if(@purchase.state)
-                      = link_to (admin_deactive_purchase_path(@purchase)), method: "patch", class: "btn btn-general" do
-                        %i.fas.fa-times
-                        %span= t("views.show.disable")
-
-                    - else
-                      = link_to (admin_active_purchase_path(@purchase)), method: "patch", class: "btn btn-general" do
-                        %i.fas.fa-check
-                        %span= t("views.show.enable")
+              -# Data details Sync
+              = sync partial: "purchase_orders/data_details", resource: @purchase
+              = sync_new partial: "purchase_orders/data_details", resource: Purchase.new
+              -# End Data details Sync
         -# End Material card
 
       .col-xs-12.col-md-8
         -# Material card
-        .material-card.shadow-card
+        %div{class: "material-card shadow-card #{@purchase.state}"}
           .row.no-margin
             -# Search record
             .col-xs-12.col-md-6.no-padding
@@ -135,7 +59,7 @@
             .col-xs-12.col-md-6.no-padding.text-right
               #show-buttons.btn-container
                 -# Render show buttons
-                = render "show_buttons"
+                =# render "show_buttons"
 
               -# Export button
               .btn-container

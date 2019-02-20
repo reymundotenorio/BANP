@@ -1,6 +1,6 @@
 class Category < ApplicationRecord
   # Association
-  has_many :products
+  has_many :products  
   # End Association
 
   # Audit
@@ -9,6 +9,7 @@ class Category < ApplicationRecord
 
   # Render sync
   sync :all
+  sync_touch :products
   # End Render sync
 
   # Search
