@@ -100,3 +100,15 @@
             .links
               = link_to_add_association "Add Detail", f, :purchase_details, class: "btn btn-general", data: { association_insertion_node: "#purchase_details", association_insertion_method: :prepend}
 -# End Form
+
+-# Modal
+.modal.fade{id: "getProviders", tabindex: "-1", role: "dialog", "aria-labelledby": "", "aria-hidden": "true"}
+  .modal-dialog
+    .modal-content
+      .modal-body
+        %button.close{type: "button", "data-dismiss": "modal", "aria-hidden": "true", "data-toggle": "tooltip", "data-placement": "left", title: t("views.form.close")}
+          &times;
+
+        -# Render categories list
+        = render "modal_providers"
+        -# End Render categories list
