@@ -11,7 +11,9 @@ class Product < ApplicationRecord
 
   # Render sync
   sync :all
-  # sync_touch :purchase_details
+  # sync_touch :category
+  # sync_touch :purchase_details, :sale_details
+  
   # End Render sync
 
   # Search

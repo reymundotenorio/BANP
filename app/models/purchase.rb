@@ -15,7 +15,7 @@ class Purchase < ApplicationRecord
   # End Audit
 
   # Render sync
-  sync :all
+  # sync :all
   # sync_touch :purchase_details
   # End Render sync
 

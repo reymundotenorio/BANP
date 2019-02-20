@@ -11,8 +11,8 @@ class Sale < ApplicationRecord
   # End Audit
 
   # Render sync
-  sync :all
-  sync_touch :sale_details
+  # sync :all
+  # sync_touch :sale_details
   # End Render sync
 
   ## Callbacks

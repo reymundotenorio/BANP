@@ -123,7 +123,7 @@ puts "Seeding users"
 
 
 puts "Seeding purchase orders"
-500.times do |count|
+120.times do |count|
   begin
     Purchase.create(
       id: (count + 1),
@@ -142,11 +142,11 @@ puts "Seeding purchase orders"
 end
 
 puts "Seeding purchase details"
-1000.times do |count|
+100.times do |count|
   begin
     PurchaseDetail.create(
       id: (count + 1),
-      purchase_id: Faker::Number.between(1, 450),
+      purchase_id: Faker::Number.between(1, 110),
       product_id: Faker::Number.between(1, 110),
       price: Faker::Number.decimal(4, 2),
       quantity: Faker::Number.between(1, 100),

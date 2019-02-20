@@ -9,7 +9,7 @@ class PurchaseDetail < ApplicationRecord
   # End Audit
 
   # Render sync
-  sync :all
+  # sync :all
   # sync_touch :purchase
   # End Render sync
 

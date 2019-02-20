@@ -14,7 +14,7 @@ class Customer < ApplicationRecord
   # End Audit
 
   # Render sync
-  sync :all
+  # sync :all
   # End Render sync
 
   # Execute after record is saved on the Database

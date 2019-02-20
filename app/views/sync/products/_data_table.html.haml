@@ -13,7 +13,8 @@
           %p= number_to_currency(product.price, precision: 2, unit: "$", format: "%u%n", separator: ".", delimiter: ",")
 
         - elsif attribute == "category"
-          %p= I18n.locale == :es ? product.category.name_spanish : product.category.name
+          = sync partial: "data_table_category_name", resource: product.category
+          = sync_new partial: "data_table_category_name", resource: Category.new
 
         - else
           %p= product["#{attribute}"]
