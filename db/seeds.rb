@@ -41,7 +41,7 @@ puts "Seeding employees"
 end
 
 puts "Seeding prodivers"
-30.times do |count|
+40.times do |count|
   begin
     Provider.create(
       id: (count + 1),
@@ -77,7 +77,7 @@ categories_list.each do |name, name_spanish|
 end
 
 puts "Seeding products"
-80.times do |count|
+120.times do |count|
   begin
     Product.create(
       id: (count + 1),
@@ -100,7 +100,7 @@ puts "Seeding products"
 end
 
 puts "Seeding customers"
-25.times do |count|
+80.times do |count|
   begin
     Customer.create(
       id: (count + 1),
@@ -123,7 +123,7 @@ puts "Seeding users"
 
 
 puts "Seeding purchase orders"
-80.times do |count|
+500.times do |count|
   begin
     Purchase.create(
       id: (count + 1),
@@ -131,7 +131,7 @@ puts "Seeding purchase orders"
       receipt_number: "N/A",
       status: "ordered",
       discount: Faker::Number.between(1, 10),
-      provider_id: Faker::Number.between(1, 25),
+      provider_id: Faker::Number.between(1, 35),
       employee_id: Faker::Number.between(1, 15),
       observations: "",
       state: Faker::Boolean.boolean(0.95)
@@ -146,8 +146,8 @@ puts "Seeding purchase details"
   begin
     PurchaseDetail.create(
       id: (count + 1),
-      purchase_id: Faker::Number.between(1, 70),
-      product_id: Faker::Number.between(1, 60),
+      purchase_id: Faker::Number.between(1, 450),
+      product_id: Faker::Number.between(1, 110),
       price: Faker::Number.decimal(4, 2),
       quantity: Faker::Number.between(1, 100),
       status: ["ordered", "returned"].sample
