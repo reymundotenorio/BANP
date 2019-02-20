@@ -473,67 +473,66 @@ input[type='number'] {
 .bootstrap-datetimepicker-widget{
   border-radius: 0px;
   border: none;
-   -webkit-box-shadow: 0px 3px 10px rgba($black, 0.15), 0px 3px 10px rgba($black, 0.1);
+  -webkit-box-shadow: 0px 3px 10px rgba($black, 0.15), 0px 3px 10px rgba($black, 0.1);
   box-shadow: 0px 3px 10px rgba($black, 0.15), 0px 3px 10px rgba($black, 0.1);
-  
+
   &.dropdown-menu{
     &.bottom{
       &:before{
         border-bottom-color: rgba($black, 0.1);
       }
     }
-    
+
     &.top{
       &:before{
         border-top-color: rgba($black, 0.1);
       }
     }
   }
-  
-    table{
-      thead{
-        tr{
-          &:first-child{
-           th{
-             color: $btn-color;
-           } 
+
+  table{
+    thead{
+      tr{
+        &:first-child{
+          th{
+            color: $btn-color;
           }
         }
-      }
-      
-      td{
-        span{
-          &.active{
-            background-color: $btn-color;
-          }
-        }
-        
-        &.active{
-          &, &:hover{
-          background-color: $btn-color;
-          }
-        }
-      }
-    } 
-    
-    .btn-primary{
-      background-color: $btn-color;
-      border-color: $btn-color;
-     
-      
-       @include on-event(true){
-         border-color: shade($btn-color, 10%);
-     background-color: shade($btn-color, 10%);
       }
     }
 
-    a{
-           @include on-event(true){
-         color: $btn-color;
+    td{
+      span{
+        &.active{
+          background-color: $btn-color;
+        }
+      }
+
+      &.active{
+        &, &:hover{
+          background-color: $btn-color;
+        }
       }
     }
   }
 
+  .btn-primary{
+    background-color: $btn-color;
+    border-color: $btn-color;
+
+
+    @include on-event(true){
+      border-color: shade($btn-color, 10%);
+      background-color: shade($btn-color, 10%);
+    }
+  }
+
+  a{
+    @include on-event(true){
+      color: $btn-color;
+    }
+  }
+}
 // End Datepicker
 
 @media (min-width: 768px){

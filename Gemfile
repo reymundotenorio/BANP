@@ -178,8 +178,11 @@ gem "zip-codes"
 gem "stripe"
 
 # Datepicker
-gem 'momentjs-rails', '>= 2.9.0'
-gem 'bootstrap3-datetimepicker-rails', '~> 4.17.47'
+gem "momentjs-rails", ">= 2.9.0"
+gem "bootstrap3-datetimepicker-rails", "~> 4.17.47"
 
 # Cocoon - Easier nested form
 gem "cocoon"
+
+# Font Awesome 5 (local)
+gem "font_awesome5_rails"
