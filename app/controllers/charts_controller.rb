@@ -32,6 +32,6 @@ class ChartsController < ApplicationController
   end
 
   def purchases_by_month
-    render json: Purchase.enabled.joins(:purchase_details).group_by_month(:purchase_datetime).order('( SUM(price * quantity) - (SUM(price * quantity) * (discount / 100)) ) DESC').pluck("purchase_datetime, ( SUM(price * quantity) - (SUM(price * quantity) * (discount / 100)) ) as 'Total'")
+    render json: Purchase.enabled.joins(:purchase_details).where("purchases.purchase_datetime BETWEEN NOW() - INTERVAL 12 MONTH AND NOW()").group_by_month(:purchase_datetime).order(:purchase_datetime).pluck("DATE_FORMAT(purchase_datetime, '%m/%Y') as 'Purchase_Date', ( SUM(price * quantity) - (SUM(price * quantity) * (discount / 100)) ) as 'Total'")
   end
 end

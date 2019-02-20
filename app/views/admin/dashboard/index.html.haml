@@ -1,13 +1,3 @@
-.input-group.date#datetimepicker1
-    %input.form-control{type: "text"}
-    %span.input-group-addon
-        %span.glyphicon.glyphicon-calendar
-
-:javascript
-    $(function () {
-        $('#datetimepicker1').datetimepicker();
-    });
-
 %h2 Compras por mes
 = line_chart charts_purchases_by_month_path, defer: true, curve: true, xtitle: "Month", ytitle: "Dollars", prefix: "$", thousands: ",", decimal: ".", messages: {empty: "No data"}, discrete: true
 %br
