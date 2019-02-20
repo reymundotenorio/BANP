@@ -66,3 +66,6 @@ Rails.application.config.assets.precompile += %w( barcode.js )
 
 # Stripe
 Rails.application.config.assets.precompile += %w( stripe.js )
+
+# Select Provider
+Rails.application.config.assets.precompile += %w( select-provider.js )

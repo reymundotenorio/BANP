@@ -45,8 +45,8 @@ class Admin::PurchasesController < ApplicationController
   # admin/purchases/order/new
   def new
     @order = Purchase.new
-    # @search_form_path = admin_new_product_path(@order)
-    # @categories = Category.search(params[:search], "enabled-only").paginate(page: params[:page], per_page: 5) # Categories with pagination
+    @search_form_path = admin_new_purchase_path(@order)
+    @providers = Provider.search(params[:search], "enabled-only").paginate(page: params[:page], per_page: 5) # Categories with pagination
 
     respond_to do |format|
       format.html
