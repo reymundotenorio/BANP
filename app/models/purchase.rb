@@ -16,7 +16,7 @@ class Purchase < ApplicationRecord
 
   # Render sync
   sync :all
-  sync_touch :purchase_details
+  # sync_touch :purchase_details
   # End Render sync
 
   # Search

@@ -11,8 +11,8 @@
 
       %tbody
         -# Data table Sync
-        = sync partial: "purchase_orders/data_table", collection: @orders
-        = sync_new partial: "purchase_orders/data_table", resource: Purchase.new
+        = sync partial: "data_table", collection: @orders
+        = sync_new partial: "data_table", resource: Purchase.new
         -# End Data table Sync
     -# End Table
 

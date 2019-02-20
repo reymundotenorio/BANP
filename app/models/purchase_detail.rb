@@ -10,7 +10,7 @@ class PurchaseDetail < ApplicationRecord
 
   # Render sync
   sync :all
-  sync_touch :purchase
+  # sync_touch :purchase
   # End Render sync
 
   ## Callbacks

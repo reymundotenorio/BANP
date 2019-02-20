@@ -8,7 +8,7 @@ class Admin::PurchaseOrdersController < ApplicationController
   # End Find purchase order with Friendly_ID
 
   # Sync model DSL
-  enable_sync only: [:create, :update]
+  enable_sync only: [:create, :update, :active, :deactive]
   # End Sync model DSL
 
   # Authentication
