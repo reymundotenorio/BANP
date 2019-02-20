@@ -11,6 +11,43 @@
     .main-info{
       padding-top: 15px;
 
+      &.text-left-right{
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-orient: horizontal;
+        -webkit-box-direction: normal;
+        -ms-flex-direction: row;
+        flex-direction: row;
+        -webkit-box-pack: center;
+        -ms-flex-pack: center;
+        justify-content: center;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        align-items: center;
+        -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+
+        .divider{
+          width: 100%;
+          height: 1px;
+          background-color: $text-color;
+          margin: 5px 0px;
+        }
+
+        p{
+          width: 50%;
+
+          &.text-left{
+            text-align: left;
+          }
+
+          &.text-right{
+            text-align: right;
+          }
+        }
+      }
+
       p{
         text-align: center;
         margin: 0px;

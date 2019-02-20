@@ -147,6 +147,7 @@ en:
     order_details: "Purchase order details"
     show_orders: "Show purchase orders"
     hide_returned: "Hide returned"
+    of: "of"
 
   # Will paginate
   will_paginate:

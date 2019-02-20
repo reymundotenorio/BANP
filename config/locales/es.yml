@@ -148,6 +148,7 @@ es:
     order_details: "Detalles de orden de compra"
     show_orders: "Mostrar ordenes de compra"
     hide_returned: "Ocultar devueltos"
+    of: "de"
 
   # Will paginate
   will_paginate:
