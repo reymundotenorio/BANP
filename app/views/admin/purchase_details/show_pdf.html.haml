@@ -7,11 +7,65 @@
   .container
     .row
       .col-xs-12
+        %h1.text-center= pdf_title
+
+      .col-xs-4
+        -# Material card
+        .material-card.shadow-card.material-card-pdf.shadow-card-pdf
+          .row.no-margin
+            .col-xs-12.no-padding.details
+              .general-info
+                .main-info
+                  %p= I18n.l(@purchase.purchase_datetime, format: I18n.locale == :es ? "%A, %d #{t('purchase.of')} %B #{t('purchase.of')} %Y" : "%A, %B %d, %Y")
+                  %p= I18n.l(@purchase.purchase_datetime, format: "%I:%M:%S %p")
+
+                %br
+
+                .main-info.text-left-right
+                  %p.text-left
+                    %b
+                      %i.fas.fa-building
+                      %span= t("activerecord.models.provider")
+                  %p.text-right= @purchase.provider.name
+
+                .main-info.text-left-right
+
+                  %p.text-left
+                    %b
+                      %i.fas.fa-briefcase
+                      %span= t("activerecord.models.employee")
+                  %p.text-right= "#{@purchase.employee.first_name} #{@purchase.employee.last_name}"
+
+                %br
+
+                .main-info.text-left-right
+                  %p.text-left
+                    %b Subtotal
+                  %p.text-right= "#{number_to_currency(Purchase.total(@purchase.id), precision: 2, unit: '$', format: '%u%n', separator: '.', delimiter: ',')}"
+
+                .main-info.text-left-right
+                  %p.text-left
+                    %b= "#{t('activerecord.attributes.purchase.discount')} (#{@purchase.discount}%)"
+                  %p.text-right="- #{number_to_currency((Purchase.total(@purchase.id) * (@purchase.discount / 100)), precision: 2, unit: '$', format: '%u%n', separator: '.', delimiter: ',')}"
+
+                .main-info.text-left-right
+                  .divider
+
+                .main-info.text-left-right
+                  %p.text-left
+                    %b Total
+                  %p.text-right= number_to_currency((Purchase.total(@purchase.id) - (Purchase.total(@purchase.id) * (@purchase.discount / 100))), precision: 2, unit: "$", format: "%u%n", separator: ".", delimiter: ",")
+
+                .main-info
+                  %p= t("views.show.created_at", time: time_ago_in_words(@purchase.created_at))
+                  %p= t("views.show.updated_at", time: time_ago_in_words(@purchase.updated_at))
+        -# End Material card
+
+      .col-xs-8
         -# Material card
         .material-card.shadow-card.material-card-pdf.shadow-card-pdf
           .row.no-margin
             .col-xs-12.no-padding
-              %h1.text-center= pdf_title
               -# Table
               %table.table.table-pdf
                 -# Set attributes
