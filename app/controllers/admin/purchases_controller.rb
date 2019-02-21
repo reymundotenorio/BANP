@@ -45,6 +45,9 @@ class Admin::PurchasesController < ApplicationController
   # admin/purchases/order/new
   def new
     @order = Purchase.new
+    @order.discount = 0
+    @order.receipt_number = "N/A"
+
     @search_form_path = admin_new_purchase_path(@order)
     @providers = Provider.search(params[:search], "enabled-only").paginate(page: params[:page], per_page: 5) # Providers with pagination
 
@@ -78,6 +81,17 @@ class Admin::PurchasesController < ApplicationController
     # End Deleting blank spaces
 
     @order[:purchase_datetime] = @order[:purchase_datetime].to_datetime
+    @order[:discount] = @order[:discount].to_i
+
+    # Fixing discount
+    if @order[:discount]
+      begin
+        @order[:discount] = @order[:discount].to_d
+
+      rescue
+        @order[:discount] = 0.00
+      end
+    end
 
     # Fixing price
     # if @order[:price]

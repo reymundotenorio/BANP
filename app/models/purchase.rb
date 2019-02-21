@@ -62,6 +62,7 @@ class Purchase < ApplicationRecord
   validates :receipt_number, presence: true
   validates :provider_id, presence: true
   validates :employee_id, presence: true
+  validates :discount, presence: true
   # End  Presence validation
 
   # Length validation
@@ -71,7 +72,7 @@ class Purchase < ApplicationRecord
   # End Length validation
 
   # Numericality validation
-  validates :discount, numericality: {greater_than_or_equal_to: 0, less_than_or_equal_to: 100}
+  validates :discount, numericality: {greater_than_or_equal_to: 0, less_than: 100}
   # End Numericality validation
 
   ## Scopes

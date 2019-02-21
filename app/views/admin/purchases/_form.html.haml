@@ -24,7 +24,7 @@
                       %b= t("activerecord.attributes.purchase.receipt_number")
                     .border-bottom
 
-                  .col-xs-12.col-md-7
+                  .col-xs-12.col-md-7.container-left
 
                     .form-group
                       .input-btn-group
@@ -37,14 +37,14 @@
                         = link_to "", class: "btn btn-general", "data-toggle": "modal", "data-target": "#getProviders" do
                           %i.fas.fa-search
 
-                    .col-xs-12.col-md-4
+                    .col-xs-12.col-md-4.container-left
                       .form-group
-                        = f.number_field :discount, class: "form-control input", placeholder: t("activerecord.attributes.purchase.discount"), step: "1", min: "0", max: "100"
+                        = f.text_field :discount, class: "form-control input discount", placeholder: t("activerecord.attributes.purchase.discount")
                         %label
                           %b= "#{t('activerecord.attributes.purchase.discount')} %"
                         .border-bottom
 
-                    .col-xs-12.col-md-8
+                    .col-xs-12.col-md-8.container-right
                       .form-group
                         .input-group.date#datetimepicker
                           = f.text_field :purchase_datetime, id: "purchase_datetime_picker", class: "form-control input date-field", placeholder: t("activerecord.attributes.purchase.purchase_datetime"), required: true
@@ -62,9 +62,9 @@
                         %b= t("activerecord.attributes.purchase.status")
                       .border-bottom
 
-                  .col-xs-12.col-md-5
+                  .col-xs-12.col-md-5.container-right
                     .form-group
-                      = f.text_area :observations, class: "form-control input text-area",placeholder: t("activerecord.attributes.purchase.observations")
+                      = f.text_area :observations, class: "form-control input text-area big",placeholder: t("activerecord.attributes.purchase.observations")
                       %label
                         %b= t("activerecord.attributes.purchase.observations")
                       .border-bottom

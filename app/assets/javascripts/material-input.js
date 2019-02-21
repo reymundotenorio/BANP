@@ -27,6 +27,15 @@ $(document).ready(function(){
       }
     });
 
+    // Datetime
+    $("#purchase_datetime_picker").each(function(){
+      // If not empty
+      if($(this).val() != ""){
+        pickerDate = moment($(this).val(), dateFormat).toDate();
+        $("#purchase_purchase_datetime").val(moment($(this).val()).format());
+      }
+    });
+
     // Init Bootstrap tooltips
     $('[data-toggle="tooltip"]').tooltip();
     $('[data-tooltip="true"]').tooltip();
@@ -105,6 +114,9 @@ $(document).ready(function(){
 
     // Mask for price Input
     $(".price").mask("#,##0.00", {reverse: true});
+
+    // Mask for discount Input
+    $(".discount").mask("##.0");
 
     // Change iOS toggle status
     $("#switcher").each(function(){

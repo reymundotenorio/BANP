@@ -2,6 +2,18 @@
 // This file contains all styles related to the form pages
 // ------------------------------------------------------------
 
+form{
+  .form-info{
+    .container-left{
+      padding: 0px;
+    }
+
+    .container-right{
+      padding: 0px;
+    }
+  }
+}
+
 .form{
   .alerts{
     padding-top: 20px;
@@ -207,6 +219,23 @@
             }
           }
         }
+      }
+    }
+  }
+
+}
+
+
+@media (min-width: 992px) {
+
+  form{
+    .form-info{
+      .container-left{
+        padding-right: 7.5px;
+      }
+
+      .container-right{
+        padding-left: 7.5px;
       }
     }
   }

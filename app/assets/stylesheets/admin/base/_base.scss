@@ -84,9 +84,22 @@ a{
   transition: all 0.5s ease;
   height: 40px;
 
+  &.date-field{
+    // pointer-events: none;
+    cursor: not-allowed;
+  }
+
   &.text-area{
     height: 80px;
     resize: none;
+
+    &.big{
+      height: 125px;
+
+      + label, + grammarly-btn + label{
+        bottom: 90px;
+      }
+    }
 
     + label, + grammarly-btn + label{
       bottom: 50px;
@@ -116,6 +129,29 @@ a{
 
   &.static{
     padding-top:  65px + 10px;
+  }
+
+  .input-group{
+    &.date{
+      label{
+        -webkit-transform: translateY(-30px);
+        transform: translateY(-30px);
+        font-size: 14px;
+        left: 0px;
+      }
+
+      .border-bottom{
+        position: absolute;
+        bottom: 0px;
+        top: auto;
+        left: 0px;
+        right: 44px;
+
+        &:after{
+          width: 100%;
+        }
+      }
+    }
   }
 
   #display-password{
