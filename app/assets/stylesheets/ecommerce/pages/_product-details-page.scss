@@ -205,8 +205,9 @@
   .card{
     display: block;
     margin: 0 auto;
-    -webkit-box-shadow: none;
-    box-shadow: none;
+    margin-bottom: 10px;
+    // -webkit-box-shadow: none;
+    // box-shadow: none;
   }
 }
 

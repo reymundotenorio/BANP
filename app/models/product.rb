@@ -13,7 +13,7 @@ class Product < ApplicationRecord
   sync :all
   # sync_touch :category
   # sync_touch :purchase_details, :sale_details
-  
+
   # End Render sync
 
   # Search
@@ -90,6 +90,10 @@ class Product < ApplicationRecord
   validates :recipes, length: { maximum: 255 }, allow_blank: true
   validates :recipes_spanish, length: { maximum: 255 }, allow_blank: true
   # End Length validation
+
+  # Numericality validation
+  validates :price, numericality: {greater_than: 0}
+  # End Numericality validation
 
   # Type validation
   validate :correct_image_type

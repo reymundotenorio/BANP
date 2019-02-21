@@ -70,6 +70,10 @@ class Purchase < ApplicationRecord
   validates :observations, length: { maximum: 255 }, allow_blank: true
   # End Length validation
 
+  # Numericality validation
+  validates :discount, numericality: {greater_than_or_equal_to: 0, less_than_or_equal_to: 100}
+  # End Numericality validation
+
   ## Scopes
   scope :enabled, -> { where(state: true) }
   scope :orders, -> { where(status: "ordered") }

@@ -28,8 +28,9 @@
         %button.addToCart.btn.btn-general.add-btn{name: "add", type: "button"}= t("views.products.add_cart")
 
     -# Out of Stock
-    .stock
-      %p.no-margin= t("views.products.out_stock")
+    - if product.stock < 1
+      .stock
+        %p.no-margin= t("views.products.out_stock")
 
   .card-body
     %p.name.aligned-text

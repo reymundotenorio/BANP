@@ -26,6 +26,11 @@
 
       %button.addToCart.btn.btn-general.add-btn{name: "add", type: "button"}= t("views.products.add_cart")
 
+  -# Out of Stock
+  - if product.stock < 1
+    .stock
+      %p.no-margin= t("views.products.out_stock")
+
 .card-body
   %p.name.aligned-text
     = link_to "#{I18n.locale == :es ? product.name_spanish : product.name}", product_path(product)

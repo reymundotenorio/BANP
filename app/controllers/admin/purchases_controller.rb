@@ -46,7 +46,7 @@ class Admin::PurchasesController < ApplicationController
   def new
     @order = Purchase.new
     @search_form_path = admin_new_purchase_path(@order)
-    @providers = Provider.search(params[:search], "enabled-only").paginate(page: params[:page], per_page: 5) # Categories with pagination
+    @providers = Provider.search(params[:search], "enabled-only").paginate(page: params[:page], per_page: 5) # Providers with pagination
 
     respond_to do |format|
       format.html
@@ -58,8 +58,8 @@ class Admin::PurchasesController < ApplicationController
   def edit
     # Order found by before_action
 
-    # @search_form_path = admin_edit_product_path(@order)
-    # @categories = Category.search(params[:search], "enabled-only").paginate(page: params[:page], per_page: 5) # Categories with pagination
+    @search_form_path = admin_edit_product_path(@order)
+    @providers = Provider.search(params[:search], "enabled-only").paginate(page: params[:page], per_page: 5) # Providers with pagination
 
     respond_to do |format|
       format.html
@@ -76,6 +76,8 @@ class Admin::PurchasesController < ApplicationController
     @order[:status] = @order[:status].strip
     @order[:observations] = @order[:observations].strip
     # End Deleting blank spaces
+
+    @order[:purchase_datetime] = @order[:purchase_datetime].to_datetime
 
     # Fixing price
     # if @order[:price]
@@ -94,7 +96,7 @@ class Admin::PurchasesController < ApplicationController
 
       # If record was not saved
     else
-      # @categories = Category.search(params[:search], "enabled-only").paginate(page: params[:page], per_page: 5) # Categories with pagination
+      @providers = Provider.search(params[:search], "enabled-only").paginate(page: params[:page], per_page: 5) # Providers
       render :new
     end
   end
@@ -118,7 +120,7 @@ class Admin::PurchasesController < ApplicationController
       redirect_to [:admin, @order], notice: t("alerts.updated", model: t("purchase.order"))
 
     else
-      # @categories = Category.search(params[:search], "enabled-only").paginate(page: params[:page], per_page: 5) # Categories with pagination
+      @providers = Provider.search(params[:search], "enabled-only").paginate(page: params[:page], per_page: 5) # Providers with pagination
       render :edit
     end
   end

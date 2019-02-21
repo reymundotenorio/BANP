@@ -20,6 +20,13 @@ $(document).ready(function(){
       e.preventDefault();
     });
 
+    $("#datetimepicker").on("dp.change", function(e) {
+      if ($("#purchase_datetime_picker").val() != ""){
+        pickerDate = moment($("#purchase_datetime_picker").val(), dateFormat).toDate();
+        $("#purchase_purchase_datetime").val(moment($("#purchase_datetime_picker").val()).format());
+      }
+    });
+
     // Init Bootstrap tooltips
     $('[data-toggle="tooltip"]').tooltip();
     $('[data-tooltip="true"]').tooltip();
