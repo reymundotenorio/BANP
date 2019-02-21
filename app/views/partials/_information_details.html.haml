@@ -33,9 +33,6 @@
               - elsif attribute == "barcode"
                 %svg#barcode{"jsbarcode-format": "CODE128", "jsbarcode-value": "#{resource.barcode}", "jsbarcode-lineColor": "#333333", "jsbarcode-background": "#fff", "jsbarcode-fontSize": "16px", "jsbarcode-font": "Montserrat"}
 
-                %img#barcode-img{"jsbarcode-format": "CODE128", "jsbarcode-value": "#{resource.barcode}", "jsbarcode-lineColor": "#333333", "jsbarcode-background": "#fff", "jsbarcode-fontSize": "16px", "jsbarcode-font": "Montserrat"}
-
-
               - elsif attribute == "category"
                 %p= I18n.locale == :es ? resource.category.name_spanish : resource.category.name
 
@@ -63,10 +60,3 @@
                     %p= resource.user["#{attribute}"]
           -# End Display user attributes
   -# End Material card
-
--# Execute Script
-:javascript
-  $(document).ready(function() {
-    // Display Barcodes
-    JsBarcode("#barcode-img").init();
-  });
