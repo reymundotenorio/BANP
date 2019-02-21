@@ -5,7 +5,7 @@
 
     %ul.dropdown-menu
       - if current_employee
-        -# Employee detail Sync
+        -# Employee detail render_sync
         = sync partial: "employee_info", resource: current_employee
         = sync_new partial: "employee_info", resource: Employee.new
-        -# End Employee detail Sync
+        -# End Employee detail render_sync

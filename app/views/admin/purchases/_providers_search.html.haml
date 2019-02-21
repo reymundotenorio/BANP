@@ -1,4 +1,4 @@
-.row.no-margin 
+.row.no-margin
   .col-xs-12.no-padding
     -# Table
     %table.table
@@ -9,10 +9,10 @@
         -# Render table header
         = render partial: "partials/table_header", locals: {model: model, attributes: attributes}
       %tbody
-        -# Data table Sync
+        -# Data table render_sync
         = sync partial: "select_provider", collection: @providers
         = sync_new partial: "select_provider", resource: Provider.new
-        -# End Data table Sync
+        -# End Data table render_sync
     -# End Table
 
 .row.no-margin

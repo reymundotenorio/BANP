@@ -9,19 +9,19 @@
         .item.active
           .col-xs-12.col-sm-6.col-md-4.col-lg-3
             .card
-              -# Related first Sync
+              -# Related first render_sync
               = sync partial: "related_first", resource: @products_first
               = sync_new partial: "related_first", resource: Product.new
-              -# End Related first Sync
+              -# End Related first render_sync
 
         - @products.each do |product|
           .item
             .col-xs-12.col-sm-6.col-md-4.col-lg-3
               .card
-                -# Related list Sync
+                -# Related list render_sync
                 = sync partial: "related_list", resource: product
                 = sync_new partial: "related_list", resource: Product.new
-                -# End Related list Sync
+                -# End Related list render_sync
 
       -# Controls
       %a.left.carousel-control{"data-slide": "prev", href: "#carousel-related"}

@@ -99,16 +99,16 @@
                       %p= product.state ? t("views.show.enabled") : t("views.show.disabled")
 
                     - elsif attribute == "category.name_spanish"
-                      -# Data table Sync
-                      = sync partial: "category_name_spanish", resource: product.category
-                      = sync_new partial: "category_name_spanish", resource: Category.new
-                      -# End Data table Sync
+                      -# Category name render_sync
+                      = sync partial: "details_category_name_spanish", resource: product.category
+                      = sync_new partial: "details_category_name_spanish", resource: Category.new
+                      -# End Category name render_sync
 
                     - elsif attribute == "category.name"
-                      -# Data table Sync
-                      = sync partial: "category_name", resource: product.category
-                      = sync_new partial: "category_name", resource: Category.new
-                      -# End Data table Sync
+                      -# Category name render_sync
+                      = sync partial: "details_category_name", resource: product.category
+                      = sync_new partial: "details_category_name", resource: Category.new
+                      -# End Category name render_sync
 
                     - elsif attribute == "price"
                       %p= number_to_currency(product.price, precision: 2, unit: "$", format: "%u%n", separator: ".", delimiter: ",")

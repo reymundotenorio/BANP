@@ -10,7 +10,10 @@
     %td
       = link_to "#", class: "record-link", "data-header": t("activerecord.attributes.purchase_detail.#{attribute}") do
         - if attribute == "product"
-          %p= I18n.locale == :es ? purchase_detail.product.name_spanish : purchase_detail.product.name
+          -# Product name render_sync
+          = sync partial: "data_table_product_name", resource: purchase_detail.product
+          = sync_new partial: "data_table_product_name", resource: Product.new
+          -# End Product name render_sync
 
         - elsif attribute == "price"
           %p= number_to_currency(purchase_detail.price, precision: 2, unit: "$", format: "%u%n", separator: ".", delimiter: ",")

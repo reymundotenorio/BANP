@@ -12,10 +12,10 @@
         - attributes = I18n.locale == :es ? ["name_spanish", "description_spanish"] : ["name", "description"]
 
       %tbody
-        -# Data table Sync
+        -# Data table render_sync
         = sync partial: "select_category", collection: @categories
         = sync_new partial: "select_category", resource: Category.new
-        -# End Data table Sync
+        -# End Data table render_sync
     -# End Table
 
 .row.no-margin

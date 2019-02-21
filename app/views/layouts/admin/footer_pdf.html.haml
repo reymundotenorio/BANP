@@ -4,15 +4,11 @@
     %meta{content: "text/html; charset=UTF-8", "http-equiv": "Content-Type"}/
     %meta{charset: "utf-8"}/
 
-    -# Favicon and theme settings
-    = favicon_link_tag asset_path("img/favicon.png"), rel: "icon", type: "image/png"
-    %meta{content: "#fef7f8", name: "theme-color"}/
-    -# End Favicon and theme settings
-
     -# PDF Stylesheet
     = wicked_pdf_stylesheet_link_tag "application"
+    = wicked_pdf_stylesheet_link_tag "admin"
     -# End PDF Stylesheet
-    
+
     -# Get page number
     :javascript
       function number_pages() {
@@ -31,7 +27,7 @@
           for(var j=0; j<y.length; ++j) y[j].textContent = vars[x[i]];
         }
       }
-  
+
   %body.body-pdf{onload: "number_pages()"}
     -# Footer
     %footer

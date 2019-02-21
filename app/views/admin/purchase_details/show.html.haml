@@ -30,10 +30,10 @@
         %div{class: "material-card shadow-card #{@purchase.state}"}
           .row.no-margin
             .col-xs-12.no-padding.details
-              -# Data details Sync
+              -# Data details render_sync
               = sync partial: "data_details", resource: @purchase
               = sync_new partial: "data_details", resource: Purchase.new
-              -# End Data details Sync
+              -# End Data details render_sync
         -# End Material card
 
       .col-xs-12.col-md-8

@@ -73,10 +73,10 @@
               .all-contains
                 %h3.text-center.list-title= t("views.landing.categories")
                 %ul.categories-list
-                  -# Data table Sync
+                  -# Data table render_sync
                   = sync partial: "data_list_ecommerce", collection: @categories
                   = sync_new partial: "data_list_ecommerce", resource: Category.new
-                  -# End Data table Sync
+                  -# End Data table render_sync
 
                 %p.text-center.view-all-container
                   %a.view-all{href: "#"}= t("views.landing.view_all_products")

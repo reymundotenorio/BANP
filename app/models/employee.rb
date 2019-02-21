@@ -10,7 +10,7 @@ class Employee < ApplicationRecord
   # End Audit
 
   # Render sync
-  # sync :all
+  sync :all
   # sync_touch :purchases
   # End Render sync
 

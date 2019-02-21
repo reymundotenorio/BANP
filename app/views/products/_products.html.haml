@@ -13,18 +13,18 @@
             %li
               = link_to t("views.products.all"), products_path, class: "#{'active' if @category_filter == ''}"
 
-              -# Data table Sync
+              -# Data table render_sync
               = sync partial: "data_list_ecommerce", collection: @categories
               = sync_new partial: "data_list_ecommerce", resource: Category.new
-              -# End Data table Sync
+              -# End Data table render_sync
 
     .col-xs-12.col-md-8.col-lg-9
       - if @products.present?
         .cards-parent
-          -# Data table Sync
+          -# Data table render_sync
           = sync partial: "data_list_ecommerce", collection: @products
           = sync_new partial: "data_list_ecommerce", resource: Product.new
-          -# End Data table Sync
+          -# End Data table render_sync
 
       -else
         %p.text-center

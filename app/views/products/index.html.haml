@@ -4,10 +4,10 @@
       .row
         .col-xs-12
           - if @category.present?
-            -# Category title Sync
+            -# Category title render_sync
             = sync partial: "category_title", resource: @category
             = sync_new partial: "category_title", resource: Category.new
-            -# End Category title Sync
+            -# End Category title render_sync
 
           - else
             %h1.search-title.text-center= t("views.navigation.all_products")

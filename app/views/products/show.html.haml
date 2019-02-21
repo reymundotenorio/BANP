@@ -3,10 +3,10 @@
     .container-fluid
       .row
         .col-xs-12
-          -# Category title Sync
+          -# Category title render_sync
           = sync partial: "product_title", resource: @product
           = sync_new partial: "product_title", resource: Product.new
-          -# End Category title Sync
+          -# End Category title render_sync
 
     .container
       .row
@@ -25,20 +25,20 @@
               %li
                 = link_to t("views.navigation.all_products"), products_path
 
-              -# Category link Sync
+              -# Category link render_sync
               = sync partial: "breadcrumb_link", resource: @category
               = sync_new partial: "breadcrumb_link", resource: Category.new
-              -# End Category link Sync
+              -# End Category link render_sync
 
-              -# Product name Sync
+              -# Product name render_sync
               = sync partial: "breadcrumb_name", resource: @product
               = sync_new partial: "breadcrumb_name", resource: Product.new
-              -# End Product name Sync
+              -# End Product name render_sync
 
-      -# Category title Sync
+      -# Category title render_sync
       = sync partial: "data_details_ecommerce", resource: @product
       = sync_new partial: "data_details_ecommerce", resource: Product.new
-      -# End Category title Sync
+      -# End Category title render_sync
 
       -# Render related products
       = render "related_products"

@@ -10,7 +10,10 @@
       %b
         %i.fas.fa-building
         %span= t("activerecord.models.provider")
-    %p.text-right= purchase.provider.name
+    -# Provider name render_sync
+    = sync partial: "detail_provider_name", resource: purchase.provider
+    = sync_new partial: "detail_provider_name", resource: Provider.new
+    -# End Provider name render_sync
 
   .main-info.text-left-right
 
@@ -18,7 +21,10 @@
       %b
         %i.fas.fa-briefcase
         %span= t("activerecord.models.employee")
-    %p.text-right= "#{purchase.employee.first_name} #{purchase.employee.last_name}"
+    -# Employee name render_sync
+    = sync partial: "detail_employee_name", resource: purchase.employee
+    = sync_new partial: "detail_employee_name", resource: Employee.new
+    -# End Employee name render_sync
 
   %br
 

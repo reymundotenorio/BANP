@@ -64,10 +64,10 @@
             .direction
               .default-group
                 - if current_customer
-                  -# Customer detail Sync
+                  -# Customer detail render_sync
                   = sync partial: "current_address", resource: current_customer
                   = sync_new partial: "current_address", resource: Customer.new
-                  -# End Customer detail Sync
+                  -# End Customer detail render_sync
 
               %label.new-check.collapsed{"aria-controls": "address-group", "aria-expanded": "false", "data-target": "#address-group", "data-toggle": "collapse"}
                 %input#different-address{type: "checkbox"}/

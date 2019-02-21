@@ -16,12 +16,17 @@
         - elsif attribute == "total"
           %p= number_to_currency((Purchase.total(purchase.id) - (Purchase.total(purchase.id) * (purchase.discount / 100))), precision: 2, unit: '$', format: '%u%n', separator: '.', delimiter: ',')
 
-        - elsif attribute == "provider"          
+        - elsif attribute == "provider"
+          -# Provider name render_sync
           = sync partial: "data_table_provider_name", resource: purchase.provider
           = sync_new partial: "data_table_provider_name", resource: Provider.new
+          -# End Provider name render_sync
 
         - elsif attribute == "employee"
-          %p= "#{purchase.employee.first_name} #{purchase.employee.last_name}"
+          -# Employee name render_sync
+          = sync partial: "data_table_employee_name", resource: purchase.employee
+          = sync_new partial: "data_table_employee_name", resource: Employee.new
+          -# End Employee name render_sync
 
         - else
           %p= purchase["#{attribute}"]

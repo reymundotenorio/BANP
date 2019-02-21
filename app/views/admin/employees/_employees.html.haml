@@ -10,10 +10,10 @@
         = render partial: "partials/table_header", locals: {model: model, attributes: attributes}
 
       %tbody
-        -# Data table Sync
+        -# Data table render_sync
         = sync partial: "data_table", collection: @employees
         = sync_new partial: "data_table", resource: Employee.new
-        -# End Data table Sync
+        -# End Data table render_sync
     -# End Table
 
 

@@ -68,7 +68,9 @@ categories_list.each do |name, name_spanish|
     Category.create(
       id: (count + 1),
       name: name,
-      name_spanish: name_spanish
+      name_spanish: name_spanish,
+      description: Faker::Food.description,
+      description_spanish: Faker::Food.description,
     )
     count += 1
   rescue StandardError => e
@@ -123,7 +125,7 @@ puts "Seeding users"
 
 
 puts "Seeding purchase orders"
-120.times do |count|
+580.times do |count|
   begin
     Purchase.create(
       id: (count + 1),
@@ -142,11 +144,11 @@ puts "Seeding purchase orders"
 end
 
 puts "Seeding purchase details"
-100.times do |count|
+2500.times do |count|
   begin
     PurchaseDetail.create(
       id: (count + 1),
-      purchase_id: Faker::Number.between(1, 110),
+      purchase_id: Faker::Number.between(1, 560),
       product_id: Faker::Number.between(1, 110),
       price: Faker::Number.decimal(4, 2),
       quantity: Faker::Number.between(1, 100),
