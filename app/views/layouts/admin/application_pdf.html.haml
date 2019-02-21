@@ -31,7 +31,7 @@
     = wicked_pdf_stylesheet_link_tag "admin"
     -# End PDF Stylesheet
 
-    -# Scripts
+    -# Jquery & Barcode
     = javascript_include_tag "http://code.jquery.com/jquery-1.10.0.min.js"
     = javascript_include_tag "http://code.jquery.com/ui/1.10.3/jquery-ui.min.js"
     = javascript_include_tag "https://cdn.jsdelivr.net/npm/jsbarcode@3.11.0/dist/JsBarcode.all.min.js"
@@ -39,16 +39,11 @@
     -# Execute Script
     :javascript
       $(document).ready(function() {
-        // function loadBarcode() {
-          // document.getElementById("yes").style.background = "yellow";
-          $("#yes").css("background", "yellow");
-          // JsBarcode(".barcode").init();
-          // $("#barcode").JsBarcode("Hi!");
-          JsBarcode("#barcode", "1234", {format: "pharmacode",lineColor: "#0aa",width:4, height:40, displayValue: false});
-        // }
+        // Display Barcodes
+        JsBarcode(".barcode").init();
       });
 
-  %body.body-pdf#yes{onload: "loadBarcode()"}
+  %body.body-pdf
     -# Header
     %header#back-top.header-top
       %section.top-navbar.top-navbar-pdf
