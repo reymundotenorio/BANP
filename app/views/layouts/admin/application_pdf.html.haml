@@ -32,16 +32,23 @@
     -# End PDF Stylesheet
 
     -# Scripts
-    = javascript_include_tag "https://code.jquery.com/jquery-1.12.4.min.js"
+    = javascript_include_tag "http://code.jquery.com/jquery-1.10.0.min.js"
+    = javascript_include_tag "http://code.jquery.com/ui/1.10.3/jquery-ui.min.js"
     = javascript_include_tag "https://cdn.jsdelivr.net/npm/jsbarcode@3.11.0/dist/JsBarcode.all.min.js"
 
-    -# Get page number
+    -# Execute Script
     :javascript
-      function loadBarcode() {
-      JsBarcode(".barcode").init();
-      }
+      $(document).ready(function() {
+        // function loadBarcode() {
+          // document.getElementById("yes").style.background = "yellow";
+          $("#yes").css("background", "yellow");
+          // JsBarcode(".barcode").init();
+          // $("#barcode").JsBarcode("Hi!");
+          JsBarcode("#barcode", "1234", {format: "pharmacode",lineColor: "#0aa",width:4, height:40, displayValue: false});
+        // }
+      });
 
-  %body.body-pdf{onload: "loadBarcode()"}
+  %body.body-pdf#yes{onload: "loadBarcode()"}
     -# Header
     %header#back-top.header-top
       %section.top-navbar.top-navbar-pdf
