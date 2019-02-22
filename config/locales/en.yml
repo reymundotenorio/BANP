@@ -152,6 +152,8 @@ en:
     show_orders: "Show purchase orders"
     hide_returned: "Hide returned"
     of: "of"
+    add_products: "Add products"
+    remove: "Remove"
 
   # Will paginate
   will_paginate:

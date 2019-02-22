@@ -3,19 +3,19 @@
   .container
     -# Title
     .row.title-container
-      .col-xs-12.col-lg-10
+      .col-xs-12.col-lg-9
         -# Heading
         %h1
           %i.fas.fa-plus
           = t("views.new.new")
         -# End Heading
 
-      .col-xs-12.col-lg-2
+      .col-xs-12.col-lg-3
         -# Providers button
         .btn-container
           = link_to (admin_purchase_orders_path), class: "btn btn-general" do
             %i.fas.fa-list-alt
-            %span= t("header.navigation.purc")
+            %span= t("purchase.show_orders")
         -# End Providers button
     -# End Title
 

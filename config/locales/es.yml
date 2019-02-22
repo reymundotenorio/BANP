@@ -153,6 +153,8 @@ es:
     show_orders: "Mostrar ordenes de compra"
     hide_returned: "Ocultar devueltos"
     of: "de"
+    add_products: "Agregar productos"
+    remove: "Eliminar"
 
   # Will paginate
   will_paginate:

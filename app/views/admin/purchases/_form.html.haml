@@ -69,6 +69,11 @@
                         %b= t("activerecord.attributes.purchase.observations")
                       .border-bottom
 
+                  .col-xs-12.no-padding.container-add-products
+                    = link_to "", class: "btn btn-general", "data-toggle": "modal", "data-target": "#getProducts" do
+                      %i.fas.fa-plus
+                      %span= t("purchase.add_products")
+
                   .col-xs-12.no-padding
                     -# Table
                     %table.table
@@ -77,8 +82,10 @@
                         - attributes = ["name", "price", "quantity", "total", "select"]
 
                         -# Render table header
-                        = render partial: "partials/table_header", locals: {model: model, attributes: attributes}
-                      %tbody
+                        = render partial: "partials/table_header_details", locals: {model: model, attributes: attributes}
+                      %tbody#purchase_details
+
+
                     -# End Table
 
                   -# Buttons
@@ -102,16 +109,6 @@
                 .general-info
           -# End Material card
 
-        .col-xs-12
-          = link_to "", class: "btn btn-general", "data-toggle": "modal", "data-target": "#getProducts" do
-            %span Add Products
-            %i.fas.fa-search
-
-          #purchase_details
-            = f.fields_for :purchase_details do |detail|
-              = render "purchase_detail_fields", f: detail
-            .links
-              = link_to_add_association "Add Detail", f, :purchase_details, class: "btn btn-general", data: { association_insertion_node: "#purchase_details", association_insertion_method: :prepend}
 -# End Form
 
 -# Modal

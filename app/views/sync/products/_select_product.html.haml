@@ -1,13 +1,9 @@
 %tr{class: "#{product.state}", id: "product_form_#{product.id}"}
-  -# Set attributes
-  - attributes = I18n.locale == :es ? ["name_spanish"] : ["name"]
-
   %td
     %p.record-link{"data-header": "No."}= product.id
 
-  - attributes.each do |attribute|
-    %td
-      %p.record-link{"data-header": t("activerecord.attributes.product.#{attribute}")}= product["#{attribute}"]
+  %td
+    %p.record-link{"data-header": t("activerecord.attributes.product.name")}= I18n.locale == :es ? product.name_spanish : product.name
 
   %td.price-container.align-middle
     .form-group.no-padding.record-link{"data-header": t("activerecord.attributes.product.price")}
