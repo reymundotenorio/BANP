@@ -69,6 +69,18 @@
                         %b= t("activerecord.attributes.purchase.observations")
                       .border-bottom
 
+                  .col-xs-12.no-padding
+                    -# Table
+                    %table.table
+                      %thead
+                        - model = "product"
+                        - attributes = ["name", "price", "quantity", "total", "select"]
+
+                        -# Render table header
+                        = render partial: "partials/table_header", locals: {model: model, attributes: attributes}
+                      %tbody
+                    -# End Table
+
                   -# Buttons
                   .main-buttons
                     .col-xs-12.button-container.no-padding
@@ -92,10 +104,9 @@
 
         .col-xs-12
           = link_to "", class: "btn btn-general", "data-toggle": "modal", "data-target": "#getProducts" do
+            %span Add Products
             %i.fas.fa-search
 
-        .col-xs-12
-          %h3 Details
           #purchase_details
             = f.fields_for :purchase_details do |detail|
               = render "purchase_detail_fields", f: detail
