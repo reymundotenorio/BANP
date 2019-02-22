@@ -20,3 +20,40 @@
     = f.text_field :status
 
   = link_to_remove_association "Remove detail", f, class: "btn btn-general"
+
+
+%tr.nested-fields
+  %td.hidden
+    = f.hidden_field :product_id
+  %td
+      %p.record-link{"data-header": "Nombre"}
+    </td>
+  %td
+    =  f.text_field :price
+  %td.quantity-container.align-middle
+    .form-group.no-padding.record-link{"data-header": 'Cantidad'}
+        <div class='quantity'>
+          <button class='subtract' name='minus' type='button'>
+            <span class='sr-only'>minus</span>
+            <i class='fas fa-minus'></i>
+          </button>
+          <input class='q-input' id='purchase_purchase_details_attributes_" + date_id + "_quantity' min='1' name='purchase[purchase_details_attributes][" + date_id + "][quantity]' step='1' type='number' value='" + product_quantity.val() + "'>
+          <button class='add' name='plus' type='button'>
+            <span class='sr-only'>plus</span>
+            <i class='fas fa-plus'></i>
+          </button>
+        </div>
+      </div>
+    </td>
+  %td.align-middle.total-container
+      <p class='record-link' "data-header": 'Total' id='purchase_purchase_details_attributes_" + date_id + "_total'>
+        " + product_total + "
+      </p>
+    </td>
+    <td class='align-middle'>
+      <p>
+        <input type='hidden' name='purchase[purchase_details_attributes][" + date_id + "][_destroy]' id='purchase_purchase_details_attributes_" + date_id + "__destroy' value='false'>
+        <a class='btn btn-general remove_fields dynamic' data-toggle='tooltip' data-placement='bottom' title=' href='#' data-original-title='Eliminar'><i class='fas fa-trash-alt'></i>
+        </a></p>
+      </td>
+    </tr>
