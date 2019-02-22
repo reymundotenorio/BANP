@@ -1,0 +1,40 @@
+%tr{class: "#{product.state}", id: "product_form_#{product.id}"}
+  -# Set attributes
+  - attributes = I18n.locale == :es ? ["name_spanish"] : ["name"]
+
+  %td
+    %p.record-link{"data-header": "No."}= product.id
+
+  - attributes.each do |attribute|
+    %td
+      %p.record-link{"data-header": t("activerecord.attributes.product.#{attribute}")}= product["#{attribute}"]
+
+  %td.price-container.align-middle
+    .form-group.no-padding.record-link{"data-header": t("activerecord.attributes.product.price")}
+      %input.form-control.input.price{type: "text", id: "product_price_#{product.id}"}/
+      %label
+      .border-bottom
+
+  %td.quantity-container.align-middle
+    .form-group.no-padding.record-link{"data-header": t("activerecord.attributes.product.quantity")}
+      .quantity
+        -# Minus
+        %button.subtract{name: "minus", type: "button"}
+          %span.sr-only minus
+          %i.fas.fa-minus
+
+        %input.q-input{name: "quantity", type: "number", value: "1", min: "1", step: "1", id: "product_quantity_#{product.id}"}/
+
+        -# Plus
+        %button.add{name: "plus", type: "button"}
+          %span.sr-only plus
+          %i.fas.fa-plus
+
+  %td.align-middle.total-container
+    %p.record-link{"data-header": "Total", id: "product_total_#{product.id}"}
+      $00.00
+
+  %td.align-middle
+    %p
+      = button_tag class: "btn btn-general select-product", "data-id": product.id, "data-name": "#{I18n.locale == :es ? product.name_spanish : product.name}", "data-toggle": "tooltip", "data-placement": "bottom", title: t("views.index.select") do
+        %i.fas.fa-check

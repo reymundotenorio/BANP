@@ -259,6 +259,20 @@
             padding: 5px 0px;
           }
 
+          &.price-container{
+            // width: 120px;
+
+            input{
+              padding: 1px 12px;
+              height: 25px;
+              border-bottom-color: #ccc;
+            }
+          }
+          //
+          // &.quantity-container{
+          //   width: 120px;
+          // }
+
           >.record-link{
             padding: 8px;
             display: block;
@@ -393,6 +407,18 @@
               &:before{
                 display: none;
               }
+            }
+
+            &.price-container{
+              width: 120px;
+            }
+
+            &.quantity-container{
+              width: 135px;
+            }
+
+            &.total-container{
+
             }
           }
         }

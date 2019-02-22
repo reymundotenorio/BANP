@@ -30,8 +30,7 @@ class Customer < ApplicationRecord
   # Search
   def self.search(search, show_all)
     if search
-      query = "(first_name LIKE :search OR last_name LIKE :search OR company LIKE :search OR phone LIKE :search OR email LIKE :search OR address LIKE :search OR zipcode LIKE :search)"
-      where(query, search: "%#{search}%")
+      self.where("(first_name LIKE :search OR last_name LIKE :search OR company LIKE :search OR phone LIKE :search OR email LIKE :search OR address LIKE :search OR zipcode LIKE :search)", search: "%#{search}%")
 
     elsif show_all == "all"
       all

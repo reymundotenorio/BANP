@@ -82,6 +82,7 @@ en:
         image_file_name: "Image file name"
         image_content_type: "Image content type"
         image_file_size: "Image file size"
+        select: ""
       customer:
         first_name: "First name"
         last_name: "Last name"
@@ -94,6 +95,7 @@ en:
         image_file_name: "Image file name"
         image_content_type: "Image content type"
         image_file_size: "Image file size"
+        select: ""
       category:
         name: "Name"
         name_spanish: "Name in Spanish"
@@ -120,6 +122,8 @@ en:
         image_file_name: "Image file name"
         image_content_type: "Image content type"
         image_file_size: "Image file size"
+        quantity: "Quantity"
+        select: ""
       purchase:
         receipt_number: "Receipt number"
         purchase_datetime: "Date"

@@ -46,7 +46,7 @@ class Admin::ProductsController < ApplicationController
   def new
     @product = Product.new
     @search_form_path = admin_new_product_path(@product)
-    @categories = Category.search(params[:search], "enabled-only").paginate(page: params[:page], per_page: 5) # Categories with pagination
+    @categories = Category.search(params[:search], "enabled-only").paginate(page: params[:categories_page], per_page: 5) # Categories with pagination
 
     respond_to do |format|
       format.html
@@ -83,7 +83,7 @@ class Admin::ProductsController < ApplicationController
     # Product found by before_action
 
     @search_form_path = admin_edit_product_path(@product)
-    @categories = Category.search(params[:search], "enabled-only").paginate(page: params[:page], per_page: 5) # Categories with pagination
+    @categories = Category.search(params[:search], "enabled-only").paginate(page: params[:categories_page], per_page: 5) # Categories with pagination
 
     respond_to do |format|
       format.html
@@ -130,7 +130,7 @@ class Admin::ProductsController < ApplicationController
 
       # If record was not saved
     else
-      @categories = Category.search(params[:search], "enabled-only").paginate(page: params[:page], per_page: 5) # Categories with pagination
+      @categories = Category.search(params[:search], "enabled-only").paginate(page: params[:categories_page], per_page: 5) # Categories with pagination
       render :new
     end
   end
@@ -154,7 +154,7 @@ class Admin::ProductsController < ApplicationController
       redirect_to [:admin, @product], notice: t("alerts.updated", model: t("activerecord.models.product"))
 
     else
-      @categories = Category.search(params[:search], "enabled-only").paginate(page: params[:page], per_page: 5) # Categories with pagination
+      @categories = Category.search(params[:search], "enabled-only").paginate(page: params[:categories_page], per_page: 5) # Categories with pagination
       render :edit
     end
   end

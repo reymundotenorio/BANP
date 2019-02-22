@@ -21,7 +21,7 @@
 .row.no-margin
   .col-xs-12.no-padding.text-center
     -# Pagination
-    = will_paginate @categories, renderer: BootstrapPagination::Rails
+    = will_paginate @categories, renderer: BootstrapPagination::Rails, param_name: "categories_page"
     -# End Pagination
 
 -# Auto search script

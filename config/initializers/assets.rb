@@ -69,3 +69,9 @@ Rails.application.config.assets.precompile += %w( stripe.js )
 
 # Select Provider
 Rails.application.config.assets.precompile += %w( select-provider.js )
+
+# Select Product
+Rails.application.config.assets.precompile += %w( select-product.js )
+
+# Products modal
+Rails.application.config.assets.precompile += %w( products-modal.js )

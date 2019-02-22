@@ -27,8 +27,7 @@ class Employee < ApplicationRecord
   # Search
   def self.search(search, show_all)
     if search
-      query = "(first_name LIKE :search OR last_name LIKE :search OR phone LIKE :search OR email LIKE :search)"
-      where(query, search: "%#{search}%")
+      self.where("(first_name LIKE :search OR last_name LIKE :search OR phone LIKE :search OR email LIKE :search)", search: "%#{search}%")
 
     elsif show_all == "all"
       all

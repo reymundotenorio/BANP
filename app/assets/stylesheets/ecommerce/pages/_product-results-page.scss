@@ -33,7 +33,7 @@ body{
 
   .cart-empty{
     display: none;
-    
+
     img{
       &.empty-cart{
         padding: 42px 0px;
@@ -221,7 +221,7 @@ body{
           padding-bottom: 20px;
 
           input{
-            width: 30px;
+            width: 50px;
             background: transparent;
             border: none;
             border-bottom: 2px solid $white;

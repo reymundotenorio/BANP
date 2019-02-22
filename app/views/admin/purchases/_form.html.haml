@@ -91,6 +91,10 @@
           -# End Material card
 
         .col-xs-12
+          = link_to "", class: "btn btn-general", "data-toggle": "modal", "data-target": "#getProducts" do
+            %i.fas.fa-search
+
+        .col-xs-12
           %h3 Details
           #purchase_details
             = f.fields_for :purchase_details do |detail|
@@ -107,6 +111,18 @@
         %button.close{type: "button", "data-dismiss": "modal", "aria-hidden": "true", "data-toggle": "tooltip", "data-placement": "left", title: t("views.form.close")}
           &times;
 
-        -# Render categories list
+        -# Render providers list
         = render "modal_providers"
-        -# End Render categories list
+        -# End Render providers list
+
+-# Modal
+.modal.fade{id: "getProducts", tabindex: "-1", role: "dialog", "aria-labelledby": "", "aria-hidden": "true"}
+  .modal-dialog
+    .modal-content
+      .modal-body
+        %button.close{type: "button", "data-dismiss": "modal", "aria-hidden": "true", "data-toggle": "tooltip", "data-placement": "left", title: t("views.form.close")}
+          &times;
+
+        -# Render products list
+        = render "modal_products"
+        -# End Render products list

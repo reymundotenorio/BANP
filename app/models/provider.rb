@@ -16,11 +16,10 @@ class Provider < ApplicationRecord
   def self.search(search, show_all)
     if search
       if show_all == "enabled-only"
-        query = "(name LIKE :search OR FEIN LIKE :search OR phone LIKE :search OR email LIKE :search OR address LIKE :search) AND (state = true)"
+        self.where("(name LIKE :search OR FEIN LIKE :search OR phone LIKE :search OR email LIKE :search OR address LIKE :search) AND (state = true)", search: "%#{search}%")
 
       else
-        query = "(name LIKE :search OR FEIN LIKE :search OR phone LIKE :search OR email LIKE :search OR address LIKE :search)"
-        where(query, search: "%#{search}%")
+        self.where("(name LIKE :search OR FEIN LIKE :search OR phone LIKE :search OR email LIKE :search OR address LIKE :search)", search: "%#{search}%")
       end
 
     elsif show_all == "all"

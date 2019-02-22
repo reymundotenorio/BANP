@@ -49,7 +49,9 @@ class Admin::PurchasesController < ApplicationController
     @order.receipt_number = "N/A"
 
     @search_form_path = admin_new_purchase_path(@order)
-    @providers = Provider.search(params[:search], "enabled-only").paginate(page: params[:page], per_page: 5) # Providers with pagination
+
+    @providers = Provider.search(params[:search_provider], "enabled-only").paginate(page: params[:providers_page], per_page: 5) # Providers with pagination
+    @products = Product.search(params[:search_product], "enabled-only").paginate(page: params[:products_page], per_page: 5) # Products with pagination
 
     respond_to do |format|
       format.html
@@ -62,7 +64,9 @@ class Admin::PurchasesController < ApplicationController
     # Order found by before_action
 
     @search_form_path = admin_edit_product_path(@order)
-    @providers = Provider.search(params[:search], "enabled-only").paginate(page: params[:page], per_page: 5) # Providers with pagination
+
+    @providers = Provider.search(params[:search_provider], "enabled-only").paginate(page: params[:providers_page], per_page: 5) # Providers with pagination
+    @products = Product.search(params[:search_product], "enabled-only").paginate(page: params[:products_page], per_page: 5) # Products with pagination
 
     respond_to do |format|
       format.html
@@ -110,7 +114,8 @@ class Admin::PurchasesController < ApplicationController
 
       # If record was not saved
     else
-      @providers = Provider.search(params[:search], "enabled-only").paginate(page: params[:page], per_page: 5) # Providers
+      @providers = Provider.search(params[:search_provider], "enabled-only").paginate(page: params[:providers_page], per_page: 5) # Providers with pagination
+      @products = Product.search(params[:search_product], "enabled-only").paginate(page: params[:products_page], per_page: 5) # Products with pagination
       render :new
     end
   end
@@ -134,7 +139,8 @@ class Admin::PurchasesController < ApplicationController
       redirect_to [:admin, @order], notice: t("alerts.updated", model: t("purchase.order"))
 
     else
-      @providers = Provider.search(params[:search], "enabled-only").paginate(page: params[:page], per_page: 5) # Providers with pagination
+      @providers = Provider.search(params[:search_provider], "enabled-only").paginate(page: params[:providers_page], per_page: 5) # Providers with pagination
+      @products = Product.search(params[:search_product], "enabled-only").paginate(page: params[:products_page], per_page: 5) # Products with pagination
       render :edit
     end
   end

@@ -131,6 +131,39 @@ a{
     padding-top:  65px + 10px;
   }
 
+  &.no-padding{
+    padding: 0px;
+    margin: 0px;
+  }
+
+  .quantity{
+    padding-top: 2px;
+
+    button{
+      background: transparent;
+      border: none;
+      outline: none;
+      color: rgba($text-color, 0.7);
+      -webkit-transition: all ease 0.5s;
+      transition: all ease 0.5s;
+
+      @include on-event{
+        color: rgba($text-color, 1);
+      }
+    }
+
+    input{
+      width: 50px;
+      background: transparent;
+      border: none;
+      border-bottom: 1px solid $primary-color;
+      outline: none;
+      text-align: center;
+      color: $text-color;
+      padding: 1px 2px 0px;
+    }
+  }
+
   .input-group{
     &.date{
       label{
