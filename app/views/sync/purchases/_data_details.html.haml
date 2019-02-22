@@ -16,7 +16,6 @@
     -# End Provider name render_sync
 
   .main-info.text-left-right
-
     %p.text-left
       %b
         %i.fas.fa-briefcase
@@ -25,6 +24,13 @@
     = sync partial: "detail_employee_name", resource: purchase.employee
     = sync_new partial: "detail_employee_name", resource: Employee.new
     -# End Employee name render_sync
+
+  .main-info
+    %p.text-center
+      %b
+        %i.fas.fa-list-alt
+        %span= t("activerecord.attributes.purchase.observations")
+    %p.text-center= purchase.observations
 
   %br
 
@@ -42,9 +48,9 @@
     .divider
 
   .main-info.text-left-right
-    %p.text-left
+    %p.text-left.total
       %b Total
-    %p.text-right= number_to_currency((Purchase.total(purchase.id) - (Purchase.total(purchase.id) * (purchase.discount / 100))), precision: 2, unit: "$", format: "%u%n", separator: ".", delimiter: ",")
+    %p.text-right.total= number_to_currency((Purchase.total(purchase.id) - (Purchase.total(purchase.id) * (purchase.discount / 100))), precision: 2, unit: "$", format: "%u%n", separator: ".", delimiter: ",")
 
   .main-info
     %p= t("views.show.created_at", time: time_ago_in_words(purchase.created_at))

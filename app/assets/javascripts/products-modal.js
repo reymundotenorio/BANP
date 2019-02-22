@@ -35,7 +35,9 @@ $(document).ready(function(){
         total_elem = "#product_total_$product_id".replace("$product_id", product_id);
         product_total = $(total_elem);
 
-        price_val = parseFloat(product_price.val());
+        productPrice = product_price.val().replace(",", "");
+
+        price_val = parseFloat(productPrice);
         quantity_val = parseInt($(this).val());
 
         total = price_val * quantity_val;
@@ -70,30 +72,70 @@ $(document).ready(function(){
       product_total.text(formatter.format("0.00"));
     }
     else{
-      if (!isNumberFloat($(this).val())) {
-        return;
+      // if (!isNumberFloat($(this).val())) {
+      //   // return;
+      // }
+      // else{
+      product_id = $(this).attr("id").replace("product_price_", "");
+
+      quantity_elem = "#product_quantity_$product_id".replace("$product_id", product_id);
+      product_quantity = $(quantity_elem);
+
+      if($(product_quantity).val() != ""){
+        total_elem = "#product_total_$product_id".replace("$product_id", product_id);
+        product_total = $(total_elem);
+
+        productPrice = $(this).val().replace(",", "");
+
+        console.log("YES: "+productPrice);
+
+        quantity_val = parseInt(product_quantity.val());
+        price_val = parseFloat(productPrice);
+
+        total = price_val * quantity_val;
+        product_total.text(formatter.format(total));
       }
-      else{
-        product_id = $(this).attr("id").replace("product_price_", "");
-
-        quantity_elem = "#product_quantity_$product_id".replace("$product_id", product_id);
-        product_quantity = $(quantity_elem);
-
-        if($(product_quantity).val() != ""){
-          total_elem = "#product_total_$product_id".replace("$product_id", product_id);
-          product_total = $(total_elem);
-
-          quantity_val = parseInt(product_quantity.val());
-          price_val = parseFloat($(this).val());
-
-          total = price_val * quantity_val;
-          product_total.text(formatter.format(total));
-        }
-      }
+      // }
     }
 
   });
   // End Validate numbers on quantity input
+
+  // Update total
+  function updateTotal(){
+    var totalDetails = 0;
+    var discount = 0;
+    // Datetime
+    $(".detail-total").each(function(){
+      // If not empty
+      if($(this).text() != ""){
+        total = $(this).text().replace("$", "");
+        totalDetails +=  parseFloat(total);
+      }
+    });
+
+    $("#subtotal").text(formatter.format(totalDetails));
+    $("#shipping").text(formatter.format(0));
+
+    discountContent = $(".discount").val();
+
+    if (discountContent != ""){
+      discount = parseFloat(discountContent);
+      discount = discount / 100;
+      discount = totalDetails * discount;
+
+      $("#discount").text(formatter.format(discount));
+      $("#discountPercent").text("("+discountContent+"%)");
+    }
+    else{
+      $("#discount").text(formatter.format(0));
+      $("#discountPercent").text("(0.0%)");
+    }
+
+
+    $("#total").text(formatter.format(totalDetails - discount));
+  }
+  // End Update total
 
   // Events on Details
   function eventsOnDetails(){
@@ -163,6 +205,12 @@ $(document).ready(function(){
   }
   // End Events on Details
 
+  // Updating Total on remove
+  $("#purchase_details").on("cocoon:after-remove", function() {
+    updateTotal();
+  });
+  // End Updating Total on remove
+
   // Click on Select product
   $(".select-product").click(function(){
     var date_id = Date.now().toString();
@@ -195,14 +243,41 @@ $(document).ready(function(){
     priceText = i18nLocale == "es" ? "Precio" : "Price";
     quantityText = i18nLocale == "es" ? "Cantidad" : "Quantity";
 
+    productPrice = product_price.val().replace(",", "");
+
     var new_product =
-    "<tr class='nested-fields'><td class='hidden'><input value='" + product_id + "' type='hidden' name='purchase[purchase_details_attributes][" + date_id + "][product_id]' id='purchase_purchase_details_attributes_" + date_id + "_product_id'></td><td class='hidden'><input value='ordered' type='hidden' name='purchase[purchase_details_attributes][" + date_id + "][status]' id='purchase_purchase_details_attributes_" + date_id + "_status'></td><td><p class='record-link' data-header='" + nameText + "'><input class='input-disabled' value='" + product_name + "' type='text' name='purchase[purchase_details_attributes][" + date_id + "][product]' id='purchase_purchase_details_attributes_" + date_id + "_product'></p></td><td class='price-container price-row align-middle'><p class='record-link' data-header='" + priceText + "'><input class='input-disabled no-padding' data-price= '" + product_price.val() + "' value='" + formatter.format(product_price.val()) + "' type='text' name='purchase[purchase_details_attributes][" + date_id + "][price]' id='purchase_purchase_details_attributes_" + date_id + "_price'></p></td><td class='quantity-container align-middle'><div class='form-group no-padding record-link' data-header='" + quantityText + "'><div class='quantity'><button class='subtract' name='minus' type='button'><i class='fas fa-minus'></i></button><input class='q-input details' min='1' step='1' value='" + product_quantity.val() + "' type='number' name='purchase[purchase_details_attributes][" + date_id + "][quantity]' id='purchase_purchase_details_attributes_" + date_id + "_quantity'><button class='add' name='plus' type='button'><i class='fas fa-plus'></i></button></div></div></td><td class='align-middle total-container'><p class='record-link' data-header='Total' id='purchase_purchase_details_attributes_" + date_id + "_total'>" + product_total.text() + "</p></td><td class='align-middle'><input type='hidden' name='purchase[purchase_details_attributes][" + date_id + "][_destroy]' id='purchase_purchase_details_attributes_" + date_id + "__destroy' value='false'><a class='btn btn-general remove_fields dynamic' href='#'><i class='fas fa-trash-alt'></i></a></td></tr>";
+    "<tr class='nested-fields'><td class='hidden'><input value='" + product_id + "' type='hidden' name='purchase[purchase_details_attributes][" + date_id + "][product_id]' id='purchase_purchase_details_attributes_" + date_id + "_product_id'></td><td class='hidden'><input value='ordered' type='hidden' name='purchase[purchase_details_attributes][" + date_id + "][status]' id='purchase_purchase_details_attributes_" + date_id + "_status'></td><td><p class='record-link' data-header='" + nameText + "'><input class='input-disabled' value='" + product_name + "' type='text' name='purchase[purchase_details_attributes][" + date_id + "][product]' id='purchase_purchase_details_attributes_" + date_id + "_product'></p></td><td class='price-container price-row align-middle'><p class='record-link' data-header='" + priceText + "'><input class='input-disabled no-padding price-details' data-price= '" + productPrice + "' value='" + formatter.format(productPrice) + "' type='text' name='purchase[purchase_details_attributes][" + date_id + "][price]' id='purchase_purchase_details_attributes_" + date_id + "_price'></p></td><td class='quantity-container align-middle'><div class='form-group no-padding record-link' data-header='" + quantityText + "'><div class='quantity'><button class='subtract' name='minus' type='button'><i class='fas fa-minus'></i></button><input class='q-input details' min='1' step='1' value='" + product_quantity.val() + "' type='number' name='purchase[purchase_details_attributes][" + date_id + "][quantity]' id='purchase_purchase_details_attributes_" + date_id + "_quantity'><button class='add' name='plus' type='button'><i class='fas fa-plus'></i></button></div></div></td><td class='align-middle total-container'><p class='record-link detail-total' data-header='Total' id='purchase_purchase_details_attributes_" + date_id + "_total'>" + product_total.text() + "</p></td><td class='align-middle'><input type='hidden' name='purchase[purchase_details_attributes][" + date_id + "][_destroy]' id='purchase_purchase_details_attributes_" + date_id + "__destroy' value='false'><a class='btn btn-general remove_fields dynamic' href='#'><i class='fas fa-trash-alt'></i></a></td></tr>";
 
     $("#purchase_details").append(new_product);
 
     eventsOnDetails();
+    updateTotal();
   });
   // Click on Select product
 
+  // Replacing prices
+  function replacePrices(){
+    $(".price-details").each(function(){
+      // If not empty
+      if($(this).val() != ""){
+        $(this).val($(this).data("price"));
+      }
+    });
+  }
+  // End Replacing prices
+
+  // Fixing prices
+  $("#new_purchase").submit(function(e) {
+    replacePrices();
+  });
+  // Fixing prices
+
+  // Update total on discount change
+  $(".discount").on("keyup change", function(){
+    updateTotal();
+  });
+  // Update total on discount change
+
   eventsOnDetails();
+  updateTotal();
 });

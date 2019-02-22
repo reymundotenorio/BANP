@@ -18,7 +18,7 @@
                   .form-group.hidden
                     = f.hidden_field :employee_id, value: 1, required: true # current_employee.id
 
-                  .form-group
+                  .form-group.hidden
                     = f.text_field :receipt_number, class: "form-control input", placeholder: t("activerecord.attributes.purchase.receipt_number")
                     %label
                       %b= t("activerecord.attributes.purchase.receipt_number")
@@ -77,7 +77,7 @@
                   .col-xs-12.no-padding.index.details
                     .scroll-table
                       -# Table
-                      %table.table
+                      %table.table#details-table
                         %thead
                           - model = "product"
                           - attributes = ["name", "price", "quantity", "total", "select"]
@@ -104,8 +104,35 @@
           -# Material card
           %div{class: "material-card shadow-card #{@order.state}"}
             .row.no-margin
-              .col-xs-12.no-padding
+              .col-xs-12.no-padding.details
                 .general-info
+
+                  %p.summary= t("views.cart.summary")
+
+                  .main-info.text-left-right
+                    %p.text-left
+                      %b= t("views.cart.subtotal")
+                    %p.text-right#subtotal $00.00
+
+                  .main-info.text-left-right
+                    %p.text-left
+                      %b= t("views.cart.shipping")
+                    %p.text-right#shipping $00.00
+
+                  .main-info.text-left-right
+                    %p.text-left
+                      %b
+                        %span= t("activerecord.attributes.purchase.discount")
+                        %span#discountPercent (0%)
+                    %p.text-right#discount $00.00
+
+                  .main-info.text-left-right
+                    .divider
+
+                  .main-info.text-left-right
+                    %p.text-left.total
+                      %b Total
+                    %p.text-right.total#total $00.00
           -# End Material card
 -# End Form
 

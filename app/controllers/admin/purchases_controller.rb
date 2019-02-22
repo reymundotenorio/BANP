@@ -97,17 +97,6 @@ class Admin::PurchasesController < ApplicationController
       end
     end
 
-    # Fixing price
-    # if @order[:price]
-    #   begin
-    #     price = @order[:price].remove(",")
-    #     @order[:price] = price.to_d
-    #
-    #   rescue
-    #     @order[:price] = 0.00
-    #   end
-    # end
-
     # If record was saved
     if @order.save
       redirect_to admin_purchase_details_path(@order.id), notice: t("alerts.created", model: t("purchase.order"))
