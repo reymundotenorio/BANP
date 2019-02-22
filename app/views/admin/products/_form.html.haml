@@ -65,15 +65,10 @@
                       %b= t("activerecord.attributes.product.price")
                     .border-bottom
 
-                  .form-group.hidden
-                    = f.hidden_field :category_id, class: "form-control input", placeholder: t("activerecord.attributes.product.category"), required: true
-                    %label
-                      %b= t("activerecord.attributes.product.category")
-                    .border-bottom
-
                   .form-group
                     .input-btn-group
-                      = f.text_field :category, value: @product.category_id.nil? ? "" : "#{@product.category.name}", class: "form-control input", placeholder: t("activerecord.attributes.product.category"), required: true, disabled: true
+                      = f.hidden_field :category_id
+                      = f.text_field :category, value: @product.category_id.nil? ? "" : "#{@product.category.name}", class: "form-control input no-events", placeholder: t("activerecord.attributes.product.category"), required: true
                       %label
                         %b= t("activerecord.attributes.product.category")
                       .border-bottom

@@ -85,7 +85,12 @@ a{
   height: 40px;
 
   &.date-field{
-    // pointer-events: none;
+    pointer-events: none;
+    cursor: not-allowed;
+  }
+
+  &.no-events{
+    pointer-events: none;
     cursor: not-allowed;
   }
 

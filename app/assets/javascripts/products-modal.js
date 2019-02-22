@@ -1,5 +1,7 @@
 $(document).ready(function(){
 
+  var i18nLocale = $("body").data("locale");
+
   // Format Currency
   const formatter = new Intl.NumberFormat("en-US", {
     style: "currency",
@@ -7,34 +9,6 @@ $(document).ready(function(){
     minimumFractionDigits: 2
   });
   // End Format Currency
-
-  // Substract button on cart details
-  $(".subtract").click(function(){
-    var $input = $(this).next();
-    var currentValue = parseInt($input.val());
-
-    if(currentValue > 1){
-      $input.val(currentValue - 1);
-    }
-
-    if ($input.val().length <= 0){
-      $input.val(1);
-    }
-  });
-  // End Substract button on cart details
-
-  // Add button on cart details
-  $(".add").click(function(){
-    var $input = $(this).prev();
-    var currentValue = parseInt($input.val());
-
-    $input.val(currentValue + 1);
-
-    if ($input.val().length <= 0){
-      $input.val(1);
-    }
-  });
-  // End Add button on cart details
 
   // Validate if is a number
   function isNumberInt(n) {
@@ -47,7 +21,7 @@ $(document).ready(function(){
   // End Validate if is a number
 
   // Validate numbers on quantity input
-  $(".q-input").on("keyup change", function(){
+  $(".q-input.search").on("keyup change", function(){
     if (!isNumberInt($(this).val())) {
       return;
     }
@@ -71,36 +45,123 @@ $(document).ready(function(){
   });
   // End Validate numbers on quantity input
 
+  // Prevent quantity without value
+  $(".q-input.search").focusout(function(){
+    if($(this).val() == ""){
+      $(this).val("1");
+      $(this).trigger("change");
+    }
+  });
+  // End Prevent quantity without value
+
   // Avoid enter letters and symbols
-  $(".q-input").keypress(function(e) {
+  $(".q-input.search").keypress(function(e) {
     if(e.charCode < 48 || e.charCode > 57) return false;
   });
   // End Avoid enter letters and symbols
 
   // Validate numbers on quantity input
   $(".input.price").on("keyup change", function(){
-    if (!isNumberFloat($(this).val())) {
-      return;
+    if($(this).val() == ""){
+      product_id = $(this).attr("id").replace("product_price_", "");
+      total_elem = "#product_total_$product_id".replace("$product_id", product_id);
+      product_total = $(total_elem);
+
+      product_total.text(formatter.format("0.00"));
     }
     else{
-      product_id = $(this).attr("id").replace("product_price_", "");
+      if (!isNumberFloat($(this).val())) {
+        return;
+      }
+      else{
+        product_id = $(this).attr("id").replace("product_price_", "");
 
-      quantity_elem = "#product_quantity_$product_id".replace("$product_id", product_id);
-      product_quantity = $(quantity_elem);
+        quantity_elem = "#product_quantity_$product_id".replace("$product_id", product_id);
+        product_quantity = $(quantity_elem);
 
-      if($(product_quantity).val() != ""){
-        total_elem = "#product_total_$product_id".replace("$product_id", product_id);
-        product_total = $(total_elem);
+        if($(product_quantity).val() != ""){
+          total_elem = "#product_total_$product_id".replace("$product_id", product_id);
+          product_total = $(total_elem);
 
-        quantity_val = parseInt(product_quantity.val());
-        price_val = parseFloat($(this).val());
+          quantity_val = parseInt(product_quantity.val());
+          price_val = parseFloat($(this).val());
 
-        total = price_val * quantity_val;
-        product_total.text(formatter.format(total));
+          total = price_val * quantity_val;
+          product_total.text(formatter.format(total));
+        }
       }
     }
+
   });
   // End Validate numbers on quantity input
+
+  // Events on Details
+  function eventsOnDetails(){
+    // Substract button on cart details
+    $(".subtract").click(function(){
+      var $input = $(this).next();
+      var currentValue = parseInt($input.val());
+
+      if(currentValue > 1){
+        $input.val(currentValue - 1);
+      }
+
+      if ($input.val().length <= 0){
+        $input.val(1);
+      }
+
+      $input.trigger("change");
+    });
+    // End Substract button on cart details
+
+    // Add button on cart details
+    $(".add").click(function(){
+      var $input = $(this).prev();
+      var currentValue = parseInt($input.val());
+
+      $input.val(currentValue + 1);
+
+      if ($input.val().length <= 0){
+        $input.val(1);
+      }
+
+      $input.trigger("change");
+    });
+    // End Add button on cart details
+
+    // Avoid enter letters and symbols
+    $(".q-input.details").keypress(function(e) {
+      if(e.charCode < 48 || e.charCode > 57) return false;
+    });
+    // End Avoid enter letters and symbols
+
+    // Validate numbers on quantity input on details
+    $(".q-input.details").on("keyup change", function(){
+      if (!isNumberInt($(this).val())) {
+        return;
+      }
+      else{
+        product_id = $(this).attr("id").replace("purchase_purchase_details_attributes_", "");
+        product_id = product_id.replace("_quantity", "");
+
+        price_elem = "#purchase_purchase_details_attributes_$product_id_price".replace("$product_id", product_id);
+        product_price = $(price_elem);
+
+        if($(product_price).val() != ""){
+          total_elem = "#purchase_purchase_details_attributes_$product_id_total".replace("$product_id", product_id);
+          product_total = $(total_elem);
+
+          price_val = parseFloat(product_price.data("price"));
+          quantity_val = parseInt($(this).val());
+
+          total = price_val * quantity_val;
+          product_total.text(formatter.format(total));
+        }
+      }
+    });
+    // End Validate numbers on quantity input on details
+  }
+  // End Events on Details
 
   // Click on Select product
   $(".select-product").click(function(){
@@ -130,14 +191,18 @@ $(document).ready(function(){
     total_elem = "#product_total_$product_id".replace("$product_id", product_id);
     product_total = $(total_elem);
 
-    var new_product = "<tr class='nested-fields'><td class='hidden'><input type='hidden' name='purchase_purchase_details_attributes_" + date_id + "_product_id' id='purchase_purchase_details_attributes_" + date_id + "_product_id' value='10'></td><td><p class='record-link' data-header='Nombre'>" + product_name + "</p></td><td><p class='record-link' name='purchase[purchase_details_attributes][" + date_id + "][price]' id='purchase_purchase_details_attributes_" + date_id + "_price' data-price='" + product_price.val() + "' data-header='Precio'>" + formatter.format(product_price.val()) + "</p></td><td class='quantity-container align-middle'><div class='form-group no-padding record-link' data-header='Cantidad'><div class='quantity'><button class='subtract' name='minus' type='button'><span class='sr-only'>minus</span><i class='fas fa-minus'></i></button><input class='q-input' id='purchase_purchase_details_attributes_" + date_id + "_quantity' min='1' name='purchase[purchase_details_attributes][" + date_id + "][quantity]' step='1' type='number' value='" + product_quantity.val() + "'><button class='add' name='plus' type='button'><span class='sr-only'>plus</span><i class='fas fa-plus'></i></button></div></div></td><td class='align-middle total-container'><p class='record-link' data-header='Total' id='purchase_purchase_details_attributes_" + date_id + "_total'>" + product_total.text() + "</p></td><td class='align-middle'><p><input type='hidden' name='purchase[purchase_details_attributes][" + date_id + "][_destroy]' id='purchase_purchase_details_attributes_" + date_id + "__destroy' value='false'><a class='btn btn-general remove_fields dynamic' href='#'><i class='fas fa-trash-alt'></i></a></p></td></tr>";
+    nameText = i18nLocale == "es" ? "Nombre" : "Name";
+    priceText = i18nLocale == "es" ? "Precio" : "Price";
+    quantityText = i18nLocale == "es" ? "Cantidad" : "Quantity";
 
-    // alert(new_product);
-
+    var new_product =
+    "<tr class='nested-fields'><td class='hidden'><input value='" + product_id + "' type='hidden' name='purchase[purchase_details_attributes][" + date_id + "][product_id]' id='purchase_purchase_details_attributes_" + date_id + "_product_id'></td><td class='hidden'><input value='ordered' type='hidden' name='purchase[purchase_details_attributes][" + date_id + "][status]' id='purchase_purchase_details_attributes_" + date_id + "_status'></td><td><p class='record-link' data-header='" + nameText + "'><input class='input-disabled' value='" + product_name + "' type='text' name='purchase[purchase_details_attributes][" + date_id + "][product]' id='purchase_purchase_details_attributes_" + date_id + "_product'></p></td><td class='price-container price-row align-middle'><p class='record-link' data-header='" + priceText + "'><input class='input-disabled no-padding' data-price= '" + product_price.val() + "' value='" + formatter.format(product_price.val()) + "' type='text' name='purchase[purchase_details_attributes][" + date_id + "][price]' id='purchase_purchase_details_attributes_" + date_id + "_price'></p></td><td class='quantity-container align-middle'><div class='form-group no-padding record-link' data-header='" + quantityText + "'><div class='quantity'><button class='subtract' name='minus' type='button'><i class='fas fa-minus'></i></button><input class='q-input details' min='1' step='1' value='" + product_quantity.val() + "' type='number' name='purchase[purchase_details_attributes][" + date_id + "][quantity]' id='purchase_purchase_details_attributes_" + date_id + "_quantity'><button class='add' name='plus' type='button'><i class='fas fa-plus'></i></button></div></div></td><td class='align-middle total-container'><p class='record-link' data-header='Total' id='purchase_purchase_details_attributes_" + date_id + "_total'>" + product_total.text() + "</p></td><td class='align-middle'><input type='hidden' name='purchase[purchase_details_attributes][" + date_id + "][_destroy]' id='purchase_purchase_details_attributes_" + date_id + "__destroy' value='false'><a class='btn btn-general remove_fields dynamic' href='#'><i class='fas fa-trash-alt'></i></a></td></tr>";
 
     $("#purchase_details").append(new_product);
+
+    eventsOnDetails();
   });
   // Click on Select product
 
-
+  eventsOnDetails();
 });

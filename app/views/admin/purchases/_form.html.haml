@@ -28,8 +28,8 @@
 
                     .form-group
                       .input-btn-group
-                        = f.hidden_field :provider_id, required: true
-                        = f.text_field :provider, value: @order.provider_id.nil? ? "" : "#{@order.provider.name}", class: "form-control input", placeholder: t("activerecord.attributes.product.category"), required: true, disabled: true
+                        = f.hidden_field :provider_id
+                        = f.text_field :provider, value: @order.provider_id.nil? ? "" : "#{@order.provider.name}", class: "form-control input no-events", placeholder: t("activerecord.attributes.product.provider"), required: true
                         %label
                           %b= t("activerecord.attributes.purchase.provider")
                         .border-bottom
@@ -74,18 +74,17 @@
                       %i.fas.fa-plus
                       %span= t("purchase.add_products")
 
-                  .col-xs-12.no-padding
-                    -# Table
-                    %table.table
-                      %thead
-                        - model = "product"
-                        - attributes = ["name", "price", "quantity", "total", "select"]
+                  .col-xs-12.no-padding.index.details
+                    .scroll-table
+                      -# Table
+                      %table.table
+                        %thead
+                          - model = "product"
+                          - attributes = ["name", "price", "quantity", "total", "select"]
 
-                        -# Render table header
-                        = render partial: "partials/table_header_details", locals: {model: model, attributes: attributes}
-                      %tbody#purchase_details
-
-
+                          -# Render table header
+                          = render partial: "partials/table_header_details", locals: {model: model, attributes: attributes}
+                        %tbody#purchase_details
                     -# End Table
 
                   -# Buttons
@@ -99,12 +98,6 @@
                         %i.fas.fa-save
                         %span= t("views.form.save")
                   -# End Buttons
-
-                  = f.fields_for :purchase_details do |detail|
-                    = render "purchase_detail_fields", f: detail
-
-                  .links
-                    = link_to_add_association "Add Detail", f, :purchase_details, class: "btn btn-general", data: { association_insertion_node: "#purchase_details", association_insertion_method: :prepend}
           -# End Material card
 
         .col-xs-12.col-md-4
@@ -114,9 +107,6 @@
               .col-xs-12.no-padding
                 .general-info
           -# End Material card
-
-
-
 -# End Form
 
 -# Modal

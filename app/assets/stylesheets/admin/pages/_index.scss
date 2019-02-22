@@ -7,6 +7,30 @@
     padding-top: 10px;
   }
 
+  &.details{
+    scrollbar-face-color: rgba($primary-color, 0.7);
+    scrollbar-track-color: #ccc;
+
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: rgba($primary-color, 0.7);
+      border-radius: 7px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: #ccc;
+      border-radius: 10px;
+    }
+  }
+
+  .scroll-table{
+    max-height: 400px;
+    overflow-y: scroll;
+  }
+
   .search-record{
     padding-bottom: 25px;
 
@@ -266,6 +290,11 @@
               padding: 1px 12px;
               height: 25px;
               border-bottom-color: #ccc;
+              width: 100%;
+
+              &.no-padding{
+                padding: 0px
+              }
             }
           }
           //
@@ -364,6 +393,11 @@
       padding-bottom: 15px;
     }
 
+    .scroll-table{
+      max-height: 325px;
+      padding-right: 15px;
+    }
+
     .btn-container{
       padding-bottom: 0px;
       padding-right: 10px;
@@ -411,6 +445,10 @@
 
             &.price-container{
               width: 120px;
+
+              &.price-row{
+                max-width: 120px;
+              }
             }
 
             &.quantity-container{

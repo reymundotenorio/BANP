@@ -110,7 +110,7 @@ class Admin::PurchasesController < ApplicationController
 
     # If record was saved
     if @order.save
-      redirect_to [:admin, @order], notice: t("alerts.created", model: t("purchase.order"))
+      redirect_to admin_purchase_details_path(@order.id), notice: t("alerts.created", model: t("purchase.order"))
 
       # If record was not saved
     else

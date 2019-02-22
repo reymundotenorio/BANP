@@ -107,6 +107,17 @@ form{
 
     input{
       margin: 0px;
+
+      &.input-disabled{
+        pointer-events: none;
+        cursor: not-allowed;
+        border: none;
+        background: $transparent;
+        -webkit-box-shadow: none;
+        box-shadow: none;
+        word-wrap: break-word;
+        padding: 0px;
+      }
     }
 
     .input-btn-group{
