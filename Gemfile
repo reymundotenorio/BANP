@@ -107,7 +107,7 @@ gem "pusher", "~> 1.3", ">= 1.3.1"
 gem "faye", "~> 1.2", ">= 1.2.2"
 
 # Bootstrap 3
-gem "bootstrap-sass", "~> 3.3.7"
+gem "bootstrap-sass", ">= 3.4.1"
 
 # Wicked PDF
 gem "wicked_pdf", "~> 1.1"

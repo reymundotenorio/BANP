@@ -113,19 +113,27 @@ class Admin::PurchasesController < ApplicationController
   def update
     updated_params = purchase_order_params
 
-    # Fixing price
-    # if updated_params[:price]
-    #   begin
-    #     price = updated_params[:price].remove(",")
-    #     updated_params[:price] = price.to_d
-    #
-    #   rescue
-    #     updated_params[:price] = 0.00
-    #   end
-    # end
+    # Deleting blank spaces
+    @order[:receipt_number]= @order[:receipt_number].strip
+    @order[:status] = @order[:status].strip
+    @order[:observations] = @order[:observations].strip
+    # End Deleting blank spaces
+
+    @order[:purchase_datetime] = @order[:purchase_datetime].to_datetime
+    @order[:discount] = @order[:discount].to_i
+
+    # Fixing discount
+    if @order[:discount]
+      begin
+        @order[:discount] = @order[:discount].to_d
+
+      rescue
+        @order[:discount] = 0.00
+      end
+    end
 
     if @order.update(updated_params)
-      redirect_to [:admin, @order], notice: t("alerts.updated", model: t("purchase.order"))
+      redirect_to admin_purchase_details_path(@order.id), notice: t("alerts.updated", model: t("purchase.order"))
 
     else
       @providers = Provider.search(params[:search_provider], "enabled-only").paginate(page: params[:providers_page], per_page: 5) # Providers with pagination

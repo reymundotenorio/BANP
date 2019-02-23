@@ -85,6 +85,8 @@
                           -# Render table header
                           = render partial: "partials/table_header_details", locals: {model: model, attributes: attributes}
                         %tbody#purchase_details
+                          = f.fields_for :purchase_details do |detail|
+                            = render "purchase_detail_fields", f: detail
                     -# End Table
 
                   -# Buttons
@@ -159,3 +161,7 @@
         -# Render products list
         = render "modal_products"
         -# End Render products list
+
+-# Products modals script
+= javascript_include_tag "products-modal", "data-turbolinks-track": "reload"
+-# End Products modals script

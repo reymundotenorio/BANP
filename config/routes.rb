@@ -1,4 +1,9 @@
 Rails.application.routes.draw do
+  # namespace :admin do
+  #   namespace :purchases do
+  #     get 'orders/index'
+  #   end
+  # end
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   # Change language
   get "/change-language/:lang", to: "settings#change_lang", as: "change_language"
@@ -215,7 +220,7 @@ Rails.application.routes.draw do
     get "/purchase/:id/edit", to: "purchases#edit", as: "edit_purchase"
     get "/purchases/:id/history", to: "purchases#history", as: "history_purchase"
     post "/purchases", to: "purchases#create"
-    patch "/purchases/:id", to: "purchases#update", as: "update_purchase"
+    patch "/purchase/:id", to: "purchases#update", as: "update_purchase"
     patch "/purchases/:id/active", to: "purchases#active", as: "active_purchase"
     patch "/purchases/:id/deactive", to: "purchases#deactive", as: "deactive_purchase"
     # End Purchases orders
