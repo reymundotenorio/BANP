@@ -23,7 +23,7 @@ $(document).ready(function(){
     $("#datetimepicker").on("dp.change", function(e) {
       if ($("#purchase_datetime_picker").val() != ""){
         pickerDate = moment($("#purchase_datetime_picker").val(), dateFormat).toDate();
-        $("#purchase_purchase_datetime").val(moment($("#purchase_datetime_picker").val(), "YYYY-MM-DD'T'HH:mm:ss.SSSZ"));
+        $("#purchase_purchase_datetime").val(moment($("#purchase_datetime_picker").val(),dateFormat).format("YYYY-MM-DD'T'HH:mm:ss.SSSZ"));
       }
     });
 
@@ -33,7 +33,7 @@ $(document).ready(function(){
       if($(this).val() != ""){
         pickerDate = moment($(this).val(), dateFormat).toDate();
         // console.log(pickerDate);
-        $("#purchase_purchase_datetime").val(moment($(this).val(), "YYYY-MM-DD'T'HH:mm:ss.SSSZ"));
+        $("#purchase_purchase_datetime").val(moment($(this).val(), dateFormat).format("YYYY-MM-DD'T'HH:mm:ss.SSSZ"));
       }
     });
 
