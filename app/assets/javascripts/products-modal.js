@@ -1,5 +1,8 @@
 $(document).ready(function(){
 
+  // Mask for discount Input
+  $(".discount").mask("##.0");
+  
   var i18nLocale = $("body").data("locale");
 
   // Format Currency

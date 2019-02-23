@@ -69,7 +69,7 @@ class StripeController < ApplicationController
 
     if charge
       # redirect_to charge.receipt_url
-      redirect_to cart_path, notice: charge.receipt_url
+        redirect_to cart_path, notice: charge.receipt_url
       return
     else
     end

@@ -35,6 +35,11 @@ $(document).ready(function(){
         // console.log(pickerDate);
         $("#purchase_purchase_datetime").val(moment($(this).val(), dateFormat).format("YYYY-MM-DD'T'HH:mm:ss.SSSZ"));
       }
+      else{
+        if($("#purchase_purchase_datetime").val() != ""){
+          $(this).val(moment($("#purchase_purchase_datetime").val(), "YYYY-MM-DD'T'HH:mm:ss.SSSZ").format(dateFormat));
+        }
+      }
     });
 
     // Init Bootstrap tooltips

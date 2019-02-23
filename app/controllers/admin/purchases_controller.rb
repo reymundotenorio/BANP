@@ -62,6 +62,8 @@ class Admin::PurchasesController < ApplicationController
   # admin/purchases/order/:id/edit
   def edit
     # Order found by before_action
+    @order.discount = "%.2f" % @order.discount
+    @order.discount = "0#{@order.discount.to_s.gsub! '.', ''}" if @order.discount < 10
 
     @search_form_path = admin_edit_product_path(@order)
 
@@ -85,7 +87,6 @@ class Admin::PurchasesController < ApplicationController
     # End Deleting blank spaces
 
     @order[:purchase_datetime] = @order[:purchase_datetime].to_datetime
-    @order[:discount] = @order[:discount].to_i
 
     # Fixing discount
     if @order[:discount]
@@ -120,7 +121,6 @@ class Admin::PurchasesController < ApplicationController
     # End Deleting blank spaces
 
     @order[:purchase_datetime] = @order[:purchase_datetime].to_datetime
-    @order[:discount] = @order[:discount].to_i
 
     # Fixing discount
     if @order[:discount]
