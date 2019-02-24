@@ -1,0 +1,174 @@
+-# Form
+= form_for @reception, url: @form_url, html: {autocomplete: "off", multipart: true} do |f|
+  %section.form
+    .container
+      .row
+        .col-xs-12
+          -# Show errors
+          = render partial: "partials/form_errors", locals: {resource: @reception, model: Purchase}
+          -# End Show errors
+
+        .col-xs-12.col-md-8
+          -# Material card
+          %div{class: "material-card shadow-card #{@reception.state}"}
+            .row.no-margin
+              .col-xs-12.no-padding
+                .form-info
+
+                  .form-group.hidden
+                    = f.hidden_field :employee_id, value: 1, required: true # current_employee.id
+
+                  .form-group.hidden
+                    = f.text_field :receipt_number, class: "form-control input", required: true
+                    %label
+                      %b= t("activerecord.attributes.purchase.receipt_number")
+                    .border-bottom
+
+                  .col-xs-12.col-md-7.container-left
+
+                    .form-group
+                      .input-btn-group
+                        = f.hidden_field :provider_id
+                        = f.text_field :provider, value: @reception.provider_id.nil? ? "" : "#{@reception.provider.name}", class: "form-control input no-events", required: true
+                        %label
+                          %b= t("activerecord.attributes.purchase.provider")
+                        .border-bottom
+
+                        = link_to "", class: "btn btn-general", "data-toggle": "modal", "data-target": "#getProviders" do
+                          %i.fas.fa-search
+
+                    .col-xs-12.col-md-4.container-left
+                      .form-group
+                        = f.text_field :discount, class: "form-control input discount"
+                        %label
+                          %b= "#{t('activerecord.attributes.purchase.discount')} %"
+                        .border-bottom
+
+                    .col-xs-12.col-md-8.container-right
+                      .form-group
+                        .input-group.date#datetimepicker
+                          = f.text_field :purchase_datetime, id: "purchase_datetime_picker", class: "form-control input date-field", required: true
+                          %span.input-group-addon.btn.btn-general
+                            %i.far.fa-calendar-alt
+                          %label
+                            %b= t("activerecord.attributes.purchase.purchase_datetime")
+                          .border-bottom
+
+                      = f.hidden_field :purchase_datetime
+
+                    .form-group.hidden
+                      = f.text_field :status, class: "form-control input"
+                      %label
+                        %b= t("activerecord.attributes.purchase.status")
+                      .border-bottom
+
+                  .col-xs-12.col-md-5.container-right
+                    .form-group
+                      = f.text_area :observations, class: "form-control input text-area big"
+                      %label
+                        %b= t("activerecord.attributes.purchase.observations")
+                      .border-bottom
+
+                  .col-xs-12.no-padding.container-add-products
+                    = link_to "", class: "btn btn-general", "data-toggle": "modal", "data-target": "#getProducts" do
+                      %i.fas.fa-plus
+                      %span= t("purchase.add_products")
+
+                  .col-xs-12.no-padding.index.details
+                    .scroll-table
+                      -# Table
+                      %table.table#details-table
+                        %thead
+                          - model = "product"
+                          - attributes = ["name", "price", "quantity", "total", "select"]
+
+                          -# Render table header
+                          = render partial: "partials/table_header_details", locals: {model: model, attributes: attributes}
+
+                        %tbody#purchase_details
+                          -# Set counter
+                          - @details_counter = 0
+
+                          = f.fields_for :purchase_details do |detail|
+                            = render "purchase_detail_fields", f: detail
+                            -# Increse couter
+                            - @details_counter += 1
+                    -# End Table
+
+                  -# Buttons
+                  .main-buttons
+                    .col-xs-12.button-container.no-padding
+                      - if @reception.new_record?
+                        = button_tag type: "reset", id: "reset-button", class: "btn btn-general" do
+                          %i.fas.fa-eraser
+                          %span= t("views.form.restart")
+
+                      = f.button class: "btn btn-general", data: {disable_with: "<i class='fas fa-spinner fa-spin'></i>"} do
+                        %i.fas.fa-save
+                        %span= t("views.form.save")
+                  -# End Buttons
+          -# End Material card
+
+        .col-xs-12.col-md-4
+          -# Material card
+          %div{class: "material-card shadow-card #{@reception.state}"}
+            .row.no-margin
+              .col-xs-12.no-padding.details
+                .general-info
+
+                  %p.summary= t("views.cart.summary")
+
+                  .main-info.text-left-right
+                    %p.text-left
+                      %b= t("views.cart.subtotal")
+                    %p.text-right#subtotal $00.00
+
+                  .main-info.text-left-right
+                    %p.text-left
+                      %b= t("views.cart.shipping")
+                    %p.text-right#shipping $00.00
+
+                  .main-info.text-left-right
+                    %p.text-left
+                      %b
+                        %span= t("activerecord.attributes.purchase.discount")
+                        %span#discountPercent (0%)
+                    %p.text-right#discount $00.00
+
+                  .main-info.text-left-right
+                    .divider
+
+                  .main-info.text-left-right
+                    %p.text-left.total
+                      %b Total
+                    %p.text-right.total#total $00.00
+          -# End Material card
+-# End Form
+
+-# Modal
+.modal.fade{id: "getProviders", tabindex: "-1", role: "dialog", "aria-labelledby": "", "aria-hidden": "true"}
+  .modal-dialog
+    .modal-content
+      .modal-body
+        %button.close{type: "button", "data-dismiss": "modal", "aria-hidden": "true", "data-toggle": "tooltip", "data-placement": "left", title: t("views.form.close")}
+          &times;
+
+        -# Render providers list
+        = render "modal_providers"
+        -# End Render providers list
+
+-# Modal
+.modal.fade{id: "getProducts", tabindex: "-1", role: "dialog", "aria-labelledby": "", "aria-hidden": "true"}
+  .modal-dialog
+    .modal-content
+      .modal-body
+        %button.close{type: "button", "data-dismiss": "modal", "aria-hidden": "true", "data-toggle": "tooltip", "data-placement": "left", title: t("views.form.close")}
+          &times;
+
+        -# Render products list
+        = render "modal_products"
+        -# End Render products list
+
+-# Products modals script
+= javascript_include_tag "products-modal", "data-turbolinks-track": "reload"
+-# End Products modals script

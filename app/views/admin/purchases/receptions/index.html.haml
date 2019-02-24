@@ -3,59 +3,46 @@
   .container
     -# Title
     .row.title-container
-      .col-xs-12.col-lg-9
+      .col-xs-12.col-lg-10
         -# Heading
         %h1#count-title
           -# Render count title
           = render "count_title"
-          -# End Heading
+        -# End Heading
 
-      .col-xs-12.col-lg-3.text-right
-        -# Show purchase button
+      .col-xs-12.col-lg-2.text-right
+        -# New button
         .btn-container.inline
-          - if @is_reception
-            = link_to (admin_purchase_receptions_path), class: "btn btn-general" do
-              %i.fa.fa-list-alt
-              %span= t("purchase.show_receptions")
-
-          - else
-            = link_to (admin_purchase_orders_path), class: "btn btn-general" do
-              %i.fa.fa-list-alt
-              %span= t("purchase.show_orders")
-        -# End Show purchase button
+          = link_to (admin_new_purchase_reception_path), class: "btn btn-general" do
+            %i.fas.fa-plus
+            %span= t("views.index.new")
+        -# End New button
     -# End Title
 
     -# Breadcrumb
-    - if @is_reception
-      = sync partial: "receptions/data_breadcrumb", resource: @purchase
-      = sync_new partial: "receptions/data_breadcrumb", resource: Purchase.new
-
-    - else
-      = sync partial: "orders/data_breadcrumb", resource: @purchase
-      = sync_new partial: "orders/data_breadcrumb", resource: Purchase.new
+    .row
+      .col-xs-12.hidden-xs
+        .breadcrumb-container
+          %ol.breadcrumb
+            %li
+              = link_to (admin_root_path) do
+                %i.fas.fa-tachometer-alt
+                %span= t("header.navigation.dashboard")
+            %li.active
+              %i.far.fa-newspaper
+              = t("purchase.receptions")
     -# End Breadcrumb
 
     .row
-      .col-xs-12.col-md-4
+      .col-xs-12
         -# Material card
-        %div{class: "material-card shadow-card #{@purchase.state}"}
-          .row.no-margin
-            .col-xs-12.no-padding.details
-              -# Data details render_sync
-              = sync partial: "orders/data_details", resource: @purchase
-              = sync_new partial: "orders/data_details", resource: Purchase.new
-              -# End Data details render_sync
-        -# End Material card
-
-      .col-xs-12.col-md-8
-        -# Material card
-        %div{class: "material-card shadow-card #{@purchase.state}"}
+        .material-card.shadow-card
           .row.no-margin
             -# Search record
             .col-xs-12.col-md-6.no-padding
               #search-record.search-record
                 -# Form
-                = form_tag admin_purchase_details_path(@purchase), method: "get", id: "search-form", autocomplete:"off", remote: true do
+                = form_tag admin_purchase_receptions_path, method: "get", id: "search-form", autocomplete:"off", remote: true do
                   .input-group
                     = text_field_tag :search, params[:search], id: "search-input", class: "form-control"
                     .border-bottom
@@ -70,11 +57,11 @@
             .col-xs-12.col-md-6.no-padding.text-right
               #show-buttons.btn-container
                 -# Render show buttons
-                =# render "show_buttons"
+                = render "show_buttons"
 
               -# Export button
               .btn-container
-                = link_to (admin_purchase_details_path(@purchase, format: "pdf", lang: I18n.locale)), target: "_blank", class: "btn btn-general btn-default" do
+                = link_to (admin_purchase_receptions_path(format: "pdf", lang: I18n.locale)), target: "_blank", class: "btn btn-general btn-default" do
                   %i.fas.fa-download
                   %span= t("views.index.export")
               -# End Export button
@@ -82,7 +69,7 @@
 
           -# Render table and pagination with Ajax
           #render-data
-            = render "purchase_details"
+            = render "purchases"
           -# End Render table and pagination with Ajax
         -# End Material card
 -# End Index

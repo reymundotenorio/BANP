@@ -160,6 +160,11 @@ es:
     of: "de"
     add_products: "Agregar productos"
     remove: "Eliminar"
+    order: "Recepción de compra"
+    receptions: "Recepciones de compra"
+    reception_detail: "Detalle de Recepción de compra"
+    reception_details: "Detalles de Recepción de compra"
+    show_receptions: "Mostrar Recepciones de compra"
 
   # Will paginate
   will_paginate:

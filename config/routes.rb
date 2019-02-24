@@ -220,6 +220,18 @@ Rails.application.routes.draw do
     patch "/purchases/order/:id/deactive", to: "purchases/orders#deactive", as: "deactive_purchase_order"
     # End Purchases orders
 
+    # Purchases receptions
+    get "/purchases/receptions", to: "purchases/receptions#index", as: "purchase_receptions"
+    get "/purchases/reception/new", to: "purchases/receptions#new", as: "new_purchase_reception"
+    get "/purchases/reception/:id", to: "purchases/receptions#show", as: "purchase_reception"
+    get "/purchases/reception/:id/edit", to: "purchases/receptions#edit", as: "edit_purchase_reception"
+    get "/purchases/reception/:id/history", to: "purchases/receptions#history", as: "history_purchase_reception"
+    post "/purchases/reception", to: "purchases/receptions#create", as: "purchases_reception"
+    patch "/purchases/reception/:id", to: "purchases/receptions#update", as: "update_purchase_reception"
+    patch "/purchases/reception/:id/active", to: "purchases/receptions#active", as: "active_purchase_reception"
+    patch "/purchases/reception/:id/deactive", to: "purchases/receptions#deactive", as: "deactive_purchase_reception"
+    # End Purchases receptions
+
     # Purchases details
     get "/purchases/:id/details", to: "purchase_details#show", as: "purchase_details"
     get "/purchase/detail/:id/edit", to: "purchase_details#edit", as: "edit_purchase_detail"

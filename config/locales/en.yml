@@ -159,6 +159,11 @@ en:
     of: "of"
     add_products: "Add products"
     remove: "Remove"
+    reception: "Purchase reception"
+    receptions: "Purchase receptions"
+    reception_detail: "Purchase reception detail"
+    reception_details: "Purchase reception details"
+    show_receptions: "Show purchase receptions"
 
   # Will paginate
   will_paginate:

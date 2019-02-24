@@ -24,6 +24,8 @@ class Admin::PurchaseDetailsController < ApplicationController
       return
     end
 
+    @is_reception = @purchase.status == "received" ? true : false
+
     @details = PurchaseDetail.search_orders(@purchase.id, params[:search], params[:show]).paginate(page: params[:page], per_page: 15) # Orders with pagination
     @show_all = params[:show] == "all" ? true : false # View All (Enabled and Disabled)
     @count = @details.count

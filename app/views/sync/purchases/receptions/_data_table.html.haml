@@ -1,0 +1,32 @@
+%tr{class: "clickable-row #{purchase.state}", "data-href": "#{admin_purchase_details_path(purchase.id)}"}
+  -# Set attributes
+  - attributes = ["receipt_number", "purchase_datetime", "total", "provider", "employee"]
+
+  %td
+    = link_to admin_purchase_details_path(purchase.id), class: "record-link", "data-header": "No.", "data-toggle": "tooltip", "data-placement": "bottom", title: t("views.index.view_details") do
+      %p= purchase.id
+
+  - attributes.each do |attribute|
+    %td
+      = link_to admin_purchase_details_path(purchase.id), class: "record-link", "data-header": t("activerecord.attributes.purchase.#{attribute}"), "data-toggle": "tooltip", "data-placement": "bottom", title: t("views.index.view_details") do
+        - if attribute == "purchase_datetime"
+          -# %p= I18n.l(purchase["#{attribute}"], format: :short)
+          %p= I18n.locale == :es ? purchase.purchase_datetime.strftime("%d/%m/%Y") : purchase.purchase_datetime.strftime("%m/%d/%Y")
+
+        - elsif attribute == "total"
+          %p= number_to_currency((Purchase.total(purchase.id) - (Purchase.total(purchase.id) * (purchase.discount / 100))), precision: 2, unit: '$', format: '%u%n', separator: '.', delimiter: ',')
+
+        - elsif attribute == "provider"
+          -# Provider name render_sync
+          = sync partial: "data_table_provider_name", resource: purchase.provider
+          = sync_new partial: "data_table_provider_name", resource: Provider.new
+          -# End Provider name render_sync
+
+        - elsif attribute == "employee"
+          -# Employee name render_sync
+          = sync partial: "data_table_employee_name", resource: purchase.employee
+          = sync_new partial: "data_table_employee_name", resource: Employee.new
+          -# End Employee name render_sync
+
+        - else
+          %p= purchase["#{attribute}"]

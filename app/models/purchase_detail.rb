@@ -22,9 +22,9 @@ class PurchaseDetail < ApplicationRecord
   after_save :update_stock #, on: [ :create, :update ]
 
   # Before_destroy callback, avoid destroy information
-  def not_permit_destroy
-    false
-  end
+  # def not_permit_destroy
+  #   false
+  # end
 
   # Update product stock
   def update_stock

@@ -6,7 +6,7 @@ class Purchase < ApplicationRecord
   # End Associations
 
   # Nested attributes
-  accepts_nested_attributes_for :purchase_details
+  accepts_nested_attributes_for :purchase_details, reject_if: :all_blank, allow_destroy: true
   # End Nested attributes
 
   # Audit
@@ -19,7 +19,7 @@ class Purchase < ApplicationRecord
   # sync_touch :purchase_details
   # End Render sync
 
-  # Search
+  # Search order
   def self.search_order(search, show_all)
     if search
       self.joins(:provider).joins(:employee).where("(DATE_FORMAT(purchase_datetime, '%d/%m/%Y') LIKE :search OR DATE_FORMAT(purchase_datetime, '%m/%d/%Y') LIKE :search OR receipt_number LIKE :search OR providers.name LIKE :search OR employees.first_name LIKE :search OR employees.last_name LIKE :search) AND (status = 'ordered')", search: "%#{search}%")
@@ -31,7 +31,21 @@ class Purchase < ApplicationRecord
       orders.enabled
     end
   end
-  # End Search
+  # End Search order
+
+  # Search reception
+  def self.search_reception(search, show_all)
+    if search
+      self.joins(:provider).joins(:employee).where("(DATE_FORMAT(purchase_datetime, '%d/%m/%Y') LIKE :search OR DATE_FORMAT(purchase_datetime, '%m/%d/%Y') LIKE :search OR receipt_number LIKE :search OR providers.name LIKE :search OR employees.first_name LIKE :search OR employees.last_name LIKE :search) AND (status = 'received')", search: "%#{search}%")
+
+    elsif show_all == "all"
+      receptions
+
+    else
+      receptions.enabled
+    end
+  end
+  # End Search reception
 
   # Total
   def self.total(id)
@@ -79,6 +93,7 @@ class Purchase < ApplicationRecord
   ## Scopes
   scope :enabled, -> { where(state: true) }
   scope :orders, -> { where(status: "ordered") }
+  scope :receptions, -> { where(status: "received") }
   ## End Scopes
 
   ## Callbacks

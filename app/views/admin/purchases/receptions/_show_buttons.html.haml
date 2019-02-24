@@ -1,0 +1,13 @@
+- if @show_all
+  -# Enabled button
+  = button_to admin_purchase_receptions_path, method: "get", remote: true, params: {}, class: "btn btn-general" do
+    %i.fa.fa-list-ul
+    %span= t("views.index.show_enabled")
+  -# End Enabled button
+
+- else
+  -# All button
+  = button_to admin_purchase_receptions_path, method: "get", remote: true, params: { show: "all" }, class: "btn btn-general btn-danger" do
+    %i.fa.fa-list-alt
+    %span= t("views.index.show_all")
+  -# End All button

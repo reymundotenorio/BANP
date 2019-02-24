@@ -57,7 +57,7 @@
             %i.far.fa-newspaper
             = t("header.navigation.orders")
         %li
-          %a{href: "#"}
+          = link_to (admin_purchase_receptions_path), class: "#{'active' if controller_name == 'purchase_receptions'}" do
             %i.fas.fa-cart-arrow-down
             = t("header.navigation.receptions")
         %li

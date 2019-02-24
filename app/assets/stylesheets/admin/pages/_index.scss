@@ -383,9 +383,6 @@
   }
 }
 
-
-
-
 @media (min-width: 992px){
 
   .index{
@@ -451,6 +448,10 @@
               }
             }
 
+            &.name-container{
+              max-width: 155px;
+            }
+
             &.quantity-container{
               width: 135px;
             }
@@ -473,6 +474,26 @@
             &:after{
               right: 40px;
               left: auto;
+            }
+          }
+        }
+      }
+    }
+  }
+
+}
+
+
+@media (min-width: 1200px){
+
+  .index{
+    .table{
+      >tbody{
+        >tr{
+          >td{
+
+            &.name-container{
+              max-width: none;
             }
           }
         }
