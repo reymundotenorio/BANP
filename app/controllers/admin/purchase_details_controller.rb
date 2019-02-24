@@ -16,7 +16,13 @@ class Admin::PurchaseDetailsController < ApplicationController
   # End Authentication
 
   def show
-    @purchase = Purchase.friendly.find(params[:id]) || nil
+    begin
+      @purchase = Purchase.friendly.find(params[:id])
+
+    rescue
+      redirect_to admin_root_path, alert: t("alerts.not_found", model: t("activerecord.models.purchase"))
+      return
+    end
 
     @details = PurchaseDetail.search_orders(@purchase.id, params[:search], params[:show]).paginate(page: params[:page], per_page: 15) # Orders with pagination
     @show_all = params[:show] == "all" ? true : false # View All (Enabled and Disabled)
