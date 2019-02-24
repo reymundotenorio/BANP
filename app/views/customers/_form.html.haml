@@ -126,9 +126,10 @@
                     -# Buttons
                     .main-buttons
                       .col-xs-12.button-container.no-padding
-                        = button_tag type: "reset", id: "reset-button", class: "btn btn-general" do
-                          %i.fas.fa-eraser
-                          %span= t("views.form.restart")
+                        - if @customer.new_record?
+                          = button_tag type: "reset", id: "reset-button", class: "btn btn-general" do
+                            %i.fas.fa-eraser
+                            %span= t("views.form.restart")
 
                         = f.button class: "btn btn-general", data: {disable_with: "<i class='fas fa-spinner fa-spin'></i>"} do
                           %i.fas.fa-save
@@ -136,3 +137,7 @@
                     -# End Buttons
             -# End Material card
 -# End Form
+
+-# Reset customer form script
+= javascript_include_tag "reset-customer-form", "data-turbolinks-track": "reload"
+-# End Reset customer form script

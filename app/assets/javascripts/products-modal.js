@@ -288,6 +288,33 @@ $(document).ready(function(){
   });
   // Update total on discount change
 
+  // Fixing date on reset
+  $("#reset-button").click(function(e) {
+    $(".new_purchase")[0].reset();
+
+    var i18nLocale = $("body").data("locale");
+    var dateFormat = i18nLocale == "es" ? "DD/MM/YYYY hh:mm A" : "MM/DD/YYYY hh:mm A";
+
+    // Datetime
+    $("#purchase_datetime_picker").each(function(){
+
+      console.log("Date");
+      // If not empty
+      if($(this).val() != ""){
+        pickerDate = moment($(this).val(), dateFormat).toDate();
+        $("#purchase_purchase_datetime").val(moment($(this).val(), dateFormat).format("YYYY-MM-DD'T'HH:mm:ss.SSSZ"));
+      }
+      else{
+        if($("#purchase_purchase_datetime").val() != ""){
+          $(this).val(moment($("#purchase_purchase_datetime").val(), "YYYY-MM-DD'T'HH:mm:ss.SSSZ").format(dateFormat));
+        }
+      }
+    });
+    
+    e.preventDefault();
+  });
+  // End Fixing date reset
+
   eventsOnDetails();
   updateTotal();
 });

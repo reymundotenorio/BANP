@@ -62,6 +62,7 @@ class Purchase < ApplicationRecord
   validates :receipt_number, presence: true
   validates :provider_id, presence: true
   validates :employee_id, presence: true
+  validates :purchase_datetime, presence: true
   validates :discount, presence: true
   # End  Presence validation
 

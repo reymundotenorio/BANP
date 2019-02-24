@@ -20,8 +20,8 @@
     -# End Title
 
     -# Breadcrumb
-    = sync partial: "data_breadcrumb", resource: @purchase
-    = sync_new partial: "data_breadcrumb", resource: Purchase.new
+    = sync partial: "orders/data_breadcrumb", resource: @purchase
+    = sync_new partial: "orders/data_breadcrumb", resource: Purchase.new
     -# End Breadcrumb
 
     .row
@@ -31,8 +31,8 @@
           .row.no-margin
             .col-xs-12.no-padding.details
               -# Data details render_sync
-              = sync partial: "data_details", resource: @purchase
-              = sync_new partial: "data_details", resource: Purchase.new
+              = sync partial: "orders/data_details", resource: @purchase
+              = sync_new partial: "orders/data_details", resource: Purchase.new
               -# End Data details render_sync
         -# End Material card
 

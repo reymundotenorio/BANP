@@ -86,7 +86,7 @@ class Admin::Purchases::OrdersController < ApplicationController
     @order[:observations] = @order[:observations].strip
     # End Deleting blank spaces
 
-    @order[:purchase_datetime] = @order[:purchase_datetime].to_datetime
+    @order[:purchase_datetime] = @order[:purchase_datetime].to_datetime if @order[:purchase_datetime]
 
     # Fixing discount
     if @order[:discount]
@@ -120,7 +120,7 @@ class Admin::Purchases::OrdersController < ApplicationController
     @order[:observations] = @order[:observations].strip
     # End Deleting blank spaces
 
-    @order[:purchase_datetime] = @order[:purchase_datetime].to_datetime
+    @order[:purchase_datetime] = @order[:purchase_datetime].to_datetime if @order[:purchase_datetime]
 
     # Fixing discount
     if @order[:discount]

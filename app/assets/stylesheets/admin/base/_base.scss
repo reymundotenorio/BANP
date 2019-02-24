@@ -277,7 +277,9 @@ a{
 
   // Error on input
   .field_with_errors{
-    + label{
+    width: 100%;
+
+    + .input-group-addon + label, + label{
       -webkit-transform: translateY(-30px);
       transform: translateY(-30px);
       font-size: 14px;
