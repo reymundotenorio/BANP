@@ -42,31 +42,31 @@
               .col-xs-12.no-padding
                 .form-info
                   .form-group
-                    = f.text_field :name, class: "form-control input", placeholder: t("activerecord.attributes.provider.name"), required: true
+                    = f.text_field :name, class: "form-control input", required: true
                     %label
                       %b= t("activerecord.attributes.provider.name")
                     .border-bottom
 
                   .form-group
-                    = f.text_field :FEIN, class: "form-control input", "data-mask": "00-0000000", placeholder: t("activerecord.attributes.provider.FEIN")
+                    = f.text_field :FEIN, class: "form-control input", "data-mask": "00-0000000"
                     %label
                       %b= t("activerecord.attributes.provider.FEIN")
                     .border-bottomm
 
                   .form-group
-                    = f.email_field :email, class: "form-control input", placeholder: t("activerecord.attributes.provider.email")
+                    = f.email_field :email, class: "form-control input"
                     %label
                       %b= t("activerecord.attributes.provider.email")
                     .border-bottom
 
                   .form-group
-                    = f.telephone_field :phone, class: "form-control input", "data-mask": "(000) 000-0000", placeholder: t("activerecord.attributes.provider.phone")
+                    = f.telephone_field :phone, class: "form-control input", "data-mask": "(000) 000-0000"
                     %label
                       %b= t("activerecord.attributes.provider.phone")
                     .border-bottom
 
                   .form-group
-                    = f.text_area :address, class: "form-control input text-area",placeholder: t("activerecord.attributes.provider.address")
+                    = f.text_area :address, class: "form-control input text-area"
                     %label
                       %b= t("activerecord.attributes.provider.address")
                     .border-bottom

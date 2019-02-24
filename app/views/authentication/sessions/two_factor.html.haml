@@ -20,7 +20,7 @@
               .col-xs-12.no-padding
                 .form-info
                   .form-group
-                    = f.text_field :otp, class: "form-control input", "data-mask": "000000", placeholder: t("activerecord.attributes.user.two_factor_auth_otp"), required: true, autofocus: true
+                    = f.text_field :otp, class: "form-control input", "data-mask": "000000", required: true, autofocus: true
                     %label
                       %b= t("activerecord.attributes.user.two_factor_auth_otp")
                     .border-bottom

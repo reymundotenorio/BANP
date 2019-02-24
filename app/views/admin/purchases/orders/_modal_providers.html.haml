@@ -11,7 +11,7 @@
               -# Heading
               %h1
                 %i.fas.fa-list-alt
-                = t("header.navigation.products")
+                = t("header.navigation.providers")
               -# End Heading
           -# End Title
 
@@ -22,11 +22,11 @@
                 -# Form
                 = form_tag @search_form_path, method: "get", id: "search-form", autocomplete:"off", remote: true do
                   .input-group
-                    = text_field_tag :search_product, params[:search_product], id: "search-input-products", class: "form-control", placeholder: t("views.index.search")
+                    = text_field_tag :search_provider, params[:search_provider], id: "search-input-providers", class: "form-control"
                     .border-bottom
 
                     %span.input-group-btn
-                      = button_tag t("elements.search"), id: "search-btn-products", class: "btn btn-general", data: {disable_with: "<i class='fas fa-spinner fa-spin'></i>"}, "data-toggle": "tooltip", "data-placement": "top", title: t("views.landing.search") do
+                      = button_tag t("elements.search"), id: "search-btn-providers", class: "btn btn-general", data: {disable_with: "<i class='fas fa-spinner fa-spin'></i>"}, "data-toggle": "tooltip", "data-placement": "top", title: t("views.landing.search") do
                         %i.fas.fa-search
                 -# End Form
             -# End Search record
@@ -34,8 +34,8 @@
             .col-xs-12.col-md-6.no-padding.text-right
 
           -# Render table and pagination with Ajax
-          #render-search-products
-            = render "products_search"
+          #render-search-providers
+            = render "providers_search"
           -# End Render table and pagination with Ajax
         -# End Material card
 -# End Index

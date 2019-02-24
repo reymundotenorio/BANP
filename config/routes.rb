@@ -214,15 +214,15 @@ Rails.application.routes.draw do
     # End Products
 
     # Purchases orders
-    get "/purchases/orders", to: "purchases#index", as: "purchase_orders"
-    get "/purchase/new", to: "purchases#new", as: "new_purchase"
-    get "/purchase/:id", to: "purchases#show", as: "purchase"
-    get "/purchase/:id/edit", to: "purchases#edit", as: "edit_purchase"
-    get "/purchases/:id/history", to: "purchases#history", as: "history_purchase"
-    post "/purchases", to: "purchases#create"
-    patch "/purchase/:id", to: "purchases#update", as: "update_purchase"
-    patch "/purchases/:id/active", to: "purchases#active", as: "active_purchase"
-    patch "/purchases/:id/deactive", to: "purchases#deactive", as: "deactive_purchase"
+    get "/purchases/orders", to: "purchases/orders#index", as: "purchase_orders"
+    get "/purchases/order/new", to: "purchases/orders#new", as: "new_purchase"
+    get "/purchases/order/:id", to: "purchases/orders#show", as: "purchase"
+    get "/purchases/order/:id/edit", to: "purchases/orders#edit", as: "edit_purchase"
+    get "/purchases/order/:id/history", to: "purchases/orders#history", as: "history_purchase"
+    post "/purchases/order", to: "purchases/orders#create", as: "purchases"
+    patch "/purchases/order/:id", to: "purchases/orders#update", as: "update_purchase"
+    patch "/purchases/order/:id/active", to: "purchases/orders#active", as: "active_purchase"
+    patch "/purchases/order/:id/deactive", to: "purchases/orders#deactive", as: "deactive_purchase"
     # End Purchases orders
 
     # Purchases details

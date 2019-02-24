@@ -43,44 +43,44 @@
               .col-xs-12.no-padding
                 .form-info
                   .form-group
-                    = f.text_field :first_name, class: "form-control input", placeholder: t("activerecord.attributes.customer.first_name"), required: true
+                    = f.text_field :first_name, class: "form-control input", required: true
                     %label
                       %b= t("activerecord.attributes.customer.first_name")
                     .border-bottom
 
                   .form-group
-                    = f.text_field :last_name, class: "form-control input", placeholder: t("activerecord.attributes.customer.last_name"), required: true
+                    = f.text_field :last_name, class: "form-control input", required: true
                     %label
                       %b= t("activerecord.attributes.customer.last_name")
                     .border-bottom
 
                   .form-group
-                    = f.text_field :company, class: "form-control input", placeholder: t("activerecord.attributes.customer.company")
+                    = f.text_field :company, class: "form-control input"
                     %label
                       %b= t("activerecord.attributes.customer.company")
                     .border-bottom
 
                   .form-group
-                    = f.email_field :email, class: "form-control input", placeholder: t("activerecord.attributes.customer.email"), required: true
+                    = f.email_field :email, class: "form-control input", required: true
                     %label
                       %b= t("activerecord.attributes.customer.email")
                     .border-bottom
 
                   .form-group
-                    -# < f.telephone_field :phone, class: "form-control input", "data-mask": "(000) 000-0000", placeholder: t("activerecord.attributes.customer.phone"), required: true >
-                    = f.telephone_field :phone, class: "form-control input", placeholder: t("activerecord.attributes.customer.phone"), required: true
+                    -# < f.telephone_field :phone, class: "form-control input", "data-mask": "(000) 000-0000", required: true >
+                    = f.telephone_field :phone, class: "form-control input", required: true
                     %label
                       %b= t("activerecord.attributes.customer.phone")
                     .border-bottom
 
                   .form-group
-                    = f.text_field :zipcode, class: "form-control input", placeholder: t("activerecord.attributes.customer.zipcode"), "data-mask": "00000", required: true
+                    = f.text_field :zipcode, class: "form-control input", "data-mask": "00000", required: true
                     %label
                       %b= t("activerecord.attributes.customer.zipcode")
                     .border-bottom
 
                   .form-group
-                    = f.text_area :address, class: "form-control input text-area",placeholder: t("activerecord.attributes.customer.address"), required: true
+                    = f.text_area :address, class: "form-control input text-area", required: true
                     %label
                       %b= t("activerecord.attributes.customer.address")
                     .border-bottom
@@ -99,13 +99,13 @@
                       -# End Email
 
                       .form-group
-                        = u.password_field :password, class: "form-control input", placeholder: t("activerecord.attributes.user.password"), required: true
+                        = u.password_field :password, class: "form-control input", required: true
                         %label
                           %b= t("activerecord.attributes.user.password")
                         .border-bottom
 
                       .form-group
-                        = u.password_field :password_confirmation, class: "form-control input", placeholder: t("activerecord.attributes.user.password_confirmation"), required: true
+                        = u.password_field :password_confirmation, class: "form-control input", required: true
                         %label
                           %b= t("activerecord.attributes.user.password_confirmation")
                         .border-bottom

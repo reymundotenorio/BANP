@@ -25,13 +25,13 @@
               .col-xs-12.no-padding
                 .form-info
                   .form-group
-                    = f.password_field :password, class: "form-control input", placeholder: t("activerecord.attributes.user.password"), required: true
+                    = f.password_field :password, class: "form-control input", required: true
                     %label
                       %b= t("activerecord.attributes.user.password")
                     .border-bottom
 
                   .form-group
-                    = f.password_field :password_confirmation, class: "form-control input", placeholder: t("activerecord.attributes.user.password_confirmation"), required: true
+                    = f.password_field :password_confirmation, class: "form-control input", required: true
                     %label
                       %b= t("activerecord.attributes.user.password_confirmation")
                     .border-bottom

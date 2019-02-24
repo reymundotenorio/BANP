@@ -20,7 +20,7 @@
                 .col-xs-12.no-padding
                   .form-info
                     .form-group
-                      = f.email_field :email, class: "form-control input", placeholder: t("activerecord.attributes.user.email"), required: true, autofocus: true, value: @email
+                      = f.email_field :email, class: "form-control input", required: true, autofocus: true, value: @email
                       %label
                         %b= t("activerecord.attributes.user.email")
                       .border-bottom

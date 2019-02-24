@@ -1,7 +1,7 @@
 -# Form
 = form_tag products_path, method: "get", autocomplete:"on" do
   .group
-    = text_field_tag :product, params[:product], placeholder: t("views.index.search"), class: "search-input"
+    = text_field_tag :product, params[:product], class: "search-input"
     %span.highlight
     %span.bar
     %label= t("views.landing.search_products")

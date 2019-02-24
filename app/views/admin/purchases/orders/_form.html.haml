@@ -19,7 +19,7 @@
                     = f.hidden_field :employee_id, value: 1, required: true # current_employee.id
 
                   .form-group.hidden
-                    = f.text_field :receipt_number, class: "form-control input", placeholder: t("activerecord.attributes.purchase.receipt_number")
+                    = f.text_field :receipt_number, class: "form-control input", required: true
                     %label
                       %b= t("activerecord.attributes.purchase.receipt_number")
                     .border-bottom
@@ -29,7 +29,7 @@
                     .form-group
                       .input-btn-group
                         = f.hidden_field :provider_id
-                        = f.text_field :provider, value: @order.provider_id.nil? ? "" : "#{@order.provider.name}", class: "form-control input no-events", placeholder: t("activerecord.attributes.product.provider"), required: true
+                        = f.text_field :provider, value: @order.provider_id.nil? ? "" : "#{@order.provider.name}", class: "form-control input no-events", required: true
                         %label
                           %b= t("activerecord.attributes.purchase.provider")
                         .border-bottom
@@ -39,7 +39,7 @@
 
                     .col-xs-12.col-md-4.container-left
                       .form-group
-                        = f.text_field :discount, class: "form-control input discount", placeholder: t("activerecord.attributes.purchase.discount")
+                        = f.text_field :discount, class: "form-control input discount"
                         %label
                           %b= "#{t('activerecord.attributes.purchase.discount')} %"
                         .border-bottom
@@ -47,7 +47,7 @@
                     .col-xs-12.col-md-8.container-right
                       .form-group
                         .input-group.date#datetimepicker
-                          = f.text_field :purchase_datetime, id: "purchase_datetime_picker", class: "form-control input date-field", placeholder: t("activerecord.attributes.purchase.purchase_datetime"), required: true
+                          = f.text_field :purchase_datetime, id: "purchase_datetime_picker", class: "form-control input date-field", required: true
                           %span.input-group-addon.btn.btn-general
                             %i.far.fa-calendar-alt
                           %label
@@ -57,14 +57,14 @@
                       = f.hidden_field :purchase_datetime, required: true
 
                     .form-group.hidden
-                      = f.text_field :status, class: "form-control input", placeholder: t("activerecord.attributes.purchase.status")
+                      = f.text_field :status, class: "form-control input"
                       %label
                         %b= t("activerecord.attributes.purchase.status")
                       .border-bottom
 
                   .col-xs-12.col-md-5.container-right
                     .form-group
-                      = f.text_area :observations, class: "form-control input text-area big",placeholder: t("activerecord.attributes.purchase.observations")
+                      = f.text_area :observations, class: "form-control input text-area big"
                       %label
                         %b= t("activerecord.attributes.purchase.observations")
                       .border-bottom

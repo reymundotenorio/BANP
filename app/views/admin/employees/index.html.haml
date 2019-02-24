@@ -44,7 +44,7 @@
                 -# Form
                 = form_tag admin_employees_path, method: "get", id: "search-form", autocomplete:"off", remote: true do
                   .input-group
-                    = text_field_tag :search, params[:search], id: "search-input", class: "form-control", placeholder: t("views.index.search")
+                    = text_field_tag :search, params[:search], id: "search-input", class: "form-control"
                     .border-bottom
 
                     %span.input-group-btn

@@ -20,13 +20,13 @@
                   -# End Email
 
                   .form-group
-                    = f.password_field :password, class: "form-control input", placeholder: t("activerecord.attributes.user.password"), required: @required
+                    = f.password_field :password, class: "form-control input", required: @required
                     %label
                       %b= t("activerecord.attributes.user.password")
                     .border-bottom
 
                   .form-group
-                    = f.password_field :password_confirmation, class: "form-control input", placeholder: t("activerecord.attributes.user.password_confirmation"), required: @required
+                    = f.password_field :password_confirmation, class: "form-control input", required: @required
                     %label
                       %b= t("activerecord.attributes.user.password_confirmation")
                     .border-bottom
