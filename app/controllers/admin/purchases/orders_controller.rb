@@ -48,7 +48,8 @@ class Admin::Purchases::OrdersController < ApplicationController
     @order.discount = 0
     @order.receipt_number = "N/A"
 
-    @search_form_path = admin_new_purchase_path(@order)
+    @search_form_path = admin_new_purchase_order_path(@order)
+    @form_url = admin_purchases_order_path
 
     @providers = Provider.search(params[:search_provider], "enabled-only").paginate(page: params[:providers_page], per_page: 5) # Providers with pagination
     @products = Product.search(params[:search_product], "enabled-only").paginate(page: params[:products_page], per_page: 5) # Products with pagination
@@ -66,6 +67,7 @@ class Admin::Purchases::OrdersController < ApplicationController
     @order.discount = "0#{@order.discount.to_s.gsub! '.', ''}" if @order.discount < 10
 
     @search_form_path = admin_edit_product_path(@order)
+    @form_url = admin_update_purchase_order_path
 
     @providers = Provider.search(params[:search_provider], "enabled-only").paginate(page: params[:providers_page], per_page: 5) # Providers with pagination
     @products = Product.search(params[:search_product], "enabled-only").paginate(page: params[:products_page], per_page: 5) # Products with pagination

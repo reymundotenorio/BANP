@@ -1,5 +1,5 @@
 -# Form
-= form_for [:admin, @order], html: {autocomplete: "off", multipart: true} do |f|
+= form_for @order, url: @form_url, html: {autocomplete: "off", multipart: true} do |f|
   %section.form
     .container
       .row
