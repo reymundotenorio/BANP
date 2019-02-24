@@ -31,7 +31,7 @@
           %i.fas.fa-plus
 
   %td.align-middle.total-container
-    %p.record-link.detail-total{"data-header": "Total"}
+    %p.record-link.detail-total{"data-header": "Total", id:"purchase_purchase_details_attributes_#{@details_counter}_total"}
       = number_to_currency((f.object.price * f.object.quantity), precision: 2, unit: "$", format: "%u%n", separator: ".", delimiter: ",") if !f.object.new_record?
 
   %td.align-middle

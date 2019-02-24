@@ -84,9 +84,15 @@
 
                           -# Render table header
                           = render partial: "partials/table_header_details", locals: {model: model, attributes: attributes}
+
                         %tbody#purchase_details
+                          -# Set counter
+                          - @details_counter = 0
+
                           = f.fields_for :purchase_details do |detail|
                             = render "purchase_detail_fields", f: detail
+                            -# Increse couter
+                            - @details_counter += 1
                     -# End Table
 
                   -# Buttons
