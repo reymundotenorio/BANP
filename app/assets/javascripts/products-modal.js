@@ -108,11 +108,12 @@ $(document).ready(function(){
   function updateTotal(){
     var totalDetails = 0;
     var discount = 0;
-    // Datetime
+    // Detail total
     $(".detail-total").each(function(){
       // If not empty
       if($(this).text() != ""){
         total = $(this).text().replace("$", "");
+        total = total.replace(",", "");
         totalDetails +=  parseFloat(total);
       }
     });
@@ -203,6 +204,8 @@ $(document).ready(function(){
           product_total.text(formatter.format(total));
         }
       }
+
+      updateTotal()
     });
     // End Validate numbers on quantity input on details
   }
@@ -270,7 +273,11 @@ $(document).ready(function(){
   // End Replacing prices
 
   // Fixing prices
-  $("#new_purchase").submit(function(e) {
+  $(".new_purchase").submit(function(e) {
+    replacePrices();
+  });
+
+  $(".edit_purchase").submit(function(e) {
     replacePrices();
   });
   // Fixing prices

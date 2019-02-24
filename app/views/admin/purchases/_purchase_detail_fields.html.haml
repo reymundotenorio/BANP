@@ -1,39 +1,41 @@
-%tr.nested-fields
-  %td.hidden
-    = f.hidden_field :product_id
+- if f.object.status == "ordered"
 
-  %td.hidden
-    = f.hidden_field :status
+  %tr.nested-fields
+    %td.hidden
+      = f.hidden_field :product_id
 
-  %td
-    %p.record-link{"data-header": "Nombre"}
-      - if f.object.new_record?
-        = f.text_field :product, class: "input-disabled"
-      - else
-        = f.text_field :product, class: "input-disabled", value: I18n.locale == :es ? f.object.product.name_spanish : f.object.product.name
+    %td.hidden
+      = f.hidden_field :status
 
-  %td.price-container.price-row.align-middle
-    %p.record-link{"data-header": "Precio"}
-      - if f.object.new_record?
-        = f.text_field :price, class: "input-disabled no-padding price-details"
-      - else
-        = f.text_field :price, class: "input-disabled no-padding price-details", "data-price": f.object.price, value: number_to_currency(f.object.price, precision: 2, unit: "$", format: "%u%n", separator: ".", delimiter: ",")
+    %td
+      %p.record-link{"data-header": "Nombre"}
+        - if f.object.new_record?
+          = f.text_field :product, class: "input-disabled"
+        - else
+          = f.text_field :product, class: "input-disabled", value: I18n.locale == :es ? f.object.product.name_spanish : f.object.product.name
 
-  %td.quantity-container.align-middle
-    .form-group.no-padding.record-link{"data-header": "Cantidad"}
-      .quantity
-        %button.subtract{name: "minus", type: "button"}
-          %i.fas.fa-minus
+    %td.price-container.price-row.align-middle
+      %p.record-link{"data-header": "Precio"}
+        - if f.object.new_record?
+          = f.text_field :price, class: "input-disabled no-padding price-details"
+        - else
+          = f.text_field :price, class: "input-disabled no-padding price-details", "data-price": f.object.price, value: number_to_currency(f.object.price, precision: 2, unit: "$", format: "%u%n", separator: ".", delimiter: ",")
 
-        = f.number_field :quantity, class: "q-input details", min: "1", step: "1"
+    %td.quantity-container.align-middle
+      .form-group.no-padding.record-link{"data-header": "Cantidad"}
+        .quantity
+          %button.subtract{name: "minus", type: "button"}
+            %i.fas.fa-minus
 
-        %button.add{name: "plus", type: "button"}
-          %i.fas.fa-plus
+          = f.number_field :quantity, class: "q-input details", min: "1", step: "1"
 
-  %td.align-middle.total-container
-    %p.record-link.detail-total{"data-header": "Total", id:"purchase_purchase_details_attributes_#{@details_counter}_total"}
-      = number_to_currency((f.object.price * f.object.quantity), precision: 2, unit: "$", format: "%u%n", separator: ".", delimiter: ",") if !f.object.new_record?
+          %button.add{name: "plus", type: "button"}
+            %i.fas.fa-plus
 
-  %td.align-middle
-    = link_to_remove_association f, class: "btn btn-general" do
-      %i.fas.fa-trash-alt
+    %td.align-middle.total-container
+      %p.record-link.detail-total{"data-header": "Total", id:"purchase_purchase_details_attributes_#{@details_counter}_total"}
+        = number_to_currency((f.object.price * f.object.quantity), precision: 2, unit: "$", format: "%u%n", separator: ".", delimiter: ",") if !f.object.new_record?
+
+    %td.align-middle
+      = link_to_remove_association f, class: "btn btn-general" do
+        %i.fas.fa-trash-alt
