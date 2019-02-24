@@ -62,6 +62,20 @@ module ApplicationHelper
     elsif attribute == "price"
       number_to_currency(info, precision: 2, unit: "$", format: "%u%n", separator: ".", delimiter: ",")
 
+    elsif attribute == "status"
+      if info == "ordered"
+        I18n.locale == :es ? "Ordenado" : "Ordered"
+
+      elsif info == "received"
+        I18n.locale == :es ? "Recibido" : "Received"
+
+      elsif info == "returned"
+        I18n.locale == :es ? "Devuelto" : "Returned"
+
+      else
+        #code
+      end
+
     else
       info
     end

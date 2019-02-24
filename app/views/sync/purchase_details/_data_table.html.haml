@@ -1,9 +1,10 @@
 %tr{class: "clickable-row #{purchase_detail.status.downcase}"}
   -# Set attributes
-  - attributes = ["product", "price", "quantity", "total", "status"]
+  -# - attributes = ["product", "price", "quantity", "total", "status"]
+  - attributes = ["product", "price", "quantity", "total"]
 
   %td
-    = link_to "#", class: "record-link", "data-header": "No." do
+    .record-link{"data-header": "No."}
       %p= purchase_detail.id
 
   - attributes.each do |attribute|
