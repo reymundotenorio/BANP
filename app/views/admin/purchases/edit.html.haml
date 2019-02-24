@@ -13,9 +13,9 @@
       .col-xs-12.col-sm-8.col-lg-4.text-right
         -# Provider button
         .btn-container
-          = link_to (admin_provider_path(@order)), class: "btn btn-general" do
+          = link_to (admin_purchase_details_path(@order.id)), class: "btn btn-general" do
             %i.fas.fa-id-card
-            %span= t("activerecord.models.provider")
+            %span= t("purchase.order_details")
         -# End Provider button
     -# End Title
 

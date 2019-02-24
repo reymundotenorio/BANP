@@ -1,9 +1,9 @@
 class ChartsController < ApplicationController
 
-  def product_by_categories
+  def products_by_categories
     category_name = I18n.locale == :es ? "categories.name_spanish" : "categories.name"
 
-    render json: Product.joins(:category).group(category_name).count
+    render json: Product.joins(:category).group(category_name).order("COUNT(categories.id) DESC").count
     # render json: Product.group(:name).count
   end
 

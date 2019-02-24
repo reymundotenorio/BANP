@@ -1,10 +1,10 @@
-%h2 Compras por mes
+%h2 Compras últimos 12 meses
 = line_chart charts_purchases_by_month_path, defer: true, curve: true, xtitle: "Month", ytitle: "Dollars", prefix: "$", thousands: ",", decimal: ".", messages: {empty: "No data"}, discrete: true
 %br
 
-%h2 Compras por mes
-= area_chart charts_purchases_by_month_path, defer: true, curve: true, xtitle: "Month", ytitle: "Dollars", prefix: "$", thousands: ",", decimal: ".", messages: {empty: "No data"}
-%br
+-# %h2 Compras por mes
+-# = area_chart charts_purchases_by_month_path, defer: true, curve: true, xtitle: "Month", ytitle: "Dollars", prefix: "$", thousands: ",", decimal: ".", messages: {empty: "No data"}
+-# %br
 
 %h2 Compras por proveedor
 = column_chart charts_purchases_by_providers_path, defer: true, prefix: "$", thousands: ",", decimal: ".", messages: {empty: "No information"}, stacked: false
@@ -14,7 +14,7 @@
 = column_chart charts_purchases_by_employees_path, defer: true, prefix: "$", thousands: ",", decimal: ".", messages: {empty: "No information"}, stacked: false
 %br
 
-%h2 Compras por product
+%h2 Compras por producto
 = column_chart charts_purchases_by_products_path, defer: true, prefix: "$", thousands: ",", decimal: ".", messages: {empty: "No information"}, stacked: false
 %br
 
@@ -23,5 +23,9 @@
 %br
 
 %h2 Productos por categoria
-= pie_chart charts_product_by_categories_path, defer: true,  donut: true
+= column_chart charts_products_by_categories_path, defer: true, messages: {empty: "No information"}, stacked: false
 %br
+
+-# %h2 Productos por categoria
+-# = pie_chart charts_product_by_categories_path, defer: true,  donut: true
+-# %br
