@@ -8,7 +8,7 @@
 
   - attributes.each do |attribute|
     %td
-      = link_to "#", class: "record-link", "data-header": t("activerecord.attributes.purchase_detail.#{attribute}") do
+      .record-link{"data-header": t("activerecord.attributes.purchase_detail.#{attribute}")}
         - if attribute == "product"
           -# Product name render_sync
           = sync partial: "data_table_product_name", resource: purchase_detail.product

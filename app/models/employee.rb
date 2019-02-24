@@ -11,9 +11,8 @@ class Employee < ApplicationRecord
 
   # Render sync
   sync :all
-  # sync_touch :purchases
   # End Render sync
-
+  
   # Execute after record is saved on the Database
   after_save :update_user_email
 

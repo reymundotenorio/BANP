@@ -135,6 +135,11 @@ en:
         state: "State"
         total_purchase: "Total"
         total: "Total"
+        provider_id: "Provider"
+        product_id: "Product"
+        purchase_id: "No. Purchase"
+        quantity: "Quantity"
+        price: "Price"
       purchase_detail:
         product: "Product"
         price: "Price"

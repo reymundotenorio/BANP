@@ -10,12 +10,12 @@ class Purchase < ApplicationRecord
   # End Nested attributes
 
   # Audit
+  has_associated_audits
   audited
-  audited associated_with: :purchase_details
   # End Audit
 
   # Render sync
-  # sync :all
+  sync :all
   # sync_touch :purchase_details
   # End Render sync
 

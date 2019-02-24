@@ -9,7 +9,6 @@ class Provider < ApplicationRecord
 
   # Render sync
   sync :all
-  # sync_touch :purchases
   # End Render sync
 
   # Search

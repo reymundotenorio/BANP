@@ -9,7 +9,6 @@ class Category < ApplicationRecord
 
   # Render sync
   sync :all
-  # sync_touch :products
   # End Render sync
 
   # Search

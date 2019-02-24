@@ -78,6 +78,14 @@ class Admin::Purchases::OrdersController < ApplicationController
     end
   end
 
+  # admin/purchases/order/:id/history
+  def history
+    # Employee found by before_action
+
+    @history = @order.associated_audits
+    @history.push(@order.audits)
+  end
+
   # Create
   def create
     @order = Purchase.new(purchase_order_params)

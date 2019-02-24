@@ -7,11 +7,11 @@ class Sale < ApplicationRecord
 
   # Audit
   audited
-  audited associated_with: :sale_details
+  has_associated_auditss
   # End Audit
 
   # Render sync
-  # sync :all
+  sync :all
   # sync_touch :sale_details
   # End Render sync
 

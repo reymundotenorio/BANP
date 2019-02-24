@@ -44,8 +44,23 @@ module ApplicationHelper
       end
 
       # If attribute is datetime
-    elsif attribute == "current_sign_in_at" || attribute == "last_sign_in_at"
+    elsif attribute == "current_sign_in_at" || attribute == "last_sign_in_at" || attribute == "purchase_datetime"
       format_datetime(info)
+
+    elsif attribute == "discount"
+      "#{info / 100}%"
+
+    elsif attribute == "provider_id"
+      Provider.find(info).name
+
+    elsif attribute == "product_id"
+      I18n.locale == :es ? Product.find(info).name_spanish : Product.find(info).name
+
+    elsif attribute == "category_id"
+      I18n.locale == :es ? Category.find(info).name_spanish : Category.find(info).name
+
+    elsif attribute == "price"
+      number_to_currency(info, precision: 2, unit: "$", format: "%u%n", separator: ".", delimiter: ",")
 
     else
       info

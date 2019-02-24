@@ -136,6 +136,11 @@ es:
         state: "Estado"
         total_purchase: "Total"
         total: "Total"
+        provider_id: "Proveedor"
+        product_id: "Producto"
+        purchase_id: "No. Compra"
+        quantity: "Cantidad"
+        price: "Precio"
       purchase_detail:
         product: "Producto"
         price: "Precio"
