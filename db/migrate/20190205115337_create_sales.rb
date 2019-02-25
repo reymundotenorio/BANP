@@ -8,7 +8,7 @@ class CreateSales < ActiveRecord::Migration[5.2]
       t.string :observations
       t.boolean :state, null: false, default: true
 
-      t.string :slug # Friendly_id slug
+      # t.string :slug # Friendly_id slug
       t.timestamps # create_at & update_at
     end
 
@@ -18,4 +18,3 @@ class CreateSales < ActiveRecord::Migration[5.2]
     add_index :sales, :slug, unique: true
   end
 end
- 

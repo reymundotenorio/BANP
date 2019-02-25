@@ -8,7 +8,7 @@ class CreatePurchases < ActiveRecord::Migration[5.2]
       t.string :observations
       t.boolean :state, null: false, default: true
 
-      t.string :slug # Friendly_id slug
+      # t.string :slug # Friendly_id slug
       t.timestamps # create_at & update_at
     end
 
@@ -17,4 +17,4 @@ class CreatePurchases < ActiveRecord::Migration[5.2]
 
     add_index :purchases, :slug, unique: true
   end
-end 
+end

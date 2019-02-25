@@ -44,7 +44,6 @@ class Admin::Purchases::ReceptionsController < ApplicationController
 
   # admin/purchases/reception/new
   def new
-    # @reception = Purchase.new
     @search_form_path = admin_new_purchase_reception_path(@reception)
     @form_url = admin_purchases_reception_path
 
@@ -172,7 +171,7 @@ class Admin::Purchases::ReceptionsController < ApplicationController
     @reception = Purchase.find(params[:id])
 
   rescue
-    # redirect_to admin_purchase_receptions_path, alert: t("alerts.not_found", model: t("purchase.reception"))
+    redirect_to admin_purchase_receptions_path, alert: t("alerts.not_found", model: t("purchase.reception"))
   end
 
   def purchase_reception_params

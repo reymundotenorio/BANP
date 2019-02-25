@@ -27,15 +27,15 @@
                   .col-xs-12.col-md-7.container-left
 
                     .form-group
-                      .input-btn-group
-                        = f.hidden_field :provider_id
-                        = f.text_field :provider, value: @reception.provider_id.nil? ? "" : "#{@reception.provider.name}", class: "form-control input no-events", required: true
-                        %label
-                          %b= t("activerecord.attributes.purchase.provider")
-                        .border-bottom
+                      -# .input-btn-group
+                      %p.form-control.input.no-events.with-value.no-margin= @reception.provider.name
+                      = f.hidden_field :provider_id, class: "form-control input"
+                      %label
+                        %b= t("activerecord.attributes.purchase.provider")
+                      .border-bottom
 
-                        = link_to "", class: "btn btn-general", "data-toggle": "modal", "data-target": "#getProviders" do
-                          %i.fas.fa-search
+                        -# = link_to "", class: "btn btn-general", "data-toggle": "modal", "data-target": "#getProviders" do
+                        -#   %i.fas.fa-search
 
                     .col-xs-12.col-md-4.container-left
                       .form-group
@@ -170,5 +170,5 @@
         -# End Render products list
 
 -# Products modals script
-= javascript_include_tag "products-modal", "data-turbolinks-track": "reload"
+=# javascript_include_tag "products-modal", "data-turbolinks-track": "reload"
 -# End Products modals script

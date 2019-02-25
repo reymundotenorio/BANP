@@ -104,21 +104,21 @@ class PurchaseDetail < ApplicationRecord
   end
   # End Search
 
-  extend FriendlyId
-  friendly_id :slug_candidates, use: :slugged
-
-  # Friendly_ID slug_candidates
-  def slug_candidates
-    [
-      [:purchase_id, :id]
-    ]
-  end
-
-  # Update Friendly_ID slug
-  def should_generate_new_friendly_id?
-    slug.blank? || purchase_id_changed?
-  end
-  # End Update Friendly_ID slug
+  # extend FriendlyId
+  # friendly_id :slug_candidates, use: :slugged
+  #
+  # # Friendly_ID slug_candidates
+  # def slug_candidates
+  #   [
+  #     [:purchase_id, :id]
+  #   ]
+  # end
+  #
+  # # Update Friendly_ID slug
+  # def should_generate_new_friendly_id?
+  #   slug.blank? || purchase_id_changed?
+  # end
+  # # End Update Friendly_ID slug
 
   # Presence validation
   # validates :purchase_id, presence: true

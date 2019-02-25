@@ -53,24 +53,22 @@ class Purchase < ApplicationRecord
   end
   # End Total
 
-  extend FriendlyId
-  friendly_id :slug_candidates, use: :slugged
-
-  # Friendly_ID slug_candidates
-  def slug_candidates
-    [
-      [:receipt_number],
-      [:receipt_number, :id]
-    ]
-  end
-
-  # Update Friendly_ID slug
-  def should_generate_new_friendly_id?
-    slug.blank? || receipt_number_changed?
-  end
-  # End Update Friendly_ID slug
-
-  ## End Friendly_ID
+  # extend FriendlyId
+  # friendly_id :slug_candidates, use: :slugged
+  #
+  # # Friendly_ID slug_candidates
+  # def slug_candidates
+  #   [
+  #     [:receipt_number],
+  #     [:receipt_number, :id]
+  #   ]
+  # end
+  #
+  # # Update Friendly_ID slug
+  # def should_generate_new_friendly_id?
+  #   slug.blank? || receipt_number_changed?
+  # end
+  # # End Update Friendly_ID slug
 
   # Presence validation
   validates :receipt_number, presence: true

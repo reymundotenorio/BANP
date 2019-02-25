@@ -174,7 +174,7 @@ class Admin::Purchases::OrdersController < ApplicationController
 
   # Set Purchase
   def set_purchase_order
-    @order = Purchase.friendly.find(params[:id])
+    @order = Purchase.find(params[:id])
 
   rescue
     redirect_to admin_purchase_orders_path, alert: t("alerts.not_found", model: t("purchase.order"))
