@@ -19,7 +19,9 @@ class PurchaseDetail < ApplicationRecord
   # before_destroy :not_permit_destroy
 
   # After save and update
-  after_save :update_stock #, on: [ :create, :update ]
+  # after_create :update_stock_create #, on: [ :create, :update ]
+  before_update :update_stock_update #, on: [ :create, :update ]
+
 
   # Before_destroy callback, avoid destroy information
   # def not_permit_destroy
@@ -27,7 +29,7 @@ class PurchaseDetail < ApplicationRecord
   # end
 
   # Update product stock
-  def update_stock
+  def update_stock_create
     product = Product.find(self.product_id) || nil
 
     # If product has been found
@@ -59,6 +61,85 @@ class PurchaseDetail < ApplicationRecord
       # End If purchase is active
     end
   end
+  # End Update product stock
+
+  # Update product stock
+  def update_stock_update
+    product = Product.find(self.product_id) || nil
+
+    # If product has been found
+    if product
+      # If purchase is active
+      if self.purchase.state
+        # If purchase is a reception
+        if self.purchase.status == "received"
+          # If purchase details has been returned
+          if self.status == "returned"
+            # If the stock is less than the quantity to return
+            if product.stock < self.quantity
+              self.errors.add(:quantity, "Cantidad no debe ser mayor a stock #{product.stock}")
+              return
+
+              # If the stock is greater or equal than the quantity to return
+            else
+              product.stock = product.stock - self.quantity
+            end
+
+            # If purchase details has been received
+          else
+            # If is a order that is being received
+            puts "STATUS"
+            puts "ERA: #{self.purchase.status}"
+            puts "ES: #{self.purchase.status_was}"
+            puts "**********************************************"
+
+            if saved_change_to_status?(from: "ordered", to: "received")
+              puts "ENTRO EN SAVED CHANGE"
+            end
+
+            if self.purchase.status == "received" && self.purchase.status_was == "ordered"
+              puts "ENTRO EN #{1}"
+              puts "ERA: #{product.stock}"
+              puts "ES: #{product.stock + self.quantity}"
+              puts "**********************************************"
+
+              product.stock = product.stock + self.quantity
+              # If is a reception
+            else
+              # If the previous quantity is more than the new quantity
+              if self.quantity_was > self.quantity
+                # If the stock is less than the new quantity
+                if product.stock < self.quantity
+                  self.errors.add(:quantity, "Cantidad no debe ser mayor a stock #{product.stock}")
+                  return
+
+                  # If the stock is more than the new quantity
+                else
+                  product.stock = product.stock - self.quantity_was + self.quantity
+                end
+
+                # If the previous quantity is less or equal than the new quantity
+              else
+                product.stock = product.stock - self.quantity_was + self.quantity
+              end
+            end
+          end
+
+          # Trigger saving successfully
+          if product.save
+            puts "Product stock UPDATED"
+
+            # Trigger saving failed
+          else
+            puts "Product stock NOT UPDATED"
+          end
+        end
+        # End If purchase is a reception
+      end
+      # End If purchase is active
+    end
+  end
+  # End Update product stock
 
   ## End Callbacks
 
