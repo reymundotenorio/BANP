@@ -65,16 +65,30 @@ class PurchaseDetail < ApplicationRecord
   # Search orders
   def self.search_orders(purchase_id, search, show_all)
     if search
-      self.joins(:purchase).joins(:product).where("(products.name LIKE :search OR products.name_spanish LIKE :search OR purchase_details.status LIKE :search) AND (purchase_details.purchase_id = :purchase_id)", purchase_id: purchase_id, search: "%#{search}%").not_returned
+      self.joins(:purchase).joins(:product).where("(products.name LIKE :search OR products.name_spanish LIKE :search) AND (purchase_details.purchase_id = :purchase_id)", purchase_id: purchase_id, search: "%#{search}%").ordered.not_returned
 
     elsif show_all == "all"
-      self.where("purchase_id = :purchase_id", purchase_id: purchase_id).not_returned
+      self.where("purchase_id = :purchase_id", purchase_id: purchase_id).ordered.not_returned
 
     else
-      self.where("purchase_id = :purchase_id", purchase_id: purchase_id).not_returned
+      self.where("purchase_id = :purchase_id", purchase_id: purchase_id).ordered.not_returned
     end
   end
   # End Search orders
+
+  # Search receptions
+  def self.search_receptions(purchase_id, search, show_all)
+    if search
+      self.joins(:purchase).joins(:product).where("(products.name LIKE :search OR products.name_spanish LIKE :search) AND (purchase_details.purchase_id = :purchase_id)", purchase_id: purchase_id, search: "%#{search}%").received.not_returned
+
+    elsif show_all == "all"
+      self.where("purchase_id = :purchase_id", purchase_id: purchase_id).received.not_returned
+
+    else
+      self.where("purchase_id = :purchase_id", purchase_id: purchase_id).received.not_returned
+    end
+  end
+  # End Search receptions
 
   # Search
   def self.search(purchase_id, search, show_all)
@@ -120,6 +134,8 @@ class PurchaseDetail < ApplicationRecord
   ## Scopes
   scope :not_returned, -> { where("(purchase_details.status != 'returned')") }
   scope :returned, -> { where("(purchase_details.status = 'returned')") }
+  scope :ordered, -> { where("(purchase_details.status = 'ordered')") }
+  scope :received, -> { where("(purchase_details.status = 'received')") }
   ## End Scopes
 
 end

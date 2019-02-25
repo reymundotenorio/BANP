@@ -1,11 +1,11 @@
-- if f.object.status == "ordered"
+- if f.object.status != "returned"
 
   %tr.nested-fields
     %td.hidden
       = f.hidden_field :product_id
 
     %td.hidden
-      = f.hidden_field :status
+      = f.hidden_field :status, value: "ordered"
 
     %td.name-container
       %p.record-link{"data-header": "Nombre"}

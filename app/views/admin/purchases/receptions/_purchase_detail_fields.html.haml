@@ -1,11 +1,11 @@
-- if f.object.status == "received"
+- if f.object.status != "returned"
 
   %tr.nested-fields
     %td.hidden
       = f.hidden_field :product_id
 
     %td.hidden
-      = f.hidden_field :status
+      = f.hidden_field :status, value: "received"
 
     %td.name-container
       %p.record-link{"data-header": "Nombre"}

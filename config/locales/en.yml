@@ -164,6 +164,7 @@ en:
     reception_detail: "Purchase reception detail"
     reception_details: "Purchase reception details"
     show_receptions: "Show purchase receptions"
+    receive_purchase_order: "Receive purchase order"
 
   # Will paginate
   will_paginate:

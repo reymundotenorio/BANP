@@ -3,25 +3,25 @@
   .container
     -# Title
     .row.title-container
-      .col-xs-12.col-lg-9
+      .col-xs-12.col-lg-8
         -# Heading
         %h1#count-title
           -# Render count title
           = render "count_title"
           -# End Heading
 
-      .col-xs-12.col-lg-3.text-right
+      .col-xs-12.col-lg-4.text-right
         -# Show purchase button
         .btn-container.inline
           - if @is_reception
             = link_to (admin_purchase_receptions_path), class: "btn btn-general" do
-              %i.fa.fa-list-alt
+              %i.fas.fa-list-alt
               %span= t("purchase.show_receptions")
 
           - else
-            = link_to (admin_purchase_orders_path), class: "btn btn-general" do
-              %i.fa.fa-list-alt
-              %span= t("purchase.show_orders")
+            = link_to (admin_new_purchase_reception_path(@purchase.id)), class: "btn btn-general" do
+              %i.fas.fa-check
+              %span= t("purchase.receive_purchase_order")
         -# End Show purchase button
     -# End Title
 
@@ -55,7 +55,7 @@
             .col-xs-12.col-md-6.no-padding
               #search-record.search-record
                 -# Form
-                = form_tag admin_purchase_details_path(@purchase), method: "get", id: "search-form", autocomplete:"off", remote: true do
+                = form_tag admin_purchase_details_path(@purchase.id), method: "get", id: "search-form", autocomplete:"off", remote: true do
                   .input-group
                     = text_field_tag :search, params[:search], id: "search-input", class: "form-control"
                     .border-bottom
@@ -74,7 +74,7 @@
 
               -# Export button
               .btn-container
-                = link_to (admin_purchase_details_path(@purchase, format: "pdf", lang: I18n.locale)), target: "_blank", class: "btn btn-general btn-default" do
+                = link_to (admin_purchase_details_path(@purchase.id, format: "pdf", lang: I18n.locale)), target: "_blank", class: "btn btn-general btn-default" do
                   %i.fas.fa-download
                   %span= t("views.index.export")
               -# End Export button

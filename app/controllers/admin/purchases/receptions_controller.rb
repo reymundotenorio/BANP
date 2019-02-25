@@ -4,11 +4,11 @@ class Admin::Purchases::ReceptionsController < ApplicationController
   # End Admin layout
 
   # Find purchase reception with Friendly_ID
-  before_action :set_purchase_reception, only: [:show, :edit, :update, :active, :deactive, :history]
+  before_action :set_purchase_reception, only: [:new, :show, :edit, :create, :update, :active, :deactive, :history]
   # End Find purchase reception with Friendly_ID
 
   # Sync model DSL
-  enable_sync only: [:create, :update, :active, :deactive]
+  enable_sync only: [:receive_order, :update, :active, :deactive]
   # End Sync model DSL
 
   # Authentication
@@ -44,8 +44,7 @@ class Admin::Purchases::ReceptionsController < ApplicationController
 
   # admin/purchases/reception/new
   def new
-    @reception = Purchase.new
-
+    # @reception = Purchase.new
     @search_form_path = admin_new_purchase_reception_path(@reception)
     @form_url = admin_purchases_reception_path
 
@@ -86,8 +85,6 @@ class Admin::Purchases::ReceptionsController < ApplicationController
 
   # Create
   def create
-    @reception = Purchase.new(purchase_reception_params)
-
     # Deleting blank spaces
     @reception[:receipt_number]= @reception[:receipt_number].strip
     @reception[:status] = @reception[:status].strip
@@ -107,8 +104,8 @@ class Admin::Purchases::ReceptionsController < ApplicationController
     end
 
     # If record was saved
-    if @reception.save
-      redirect_to admin_purchase_details_path(@reception.id), notice: t("alerts.created", model: t("purchase.reception"))
+    if @reception.update(purchase_reception_params)
+      redirect_to admin_purchase_details_path(@reception.id), notice: t("alerts.updated", model: t("purchase.reception")) # Received
 
       # If record was not saved
     else
@@ -120,11 +117,9 @@ class Admin::Purchases::ReceptionsController < ApplicationController
 
   # Update
   def update
-    updated_params = purchase_reception_params
-
     # Deleting blank spaces
     @reception[:receipt_number]= @reception[:receipt_number].strip
-    @reception[:status] = @reception[:status].strip
+    @reception[:status] = "received"
     @reception[:observations] = @reception[:observations].strip
     # End Deleting blank spaces
 
@@ -140,7 +135,7 @@ class Admin::Purchases::ReceptionsController < ApplicationController
       end
     end
 
-    if @reception.update(updated_params)
+    if @reception.update(purchase_reception_params)
       redirect_to admin_purchase_details_path(@reception.id), notice: t("alerts.updated", model: t("purchase.reception"))
 
     else
@@ -174,10 +169,10 @@ class Admin::Purchases::ReceptionsController < ApplicationController
 
   # Set Purchase
   def set_purchase_reception
-    @reception = Purchase.friendly.find(params[:id])
-    
+    @reception = Purchase.find(params[:id])
+
   rescue
-    redirect_to admin_purchase_receptions_path, alert: t("alerts.not_found", model: t("purchase.reception"))
+    # redirect_to admin_purchase_receptions_path, alert: t("alerts.not_found", model: t("purchase.reception"))
   end
 
   def purchase_reception_params

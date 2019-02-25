@@ -10,7 +10,7 @@
           = t("views.edit.edit")
         -# End Heading
 
-      .col-xs-12.col-sm-8.col-lg-4.text-right
+      .col-xs-12.col-sm-8.col-lg-4
         -# Provider button
         .btn-container
           = link_to (admin_purchase_details_path(@reception.id)), class: "btn btn-general" do
@@ -34,7 +34,7 @@
                 %span= t("purchase.receptions")
             %li
               = link_to (admin_purchase_details_path(@reception.id)) do
-                %i.fa.fa-list-alt
+                %i.fas.fa-list-alt
                 = "#{t('purchase.reception_details')} ##{@reception.id}"
             %li.active
               %i.fas.fa-edit

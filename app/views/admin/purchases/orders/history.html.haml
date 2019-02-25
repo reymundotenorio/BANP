@@ -34,7 +34,7 @@
                 %span= t("purchase.orders")
             %li
               = link_to (admin_purchase_details_path(@order.id)) do
-                %i.fa.fa-list-alt
+                %i.fas.fa-list-alt
                 = "#{t('purchase.order_details')} ##{@order.id}"
             %li.active
               %i.fas.fa-history

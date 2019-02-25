@@ -17,7 +17,7 @@ class Admin::PurchaseDetailsController < ApplicationController
 
   def show
     begin
-      @purchase = Purchase.friendly.find(params[:id])
+      @purchase = Purchase.find(params[:id])
 
     rescue
       redirect_to admin_root_path, alert: t("alerts.not_found", model: t("activerecord.models.purchase"))
@@ -26,7 +26,9 @@ class Admin::PurchaseDetailsController < ApplicationController
 
     @is_reception = @purchase.status == "received" ? true : false
 
-    @details = PurchaseDetail.search_orders(@purchase.id, params[:search], params[:show]).paginate(page: params[:page], per_page: 15) # Orders with pagination
+    @details = @is_reception ? PurchaseDetail.search_receptions(@purchase.id, params[:search], params[:show]).paginate(page: params[:page], per_page: 15) : PurchaseDetail.search_orders(@purchase.id, params[:search], params[:show]).paginate(page: params[:page], per_page: 15) # Details with pagination
+
+
     @show_all = params[:show] == "all" ? true : false # View All (Enabled and Disabled)
     @count = @details.count
 
@@ -39,7 +41,7 @@ class Admin::PurchaseDetailsController < ApplicationController
 
     name_pdf = "purchase-details-#{file_time}"
     template = "admin/purchase_details/show_pdf.html.haml"
-    title_pdf = "#{t('purchase.order_details')} ##{@purchase.id}"
+    title_pdf =   @is_reception ? "#{t('purchase.reception_details')} ##{@purchase.id}" : "#{t('purchase.order_details')} ##{@purchase.id}"
     # End PDF view configuration
 
     respond_to do |format|

@@ -85,7 +85,7 @@
                           -# Render table header
                           = render partial: "partials/table_header_details", locals: {model: model, attributes: attributes}
 
-                        %tbody#purchase_details
+                        %tbody#purchase_details.order_details
                           -# Set counter
                           - @details_counter = 0
 

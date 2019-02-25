@@ -18,7 +18,7 @@
                   .form-group.hidden
                     = f.hidden_field :employee_id, value: 1, required: true # current_employee.id
 
-                  .form-group.hidden
+                  .form-group
                     = f.text_field :receipt_number, class: "form-control input", required: true
                     %label
                       %b= t("activerecord.attributes.purchase.receipt_number")
@@ -57,7 +57,7 @@
                       = f.hidden_field :purchase_datetime
 
                     .form-group.hidden
-                      = f.text_field :status, class: "form-control input"
+                      = f.text_field :status, value: "received", class: "form-control input"
                       %label
                         %b= t("activerecord.attributes.purchase.status")
                       .border-bottom
@@ -85,7 +85,7 @@
                           -# Render table header
                           = render partial: "partials/table_header_details", locals: {model: model, attributes: attributes}
 
-                        %tbody#purchase_details
+                        %tbody#purchase_details.reception_details
                           -# Set counter
                           - @details_counter = 0
 

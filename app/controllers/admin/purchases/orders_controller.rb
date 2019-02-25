@@ -92,7 +92,7 @@ class Admin::Purchases::OrdersController < ApplicationController
 
     # Deleting blank spaces
     @order[:receipt_number]= @order[:receipt_number].strip
-    @order[:status] = @order[:status].strip
+    @order[:status] = "ordered"
     @order[:observations] = @order[:observations].strip
     # End Deleting blank spaces
 
@@ -122,11 +122,9 @@ class Admin::Purchases::OrdersController < ApplicationController
 
   # Update
   def update
-    updated_params = purchase_order_params
-
     # Deleting blank spaces
     @order[:receipt_number]= @order[:receipt_number].strip
-    @order[:status] = @order[:status].strip
+    @order[:status] = "ordered"
     @order[:observations] = @order[:observations].strip
     # End Deleting blank spaces
 
@@ -142,7 +140,7 @@ class Admin::Purchases::OrdersController < ApplicationController
       end
     end
 
-    if @order.update(updated_params)
+    if @order.update(purchase_order_params)
       redirect_to admin_purchase_details_path(@order.id), notice: t("alerts.updated", model: t("purchase.order"))
 
     else
@@ -177,7 +175,7 @@ class Admin::Purchases::OrdersController < ApplicationController
   # Set Purchase
   def set_purchase_order
     @order = Purchase.friendly.find(params[:id])
-    
+
   rescue
     redirect_to admin_purchase_orders_path, alert: t("alerts.not_found", model: t("purchase.order"))
   end
