@@ -7,7 +7,7 @@ class Sale < ApplicationRecord
 
   # Audit
   audited
-  has_associated_auditss
+  has_associated_audits
   # End Audit
 
   # Render sync
