@@ -143,7 +143,14 @@ $(document).ready(function(){
 
   // Events on Details
   function eventsOnDetails(){
-    // Substract button on cart details
+
+    // Remove duplicate click functions
+    $(".subtract").off("click");
+    $(".add").off("click");
+    // End Remove duplicate click functions
+
+
+    // Subtract button on cart details
     $(".subtract").click(function(){
       var $input = $(this).next();
       var currentValue = parseInt($input.val());
@@ -158,7 +165,7 @@ $(document).ready(function(){
 
       $input.trigger("change");
     });
-    // End Substract button on cart details
+    // End Subtract button on cart details
 
     // Add button on cart details
     $(".add").click(function(){
@@ -216,6 +223,10 @@ $(document).ready(function(){
     updateTotal();
   });
   // End Updating Total on remove
+
+  // Remove duplicate click functions
+  $(".select-product").off("click");
+  // End Remove duplicate click functions
 
   // Click on Select product
   $(".select-product").click(function(){

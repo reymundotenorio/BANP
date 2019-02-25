@@ -1,4 +1,4 @@
-// Substract button on cart details
+// Subtract button on cart details
 $(".subtract").click(function(){
   var $input = $(this).next();
   var currentValue = parseInt($input.val());
@@ -11,7 +11,7 @@ $(".subtract").click(function(){
     $input.val(1);
   }
 });
-// End Substract button on cart details
+// End Subtract button on cart details
 
 // Add button on cart details
 $(".add").click(function(){
