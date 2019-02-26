@@ -114,6 +114,9 @@ class Admin::Purchases::OrdersController < ApplicationController
 
       # If record was not saved
     else
+      @search_form_path = admin_new_purchase_order_path(@order)
+      @form_url = admin_purchases_order_path
+
       @providers = Provider.search(params[:search_provider], "enabled-only").paginate(page: params[:providers_page], per_page: 5) # Providers with pagination
       @products = Product.search(params[:search_product], "enabled-only").paginate(page: params[:products_page], per_page: 5) # Products with pagination
       render :new
@@ -144,6 +147,9 @@ class Admin::Purchases::OrdersController < ApplicationController
       redirect_to admin_purchase_details_path(@order.id), notice: t("alerts.updated", model: t("purchase.order"))
 
     else
+      @search_form_path = admin_edit_product_path(@order)
+      @form_url = admin_update_purchase_order_path
+      
       @providers = Provider.search(params[:search_provider], "enabled-only").paginate(page: params[:providers_page], per_page: 5) # Providers with pagination
       @products = Product.search(params[:search_product], "enabled-only").paginate(page: params[:products_page], per_page: 5) # Products with pagination
       render :edit

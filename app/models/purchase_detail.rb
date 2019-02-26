@@ -20,8 +20,12 @@ class PurchaseDetail < ApplicationRecord
 
   # After save and update
   # after_create :update_stock_create #, on: [ :create, :update ]
-  before_save :update_stock #, on: [ :create, :update ]
+  # before_save :update_stock #, on: [ :create, :update ]
+  before_validation :probando
 
+  def probando
+    self.errors.add(:quantity, "Cantidad no debe ser mayor a stock X")
+  end
 
   # Before_destroy callback, avoid destroy information
   # def not_permit_destroy
@@ -60,7 +64,7 @@ class PurchaseDetail < ApplicationRecord
             puts "CHANGES 1: #{self.changes["status"][0]  if self.changes["status"]}"
             puts "CHANGES 1: #{self.changes["status"][1]  if self.changes["status"]}"
             puts "**********************************************"
-            
+
             puts "**********************************************"
             puts "QUANTITY"
             puts "WAS: #{self.quantity_before_last_save}"
@@ -69,26 +73,30 @@ class PurchaseDetail < ApplicationRecord
             puts "CHANGES 1: #{self.changes["quantity"][1] if self.changes["quantity"]}"
             puts "**********************************************"
 
+            old_quantity = self.changes["quantity"] ? self.changes["quantity"][0] : 0;
+            # new_quantity = self.changes["quantity"] ? self.changes["quantity"][1] : 0;
+
             if self.purchase.status == "received" && self.purchase.status_before_last_save == "ordered"
               product.stock = product.stock + self.quantity
-                           
+
               # If is a reception
             else
-              # If the previous quantity is more than the new quantity
-              if self.quantity_was > self.quantity
-                # If the stock is less than the new quantity
-                if product.stock < self.quantity
-                  self.errors.add(:quantity, "Cantidad no debe ser mayor a stock #{product.stock}")
-                  return
+              final_stock = product.stock - old_quantity + self.quantity
 
-                  # If the stock is more than the new quantity
-                else
-                  product.stock = product.stock - self.quantity_was + self.quantity
-                end
+              puts "**********************************************"
+              puts "STOCK"
+              puts "Final stock: #{final_stock}"
+              puts "**********************************************"
 
-                # If the previous quantity is less or equal than the new quantity
+              # If the new quantity is more than the stock
+              if (product.stock - old_quantity + self.quantity) < 0
+                puts "ERRORRRR NEGATIVO"
+                errors.add(:quantity, "Cantidad no debe ser mayor a stock #{product.stock}")
+                return
+
+                # If the new quantity is less than the stock
               else
-                product.stock = product.stock - self.quantity_was + self.quantity
+                product.stock = product.stock - old_quantity + self.quantity
               end
             end
           end

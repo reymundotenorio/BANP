@@ -109,6 +109,12 @@ class Admin::Purchases::ReceptionsController < ApplicationController
 
       # If record was not saved
     else
+      @search_form_path = admin_edit_product_path(@reception)
+      @form_url = admin_purchases_reception_path
+
+      # @search_form_path = admin_new_purchase_reception_path(@reception)
+      # @form_url = admin_purchases_reception_path
+
       @providers = Provider.search(params[:search_provider], "enabled-only").paginate(page: params[:providers_page], per_page: 5) # Providers with pagination
       @products = Product.search(params[:search_product], "enabled-only").paginate(page: params[:products_page], per_page: 5) # Products with pagination
       render :new
