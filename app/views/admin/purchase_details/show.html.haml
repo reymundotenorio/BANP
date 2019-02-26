@@ -42,8 +42,13 @@
           .row.no-margin
             .col-xs-12.no-padding.details
               -# Data details render_sync
-              = sync partial: "orders/data_details", resource: @purchase
-              = sync_new partial: "orders/data_details", resource: Purchase.new
+              - if @is_reception
+                = sync partial: "receptions/data_details", resource: @purchase
+                = sync_new partial: "receptions/data_details", resource: Purchase.new
+              
+              - else
+                = sync partial: "orders/data_details", resource: @purchase
+                = sync_new partial: "orders/data_details", resource: Purchase.new
               -# End Data details render_sync
         -# End Material card
 

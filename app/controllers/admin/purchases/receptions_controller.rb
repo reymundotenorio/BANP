@@ -4,11 +4,11 @@ class Admin::Purchases::ReceptionsController < ApplicationController
   # End Admin layout
 
   # Find purchase reception with Friendly_ID
-  before_action :set_purchase_reception, only: [:new, :show, :edit, :create, :update, :active, :deactive, :history]
+  before_action :set_purchase_reception, only: [:new, :show, :edit, :create, :active, :deactive, :history]
   # End Find purchase reception with Friendly_ID
 
   # Sync model DSL
-  enable_sync only: [:receive_order, :update, :active, :deactive]
+  enable_sync only: [:create, :update, :active, :deactive]
   # End Sync model DSL
 
   # Authentication
@@ -63,7 +63,8 @@ class Admin::Purchases::ReceptionsController < ApplicationController
     @reception.discount = "0#{@reception.discount.to_s.gsub! '.', ''}" if @reception.discount < 10
 
     @search_form_path = admin_edit_product_path(@reception)
-    @form_url = admin_update_purchase_reception_path
+    @form_url = admin_purchases_reception_path
+    # @form_url = admin_update_purchase_reception_path
 
     @providers = Provider.search(params[:search_provider], "enabled-only").paginate(page: params[:providers_page], per_page: 5) # Providers with pagination
     @products = Product.search(params[:search_product], "enabled-only").paginate(page: params[:products_page], per_page: 5) # Products with pagination

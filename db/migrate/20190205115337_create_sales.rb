@@ -9,7 +9,6 @@ class CreateSales < ActiveRecord::Migration[5.2]
       t.string :payment_reference, null: false # Paypal or Stripe Reference Code
       t.boolean :paid, null: false
       t.string :observations
-      t.boolean :new_reception, null: false, default: false
       t.boolean :state, null: false, default: true
 
       # t.string :slug # Friendly_id slug

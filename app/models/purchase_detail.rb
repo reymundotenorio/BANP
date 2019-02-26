@@ -20,7 +20,7 @@ class PurchaseDetail < ApplicationRecord
 
   # After save and update
   # after_create :update_stock_create #, on: [ :create, :update ]
-  before_update :update_stock_update #, on: [ :create, :update ]
+  before_save :update_stock #, on: [ :create, :update ]
 
 
   # Before_destroy callback, avoid destroy information
@@ -29,42 +29,7 @@ class PurchaseDetail < ApplicationRecord
   # end
 
   # Update product stock
-  def update_stock_create
-    product = Product.find(self.product_id) || nil
-
-    # If product has been found
-    if product
-      # If purchase is active
-      if self.purchase.state
-        # If purchase is a reception
-        if self.purchase.status == "received"
-          # If purchase details has been returned
-          if self.status == "returned"
-            product.stock = product.stock - self.quantity
-
-            # If purchase details has been received
-          else
-            product.stock = product.stock + self.quantity
-          end
-
-          # Trigger saving successfully
-          if product.save
-            puts "Product stock UPDATED"
-
-            # Trigger saving failed
-          else
-            puts "Product stock NOT UPDATED"
-          end
-        end
-        # End If purchase is a reception
-      end
-      # End If purchase is active
-    end
-  end
-  # End Update product stock
-
-  # Update product stock
-  def update_stock_update
+  def update_stock
     product = Product.find(self.product_id) || nil
 
     # If product has been found
@@ -88,22 +53,25 @@ class PurchaseDetail < ApplicationRecord
             # If purchase details has been received
           else
             # If is a order that is being received
+            puts "**********************************************"
             puts "STATUS"
-            puts "ERA: #{self.purchase.status}"
-            puts "ES: #{self.purchase.status_was}"
+            puts "WAS: #{self.purchase.status_before_last_save}"
+            puts "IS: #{self.purchase.status}"
+            puts "CHANGES 1: #{self.changes["status"][0]  if self.changes["status"]}"
+            puts "CHANGES 1: #{self.changes["status"][1]  if self.changes["status"]}"
+            puts "**********************************************"
+            
+            puts "**********************************************"
+            puts "QUANTITY"
+            puts "WAS: #{self.quantity_before_last_save}"
+            puts "IS: #{self.quantity}"
+            puts "CHANGES 1: #{self.changes["quantity"][0] if self.changes["quantity"]}"
+            puts "CHANGES 1: #{self.changes["quantity"][1] if self.changes["quantity"]}"
             puts "**********************************************"
 
-            if saved_change_to_status?(from: "ordered", to: "received")
-              puts "ENTRO EN SAVED CHANGE"
-            end
-
-            if self.purchase.status == "received" && self.purchase.status_was == "ordered"
-              puts "ENTRO EN #{1}"
-              puts "ERA: #{product.stock}"
-              puts "ES: #{product.stock + self.quantity}"
-              puts "**********************************************"
-
+            if self.purchase.status == "received" && self.purchase.status_before_last_save == "ordered"
               product.stock = product.stock + self.quantity
+                           
               # If is a reception
             else
               # If the previous quantity is more than the new quantity
