@@ -6,6 +6,7 @@ class CreatePurchases < ActiveRecord::Migration[5.2]
       t.string :status, null: false , default: "ordered" # ordered, received, returned
       t.decimal :discount, null: false, precision: 8, scale: 2, default: 0
       t.string :observations
+      t.boolean :new_reception, null: false, default: false
       t.boolean :state, null: false, default: true
 
       # t.string :slug # Friendly_id slug
