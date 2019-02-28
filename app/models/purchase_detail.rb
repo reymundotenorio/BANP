@@ -20,13 +20,13 @@ class PurchaseDetail < ApplicationRecord
 
   # After save and update
   # after_create :update_stock_create #, on: [ :create, :update ]
-  # before_save :update_stock #, on: [ :create, :update ]
-  before_validation :update_stock, on: :update
-  before_destroy :nel
+  before_save :update_stock #, on: [ :create, :update ]
 
-  def nel
-    return false
-  end
+
+  # Before_destroy callback, avoid destroy information
+  # def not_permit_destroy
+  #   false
+  # end
 
   # Update product stock
   def update_stock
@@ -52,14 +52,7 @@ class PurchaseDetail < ApplicationRecord
 
             # If purchase details has been received
           else
-            old_quantity = self.changes["quantity"][0]
-            old_quantity = 0 if !old_quantity
-
-            old_status = self.changes["status"][0]
-            old_status = "received" if !old_status
-
-            # new_quantity = self.changes["quantity"] ? self.changes["quantity"][1] : 0;
-
+            # If is a order that is being received
             puts "**********************************************"
             puts "STATUS"
             puts "WAS: #{self.purchase.status_before_last_save}"
@@ -76,13 +69,20 @@ class PurchaseDetail < ApplicationRecord
             puts "CHANGES 1: #{self.changes["quantity"][1] if self.changes["quantity"]}"
             puts "**********************************************"
 
-            # If is a order that is being received
-            if self.purchase.status == "received" && old_status == "ordered"
+            old_quantity = self.changes["quantity"] ? self.changes["quantity"][0] : 0;
+            # new_quantity = self.changes["quantity"] ? self.changes["quantity"][1] : 0;
+
+            if self.purchase.status == "received" && self.purchase.status_before_last_save == "ordered"
               product.stock = product.stock + self.quantity
 
-              # If already is a reception
+              # If is a reception
             else
               final_stock = product.stock - old_quantity + self.quantity
+
+              puts "**********************************************"
+              puts "STOCK"
+              puts "Final stock: #{final_stock}"
+              puts "**********************************************"
 
               # If the new quantity is more than the stock
               if (product.stock - old_quantity + self.quantity) < 0
@@ -111,44 +111,6 @@ class PurchaseDetail < ApplicationRecord
     end
   end
   # End Update product stock
-
-  # Update product stock on destroy
-  def update_stock_destroy
-    product = Product.find(self.product_id) || nil
-
-    # If product has been found
-    if product
-      # If purchase is active
-      if self.purchase.state
-        # If purchase is a reception or ordered
-        if self.purchase.status == "received"
-          # If the quantity is more than the stock
-          if (product.stock - self.quantity) < 0
-            puts "Stock is less than the quantity"
-            raise "You cannot delete this details because quantity is more than product stock"
-            false
-
-            # If the quantity is less than the stock
-          else
-            puts "Stock is more than the quantity"
-            product.stock = product.stock - self.quantity
-
-            # Trigger saving successfully
-            if product.save
-              puts "Product stock UPDATED on destroy"
-
-              # Trigger saving failed
-            else
-              puts "Product stock NOT UPDATED on destroy"
-            end
-          end
-        end
-        # End If purchase is a reception or ordered
-      end
-      # End If purchase is active
-    end
-  end
-  # End Update product stock on destroy
 
   ## End Callbacks
 

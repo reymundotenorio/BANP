@@ -143,27 +143,13 @@ class Admin::Purchases::OrdersController < ApplicationController
       end
     end
 
-    puts "****************************************".red
-    # puts @order.purchase_details.detect { |p| p.id == 235 }.marked_for_destruction?
-    # @order.marked_for_destruction?
-    # purchase_order_params["purchase_details_attributes"].detect { |p| puts "*** id: #{p.id}, #{p.product_id}, #{p._destroy}"}
-    puts purchase_order_params.to_json
-    puts purchase_order_params["purchase_details_attributes"].to_json
+    # Validating detail with stock on Destroy
+    json = JSON.parse(purchase_order_params["purchase_details_attributes"].to_json) # Converting to Json
+    json.each do |item| # Iterating Json
 
-
-    json = JSON.parse(purchase_order_params.to_s)
-    json.each do |f|
-      puts "*** #{f}"
+      if item[1]["_destroy"] == "1"
+      end
     end
-
-    # {"purchase_datetime":"2018-12-28 00:00:00 -0500","receipt_number":"N/A","status":"ordered","discount":"09.0","provider_id":"2","employee_id":"1","observations":"","purchase_details_attributes":{"0":{"id":"1791"},"1":{"id":"2051","price":"9141.07","quantity":"12","status":"ordered","product_id":"44","_destroy":"1"}}}
-
-    puts "****************************************".red
-
-    # if (@order.purchase_details.detect { |p| p.id == 1967 }.marked_for_destruction?) # => true
-    #   redirect_to root_path
-    #   return
-    # end
 
 
     if @order.update(purchase_order_params)
