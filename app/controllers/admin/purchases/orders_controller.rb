@@ -143,13 +143,36 @@ class Admin::Purchases::OrdersController < ApplicationController
       end
     end
 
+    puts "****************************************".red
+    # puts @order.purchase_details.detect { |p| p.id == 235 }.marked_for_destruction?
+    # @order.marked_for_destruction?
+    # purchase_order_params["purchase_details_attributes"].detect { |p| puts "*** id: #{p.id}, #{p.product_id}, #{p._destroy}"}
+    puts purchase_order_params.to_json
+    puts purchase_order_params["purchase_details_attributes"].to_json
+
+
+    json = JSON.parse(purchase_order_params.to_s)
+    json.each do |f|
+      puts "*** #{f}"
+    end
+
+    # {"purchase_datetime":"2018-12-28 00:00:00 -0500","receipt_number":"N/A","status":"ordered","discount":"09.0","provider_id":"2","employee_id":"1","observations":"","purchase_details_attributes":{"0":{"id":"1791"},"1":{"id":"2051","price":"9141.07","quantity":"12","status":"ordered","product_id":"44","_destroy":"1"}}}
+
+    puts "****************************************".red
+
+    # if (@order.purchase_details.detect { |p| p.id == 1967 }.marked_for_destruction?) # => true
+    #   redirect_to root_path
+    #   return
+    # end
+
+
     if @order.update(purchase_order_params)
       redirect_to admin_purchase_details_path(@order.id), notice: t("alerts.updated", model: t("purchase.order"))
 
     else
       @search_form_path = admin_edit_product_path(@order)
       @form_url = admin_update_purchase_order_path
-      
+
       @providers = Provider.search(params[:search_provider], "enabled-only").paginate(page: params[:providers_page], per_page: 5) # Providers with pagination
       @products = Product.search(params[:search_product], "enabled-only").paginate(page: params[:products_page], per_page: 5) # Products with pagination
       render :edit
