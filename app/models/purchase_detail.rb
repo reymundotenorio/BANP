@@ -18,15 +18,7 @@ class PurchaseDetail < ApplicationRecord
   # Before destroy
   # before_destroy :not_permit_destroy
 
-  # After save and update
-  # after_create :update_stock_create #, on: [ :create, :update ]
-  before_save :update_stock #, on: [ :create, :update ]
-
-
-  # Before_destroy callback, avoid destroy information
-  # def not_permit_destroy
-  #   false
-  # end
+  # before_validation :update_stock, on: :update
 
   # Update product stock
   def update_stock
@@ -43,72 +35,58 @@ class PurchaseDetail < ApplicationRecord
             # If the stock is less than the quantity to return
             if product.stock < self.quantity
               self.errors.add(:quantity, "Cantidad no debe ser mayor a stock #{product.stock}")
-              return
+              return false
 
               # If the stock is greater or equal than the quantity to return
             else
               product.stock = product.stock - self.quantity
             end
+            # End If the stock is less than the quantity to return
 
             # If purchase details has been received
           else
+            old_quantity = self.changes["quantity"][0] if changes["quantity"]
+            old_quantity = 0 if !old_quantity
+
+            old_status = self.changes["status"][0] if changes["status"]
+            old_status = "received" if !old_status
+
+
             # If is a order that is being received
-            puts "**********************************************"
-            puts "STATUS"
-            puts "WAS: #{self.purchase.status_before_last_save}"
-            puts "IS: #{self.purchase.status}"
-            puts "CHANGES 1: #{self.changes["status"][0]  if self.changes["status"]}"
-            puts "CHANGES 1: #{self.changes["status"][1]  if self.changes["status"]}"
-            puts "**********************************************"
-
-            puts "**********************************************"
-            puts "QUANTITY"
-            puts "WAS: #{self.quantity_before_last_save}"
-            puts "IS: #{self.quantity}"
-            puts "CHANGES 1: #{self.changes["quantity"][0] if self.changes["quantity"]}"
-            puts "CHANGES 1: #{self.changes["quantity"][1] if self.changes["quantity"]}"
-            puts "**********************************************"
-
-            old_quantity = self.changes["quantity"] ? self.changes["quantity"][0] : 0;
-            # new_quantity = self.changes["quantity"] ? self.changes["quantity"][1] : 0;
-
-            if self.purchase.status == "received" && self.purchase.status_before_last_save == "ordered"
+            if self.purchase.status == "received" && old_status == "ordered"
               product.stock = product.stock + self.quantity
 
-              # If is a reception
+              # If already is a reception
             else
               final_stock = product.stock - old_quantity + self.quantity
 
-              puts "**********************************************"
-              puts "STOCK"
-              puts "Final stock: #{final_stock}"
-              puts "**********************************************"
-
               # If the new quantity is more than the stock
-              if (product.stock - old_quantity + self.quantity) < 0
+              if (final_stock) < 0
                 self.errors.add(:quantity, "Cantidad no debe ser mayor a stock #{product.stock}")
                 return
 
                 # If the new quantity is less than the stock
               else
-                product.stock = product.stock - old_quantity + self.quantity
+                product.stock = final_stock
               end
             end
+            # End If already is a reception
           end
+          # End If purchase details has been received
 
           # Trigger saving successfully
           if product.save
-            puts "Product stock UPDATED"
 
             # Trigger saving failed
           else
-            puts "Product stock NOT UPDATED"
+            puts "Product stock not updated"
           end
         end
         # End If purchase is a reception
       end
       # End If purchase is active
     end
+    # End If product has been found
   end
   # End Update product stock
 

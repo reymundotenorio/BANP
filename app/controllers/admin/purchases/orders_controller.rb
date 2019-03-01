@@ -142,16 +142,7 @@ class Admin::Purchases::OrdersController < ApplicationController
         @order[:discount] = 0.00
       end
     end
-
-    # Validating detail with stock on Destroy
-    json = JSON.parse(purchase_order_params["purchase_details_attributes"].to_json) # Converting to Json
-    json.each do |item| # Iterating Json
-
-      if item[1]["_destroy"] == "1"
-      end
-    end
-
-
+    
     if @order.update(purchase_order_params)
       redirect_to admin_purchase_details_path(@order.id), notice: t("alerts.updated", model: t("purchase.order"))
 
