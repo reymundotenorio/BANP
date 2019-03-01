@@ -31,6 +31,24 @@ class Product < ApplicationRecord
   end
   # End Search
 
+  # Search on Inventory
+  def self.search_inventory(search, show_all)
+    if search
+      if show_all == "enabled-only"
+        self.joins(:category).where("(products.name LIKE :search OR products.name_spanish LIKE :search OR categories.name LIKE :search OR categories.name_spanish LIKE :search OR barcode LIKE :search OR products.description LIKE :search OR products.description_spanish LIKE :search) AND (products.state = true) AND (products.stock > 0)", search: "%#{search}%")
+
+      else
+        self.joins(:category).where("(products.name LIKE :search OR products.name_spanish LIKE :search OR categories.name LIKE :search OR categories.name_spanish LIKE :search OR barcode LIKE :search OR products.description LIKE :search OR products.description_spanish LIKE :search) AND (products.stock > 0)", search: "%#{search}%")
+      end
+    elsif show_all == "all"
+      available
+
+    else
+      available.enabled
+    end
+  end
+  # End Search on Inventory
+
   def self.find_category(category_slug)
     Product.joins(:category).where(categories: { slug: category_slug }).group(:id)
   end
@@ -107,6 +125,7 @@ class Product < ApplicationRecord
 
   ## Scopes
   scope :enabled, -> { where(state: true) }
+  scope :available, -> { where("stock > 0") }
   ## End Scopes
 
   ## Callbacks

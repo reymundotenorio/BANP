@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  namespace :admin do
+    get 'inventories/index'
+  end
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   # Change language
   get "/change-language/:lang", to: "settings#change_lang", as: "change_language"
@@ -238,6 +241,10 @@ Rails.application.routes.draw do
     get "/purchase/detail/:id/history", to: "purchase_details#history", as: "history_purchase_detail"
     patch "/purchases/detail/:id", to: "purchase_details#update", as: "update_purchase_detail"
     # End Purchases details
+    
+        # Inventory
+    get "/inventory", to: "inventories#index", as: "inventory"
+    # End Inventory
   end
   # End Admin namespace
 

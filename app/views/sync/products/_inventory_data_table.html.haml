@@ -1,0 +1,22 @@
+%tr{class: "clickable-row #{product.state}", "data-href": "#{admin_product_path(product)}"}
+  -# Set attributes
+  - attributes = I18n.locale == :es ? ["name_spanish", "barcode", "price", "category", "stock", "content_spanish"] : ["name", "barcode", "price", "category", "stock", "content"]
+
+  %td
+    .record-link{"data-header": "No."}
+      %p= product.id
+
+  - attributes.each do |attribute|
+    %td
+      .record-link{"data-header": t("activerecord.attributes.product.#{attribute}")}
+        - if attribute == "price"
+          %p= number_to_currency(product.price, precision: 2, unit: "$", format: "%u%n", separator: ".", delimiter: ",")
+
+        - elsif attribute == "category"
+          -# Category name render_sync
+          = sync partial: "data_table_category_name", resource: product.category
+          = sync_new partial: "data_table_category_name", resource: Category.new
+          -# End Category name render_sync
+
+        - else
+          %p= product["#{attribute}"]
