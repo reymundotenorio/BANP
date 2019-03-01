@@ -10,7 +10,7 @@ class Admin::Purchases::OrdersController < ApplicationController
   # Sync model DSL
   enable_sync only: [:create, :update, :active, :deactive]
   # End Sync model DSL
-
+  
   # Authentication
   # before_action :require_employee
   # End Authentication
@@ -142,7 +142,7 @@ class Admin::Purchases::OrdersController < ApplicationController
         @order[:discount] = 0.00
       end
     end
-    
+
     if @order.update(purchase_order_params)
       redirect_to admin_purchase_details_path(@order.id), notice: t("alerts.updated", model: t("purchase.order"))
 

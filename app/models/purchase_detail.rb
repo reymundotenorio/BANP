@@ -18,7 +18,7 @@ class PurchaseDetail < ApplicationRecord
   # Before destroy
   # before_destroy :not_permit_destroy
 
-  # before_validation :update_stock, on: :update
+  before_validation :update_stock, on: :update
 
   # Update product stock
   def update_stock

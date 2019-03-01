@@ -63,11 +63,13 @@ class Admin::Purchases::ReceptionsController < ApplicationController
     @reception.discount = "0#{@reception.discount.to_s.gsub! '.', ''}" if @reception.discount < 10
 
     @search_form_path =admin_edit_purchase_reception_path(@reception)
-    # @form_url = admin_purchases_reception_path
-    @form_url = admin_update_purchase_reception_path
+    @form_url = admin_purchases_reception_path
+    # @form_url = admin_update_purchase_reception_path
 
     @providers = Provider.search(params[:search_provider], "enabled-only").paginate(page: params[:providers_page], per_page: 5) # Providers with pagination
     @products = Product.search(params[:search_product], "enabled-only").paginate(page: params[:products_page], per_page: 5) # Products with pagination
+
+    @is_edit = true
 
     respond_to do |format|
       format.html
@@ -103,6 +105,66 @@ class Admin::Purchases::ReceptionsController < ApplicationController
       end
     end
 
+    is_edit = params[:is_edit] || false
+
+    # If record is an edit
+    if is_edit
+
+      # Deleting blank spaces
+      @reception[:status] = "received"
+      # End Deleting blank spaces
+
+      # Validating detail with stock on Destroy
+      json = JSON.parse(purchase_reception_params["purchase_details_attributes"].to_json) # Converting to Json
+      # Iterating Json
+      json.each do |item|
+        # Item is being destroyed
+        if item[1]["_destroy"] == "1"
+          detail_id = item[1]["id"] || nil
+          detail = PurchaseDetail.find(detail_id) || nil
+
+          product_id = item[1]["product_id"] || nil
+          product = Product.find(product_id) || nil
+
+          # If detail has been found
+          if detail
+            # If product has been found
+            if product
+              # If purchase is active
+              if detail.purchase.state
+                # If purchase is a reception or ordered
+                if detail.purchase.status == "received"
+                  # If the quantity is more than the stock
+                  if (product.stock - detail.quantity) < 0
+                    redirect_to admin_edit_purchase_reception_path(@reception), alert: "Stock is less than the quantity"
+                    return
+
+                    # If the quantity is less than the stock
+                  else
+                    puts "Stock is more than the quantity"
+                    product.stock = product.stock - detail.quantity
+
+                    # Trigger saving successfully
+                    if product.save
+                      puts "Stock updated on destroy"
+                    end
+                  end
+                end
+                # End If purchase is a reception or ordered
+              end
+              # End If purchase is active
+            end
+            # End If product has been found
+          end
+          # End If detail has been found
+        end
+        # End Item is being destroyed
+      end
+      # End Iterating Json
+
+    end
+    # If record is an edit
+
     # If record was saved
     if @reception.update(purchase_reception_params)
       redirect_to admin_purchase_details_path(@reception.id), notice: t("alerts.updated", model: t("purchase.reception")) # Received
@@ -117,90 +179,19 @@ class Admin::Purchases::ReceptionsController < ApplicationController
 
       @providers = Provider.search(params[:search_provider], "enabled-only").paginate(page: params[:providers_page], per_page: 5) # Providers with pagination
       @products = Product.search(params[:search_product], "enabled-only").paginate(page: params[:products_page], per_page: 5) # Products with pagination
+
+      if is_edit
+        @is_edit = true
+        render :edit
+        return
+      end
+
       render :new
     end
   end
 
   # Update
   def update
-    # Deleting blank spaces
-    @reception[:receipt_number]= @reception[:receipt_number].strip
-    @reception[:status] = "received"
-    @reception[:observations] = @reception[:observations].strip
-    # End Deleting blank spaces
-
-    @reception[:purchase_datetime] = @reception[:purchase_datetime].to_datetime if @reception[:purchase_datetime]
-
-    # Fixing discount
-    if @reception[:discount]
-      begin
-        @reception[:discount] = @reception[:discount].to_d
-
-      rescue
-        @reception[:discount] = 0.00
-      end
-    end
-
-
-    # Validating detail with stock on Destroy
-    json = JSON.parse(purchase_reception_params["purchase_details_attributes"].to_json) # Converting to Json
-    json.each do |item| # Iterating Json
-
-      puts "****************************************".red
-      puts item[1]
-      puts "****************************************".red
-
-      if item[1]["_destroy"] == "1"
-        puts "Entro"
-
-        detail_id = item[1]["id"] || nil
-        detail = PurchaseDetail.find(detail_id) || nil
-
-        product_id = item[1]["product_id"] || nil
-        product = Product.find(product_id) || nil
-
-        # If detail has been found
-        if detail
-          # If product has been found
-          if product
-            # If purchase is active
-            if detail.purchase.state
-              # If purchase is a reception or ordered
-              if detail.purchase.status == "received"
-                # If the quantity is more than the stock
-                if (product.stock - detail.quantity) < 0
-                  puts "Stock is less than the quantity".red
-
-                  redirect_to root_path, alert: "Stock is less than the quantity"
-                  return
-
-                  # If the quantity is less than the stock
-                else
-                  puts "Stock is more than the quantity"
-                  product.stock = product.stock - detail.quantity
-
-                  # Trigger saving successfully
-                  if product.save
-                    puts "Product stock UPDATED on destroy"
-
-                    redirect_to root_path, notice: "Stock is more than the quantity"
-                    return
-
-                    # Trigger saving failed
-                  else
-                    puts "Product stock NOT UPDATED on destroy"
-                  end
-                end
-              end
-              # End If purchase is a reception or ordered
-            end
-            # End If purchase is active
-          end
-          # End If product has been found
-        end
-        # End If detail has been found
-      end
-    end
 
     if @reception.update(purchase_reception_params)
       redirect_to admin_purchase_details_path(@reception.id), notice: t("alerts.updated", model: t("purchase.reception"))

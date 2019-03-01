@@ -56,6 +56,10 @@
 
                       = f.hidden_field :purchase_datetime
 
+
+                      - if @is_edit
+                        = hidden_field_tag "is_edit", true
+
                     .form-group.hidden
                       = f.text_field :status, value: "received", class: "form-control input"
                       %label
