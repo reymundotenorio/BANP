@@ -70,7 +70,7 @@
                       %span= t("views.show.history")
 
                   .col-xs-12.col-sm-4.col-md-12.button-container.no-padding
-                    - if(category.state)
+                    - if category.state
                       = link_to (admin_deactive_category_path(category)), method: "patch", class: "btn btn-general" do
                         %i.fas.fa-times
                         %span= t("views.show.disable")

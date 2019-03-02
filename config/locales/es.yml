@@ -168,10 +168,11 @@ es:
     reception_details: "Detalles de Recepción de compra"
     show_receptions: "Mostrar Recepciones de compra"
     receive_purchase_order: "Recibir orden de compra"
-    stock_is_less: "El stock del producto %{product}(%{stock}) es inferior a la cantidad a devolver"
+    stock_is_less: "El stock (%{stock}) del producto %{product} es inferior a la cantidad a devolver"
     in_inventory: "en inventario"
     return: "devolución"
     returns: "devoluciones"
+    error_canceling_reception: "Error al anular la recepción de compra"
 
   # Will paginate
   will_paginate:
@@ -218,6 +219,7 @@ es:
       confirmed: "Confirmado"
       not_confirmed: "No confirmado"
       create_user: "Crear usuario"
+      cancel: "Anular"
     new:
       new: "Nuevo"
     edit:

@@ -4,11 +4,11 @@ class Admin::Purchases::ReceptionsController < ApplicationController
   # End Admin layout
 
   # Find purchase reception with Friendly_ID
-  before_action :set_purchase_reception, only: [:new, :show, :edit, :create, :active, :deactive, :history]
+  before_action :set_purchase_reception, only: [:new, :show, :edit, :create, :deactive, :history]
   # End Find purchase reception with Friendly_ID
 
   # Sync model DSL
-  enable_sync only: [:create, :active, :deactive]
+  enable_sync only: [:create, :deactive]
   # End Sync model DSL
 
   # Authentication
@@ -202,18 +202,12 @@ class Admin::Purchases::ReceptionsController < ApplicationController
     end
   end
 
-  # Active
-  def active
-    if @reception.update(state: true)
-      redirect_to_back(true, admin_purchase_receptions_path, "purchase", "success")
-
-    else
-      redirect_to_back(true, admin_purchase_receptions_path, "purchase", "error")
-    end
-  end
-
   # Deactive
   def deactive
+    @reception.purchase_details.each do |detail|
+      return if !update_stock(detail)
+    end
+
     if @reception.update(state: false)
       redirect_to_back(false, admin_purchase_receptions_path, "purchase", "success")
 
@@ -221,6 +215,52 @@ class Admin::Purchases::ReceptionsController < ApplicationController
       redirect_to_back(false, admin_purchase_receptions_path, "purchase", "error")
     end
   end
+
+  # Update product stock
+  def update_stock(detail)
+    product = Product.find(detail.product_id) || nil
+
+    # If product has been found
+    if product
+      # If purchase is active
+      if detail.purchase.state
+        final_stock = product.stock - detail.quantity
+
+        # If the new quantity is more than the stock
+        if (final_stock) < 0
+          redirect_to admin_purchase_details_path(detail.purchase_id), alert: "#{t('purchase.error_canceling_reception')}. #{t('purchase.stock_is_less', stock: product.stock, product: I18n.locale == :es ? product.name_spanish : product.name)}"
+          return false
+
+          # If the new quantity is less than the stock
+        else
+          product.stock = final_stock
+
+          returned = PurchaseDetail.new
+          returned.purchase_id = detail.purchase_id
+          returned.product_id = detail.product_id
+          returned.price = detail.price
+          returned.quantity = detail.quantity
+          returned.status = "returned"
+
+          if returned.save
+            puts "Return created on detail deactivation"
+          end
+        end
+
+        # Trigger saving successfully
+        if product.save
+          return true
+
+          # Trigger saving failed
+        else
+          puts "Product stock not updated on deactivation"
+        end
+      end
+      # End If purchase is active
+    end
+    # End If product has been found
+  end
+  # End Update product stock
 
   private
 

@@ -10,7 +10,7 @@ class Admin::Purchases::OrdersController < ApplicationController
   # Sync model DSL
   enable_sync only: [:create, :update, :active, :deactive]
   # End Sync model DSL
-  
+
   # Authentication
   # before_action :require_employee
   # End Authentication

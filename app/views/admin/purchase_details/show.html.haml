@@ -19,9 +19,10 @@
               %span= t("purchase.show_receptions")
 
           - else
-            = link_to (admin_new_purchase_reception_path(@purchase.id)), class: "btn btn-general" do
-              %i.fas.fa-check
-              %span= t("purchase.receive_purchase_order")
+            - if @purchase.state
+              = link_to (admin_new_purchase_reception_path(@purchase.id)), class: "btn btn-general" do
+                %i.fas.fa-check
+                %span= t("purchase.receive_purchase_order")
         -# End Show purchase button
     -# End Title
 
@@ -45,7 +46,7 @@
               - if @is_reception
                 = sync partial: "receptions/data_details", resource: @purchase
                 = sync_new partial: "receptions/data_details", resource: Purchase.new
-              
+
               - else
                 = sync partial: "orders/data_details", resource: @purchase
                 = sync_new partial: "orders/data_details", resource: Purchase.new

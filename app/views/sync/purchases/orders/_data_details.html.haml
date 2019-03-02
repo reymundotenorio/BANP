@@ -68,7 +68,7 @@
         %span= t("views.show.history")
 
     .col-xs-12.col-sm-4.col-md-12.button-container.no-padding
-      - if(purchase.state)
+      - if purchase.state
         = link_to (admin_deactive_purchase_order_path(purchase)), method: "patch", class: "btn btn-general" do
           %i.fas.fa-times
           %span= t("views.show.disable")
