@@ -136,13 +136,24 @@ class Admin::Purchases::ReceptionsController < ApplicationController
                 if detail.purchase.status == "received"
                   # If the quantity is more than the stock
                   if (product.stock - detail.quantity) < 0
-                    redirect_to admin_edit_purchase_reception_path(@reception), alert: "Stock is less than the quantity"
+                    redirect_to admin_edit_purchase_reception_path(@reception), alert: t("purchase.stock_is_less", product: I18n.locale == :es ? detail.product.name_spanish : detail.product.name)
                     return
 
                     # If the quantity is less than the stock
                   else
                     puts "Stock is more than the quantity"
                     product.stock = product.stock - detail.quantity
+
+                    returned = PurchaseDetail.new
+                    returned.purchase_id = detail.purchase_id
+                    returned.product_id = detail.product_id
+                    returned.price = detail.price
+                    returned.quantity = detail.quantity
+                    returned.status = "returned"
+
+                    if returned.save
+                      puts "Return created on detail destroy"
+                    end
 
                     # Trigger saving successfully
                     if product.save

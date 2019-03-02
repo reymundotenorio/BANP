@@ -148,6 +148,8 @@ es:
         total_purchase_detail: "Total"
         status: "Condición"
         total: "Total"
+        purchase_id: "No. Compra"
+        created_at: "Fecha"
 
   # Purchase
   purchase:
@@ -166,6 +168,10 @@ es:
     reception_details: "Detalles de Recepción de compra"
     show_receptions: "Mostrar Recepciones de compra"
     receive_purchase_order: "Recibir orden de compra"
+    stock_is_less: "El stock del producto %{product} es inferior a la cantidad a devolver"
+    in_inventory: "en inventario"
+    return: "devolución"
+    returns: "devoluciones"
 
   # Will paginate
   will_paginate:

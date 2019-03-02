@@ -120,6 +120,18 @@ class PurchaseDetail < ApplicationRecord
   end
   # End Search receptions
 
+
+  # Search returns
+  def self.search_returns(search)
+    if search
+      self.joins(:purchase).joins(:product).where("(products.name LIKE :search OR products.name_spanish LIKE :search)", search: "%#{search}%").returned
+
+    else
+      returned
+    end
+  end
+  # End Search returns
+
   # Search
   def self.search(purchase_id, search, show_all)
     if search

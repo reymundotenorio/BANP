@@ -53,19 +53,19 @@
 
       %ul.dropdown-menu
         %li
-          = link_to (admin_purchase_orders_path), class: "#{'active' if controller_name == 'purchase_orders'}" do
+          = link_to (admin_purchase_orders_path), class: "#{'active' if controller_path == 'admin/purchases/orders'}" do
             %i.far.fa-newspaper
             = t("header.navigation.orders")
         %li
-          = link_to (admin_purchase_receptions_path), class: "#{'active' if controller_name == 'purchase_receptions'}" do
+          = link_to (admin_purchase_receptions_path), class: "#{'active' if controller_path == 'admin/purchases/receptions'}" do
             %i.fas.fa-cart-arrow-down
             = t("header.navigation.receptions")
         %li
-          %a{href: "#"}
+          = link_to (admin_inventory_path), class: "#{'active' if controller_name == 'inventories'}" do
             %i.fas.fa-archive
             = t("header.navigation.inventory")
         %li
-          %a{href: "#"}
+          = link_to (admin_purchase_returns_path), class: "#{'active' if controller_path == 'admin/purchases/returns'}" do
             %i.fas.fa-undo
             = t("header.navigation.returns")
     -# End Purchases

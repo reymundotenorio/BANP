@@ -1,5 +1,10 @@
 Rails.application.routes.draw do
   namespace :admin do
+    namespace :purchases do
+      get 'returns/index'
+    end
+  end
+  namespace :admin do
     get 'inventories/index'
   end
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
@@ -241,10 +246,14 @@ Rails.application.routes.draw do
     get "/purchase/detail/:id/history", to: "purchase_details#history", as: "history_purchase_detail"
     patch "/purchases/detail/:id", to: "purchase_details#update", as: "update_purchase_detail"
     # End Purchases details
-    
-        # Inventory
+
+    # Inventory
     get "/inventory", to: "inventories#index", as: "inventory"
     # End Inventory
+
+    # Purchases returns
+    get "/purchases/returns", to: "purchases/returns#index", as: "purchase_returns"
+    # End Purchases returns
   end
   # End Admin namespace
 

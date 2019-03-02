@@ -1,0 +1,29 @@
+%tr{class: "clickable-row #{purchase_detail.status.downcase}"}
+  -# Set attributes
+  -# - attributes = ["product", "price", "quantity", "total", "status"]
+  - attributes = ["purchase_id", "created_at", "product", "price", "quantity", "total"]
+
+  %td
+    .record-link{"data-header": "No."}
+      %p= purchase_detail.id
+
+  - attributes.each do |attribute|
+    %td
+      .record-link{"data-header": t("activerecord.attributes.purchase_detail.#{attribute}")}
+        - if attribute == "created_at"
+          %p= I18n.locale == :es ? purchase_detail.created_at.strftime("%d/%m/%Y") : purchase_detail.created_at.strftime("%m/%d/%Y")
+
+        - elsif attribute == "product"
+          -# Product name render_sync
+          = sync partial: "data_table_product_name", resource: purchase_detail.product
+          = sync_new partial: "data_table_product_name", resource: Product.new
+          -# End Product name render_sync
+
+        - elsif attribute == "price"
+          %p= number_to_currency(purchase_detail.price, precision: 2, unit: "$", format: "%u%n", separator: ".", delimiter: ",")
+
+        - elsif attribute == "total"
+          %p= number_to_currency((purchase_detail.price * purchase_detail.quantity), precision: 2, unit: "$", format: "%u%n", separator: ".", delimiter: ",")
+
+        - else
+          %p= purchase_detail["#{attribute}"]

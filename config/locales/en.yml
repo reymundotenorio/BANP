@@ -147,6 +147,10 @@ en:
         total_purchase_detail: "Total"
         status: "Status"
         total: "Total"
+        purchase_id: "Purchase no."
+        created_at: "Date"
+        return: "return"
+        returns: "returns"
 
   # Purchase
   purchase:
@@ -165,6 +169,8 @@ en:
     reception_details: "Purchase reception details"
     show_receptions: "Show purchase receptions"
     receive_purchase_order: "Receive purchase order"
+    stock_is_less: "The stock of the product %{product} is less than the amount to be returned"
+    in_inventory: "in inventory"
 
   # Will paginate
   will_paginate:

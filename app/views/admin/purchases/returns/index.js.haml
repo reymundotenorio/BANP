@@ -1,0 +1,6 @@
+-# Render count and title
+$("#count-title").html("#{escape_javascript(render "count_title")}");
+-# Render table
+$("#render-data").html("#{escape_javascript(render "returns")}");
+-# Render pagination
+$(".pagination a").attr("data-remote", "true");

@@ -152,7 +152,8 @@ puts "Seeding purchase details"
       product_id: Faker::Number.between(1, 110),
       price: Faker::Number.decimal(4, 2),
       quantity: Faker::Number.between(1, 100),
-      status: ["ordered", "returned"].sample
+      status: "ordered"
+      # status: ["ordered", "returned"].sample
     )
   rescue StandardError => e
     puts "Error found #{e.to_s}"
@@ -166,6 +167,3 @@ puts "The information have been seeded"
 # rails db:migrate
 # rails db:seed
 # rails s
-
-
-PurchaseDetail.create(purchase_id: 1, price: Faker::Number.decimal(4,  2), quantity: 20, status: "returned", product_id: 1)
