@@ -1,12 +1,4 @@
 Rails.application.routes.draw do
-  namespace :admin do
-    namespace :purchases do
-      get 'returns/index'
-    end
-  end
-  namespace :admin do
-    get 'inventories/index'
-  end
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   # Change language
   get "/change-language/:lang", to: "settings#change_lang", as: "change_language"
@@ -254,6 +246,18 @@ Rails.application.routes.draw do
     # Purchases returns
     get "/purchases/returns", to: "purchases/returns#index", as: "purchase_returns"
     # End Purchases returns
+
+    # Sales orders
+    get "/sales/orders", to: "sales/orders#index", as: "sale_orders"
+    get "/sales/order/new", to: "sales/orders#new", as: "new_sale_order"
+    get "/sales/order/:id", to: "sales/orders#show", as: "sale_order"
+    get "/sales/order/:id/edit", to: "sales/orders#edit", as: "edit_sale_order"
+    get "/sales/order/:id/history", to: "sales/orders#history", as: "history_sale_order"
+    post "/sales/order", to: "sales/orders#create", as: "sales_order"
+    patch "/sales/order/:id", to: "sales/orders#update", as: "update_sale_order"
+    patch "/sales/order/:id/active", to: "sales/orders#active", as: "active_sale_order"
+    patch "/sales/order/:id/deactive", to: "sales/orders#deactive", as: "deactive_sale_order"
+    # End Sales orders
   end
   # End Admin namespace
 
