@@ -42,7 +42,7 @@
             .col-xs-12.col-md-6.no-padding
               #search-record.search-record
                 -# Form
-                = form_tag admin_purchase_orders_path, method: "get", id: "search-form", autocomplete:"off", remote: true do
+                = form_tag admin_purchase_orders_path, method: "get", id: "search-form", autocomplete: "off", remote: true do
                   .input-group
                     = text_field_tag :search, params[:search], id: "search-input", class: "form-control"
                     .border-bottom

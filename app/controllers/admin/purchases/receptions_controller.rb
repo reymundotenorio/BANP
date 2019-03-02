@@ -136,7 +136,7 @@ class Admin::Purchases::ReceptionsController < ApplicationController
                 if detail.purchase.status == "received"
                   # If the quantity is more than the stock
                   if (product.stock - detail.quantity) < 0
-                    redirect_to admin_edit_purchase_reception_path(@reception), alert: t("purchase.stock_is_less", product: I18n.locale == :es ? detail.product.name_spanish : detail.product.name)
+                    redirect_to admin_edit_purchase_reception_path(@reception), alert: t("purchase.stock_is_less", stock: detail.product.stock ,product: I18n.locale == :es ? detail.product.name_spanish : detail.product.name)
                     return
 
                     # If the quantity is less than the stock

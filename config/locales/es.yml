@@ -40,7 +40,7 @@ es:
       category: "Categoría"
       product: "Producto"
       purchase: "Compra"
-      purchase_detail: "Detalle de compra"
+      purchase_details: "Detalle de compra"
     attributes:
       employee:
         first_name: "Nombre"
@@ -141,7 +141,7 @@ es:
         purchase_id: "No. Compra"
         quantity: "Cantidad"
         price: "Precio"
-      purchase_detail:
+      purchase_details:
         product: "Producto"
         price: "Precio"
         quantity: "Cantidad"
@@ -168,7 +168,7 @@ es:
     reception_details: "Detalles de Recepción de compra"
     show_receptions: "Mostrar Recepciones de compra"
     receive_purchase_order: "Recibir orden de compra"
-    stock_is_less: "El stock del producto %{product} es inferior a la cantidad a devolver"
+    stock_is_less: "El stock del producto %{product}(%{stock}) es inferior a la cantidad a devolver"
     in_inventory: "en inventario"
     return: "devolución"
     returns: "devoluciones"

@@ -62,7 +62,7 @@ class PurchaseDetail < ApplicationRecord
 
               # If the new quantity is more than the stock
               if (final_stock) < 0
-                self.errors.add(:quantity, "Cantidad no debe ser mayor a stock #{product.stock}")
+                self.errors.add(:quantity, I18n.t("purchase.stock_is_less", stock: product.stock, product: I18n.locale == :es ? product.name_spanish : product.name))
                 return
 
                 # If the new quantity is less than the stock
