@@ -4,11 +4,11 @@ class Admin::Purchases::ReceptionsController < ApplicationController
   # End Admin layout
 
   # Find purchase reception with Friendly_ID
-  before_action :set_purchase_reception, only: [:new, :show, :edit, :create, :update, :active, :deactive, :history]
+  before_action :set_purchase_reception, only: [:new, :show, :edit, :create, :active, :deactive, :history]
   # End Find purchase reception with Friendly_ID
 
   # Sync model DSL
-  enable_sync only: [:create, :update, :active, :deactive]
+  enable_sync only: [:create, :active, :deactive]
   # End Sync model DSL
 
   # Authentication
@@ -142,6 +142,7 @@ class Admin::Purchases::ReceptionsController < ApplicationController
                     # If the quantity is less than the stock
                   else
                     puts "Stock is more than the quantity"
+
                     product.stock = product.stock - detail.quantity
 
                     returned = PurchaseDetail.new
@@ -198,19 +199,6 @@ class Admin::Purchases::ReceptionsController < ApplicationController
       end
 
       render :new
-    end
-  end
-
-  # Update
-  def update
-
-    if @reception.update(purchase_reception_params)
-      redirect_to admin_purchase_details_path(@reception.id), notice: t("alerts.updated", model: t("purchase.reception"))
-
-    else
-      @providers = Provider.search(params[:search_provider], "enabled-only").paginate(page: params[:providers_page], per_page: 5) # Providers with pagination
-      @products = Product.search(params[:search_product], "enabled-only").paginate(page: params[:products_page], per_page: 5) # Products with pagination
-      render :edit
     end
   end
 

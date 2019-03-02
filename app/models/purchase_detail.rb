@@ -32,16 +32,16 @@ class PurchaseDetail < ApplicationRecord
         if self.purchase.status == "received"
           # If purchase details has been returned
           if self.status == "returned"
-            # If the stock is less than the quantity to return
-            if product.stock < self.quantity
-              self.errors.add(:quantity, "Cantidad no debe ser mayor a stock #{product.stock}")
-              return false
-
-              # If the stock is greater or equal than the quantity to return
-            else
-              product.stock = product.stock - self.quantity
-            end
-            # End If the stock is less than the quantity to return
+            # # If the stock is less than the quantity to return
+            # if product.stock < self.quantity
+            #   self.errors.add(:quantity, "Cantidad no debe ser mayor a stock #{product.stock}")
+            #   return false
+            #
+            #   # If the stock is greater or equal than the quantity to return
+            # else
+            #   product.stock = product.stock - self.quantity
+            # end
+            # # End If the stock is less than the quantity to return
 
             # If purchase details has been received
           else
@@ -68,6 +68,21 @@ class PurchaseDetail < ApplicationRecord
                 # If the new quantity is less than the stock
               else
                 product.stock = final_stock
+
+                # If quantity was reduced
+                if self.quantity < old_quantity
+                  returned = PurchaseDetail.new
+                  returned.purchase_id = self.purchase_id
+                  returned.product_id = self.product_id
+                  returned.price = self.price
+                  returned.quantity = (old_quantity - self.quantity)
+                  returned.status = "returned"
+
+                  if returned.save
+                    puts "Return created on detail update"
+                  end
+                end
+                # End If quantity was reduced
               end
             end
             # End If already is a reception
