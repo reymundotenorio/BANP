@@ -147,6 +147,21 @@ a{
 
   .quantity{
     padding-top: 2px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+
+    .field_with_errors{
+      width: auto;
+
+      input{
+        border-bottom: 1px solid $sixth-color;
+        background-color: rgba($sixth-color, 0.1);
+      }
+    }
 
     button{
       background: transparent;

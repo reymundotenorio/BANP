@@ -18,12 +18,17 @@
                   .form-group.hidden
                     = f.hidden_field :employee_id, value: 1, required: true # current_employee.id
 
+                  .form-group.hidden
+                    = f.hidden_field :payment_method, value: "cash", required: true
+                    = f.hidden_field :payment_reference, value: "-", required: true
+                    = f.hidden_field :paid, value: true, required: true
+
                   .col-xs-12.col-md-7.container-left
 
                     .form-group
                       .input-btn-group
                         = f.hidden_field :customer_id
-                        = f.text_field :customer, value: @invoice.customer_id.nil? ? "" : "#{@invoice.customer.name}", class: "form-control input no-events", required: true
+                        = f.text_field :customer, value: @invoice.customer_id.nil? ? "" : "#{@invoice.customer.first_name} #{@invoice.customer.last_name}", class: "form-control input no-events", required: true
                         %label
                           %b= t("activerecord.attributes.sale.customer")
                         .border-bottom

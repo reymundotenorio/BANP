@@ -10,7 +10,13 @@
     %td.name-container
       %p.record-link{"data-header": "Nombre"}
         - if f.object.new_record?
-          = f.text_field :product, class: "input-disabled"
+
+          - if f.object.product
+            = f.text_field :product, class: "input-disabled", value: I18n.locale == :es ? f.object.product.name_spanish : f.object.product.name
+
+          - else
+            = f.text_field :product, class: "input-disabled"
+          
         - else
           = f.text_field :product, class: "input-disabled", value: I18n.locale == :es ? f.object.product.name_spanish : f.object.product.name
 

@@ -1,4 +1,4 @@
-%tr{class: "#{resource.state if resource.class != PurchaseDetail}"}
+%tr{class: "#{resource.state if (resource.class != PurchaseDetail && resource.class != SaleDetail)}"}
   %td
     %p= resource.id
 
@@ -19,8 +19,45 @@
       - elsif attribute == "total_purchase_detail"
         %p= number_to_currency((resource.price * resource.quantity), precision: 2, unit: "$", format: "%u%n", separator: ".", delimiter: ",")
 
+      - elsif attribute == "sale_datetime"
+        %p= I18n.locale == :es ? resource.sale_datetime.strftime("%d/%m/%Y") : resource.sale_datetime.strftime("%m/%d/%Y")
+
+      - elsif attribute == "total_sale"
+        %p= number_to_currency(Sale.total(resource.id), precision: 2, unit: "$", format: "%u%n", separator: ".", delimiter: ",")
+
+      - elsif attribute == "total_sale_detail"
+        %p= number_to_currency((resource.price * resource.quantity), precision: 2, unit: "$", format: "%u%n", separator: ".", delimiter: ",")
+
       - elsif attribute == "status"
-        %p= resource["#{attribute}"].capitalize
+        %p
+          - if resource["#{attribute}"] == "received"
+            = I18n.locale == :es ? "Recibido" : "Received"
+
+          - elsif resource["#{attribute}"] == "ordered"
+            = I18n.locale == :es ? "Ordenado" : "Ordered"
+
+          - elsif resource["#{attribute}"] == "returned"
+            = I18n.locale == :es ? "Devuelto" : "Returned"
+
+          - elsif resource["#{attribute}"] == "invoiced"
+            = I18n.locale == :es ? "Facturado" : "Invoiced"
+
+      - elsif attribute == "delivery_status"
+        %p
+          - if resource["#{attribute}"] == "in_queue"
+            = I18n.locale == :es ? "En espera" : "In queue"
+
+          - elsif resource["#{attribute}"] == "received"
+            = I18n.locale == :es ? "Recibido" : "Received"
+
+          - elsif resource["#{attribute}"] == "on_the_way"
+            = I18n.locale == :es ? "En camino" : "On the way"
+
+          - elsif resource["#{attribute}"] == "delivered"
+            = I18n.locale == :es ? "Entregado" : "Delivered"
+
+          - elsif resource["#{attribute}"] == "returned"
+            = I18n.locale == :es ? "Devuelto" : "Returned"
 
       - elsif attribute == "product"
         %p= I18n.locale == :es ? resource.product.name_spanish : resource.product.name
@@ -30,6 +67,9 @@
 
       - elsif attribute == "employee"
         %p= "#{resource.employee.first_name} #{resource.employee.last_name}"
+
+      - elsif attribute == "customer"
+        %p= "#{resource.customer.first_name} #{resource.customer.last_name}"
 
       - else
         %p= resource["#{attribute}"]

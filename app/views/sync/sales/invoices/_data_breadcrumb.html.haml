@@ -7,9 +7,9 @@
             %i.fas.fa-tachometer-alt
             %span= t("header.navigation.dashboard")
         %li
-          = link_to (admin_purchase_receptions_path) do
+          = link_to (admin_sale_invoices_path) do
             %i.far.fa-newspaper
-            %span= t("purchase.receptions")
+            %span= t("sale.invoices")
         %li.active
           %i.fas.fa-list-alt
-          = "#{@count == 1 ? t('purchase.reception_detail') : t('purchase.reception_details')} ##{purchase.receipt_number}"
+          = "#{@count == 1 ? t('sale.invoice_detail') : t('sale.invoice_details')} ##{sale.id}"

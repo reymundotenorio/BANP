@@ -37,7 +37,7 @@ class Admin::Purchases::ReceptionsController < ApplicationController
       format.html
       format.js
       format.pdf do
-        to_pdf(name_pdf, template, Purchase.all, I18n.l(datetime), title_pdf)
+        to_pdf(name_pdf, template, Purchase.receptions, I18n.l(datetime), title_pdf)
       end
     end
   end

@@ -91,11 +91,12 @@ class Admin::Sales::InvoicesController < ApplicationController
   # Create
   def create
     @invoice = Sale.new(sale_invoice_params)
-    @invoice.payment_method = "-"
-    @invoice.payment_reference = "-"
-    @invoice.paid = true
 
     # Deleting blank spaces
+    @invoice[:delivery_status] = @invoice[:delivery_status].strip
+    @invoice[:status] = "invoiced"
+    @invoice[:observations] = @invoice[:observations].strip
+
     @invoice[:delivery_status] = @invoice[:delivery_status].strip
     @invoice[:status] = "invoiced"
     @invoice[:observations] = @invoice[:observations].strip
@@ -171,7 +172,7 @@ class Admin::Sales::InvoicesController < ApplicationController
               if detail.sale.status == "invoiced"
                 puts "Stock is more than the quantity"
 
-                product.stock = product.stock - detail.quantity
+                product.stock = product.stock + detail.quantity
 
                 returned = SaleDetail.new
                 returned.sale_id = detail.sale_id

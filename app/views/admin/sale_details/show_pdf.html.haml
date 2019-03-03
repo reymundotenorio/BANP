@@ -16,17 +16,17 @@
             .col-xs-12.no-padding.details
               .general-info
                 .main-info
-                  %p= I18n.l(@purchase.purchase_datetime, format: I18n.locale == :es ? "%A, %d #{t('purchase.of')} %B #{t('purchase.of')} %Y" : "%A, %B %d, %Y")
-                  %p= I18n.l(@purchase.purchase_datetime, format: "%I:%M:%S %p")
+                  %p= I18n.l(@sale.sale_datetime, format: I18n.locale == :es ? "%A, %d #{t('sale.of')} %B #{t('sale.of')} %Y" : "%A, %B %d, %Y")
+                  %p= I18n.l(@sale.sale_datetime, format: "%I:%M:%S %p")
 
                 %br
 
                 .main-info.text-left-right
                   %p.text-left
                     %b
-                      %i.fas.fa-building
-                      %span= t("activerecord.models.provider")
-                  %p.text-right= @purchase.provider.name
+                      %i.fas.fa-users
+                      %span= t("activerecord.models.customer")
+                  %p.text-right= "#{@sale.customer.first_name} #{@sale.customer.last_name}"
 
                 .main-info.text-left-right
 
@@ -34,19 +34,19 @@
                     %b
                       %i.fas.fa-briefcase
                       %span= t("activerecord.models.employee")
-                  %p.text-right= "#{@purchase.employee.first_name} #{@purchase.employee.last_name}"
+                  %p.text-right= "#{@sale.employee.first_name} #{@sale.employee.last_name}"
 
                 %br
 
                 .main-info.text-left-right
                   %p.text-left
                     %b Subtotal
-                  %p.text-right= "#{number_to_currency(Purchase.total(@purchase.id), precision: 2, unit: '$', format: '%u%n', separator: '.', delimiter: ',')}"
+                  %p.text-right= "#{number_to_currency(Sale.total(@sale.id), precision: 2, unit: '$', format: '%u%n', separator: '.', delimiter: ',')}"
 
                 .main-info.text-left-right
                   %p.text-left
-                    %b= "#{t('activerecord.attributes.purchase.discount')} (#{@purchase.discount}%)"
-                  %p.text-right="- #{number_to_currency((Purchase.total(@purchase.id) * (@purchase.discount / 100)), precision: 2, unit: '$', format: '%u%n', separator: '.', delimiter: ',')}"
+                    %b= "#{t('activerecord.attributes.sale.discount')} (#{@sale.discount}%)"
+                  %p.text-right="- #{number_to_currency((Sale.total(@sale.id) * (@sale.discount / 100)), precision: 2, unit: '$', format: '%u%n', separator: '.', delimiter: ',')}"
 
                 .main-info.text-left-right
                   .divider
@@ -54,11 +54,11 @@
                 .main-info.text-left-right
                   %p.text-left
                     %b Total
-                  %p.text-right= number_to_currency((Purchase.total(@purchase.id) - (Purchase.total(@purchase.id) * (@purchase.discount / 100))), precision: 2, unit: "$", format: "%u%n", separator: ".", delimiter: ",")
+                  %p.text-right= number_to_currency((Sale.total(@sale.id) - (Sale.total(@sale.id) * (@sale.discount / 100))), precision: 2, unit: "$", format: "%u%n", separator: ".", delimiter: ",")
 
                 .main-info
-                  %p= t("views.show.created_at", time: time_ago_in_words(@purchase.created_at))
-                  %p= t("views.show.updated_at", time: time_ago_in_words(@purchase.updated_at))
+                  %p= t("views.show.created_at", time: time_ago_in_words(@sale.created_at))
+                  %p= t("views.show.updated_at", time: time_ago_in_words(@sale.updated_at))
         -# End Material card
 
       .col-xs-8
@@ -69,8 +69,8 @@
               -# Table
               %table.table.table-pdf
                 -# Set attributes
-                - model = "purchase_details"
-                - attributes = ["product", "price", "quantity", "total_purchase_detail", "status"]
+                - model = "sale_details"
+                - attributes = ["product", "price", "quantity", "total_sale_detail", "status"]
 
                 -# Render table header
                 = render partial: "partials/table_header", locals: {model: model, attributes: attributes}

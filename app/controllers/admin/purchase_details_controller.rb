@@ -3,27 +3,15 @@ class Admin::PurchaseDetailsController < ApplicationController
   layout "admin/application"
   # End Admin layout
 
-  # Find providers with Friendly_ID
-  # before_action :set_provider, only: [:show, :history]
-  # End Find providers with Friendly_ID
-
-  # Sync model DSL
-  enable_sync only: [:create, :update]
-  # End Sync model DSL
+  # Find purchase
+  before_action :set_purchase, only: [:show]
+  # End Find purchase
 
   # Authentication
   # before_action :require_employee
   # End Authentication
 
   def show
-    begin
-      @purchase = Purchase.find(params[:id])
-
-    rescue
-      redirect_to admin_root_path, alert: t("alerts.not_found", model: t("activerecord.models.purchase"))
-      return
-    end
-
     @is_reception = @purchase.status == "received" ? true : false
 
     @details = @is_reception ? PurchaseDetail.search_receptions(@purchase.id, params[:search], params[:show]).paginate(page: params[:page], per_page: 15) : PurchaseDetail.search_orders(@purchase.id, params[:search], params[:show]).paginate(page: params[:page], per_page: 15) # Details with pagination
@@ -41,7 +29,7 @@ class Admin::PurchaseDetailsController < ApplicationController
 
     name_pdf = "purchase-details-#{file_time}"
     template = "admin/purchase_details/show_pdf.html.haml"
-    title_pdf =   @is_reception ? "#{t('purchase.reception_details')} ##{@purchase.id}" : "#{t('purchase.order_details')} ##{@purchase.id}"
+    title_pdf =   @is_reception ? "#{t('purchase.reception_details')} ##{@purchase.receipt_number}" : "#{t('purchase.order_details')} ##{@purchase.receipt_number}"
     # End PDF view configuration
 
     respond_to do |format|
@@ -51,5 +39,15 @@ class Admin::PurchaseDetailsController < ApplicationController
         to_pdf(name_pdf, template, @details, I18n.l(datetime), title_pdf)
       end
     end
+  end
+
+  private
+
+  # Set Purchase
+  def set_purchase
+    @purchase = Purchase.find(params[:id])
+
+  rescue
+    redirect_to admin_purchase_orders_path, alert: t("alerts.not_found", model: t("activerecord.models.purchase"))
   end
 end

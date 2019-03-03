@@ -9,14 +9,11 @@ class PurchaseDetail < ApplicationRecord
   # End Audit
 
   # Render sync
-  sync :all 
+  sync :all
   # sync_touch :purchase
   # End Render sync
 
   ## Callbacks
-
-  # Before destroy
-  # before_destroy :not_permit_destroy
 
   before_validation :update_stock, on: :update
 
@@ -135,7 +132,6 @@ class PurchaseDetail < ApplicationRecord
   end
   # End Search receptions
 
-
   # Search returns
   def self.search_returns(search)
     if search
@@ -188,11 +184,15 @@ class PurchaseDetail < ApplicationRecord
   validates :status, length: { maximum: 255 }
   # End Length validation
 
+  # Numericality validation
+  validates :price, numericality: {greater_than: 0}
+  validates :quantity, numericality: {greater_than: 0}
+  # End Numericality validation
+
   ## Scopes
   scope :not_returned, -> { where("(purchase_details.status != 'returned')") }
   scope :returned, -> { where("(purchase_details.status = 'returned')") }
   scope :ordered, -> { where("(purchase_details.status = 'ordered')") }
   scope :received, -> { where("(purchase_details.status = 'received')") }
   ## End Scopes
-
 end

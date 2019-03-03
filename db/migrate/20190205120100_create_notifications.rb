@@ -10,6 +10,6 @@ class CreateNotifications < ActiveRecord::Migration[5.2]
       t.timestamps # create_at & update_at
     end
 
-    add_index :notifications, :slug, unique: true
+    # add_index :notifications, :slug, unique: true
   end
 end

@@ -15,6 +15,6 @@ class CreatePurchases < ActiveRecord::Migration[5.2]
     add_reference :purchases, :provider, index: true, foreign_key: true
     add_reference :purchases, :employee, index: true, foreign_key: true
 
-    add_index :purchases, :slug, unique: true
+    # add_index :purchases, :slug, unique: true
   end
 end

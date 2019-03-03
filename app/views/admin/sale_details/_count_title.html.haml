@@ -1,0 +1,6 @@
+%i.fas.fa-list-alt
+- if @is_invoice
+  = "#{@count == 1 ? t('sale.invoice_detail') : t('sale.invoice_details')} ##{@sale.id}"
+
+- else
+  = "#{@count == 1 ? t('sale.order_detail') : t('sale.order_details')} ##{@sale.id}"

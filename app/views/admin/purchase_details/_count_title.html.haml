@@ -1,6 +1,6 @@
 %i.fas.fa-list-alt
 - if @is_reception
-  = "#{@count == 1 ? t('purchase.reception_detail') : t('purchase.reception_details')} ##{@purchase.id}"
+  = "#{@count == 1 ? t('purchase.reception_detail') : t('purchase.reception_details')} ##{@purchase.receipt_number}"
 
 - else
   = "#{@count == 1 ? t('purchase.order_detail') : t('purchase.order_details')} ##{@purchase.id}"

@@ -24,6 +24,9 @@ module ApplicationHelper
       elsif attribute == "two_factor_auth"
         t("views.show.enabled")
 
+      elsif attribute == "paid"
+        I18n.locale == :es ? "Si" : "No"
+
       else
         true
       end
@@ -38,6 +41,9 @@ module ApplicationHelper
 
       elsif attribute == "two_factor_auth"
         t("views.show.disabled")
+
+      elsif attribute == "paid"
+        "No"
 
       else
         false
@@ -61,6 +67,36 @@ module ApplicationHelper
 
     elsif attribute == "price"
       number_to_currency(info, precision: 2, unit: "$", format: "%u%n", separator: ".", delimiter: ",")
+
+    elsif attribute == "payment_method"
+      if info == "cash"
+        I18n.locale == :es ? "Efectivo" : "Cash"
+
+      elsif info == "card"
+        I18n.locale == :es ? "Tarjeta" : "Card"
+      end
+
+    elsif attribute == "payment_reference"
+      if info == "-"
+        ""
+      end
+
+    elsif attribute == "delivery_status"
+      if info == "in_queue"
+        I18n.locale == :es ? "En espera" : "In queue"
+
+      elsif info == "received"
+        I18n.locale == :es ? "Recibido" : "Received"
+
+      elsif info == "on_the_way"
+        I18n.locale == :es ? "En camino" : "On the way"
+
+      elsif info == "delivered"
+        I18n.locale == :es ? "Entregado" : "Delivered"
+
+      elsif info == "returned"
+        I18n.locale == :es ? "Devuelto" : "Returned"
+      end
 
     elsif attribute == "status"
       if info == "ordered"

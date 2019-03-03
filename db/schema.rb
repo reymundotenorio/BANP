@@ -115,10 +115,8 @@ ActiveRecord::Schema.define(version: 2019_02_05_120100) do
     t.string "authorized_roles"
     t.text "read_by"
     t.boolean "state", default: true, null: false
-    t.string "slug"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["slug"], name: "index_notifications_on_slug", unique: true
   end
 
   create_table "products", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -160,62 +158,57 @@ ActiveRecord::Schema.define(version: 2019_02_05_120100) do
     t.decimal "price", precision: 8, scale: 2, null: false
     t.integer "quantity", null: false
     t.string "status"
-    t.string "slug"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "purchase_id"
     t.bigint "product_id"
     t.index ["product_id"], name: "index_purchase_details_on_product_id"
     t.index ["purchase_id"], name: "index_purchase_details_on_purchase_id"
-    t.index ["slug"], name: "index_purchase_details_on_slug", unique: true
   end
 
   create_table "purchases", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.datetime "purchase_datetime", null: false
     t.string "receipt_number", null: false
     t.string "status", default: "ordered", null: false
-    t.decimal "discount", precision: 8, scale: 2, null: false
+    t.decimal "discount", precision: 8, scale: 2, default: "0.0", null: false
     t.string "observations"
     t.boolean "state", default: true, null: false
-    t.string "slug"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "provider_id"
     t.bigint "employee_id"
     t.index ["employee_id"], name: "index_purchases_on_employee_id"
     t.index ["provider_id"], name: "index_purchases_on_provider_id"
-    t.index ["slug"], name: "index_purchases_on_slug", unique: true
   end
 
   create_table "sale_details", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.decimal "price", precision: 8, scale: 2, null: false
     t.integer "quantity", null: false
     t.string "status"
-    t.string "slug"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "sale_id"
     t.bigint "product_id"
     t.index ["product_id"], name: "index_sale_details_on_product_id"
     t.index ["sale_id"], name: "index_sale_details_on_sale_id"
-    t.index ["slug"], name: "index_sale_details_on_slug", unique: true
   end
 
   create_table "sales", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.datetime "sale_datetime", null: false
     t.string "status", default: "ordered", null: false
     t.string "delivery_status", default: "in_queue", null: false
-    t.decimal "discount", precision: 8, scale: 2, null: false
+    t.decimal "discount", precision: 8, scale: 2, default: "0.0", null: false
+    t.string "payment_method", null: false
+    t.string "payment_reference", null: false
+    t.boolean "paid", null: false
     t.string "observations"
     t.boolean "state", default: true, null: false
-    t.string "slug"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "customer_id"
     t.bigint "employee_id"
     t.index ["customer_id"], name: "index_sales_on_customer_id"
     t.index ["employee_id"], name: "index_sales_on_employee_id"
-    t.index ["slug"], name: "index_sales_on_slug", unique: true
   end
 
   create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|

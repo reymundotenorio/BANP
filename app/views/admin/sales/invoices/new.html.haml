@@ -3,14 +3,14 @@
   .container
     -# Title
     .row.title-container
-      .col-xs-12.col-lg-9
+      .col-xs-12.col-lg-7
         -# Heading
         %h1
           %i.fas.fa-plus
           = t("views.new.new")
         -# End Heading
 
-      .col-xs-12.col-lg-3
+      .col-xs-12.col-lg-5
         -# Providers button
         .btn-container
           = link_to (admin_sale_invoices_path), class: "btn btn-general" do

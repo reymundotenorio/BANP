@@ -1,0 +1,25 @@
+.row.no-margin
+  .col-xs-12.no-padding
+    -# Table
+    %table.table
+      %thead
+        - model = "sale_detail"
+        -# attributes = ["product", "price", "quantity", "total", "status"]
+        - attributes = ["product", "price", "quantity", "total"]
+
+        -# Render table header
+        = render partial: "partials/table_header", locals: {model: model, attributes: attributes}
+
+      %tbody
+        -# Data table render_sync
+        = sync partial: "data_table", collection: @details
+        = sync_new partial: "data_table", resource: SaleDetail.new
+        -# End Data table render_sync
+    -# End Table
+
+
+.row.no-margin
+  .col-xs-12.no-padding.text-center
+    -# Pagination
+    = will_paginate @details, renderer: BootstrapPagination::Rails
+    -# End Pagination

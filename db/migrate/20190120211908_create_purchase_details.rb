@@ -12,6 +12,6 @@ class CreatePurchaseDetails < ActiveRecord::Migration[5.2]
     add_reference :purchase_details, :purchase, index: true, foreign_key: true
     add_reference :purchase_details, :product, index: true, foreign_key: true
 
-    add_index :purchase_details, :slug, unique: true
+    # add_index :purchase_details, :slug, unique: true
   end
 end
