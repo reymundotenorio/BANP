@@ -90,8 +90,8 @@ class Admin::CategoriesController < ApplicationController
     # Deleting blank spaces
     @category[:name] = @category[:name].strip
     @category[:name_spanish] = @category[:name_spanish].strip
-    @category[:description]= @category[:description].strip
-    @category[:description_spanish]= @category[:description_spanish].strip
+    @category[:description] = @category[:description].strip
+    @category[:description_spanish] = @category[:description_spanish].strip
     # End Deleting blank spaces
 
     # If record was saved

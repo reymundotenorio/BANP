@@ -39,7 +39,9 @@ en:
       category: "Category"
       product: "Product"
       purchase: "Purchase"
-      purchase_detail: "Purchase detail"
+      purchase_details: "Purchase detail"
+      sale: "Sale"
+      sale_details: "Sale detail"
     attributes:
       employee:
         first_name: "First name"
@@ -140,7 +142,7 @@ en:
         purchase_id: "No. Purchase"
         quantity: "Quantity"
         price: "Price"
-      purchase_detail:
+      purchase_details:
         product: "Product"
         price: "Price"
         quantity: "Quantity"
@@ -151,6 +153,31 @@ en:
         created_at: "Date"
         return: "return"
         returns: "returns"
+      sale:
+        sale_datetime: "Date"
+        delivery_status: "Delivery status"
+        customer: "Customer"
+        employee: "Employee"
+        status: "Status"
+        discount: "Discount"
+        observations: "Observations"
+        state: "State"
+        total_sale: "Total"
+        total: "Total"
+        customer_id: "Cliente"
+        product_id: "Product"
+        sale_id: "Sale no."
+        quantity: "Quantity"
+        price: "Price"
+      sale_details:
+        product: "Product"
+        price: "Price"
+        quantity: "Quantity"
+        total_sale_detail: "Total"
+        status: "Status"
+        total: "Total"
+        sale_id: "Sale no."
+        created_at: "Date"
 
   # Purchase
   purchase:
@@ -171,7 +198,30 @@ en:
     receive_purchase_order: "Receive purchase order"
     stock_is_less: "The stock (%{stock}) of the product %{product} is less than the amount to be returned"
     in_inventory: "in inventory"
+    return: "return"
+    returns: "returns"
     error_canceling_reception: "Error canceling purchase reception"
+
+  # Sale
+  sale:
+    order: "Sale order"
+    orders: "Sale orders"
+    order_detail: "Sale order detail"
+    order_details: "Sale order details"
+    show_orders: "Show sale orders"
+    hide_returned: "Hide returned"
+    of: "of"
+    add_products: "Add products"
+    remove: "Remove"
+    reception: "Sale reception"
+    receptions: "Sale receptions"
+    reception_detail: "Sale reception detail"
+    reception_details: "Sale reception details"
+    show_receptions: "Show sale receptions"
+    receive_sale_order: "Receive sale order"
+    stock_is_less: "The stock (%{stock}) of the product %{product} is less than the amount to be returned"
+    in_inventory: "in inventory"
+    error_canceling_reception: "Error canceling sale reception"
 
   # Will paginate
   will_paginate:

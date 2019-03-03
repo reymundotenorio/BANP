@@ -91,7 +91,7 @@ class Admin::EmployeesController < ApplicationController
 
     # Deleting blank spaces
     @employee[:first_name] = @employee[:first_name].strip
-    @employee[:last_name]= @employee[:last_name].strip
+    @employee[:last_name] = @employee[:last_name].strip
     @employee[:email] =  @employee[:email].strip.downcase
     @employee[:phone] = @employee[:phone].strip
     @employee[:role] = @employee[:role].strip

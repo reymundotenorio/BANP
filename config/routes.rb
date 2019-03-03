@@ -258,6 +258,18 @@ Rails.application.routes.draw do
     patch "/sales/order/:id/active", to: "sales/orders#active", as: "active_sale_order"
     patch "/sales/order/:id/deactive", to: "sales/orders#deactive", as: "deactive_sale_order"
     # End Sales orders
+
+    # Purchases invoices
+    get "/sales/invoices", to: "sales/invoices#index", as: "sale_invoices"
+    get "/sales/invoice/new", to: "sales/invoices#new", as: "new_sale_invoice"
+    get "/sales/invoice/:id", to: "sales/invoices#show", as: "sale_invoice"
+    get "/sales/invoice/:id/edit", to: "sales/invoices#edit", as: "edit_sale_invoice"
+    get "/sales/invoice/:id/history", to: "sales/invoices#history", as: "history_sale_invoice"
+    post "/sales/invoice", to: "sales/invoices#create", as: "sales_invoice"
+    patch "/sales/invoice/:id", to: "sales/invoices#update", as: "update_sale_invoice"
+    patch "/sales/invoice/:id/active", to: "sales/invoices#active", as: "active_sale_invoice"
+    patch "/sales/invoice/:id/deactive", to: "sales/invoices#deactive", as: "deactive_sale_invoice"
+    # End Purchases invoices
   end
   # End Admin namespace
 

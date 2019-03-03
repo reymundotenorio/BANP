@@ -29,7 +29,7 @@ class Admin::Purchases::OrdersController < ApplicationController
     file_time = datetime.strftime("%m%d%Y")
 
     name_pdf = "purchase-orders-#{file_time}"
-    template = "admin/purchase_orders/index_pdf.html.haml"
+    template = "admin/purchases/orders/index_pdf.html.haml"
     title_pdf = t("purchase.orders")
     # End PDF view configuration
 
@@ -91,7 +91,7 @@ class Admin::Purchases::OrdersController < ApplicationController
     @order = Purchase.new(purchase_order_params)
 
     # Deleting blank spaces
-    @order[:receipt_number]= @order[:receipt_number].strip
+    @order[:receipt_number] = @order[:receipt_number].strip
     @order[:status] = "ordered"
     @order[:observations] = @order[:observations].strip
     # End Deleting blank spaces
@@ -126,7 +126,7 @@ class Admin::Purchases::OrdersController < ApplicationController
   # Update
   def update
     # Deleting blank spaces
-    @order[:receipt_number]= @order[:receipt_number].strip
+    @order[:receipt_number] = @order[:receipt_number].strip
     @order[:status] = "ordered"
     @order[:observations] = @order[:observations].strip
     # End Deleting blank spaces

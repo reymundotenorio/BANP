@@ -89,7 +89,7 @@ class Admin::ProvidersController < ApplicationController
 
     # Deleting blank spaces
     @provider[:name] = @provider[:name].strip
-    @provider[:FEIN]= @provider[:FEIN].strip
+    @provider[:FEIN] = @provider[:FEIN].strip
     @provider[:email] =  @provider[:email].strip.downcase
     @provider[:phone] = @provider[:phone].strip
     @provider[:address] = @provider[:address].strip

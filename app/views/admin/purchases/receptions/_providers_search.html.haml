@@ -4,7 +4,7 @@
     %table.table
       %thead
         - model = "provider"
-        - attributes = ["name", "FEIN", "email", "Phone", "select"]
+        - attributes = ["name", "FEIN", "email", "phone", "select"]
 
         -# Render table header
         = render partial: "partials/table_header", locals: {model: model, attributes: attributes}

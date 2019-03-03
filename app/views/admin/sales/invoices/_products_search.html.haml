@@ -3,22 +3,26 @@
     -# Table
     %table.table
       %thead
-        - model = "provider"
-        - attributes = ["name", "FEIN", "email", "phone", "select"]
+        - model = "product"
+        - attributes = ["name", "price", "quantity", "total", "select"]
 
         -# Render table header
         = render partial: "partials/table_header", locals: {model: model, attributes: attributes}
+
+        - if I18n.locale == :es
+          - attributes = ["name_spanish", "price", "quantity", "total", "select"]
+
       %tbody
         -# Data table render_sync
-        = sync partial: "select_provider", collection: @providers
-        = sync_new partial: "select_provider", resource: Provider.new
+        = sync partial: "select_product_sale", collection: @products
+        = sync_new partial: "select_product_sale", resource: Product.new
         -# End Data table render_sync
     -# End Table
 
 .row.no-margin
   .col-xs-12.no-padding.text-center
     -# Pagination
-    = will_paginate @providers, renderer: BootstrapPagination::Rails, param_name: "providers_page"
+    = will_paginate @products, renderer: BootstrapPagination::Rails, param_name: "products_page"
     -# End Pagination
 
 -# Auto search script
@@ -29,6 +33,6 @@
 = javascript_include_tag "pagination-ajax", "data-turbolinks-track": "reload"
 -# End Pagination with Ajax script
 
--# Select provider
-= javascript_include_tag "select-provider", "data-turbolinks-track": "reload"
--# End Select provider
+-# Products modals script
+= javascript_include_tag "products-modal-sale", "data-turbolinks-track": "reload"
+-# End Products modals script

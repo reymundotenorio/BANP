@@ -55,7 +55,7 @@ $(document).ready(function(){
     $("#role-dropdown .dropdown-menu li:first-child .dropdown-item").focus();
   });
 
-  // Copy costumer_email to value on user_email
+  // Copy customer_email to value on user_email
   $("#customer_email").on("change paste keyup", function(){
     $("#customer_user_attributes_email").val($(this).val());
   });

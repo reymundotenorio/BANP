@@ -5,7 +5,7 @@ class CreateSales < ActiveRecord::Migration[5.2]
       t.string :status, null: false, default: "ordered" # ordered, invoiced, delivered, returned
       t.string :delivery_status, null: false, default: "in_queue" # in_queue, invoiced, on_the_way, delivered, returned
       t.decimal :discount, null: false, precision: 8, scale: 2, default: 0
-      t.string :payment_method, null: false # Cash, PayPal, Stripe
+      t.string :payment_method, null: false # Cash, PayPal, Stripe, Card
       t.string :payment_reference, null: false # Paypal or Stripe Reference Code
       t.boolean :paid, null: false
       t.string :observations

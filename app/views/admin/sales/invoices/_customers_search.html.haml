@@ -3,22 +3,22 @@
     -# Table
     %table.table
       %thead
-        - model = "provider"
-        - attributes = ["name", "FEIN", "email", "phone", "select"]
+        - model = "customer"
+        - attributes = ["first_name", "last_name", "company", "email" ,"phone", "select"]
 
         -# Render table header
         = render partial: "partials/table_header", locals: {model: model, attributes: attributes}
       %tbody
         -# Data table render_sync
-        = sync partial: "select_provider", collection: @providers
-        = sync_new partial: "select_provider", resource: Provider.new
+        = sync partial: "select_customer", collection: @customers
+        = sync_new partial: "select_customer", resource: Customer.new
         -# End Data table render_sync
     -# End Table
 
 .row.no-margin
   .col-xs-12.no-padding.text-center
     -# Pagination
-    = will_paginate @providers, renderer: BootstrapPagination::Rails, param_name: "providers_page"
+    = will_paginate @customers, renderer: BootstrapPagination::Rails, param_name: "customers_page"
     -# End Pagination
 
 -# Auto search script
@@ -29,6 +29,6 @@
 = javascript_include_tag "pagination-ajax", "data-turbolinks-track": "reload"
 -# End Pagination with Ajax script
 
--# Select provider
-= javascript_include_tag "select-provider", "data-turbolinks-track": "reload"
--# End Select provider
+-# Select customer
+= javascript_include_tag "select-customer", "data-turbolinks-track": "reload"
+-# End Select customer

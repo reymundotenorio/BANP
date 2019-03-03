@@ -104,7 +104,7 @@ class Admin::ProductsController < ApplicationController
 
     # Deleting blank spaces
     @product[:name] = @product[:name].strip
-    @product[:name_spanish]= @product[:name_spanish].strip
+    @product[:name_spanish] = @product[:name_spanish].strip
     @product[:content] = @product[:content].strip
     @product[:content_spanish] = @product[:content_spanish].strip
     @product[:description] = @product[:description].strip

@@ -17,7 +17,7 @@ class Admin::Purchases::ReceptionsController < ApplicationController
 
   # /admin/purchases/receptions
   def index
-    @receptions = Purchase.search_reception(params[:search], params[:show]).paginate(page: params[:page], per_page: 15) # Orders with pagination
+    @receptions = Purchase.search_reception(params[:search], params[:show]).paginate(page: params[:page], per_page: 15) # Receptions with pagination
     @show_all = params[:show] == "all" ? true : false # View All (Enabled and Disabled)
     @count = @receptions.count
 
@@ -29,7 +29,7 @@ class Admin::Purchases::ReceptionsController < ApplicationController
     file_time = datetime.strftime("%m%d%Y")
 
     name_pdf = "purchase-receptions-#{file_time}"
-    template = "admin/purchase_receptions/index_pdf.html.haml"
+    template = "admin/purchases/receptions/index_pdf.html.haml"
     title_pdf = t("purchase.receptions")
     # End PDF view configuration
 
@@ -88,7 +88,7 @@ class Admin::Purchases::ReceptionsController < ApplicationController
   # Create
   def create
     # Deleting blank spaces
-    @reception[:receipt_number]= @reception[:receipt_number].strip
+    @reception[:receipt_number] = @reception[:receipt_number].strip
     @reception[:status] = @reception[:status].strip
     @reception[:observations] = @reception[:observations].strip
     # End Deleting blank spaces
@@ -132,7 +132,7 @@ class Admin::Purchases::ReceptionsController < ApplicationController
             if product
               # If purchase is active
               if detail.purchase.state
-                # If purchase is a reception or ordered
+                # If sale is a reception
                 if detail.purchase.status == "received"
                   # If the quantity is more than the stock
                   if (product.stock - detail.quantity) < 0
@@ -162,7 +162,7 @@ class Admin::Purchases::ReceptionsController < ApplicationController
                     end
                   end
                 end
-                # End If purchase is a reception or ordered
+                # End If sale is a reception
               end
               # End If purchase is active
             end

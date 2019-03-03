@@ -78,3 +78,9 @@ Rails.application.config.assets.precompile += %w( products-modal.js )
 
 # Reset customer form
 Rails.application.config.assets.precompile += %w( reset-customer-form.js )
+
+# Select Customer
+Rails.application.config.assets.precompile += %w( select-customer.js )
+
+# Products modal on sale
+Rails.application.config.assets.precompile += %w( products-modal-sale.js )

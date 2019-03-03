@@ -11,7 +11,7 @@
     %td
       .record-link{"data-header": t("activerecord.attributes.purchase_detail.#{attribute}")}
         - if attribute == "created_at"
-          %p= I18n.locale == :es ? purchase_detail.created_at.strftime("%d/%m/%Y") : purchase_detail.created_at.strftime("%m/%d/%Y")
+          %p= I18n.locale == :es ? purchase_detail.created_at.strftime("%d/%m/%Y - %I:%M:%S %p") : purchase_detail.created_at.strftime("%m/%d/%Y - %H:%M:%S")
 
         - elsif attribute == "product"
           -# Product name render_sync

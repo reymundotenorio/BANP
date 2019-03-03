@@ -10,7 +10,6 @@ class SaleDetail < ApplicationRecord
 
   # Audit
   audited
-  audited associated_with: :sale
   # End Audit
 
   # Render sync

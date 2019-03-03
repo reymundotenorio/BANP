@@ -41,6 +41,8 @@ es:
       product: "Producto"
       purchase: "Compra"
       purchase_details: "Detalle de compra"
+      sale: "Venta"
+      sale_details: "Detalle de venta"
     attributes:
       employee:
         first_name: "Nombre"
@@ -150,6 +152,31 @@ es:
         total: "Total"
         purchase_id: "No. Compra"
         created_at: "Fecha"
+      sale:
+        sale_datetime: "Fecha"
+        delivery_status: "Condición del envío"
+        customer: "Cliente"
+        employee: "Empleado"
+        status: "Condición"
+        discount: "Descuento"
+        observations: "Observaciones"
+        state: "Estado"
+        total_sale: "Total"
+        total: "Total"
+        customer_id: "Cliente"
+        product_id: "Producto"
+        sale_id: "No. Venta"
+        quantity: "Cantidad"
+        price: "Precio"
+      sale_details:
+        product: "Producto"
+        price: "Precio"
+        quantity: "Cantidad"
+        total_sale_detail: "Total"
+        status: "Condición"
+        total: "Total"
+        sale_id: "No. Venta"
+        created_at: "Fecha"
 
   # Purchase
   purchase:
@@ -173,6 +200,29 @@ es:
     return: "devolución"
     returns: "devoluciones"
     error_canceling_reception: "Error al anular la recepción de compra"
+
+  # Sale
+  sale:
+    order: "Orden de venta"
+    orders: "Ordenes de venta"
+    order_detail: "Detalle de orden de venta"
+    order_details: "Detalles de orden de venta"
+    show_orders: "Mostrar ordenes de venta"
+    hide_returned: "Ocultar devueltos"
+    of: "de"
+    add_products: "Agregar productos"
+    remove: "Eliminar"
+    reception: "Recepción de venta"
+    receptions: "Recepciones de venta"
+    reception_detail: "Detalle de Recepción de venta"
+    reception_details: "Detalles de Recepción de venta"
+    show_receptions: "Mostrar Recepciones de venta"
+    receive_sale_order: "Recibir orden de venta"
+    stock_is_less: "El stock (%{stock}) del producto %{product} es inferior a la cantidad a devolver"
+    in_inventory: "en inventario"
+    return: "devolución"
+    returns: "devoluciones"
+    error_canceling_reception: "Error al anular la recepción de venta"
 
   # Will paginate
   will_paginate:

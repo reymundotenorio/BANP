@@ -80,14 +80,14 @@
       %ul.dropdown-menu
         -# Orders
         %li
-          %a{href: "#"}
+          = link_to (admin_sale_orders_path), class: "#{'active' if controller_path == 'admin/sales/orders'}" do
             %i.far.fa-newspaper
             = t("header.navigation.orders")
         -# End Orders
 
         -# Invoicing
         %li
-          %a{href: "#"}
+          = link_to (admin_sale_invoices_path), class: "#{'active' if controller_path == 'admin/sales/invoices'}" do
             %i.fas.fa-cart-plus
             = t("header.navigation.invoicing")
         -# End Invoicing

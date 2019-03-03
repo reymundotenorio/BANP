@@ -34,11 +34,14 @@ $(document).ready(function(){
       price_elem = "#product_price_$product_id".replace("$product_id", product_id);
       product_price = $(price_elem);
 
-      if(product_price.val() != ""){
+      if(product_price.text() != ""){
         total_elem = "#product_total_$product_id".replace("$product_id", product_id);
         product_total = $(total_elem);
 
-        productPrice = product_price.val().replace(",", "");
+        productPrice = product_price.text().replace("$", "");
+        productPrice = productPrice.replace(",", "");
+
+        console.error(productPrice);
 
         price_val = parseFloat(productPrice);
         quantity_val = parseInt($(this).val());
@@ -75,10 +78,6 @@ $(document).ready(function(){
       product_total.text(formatter.format("0.00"));
     }
     else{
-      // if (!isNumberFloat($(this).val())) {
-      //   // return;
-      // }
-      // else{
       product_id = $(this).attr("id").replace("product_price_", "");
 
       quantity_elem = "#product_quantity_$product_id".replace("$product_id", product_id);
@@ -88,9 +87,8 @@ $(document).ready(function(){
         total_elem = "#product_total_$product_id".replace("$product_id", product_id);
         product_total = $(total_elem);
 
-        productPrice = $(this).val().replace(",", "");
-
-        console.log("YES: "+productPrice);
+        productPrice = $(this).text().replace("$", "");
+        productPrice = productPrice.replace(",", "");
 
         quantity_val = parseInt(product_quantity.val());
         price_val = parseFloat(productPrice);
@@ -98,7 +96,6 @@ $(document).ready(function(){
         total = price_val * quantity_val;
         product_total.text(formatter.format(total));
       }
-      // }
     }
 
   });
@@ -194,14 +191,14 @@ $(document).ready(function(){
         return;
       }
       else{
-        product_id = $(this).attr("id").replace("purchase_purchase_details_attributes_", "");
+        product_id = $(this).attr("id").replace("sale_sale_details_attributes_", "");
         product_id = product_id.replace("_quantity", "");
 
-        price_elem = "#purchase_purchase_details_attributes_$product_id_price".replace("$product_id", product_id);
+        price_elem = "#sale_sale_details_attributes_$product_id_price".replace("$product_id", product_id);
         product_price = $(price_elem);
 
-        if(product_price.val() != ""){
-          total_elem = "#purchase_purchase_details_attributes_$product_id_total".replace("$product_id", product_id);
+        if(product_price.text() != ""){
+          total_elem = "#sale_sale_details_attributes_$product_id_total".replace("$product_id", product_id);
           product_total = $(total_elem);
 
           price_val = parseFloat(product_price.data("price"));
@@ -219,7 +216,7 @@ $(document).ready(function(){
   // End Events on Details
 
   // Updating Total on remove
-  $("#purchase_details").on("cocoon:after-remove", function() {
+  $("#sale_details").on("cocoon:after-remove", function() {
     updateTotal();
   });
   // End Updating Total on remove
@@ -240,14 +237,14 @@ $(document).ready(function(){
     product_price = $(price_elem);
     product_quantity = $(quantity_elem);
 
-    if (product_price.val() == ""){
+    if (product_price.text() == ""){
       product_price.focus();
       return;
     }
 
-    if (product_price.val() == ""){
+    if (product_price.text() == ""){
 
-      if (!isNumberInt(product_price.val())) {
+      if (!isNumberInt(product_price.text())) {
         product_quantity.focus();
         return;
       }
@@ -260,16 +257,17 @@ $(document).ready(function(){
     priceText = i18nLocale == "es" ? "Precio" : "Price";
     quantityText = i18nLocale == "es" ? "Cantidad" : "Quantity";
 
-    productPrice = product_price.val().replace(",", "");
+    productPrice = product_price.text().replace("$", "");
+    productPrice = productPrice.replace(",", "");
 
     var new_order_product =
-    "<tr class='nested-fields'><td class='hidden'><input value='" + product_id + "' type='hidden' name='purchase[purchase_details_attributes][" + date_id + "][product_id]' id='purchase_purchase_details_attributes_" + date_id + "_product_id'></td><td class='hidden'><input value='ordered' type='hidden' name='purchase[purchase_details_attributes][" + date_id + "][status]' id='purchase_purchase_details_attributes_" + date_id + "_status'></td><td class='name-container'><p class='record-link' data-header='" + nameText + "'><input class='input-disabled' value='" + product_name + "' type='text' name='purchase[purchase_details_attributes][" + date_id + "][product]' id='purchase_purchase_details_attributes_" + date_id + "_product'></p></td><td class='price-container price-row align-middle'><p class='record-link' data-header='" + priceText + "'><input class='input-disabled no-padding price-details' data-price= '" + productPrice + "' value='" + formatter.format(productPrice) + "' type='text' name='purchase[purchase_details_attributes][" + date_id + "][price]' id='purchase_purchase_details_attributes_" + date_id + "_price'></p></td><td class='quantity-container align-middle'><div class='form-group no-padding record-link' data-header='" + quantityText + "'><div class='quantity'><button class='subtract' name='minus' type='button'><i class='fas fa-minus'></i></button><input class='q-input details' min='1' step='1' value='" + product_quantity.val() + "' type='number' name='purchase[purchase_details_attributes][" + date_id + "][quantity]' id='purchase_purchase_details_attributes_" + date_id + "_quantity'><button class='add' name='plus' type='button'><i class='fas fa-plus'></i></button></div></div></td><td class='align-middle total-container'><p class='record-link detail-total' data-header='Total' id='purchase_purchase_details_attributes_" + date_id + "_total'>" + product_total.text() + "</p></td><td class='align-middle'><input type='hidden' name='purchase[purchase_details_attributes][" + date_id + "][_destroy]' id='purchase_purchase_details_attributes_" + date_id + "__destroy' value='false'><a class='btn btn-general remove_fields dynamic' href='#'><i class='fas fa-trash-alt'></i></a></td></tr>";
+    "<tr class='nested-fields'><td class='hidden'><input value='" + product_id + "' type='hidden' name='sale[sale_details_attributes][" + date_id + "][product_id]' id='sale_sale_details_attributes_" + date_id + "_product_id'></td><td class='hidden'><input value='ordered' type='hidden' name='sale[sale_details_attributes][" + date_id + "][status]' id='sale_sale_details_attributes_" + date_id + "_status'></td><td class='name-container'><p class='record-link' data-header='" + nameText + "'><input class='input-disabled' value='" + product_name + "' type='text' name='sale[sale_details_attributes][" + date_id + "][product]' id='sale_sale_details_attributes_" + date_id + "_product'></p></td><td class='price-container price-row align-middle'><p class='record-link' data-header='" + priceText + "'><input class='input-disabled no-padding price-details' data-price= '" + productPrice + "' value='" + formatter.format(productPrice) + "' type='text' name='sale[sale_details_attributes][" + date_id + "][price]' id='sale_sale_details_attributes_" + date_id + "_price'></p></td><td class='quantity-container align-middle'><div class='form-group no-padding record-link' data-header='" + quantityText + "'><div class='quantity'><button class='subtract' name='minus' type='button'><i class='fas fa-minus'></i></button><input class='q-input details' min='1' step='1' value='" + product_quantity.val() + "' type='number' name='sale[sale_details_attributes][" + date_id + "][quantity]' id='sale_sale_details_attributes_" + date_id + "_quantity'><button class='add' name='plus' type='button'><i class='fas fa-plus'></i></button></div></div></td><td class='align-middle total-container'><p class='record-link detail-total' data-header='Total' id='sale_sale_details_attributes_" + date_id + "_total'>" + product_total.text() + "</p></td><td class='align-middle'><input type='hidden' name='sale[sale_details_attributes][" + date_id + "][_destroy]' id='sale_sale_details_attributes_" + date_id + "__destroy' value='false'><a class='btn btn-general remove_fields dynamic' href='#'><i class='fas fa-trash-alt'></i></a></td></tr>";
 
     var new_reception_product =
-    "<tr class='nested-fields'><td class='hidden'><input value='" + product_id + "' type='hidden' name='purchase[purchase_details_attributes][" + date_id + "][product_id]' id='purchase_purchase_details_attributes_" + date_id + "_product_id'></td><td class='hidden'><input value='received' type='hidden' name='purchase[purchase_details_attributes][" + date_id + "][status]' id='purchase_purchase_details_attributes_" + date_id + "_status'></td><td class='name-container'><p class='record-link' data-header='" + nameText + "'><input class='input-disabled' value='" + product_name + "' type='text' name='purchase[purchase_details_attributes][" + date_id + "][product]' id='purchase_purchase_details_attributes_" + date_id + "_product'></p></td><td class='price-container price-row align-middle'><p class='record-link' data-header='" + priceText + "'><input class='input-disabled no-padding price-details' data-price= '" + productPrice + "' value='" + formatter.format(productPrice) + "' type='text' name='purchase[purchase_details_attributes][" + date_id + "][price]' id='purchase_purchase_details_attributes_" + date_id + "_price'></p></td><td class='quantity-container align-middle'><div class='form-group no-padding record-link' data-header='" + quantityText + "'><div class='quantity'><button class='subtract' name='minus' type='button'><i class='fas fa-minus'></i></button><input class='q-input details' min='1' step='1' value='" + product_quantity.val() + "' type='number' name='purchase[purchase_details_attributes][" + date_id + "][quantity]' id='purchase_purchase_details_attributes_" + date_id + "_quantity'><button class='add' name='plus' type='button'><i class='fas fa-plus'></i></button></div></div></td><td class='align-middle total-container'><p class='record-link detail-total' data-header='Total' id='purchase_purchase_details_attributes_" + date_id + "_total'>" + product_total.text() + "</p></td><td class='align-middle'><input type='hidden' name='purchase[purchase_details_attributes][" + date_id + "][_destroy]' id='purchase_purchase_details_attributes_" + date_id + "__destroy' value='false'><a class='btn btn-general remove_fields dynamic' href='#'><i class='fas fa-trash-alt'></i></a></td></tr>";
+    "<tr class='nested-fields'><td class='hidden'><input value='" + product_id + "' type='hidden' name='sale[sale_details_attributes][" + date_id + "][product_id]' id='sale_sale_details_attributes_" + date_id + "_product_id'></td><td class='hidden'><input value='received' type='hidden' name='sale[sale_details_attributes][" + date_id + "][status]' id='sale_sale_details_attributes_" + date_id + "_status'></td><td class='name-container'><p class='record-link' data-header='" + nameText + "'><input class='input-disabled' value='" + product_name + "' type='text' name='sale[sale_details_attributes][" + date_id + "][product]' id='sale_sale_details_attributes_" + date_id + "_product'></p></td><td class='price-container price-row align-middle'><p class='record-link' data-header='" + priceText + "'><input class='input-disabled no-padding price-details' data-price= '" + productPrice + "' value='" + formatter.format(productPrice) + "' type='text' name='sale[sale_details_attributes][" + date_id + "][price]' id='sale_sale_details_attributes_" + date_id + "_price'></p></td><td class='quantity-container align-middle'><div class='form-group no-padding record-link' data-header='" + quantityText + "'><div class='quantity'><button class='subtract' name='minus' type='button'><i class='fas fa-minus'></i></button><input class='q-input details' min='1' step='1' value='" + product_quantity.val() + "' type='number' name='sale[sale_details_attributes][" + date_id + "][quantity]' id='sale_sale_details_attributes_" + date_id + "_quantity'><button class='add' name='plus' type='button'><i class='fas fa-plus'></i></button></div></div></td><td class='align-middle total-container'><p class='record-link detail-total' data-header='Total' id='sale_sale_details_attributes_" + date_id + "_total'>" + product_total.text() + "</p></td><td class='align-middle'><input type='hidden' name='sale[sale_details_attributes][" + date_id + "][_destroy]' id='sale_sale_details_attributes_" + date_id + "__destroy' value='false'><a class='btn btn-general remove_fields dynamic' href='#'><i class='fas fa-trash-alt'></i></a></td></tr>";
 
-    $("#purchase_details.order_details").append(new_order_product);
-    $("#purchase_details.reception_details").append(new_reception_product);
+    $("#sale_details.order_details").append(new_order_product);
+    $("#sale_details.reception_details").append(new_reception_product);
 
     eventsOnDetails();
     updateTotal();
@@ -288,11 +286,11 @@ $(document).ready(function(){
   // End Replacing prices
 
   // Fixing prices
-  $(".new_purchase").submit(function(e) {
+  $(".new_sale").submit(function(e) {
     replacePrices();
   });
 
-  $(".edit_purchase").submit(function(e) {
+  $(".edit_sale").submit(function(e) {
     replacePrices();
   });
   // Fixing prices
@@ -305,23 +303,21 @@ $(document).ready(function(){
 
   // Fixing date on reset
   $("#reset-button").click(function(e) {
-    $(".new_purchase")[0].reset();
+    $(".new_sale")[0].reset();
 
     var i18nLocale = $("body").data("locale");
     var dateFormat = i18nLocale == "es" ? "DD/MM/YYYY hh:mm A" : "MM/DD/YYYY hh:mm A";
 
     // Datetime
-    $("#purchase_datetime_picker").each(function(){
-
-      console.log("Date");
+    $("#sale_datetime_picker").each(function(){
       // If not empty
       if($(this).val() != ""){
         pickerDate = moment($(this).val(), dateFormat).toDate();
-        $("#purchase_purchase_datetime").val(moment($(this).val(), dateFormat).format("YYYY-MM-DD'T'HH:mm:ss.SSSZ"));
+        $("#sale_sale_datetime").val(moment($(this).val(), dateFormat).format("YYYY-MM-DD'T'HH:mm:ss.SSSZ"));
       }
       else{
-        if($("#purchase_purchase_datetime").val() != ""){
-          $(this).val(moment($("#purchase_purchase_datetime").val(), "YYYY-MM-DD'T'HH:mm:ss.SSSZ").format(dateFormat));
+        if($("#sale_sale_datetime").val() != ""){
+          $(this).val(moment($("#sale_sale_datetime").val(), "YYYY-MM-DD'T'HH:mm:ss.SSSZ").format(dateFormat));
         }
       }
     });

@@ -90,7 +90,7 @@ class Admin::CustomersController < ApplicationController
 
     # Deleting blank spaces
     @customer[:first_name] = @customer[:first_name].strip
-    @customer[:last_name]= @customer[:last_name].strip
+    @customer[:last_name] = @customer[:last_name].strip
     @customer[:email] =  @customer[:email].strip.downcase
     @customer[:phone] = @customer[:phone].strip
     @customer[:zipcode] = @customer[:zipcode].strip

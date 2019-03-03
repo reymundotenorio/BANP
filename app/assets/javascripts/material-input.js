@@ -41,6 +41,21 @@ $(document).ready(function(){
     }
   });
 
+  // Datetime
+  $("#sale_datetime_picker").each(function(){
+    // If not empty
+    if($(this).val() != ""){
+      pickerDate = moment($(this).val(), dateFormat).toDate();
+      // console.log(pickerDate);
+      $("#sale_sale_datetime").val(moment($(this).val(), dateFormat).format("YYYY-MM-DD'T'HH:mm:ss.SSSZ"));
+    }
+    else{
+      if($("#sale_sale_datetime").val() != ""){
+        $(this).val(moment($("#sale_sale_datetime").val(), "YYYY-MM-DD'T'HH:mm:ss.SSSZ").format(dateFormat));
+      }
+    }
+  });
+
   // Init Bootstrap tooltips
   $('[data-toggle="tooltip"]').tooltip();
   $('[data-tooltip="true"]').tooltip();

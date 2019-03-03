@@ -1,0 +1,15 @@
+%tr{class: "#{customer.state}"}
+  -# Set attributes
+  - attributes = ["first_name", "last_name", "company", "email" ,"phone"]
+
+  %td
+    %p= customer.id
+
+  - attributes.each do |attribute|
+    %td
+      %p= customer["#{attribute}"]
+
+  %td.align-middle
+    %p
+      = button_tag class: "btn btn-general select-customer", "data-id": customer.id, "data-name": "#{customer.first_name} #{customer.last_name}", "data-toggle": "tooltip", "data-placement": "bottom", title: t("views.index.select") do
+        %i.fas.fa-check
