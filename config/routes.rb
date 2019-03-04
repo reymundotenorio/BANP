@@ -246,28 +246,31 @@ Rails.application.routes.draw do
     # End Inventory
 
     # Sales orders
-    get "/sales/orders", to: "sales/orders#index", as: "sale_orders"
-    get "/sales/order/new", to: "sales/orders#new", as: "new_sale_order"
-    get "/sales/order/:id", to: "sales/orders#show", as: "sale_order"
-    get "/sales/order/:id/edit", to: "sales/orders#edit", as: "edit_sale_order"
-    get "/sales/order/:id/history", to: "sales/orders#history", as: "history_sale_order"
-    post "/sales/order", to: "sales/orders#create", as: "sales_order"
-    patch "/sales/order/:id", to: "sales/orders#update", as: "update_sale_order"
-    patch "/sales/order/:id/active", to: "sales/orders#active", as: "active_sale_order"
-    patch "/sales/order/:id/deactive", to: "sales/orders#deactive", as: "deactive_sale_order"
+    get "/sales/orders", to: "sales#index_orders", as: "sale_orders"
+    get "/sales/order/:id/history", to: "sales#history_order", as: "history_sale_order"
     # End Sales orders
 
     # Sales invoices
-    get "/sales/invoices", to: "sales/invoices#index", as: "sale_invoices"
-    get "/sales/invoice/new", to: "sales/invoices#new", as: "new_sale_invoice"
-    get "/sales/invoice/:id", to: "sales/invoices#show", as: "sale_invoice"
-    get "/sales/invoice/:id/edit", to: "sales/invoices#edit", as: "edit_sale_invoice"
-    get "/sales/invoice/:id/history", to: "sales/invoices#history", as: "history_sale_invoice"
-    post "/sales/invoice", to: "sales/invoices#create", as: "sales_invoice"
-    patch "/sales/invoice/:id", to: "sales/invoices#update", as: "update_sale_invoice"
-    patch "/sales/invoice/:id/active", to: "sales/invoices#active", as: "active_sale_invoice"
-    patch "/sales/invoice/:id/deactive", to: "sales/invoices#deactive", as: "deactive_sale_invoice"
+    get "/sales/invoices", to: "sales#index_invoices", as: "sale_invoices"
+    get "/sales/invoice/new", to: "sales#new_invoice", as: "new_sale_invoice"
+    get "/sales/invoice/:id/edit", to: "sales#edit_invoice", as: "edit_sale_invoice"
+    get "/sales/invoice/:id/history", to: "sales#history_invoice", as: "history_sale_invoice"
+    post "/sales/invoice", to: "sales#create_invoice", as: "sales_invoice"
+    patch "/sales/invoice/:id", to: "sales#update_invoice", as: "update_sale_invoice"
+    patch "/sales/invoice/:id/deactive", to: "sales#deactive_invoice", as: "deactive_sale_invoice"
     # End Sales invoices
+
+    # Sales shipments
+    get "/sales/shipments", to: "sales#index_shipments", as: "sale_shipments"
+    get "/sales/shipment/new", to: "sales#new_shipment", as: "new_sale_shipment"
+    get "/sales/shipment/:id", to: "sales#show_shipment", as: "sale_shipment"
+    get "/sales/shipment/:id/edit", to: "sales#edit_shipment", as: "edit_sale_shipment"
+    get "/sales/shipment/:id/history", to: "sales#history_shipment", as: "history_sale_shipment"
+    post "/sales/shipment", to: "sales#create_shipment", as: "sales_shipment"
+    patch "/sales/shipment/:id", to: "sales#update_shipment", as: "update_sale_shipment"
+    patch "/sales/shipment/:id/active", to: "sales#active_shipment", as: "active_sale_shipment"
+    patch "/sales/shipment/:id/deactive", to: "sales#deactive_shipment", as: "deactive_sale_shipment"
+    # End Sales shipments
 
     # Sales details
     get "/sales/:id/details", to: "sale_details#show", as: "sale_details"
@@ -275,18 +278,6 @@ Rails.application.routes.draw do
     get "/sale/detail/:id/history", to: "sale_details#history", as: "history_sale_detail"
     patch "/sales/detail/:id", to: "sale_details#update", as: "update_sale_detail"
     # End Sales details
-
-    # Sales shipments
-    get "/sales/shipments", to: "sales/shipments#index", as: "sale_shipments"
-    get "/sales/shipment/new", to: "sales/shipments#new", as: "new_sale_shipment"
-    get "/sales/shipment/:id", to: "sales/shipments#show", as: "sale_shipment"
-    get "/sales/shipment/:id/edit", to: "sales/shipments#edit", as: "edit_sale_shipment"
-    get "/sales/shipment/:id/history", to: "sales/shipments#history", as: "history_sale_shipment"
-    post "/sales/shipment", to: "sales/shipments#create", as: "sales_shipment"
-    patch "/sales/shipment/:id", to: "sales/shipments#update", as: "update_sale_shipment"
-    patch "/sales/shipment/:id/active", to: "sales/shipments#active", as: "active_sale_shipment"
-    patch "/sales/shipment/:id/deactive", to: "sales/shipments#deactive", as: "deactive_sale_shipment"
-    # End Sales shipments
   end
   # End Admin namespace
 

@@ -84,7 +84,7 @@
                           - @details_counter = 0
 
                           = f.fields_for :sale_details do |detail|
-                            = render "sale_detail_fields", f: detail
+                            = render "admin/sales/invoices/sale_detail_fields", f: detail
                             -# Increse couter
                             - @details_counter += 1
                     -# End Table
@@ -148,7 +148,7 @@
           &times;
 
         -# Render customers list
-        = render "modal_customers"
+        = render "admin/sales/invoices/modal_customers"
         -# End Render customers list
 
 -# Modal
@@ -160,7 +160,7 @@
           &times;
 
         -# Render products list
-        = render "modal_products"
+        = render "admin/sales/invoices/modal_products"
         -# End Render products list
 
 -# Products modals script

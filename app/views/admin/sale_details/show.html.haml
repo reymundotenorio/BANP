@@ -28,12 +28,12 @@
 
     -# Breadcrumb
     - if @is_invoice
-      = sync partial: "invoices/data_breadcrumb", resource: @sale
-      = sync_new partial: "invoices/data_breadcrumb", resource: Sale.new
+      = sync partial: "invoices_data_breadcrumb", resource: @sale
+      = sync_new partial: "invoices_data_breadcrumb", resource: Sale.new
 
     - else
-      = sync partial: "orders/data_breadcrumb", resource: @sale
-      = sync_new partial: "orders/data_breadcrumb", resource: Sale.new
+      = sync partial: "orders_data_breadcrumb", resource: @sale
+      = sync_new partial: "orders_data_breadcrumb", resource: Sale.new
     -# End Breadcrumb
 
     .row
@@ -44,12 +44,12 @@
             .col-xs-12.no-padding.details
               -# Data details render_sync
               - if @is_invoice
-                = sync partial: "invoices/data_details", resource: @sale
-                = sync_new partial: "invoices/data_details", resource: Sale.new
+                = sync partial: "invoices_data_details", resource: @sale
+                = sync_new partial: "invoices_data_details", resource: Sale.new
 
               - else
-                = sync partial: "orders/data_details", resource: @sale
-                = sync_new partial: "orders/data_details", resource: Sale.new
+                = sync partial: "orders_data_details", resource: @sale
+                = sync_new partial: "orders_data_details", resource: Sale.new
               -# End Data details render_sync
         -# End Material card
 

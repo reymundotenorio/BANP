@@ -1,8 +1,8 @@
 -# Render count and title
-$("#count-title").html("#{escape_javascript(render "count_title")}");
+$("#count-title").html("#{escape_javascript(render "admin/sales/orders/count_title")}");
 -# Render show buttons
-$("#show-buttons").html("#{escape_javascript(render "show_buttons")}");
+$("#show-buttons").html("#{escape_javascript(render "admin/sales/orders/show_buttons")}");
 -# Render table
-$("#render-data").html("#{escape_javascript(render "sales")}");
+$("#render-data").html("#{escape_javascript(render "admin/sales/orders/sales")}");
 -# Render pagination
 $(".pagination a").attr("data-remote", "true");

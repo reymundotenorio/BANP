@@ -11,8 +11,8 @@
 
       %tbody
         -# Data table render_sync
-        = sync partial: "invoices/data_table", collection: @invoices
-        = sync_new partial: "invoices/data_table", resource: Sale.new
+        = sync partial: "invoices_data_table", collection: @invoices
+        = sync_new partial: "invoices_data_table", resource: Sale.new
         -# End Data table render_sync
     -# End Table
 
