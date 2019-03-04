@@ -87,21 +87,23 @@ class Admin::Purchases::ReceptionsController < ApplicationController
 
   # Create
   def create
+    updated_params = purchase_reception_params
+
     # Deleting blank spaces
-    @reception[:receipt_number] = @reception[:receipt_number].strip
-    @reception[:status] = @reception[:status].strip
-    @reception[:observations] = @reception[:observations].strip
+    updated_params[:receipt_number] = updated_params[:receipt_number].strip
+    updated_params[:status] = updated_params[:status].strip
+    updated_params[:observations] = updated_params[:observations].strip
     # End Deleting blank spaces
 
-    @reception[:purchase_datetime] = @reception[:purchase_datetime].to_datetime if @reception[:purchase_datetime]
+    updated_params[:purchase_datetime] = updated_params[:purchase_datetime].to_datetime if updated_params[:purchase_datetime]
 
     # Fixing discount
-    if @reception[:discount]
+    if updated_params[:discount]
       begin
-        @reception[:discount] = @reception[:discount].to_d
+        updated_params[:discount] = updated_params[:discount].to_d
 
       rescue
-        @reception[:discount] = 0.00
+        updated_params[:discount] = 0.00
       end
     end
 
@@ -111,11 +113,11 @@ class Admin::Purchases::ReceptionsController < ApplicationController
     if is_edit
 
       # Deleting blank spaces
-      @reception[:status] = "received"
+      updated_params[:status] = "received"
       # End Deleting blank spaces
 
       # Validating detail with stock on Destroy
-      json = JSON.parse(purchase_reception_params["purchase_details_attributes"].to_json) # Converting to Json
+      json = JSON.parse(updated_params["purchase_details_attributes"].to_json) # Converting to Json
       # Iterating Json
       json.each do |item|
         # Item is being destroyed
@@ -178,7 +180,7 @@ class Admin::Purchases::ReceptionsController < ApplicationController
     # If record is an edit
 
     # If record was saved
-    if @reception.update(purchase_reception_params)
+    if @reception.update(updated_params)
       redirect_to admin_purchase_details_path(@reception.id), notice: t("alerts.updated", model: t("purchase.reception")) # Received
 
       # If record was not saved

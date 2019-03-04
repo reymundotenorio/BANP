@@ -24,6 +24,11 @@ $(document).ready(function(){
       pickerDate = moment($("#purchase_datetime_picker").val(), dateFormat).toDate();
       $("#purchase_purchase_datetime").val(moment($("#purchase_datetime_picker").val(),dateFormat).format("YYYY-MM-DD'T'HH:mm:ss.SSSZ"));
     }
+
+    if ($("#sale_datetime_picker").val() != ""){
+      pickerDate = moment($("#sale_datetime_picker").val(), dateFormat).toDate();
+      $("#sale_sale_datetime").val(moment($("#sale_datetime_picker").val(),dateFormat).format("YYYY-MM-DD'T'HH:mm:ss.SSSZ"));
+    }
   });
 
   // Datetime

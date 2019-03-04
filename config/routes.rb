@@ -277,6 +277,18 @@ Rails.application.routes.draw do
     get "/sale/detail/:id/history", to: "sale_details#history", as: "history_sale_detail"
     patch "/sales/detail/:id", to: "sale_details#update", as: "update_sale_detail"
     # End Sales details
+
+    # Sales shipments
+    get "/sales/shipments", to: "sales/shipments#index", as: "sale_shipments"
+    get "/sales/shipment/new", to: "sales/shipments#new", as: "new_sale_shipment"
+    get "/sales/shipment/:id", to: "sales/shipments#show", as: "sale_shipment"
+    get "/sales/shipment/:id/edit", to: "sales/shipments#edit", as: "edit_sale_shipment"
+    get "/sales/shipment/:id/history", to: "sales/shipments#history", as: "history_sale_shipment"
+    post "/sales/shipment", to: "sales/shipments#create", as: "sales_shipment"
+    patch "/sales/shipment/:id", to: "sales/shipments#update", as: "update_sale_shipment"
+    patch "/sales/shipment/:id/active", to: "sales/shipments#active", as: "active_sale_shipment"
+    patch "/sales/shipment/:id/deactive", to: "sales/shipments#deactive", as: "deactive_sale_shipment"
+    # End Sales shipments
   end
   # End Admin namespace
 

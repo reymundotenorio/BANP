@@ -1,6 +1,6 @@
 %tr{class: "clickable-row #{sale.state}", "data-href": "#{admin_sale_details_path(sale.id)}"}
   -# Set attributes
-  - attributes = ["sale_datetime", "total", "customer", "employee", "delivery_status"]
+  - attributes = ["sale_datetime", "total", "customer", "employee", "paid", "payment_method", "delivery_status"]
 
   %td
     = link_to admin_sale_details_path(sale.id), class: "record-link", "data-header": "No.", "data-toggle": "tooltip", "data-placement": "bottom", title: t("views.index.view_details") do
@@ -28,6 +28,23 @@
           = sync_new partial: "data_table_employee_name", resource: Employee.new
           -# End Employee name render_sync
 
+        - elsif attribute == "paid"
+          - if sale["#{attribute}"]
+            = I18n.locale == :es ? "Si" : "Yes"
+
+          - else
+            = "No"
+
+        - elsif attribute == "payment_method"
+          - if sale["#{attribute}"] == "cash"
+            = I18n.locale == :es ? "Efectivo" : "Cash"
+
+          - elsif sale["#{attribute}"] == "card"
+            = I18n.locale == :es ? "Tarjeta" : "Card"
+
+          - else
+            = sale["#{attribute}"]
+
         - elsif attribute == "delivery_status"
           %p
             - if sale["#{attribute}"] == "in_queue"
@@ -36,8 +53,8 @@
             - elsif sale["#{attribute}"] == "received"
               = I18n.locale == :es ? "Recibido" : "Received"
 
-            - elsif sale["#{attribute}"] == "on_the_way"
-              = I18n.locale == :es ? "En camino" : "On the way"
+            - elsif sale["#{attribute}"] == "shipped"
+              = I18n.locale == :es ? "Enviado" : "Shipped"
 
             - elsif sale["#{attribute}"] == "delivered"
               = I18n.locale == :es ? "Entregado" : "Delivered"

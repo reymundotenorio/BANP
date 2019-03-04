@@ -37,7 +37,7 @@ class Admin::Sales::InvoicesController < ApplicationController
       format.html
       format.js
       format.pdf do
-        to_pdf(name_pdf, template, Sale.all, I18n.l(datetime), title_pdf)
+        to_pdf(name_pdf, template, Sale.invoices, I18n.l(datetime), title_pdf)
       end
     end
   end
@@ -66,8 +66,7 @@ class Admin::Sales::InvoicesController < ApplicationController
     @invoice.discount = "0#{@invoice.discount.to_s.gsub! '.', ''}" if @invoice.discount < 10
 
     @search_form_path = admin_edit_sale_invoice_path(@invoice)
-    @form_url = admin_sales_invoice_path
-    # @form_url = admin_update_sale_invoice_path
+    @form_url = admin_update_sale_invoice_path
 
     @customers = Customer.search(params[:search_customer], "enabled-only").paginate(page: params[:customers_page], per_page: 5) # Providers with pagination
     @products = Product.search(params[:search_product], "enabled-only").paginate(page: params[:products_page], per_page: 5) # Products with pagination
@@ -92,13 +91,14 @@ class Admin::Sales::InvoicesController < ApplicationController
   def create
     @invoice = Sale.new(sale_invoice_params)
 
-    # Deleting blank spaces
-    @invoice[:delivery_status] = @invoice[:delivery_status].strip
+    @invoice[:delivery_status] = "received"
     @invoice[:status] = "invoiced"
-    @invoice[:observations] = @invoice[:observations].strip
 
-    @invoice[:delivery_status] = @invoice[:delivery_status].strip
-    @invoice[:status] = "invoiced"
+    @invoice[:payment_method] = "cash"
+    @invoice[:payment_reference] = "*****"
+    @invoice[:paid] = true
+
+    # Deleting blank spaces
     @invoice[:observations] = @invoice[:observations].strip
     # End Deleting blank spaces
 
@@ -129,29 +129,28 @@ class Admin::Sales::InvoicesController < ApplicationController
     end
   end
 
-
   # Update
   def update
+    updated_params = sale_invoice_params
+
     # Deleting blank spaces
-    @invoice[:delivery_status] = @invoice[:delivery_status].strip
-    @invoice[:status] = "invoiced"
-    @invoice[:observations] = @invoice[:observations].strip
+    updated_params[:observations] = updated_params[:observations].strip
     # End Deleting blank spaces
 
-    @invoice[:sale_datetime] = @invoice[:sale_datetime].to_datetime if @invoice[:sale_datetime]
+    updated_params[:sale_datetime] = updated_params[:sale_datetime].to_datetime if updated_params[:sale_datetime]
 
     # Fixing discount
-    if @invoice[:discount]
+    if updated_params[:discount]
       begin
-        @invoice[:discount] = @invoice[:discount].to_d
+        updated_params[:discount] = updated_params[:discount].to_d
 
       rescue
-        @invoice[:discount] = 0.00
+        updated_params[:discount] = 0.00
       end
     end
 
     # Validating detail with stock on Destroy
-    json = JSON.parse(sale_invoice_params["sale_details_attributes"].to_json) # Converting to Json
+    json = JSON.parse(updated_params["sale_details_attributes"].to_json) # Converting to Json
     # Iterating Json
     json.each do |item|
       # Item is being destroyed
@@ -170,8 +169,6 @@ class Admin::Sales::InvoicesController < ApplicationController
             if detail.sale.state
               # If sale is an invoiced
               if detail.sale.status == "invoiced"
-                puts "Stock is more than the quantity"
-
                 product.stock = product.stock + detail.quantity
 
                 returned = SaleDetail.new
@@ -202,7 +199,7 @@ class Admin::Sales::InvoicesController < ApplicationController
     end
     # End Iterating Json
 
-    if @invoice.update(sale_invoice_params)
+    if @invoice.update(updated_params)
       redirect_to admin_sale_details_path(@invoice.id), notice: t("alerts.updated", model: t("sale.invoice"))
 
     else

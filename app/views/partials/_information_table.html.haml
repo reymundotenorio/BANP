@@ -42,6 +42,23 @@
           - elsif resource["#{attribute}"] == "invoiced"
             = I18n.locale == :es ? "Facturado" : "Invoiced"
 
+      - elsif attribute == "paid"
+        - if resource["#{attribute}"]
+          = I18n.locale == :es ? "Si" : "Yes"
+
+        - else
+          = "No"
+
+      - elsif attribute == "payment_method"
+        - if resource["#{attribute}"] == "cash"
+          = I18n.locale == :es ? "Efectivo" : "Cash"
+
+        - elsif resource["#{attribute}"] == "card"
+          = I18n.locale == :es ? "Tarjeta" : "Card"
+
+        - else
+          = resource["#{attribute}"]
+
       - elsif attribute == "delivery_status"
         %p
           - if resource["#{attribute}"] == "in_queue"
@@ -50,8 +67,8 @@
           - elsif resource["#{attribute}"] == "received"
             = I18n.locale == :es ? "Recibido" : "Received"
 
-          - elsif resource["#{attribute}"] == "on_the_way"
-            = I18n.locale == :es ? "En camino" : "On the way"
+          - elsif resource["#{attribute}"] == "shipped"
+            = I18n.locale == :es ? "Enviado" : "Shipped"
 
           - elsif resource["#{attribute}"] == "delivered"
             = I18n.locale == :es ? "Entregado" : "Delivered"

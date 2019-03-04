@@ -37,43 +37,8 @@ class Admin::Sales::OrdersController < ApplicationController
       format.html
       format.js
       format.pdf do
-        to_pdf(name_pdf, template, Sale.all, I18n.l(datetime), title_pdf)
+        to_pdf(name_pdf, template, Sale.orders, I18n.l(datetime), title_pdf)
       end
-    end
-  end
-
-  # admin/sales/order/new
-  def new
-    @order = Sale.new
-    @order.discount = 0
-
-    @search_form_path = admin_new_sale_order_path(@order)
-    @form_url = admin_sales_order_path
-
-    @customers = Customer.search(params[:search_customer], "enabled-only").paginate(page: params[:customers_page], per_page: 5) # Providers with pagination
-    @products = Product.search(params[:search_product], "enabled-only").paginate(page: params[:products_page], per_page: 5) # Products with pagination
-
-    respond_to do |format|
-      format.html
-      format.js
-    end
-  end
-
-  # admin/sales/order/:id/edit
-  def edit
-    # Order found by before_action
-    @order.discount = "%.2f" % @order.discount
-    @order.discount = "0#{@order.discount.to_s.gsub! '.', ''}" if @order.discount < 10
-
-    @search_form_path = admin_edit_product_path(@order)
-    @form_url = admin_update_sale_order_path
-
-    @customers = Customer.search(params[:search_customer], "enabled-only").paginate(page: params[:customers_page], per_page: 5) # Providers with pagination
-    @products = Product.search(params[:search_product], "enabled-only").paginate(page: params[:products_page], per_page: 5) # Products with pagination
-
-    respond_to do |format|
-      format.html
-      format.js
     end
   end
 

@@ -222,6 +222,7 @@ en:
     invoice_details: "Sale invoice details"
     show_invoices: "Show sale invoices"
     receive_sale_order: "Receive sale order"
+    ship_sale_order: "Ship sale order"
     stock_is_less: "The stock (%{stock}) of the product %{product} is less than the amount to be returned"
     in_inventory: "in inventory"
     error_canceling_invoice: "Error canceling sale invoice"

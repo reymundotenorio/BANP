@@ -51,7 +51,7 @@ class StripeController < ApplicationController
     # Creating the order
     order = Sale.new
 
-    order.sale_datetime = Time.zone.now
+    order.sale_datetime = Time.current
     order.status = "pending"
     order.delivery_status = "in_queue"
     order.discount = 0.00

@@ -1,29 +1,9 @@
 .general-info
   .main-info
-    %p= I18n.l(sale.sale_datetime, format: I18n.locale == :es ? "%A, %d #{t('sale.of')} %B #{t('sale.of')} %Y" : "%A, %B %d, %Y")
-    %p= I18n.l(sale.sale_datetime, format: "%I:%M:%S %p")
+    %p= I18n.l(sale.sale_datetime, format: I18n.locale == :es ? "%A, %d #{t('sale.of')} %B #{t('sale.of')} %Y" : "%A, %B %d, %Y").capitalize
+    %p= I18n.l(sale.sale_datetime, format: "%I:%M:%S %p").capitalize
 
   %br
-
-  .main-info.text-left-right
-    %p.text-left
-      %b
-        %i.fas.fa-users
-        %span= t("activerecord.models.customer")
-    -# Customer name render_sync
-    = sync partial: "detail_customer_name", resource: sale.customer
-    = sync_new partial: "detail_customer_name", resource: Customer.new
-    -# End Customer name render_sync
-
-  .main-info.text-left-right
-    %p.text-left
-      %b
-        %i.fas.fa-briefcase
-        %span= t("activerecord.models.employee")
-    -# Employee name render_sync
-    = sync partial: "detail_employee_name", resource: sale.employee
-    = sync_new partial: "detail_employee_name", resource: Employee.new
-    -# End Employee name render_sync
 
   %div{class: "main-info text-left-right paid #{'not-paid' if !sale.paid}"}
     %p.text-left
@@ -63,14 +43,34 @@
       - else
         = sale.payment_method
 
-  - if sale.payment_method == "card"
-    .main-info.text-left-right
-      %p.text-left
-        %b
-          %i.fas.fa-file-invoice
-          %span= t("activerecord.attributes.sale.payment_reference")
+  .main-info
+    %p.text-center
+      %b
+        %i.fas.fa-file-invoice
+        %span= t("activerecord.attributes.sale.payment_reference")
+    %p.text-center= sale.payment_reference
 
-      %p.text-right= sale.payment_reference
+  %br
+
+  .main-info.text-left-right
+    %p.text-left
+      %b
+        %i.fas.fa-users
+        %span= t("activerecord.models.customer")
+    -# Customer name render_sync
+    = sync partial: "detail_customer_name", resource: sale.customer
+    = sync_new partial: "detail_customer_name", resource: Customer.new
+    -# End Customer name render_sync
+
+  .main-info.text-left-right
+    %p.text-left
+      %b
+        %i.fas.fa-briefcase
+        %span= t("activerecord.models.employee")
+    -# Employee name render_sync
+    = sync partial: "detail_employee_name", resource: sale.employee
+    = sync_new partial: "detail_employee_name", resource: Employee.new
+    -# End Employee name render_sync
 
   .main-info
     %p.text-center

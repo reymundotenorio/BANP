@@ -125,25 +125,27 @@ class Admin::Purchases::OrdersController < ApplicationController
 
   # Update
   def update
+    updated_params = purchase_order_params
+
     # Deleting blank spaces
-    @order[:receipt_number] = @order[:receipt_number].strip
-    @order[:status] = "ordered"
-    @order[:observations] = @order[:observations].strip
+    updated_params[:receipt_number] = updated_params[:receipt_number].strip
+    updated_params[:status] = "ordered"
+    updated_params[:observations] = updated_params[:observations].strip
     # End Deleting blank spaces
 
-    @order[:purchase_datetime] = @order[:purchase_datetime].to_datetime if @order[:purchase_datetime]
+    updated_params[:purchase_datetime] = updated_params[:purchase_datetime].to_datetime if updated_params[:purchase_datetime]
 
     # Fixing discount
-    if @order[:discount]
+    if updated_params[:discount]
       begin
-        @order[:discount] = @order[:discount].to_d
+        updated_params[:discount] = updated_params[:discount].to_d
 
       rescue
-        @order[:discount] = 0.00
+        updated_params[:discount] = 0.00
       end
     end
 
-    if @order.update(purchase_order_params)
+    if @order.update(updated_params)
       redirect_to admin_purchase_details_path(@order.id), notice: t("alerts.updated", model: t("purchase.order"))
 
     else

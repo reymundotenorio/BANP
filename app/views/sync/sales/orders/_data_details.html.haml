@@ -1,29 +1,9 @@
 .general-info
   .main-info
-    %p= I18n.l(sale.sale_datetime, format: I18n.locale == :es ? "%A, %d #{t('sale.of')} %B #{t('sale.of')} %Y" : "%A, %B %d, %Y")
-    %p= I18n.l(sale.sale_datetime, format: I18n.locale == :es ? "%I:%M:%S %p" : "%H:%M:%S")
+    %p= I18n.l(sale.sale_datetime, format: I18n.locale == :es ? "%A, %d #{t('sale.of')} %B #{t('sale.of')} %Y" : "%A, %B %d, %Y").capitalize
+    %p= I18n.l(sale.sale_datetime, format: I18n.locale == :es ? "%I:%M:%S %p" : "%H:%M:%S").capitalize
 
   %br
-
-  .main-info.text-left-right
-    %p.text-left
-      %b
-        %i.fas.fa-users
-        %span= t("activerecord.models.customer")
-    -# Customer name render_sync
-    = sync partial: "detail_customer_name", resource: sale.customer
-    = sync_new partial: "detail_customer_name", resource: Customer.new
-    -# End Customer name render_sync
-
-  .main-info.text-left-right
-    %p.text-left
-      %b
-        %i.fas.fa-briefcase
-        %span= t("activerecord.models.employee")
-    -# Employee name render_sync
-    = sync partial: "detail_employee_name", resource: sale.employee
-    = sync_new partial: "detail_employee_name", resource: Employee.new
-    -# End Employee name render_sync
 
   %div{class: "main-info text-left-right paid #{'not-paid' if !sale.paid}"}
     %p.text-left
@@ -63,15 +43,34 @@
       - else
         = sale.payment_method
 
-  - if sale.payment_method == "card"
-    .main-info.text-left-right
-      %p.text-left
-        %b
-          %i.fas.fa-file-invoice
-          %span= t("activerecord.attributes.sale.payment_reference")
+  .main-info
+    %p.text-center
+      %b
+        %i.fas.fa-file-invoice
+        %span= t("activerecord.attributes.sale.payment_reference")
+    %p.text-center= sale.payment_reference
 
-      %p.text-right= sale.payment_reference
+  %br
 
+  .main-info.text-left-right
+    %p.text-left
+      %b
+        %i.fas.fa-users
+        %span= t("activerecord.models.customer")
+    -# Customer name render_sync
+    = sync partial: "detail_customer_name", resource: sale.customer
+    = sync_new partial: "detail_customer_name", resource: Customer.new
+    -# End Customer name render_sync
+
+  .main-info.text-left-right
+    %p.text-left
+      %b
+        %i.fas.fa-briefcase
+        %span= t("activerecord.models.employee")
+    -# Employee name render_sync
+    = sync partial: "detail_employee_name", resource: sale.employee
+    = sync_new partial: "detail_employee_name", resource: Employee.new
+    -# End Employee name render_sync
 
   .main-info
     %p.text-center
@@ -105,23 +104,13 @@
     %p= t("views.show.updated_at", time: time_ago_in_words(sale.updated_at))
 
   .main-buttons
-    .col-xs-12.col-sm-4.col-md-6.button-container.no-padding
-      = link_to (admin_edit_sale_order_path(sale)), class: "btn btn-general" do
-        %i.fas.fa-edit
-        %span= t("views.show.edit")
-
-    .col-xs-12.col-sm-4.col-md-6.button-container.no-padding
+    .col-xs-12.col-sm-4.col-md-6.col-md-offset-3.button-container.no-padding
       = link_to (admin_history_sale_order_path(sale)), class: "btn btn-general" do
         %i.fas.fa-history
         %span= t("views.show.history")
 
     .col-xs-12.col-sm-4.col-md-12.button-container.no-padding
-      - if sale.state
+      - if sale.state && !sale.paid
         = link_to (admin_deactive_sale_order_path(sale)), method: "patch", class: "btn btn-general" do
           %i.fas.fa-times
-          %span= t("views.show.disable")
-
-      - else
-        = link_to (admin_active_sale_order_path(sale)), method: "patch", class: "btn btn-general" do
-          %i.fas.fa-check
-          %span= t("views.show.enable")
+          %span= t("views.show.cancel")

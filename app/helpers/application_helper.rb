@@ -88,8 +88,8 @@ module ApplicationHelper
       elsif info == "received"
         I18n.locale == :es ? "Recibido" : "Received"
 
-      elsif info == "on_the_way"
-        I18n.locale == :es ? "En camino" : "On the way"
+      elsif info == "shipped"
+        I18n.locale == :es ? "Enviado" : "Shipped"
 
       elsif info == "delivered"
         I18n.locale == :es ? "Entregado" : "Delivered"
