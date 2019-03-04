@@ -96,27 +96,20 @@ class SaleDetail < ApplicationRecord
 
     # If product has been found
     if product
-      # If sale details has been returned
-      if self.status == "returned"
+      old_quantity = self.changes["quantity"][0] if changes["quantity"]
+      old_quantity = 0 if !old_quantity
 
-        # If sale details has been invoiced
+      old_status = self.changes["status"][0] if changes["status"]
+      old_status = "invoiced" if !old_status
+
+      # If is a order that is being invoiced
+      if (product.stock - self.quantity) < 0
+        self.errors.add(:quantity, I18n.t("sale.stock_is_less_sale", stock: product.stock, product: I18n.locale == :es ? product.name_spanish : product.name))
+        return
+
       else
-        old_quantity = self.changes["quantity"][0] if changes["quantity"]
-        old_quantity = 0 if !old_quantity
-
-        old_status = self.changes["status"][0] if changes["status"]
-        old_status = "invoiced" if !old_status
-
-        # If is a order that is being invoiced
-        if (product.stock - self.quantity) < 0
-          self.errors.add(:quantity, I18n.t("sale.stock_is_less_sale", stock: product.stock, product: I18n.locale == :es ? product.name_spanish : product.name))
-          return
-
-        else
-          product.stock = product.stock - self.quantity
-        end
+        product.stock = product.stock - self.quantity
       end
-      # End If sale details has been invoiced
 
       # Trigger saving successfully
       if product.save

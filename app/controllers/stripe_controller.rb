@@ -15,9 +15,7 @@ class StripeController < ApplicationController
     # Token is created using Checkout or Elements!
     # Get the payment token ID submitted by the form
     token = params[:stripeToken]
-    product = Product.first
-
-    address = params[:address] || @current_customer.address
+    address = params[:address] || current_customer.address
 
     product_items = Array.new
     products_description = ""
@@ -41,7 +39,6 @@ class StripeController < ApplicationController
         products_description += ", "
         products_description += I18n.locale == :es ? "#{product.name} (#{attributes['quantity']})" : "#{product.name_spanish} (#{attributes['quantity']})"
       end
-
     end
 
     # Calculations
@@ -51,29 +48,82 @@ class StripeController < ApplicationController
     # Fixing price
     price_cents = dollars_to_cents(items_subtotal.to_s)
 
-    begin
+    # Creating the order
+    order = Sale.new
 
-      charge = Stripe::Charge.create(
-        {
-          amount: price_cents,
-          currency: "usd",
-          description: products_description,
-          source: token,
-        }
-      )
+    order.sale_datetime = Time.zone.now
+    order.status = "pending"
+    order.delivery_status = "in_queue"
+    order.discount = 0.00
+    order.customer_id = current_customer.id
+    order.employee_id = 1 # SIBANP
+    order.observations = "Ship to: #{address}"
 
-    rescue Stripe::InvalidRequestError => e
-      redirect_to cart_path, alert: e.message
-      return
+    order.payment_method = "Stripe"
+    order.payment_reference = "-"
+    order.paid = false
+
+    # Iterating products
+    params[:products].each do |id, attributes|
+      cart_product = Product.find(attributes["id"].to_i)
+
+      if cart_product
+        order.sale_details.build(product_id: cart_product.id, price: cart_product.price, quantity: attributes["quantity"].to_i, status: "ordered")
+      end
     end
+    # End Iterating products
 
-    if charge
-      # redirect_to charge.receipt_url
-        redirect_to cart_path, notice: charge.receipt_url
-      return
+    # If order was saved correcty
+    if order.save
+      # Creating charge
+      begin
+
+        charge = Stripe::Charge.create(
+          {
+            amount: price_cents,
+            currency: "usd",
+            description: products_description,
+            source: token,
+          }
+        )
+
+      rescue Stripe::InvalidRequestError => e
+        redirect_to cart_path, alert: "NO SE: #{e.message}"
+        return
+      end
+      # End Creating charge
+
+      # If charge was create correctly
+      if charge
+        order.status = "ordered"
+        order.payment_reference = charge.id
+        order.paid = true
+
+        if order.save
+          redirect_to cart_path, notice: "Orden generada correctamente"
+          return
+
+        else
+          redirect_to cart_path, error: "Error al generar orden"
+          return
+        end
+      end
+      # End If charge was create correctly
+
+      # If order was not saved correcty
     else
-    end
+      errors_messages = ""
 
+      order.errors.full_messages.each do |error|
+        errors_messages += " #{error}."
+      end
+
+      errors_messages = errors_messages.strip
+
+      redirect_to cart_path, alert: errors_messages
+      return
+    end
+    # End Creating the order
   end
 
   def dollars_to_cents(dollars)

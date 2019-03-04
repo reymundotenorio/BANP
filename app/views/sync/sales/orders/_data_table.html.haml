@@ -1,6 +1,6 @@
 %tr{class: "clickable-row #{sale.state}", "data-href": "#{admin_sale_details_path(sale.id)}"}
   -# Set attributes
-  -- attributes = ["sale_datetime", "total", "customer", "employee", "delivery_status"]
+  - attributes = ["sale_datetime", "total", "customer", "employee", "delivery_status"]
 
   %td
     = link_to admin_sale_details_path(sale.id), class: "record-link", "data-header": "No.", "data-toggle": "tooltip", "data-placement": "bottom", title: t("views.index.view_details") do
@@ -14,7 +14,7 @@
           %p= I18n.locale == :es ? sale.sale_datetime.strftime("%d/%m/%Y") : sale.sale_datetime.strftime("%m/%d/%Y")
 
         - elsif attribute == "total"
-          %p= number_to_currency((Purchase.total(sale.id) - (Purchase.total(sale.id) * (sale.discount / 100))), precision: 2, unit: '$', format: '%u%n', separator: '.', delimiter: ',')
+          %p= number_to_currency((Sale.total(sale.id) - (Sale.total(sale.id) * (sale.discount / 100))), precision: 2, unit: '$', format: '%u%n', separator: '.', delimiter: ',')
 
         - elsif attribute == "customer"
           -# Customer name render_sync

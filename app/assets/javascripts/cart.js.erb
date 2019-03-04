@@ -40,7 +40,7 @@ $(document).ready(function(){
     addCartEvents(jsonData);
     updateCartDropdown();
     updateCartPage(jsonData);
-    addEventMaskInput();
+    addEventMaskInput(jsonData);
     $("#paypal-checkout").submit();
   }
   // End Update add to cart, cart, cart details, cart events and PayPal form
@@ -213,7 +213,9 @@ $(document).ready(function(){
   // End Update cart page information
 
   // Add Mask and Event to Input
-  function addEventMaskInput(){
+  function addEventMaskInput(jsonData){
+    var products = jsonData;
+    
     // Fuction on the "Remove from cart" button
     $(".removeFromCart").click(function(){
       var form = $(this).parents(".table-row:first");

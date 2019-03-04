@@ -60,7 +60,7 @@ class Sale < ApplicationRecord
   validates :discount, presence: true
   validates :payment_method, presence: true
   validates :payment_reference, presence: true
-  validates :paid, presence: true
+  # validates :paid, presence: true
   # End  Presence validation
 
   # Length validation
@@ -83,13 +83,13 @@ class Sale < ApplicationRecord
 
   ## Callbacks
 
-  # Before destroy
-  before_destroy :not_permit_destroy
-
-  # Before_destroy callback, avoid destroy information
-  def not_permit_destroy
-    false
-  end
+  # # Before destroy
+  # before_destroy :not_permit_destroy
+  #
+  # # Before_destroy callback, avoid destroy information
+  # def not_permit_destroy
+  #   false
+  # end
 
   ## End Callbacks
 end

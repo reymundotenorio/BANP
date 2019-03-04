@@ -25,6 +25,54 @@
     = sync_new partial: "detail_employee_name", resource: Employee.new
     -# End Employee name render_sync
 
+  %div{class: "main-info text-left-right paid #{'not-paid' if !sale.paid}"}
+    %p.text-left
+      %b
+        %i.fas.fa-hand-holding-usd
+        %span= t("activerecord.attributes.sale.paid")
+
+    %p.text-right= sale.paid ? "Si" : "No"
+
+  .main-info.text-left-right
+    %p.text-left
+      %b
+        - if sale.payment_method == "cash"
+          %i.fas.fa-money-bill-alt
+
+        - elsif sale.payment_method == "card"
+          %i.fas.fa-credit-card
+
+        - elsif sale.payment_method == "PayPal"
+          %i.fab.fa-paypal
+
+        - elsif sale.payment_method == "Stripe"
+          %i.fab.fa-stripe-s
+
+        - else
+          %i.fas.fa-dollar-sign
+
+        %span= t("activerecord.attributes.sale.payment_method")
+
+    %p.text-right
+      - if sale.payment_method == "cash"
+        = t("sale.cash")
+
+      - elsif sale.payment_method == "card"
+        = t("sale.cash")
+
+      - else
+        = sale.payment_method
+
+  - if sale.payment_method == "card"
+    .main-info.text-left-right
+      %p.text-left
+        %b
+          %i.fas.fa-file-invoice
+          %span= t("activerecord.attributes.sale.payment_reference")
+
+      %p.text-right= sale.payment_reference
+
+
   .main-info
     %p.text-center
       %b

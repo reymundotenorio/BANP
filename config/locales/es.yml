@@ -227,6 +227,8 @@ es:
     returns: "devoluciones"
     error_canceling_invoice: "Error al anular la recepción de venta"
     stock_is_less_sale: "El stock (%{stock}) del producto %{product} es inferior a la cantidad a ser vendida"
+    cash: "Efectivo"
+    card: "Tarjeta"
 
   # Will paginate
   will_paginate:

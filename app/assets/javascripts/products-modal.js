@@ -25,7 +25,7 @@ $(document).ready(function(){
 
   // Validate numbers on quantity input
   $(".q-input.search").on("keyup change", function(){
-    if (!isNumberInt($(this).val())) {
+    if(!isNumberInt($(this).val())) {
       return;
     }
     else{
@@ -75,7 +75,7 @@ $(document).ready(function(){
       product_total.text(formatter.format("0.00"));
     }
     else{
-      // if (!isNumberFloat($(this).val())) {
+      // if(!isNumberFloat($(this).val())) {
       //   // return;
       // }
       // else{
@@ -123,7 +123,7 @@ $(document).ready(function(){
 
     discountContent = $(".discount").val();
 
-    if (discountContent != ""){
+    if(discountContent != ""){
       discount = parseFloat(discountContent);
       discount = discount / 100;
       discount = totalDetails * discount;
@@ -159,7 +159,7 @@ $(document).ready(function(){
         $input.val(currentValue - 1);
       }
 
-      if ($input.val().length <= 0){
+      if($input.val().length <= 0){
         $input.val(1);
       }
 
@@ -174,7 +174,7 @@ $(document).ready(function(){
 
       $input.val(currentValue + 1);
 
-      if ($input.val().length <= 0){
+      if($input.val().length <= 0){
         $input.val(1);
       }
 
@@ -190,7 +190,7 @@ $(document).ready(function(){
 
     // Validate numbers on quantity input on details
     $(".q-input.details").on("keyup change", function(){
-      if (!isNumberInt($(this).val())) {
+      if(!isNumberInt($(this).val())) {
         return;
       }
       else{
@@ -240,14 +240,14 @@ $(document).ready(function(){
     product_price = $(price_elem);
     product_quantity = $(quantity_elem);
 
-    if (product_price.val() == ""){
+    if(product_price.val() == ""){
       product_price.focus();
       return;
     }
 
-    if (product_price.val() == ""){
+    if(product_price.val() == ""){
 
-      if (!isNumberInt(product_price.val())) {
+      if(!isNumberInt(product_price.val())) {
         product_quantity.focus();
         return;
       }

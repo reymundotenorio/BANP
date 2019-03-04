@@ -94,8 +94,4 @@ class Admin::Sales::OrdersController < ApplicationController
   rescue
     redirect_to admin_sale_orders_path, alert: t("alerts.not_found", model: t("sale.order"))
   end
-
-  def sale_order_params
-    params.require(:sale).permit(:sale_datetime, :status, :delivery_status, :discount, :customer_id, :employee_id, :observations, sale_details_attributes: SaleDetail.attribute_names.map(&:to_sym).push(:_destroy))
-  end
 end

@@ -25,7 +25,7 @@
 
   %td.align-middle.total-container
     %p.record-link{"data-header": "Total", id: "product_total_#{product.id}"}
-      $00.00
+      = number_to_currency((product.price * 1), precision: 2, unit: "$", format: "%u%n", separator: ".", delimiter: ",")
 
   %td.align-middle
     %p

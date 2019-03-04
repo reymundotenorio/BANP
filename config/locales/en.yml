@@ -226,6 +226,8 @@ en:
     in_inventory: "in inventory"
     error_canceling_invoice: "Error canceling sale invoice"
     stock_is_less_sale: "The stock (%{stock}) of the product %{product} is less than the amount to be sold"
+    cash: "Cash"
+    card: "Card"
 
   # Will paginate
   will_paginate:

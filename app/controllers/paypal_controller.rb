@@ -22,7 +22,7 @@ class PaypalController < ApplicationController
 
   def paypal_checkout
     code = params[:code]
-    address = params[:address] || @current_customer.address
+    address = params[:address] || current_customer.address
 
     # If code param is present
     if code
@@ -74,8 +74,9 @@ class PaypalController < ApplicationController
       items_subtotal = product_items.inject(0) {|sum, hash| sum + ((hash[:price]).to_f * (hash[:quantity]).to_i)}
       items_subtotal = items_subtotal.round(2)
 
-      zip_code = current_customer.zipcode
-      zip_info = ZipCodes.identify(zip_code)
+      # zip_code = current_customer.zipcode
+      # zip_info = ZipCodes.identify(zip_code)
+
 
       # items_shipping = items_subtotal * 0.05
       # items_shipping = items_shipping.round(2)
@@ -89,58 +90,102 @@ class PaypalController < ApplicationController
       # puts "Subtotal: #{items_subtotal}"
       # puts "Zip code: #{zip_info}"
 
-      # Build Payment object
-      payment = Payment.new(
-        {
-          intent: "sale",
-          payer: {
-            payment_method: "paypal"
-          },
-          transactions: [
-            {
-              amount: {
-                total: "#{items_subtotal}",
-                currency: "USD"
-                # details: {
-                #   subtotal: "#{items_subtotal}",
-                #   shipping: "#{items_shipping}",
-                #   shipping_discount: "#{items_discount}"
-                # }
-              },
-              description: I18n.t("views.cart.paypal_description"),
-              item_list: {
-                items: product_items,
-                shipping_address: {
-                  recipient_name: "#{current_customer.first_name} #{current_customer.last_name}",
-                  line1: address, #@current_customer.address,
-                  city: zip_info[:city],
-                  state: zip_info[:state_code],
-                  phone: @current_customer.phone,
-                  postal_code: zip_code,
-                  country_code: "US"
+      # Creating the order
+      sale_order = ::Sale.new
+
+      sale_order.sale_datetime = Time.current
+      sale_order.status = "pending"
+      sale_order.delivery_status = "in_queue"
+      sale_order.discount = 0.00
+      sale_order.customer_id = current_customer.id
+      sale_order.employee_id = 1 # SIBANP
+      sale_order.observations = "Ship to: #{address}"
+
+      sale_order.payment_method = "Paypal"
+      sale_order.payment_reference = "-"
+      sale_order.paid = false
+
+      # Iterating products
+      params[:products].each do |id, attributes|
+        cart_product = Product.find(attributes["id"].to_i)
+
+        if cart_product
+          sale_order.sale_details.build(product_id: cart_product.id, price: cart_product.price, quantity: attributes["quantity"].to_i, status: "ordered")
+        end
+      end
+      # End Iterating products
+
+      # If order was saved correcty
+      if sale_order.save
+
+        # Build Payment object
+        payment = Payment.new(
+          {
+            intent: "sale",
+            payer: {
+              payment_method: "paypal"
+            },
+            transactions: [
+              {
+                amount: {
+                  total: "#{items_subtotal}",
+                  currency: "USD"
+                  # details: {
+                  #   subtotal: "#{items_subtotal}",
+                  #   shipping: "#{items_shipping}",
+                  #   shipping_discount: "#{items_discount}"
+                  # }
+                },
+                description: I18n.t("views.cart.paypal_description"),
+                item_list: {
+                  items: product_items
+                  # ,
+                  # shipping_address: {
+                  #   recipient_name: "#{current_customer.first_name} #{current_customer.last_name}",
+                  #   line1: address, #current_customer.address,
+                  #   phone: current_customer.phone#,
+                  #   city: zip_info[:city],
+                  #   state: zip_info[:state_code],
+                  #   postal_code: zip_code,
+                  #   country_code: "US"
+                  # }
                 }
               }
+            ],
+            note_to_payer: I18n.t("views.cart.paypal_note_payer"),
+            redirect_urls: {
+              return_url: paypal_payment_url(order: sale_order.id),
+              cancel_url: cart_url
             }
-          ],
-          note_to_payer: I18n.t("views.cart.paypal_note_payer"),
-          redirect_urls: {
-            return_url: paypal_payment_url,
-            cancel_url: cart_url
           }
-        }
-      )
+        )  # Creating the order
 
-      # If the payment was correctly created
-      if payment.create
-        # payment.id
-        redirect_to payment.links.find{|v| v.rel == "approval_url" }.href
+        # If the payment was correctly created
+        if payment.create
+          # payment.id
+          redirect_to payment.links.find{|v| v.rel == "approval_url" }.href
 
-        # If the payment was not correctly created
+          # If the payment was not correctly created
+        else
+          puts payment.error # Error Hash
+          redirect_to cart_path, alert: "#{t('views.cart.problem_payment_creating')}"
+          return
+        end
+
+        # If order was not saved correcty
       else
-        # payment.error  # Error Hash
-        redirect_to cart_path, alert: "#{t('views.cart.problem_payment_creating')}: #{payment.error}"
+        errors_messages = ""
+
+        order.errors.full_messages.each do |error|
+          errors_messages += " #{error}."
+        end
+
+        errors_messages = errors_messages.strip
+
+        redirect_to cart_path, alert: errors_messages
         return
       end
+      # End Creating the order
 
       # If code param is not present
     else
@@ -150,6 +195,9 @@ class PaypalController < ApplicationController
   end
 
   def paypal_payment
+
+    order_id = params[:order]
+
     payment_id = params[:paymentId]
     # token = params[:token]
     payer_id = params[:PayerID]
@@ -160,7 +208,23 @@ class PaypalController < ApplicationController
 
       # If payment was executed correctly
       if payment.execute(payer_id: payer_id)
-        # Success Message
+
+        # Creating the order
+        sale_order = ::Sale.find(order_id)
+
+        sale_order.status = "ordered"
+        sale_order.payment_reference = payment_id
+        sale_order.paid = true
+
+        if sale_order.save
+          redirect_to cart_path, notice: t("views.cart.payment_correctly")
+          return
+
+        else
+          redirect_to cart_path, error: "Error al generar orden"
+          return
+        end
+        # End Creating the order
 
         # Decrease inventory
         # Save sale / transaction
@@ -168,13 +232,10 @@ class PaypalController < ApplicationController
         # Add sale to delivery queue
         # Show PDF invoice (new tab) and redirect to delivery tracking
 
-        redirect_to root_path(msj: "successful-payment"), notice: t("views.cart.payment_correctly")
-        return
-
         # If payment was not executed correctly
       else
-        # payment.error # Error Hash
-        redirect_to cart_path, alert: "#{t('views.cart.problem_payment_executing')}: #{payment.error}"
+        puts payment.error # Error Hash
+        redirect_to cart_path, alert: "#{t('views.cart.problem_payment_executing')}"
         return
       end
 
