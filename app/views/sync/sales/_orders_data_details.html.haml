@@ -108,9 +108,3 @@
       = link_to (admin_history_sale_order_path(sale)), class: "btn btn-general" do
         %i.fas.fa-history
         %span= t("views.show.history")
-
-    .col-xs-12.col-sm-4.col-md-12.button-container.no-padding
-      - if sale.state && !sale.paid
-        = link_to (admin_deactive_sale_order_path(sale)), method: "patch", class: "btn btn-general" do
-          %i.fas.fa-times
-          %span= t("views.show.cancel")
