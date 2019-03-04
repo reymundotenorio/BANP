@@ -25,6 +25,11 @@ $(document).ready(function(){
       $("#purchase_purchase_datetime").val(moment($("#purchase_datetime_picker").val(),dateFormat).format("YYYY-MM-DD'T'HH:mm:ss.SSSZ"));
     }
 
+    if ($("#purchase_datetime_picker_new").val() != ""){
+      pickerDate = moment($("#purchase_datetime_picker_new").val(), dateFormat).toDate();
+      $("#purchase_purchase_datetime_new").val(moment($("#purchase_datetime_picker_new").val(),dateFormat).format("YYYY-MM-DD'T'HH:mm:ss.SSSZ"));
+    }
+
     if ($("#sale_datetime_picker").val() != ""){
       pickerDate = moment($("#sale_datetime_picker").val(), dateFormat).toDate();
       $("#sale_sale_datetime").val(moment($("#sale_datetime_picker").val(),dateFormat).format("YYYY-MM-DD'T'HH:mm:ss.SSSZ"));
@@ -36,7 +41,6 @@ $(document).ready(function(){
     // If not empty
     if($(this).val() != ""){
       pickerDate = moment($(this).val(), dateFormat).toDate();
-      // console.log(pickerDate);
       $("#purchase_purchase_datetime").val(moment($(this).val(), dateFormat).format("YYYY-MM-DD'T'HH:mm:ss.SSSZ"));
     }
     else{
@@ -47,11 +51,20 @@ $(document).ready(function(){
   });
 
   // Datetime
+  $("#purchase_datetime_picker_new").each(function(){
+    // If not empty
+    if($("#purchase_purchase_datetime_new").val() != ""){
+      $(this).val(moment().format(dateFormat));
+      $("#purchase_purchase_datetime_new").val(moment().format("YYYY-MM-DD'T'HH:mm:ss.SSSZ"));
+    }    
+  });
+
+
+  // Datetime
   $("#sale_datetime_picker").each(function(){
     // If not empty
     if($(this).val() != ""){
       pickerDate = moment($(this).val(), dateFormat).toDate();
-      // console.log(pickerDate);
       $("#sale_sale_datetime").val(moment($(this).val(), dateFormat).format("YYYY-MM-DD'T'HH:mm:ss.SSSZ"));
     }
     else{
