@@ -107,7 +107,7 @@
                           - @details_counter = 0
 
                           = f.fields_for :purchase_details do |detail|
-                            = render "purchase_detail_fields", f: detail
+                            = render "admin/purchases/receptions/purchase_detail_fields", f: detail
                             -# Increse couter
                             - @details_counter += 1
                     -# End Table
@@ -171,7 +171,7 @@
           &times;
 
         -# Render providers list
-        = render "modal_providers"
+        = render "admin/purchases/receptions/modal_providers"
         -# End Render providers list
 
 -# Modal
@@ -183,7 +183,7 @@
           &times;
 
         -# Render products list
-        = render "modal_products"
+        = render "admin/purchases/receptions/modal_products"
         -# End Render products list
 
 -# Products modals script

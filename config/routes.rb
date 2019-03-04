@@ -210,28 +210,29 @@ Rails.application.routes.draw do
     # End Products
 
     # Purchases orders
-    get "/purchases/orders", to: "purchases/orders#index", as: "purchase_orders"
-    get "/purchases/order/new", to: "purchases/orders#new", as: "new_purchase_order"
-    get "/purchases/order/:id", to: "purchases/orders#show", as: "purchase_order"
-    get "/purchases/order/:id/edit", to: "purchases/orders#edit", as: "edit_purchase_order"
-    get "/purchases/order/:id/history", to: "purchases/orders#history", as: "history_purchase_order"
-    post "/purchases/order", to: "purchases/orders#create", as: "purchases_order"
-    patch "/purchases/order/:id", to: "purchases/orders#update", as: "update_purchase_order"
-    patch "/purchases/order/:id/active", to: "purchases/orders#active", as: "active_purchase_order"
-    patch "/purchases/order/:id/deactive", to: "purchases/orders#deactive", as: "deactive_purchase_order"
+    get "/purchases/orders", to: "purchases#index_orders", as: "purchase_orders"
+    get "/purchases/order/new", to: "purchases#new_order", as: "new_purchase_order"
+    get "/purchases/order/:id/edit", to: "purchases#edit_order", as: "edit_purchase_order"
+    get "/purchases/order/:id/history", to: "purchases#history_order", as: "history_purchase_order"
+    post "/purchases/order", to: "purchases#create_order", as: "purchases_order"
+    patch "/purchases/order/:id", to: "purchases#update_order", as: "update_purchase_order"
+    patch "/purchases/order/:id/active", to: "purchases#active_order", as: "active_purchase_order"
+    patch "/purchases/order/:id/deactive", to: "purchases#deactive_order", as: "deactive_purchase_order"
     # End Purchases orders
 
     # Purchases receptions
-    get "/purchases/receptions", to: "purchases/receptions#index", as: "purchase_receptions"
-    get "/purchases/reception/:id/new", to: "purchases/receptions#new", as: "new_purchase_reception"
-    get "/purchases/reception/:id", to: "purchases/receptions#show", as: "purchase_reception"
-    get "/purchases/reception/:id/edit", to: "purchases/receptions#edit", as: "edit_purchase_reception"
-    get "/purchases/reception/:id/history", to: "purchases/receptions#history", as: "history_purchase_reception"
-    patch "/purchases/reception/:id", to: "purchases/receptions#create", as: "purchases_reception"
-    patch "/purchases/reception/:id/update", to: "purchases/receptions#update", as: "update_purchase_reception"
-    patch "/purchases/reception/:id/active", to: "purchases/receptions#active", as: "active_purchase_reception"
-    patch "/purchases/reception/:id/deactive", to: "purchases/receptions#deactive", as: "deactive_purchase_reception"
+    get "/purchases/receptions", to: "purchases#index_receptions", as: "purchase_receptions"
+    get "/purchases/reception/:id/new", to: "purchases#new_reception", as: "new_purchase_reception"
+    get "/purchases/reception/:id/edit", to: "purchases#edit_reception", as: "edit_purchase_reception"
+    get "/purchases/reception/:id/history", to: "purchases#history_reception", as: "history_purchase_reception"
+    patch "/purchases/reception/:id", to: "purchases#create_reception", as: "purchases_reception"
+    patch "/purchases/reception/:id/active", to: "purchases#active_reception", as: "active_purchase_reception"
+    patch "/purchases/reception/:id/deactive", to: "purchases#deactive_reception", as: "deactive_purchase_reception"
     # End Purchases receptions
+
+    # Purchases returns
+    get "/purchases/returns", to: "purchases#index_returns", as: "purchase_returns"
+    # End Purchases returns
 
     # Purchases details
     get "/purchases/:id/details", to: "purchase_details#show", as: "purchase_details"
@@ -243,10 +244,6 @@ Rails.application.routes.draw do
     # Inventory
     get "/inventory", to: "inventories#index", as: "inventory"
     # End Inventory
-
-    # Purchases returns
-    get "/purchases/returns", to: "purchases/returns#index", as: "purchase_returns"
-    # End Purchases returns
 
     # Sales orders
     get "/sales/orders", to: "sales/orders#index", as: "sale_orders"

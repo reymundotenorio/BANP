@@ -7,7 +7,7 @@
         -# Heading
         %h1#count-title
           -# Render count title
-          = render "count_title"
+          = render "admin/purchases/orders/count_title"
         -# End Heading
 
       .col-xs-12.col-lg-2.text-right
@@ -57,7 +57,7 @@
             .col-xs-12.col-md-6.no-padding.text-right
               #show-buttons.btn-container
                 -# Render show buttons
-                = render "show_buttons"
+                = render "admin/purchases/orders/show_buttons"
 
               -# Export button
               .btn-container
@@ -69,7 +69,7 @@
 
           -# Render table and pagination with Ajax
           #render-data
-            = render "purchases"
+            = render "admin/purchases/orders/purchases"
           -# End Render table and pagination with Ajax
         -# End Material card
 -# End Index
