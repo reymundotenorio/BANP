@@ -89,6 +89,7 @@ Rails.application.routes.draw do
     get "purchases-by-products", to: "purchases_by_products", as: "purchases_by_products"
     get "purchases-by-categories", to: "purchases_by_categories", as: "purchases_by_categories"
     get "purchases-by-month", to: "purchases_by_month", as: "purchases_by_month"
+    get "sales-by-month", to: "sales_by_month", as: "sales_by_month"
   end
   # End Charts namespace
 

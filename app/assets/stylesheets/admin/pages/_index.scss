@@ -2,6 +2,12 @@
 // This file contains all styles related to the index pages
 // ----------------------------------------------------------
 
+.dashboard{
+  h2{
+    padding-bottom: 30px;
+  }
+}
+
 .index{
   &.index-pdf{
     padding-top: 10px;

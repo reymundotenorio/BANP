@@ -12,14 +12,25 @@ require "faker"
 
 puts "Seeding employees"
 20.times do |count|
-  if count == 0
+  if count == 0 # Creating SIBANP
+    Employee.create(
+      id: (count + 1),
+      first_name: "SIBANP",
+      last_name: "-",
+      email: "admin@betterandnice.com",
+      phone: "(305) 557-3700",
+      role: "Administrator",
+      state: true
+    )
+
+  elsif count == 1
     Employee.create(
       id: (count + 1),
       first_name: "Reymundo",
       last_name: "Tenorio",
       email: "reymundotenorio@gmail.com",
-      phone: "88888888",
-      role: "Administrator",
+      phone: "+50588070840", # Phone format only for development
+      role: "administrator",
       state: true
     )
 
@@ -96,6 +107,7 @@ puts "Seeding products"
       state: Faker::Boolean.boolean(0.8),
       category_id: Faker::Number.between(1, 5)
     )
+
   rescue StandardError => e
     puts "Error found #{e.to_s}"
   end
@@ -103,20 +115,36 @@ end
 
 puts "Seeding customers"
 80.times do |count|
-  begin
+
+  if count == 0 # Creating Independent customer
     Customer.create(
       id: (count + 1),
-      first_name: Faker::Name.first_name,
-      last_name: Faker::Name.last_name,
-      company: Faker::Company.name,
-      email: Faker::Internet.email,
-      phone: "(#{Faker::Number.number(3)}) #{Faker::Number.number(3)}-#{Faker::Number.number(4)}",
-      zipcode: Faker::Address.zip_code,
-      address: "#{Faker::Address.street_address}. #{Faker::Address.city}, #{Faker::Address.state}",
-      state: Faker::Boolean.boolean(0.8)
+      first_name: "Independent",
+      last_name: "-",
+      company: "-",
+      email: "customer@betterandnice.com",
+      phone: "-",
+      zipcode: "-",
+      address: "-",
+      state: true
     )
-  rescue StandardError => e
-    puts "Error found #{e.to_s}"
+
+  else
+    begin
+      Customer.create(
+        id: (count + 1),
+        first_name: Faker::Name.first_name,
+        last_name: Faker::Name.last_name,
+        company: Faker::Company.name,
+        email: Faker::Internet.email,
+        phone: "(#{Faker::Number.number(3)}) #{Faker::Number.number(3)}-#{Faker::Number.number(4)}",
+        zipcode: Faker::Address.zip_code,
+        address: "#{Faker::Address.street_address}. #{Faker::Address.city}, #{Faker::Address.state}",
+        state: Faker::Boolean.boolean(0.8)
+      )
+    rescue StandardError => e
+      puts "Error found #{e.to_s}"
+    end
   end
 end
 
@@ -133,8 +161,8 @@ puts "Seeding purchase orders"
       receipt_number: "N/A",
       status: "ordered",
       discount: Faker::Number.between(1, 10),
-      provider_id: Faker::Number.between(1, 35),
-      employee_id: Faker::Number.between(1, 15),
+      provider_id: Faker::Number.between(1, 20),
+      employee_id: Faker::Number.between(1, 10),
       observations: "",
       state: Faker::Boolean.boolean(0.95)
     )
@@ -143,13 +171,19 @@ puts "Seeding purchase orders"
   end
 end
 
+products_id = Array.new
+
+Product.enabled.each do |prod|
+  products_id.push(prod.id)
+end
+
 puts "Seeding purchase details"
 2500.times do |count|
   begin
     PurchaseDetail.create(
       id: (count + 1),
-      purchase_id: Faker::Number.between(1, 560),
-      product_id: Faker::Number.between(1, 110),
+      purchase_id: Faker::Number.between(1, 400),
+      product_id: products_id.sample,
       price: Faker::Number.decimal(4, 2),
       quantity: Faker::Number.between(1, 100),
       status: "ordered"
@@ -160,6 +194,46 @@ puts "Seeding purchase details"
   end
 end
 
+
+puts "Seeding sale invoices"
+580.times do |count|
+  begin
+    Sale.create(
+      id: (count + 1),
+      sale_datetime: Faker::Date.between(1.years.ago, Date.today),
+      delivery_status: "delivered",
+      payment_method: "cash",
+      payment_reference: "-",
+      paid: Faker::Boolean.boolean(0.95),
+      status: "invoiced",
+      discount: Faker::Number.between(1, 10),
+      customer_id: Faker::Number.between(1, 30),
+      employee_id: Faker::Number.between(1, 10),
+      observations: "",
+      state: Faker::Boolean.boolean(0.95)
+    )
+  rescue StandardError => e
+    puts "Error found #{e.to_s}"
+  end
+end
+
+puts "Seeding sale details"
+2500.times do |count|
+  begin
+    SaleDetail.new(
+      id: (count + 1),
+      sale_id: Faker::Number.between(1, 250),
+      product_id: products_id.sample,
+      price: Faker::Number.decimal(4, 2),
+      quantity: Faker::Number.between(1, 100),
+      status: "invoiced"
+    ).save(validate: false)
+  rescue StandardError => e
+    puts "Error found #{e.to_s}"
+  end
+end
+
+puts "Products ids: #{products_id}"
 puts "The information have been seeded"
 
 # rails db:drop
