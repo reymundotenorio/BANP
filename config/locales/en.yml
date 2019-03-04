@@ -21,6 +21,7 @@ en:
       returns: "Returns"
       sales: "Sales"
       invoicing: "Invoices"
+      shipments: "Shipments"
       deliveries: "Deliveries"
       quotes: "Quotes"
       reports: "Reports"

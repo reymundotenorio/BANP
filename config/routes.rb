@@ -262,14 +262,15 @@ Rails.application.routes.draw do
 
     # Sales shipments
     get "/sales/shipments", to: "sales#index_shipments", as: "sale_shipments"
-    get "/sales/shipment/new", to: "sales#new_shipment", as: "new_sale_shipment"
-    get "/sales/shipment/:id", to: "sales#show_shipment", as: "sale_shipment"
-    get "/sales/shipment/:id/edit", to: "sales#edit_shipment", as: "edit_sale_shipment"
-    get "/sales/shipment/:id/history", to: "sales#history_shipment", as: "history_sale_shipment"
-    post "/sales/shipment", to: "sales#create_shipment", as: "sales_shipment"
-    patch "/sales/shipment/:id", to: "sales#update_shipment", as: "update_sale_shipment"
-    patch "/sales/shipment/:id/active", to: "sales#active_shipment", as: "active_sale_shipment"
-    patch "/sales/shipment/:id/deactive", to: "sales#deactive_shipment", as: "deactive_sale_shipment"
+    patch "/sales/shipment/:id/new", to: "sales#new_shipment", as: "new_sale_shipment"
+
+    # get "/sales/shipment/:id", to: "sales#show_shipment", as: "sale_shipment"
+    # get "/sales/shipment/:id/edit", to: "sales#edit_shipment", as: "edit_sale_shipment"
+    # get "/sales/shipment/:id/history", to: "sales#history_shipment", as: "history_sale_shipment"
+    # post "/sales/shipment", to: "sales#create_shipment", as: "sales_shipment"
+    # patch "/sales/shipment/:id", to: "sales#update_shipment", as: "update_sale_shipment"
+    # patch "/sales/shipment/:id/active", to: "sales#active_shipment", as: "active_sale_shipment"
+    # patch "/sales/shipment/:id/deactive", to: "sales#deactive_shipment", as: "deactive_sale_shipment"
     # End Sales shipments
 
     # Sales details

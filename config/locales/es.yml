@@ -22,6 +22,7 @@ es:
       returns: "Devoluciones"
       sales: "Ventas"
       invoicing: "Facturaciones"
+      shipments: "Envíos"
       deliveries: "Entregas"
       quotes: "Cotizaciones"
       reports: "Reportes"

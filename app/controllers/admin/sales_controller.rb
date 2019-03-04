@@ -1,5 +1,5 @@
 class Admin::SalesController < ApplicationController
-      # Admin layout
+  # Admin layout
   layout "admin/application"
   # End Admin layout
 
@@ -18,6 +18,13 @@ class Admin::SalesController < ApplicationController
   # Sync model DSL
   enable_sync only: [:create, :update_invoice, :deactive_invoice]
   # End Sync model DSL
+
+
+  ########## SHIPMENTS ##########
+
+  # Find sale order with Friendly_ID
+  before_action :set_sale_shipment, only: [:new_shipment]
+  # End Find sale order with Friendly_ID
 
   # Authentication
   # before_action :require_employee
@@ -342,6 +349,61 @@ class Admin::SalesController < ApplicationController
 
   ########## END INVOICES ##########
 
+
+  ########## SHIPMENTS ##########
+
+  # /admin/sales/shipments
+  def index_shipments
+    @shipments = Sale.search_order(params[:search], params[:show]).paginate(page: params[:page], per_page: 15) # Shipments with pagination
+    @show_all = params[:show] == "all" ? true : false # View All (Enabled and Disabled)
+    @count = @shipments.count
+
+    # PDF view configuration
+    current_lang = params[:lang]
+    I18n.locale = current_lang
+
+    datetime =  Time.zone.now
+    file_time = datetime.strftime("%m%d%Y")
+
+    name_pdf = "sale-shipments-#{file_time}"
+    template = "admin/sales/shipments/index_pdf.html.haml"
+    title_pdf = t("sale.shipments")
+    # End PDF view configuration
+
+    respond_to do |format|
+      format.html do
+        render "admin/sales/shipments/index"
+      end
+
+      format.js do
+        render "admin/sales/shipments/index"
+      end
+
+      format.pdf do
+        to_pdf(name_pdf, template, Sale.shipments, I18n.l(datetime), title_pdf)
+      end
+    end
+  end
+
+  def new_shipment
+    @shipment.status = "shipped"
+
+    @shipment.sale_details.each do |detail|
+      detail.status = "shipped"
+    end
+
+    if @shipment.save
+      # redirect_to admin_sale_shipments_path, notice: "Orden enviada correctamente"
+      redirect_to admin_sale_orders_path, notice: "Orden enviada correctamente"
+
+    else
+      # redirect_to admin_sale_details_path(@shipment.id), error: "No se pudo enviar la orden"
+      redirect_to admin_sale_orders_path, error: "No se pudo enviar la orden"
+    end
+  end
+
+  ########## SHIPMENTS ##########
+
   private
 
   ########## ORDERS ##########
@@ -366,5 +428,15 @@ class Admin::SalesController < ApplicationController
 
   def sale_invoice_params
     params.require(:sale).permit(:sale_datetime, :status, :delivery_status, :payment_method, :payment_reference, :paid, :discount, :customer_id, :employee_id, :observations, sale_details_attributes: SaleDetail.attribute_names.map(&:to_sym).push(:_destroy))
+  end
+
+  ########## SHIPMENTS ##########
+
+  # Set Sale
+  def set_sale_shipment
+    @shipment = Sale.find(params[:id])
+
+  rescue
+    redirect_to admin_sale_shipments_path, alert: t("alerts.not_found", model: t("sale.shipment"))
   end
 end

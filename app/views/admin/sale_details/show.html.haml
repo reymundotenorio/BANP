@@ -20,7 +20,7 @@
 
           - else
             - if @sale.state
-              = link_to (admin_new_sale_shipment_path(@sale.id)), class: "btn btn-general" do
+              = link_to (admin_new_sale_shipment_path(@sale.id)), method: "patch", class: "btn btn-general" do
                 %i.fas.fa-check
                 %span= t("sale.ship_sale_order")
         -# End Show sale button
