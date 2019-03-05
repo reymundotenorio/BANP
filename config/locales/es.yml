@@ -237,8 +237,11 @@ es:
     shipment_details: "Detalles de envío"
     show_shipments: "Mostrar envíos"
     shipment_delivered: "Envío entregado"
-    ship_to: "Enviar a:"
     are_you_sure: "¿Estás seguro de que desea proceder con la cancelación?"
+    bill_to: "Cobrar a"
+    ship_to: "Enviar a"
+    sale_claim: "Si tiene algún reclamo con esta factura, comuníquese con Better and Nice Produce Corp. a través de uno de los medios detallados en el encabezado."
+    invoice_header: "Factura"
 
   # Will paginate
   will_paginate:

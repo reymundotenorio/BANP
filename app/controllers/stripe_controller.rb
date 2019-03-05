@@ -57,7 +57,7 @@ class StripeController < ApplicationController
     order.discount = 0.00
     order.customer_id = current_customer.id
     order.employee_id = 1 # SIBANP
-    order.observations = "*** Enviar a/Ship to: #{address} ***"
+    order.observations = address
 
     order.payment_method = "Stripe"
     order.payment_reference = "-"

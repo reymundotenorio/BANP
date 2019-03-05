@@ -52,14 +52,15 @@ class Admin::SaleDetailsController < ApplicationController
 
     template = "partials/invoice.html.haml"
 
+    @invoice_no = @sale.id
+    @invoice_date = @sale.sale_datetime
+
     respond_to do |format|
-      format.html do
-        render "partials/invoice"
-      end
+      format.html
       format.js
       format.pdf do
         # to_pdf(name_pdf, template, @details, I18n.l(datetime), title_pdf)
-        invoice_pdf(name_pdf, template, @details, I18n.l(datetime), title_pdf)
+        invoice_pdf(name_pdf, template, @sale, I18n.l(datetime), title_pdf)
       end
     end
   end

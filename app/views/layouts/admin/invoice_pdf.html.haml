@@ -31,6 +31,18 @@
     = wicked_pdf_stylesheet_link_tag "admin"
     -# End PDF Stylesheet
 
+    -# Jquery & Barcode
+    = javascript_include_tag "http://code.jquery.com/jquery-1.10.0.min.js"
+    = javascript_include_tag "http://code.jquery.com/ui/1.10.3/jquery-ui.min.js"
+    = javascript_include_tag "https://cdn.jsdelivr.net/npm/jsbarcode@3.11.0/dist/JsBarcode.all.min.js"
+
+    -# Execute Script
+    :javascript
+      $(document).ready(function() {
+        // Display Barcodes
+        JsBarcode("#barcode").init();
+      });
+
   %body.body-pdf.invoice-page
     -# Header
     .invoice-header
@@ -57,13 +69,18 @@
                   %a{href: "tel:+13057758199"} 305-775-8199
           .col-xs-5
             .legal-top
-              %h2.title Invoice
+              %h2.title= t("sale.invoice_header")
               .legal-item.date
-                %span.item-title Date
-                %span#invoice-date.item-content 1/16/2019 - 10:00 AM
+                %span.item-title= t("activerecord.attributes.sale.sale_datetime")
+                %span#invoice-date.item-content
+                  = I18n.l(@invoice_date, format: I18n.locale == :es ? "%d/%m/%Y - %I:%M:%S %p" : "%m/%d/%Y - %H:%M:%S") 
+
+
+
               .legal-item.number
-                %span.item-title Invoice #
-                %span#invoice-number.item-content 334
+                %span.item-title= "#{t('sale.invoice_header')} ##{@invoice_no}"
+                %span#invoice-number.item-content
+                  %svg#barcode{"jsbarcode-format": "CODE128", "jsbarcode-value": "#{@invoice_no}", "jsbarcode-lineColor": "#333333", "jsbarcode-background": "#fff", "jsbarcode-fontSize": "16px", "jsbarcode-font": "Montserrat"}
     -# End Header
 
     -# Main content

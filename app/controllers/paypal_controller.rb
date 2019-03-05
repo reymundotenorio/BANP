@@ -99,7 +99,7 @@ class PaypalController < ApplicationController
       sale_order.discount = 0.00
       sale_order.customer_id = current_customer.id
       sale_order.employee_id = 1 # SIBANP
-      sale_order.observations = "*** Enviar a/Ship to: #{address} ***"
+      sale_order.observations = address
 
       sale_order.payment_method = "Paypal"
       sale_order.payment_reference = "-"

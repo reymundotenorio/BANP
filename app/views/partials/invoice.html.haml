@@ -3,18 +3,39 @@
     .row
       .col-xs-6
         #bill-info-container.info-container
-          %h4.info-title Bill To
+          %h4.info-title= t("sale.bill_to")
 
           .info-content
-            %p.invoice-name Joe Paul Doe Jones
-            %p.invoice-card xxxx-xxxx-xxxx-1547
+            %p.invoice-name= "#{resource.customer.first_name} #{resource.customer.last_name}"
+            %p.invoice-card
+              - if resource.payment_method == "cash"
+                %i.fas.fa-money-bill-alt
+
+              - elsif resource.payment_method == "card"
+                %i.fas.fa-credit-card
+
+              - elsif resource.payment_method == "PayPal"
+                %i.fab.fa-paypal
+
+              - elsif resource.payment_method == "Stripe"
+                %i.fab.fa-stripe-s
+
+              - else
+                %i.fas.fa-dollar-sign
+
+              %span= resource.payment_reference
+
+            - if resource.customer.company
+              %p.invoice-name
+                %i.fas.fa-building
+                %span= resource.customer.company
+
       .col-xs-6
         #ship-info-container.info-container
-          %h4.info-title Ship To
+          %h4.info-title= t("sale.ship_to")
 
           .info-content
-            %p.ship-address
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+            %p.ship-address= resource.observations
 
 .invoice-body
   .logo
@@ -27,35 +48,35 @@
           %table.body-table
             %thead
               %tr
-                %th.q-row Quantity
-                %th.d-row Description
-                %th.r-row Rate
-                %th.a-row Amount
+                %th.q-row= t("activerecord.attributes.product.quantity")
+                %th.d-row= t("activerecord.attributes.product.description")
+                %th.r-row= t("activerecord.attributes.product.price")
+                %th.a-row= t("activerecord.attributes.sale.total")
 
             %tbody
               %tr
-                %td 2
+                %td.invoice-q 2
                 %td Patatoes baker
                 %td 28.95
                 %td 57.90
 
               %tr
-                %td 1
+                %td.invoice-q 1
                 %td Onions SP
                 %td 19.95
                 %td 19.95
 
               %tr
-                %td 1
+                %td.invoice-q 1
                 %td Spinach Cello Bach
                 %td 2.50
                 %td 15.00
 
         .total-container
           .flex-child.note
-            %span If you have any claim with this invoice, contact Better and Nice Produce Corp. through one of the means detailed in the header.
-            
+            %span= t("sale.sale_claim")
+
           .flex-child.total
-            %span Total
+            %span= t("activerecord.attributes.sale.total")
           .flex-child.mount
             %span $92.82

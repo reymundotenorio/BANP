@@ -17,7 +17,7 @@
               .general-info
                 .main-info
                   %p= I18n.l(@sale.sale_datetime, format: I18n.locale == :es ? "%A, %d #{t('sale.of')} %B #{t('sale.of')} %Y" : "%A, %B %d, %Y").capitalize
-                  %p= I18n.l(@sale.sale_datetime, format: "%I:%M:%S %p").capitalize
+                  %p= I18n.l(@sale.sale_datetime, format: I18n.locale == :es ? "%I:%M:%S %p" : "%H:%M:%S")
 
                 %br
 
