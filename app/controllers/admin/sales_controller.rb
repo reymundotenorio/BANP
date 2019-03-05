@@ -3,6 +3,10 @@ class Admin::SalesController < ApplicationController
   layout "admin/application"
   # End Admin layout
 
+  # Sync model DSL
+  enable_sync only: [:create, :update_invoice, :deactive_invoice, :new_shipment]
+  # End Sync model DSL
+
   ########## ORDERS ##########
 
   # Find sale order with Friendly_ID
@@ -15,15 +19,17 @@ class Admin::SalesController < ApplicationController
   before_action :set_sale_invoice, only: [:edit_invoice, :update_invoice, :deactive_invoice, :history_invoice]
   # End Find sale invoice with Friendly_ID
 
-  # Sync model DSL
-  enable_sync only: [:create, :update_invoice, :deactive_invoice]
-  # End Sync model DSL
+  ########## SHIPMENTS ##########
+
+  # Find sale order with Friendly_ID
+  before_action :set_sale_shipment, only: [:new_shipment, :history_shipment]
+  # End Find sale order with Friendly_ID
 
 
   ########## SHIPMENTS ##########
 
   # Find sale order with Friendly_ID
-  before_action :set_sale_shipment, only: [:new_shipment, :history_shipment]
+  before_action :set_sale_delivery, only: [:new_delivery, :history_delivery]
   # End Find sale order with Friendly_ID
 
   # Authentication
@@ -251,7 +257,7 @@ class Admin::SalesController < ApplicationController
             # If sale is active
             if detail.sale.state
               # If sale is an invoiced
-              if detail.sale.status == "invoiced"
+              if detail.sale.status == "invoiced" || detail.sale.status == "delivered"
                 product.stock = product.stock + detail.quantity
 
                 returned = SaleDetail.new
@@ -260,6 +266,7 @@ class Admin::SalesController < ApplicationController
                 returned.price = detail.price
                 returned.quantity = detail.quantity
                 returned.status = "returned"
+
 
                 if returned.save
                   puts "Return created on detail destroy"
@@ -291,7 +298,17 @@ class Admin::SalesController < ApplicationController
 
       @customers = Customer.search(params[:search_customer], "enabled-only").paginate(page: params[:customers_page], per_page: 5) # Providers with pagination
       @products = Product.search(params[:search_product], "enabled-only").paginate(page: params[:products_page], per_page: 5) # Products with pagination
-      render :edit_invoice
+      # render :edit_invoice
+
+      respond_to do |format|
+        format.html do
+          render "admin/sales/invoices/edit"
+        end
+
+        format.js do
+          render "admin/sales/invoices/edit"
+        end
+      end
     end
   end
 
@@ -415,6 +432,107 @@ class Admin::SalesController < ApplicationController
 
   ########## SHIPMENTS ##########
 
+
+  ########## DELIVERIES ##########
+
+  # /admin/sales/deliveries
+  def index_deliveries
+    @deliveries = Sale.search_delivery(params[:search], params[:show]).paginate(page: params[:page], per_page: 15) # Shipments with pagination
+    @show_all = params[:show] == "all" ? true : false # View All (Enabled and Disabled)
+    @count = @deliveries.count
+
+    # PDF view configuration
+    current_lang = params[:lang]
+    I18n.locale = current_lang
+
+    datetime =  Time.zone.now
+    file_time = datetime.strftime("%m%d%Y")
+
+    name_pdf = "sale-deliveries-#{file_time}"
+    template = "admin/sales/deliveries/index_pdf.html.haml"
+    title_pdf = t("sale.deliveries")
+    # End PDF view configuration
+
+    respond_to do |format|
+      format.html do
+        render "admin/sales/deliveries/index"
+      end
+
+      format.js do
+        render "admin/sales/deliveries/index"
+      end
+
+      format.pdf do
+        to_pdf(name_pdf, template, Sale.deliveries, I18n.l(datetime), title_pdf)
+      end
+    end
+  end
+
+  def new_delivery
+    @delivery.status = "delivered"
+    @delivery.delivery_status = "delivered"
+
+    @delivery.sale_details.each do |detail|
+      detail.status = "delivered"
+    end
+
+    if @delivery.save
+      # redirect_to admin_sale_deliveries_path, notice: "Orden enviada correctamente"
+      redirect_to admin_sale_deliveries_path, notice: "Orden recibida correctamente"
+
+    else
+      # redirect_to admin_sale_details_path(@delivery.id), error: "No se pudo enviar la orden"
+      redirect_to admin_sale_deliveries_path, error: "No se pudo recibir la orden"
+    end
+  end
+
+  # admin/sales/delivery/:id/history
+  def history_delivery
+    # Sale found by before_action
+
+    @history = @delivery.associated_audits
+    @history.push(@delivery.audits)
+
+    render "admin/sales/deliveries/history"
+  end
+
+  ########## DELIVERIES ##########
+
+  ########## RETURNS ##########
+
+  # admin/sales/returns
+  def index_returns
+    @returns = SaleDetail.search_returns(params[:search]).paginate(page: params[:page], per_page: 15) # Returns with pagination
+    @count = @returns.count
+
+    # PDF view configuration
+    current_lang = params[:lang]
+    I18n.locale = current_lang
+
+    datetime =  Time.zone.now
+    file_time = datetime.strftime("%m%d%Y")
+
+    name_pdf = "returns-#{file_time}"
+    template = "admin/sales/returns/index_pdf.html.haml"
+    title_pdf = t("header.navigation.returns")
+    # End PDF view configuration
+
+    respond_to do |format|
+      format.html do
+        render "admin/sales/returns/index"
+      end
+
+      format.js do
+        render "admin/sales/returns/index"
+      end
+      format.pdf do
+        to_pdf(name_pdf, template, SaleDetail.returns, I18n.l(datetime), title_pdf)
+      end
+    end
+  end
+
+  ########## END RETURNS ##########
+
   private
 
   ########## ORDERS ##########
@@ -449,5 +567,15 @@ class Admin::SalesController < ApplicationController
 
   rescue
     redirect_to admin_sale_shipments_path, alert: t("alerts.not_found", model: t("sale.shipment"))
+  end
+
+  ########## DELIVERIES ##########
+
+  # Set Sale
+  def set_sale_delivery
+    @delivery = Sale.find(params[:id])
+
+  rescue
+    redirect_to admin_sale_deliveries_path, alert: t("alerts.not_found", model: t("sale.delivery"))
   end
 end

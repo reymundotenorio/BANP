@@ -14,12 +14,16 @@ class Admin::SaleDetailsController < ApplicationController
   def show
     @is_invoice = @sale.status == "invoiced" ? true : false
     @is_shipment = @sale.status == "shipped" ? true : false
+    @is_delivery = @sale.status == "delivered" ? true : false
 
     if @is_invoice
       @details =  SaleDetail.search_invoices(@sale.id, params[:search], params[:show]).paginate(page: params[:page], per_page: 15)
 
     elsif @is_shipment
       @details = SaleDetail.search_shipments(@sale.id, params[:search], params[:show]).paginate(page: params[:page], per_page: 15) # Details with pagination
+
+    elsif @is_delivery
+      @details = SaleDetail.search_deliveries(@sale.id, params[:search], params[:show]).paginate(page: params[:page], per_page: 15) # Details with pagination
 
     else
       @details = SaleDetail.search_orders(@sale.id, params[:search], params[:show]).paginate(page: params[:page], per_page: 15) # Details with pagination
@@ -38,12 +42,14 @@ class Admin::SaleDetailsController < ApplicationController
     name_pdf = "sale-details-#{file_time}"
     # template = "admin/sale_details/show_pdf.html.haml"
 
-
     if @is_invoice
       title_pdf = "#{t('sale.invoice_details')} ##{@sale.id}"
 
     elsif @is_shipment
       title_pdf = "#{t('sale.shipment_details')} ##{@sale.id}"
+
+    elsif @is_delivery
+      title_pdf = "#{t('sale.delivery_details')} ##{@sale.id}"
 
     else
       title_pdf = "#{t('sale.order_details')} ##{@sale.id}"

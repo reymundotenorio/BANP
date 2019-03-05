@@ -30,59 +30,53 @@ class SaleDetail < ApplicationRecord
     if product
       # If sale is active
       if self.sale.state
-        # If sale is a invoice
-        if self.sale.status == "invoiced"
-          # If sale details has been returned
-          if self.status == "returned"
+        # If sale details has been returned
+        if self.status == "returned"
 
-            # If sale details has been invoiced
-          else
-            old_quantity = self.changes["quantity"][0] if changes["quantity"]
-            old_quantity = 0 if !old_quantity
+          # If sale details has been invoiced
+        else
+          old_quantity = self.changes["quantity"][0] if changes["quantity"]
+          old_quantity = 0 if !old_quantity
 
-            old_status = self.changes["status"][0] if changes["status"]
-            old_status = "invoiced" if !old_status
+          old_status = self.changes["status"][0] if changes["status"]
+          old_status = "invoiced" if !old_status
 
-            # If is a order that is being invoiced
-            if self.sale.status == "invoiced" && old_status == "ordered"
-              if (product.stock - self.quantity) < 0
-                self.errors.add(:quantity, I18n.t("sale.stock_is_less", stock: product.stock, product: I18n.locale == :es ? product.name_spanish : product.name))
-                return
+          # If is an invoice or a delivery
+          if self.status == "invoiced" || self.status == "delivered"
+            product.stock = product.stock + old_quantity - self.quantity
 
-              else
-                product.stock = product.stock - self.quantity
-              end
-
-              # If already is a invoice
-            else
-              final_stock = product.stock + old_quantity - self.quantity
-
-              product.stock = final_stock
-
+            # If quantity was reduced
+            if self.quantity < old_quantity
               returned = SaleDetail.new
               returned.sale_id = self.sale_id
               returned.product_id = self.product_id
               returned.price = self.price
-              returned.quantity = self.quantity
+              returned.quantity = (old_quantity - self.quantity)
               returned.status = "returned"
 
               if returned.save
                 puts "Return created on detail update"
               end
+
+            else
+              if (product.stock + old_quantity - self.quantity) < 0
+                self.errors.add(:quantity, I18n.t("sale.stock_is_less_sale", stock: product.stock, product: I18n.locale == :es ? product.name_spanish : product.name))
+                return
+              end
             end
-            # End If already is a invoice
-          end
-          # End If sale details has been invoiced
 
-          # Trigger saving successfully
-          if product.save
+            # Trigger saving successfully
+            if product.save
 
-            # Trigger saving failed
-          else
-            puts "Product stock not updated"
+              # Trigger saving failed
+            else
+              puts "Product stock not updated"
+            end
+            # End If quantity was reduced
           end
+          # End If is an invoice or a delivery
         end
-        # End If sale is a invoice
+        # End If sale details has been invoiced
       end
       # End If sale is active
     end
@@ -102,22 +96,29 @@ class SaleDetail < ApplicationRecord
       old_status = self.changes["status"][0] if changes["status"]
       old_status = "invoiced" if !old_status
 
-      # If is a order that is being invoiced
-      if (product.stock - self.quantity) < 0
-        self.errors.add(:quantity, I18n.t("sale.stock_is_less_sale", stock: product.stock, product: I18n.locale == :es ? product.name_spanish : product.name))
-        return
+      # If is a return
+      if self.status == "returned"
 
+        # If is not a return
       else
-        product.stock = product.stock - self.quantity
-      end
+        # If is a order that is being invoiced
+        if (product.stock - self.quantity) < 0
+          self.errors.add(:quantity, I18n.t("sale.stock_is_less_sale", stock: product.stock, product: I18n.locale == :es ? product.name_spanish : product.name))
+          return
 
-      # Trigger saving successfully
-      if product.save
+        else
+          product.stock = product.stock - self.quantity
+        end
 
-        # Trigger saving failed
-      else
-        puts "Product stock not updated"
+        # Trigger saving successfully
+        if product.save
+
+          # Trigger saving failed
+        else
+          puts "Product stock not updated"
+        end
       end
+      # End If is not a return
     end
     # End If product has been found
   end
@@ -167,6 +168,20 @@ class SaleDetail < ApplicationRecord
   end
   # End Search shipments
 
+  # Search deliveries
+  def self.search_deliveries(sale_id, search, show_all)
+    if search
+      self.joins(:sale).joins(:product).where("(products.name LIKE :search OR products.name_spanish LIKE :search) AND (sale_details.sale_id = :sale_id)", sale_id: sale_id, search: "%#{search}%").delivered.not_returned.not_pending
+
+    elsif show_all == "all"
+      self.where("sale_id = :sale_id", sale_id: sale_id).delivered.not_returned.not_pending
+
+    else
+      self.where("sale_id = :sale_id", sale_id: sale_id).delivered.not_returned.not_pending
+    end
+  end
+  # End Search deliveries
+
   # Search returns
   def self.search_returns(search)
     if search
@@ -214,5 +229,6 @@ class SaleDetail < ApplicationRecord
   scope :ordered, -> { where("(sale_details.status = 'ordered')") }
   scope :invoiced, -> { where("(sale_details.status = 'invoiced')") }
   scope :shipped, -> { where("(sale_details.status = 'shipped')") }
+  scope :delivered, -> { where("(sale_details.status = 'delivered')") }
   ## End Scopes
 end

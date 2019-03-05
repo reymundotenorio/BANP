@@ -243,6 +243,13 @@ es:
     sale_claim: "Si tiene algún reclamo con esta factura, comuníquese con Better and Nice Produce Corp. a través de uno de los medios detallados en el encabezado."
     invoice_header: "Factura"
     amount: "Monto"
+    paid_out: "Pagado"
+    pending_payment: "Pago pendiente"
+    delivery: "Entrega"
+    deliveries: "Entregas"
+    delivery_detail: "Detalle de entrega"
+    delivery_details: "Detalles de entrega"
+    show_deliveries: "Mostrar entregas"
 
   # Will paginate
   will_paginate:
@@ -601,15 +608,15 @@ es:
       submit: Guardar %{model}
       update: Actualizar %{model}
   number:
-    currency:
-      format:
-        delimiter: "."
-        format: "%n %u"
-        precision: 2
-        separator: ","
-        significant: false
-        strip_insignificant_zeros: false
-        unit: "€"
+    # currency:
+    #   format:
+    #     delimiter: "."
+    #     format: "%n %u"
+    #     precision: 2
+    #     separator: ","
+    #     significant: false
+    #     strip_insignificant_zeros: false
+    #     unit: "€"
     format:
       delimiter: "."
       precision: 3

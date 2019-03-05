@@ -1,0 +1,30 @@
+-# PDF resource
+-# resource
+-# End PDF resource
+
+-# Index PDF
+%section.index.index-pdf
+  .container
+    .row
+      .col-xs-12
+        -# Material card
+        .material-card.shadow-card.material-card-pdf.shadow-card-pdf
+          .row.no-margin
+            .col-xs-12.no-padding
+              %h1.text-center= pdf_title
+              -# Table
+              %table.table.table-pdf
+                -# Set attributes
+                - model = "sale_detail"
+                - attributes = ["sale_id", "created_at", "product", "price", "quantity", "total"]
+
+                -# Render table header
+                = render partial: "partials/table_header", locals: {model: model, attributes: attributes}
+
+                %tbody
+                  - resource.each do |info|
+                    -# Render table information
+                    = render partial: "partials/information_table", locals: {resource: info, attributes: attributes}
+              -# End Table
+        -# End Material card
+-# End Index PDF

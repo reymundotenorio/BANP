@@ -272,6 +272,10 @@ Rails.application.routes.draw do
     get "/sales/delivery/:id/history", to: "sales#history_delivery", as: "history_sale_delivery"
     # End Sales deliveries
 
+    # Sales returns
+    get "/sales/returns", to: "sales#index_returns", as: "sale_returns"
+    # End Sales returns
+
     # Sales details
     get "/sales/:id/details", to: "sale_details#show", as: "sale_details"
     get "/sale/detail/:id/edit", to: "sale_details#edit", as: "edit_sale_detail"

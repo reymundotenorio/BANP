@@ -177,7 +177,7 @@ class PaypalController < ApplicationController
       else
         errors_messages = ""
 
-        order.errors.full_messages.each do |error|
+        sale_order.errors.full_messages.each do |error|
           errors_messages += " #{error}."
         end
 

@@ -24,6 +24,11 @@
                 %i.fas.fa-check
                 %span= t("sale.shipment_delivered")
 
+          - elsif @is_delivery
+            = link_to (admin_sale_deliveries_path), class: "btn btn-general" do
+              %i.fas.fa-list-alt
+              %span= t("sale.show_deliveries")
+
           - else
             - if @sale.state
               = link_to (admin_new_sale_shipment_path(@sale.id)), method: "patch", class: "btn btn-general" do
@@ -40,6 +45,10 @@
     - elsif @is_shipment
       = sync partial: "shipments_data_breadcrumb", resource: @sale
       -# = sync_new partial: "shipments_data_breadcrumb", resource: Sale.new
+
+    - elsif @is_delivery
+      = sync partial: "deliveries_data_breadcrumb", resource: @sale
+      -# = sync_new partial: "deliveries_data_breadcrumb", resource: Sale.new
 
     - else
       = sync partial: "orders_data_breadcrumb", resource: @sale
@@ -60,6 +69,10 @@
               - elsif @is_shipment
                 = sync partial: "shipments_data_details", resource: @sale
                 -# = sync_new partial: "shipments_data_details", resource: Sale.new'
+
+              - elsif @is_delivery
+                = sync partial: "deliveries_data_details", resource: @sale
+                -# = sync_new partial: "deliveries_data_details", resource: Sale.new'
 
               - else
                 = sync partial: "orders_data_details", resource: @sale

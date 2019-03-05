@@ -1,0 +1,48 @@
+-# History
+%section.history
+  .container
+    -# Title
+    .row.title-container
+      .col-xs-12.col-lg-8
+        -# Heading
+        %h1.false
+          %i.fas.fa-history
+          = t("views.history.history")
+        -# End Heading
+
+      .col-xs-12.col-lg-4
+        -# Employee button
+        .btn-container
+          = link_to (admin_sale_details_path(@delivery.id)), class: "btn btn-general" do
+            %i.fas.fa-id-card
+            %span= t("sale.delivery_details")
+        -# End Employee button
+    -# End Title
+
+    -# Breadcrumb
+    .row
+      .col-xs-12.hidden-xs
+        .breadcrumb-container
+          %ol.breadcrumb
+            %li
+              = link_to (admin_root_path) do
+                %i.fas.fa-tachometer-alt
+                %span= t("header.navigation.dashboard")
+            %li
+              = link_to (admin_sale_deliveries_path) do
+                %i.far.fa-newspaper
+                %span= t("sale.deliveries")
+            %li
+              = link_to (admin_sale_details_path(@delivery.id)) do
+                %i.fas.fa-list-alt
+                = "#{t('sale.delivery_details')} ##{@delivery.id}"
+            %li.active
+              %i.fas.fa-history
+              = t("views.history.history")
+    -# End Breadcrumb
+
+    -# Render timeline
+    - model = Sale
+    = render partial: "partials/timeline", locals: {model: model}
+    -# End Render timeline
+-# End History

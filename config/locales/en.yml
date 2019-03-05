@@ -242,6 +242,14 @@ en:
     sale_claim: "If you have any claim with this invoice, contact Better and Nice Produce Corp. through one of the means detailed in the header."
     invoice_header: "Invoice"
     amount: "Amount"
+    paid_out: "Paid out"
+    pending_payment: "Pending payment"
+    delivery: "Delivery"
+    deliveries: "Deliveries"
+    delivery_detail: "Delivery detail"
+    delivery_details: "Delivery details"
+    show_deliveries: "Show deliveries"
+
 
   # Will paginate
   will_paginate:
@@ -600,15 +608,15 @@ en:
       submit: Save %{model}
       update: Update %{model}
   number:
-    currency:
-      format:
-        delimiter: ","
-        format: "%u%n"
-        precision: 2
-        separator: "."
-        significant: false
-        strip_insignificant_zeros: false
-        unit: "$"
+    # currency:
+    #   format:
+    #     delimiter: ","
+    #     format: "%u%n"
+    #     precision: 2
+    #     separator: "."
+    #     significant: false
+    #     strip_insignificant_zeros: false
+    #     unit: "$"
     format:
       delimiter: ","
       precision: 3

@@ -483,7 +483,7 @@ class Admin::PurchasesController < ApplicationController
 
   ########## RETURNS ##########
 
-  # admin/products
+  # admin/purchases/returns
   def index_returns
     @returns = PurchaseDetail.search_returns(params[:search]).paginate(page: params[:page], per_page: 15) # Returns with pagination
     @count = @returns.count

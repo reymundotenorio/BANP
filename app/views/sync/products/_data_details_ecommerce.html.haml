@@ -12,7 +12,7 @@
       %h2.name.aligned-text
         = I18n.locale == :es ? product.name_spanish : product.name
 
-      %p.price.aligned-text
+      %p.pricing.aligned-text
         = number_to_currency(product.price, precision: 2, unit: "$", format: "%u%n", separator: ".", delimiter: ",")
         %span.unit= t("views.products.per_box")
 

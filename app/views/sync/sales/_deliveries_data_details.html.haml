@@ -1,0 +1,110 @@
+.general-info
+  .main-info
+    %p= I18n.l(sale.sale_datetime, format: I18n.locale == :es ? "%A, %d #{t('sale.of')} %B #{t('sale.of')} %Y" : "%A, %B %d, %Y").capitalize
+    %p= I18n.l(sale.sale_datetime, format: I18n.locale == :es ? "%I:%M:%S %p" : "%H:%M:%S").capitalize
+
+  %br
+
+  %div{class: "main-info text-left-right paid #{'not-paid' if !sale.paid}"}
+    %p.text-left
+      %b
+        %i.fas.fa-hand-holding-usd
+        %span= t("activerecord.attributes.sale.paid")
+
+    %p.text-right= sale.paid ? "Si" : "No"
+
+  .main-info.text-left-right
+    %p.text-left
+      %b
+        - if sale.payment_method == "cash"
+          %i.fas.fa-money-bill-alt
+
+        - elsif sale.payment_method == "card"
+          %i.fas.fa-credit-card
+
+        - elsif sale.payment_method == "PayPal"
+          %i.fab.fa-paypal
+
+        - elsif sale.payment_method == "Stripe"
+          %i.fab.fa-stripe-s
+
+        - else
+          %i.fas.fa-dollar-sign
+
+        %span= t("activerecord.attributes.sale.payment_method")
+
+    %p.text-right
+      - if sale.payment_method == "cash"
+        = t("sale.cash")
+
+      - elsif sale.payment_method == "card"
+        = t("sale.cash")
+
+      - else
+        = sale.payment_method
+
+  .main-info
+    %p.text-center
+      %b
+        %i.fas.fa-file-invoice
+        %span= t("activerecord.attributes.sale.payment_reference")
+    %p.text-center= sale.payment_reference
+
+  %br
+
+  .main-info.text-left-right
+    %p.text-left
+      %b
+        %i.fas.fa-users
+        %span= t("activerecord.models.customer")
+    -# Customer name render_sync
+    = sync partial: "detail_customer_name", resource: sale.customer
+    -# = sync_new partial: "detail_customer_name", resource: Customer.new
+    -# End Customer name render_sync
+
+  .main-info.text-left-right
+    %p.text-left
+      %b
+        %i.fas.fa-briefcase
+        %span= t("activerecord.models.employee")
+    -# Employee name render_sync
+    = sync partial: "detail_employee_name", resource: sale.employee
+    -# = sync_new partial: "detail_employee_name", resource: Employee.new
+    -# End Employee name render_sync
+
+  .main-info
+    %p.text-center
+      %b
+        %i.fas.fa-list-alt
+        %span= t("activerecord.attributes.sale.observations")
+    %p.text-center= sale.observations
+
+  %br
+
+  .main-info.text-left-right
+    %p.text-left
+      %b Subtotal
+    %p.text-right= "#{number_to_currency(Sale.total(sale.id), precision: 2, unit: '$', format: '%u%n', separator: '.', delimiter: ',')}"
+
+  .main-info.text-left-right
+    %p.text-left
+      %b= "#{t('activerecord.attributes.sale.discount')} (#{sale.discount}%)"
+    %p.text-right="- #{number_to_currency((Sale.total(sale.id) * (sale.discount / 100)), precision: 2, unit: '$', format: '%u%n', separator: '.', delimiter: ',')}"
+
+  .main-info.text-left-right
+    .divider
+
+  .main-info.text-left-right
+    %p.text-left.total
+      %b Total
+    %p.text-right.total= number_to_currency((Sale.total(sale.id) - (Sale.total(sale.id) * (sale.discount / 100))), precision: 2, unit: "$", format: "%u%n", separator: ".", delimiter: ",")
+
+  .main-info
+    %p= t("views.show.created_at", time: time_ago_in_words(sale.created_at))
+    %p= t("views.show.updated_at", time: time_ago_in_words(sale.updated_at))
+
+  .main-buttons
+    .col-xs-12.col-sm-4.col-md-6.col-md-offset-3.button-container.no-padding
+      = link_to (admin_history_sale_delivery_path(sale)), class: "btn btn-general" do
+        %i.fas.fa-history
+        %span= t("views.show.history")

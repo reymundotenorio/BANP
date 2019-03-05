@@ -1,5 +1,5 @@
 -# Form
-= form_tag products_path, method: "get", autocomplete: "on" do
+= form_tag products_path, method: "get", autocomplete: "off" do
   .group
     = text_field_tag :product, params[:product], class: "search-input"
     %span.highlight

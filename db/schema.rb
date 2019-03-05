@@ -123,7 +123,7 @@ ActiveRecord::Schema.define(version: 2019_02_05_120100) do
     t.string "name", null: false
     t.string "name_spanish", null: false
     t.string "barcode", null: false
-    t.decimal "price", precision: 8, scale: 2, null: false
+    t.decimal "price", precision: 10, scale: 2, null: false
     t.integer "stock", default: 0, null: false
     t.string "content"
     t.string "content_spanish"
