@@ -97,7 +97,7 @@ puts "Seeding products"
       name: Faker::Food.dish,
       name_spanish: Faker::Food.dish,
       barcode: Faker::Code.ean,
-      price: Faker::Number.decimal(3, 2),
+      price: Faker::Number.decimal(4, 2).to_d.abs,
       content: Faker::Food.measurement,
       content_spanish: Faker::Food.measurement,
       description: Faker::Food.description,
@@ -184,7 +184,7 @@ puts "Seeding purchase details"
       id: (count + 1),
       purchase_id: Faker::Number.between(1, 400),
       product_id: products_id.sample,
-      price: Faker::Number.decimal(4, 2),
+      price: Faker::Number.decimal(4, 2).to_d.abs,
       quantity: Faker::Number.between(1, 100),
       status: "ordered"
       # status: ["ordered", "returned"].sample
@@ -220,11 +220,11 @@ end
 puts "Seeding sale details"
 2500.times do |count|
   begin
-    SaleDetail.new(
+    SaleDetail.create(
       id: (count + 1),
       sale_id: Faker::Number.between(1, 250),
       product_id: products_id.sample,
-      price: Faker::Number.decimal(4, 2),
+      price: Faker::Number.decimal(4, 2).to_d.abs,
       quantity: Faker::Number.between(1, 100),
       status: "invoiced"
     ).save(validate: false)
