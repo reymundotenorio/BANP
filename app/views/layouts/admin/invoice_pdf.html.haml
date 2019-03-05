@@ -69,18 +69,17 @@
                   %a{href: "tel:+13057758199"} 305-775-8199
           .col-xs-5
             .legal-top
-              %h2.title= t("sale.invoice_header")
+              %span#invoice-number.item-content
+                %svg#barcode{"jsbarcode-format": "CODE128", "jsbarcode-value": "#{@invoice_no}", "jsbarcode-lineColor": "#333333", "jsbarcode-background": "#fff", "jsbarcode-height": "40", "jsbarcode-displayValue": "false", "jsbarcode-margin": "0", "jsbarcode-marginBottom": "10"}
+
+              %h2.title= "#{t('sale.invoice_header')} ##{@invoice_no}"
+
               .legal-item.date
                 %span.item-title= t("activerecord.attributes.sale.sale_datetime")
                 %span#invoice-date.item-content
-                  = I18n.l(@invoice_date, format: I18n.locale == :es ? "%d/%m/%Y - %I:%M:%S %p" : "%m/%d/%Y - %H:%M:%S") 
+                  = I18n.l(@invoice_date, format: I18n.locale == :es ? "%d/%m/%Y - %I:%M:%S %p" : "%m/%d/%Y - %H:%M:%S")
 
 
-
-              .legal-item.number
-                %span.item-title= "#{t('sale.invoice_header')} ##{@invoice_no}"
-                %span#invoice-number.item-content
-                  %svg#barcode{"jsbarcode-format": "CODE128", "jsbarcode-value": "#{@invoice_no}", "jsbarcode-lineColor": "#333333", "jsbarcode-background": "#fff", "jsbarcode-fontSize": "16px", "jsbarcode-font": "Montserrat"}
     -# End Header
 
     -# Main content

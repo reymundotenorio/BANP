@@ -242,6 +242,7 @@ es:
     ship_to: "Enviar a"
     sale_claim: "Si tiene algún reclamo con esta factura, comuníquese con Better and Nice Produce Corp. a través de uno de los medios detallados en el encabezado."
     invoice_header: "Factura"
+    amount: "Monto"
 
   # Will paginate
   will_paginate:

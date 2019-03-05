@@ -128,13 +128,13 @@ class SaleDetail < ApplicationRecord
   # Search orders
   def self.search_orders(sale_id, search, show_all)
     if search
-      self.joins(:sale).joins(:product).where("(products.name LIKE :search OR products.name_spanish LIKE :search) AND (sale_details.sale_id = :sale_id)", sale_id: sale_id, search: "%#{search}%").ordered.not_returned
+      self.joins(:sale).joins(:product).where("(products.name LIKE :search OR products.name_spanish LIKE :search) AND (sale_details.sale_id = :sale_id)", sale_id: sale_id, search: "%#{search}%").ordered.not_returned.not_pending
 
     elsif show_all == "all"
-      self.where("sale_id = :sale_id", sale_id: sale_id).ordered.not_returned
+      self.where("sale_id = :sale_id", sale_id: sale_id).ordered.not_returned.not_pending
 
     else
-      self.where("sale_id = :sale_id", sale_id: sale_id).ordered.not_returned
+      self.where("sale_id = :sale_id", sale_id: sale_id).ordered.not_returned.not_pending
     end
   end
   # End Search orders
@@ -142,13 +142,13 @@ class SaleDetail < ApplicationRecord
   # Search invoices
   def self.search_invoices(sale_id, search, show_all)
     if search
-      self.joins(:sale).joins(:product).where("(products.name LIKE :search OR products.name_spanish LIKE :search) AND (sale_details.sale_id = :sale_id)", sale_id: sale_id, search: "%#{search}%").invoiced.not_returned
+      self.joins(:sale).joins(:product).where("(products.name LIKE :search OR products.name_spanish LIKE :search) AND (sale_details.sale_id = :sale_id)", sale_id: sale_id, search: "%#{search}%").invoiced.not_returned.not_pending
 
     elsif show_all == "all"
-      self.where("sale_id = :sale_id", sale_id: sale_id).invoiced.not_returned
+      self.where("sale_id = :sale_id", sale_id: sale_id).invoiced.not_returned.not_pending
 
     else
-      self.where("sale_id = :sale_id", sale_id: sale_id).invoiced.not_returned
+      self.where("sale_id = :sale_id", sale_id: sale_id).invoiced.not_returned.not_pending
     end
   end
   # End Search invoices
@@ -156,13 +156,13 @@ class SaleDetail < ApplicationRecord
   # Search shipments
   def self.search_shipments(sale_id, search, show_all)
     if search
-      self.joins(:sale).joins(:product).where("(products.name LIKE :search OR products.name_spanish LIKE :search) AND (sale_details.sale_id = :sale_id)", sale_id: sale_id, search: "%#{search}%").shipped.not_returned
+      self.joins(:sale).joins(:product).where("(products.name LIKE :search OR products.name_spanish LIKE :search) AND (sale_details.sale_id = :sale_id)", sale_id: sale_id, search: "%#{search}%").shipped.not_returned.not_pending
 
     elsif show_all == "all"
-      self.where("sale_id = :sale_id", sale_id: sale_id).shipped.not_returned
+      self.where("sale_id = :sale_id", sale_id: sale_id).shipped.not_returned.not_pending
 
     else
-      self.where("sale_id = :sale_id", sale_id: sale_id).shipped.not_returned
+      self.where("sale_id = :sale_id", sale_id: sale_id).shipped.not_returned.not_pending
     end
   end
   # End Search shipments
@@ -187,7 +187,7 @@ class SaleDetail < ApplicationRecord
       self.where("sale_id = :sale_id", sale_id: sale_id)
 
     else
-      self.where("sale_id = :sale_id", sale_id: sale_id).not_returned
+      self.where("sale_id = :sale_id", sale_id: sale_id).not_returned.not_pending
     end
   end
   # End Search
@@ -209,6 +209,7 @@ class SaleDetail < ApplicationRecord
 
   ## Scopes
   scope :not_returned, -> { where("(sale_details.status != 'returned')") }
+  scope :not_pending, -> { where("(sale_details.status != 'pending')") }
   scope :returned, -> { where("(sale_details.status = 'returned')") }
   scope :ordered, -> { where("(sale_details.status = 'ordered')") }
   scope :invoiced, -> { where("(sale_details.status = 'invoiced')") }

@@ -50,10 +50,9 @@ class Admin::SaleDetailsController < ApplicationController
     end
     # End PDF view configuration
 
-    template = "partials/invoice.html.haml"
-
     @invoice_no = @sale.id
     @invoice_date = @sale.sale_datetime
+    template = "partials/invoice.html.haml"
 
     respond_to do |format|
       format.html

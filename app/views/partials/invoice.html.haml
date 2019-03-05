@@ -7,23 +7,25 @@
 
           .info-content
             %p.invoice-name= "#{resource.customer.first_name} #{resource.customer.last_name}"
-            %p.invoice-card
-              - if resource.payment_method == "cash"
-                %i.fas.fa-money-bill-alt
 
-              - elsif resource.payment_method == "card"
-                %i.fas.fa-credit-card
+            - if resource.payment_method != "cash"
+              %p.invoice-card
+                - if resource.payment_method == "cash"
+                  %i.fas.fa-money-bill-alt
 
-              - elsif resource.payment_method == "PayPal"
-                %i.fab.fa-paypal
+                - elsif resource.payment_method == "card"
+                  %i.fas.fa-credit-card
 
-              - elsif resource.payment_method == "Stripe"
-                %i.fab.fa-stripe-s
+                - elsif resource.payment_method == "PayPal"
+                  %i.fab.fa-paypal
 
-              - else
-                %i.fas.fa-dollar-sign
+                - elsif resource.payment_method == "Stripe"
+                  %i.fab.fa-stripe-s
 
-              %span= resource.payment_reference
+                - else
+                  %i.fas.fa-dollar-sign
+
+                %span= resource.payment_reference
 
             - if resource.customer.company
               %p.invoice-name
@@ -38,8 +40,9 @@
             %p.ship-address= resource.observations
 
 .invoice-body
-  .logo
-    BANP
+  .logo-container
+    .logo
+      BANP
 
   .container
     .row
@@ -51,26 +54,27 @@
                 %th.q-row= t("activerecord.attributes.product.quantity")
                 %th.d-row= t("activerecord.attributes.product.description")
                 %th.r-row= t("activerecord.attributes.product.price")
-                %th.a-row= t("activerecord.attributes.sale.total")
+                %th.a-row= t("sale.amount")
 
             %tbody
-              %tr
-                %td.invoice-q 2
-                %td Patatoes baker
-                %td 28.95
-                %td 57.90
+              - resource.sale_details.each do |detail|
+                - if detail.status != "returned" && detail.status != "pending"
+                  %tr
+                    %td.invoice-q= detail.quantity
+                    %td= I18n.locale == :es ? "#{detail.product.name_spanish} - #{detail.product.content_spanish}" : "#{detail.product.name} - #{detail.product.content}"
 
-              %tr
-                %td.invoice-q 1
-                %td Onions SP
-                %td 19.95
-                %td 19.95
+                    %td= number_to_currency(detail.price, precision: 2, unit: "$", format: "%u%n", separator: ".", delimiter: ",")
 
-              %tr
-                %td.invoice-q 1
-                %td Spinach Cello Bach
-                %td 2.50
-                %td 15.00
+                    %td= number_to_currency((detail.quantity * detail.price), precision: 2, unit: "$", format: "%u%n", separator: ".", delimiter: ",")
+
+        .total-container.no-border
+          .flex-child.note.no-border
+
+          .flex-child.total.discount
+            %span= "#{t('activerecord.attributes.sale.discount')} (#{resource.discount}%)"
+
+          .flex-child.mount.discount
+            %span= number_to_currency((Sale.total(resource.id) * (resource.discount / 100)), precision: 2, unit: "$", format: "%u%n", separator: ".", delimiter: ",")
 
         .total-container
           .flex-child.note
@@ -78,5 +82,6 @@
 
           .flex-child.total
             %span= t("activerecord.attributes.sale.total")
+
           .flex-child.mount
-            %span $92.82
+            %span= number_to_currency((Sale.total(resource.id)), precision: 2, unit: "$", format: "%u%n", separator: ".", delimiter: ",")

@@ -114,7 +114,7 @@
                       %p= number_to_currency(product.price, precision: 2, unit: "$", format: "%u%n", separator: ".", delimiter: ",")
 
                     - elsif attribute == "barcode"
-                      %svg.barcode{"jsbarcode-format": "CODE128", "jsbarcode-value": "#{product.barcode}", "jsbarcode-lineColor": "#333333", "jsbarcode-background": "#fff", "jsbarcode-fontSize": "16px", "jsbarcode-font": "Montserrat"}
+                      %svg.barcode{"jsbarcode-format": "CODE128", "jsbarcode-value": "#{product.barcode}", "jsbarcode-lineColor": "#333333", "jsbarcode-background": "#fff", "jsbarcode-fontSize": "16px", "jsbarcode-font": "Montserrat", "jsbarcode-margin": "0", "jsbarcode-marginTop": "10"}
 
                     - else
                       %p= product["#{attribute}"]

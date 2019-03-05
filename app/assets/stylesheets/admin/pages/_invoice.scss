@@ -11,7 +11,7 @@
     margin-top: 0px;
     margin-bottom: 10px;
     text-transform: none;
-    font-size: 20px + 4px;
+    font-size: 24px + 4px;
     color: $black;
     line-height: 1.15;
     font-family: $third-font;
@@ -54,6 +54,7 @@
       margin-top: 0px;
       margin-bottom: 10px;
     }
+
     .legal-item{
       margin-bottom: 10px;
 
@@ -94,7 +95,7 @@
         margin-bottom: 5px;
 
         i{
-          padding-left: 5px;
+          padding-right: 5px;
         }
       }
     }
@@ -105,6 +106,29 @@
   padding-top: 30px;
   position: relative;
 
+
+  .logo-container{
+    position: absolute;
+    top: 0px;
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
+
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+  }
+
   .logo{
     padding: 20px;
     font-family: $third-font;
@@ -113,12 +137,8 @@
     border: 5px solid $text-color;
     display: inline-block;
     border-radius: 20px;
-    opacity: 0.05;
-    position: absolute;
-    top: calc(50% - 68px);
-    bottom: auto;
-    left: calc(50% - 146.43px);
-    right: auto;
+    opacity: 0.1;
+    line-height: 1;
   }
 
   .table-container{
@@ -144,8 +164,8 @@
             // border-left: 1px solid $text-color;
           }
 
-          &.a-row{ // &:last-child
-            border-right-color: $transparent;
+          &.a-row{ // &:last-child;
+            border-right-color: $transparent
           }
         }
       }
@@ -187,6 +207,10 @@
     border: 1px solid $text-color;
     border-top: 0px;
 
+    &.no-border{
+      border-top: none;
+    }
+
     .flex-child{
       padding: 5px 10px;
       -webkit-box-flex: 1;
@@ -195,21 +219,39 @@
 
       &.note{
         border-right: 1px solid $text-color;
+
+        &.no-border{
+          border-right: none;
+          width: 58%;
+        }
       }
     }
 
     .note{
-      width: 70%;
+      width: 60%;
       font-size: 10px + 4px;
     }
 
     .total, .mount{
       font-size: 14px + 4px;
       text-align: right;
+
+      &.discount{
+        font-weight: normal;
+        font-size: 14px;
+      }
     }
 
     .total{
       font-weight: 700;
+
+      &, &.discount{
+        width: 200px;
+        -webkit-box-flex: 0;
+        -ms-flex-positive: 0;
+        flex-grow: 0;
+        text-align: left;
+      }
     }
   }
 }
