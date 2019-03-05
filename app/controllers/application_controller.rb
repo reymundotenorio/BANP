@@ -189,4 +189,16 @@ class ApplicationController < ActionController::Base
     footer: { content: render_to_string("layouts/admin/footer_pdf.html.haml", layout: nil, locals: { datetime: datetime }) },
     locals: { resource: resource, pdf_title: pdf_title }
   end
+
+  # Render invoice PDF
+  def invoice_pdf(name_pdf, template, resource, datetime, pdf_title)
+    render pdf: name_pdf,
+    template: template,
+    layout: "admin/invoice_pdf.html.haml",
+    page_size: "letter",
+    # orientation: "Landscape", # Portrait
+    margin: { top: 10, bottom: 15 },
+    footer: { content: render_to_string("layouts/admin/footer_pdf.html.haml", layout: nil, locals: { datetime: datetime }) },
+    locals: { resource: resource, pdf_title: pdf_title }
+  end
 end

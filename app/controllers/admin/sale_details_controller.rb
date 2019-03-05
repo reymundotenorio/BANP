@@ -36,7 +36,8 @@ class Admin::SaleDetailsController < ApplicationController
     file_time = datetime.strftime("%m%d%Y")
 
     name_pdf = "sale-details-#{file_time}"
-    template = "admin/sale_details/show_pdf.html.haml"
+    # template = "admin/sale_details/show_pdf.html.haml"
+
 
     if @is_invoice
       title_pdf = "#{t('sale.invoice_details')} ##{@sale.id}"
@@ -49,11 +50,16 @@ class Admin::SaleDetailsController < ApplicationController
     end
     # End PDF view configuration
 
+    template = "partials/invoice.html.haml"
+
     respond_to do |format|
-      format.html
+      format.html do
+        render "partials/invoice"
+      end
       format.js
       format.pdf do
-        to_pdf(name_pdf, template, @details, I18n.l(datetime), title_pdf)
+        # to_pdf(name_pdf, template, @details, I18n.l(datetime), title_pdf)
+        invoice_pdf(name_pdf, template, @details, I18n.l(datetime), title_pdf)
       end
     end
   end

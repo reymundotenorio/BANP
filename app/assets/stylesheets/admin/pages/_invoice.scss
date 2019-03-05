@@ -1,0 +1,200 @@
+.invoice-page{
+  background: $white;
+  // padding: 30px 0px;
+  // margin: 0 auto;
+  line-height: 1.15;
+  font-size: 12px + 4px;
+}
+
+.invoice-header{
+  .name{
+    margin-top: 0px;
+    margin-bottom: 10px;
+    text-transform: none;
+    font-size: 20px + 4px;
+    color: $black;
+    line-height: 1.15;
+    font-family: $third-font;
+    letter-spacing: -1px;
+    color: $black;
+  }
+
+  .tagline, .url{
+    text-transform: uppercase;
+    color: $text-color;
+    font-size: 13px + 4px;
+    font-weight: 300;
+    margin-top: 0px;
+    line-height: 1.15;
+    margin-bottom: 10px;
+    letter-spacing: -0.5px;
+  }
+
+  .url{
+    text-transform: lowercase;
+  }
+
+  .zip{
+    display: block;
+    font-size: 14px;
+    margin-bottom: 10px;
+
+    a{
+      color: $text-color;
+    }
+  }
+
+  .legal-top{
+    text-align: right;
+
+    .title{
+      color: $black;
+      font-size: 18px + 4px;
+      line-height: 1.15;
+      margin-top: 0px;
+      margin-bottom: 10px;
+    }
+    .legal-item{
+      margin-bottom: 10px;
+
+      span{
+        display: block;
+      }
+
+      .item-title{
+        font-weight: 700;
+        margin-bottom: 5px;
+      }
+    }
+  }
+}
+
+.invoice-info{
+  padding-top: 30px;
+  .info-container{
+    border: 1px solid $text-color;
+
+    .info-title{
+      font-size: 12px + 4px;
+      font-weight: 700;
+      color: $text-color;
+      margin: 0px;
+      padding: 5px;
+      border-bottom: 1px solid $text-color;
+    }
+
+    .info-content{
+      padding: 15px;
+      height: 120px;
+    }
+  }
+}
+
+.invoice-body{
+  padding-top: 30px;
+  position: relative;
+
+  .logo{
+    padding: 20px;
+    font-family: $third-font;
+    font-size: 75px;
+    font-weight: 700;
+    border: 5px solid $text-color;
+    display: inline-block;
+    border-radius: 20px;
+    opacity: 0.05;
+    position: absolute;
+    top: calc(50% - 68px);
+    bottom: auto;
+    left: calc(50% - 146.43px);
+    right: auto;
+  }
+
+  .table-container{
+    border: 1px solid $text-color;
+    height: 580px;
+  }
+
+  .body-table{
+    width: 100%;
+
+    thead{
+      background: #ddd;
+      border-left: 2px solid $transparent;
+      border-right: 2px solid $transparent;
+      border-bottom: 1px solid $text-color;
+
+      tr{
+        th{
+          border-right: 1px solid $text-color;
+          text-align: center !important;
+
+          &.q-row{
+            // border-left: 1px solid $text-color;
+          }
+
+          &.a-row{ // &:last-child
+            border-right-color: $transparent;
+          }
+        }
+      }
+    }
+
+    tr{
+      th, td{
+        padding: 5px 10px;
+        width: 15%;
+        text-align: right;
+        // height: 28px;
+
+        &:nth-child(2){
+          width: 55%;
+          text-align: left;
+        }
+      }
+    }
+  }
+
+  .total-container{
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: row;
+    flex-direction: row;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    border: 1px solid $text-color;
+    border-top: 0px;
+
+    .flex-child{
+      padding: 5px 10px;
+      -webkit-box-flex: 1;
+      -ms-flex-positive: 1;
+      flex-grow: 1;
+
+      &.note{
+        border-right: 1px solid $text-color;
+      }
+    }
+
+    .note{
+      width: 70%;
+      font-size: 10px + 4px;
+    }
+
+    .total, .mount{
+      font-size: 14px + 4px;
+      text-align: right;
+    }
+
+    .total{
+      font-weight: 700;
+    }
+  }
+}

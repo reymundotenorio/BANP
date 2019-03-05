@@ -1,0 +1,71 @@
+!!!
+%html
+  %head
+    %title Better and Nice Produce Corp
+    -# Meta information
+    %meta{charset: "utf-8"}/
+    %meta{content: "text/html;charset=utf-8", "http-equiv": "content-type"}/
+    %meta{content: "IE=edge", "http-equiv": "X-UA-Compatible"}/
+    %meta{content: "width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui", name: "viewport"}/
+    -# End Meta information
+
+    -# Base
+    %base{href: "#{$banp_domain}"}/
+    -# End Base
+
+    -# Favicon and theme settings
+    = favicon_link_tag asset_path("img/favicon.png"), rel: "icon", type: "image/png"
+    %meta{content: "#444444", name: "theme-color"}/
+    -# End Favicon and theme settings
+
+    -# CSRF Tags
+    = csrf_meta_tags
+    -# End CSRF Tags
+
+    -# CSP Tags
+    = csp_meta_tag
+    -# End CSP Tags
+
+    -# PDF Stylesheet
+    = wicked_pdf_stylesheet_link_tag "application"
+    = wicked_pdf_stylesheet_link_tag "admin"
+    -# End PDF Stylesheet
+
+  %body.body-pdf.invoice-page
+    -# Header
+    .invoice-header
+      .container
+        .row
+          .col-xs-7
+            %h1.name Better and Nice Produce Corp.
+            %h2.tagline= t('views.landing.motto')
+            .row
+              .col-xs-6
+                %span.zip P.O. BOX 352195
+              .col-xs-6
+                %span.zip Miami, Fl 33142
+              .col-xs-6
+                %span.zip PH: 305-557-3700
+              .col-xs-6
+                %span.zip Miami, Fl 33135
+              .col-xs-6
+                %span.zip
+                  %a{href: "https://www.betterandnice.com/"} https://www.betterandnice.com
+              .col-xs-6
+                %span.zip
+                  Cell.:
+                  %a{href: "tel:+13057758199"} 305-775-8199
+          .col-xs-5
+            .legal-top
+              %h2.title Invoice
+              .legal-item.date
+                %span.item-title Date
+                %span#invoice-date.item-content 1/16/2019 - 10:00 AM
+              .legal-item.number
+                %span.item-title Invoice #
+                %span#invoice-number.item-content 334
+    -# End Header
+
+    -# Main content
+    = yield
+    -# End Main content
