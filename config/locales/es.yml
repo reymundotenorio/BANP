@@ -218,9 +218,9 @@ es:
     remove: "Eliminar"
     invoice: "Facturación de venta"
     invoices: "Facturaciones de venta"
-    invoice_detail: "Detalle de Facturación de venta"
-    invoice_details: "Detalles de Facturación de venta"
-    show_invoices: "Mostrar Facturaciones de venta"
+    invoice_detail: "Detalle de facturación de venta"
+    invoice_details: "Detalles de facturación de venta"
+    show_invoices: "Mostrar facturaciones de venta"
     receive_sale_order: "Recibir orden de venta"
     ship_sale_order: "Enviar orden de venta"
     stock_is_less: "El stock (%{stock}) del producto %{product} es inferior a la cantidad a devolver"
@@ -231,6 +231,14 @@ es:
     stock_is_less_sale: "El stock (%{stock}) del producto %{product} es inferior a la cantidad a ser vendida"
     cash: "Efectivo"
     card: "Tarjeta"
+    shipment: "Envío"
+    shipments: "Envíos"
+    shipment_detail: "Detalle de envío"
+    shipment_details: "Detalles de envío"
+    show_shipments: "Mostrar envíos"
+    shipment_delivered: "Envío entregado"
+    ship_to: "Enviar a:"
+    are_you_sure: "¿Estás seguro de que desea proceder con la cancelación?"
 
   # Will paginate
   will_paginate:

@@ -23,7 +23,7 @@ class Admin::SalesController < ApplicationController
   ########## SHIPMENTS ##########
 
   # Find sale order with Friendly_ID
-  before_action :set_sale_shipment, only: [:new_shipment]
+  before_action :set_sale_shipment, only: [:new_shipment, :history_shipment]
   # End Find sale order with Friendly_ID
 
   # Authentication
@@ -67,7 +67,7 @@ class Admin::SalesController < ApplicationController
 
   # admin/sales/order/:id/history
   def history_order
-    # Employee found by before_action
+    # Sale found by before_action
 
     @history = @order.associated_audits
     @history.push(@order.audits)
@@ -401,6 +401,16 @@ class Admin::SalesController < ApplicationController
       # redirect_to admin_sale_details_path(@shipment.id), error: "No se pudo enviar la orden"
       redirect_to admin_sale_shipments_path, error: "No se pudo enviar la orden"
     end
+  end
+
+  # admin/sales/shipment/:id/history
+  def history_shipment
+    # Sale found by before_action
+
+    @history = @shipment.associated_audits
+    @history.push(@shipment.audits)
+
+    render "admin/sales/shipments/history"
   end
 
   ########## SHIPMENTS ##########

@@ -2,5 +2,8 @@
 - if @is_invoice
   = "#{@count == 1 ? t('sale.invoice_detail') : t('sale.invoice_details')} ##{@sale.id}"
 
+- elsif @is_shipment
+  = "#{@count == 1 ? t('sale.shipment_detail') : t('sale.shipment_details')} ##{@sale.id}"
+
 - else
   = "#{@count == 1 ? t('sale.order_detail') : t('sale.order_details')} ##{@sale.id}"

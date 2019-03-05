@@ -118,6 +118,6 @@
 
     .col-xs-12.col-sm-4.col-md-12.button-container.no-padding
       - if sale.state
-        = link_to (admin_deactive_sale_invoice_path(sale)), method: "patch", class: "btn btn-general" do
+        = link_to (admin_deactive_sale_invoice_path(sale)), method: "patch", class: "btn btn-general", data: {confirm: t("sale.are_you_sure")} do
           %i.fas.fa-times
           %span= t("views.show.cancel")

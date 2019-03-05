@@ -153,6 +153,20 @@ class SaleDetail < ApplicationRecord
   end
   # End Search invoices
 
+  # Search shipments
+  def self.search_shipments(sale_id, search, show_all)
+    if search
+      self.joins(:sale).joins(:product).where("(products.name LIKE :search OR products.name_spanish LIKE :search) AND (sale_details.sale_id = :sale_id)", sale_id: sale_id, search: "%#{search}%").shipped.not_returned
+
+    elsif show_all == "all"
+      self.where("sale_id = :sale_id", sale_id: sale_id).shipped.not_returned
+
+    else
+      self.where("sale_id = :sale_id", sale_id: sale_id).shipped.not_returned
+    end
+  end
+  # End Search shipments
+
   # Search returns
   def self.search_returns(search)
     if search
@@ -198,5 +212,6 @@ class SaleDetail < ApplicationRecord
   scope :returned, -> { where("(sale_details.status = 'returned')") }
   scope :ordered, -> { where("(sale_details.status = 'ordered')") }
   scope :invoiced, -> { where("(sale_details.status = 'invoiced')") }
+  scope :shipped, -> { where("(sale_details.status = 'shipped')") }
   ## End Scopes
 end

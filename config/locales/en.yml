@@ -230,6 +230,14 @@ en:
     stock_is_less_sale: "The stock (%{stock}) of the product %{product} is less than the amount to be sold"
     cash: "Cash"
     card: "Card"
+    shipment: "Shipment"
+    shipments: "Shipments"
+    shipment_detail: "Shipment detail"
+    shipment_details: "Shipment details"
+    show_shipments: "Show shipments"
+    shipment_delivered: "Shipment delivered"
+    ship_to: "Ship to:"
+    are_you_sure: "Are you sure you want to proceed with the cancellation?"
 
   # Will paginate
   will_paginate:

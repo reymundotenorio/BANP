@@ -15,7 +15,7 @@ puts "Seeding employees"
   if count == 0 # Creating SIBANP
     Employee.create(
       id: (count + 1),
-      first_name: "SIBANP",
+      first_name: "- SIBANP",
       last_name: "-",
       email: "admin@betterandnice.com",
       phone: "(305) 557-3700",
@@ -97,7 +97,7 @@ puts "Seeding products"
       name: Faker::Food.dish,
       name_spanish: Faker::Food.dish,
       barcode: Faker::Code.ean,
-      price: Faker::Number.decimal(4, 2),
+      price: Faker::Number.decimal(3, 2),
       content: Faker::Food.measurement,
       content_spanish: Faker::Food.measurement,
       description: Faker::Food.description,
@@ -119,13 +119,13 @@ puts "Seeding customers"
   if count == 0 # Creating Independent customer
     Customer.create(
       id: (count + 1),
-      first_name: "Independent",
-      last_name: "-",
-      company: "-",
-      email: "customer@betterandnice.com",
-      phone: "-",
-      zipcode: "-",
-      address: "-",
+      first_name: "***",
+      last_name: "***",
+      company: "***",
+      email: "***@***.***",
+      phone: "(***) ***-****",
+      zipcode: "***",
+      address: "***",
       state: true
     )
 

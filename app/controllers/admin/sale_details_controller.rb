@@ -13,8 +13,17 @@ class Admin::SaleDetailsController < ApplicationController
 
   def show
     @is_invoice = @sale.status == "invoiced" ? true : false
+    @is_shipment = @sale.status == "shipped" ? true : false
 
-    @details = @is_invoice ? SaleDetail.search_invoices(@sale.id, params[:search], params[:show]).paginate(page: params[:page], per_page: 15) : SaleDetail.search_orders(@sale.id, params[:search], params[:show]).paginate(page: params[:page], per_page: 15) # Details with pagination
+    if @is_invoice
+      @details =  SaleDetail.search_invoices(@sale.id, params[:search], params[:show]).paginate(page: params[:page], per_page: 15)
+
+    elsif @is_shipment
+      @details = SaleDetail.search_shipments(@sale.id, params[:search], params[:show]).paginate(page: params[:page], per_page: 15) # Details with pagination
+
+    else
+      @details = SaleDetail.search_orders(@sale.id, params[:search], params[:show]).paginate(page: params[:page], per_page: 15) # Details with pagination
+    end
 
     @show_all = params[:show] == "all" ? true : false # View All (Enabled and Disabled)
     @count = @details.count
@@ -28,7 +37,16 @@ class Admin::SaleDetailsController < ApplicationController
 
     name_pdf = "sale-details-#{file_time}"
     template = "admin/sale_details/show_pdf.html.haml"
-    title_pdf =   @is_invoice ? "#{t('sale.invoice_details')} ##{@sale.id}" : "#{t('sale.order_details')} ##{@sale.id}"
+
+    if @is_invoice
+      title_pdf = "#{t('sale.invoice_details')} ##{@sale.id}"
+
+    elsif @is_shipment
+      title_pdf = "#{t('sale.shipment_details')} ##{@sale.id}"
+
+    else
+      title_pdf = "#{t('sale.order_details')} ##{@sale.id}"
+    end
     # End PDF view configuration
 
     respond_to do |format|
