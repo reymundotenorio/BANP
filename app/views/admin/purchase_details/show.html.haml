@@ -29,11 +29,11 @@
     -# Breadcrumb
     - if @is_reception
       = sync partial: "receptions_data_breadcrumb", resource: @purchase
-      = sync_new partial: "receptions_data_breadcrumb", resource: Purchase.new
+      -# = sync_new partial: "receptions_data_breadcrumb", resource: Purchase.new
 
     - else
       = sync partial: "orders_data_breadcrumb", resource: @purchase
-      = sync_new partial: "orders_data_breadcrumb", resource: Purchase.new
+      -# = sync_new partial: "orders_data_breadcrumb", resource: Purchase.new
     -# End Breadcrumb
 
     .row
@@ -45,11 +45,11 @@
               -# Data details render_sync
               - if @is_reception
                 = sync partial: "receptions_data_details", resource: @purchase
-                = sync_new partial: "receptions_data_details", resource: Purchase.new
+                -# = sync_new partial: "receptions_data_details", resource: Purchase.new
 
               - else
                 = sync partial: "orders_data_details", resource: @purchase
-                = sync_new partial: "orders_data_details", resource: Purchase.new
+                -# = sync_new partial: "orders_data_details", resource: Purchase.new
               -# End Data details render_sync
         -# End Material card
 

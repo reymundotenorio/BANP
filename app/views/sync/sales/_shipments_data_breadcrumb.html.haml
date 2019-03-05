@@ -1,0 +1,15 @@
+.row
+  .col-xs-12.hidden-xs
+    .breadcrumb-container
+      %ol.breadcrumb
+        %li
+          = link_to (admin_root_path) do
+            %i.fas.fa-tachometer-alt
+            %span= t("header.navigation.dashboard")
+        %li
+          = link_to (admin_sale_shipments_path) do
+            %i.far.fa-newspaper
+            %span= t("sale.shipments")
+        %li.active
+          %i.fas.fa-list-alt
+          = "#{@count == 1 ? t('sale.order_detail') : t('sale.order_details')} ##{sale.id}"

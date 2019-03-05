@@ -29,11 +29,11 @@
     -# Breadcrumb
     - if @is_invoice
       = sync partial: "invoices_data_breadcrumb", resource: @sale
-      = sync_new partial: "invoices_data_breadcrumb", resource: Sale.new
+      -# = sync_new partial: "invoices_data_breadcrumb", resource: Sale.new
 
     - else
       = sync partial: "orders_data_breadcrumb", resource: @sale
-      = sync_new partial: "orders_data_breadcrumb", resource: Sale.new
+      -# = sync_new partial: "orders_data_breadcrumb", resource: Sale.new
     -# End Breadcrumb
 
     .row
@@ -45,11 +45,11 @@
               -# Data details render_sync
               - if @is_invoice
                 = sync partial: "invoices_data_details", resource: @sale
-                = sync_new partial: "invoices_data_details", resource: Sale.new
+                -# = sync_new partial: "invoices_data_details", resource: Sale.new
 
               - else
                 = sync partial: "orders_data_details", resource: @sale
-                = sync_new partial: "orders_data_details", resource: Sale.new
+                -# = sync_new partial: "orders_data_details", resource: Sale.new
               -# End Data details render_sync
         -# End Material card
 

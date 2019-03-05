@@ -101,13 +101,13 @@
                     - elsif attribute == "category.name_spanish"
                       -# Category name render_sync
                       = sync partial: "details_category_name_spanish", resource: product.category
-                      = sync_new partial: "details_category_name_spanish", resource: Category.new
+                      -# = sync_new partial: "details_category_name_spanish", resource: Category.new
                       -# End Category name render_sync
 
                     - elsif attribute == "category.name"
                       -# Category name render_sync
                       = sync partial: "details_category_name", resource: product.category
-                      = sync_new partial: "details_category_name", resource: Category.new
+                      -# = sync_new partial: "details_category_name", resource: Category.new
                       -# End Category name render_sync
 
                     - elsif attribute == "price"

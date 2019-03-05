@@ -354,7 +354,7 @@ class Admin::SalesController < ApplicationController
 
   # /admin/sales/shipments
   def index_shipments
-    @shipments = Sale.search_order(params[:search], params[:show]).paginate(page: params[:page], per_page: 15) # Shipments with pagination
+    @shipments = Sale.search_shipment(params[:search], params[:show]).paginate(page: params[:page], per_page: 15) # Shipments with pagination
     @show_all = params[:show] == "all" ? true : false # View All (Enabled and Disabled)
     @count = @shipments.count
 
@@ -387,6 +387,7 @@ class Admin::SalesController < ApplicationController
 
   def new_shipment
     @shipment.status = "shipped"
+    @shipment.delivery_status = "shipped"
 
     @shipment.sale_details.each do |detail|
       detail.status = "shipped"
@@ -394,11 +395,11 @@ class Admin::SalesController < ApplicationController
 
     if @shipment.save
       # redirect_to admin_sale_shipments_path, notice: "Orden enviada correctamente"
-      redirect_to admin_sale_orders_path, notice: "Orden enviada correctamente"
+      redirect_to admin_sale_shipments_path, notice: "Orden enviada correctamente"
 
     else
       # redirect_to admin_sale_details_path(@shipment.id), error: "No se pudo enviar la orden"
-      redirect_to admin_sale_orders_path, error: "No se pudo enviar la orden"
+      redirect_to admin_sale_shipments_path, error: "No se pudo enviar la orden"
     end
   end
 

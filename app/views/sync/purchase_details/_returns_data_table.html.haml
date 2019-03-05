@@ -16,7 +16,7 @@
         - elsif attribute == "product"
           -# Product name render_sync
           = sync partial: "data_table_product_name", resource: purchase_detail.product
-          = sync_new partial: "data_table_product_name", resource: Product.new
+          -# = sync_new partial: "data_table_product_name", resource: Product.new
           -# End Product name render_sync
 
         - elsif attribute == "price"

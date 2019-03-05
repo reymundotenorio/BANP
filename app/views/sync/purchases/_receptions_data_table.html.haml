@@ -19,13 +19,13 @@
         - elsif attribute == "provider"
           -# Provider name render_sync
           = sync partial: "data_table_provider_name", resource: purchase.provider
-          = sync_new partial: "data_table_provider_name", resource: Provider.new
+          -# = sync_new partial: "data_table_provider_name", resource: Provider.new
           -# End Provider name render_sync
 
         - elsif attribute == "employee"
           -# Employee name render_sync
           = sync partial: "data_table_employee_name", resource: purchase.employee
-          = sync_new partial: "data_table_employee_name", resource: Employee.new
+          -# = sync_new partial: "data_table_employee_name", resource: Employee.new
           -# End Employee name render_sync
 
         - else

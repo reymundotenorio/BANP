@@ -47,6 +47,20 @@ class Sale < ApplicationRecord
   end
   # End Search invoice
 
+  # Search shipment
+  def self.search_shipment(search, show_all)
+    if search
+      self.joins(:customer).joins(:employee).where("(DATE_FORMAT(sale_datetime, '%d/%m/%Y') LIKE :search OR DATE_FORMAT(sale_datetime, '%m/%d/%Y') LIKE :search OR customers.name LIKE :search OR employees.first_name LIKE :search OR employees.last_name LIKE :search) AND (status = 'shipped')", search: "%#{search}%")
+
+    elsif show_all == "all"
+      shipments
+
+    else
+      shipments.enabled
+    end
+  end
+  # End Search shipment
+
   # Total
   def self.total(id)
     self.find(id).sale_details.not_returned.sum("price * quantity")
@@ -79,6 +93,7 @@ class Sale < ApplicationRecord
   scope :enabled, -> { where(state: true) }
   scope :orders, -> { where(status: "ordered") }
   scope :invoices, -> { where(status: "invoiced") }
+  scope :shipments, -> { where(status: "shipped") }
   ## End Scopes
 
   ## Callbacks

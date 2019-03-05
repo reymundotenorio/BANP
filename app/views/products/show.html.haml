@@ -5,7 +5,7 @@
         .col-xs-12
           -# Category title render_sync
           = sync partial: "product_title", resource: @product
-          = sync_new partial: "product_title", resource: Product.new
+          -# = sync_new partial: "product_title", resource: Product.new
           -# End Category title render_sync
 
     .container
@@ -27,18 +27,18 @@
 
               -# Category link render_sync
               = sync partial: "breadcrumb_link", resource: @category
-              = sync_new partial: "breadcrumb_link", resource: Category.new
+              -# = sync_new partial: "breadcrumb_link", resource: Category.new
               -# End Category link render_sync
 
               -# Product name render_sync
               = sync partial: "breadcrumb_name", resource: @product
-              = sync_new partial: "breadcrumb_name", resource: Product.new
+              -# = sync_new partial: "breadcrumb_name", resource: Product.new
               -# End Product name render_sync
 
-      -# Category title render_sync
+      -# Data details render_sync
       = sync partial: "data_details_ecommerce", resource: @product
-      = sync_new partial: "data_details_ecommerce", resource: Product.new
-      -# End Category title render_sync
+      -# = sync_new partial: "data_details_ecommerce", resource: Product.new
+      -# End Data details render_sync
 
       -# Render related products
       = render "related_products"

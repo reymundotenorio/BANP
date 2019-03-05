@@ -6,7 +6,7 @@
           - if @category.present?
             -# Category title render_sync
             = sync partial: "category_title", resource: @category
-            = sync_new partial: "category_title", resource: Category.new
+            -# = sync_new partial: "category_title", resource: Category.new
             -# End Category title render_sync
 
           - else

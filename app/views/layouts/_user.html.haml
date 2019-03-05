@@ -9,7 +9,7 @@
     - if current_customer
       -# Customer detail render_sync
       = sync partial: "customer_info", resource: current_customer
-      = sync_new partial: "customer_info", resource: Customer.new
+      -# = sync_new partial: "customer_info", resource: Customer.new
       -# End Customer detail render_sync
 
     - else

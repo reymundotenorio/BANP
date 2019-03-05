@@ -12,7 +12,7 @@
         %span= t("activerecord.models.provider")
     -# Provider name render_sync
     = sync partial: "detail_provider_name", resource: purchase.provider
-    = sync_new partial: "detail_provider_name", resource: Provider.new
+    -# = sync_new partial: "detail_provider_name", resource: Provider.new
     -# End Provider name render_sync
 
   .main-info.text-left-right
@@ -22,7 +22,7 @@
         %span= t("activerecord.models.employee")
     -# Employee name render_sync
     = sync partial: "detail_employee_name", resource: purchase.employee
-    = sync_new partial: "detail_employee_name", resource: Employee.new
+    -# = sync_new partial: "detail_employee_name", resource: Employee.new
     -# End Employee name render_sync
 
   .main-info
