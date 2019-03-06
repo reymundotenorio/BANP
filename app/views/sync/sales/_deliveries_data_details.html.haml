@@ -104,7 +104,20 @@
     %p= t("views.show.updated_at", time: time_ago_in_words(sale.updated_at))
 
   .main-buttons
-    .col-xs-12.col-sm-4.col-md-6.col-md-offset-3.button-container.no-padding
+    - if sale.state
+      .col-xs-12.col-sm-4.col-md-6.button-container.no-padding
+        = link_to (admin_edit_sale_delivery_path(sale)), class: "btn btn-general" do
+          %i.fas.fa-edit
+          %span= t("views.show.edit")
+
+
+    %div{class: " col-xs-12 col-sm-4 col-md-6 #{'col-md-offset-3' if !sale.state} button-container no-padding"}
       = link_to (admin_history_sale_delivery_path(sale)), class: "btn btn-general" do
         %i.fas.fa-history
         %span= t("views.show.history")
+
+    .col-xs-12.col-sm-4.col-md-12.button-container.no-padding
+      - if sale.state
+        = link_to (admin_deactive_sale_delivery_path(sale)), method: "patch", class: "btn btn-general", data: {confirm: t("sale.are_you_sure")} do
+          %i.fas.fa-times
+          %span= t("views.show.cancel")

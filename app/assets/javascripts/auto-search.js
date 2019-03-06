@@ -15,4 +15,9 @@ $(document).ready(function(){
     $("#search-btn-products").delay(500).click();
   });
 
+  // Auto search customers
+  $("#search-input-customers").on("keyup", function(){
+    $("#search-btn-customers").delay(500).click();
+  });
+
 });

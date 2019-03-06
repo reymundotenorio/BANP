@@ -7,6 +7,18 @@
   padding-top: 30px;
   text-align: center;
 
+  .powered_by{
+    // text-align: right;
+    text-align: center;
+    line-height: 1;
+    margin-bottom: 5px;
+
+    i{
+      font-size: 46px;
+      color: #6772E6;
+    }
+  }
+
   label{
     text-align: left;
     font-size: 14px;

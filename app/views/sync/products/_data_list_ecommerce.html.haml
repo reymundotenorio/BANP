@@ -32,6 +32,10 @@
       .stock
         %p.no-margin= t("views.products.out_stock")
 
+    - else
+      .stock.available
+        %p.no-margin= t("sale.available")
+
   .card-body
     %p.name.aligned-text
       = link_to "#{I18n.locale == :es ? product.name_spanish : product.name}", product_path(product)

@@ -1,3 +1,13 @@
+- if action_name == "create_reception"
+  :javascript
+    $(document).ready(function(){
+      // Auto search providers
+      $("#search-btn-providers").click();
+
+      // Auto search products
+      $("#search-btn-products").click();
+    });
+
 -# Form
 = form_for @reception, url: @form_url, html: {autocomplete: "off", multipart: true} do |f|
   %section.form

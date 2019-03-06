@@ -190,7 +190,12 @@ $(document).ready(function(){
             subtotal += (product.price * value.cartDetails.quantity);
             counter ++;
 
-            var productItem = "<div class='table-row'> <div class='image-column'><img class='img-responsive' src='" + product.image_url + "'></div> <div class='info cart-info'> <div class='name-column info-column'><span>" + productName + "</span></div> <div class='price-column info-column'><span>" + formatter.format(product.price) + "</span></div> <div class='quantity-column info-column'><form action='' class='cart-form' method=''><div class='quantity'> <button class='subtract-cart' name='minus' type='button'><span class='sr-only'>minus</span><i class='fas fa-minus'></i></button> <input id='quantity' class='q-input q-cart' name='quant-prod' type='number' value='" + value.cartDetails.quantity + "' min='1' step='1'> <button class='add-cart' name='plus' type='button'><span class='sr-only'>plus</span> <i class='fas fa-plus'></i></button></div> <input id='productId' name='productId' type='hidden' value='" + product.id + "'> </form></div> <div class='total-column info-column'><span>" + formatter.format((product.price * value.cartDetails.quantity)) + "</span></div> </div> <button class='remove-btn removeFromCart' name='Remove' type='button'><i class='far fa-trash-alt'></i></button> </div>";
+            name_title = i18nLocale == "es" ? "Producto" : "Product";
+            price_title = i18nLocale == "es" ? "Precio" : "Price";
+            quantity_title = i18nLocale == "es" ? "Cantidad" : "Quantity";
+            total_title = i18nLocale == "es" ? "Total" : "Total";
+
+            var productItem = "<div class='table-row'> <div class='image-column'><img class='img-responsive' src='" + product.image_url + "'></div> <div class='info cart-info'> <div class='name-column info-column' data-title='" + name_title + "'><span>" + productName + "</span></div> <div class='price-column info-column' data-title='" + price_title + "'><span>" + formatter.format(product.price) + "</span></div> <div class='quantity-column info-column' data-title='" + quantity_title + "'><form action='' class='cart-form' method=''><div class='quantity'> <button class='subtract-cart' name='minus' type='button'><span class='sr-only'>minus</span><i class='fas fa-minus'></i></button> <input id='quantity' class='q-input q-cart' name='quant-prod' type='number' value='" + value.cartDetails.quantity + "' min='1' step='1'> <button class='add-cart' name='plus' type='button'><span class='sr-only'>plus</span> <i class='fas fa-plus'></i></button></div> <input id='productId' name='productId' type='hidden' value='" + product.id + "'> </form></div> <div class='total-column info-column' data-title='" + total_title + "'><span>" + formatter.format((product.price * value.cartDetails.quantity)) + "</span></div> </div> <button class='remove-btn removeFromCart' name='Remove' type='button'><i class='far fa-trash-alt'></i></button> </div>";
 
             var productInfo = "<div class='item'><input id='products_" + counter + "_id' name='products[" + counter + "][id]' type='hidden' value='" + product.id + "'> <input id='products_" + counter + "_quantity' name='products[" + counter + "][quantity]' type='hidden' value='" + value.cartDetails.quantity + "'></div>"
 
@@ -215,7 +220,7 @@ $(document).ready(function(){
   // Add Mask and Event to Input
   function addEventMaskInput(jsonData){
     var products = jsonData;
-    
+
     // Fuction on the "Remove from cart" button
     $(".removeFromCart").click(function(){
       var form = $(this).parents(".table-row:first");

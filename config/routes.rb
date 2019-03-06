@@ -262,14 +262,17 @@ Rails.application.routes.draw do
 
     # Sales shipments
     get "/sales/shipments", to: "sales#index_shipments", as: "sale_shipments"
-    patch "/sales/shipment/:id/new", to: "sales#new_shipment", as: "new_sale_shipment"
     get "/sales/shipment/:id/history", to: "sales#history_shipment", as: "history_sale_shipment"
+    patch "/sales/shipment/:id/new", to: "sales#new_shipment", as: "new_sale_shipment"
     # End Sales shipments
 
     # Sales deliveries
     get "/sales/deliveries", to: "sales#index_deliveries", as: "sale_deliveries"
-    patch "/sales/delivery/:id/new", to: "sales#new_delivery", as: "new_sale_delivery"
+    get "/sales/delivery/:id/edit", to: "sales#edit_delivery", as: "edit_sale_delivery"
     get "/sales/delivery/:id/history", to: "sales#history_delivery", as: "history_sale_delivery"
+    patch "/sales/delivery/:id/new", to: "sales#new_delivery", as: "new_sale_delivery"
+    patch "/sales/delivery/:id", to: "sales#update_delivery", as: "update_sale_delivery"
+    patch "/sales/delivery/:id/deactive", to: "sales#deactive_delivery", as: "deactive_sale_delivery"
     # End Sales deliveries
 
     # Sales returns

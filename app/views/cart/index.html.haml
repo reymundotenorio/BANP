@@ -34,13 +34,13 @@
               .table-head.hidden-xs
                 .image-column
                 .info.cart-table
-                  .name-column
+                  .name-column{"data-title": "#{t('views.cart.product')}"}
                     %span= t("views.cart.product")
-                  .price-column
+                  .price-column{"data-title": "#{t('views.cart.price')}"}
                     %span= t("views.cart.price")
-                  .quantity-column
+                  .quantity-column{"data-title": "#{t('views.cart.quantity')}"}
                     %span= t("views.cart.quantity")
-                  .total-column
+                  .total-column{"data-title": "#{t('views.cart.total')}"}
                     %span= t("views.cart.total")
 
               -# Product list

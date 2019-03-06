@@ -4,7 +4,7 @@ class Admin::SalesController < ApplicationController
   # End Admin layout
 
   # Sync model DSL
-  enable_sync only: [:create, :update_invoice, :deactive_invoice, :new_shipment]
+  enable_sync only: [:create_invoice, :update_invoice, :deactive_invoice, :new_shipment, :new_delivery, :update_delivery, :deactive_delivery]
   # End Sync model DSL
 
   ########## ORDERS ##########
@@ -29,7 +29,7 @@ class Admin::SalesController < ApplicationController
   ########## SHIPMENTS ##########
 
   # Find sale order with Friendly_ID
-  before_action :set_sale_delivery, only: [:new_delivery, :history_delivery]
+  before_action :set_sale_delivery, only: [:new_delivery, :edit_delivery, :update_delivery, :deactive_delivery, :history_delivery]
   # End Find sale order with Friendly_ID
 
   # Authentication
@@ -214,7 +214,17 @@ class Admin::SalesController < ApplicationController
 
       @customers = Customer.search(params[:search_customer], "enabled-only").paginate(page: params[:customers_page], per_page: 5) # Providers with pagination
       @products = Product.search(params[:search_product], "enabled-only").paginate(page: params[:products_page], per_page: 5) # Products with pagination
-      render :new_invoice
+      # render :new_invoice
+
+      respond_to do |format|
+        format.html do
+          render "admin/sales/invoices/new"
+        end
+
+        format.js do
+          render "admin/sales/invoices/new"
+        end
+      end
     end
   end
 
@@ -256,7 +266,7 @@ class Admin::SalesController < ApplicationController
           if product
             # If sale is active
             if detail.sale.state
-              # If sale is an invoiced
+              # If sale is an invoice or delivery
               if detail.sale.status == "invoiced" || detail.sale.status == "delivered"
                 product.stock = product.stock + detail.quantity
 
@@ -277,7 +287,7 @@ class Admin::SalesController < ApplicationController
                   puts "Stock updated on destroy"
                 end
               end
-              # End If sale is an invoiced
+              # End If sale is an invoice or delivery
             end
             # End If sale is active
           end
@@ -402,9 +412,21 @@ class Admin::SalesController < ApplicationController
     end
   end
 
+  # admin/sales/shipment/:id/history
+  def history_shipment
+    # Sale found by before_action
+
+    @history = @shipment.associated_audits
+    @history.push(@shipment.audits)
+
+    render "admin/sales/shipments/history"
+  end
+
   def new_shipment
     @shipment.status = "shipped"
     @shipment.delivery_status = "shipped"
+
+    # @shipment.id_employee = current_employee_id
 
     @shipment.sale_details.each do |detail|
       detail.status = "shipped"
@@ -418,16 +440,6 @@ class Admin::SalesController < ApplicationController
       # redirect_to admin_sale_details_path(@shipment.id), error: "No se pudo enviar la orden"
       redirect_to admin_sale_shipments_path, error: "No se pudo enviar la orden"
     end
-  end
-
-  # admin/sales/shipment/:id/history
-  def history_shipment
-    # Sale found by before_action
-
-    @history = @shipment.associated_audits
-    @history.push(@shipment.audits)
-
-    render "admin/sales/shipments/history"
   end
 
   ########## SHIPMENTS ##########
@@ -468,9 +480,46 @@ class Admin::SalesController < ApplicationController
     end
   end
 
+  # admin/sales/delivery/:id/edit
+  def edit_delivery
+    # Order found by before_action
+    @delivery.discount = "%.2f" % @delivery.discount
+    @delivery.discount = "0#{@delivery.discount.to_s.gsub! '.', ''}" if @delivery.discount < 10
+
+    @search_form_path = admin_edit_sale_delivery_path(@delivery)
+    @form_url = admin_update_sale_delivery_path
+
+    @customers = Customer.search(params[:search_customer], "enabled-only").paginate(page: params[:customers_page], per_page: 5) # Providers with pagination
+    @products = Product.search(params[:search_product], "enabled-only").paginate(page: params[:products_page], per_page: 5) # Products with pagination
+
+    @is_edit = true
+
+    respond_to do |format|
+      format.html do
+        render "admin/sales/deliveries/edit"
+      end
+
+      format.js do
+        render "admin/sales/deliveries/edit"
+      end
+    end
+  end
+
+  # admin/sales/delivery/:id/history
+  def history_delivery
+    # Sale found by before_action
+
+    @history = @delivery.associated_audits
+    @history.push(@delivery.audits)
+
+    render "admin/sales/deliveries/history"
+  end
+
   def new_delivery
     @delivery.status = "delivered"
     @delivery.delivery_status = "delivered"
+
+    # @delivery.id_employee = current_employee_id
 
     @delivery.sale_details.each do |detail|
       detail.status = "delivered"
@@ -486,14 +535,112 @@ class Admin::SalesController < ApplicationController
     end
   end
 
-  # admin/sales/delivery/:id/history
-  def history_delivery
-    # Sale found by before_action
+  # Update
+  def update_delivery
+    updated_params = sale_delivery_params
 
-    @history = @delivery.associated_audits
-    @history.push(@delivery.audits)
+    # Deleting blank spaces
+    updated_params[:observations] = updated_params[:observations].strip
+    # End Deleting blank spaces
 
-    render "admin/sales/deliveries/history"
+    updated_params[:sale_datetime] = updated_params[:sale_datetime].to_datetime if updated_params[:sale_datetime]
+
+    # Fixing discount
+    if updated_params[:discount]
+      begin
+        updated_params[:discount] = updated_params[:discount].to_d
+
+      rescue
+        updated_params[:discount] = 0.00
+      end
+    end
+
+    # Validating detail with stock on Destroy
+    json = JSON.parse(updated_params["sale_details_attributes"].to_json) # Converting to Json
+    # Iterating Json
+    json.each do |item|
+      # Item is being destroyed
+      if item[1]["_destroy"] == "1"
+        detail_id = item[1]["id"] || nil
+        detail = SaleDetail.find(detail_id) || nil
+
+        product_id = item[1]["product_id"] || nil
+        product = Product.find(product_id) || nil
+
+        # If detail has been found
+        if detail
+          # If product has been found
+          if product
+            # If sale is active
+            if detail.sale.state
+              # If sale is an invoice or delivery
+              if detail.sale.status == "invoiced" || detail.sale.status == "delivered"
+                product.stock = product.stock + detail.quantity
+
+                returned = SaleDetail.new
+                returned.sale_id = detail.sale_id
+                returned.product_id = detail.product_id
+                returned.price = detail.price
+                returned.quantity = detail.quantity
+                returned.status = "returned"
+
+
+                if returned.save
+                  puts "Return created on detail destroy"
+                end
+
+                # Trigger saving successfully
+                if product.save
+                  puts "Stock updated on destroy"
+                end
+              end
+              # End If sale is an invoice or delivery
+            end
+            # End If sale is active
+          end
+          # End If product has been found
+        end
+        # End If detail has been found
+      end
+      # End Item is being destroyed
+    end
+    # End Iterating Json
+
+    if @delivery.update(updated_params)
+      redirect_to admin_sale_details_path(@delivery.id), notice: t("alerts.updated", model: t("sale.delivery"))
+
+    else
+      @search_form_path = admin_edit_sale_delivery_path(@delivery)
+      @form_url = admin_update_sale_delivery_path
+
+      @customers = Customer.search(params[:search_customer], "enabled-only").paginate(page: params[:customers_page], per_page: 5) # Providers with pagination
+      @products = Product.search(params[:search_product], "enabled-only").paginate(page: params[:products_page], per_page: 5) # Products with pagination
+      # render :edit_delivery
+
+      respond_to do |format|
+        format.html do
+          render "admin/sales/deliveries/edit"
+        end
+
+        format.js do
+          render "admin/sales/deliveries/edit"
+        end
+      end
+    end
+  end
+
+  # Deactive
+  def deactive_delivery
+    @delivery.sale_details.each do |detail|
+      return if !update_stock(detail)
+    end
+
+    if @delivery.update(state: false)
+      redirect_to_back(false, admin_sale_deliveries_path, "sale", "success")
+
+    else
+      redirect_to_back(false, admin_sale_deliveries_path, "sale", "error")
+    end
   end
 
   ########## DELIVERIES ##########
@@ -577,5 +724,9 @@ class Admin::SalesController < ApplicationController
 
   rescue
     redirect_to admin_sale_deliveries_path, alert: t("alerts.not_found", model: t("sale.delivery"))
+  end
+
+  def sale_delivery_params
+    params.require(:sale).permit(:sale_datetime, :status, :delivery_status, :payment_method, :payment_reference, :paid, :discount, :customer_id, :employee_id, :observations, sale_details_attributes: SaleDetail.attribute_names.map(&:to_sym).push(:_destroy))
   end
 end

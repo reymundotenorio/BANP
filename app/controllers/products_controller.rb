@@ -19,17 +19,17 @@ class ProductsController < ApplicationController
     if @product_filter == ""
       # And if category filter is empty
       if @category_filter == ""
-        @products = Product.enabled.paginate(page: params[:page], per_page: 6) # Products with pagination
+        @products = Product.enabled.paginate(page: params[:page], per_page: 6).order("(products.stock) DESC") # Products with pagination
 
         # if category filter is not empty
       else
-        @products = Product.enabled.find_category(@category_filter).paginate(page: params[:page], per_page: 6) # Products with pagination
+        @products = Product.enabled.find_category(@category_filter).paginate(page: params[:page], per_page: 6).order("(products.stock) DESC") # Products with pagination
         @category = Category.friendly.find(@category_filter)
       end
 
       # If product filter not is empty
     else
-      @products = Product.search(@product_filter, "enabled-only").paginate(page: params[:page], per_page: 6) # Products with pagination
+      @products = Product.search(@product_filter, "enabled-only").paginate(page: params[:page], per_page: 6).order("(products.stock) DESC") # Products with pagination
     end
 
     respond_to do |format|

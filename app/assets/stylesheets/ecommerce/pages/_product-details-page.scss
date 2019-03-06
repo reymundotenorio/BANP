@@ -32,6 +32,25 @@
 }
 
 .details-content{
+
+  .stock{
+    width: auto;
+    display: inline-block;
+    background: #E34132;
+    margin-bottom: 20px;
+
+    &.available{
+      background: #00a68c;
+    }
+
+    p{
+      color: $white;
+      font-weight: 700;
+      font-size: 12px;
+      padding: 5px 15px;
+    }
+  }
+
   .name{
     font-size: 24px;
     margin-bottom: 20px;

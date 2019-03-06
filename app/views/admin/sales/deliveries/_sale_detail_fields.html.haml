@@ -5,7 +5,7 @@
       = f.hidden_field :product_id
 
     %td.hidden
-      = f.hidden_field :status, value: "ordered"
+      = f.hidden_field :status, value: "delivered"
 
     %td.name-container
       %p.record-link{"data-header": "#{t('activerecord.attributes.product.name')}"}
@@ -23,7 +23,13 @@
     %td.price-container.price-row.align-middle
       %p.record-link{"data-header": "#{t('activerecord.attributes.product.price')}"}
         - if f.object.new_record?
-          = f.text_field :price, class: "input-disabled no-padding price-details"
+
+          - if f.object.product
+            = f.text_field :price, class: "input-disabled no-padding price-details", "data-price": f.object.product.price, value: number_to_currency(f.object.product.price, precision: 2, unit: "$", format: "%u%n", separator: ".", delimiter: ",")
+
+          - else
+            = f.text_field :price, class: "input-disabled no-padding price-details"
+
         - else
           = f.text_field :price, class: "input-disabled no-padding price-details", "data-price": f.object.price, value: number_to_currency(f.object.price, precision: 2, unit: "$", format: "%u%n", separator: ".", delimiter: ",")
 
@@ -39,8 +45,8 @@
             %i.fas.fa-plus
 
     %td.align-middle.total-container
-      %p.record-link.detail-total{"data-header": "#{t('activerecord.attributes.purchase.total')}", id:"purchase_purchase_details_attributes_#{@details_counter}_total"}
-        = number_to_currency((f.object.price * f.object.quantity), precision: 2, unit: "$", format: "%u%n", separator: ".", delimiter: ",") if !f.object.new_record?
+      %p.record-link.detail-total{"data-header": "#{t('activerecord.attributes.sale.total')}", id:"sale_sale_details_attributes_#{@details_counter}_total"}
+        = number_to_currency((f.object.price * f.object.quantity), precision: 2, unit: "$", format: "%u%n", separator: ".", delimiter: ",")
 
     %td.align-middle
       = link_to_remove_association f, class: "btn btn-general" do

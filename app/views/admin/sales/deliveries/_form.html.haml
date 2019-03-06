@@ -1,4 +1,4 @@
-- if action_name == "create_invoice" || action_name == "update_invoice"
+- if action_name == "update_delivery"
   :javascript
     $(document).ready(function(){
       // Auto search customers
@@ -9,18 +9,18 @@
     });
 
 -# Form
-= form_for @invoice, url: @form_url, html: {autocomplete: "off", multipart: true} do |f|
+= form_for @delivery, url: @form_url, html: {autocomplete: "off", multipart: true} do |f|
   %section.form
     .container
       .row
         .col-xs-12
           -# Show errors
-          = render partial: "partials/form_errors", locals: {resource: @invoice, model: Sale}
+          = render partial: "partials/form_errors", locals: {resource: @delivery, model: Sale}
           -# End Show errors
 
         .col-xs-12.col-md-8
           -# Material card
-          %div{class: "material-card shadow-card #{@invoice.state}"}
+          %div{class: "material-card shadow-card #{@delivery.state}"}
             .row.no-margin
               .col-xs-12.no-padding
                 .form-info
@@ -33,7 +33,7 @@
                     .form-group
                       .input-btn-group
                         = f.hidden_field :customer_id
-                        = f.text_field :customer, value: @invoice.customer_id.nil? ? "" : "#{@invoice.customer.first_name} #{@invoice.customer.last_name}", class: "form-control input no-events", required: true
+                        = f.text_field :customer, value: @delivery.customer_id.nil? ? "" : "#{@delivery.customer.first_name} #{@delivery.customer.last_name}", class: "form-control input no-events", required: true
                         %label
                           %b= t("activerecord.attributes.sale.customer")
                         .border-bottom
@@ -94,7 +94,7 @@
                           - @details_counter = 0
 
                           = f.fields_for :sale_details do |detail|
-                            = render "admin/sales/invoices/sale_detail_fields", f: detail
+                            = render "admin/sales/deliveries/sale_detail_fields", f: detail
                             -# Increse couter
                             - @details_counter += 1
                     -# End Table
@@ -102,7 +102,7 @@
                   -# Buttons
                   .main-buttons
                     .col-xs-12.button-container.no-padding
-                      - if @invoice.new_record?
+                      - if @delivery.new_record?
                         = button_tag type: "reset", id: "reset-button", class: "btn btn-general" do
                           %i.fas.fa-eraser
                           %span= t("views.form.restart")
@@ -115,7 +115,7 @@
 
         .col-xs-12.col-md-4
           -# Material card
-          %div{class: "material-card shadow-card #{@invoice.state}"}
+          %div{class: "material-card shadow-card #{@delivery.state}"}
             .row.no-margin
               .col-xs-12.no-padding.details
                 .general-info
@@ -158,7 +158,7 @@
           &times;
 
         -# Render customers list
-        = render "admin/sales/invoices/modal_customers"
+        = render "admin/sales/deliveries/modal_customers"
         -# End Render customers list
 
 -# Modal
@@ -170,7 +170,7 @@
           &times;
 
         -# Render products list
-        = render "admin/sales/invoices/modal_products"
+        = render "admin/sales/deliveries/modal_products"
         -# End Render products list
 
 -# Products modals script

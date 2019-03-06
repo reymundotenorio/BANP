@@ -4,6 +4,10 @@
 
   = hidden_field_tag "address", "", id: "paypal-address"
 
+  %p.powered_by
+    -# %span= t("views.cart.powered_by_stripe")
+    %i.fab.fa-stripe
+
   .form-row
     %label{for: "card-element"}= t("views.cart.credit_debit_card")
 
@@ -15,7 +19,6 @@
 
   %button
     %span= t("views.cart.submit_payment")
-    %i.fab.fa-stripe-s
 
 -# Stripe script
 = javascript_include_tag "stripe", "data-turbolinks-track": "reload"

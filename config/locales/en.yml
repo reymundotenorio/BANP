@@ -249,6 +249,7 @@ en:
     delivery_detail: "Delivery detail"
     delivery_details: "Delivery details"
     show_deliveries: "Show deliveries"
+    available: "Available"
 
 
   # Will paginate
@@ -418,7 +419,8 @@ en:
       paypal_description: "Payment of the shopping cart in Better and Nice Produce Corp"
       empty: "Your cart is currently empty"
       view_all_products: "View all products"
-      submit_payment: "Submit payment with"
+      submit_payment: "Submit payment"
+      powered_by_stripe: "Using"
       credit_debit_card: "Credit or debit card"
       problem_payment_creating: "There was a problem creating the payment"
       problem_payment_executing: "There was a problem executing the payment"

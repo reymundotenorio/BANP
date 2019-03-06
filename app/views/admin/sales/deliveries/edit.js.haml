@@ -1,0 +1,6 @@
+-# Render table
+$("#render-search-customers").html("#{escape_javascript(render "admin/sales/deliveries/customers_search")}");
+-# Render table
+$("#render-search-products").html("#{escape_javascript(render "admin/sales/deliveries/products_search")}");
+-# Render pagination
+$(".pagination a").attr("data-remote", "true");

@@ -79,19 +79,19 @@
       }
 
       &.name-column::before{
-        content: "Product:"
+        content: attr(data-title);
       }
 
       &.price-column::before{
-        content: "Price:"
+        content: attr(data-title);
       }
 
       &.quantity-column::before{
-        content: "Quantity:"
+        content: attr(data-title);
       }
 
       &.total-column::before{
-        content: "Total:"
+        content: attr(data-title);
       }
 
       &.price-column, &.total-column{
@@ -500,7 +500,8 @@
 
       .price-column,.total-column, .quantity-column{
         width: 25%;
-        text-align: right;
+        // text-align: right;
+        text-align: center;
       }
     }
 

@@ -147,7 +147,17 @@ class Admin::PurchasesController < ApplicationController
 
       @providers = Provider.search(params[:search_provider], "enabled-only").paginate(page: params[:providers_page], per_page: 5) # Providers with pagination
       @products = Product.search(params[:search_product], "enabled-only").paginate(page: params[:products_page], per_page: 5) # Products with pagination
-      render :new_order
+      # render :new_order
+
+      respond_to do |format|
+        format.html do
+          render "admin/purchases/orders/new"
+        end
+
+        format.js do
+          render "admin/purchases/orders/new"
+        end
+      end
     end
   end
 
@@ -182,7 +192,17 @@ class Admin::PurchasesController < ApplicationController
 
       @providers = Provider.search(params[:search_provider], "enabled-only").paginate(page: params[:providers_page], per_page: 5) # Providers with pagination
       @products = Product.search(params[:search_product], "enabled-only").paginate(page: params[:products_page], per_page: 5) # Products with pagination
-      render :edit_order
+      # render :edit_order
+
+      respond_to do |format|
+        format.html do
+          render "admin/purchases/orders/edit"
+        end
+
+        format.js do
+          render "admin/purchases/orders/edit"
+        end
+      end
     end
   end
 
@@ -410,11 +430,31 @@ class Admin::PurchasesController < ApplicationController
 
       if is_edit
         @is_edit = true
-        render :edit_reception
+        
+        # render :edit_reception
+        respond_to do |format|
+          format.html do
+            render "admin/purchases/receptions/edit"
+          end
+
+          format.js do
+            render "admin/purchases/receptions/edit"
+          end
+        end
+
         return
       end
 
-      render :new_reception
+      # render :new_reception
+      respond_to do |format|
+        format.html do
+          render "admin/purchases/receptions/new"
+        end
+
+        format.js do
+          render "admin/purchases/receptions/new"
+        end
+      end
     end
   end
 

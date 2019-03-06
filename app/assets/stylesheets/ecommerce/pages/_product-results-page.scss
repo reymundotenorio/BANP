@@ -164,19 +164,12 @@ body{
       -webkit-box-shadow: 6px 3px 10px rgba(0,0,0,0.5);
       box-shadow: 6px 3px 10px rgba(0,0,0,0.5);
 
-      p{
-        color: $white;
-        font-weight: 700;
-        font-size: 10px;
-        padding-left: 20px;
-      }
-
       &:after{
         content: "";
         width: 0px;
         height: 0px;
-        border-right: 0px solid #710f06;
-        border-top: 10px solid #710f06;
+        border-right: 0px solid shade(#E34132, 40%);
+        border-top: 10px solid shade(#E34132, 40%);
         border-bottom: 10px solid transparent;
         border-left: 10px solid transparent;
         display: block;
@@ -186,6 +179,22 @@ body{
         top: 100%;
         left: 0px;
         right: auto;
+      }
+
+      &.available{
+        background: #00a68c;
+
+        &:after{
+          border-right: 0px solid shade(#00a68c, 40%);
+          border-top: 10px solid shade(#00a68c, 40%);
+        }
+      }
+
+      p{
+        color: $white;
+        font-weight: 700;
+        font-size: 10px;
+        padding-left: 20px;
       }
     }
 

@@ -8,7 +8,7 @@
       = f.hidden_field :status, value: "received"
 
     %td.name-container
-      %p.record-link{"data-header": "Nombre"}
+      %p.record-link{"data-header": "#{t('activerecord.attributes.product.name')}"}
         - if f.object.new_record?
 
           - if f.object.product
@@ -16,19 +16,19 @@
 
           - else
             = f.text_field :product, class: "input-disabled"
-          
+
         - else
           = f.text_field :product, class: "input-disabled", value: I18n.locale == :es ? f.object.product.name_spanish : f.object.product.name
 
     %td.price-container.price-row.align-middle
-      %p.record-link{"data-header": "Precio"}
+      %p.record-link{"data-header": "#{t('activerecord.attributes.product.price')}"}
         - if f.object.new_record?
           = f.text_field :price, class: "input-disabled no-padding price-details"
         - else
           = f.text_field :price, class: "input-disabled no-padding price-details", "data-price": f.object.price, value: number_to_currency(f.object.price, precision: 2, unit: "$", format: "%u%n", separator: ".", delimiter: ",")
 
     %td.quantity-container.align-middle
-      .form-group.no-padding.record-link{"data-header": "Cantidad"}
+      .form-group.no-padding.record-link{"data-header": "#{t('activerecord.attributes.product.quantity')}"}
         .quantity
           %button.subtract{name: "minus", type: "button"}
             %i.fas.fa-minus
@@ -39,7 +39,7 @@
             %i.fas.fa-plus
 
     %td.align-middle.total-container
-      %p.record-link.detail-total{"data-header": "Total", id:"purchase_purchase_details_attributes_#{@details_counter}_total"}
+      %p.record-link.detail-total{"data-header": "#{t('activerecord.attributes.purchase.total')}", id:"purchase_purchase_details_attributes_#{@details_counter}_total"}
         = number_to_currency((f.object.price * f.object.quantity), precision: 2, unit: "$", format: "%u%n", separator: ".", delimiter: ",") if !f.object.new_record?
 
     %td.align-middle
