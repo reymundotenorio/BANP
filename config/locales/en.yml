@@ -261,6 +261,7 @@ en:
     order_number: "Order number"
     delivery_addrees: "Delivery addrees"
     view_order_invoice: "View invoice"
+    view_orders: "View orders"
     canceled: "Canceled"
     order_received_correctly: "Order received correctly"
     problem_receiving_order: "There was a problem receiving the order"

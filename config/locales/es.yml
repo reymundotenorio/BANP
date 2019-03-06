@@ -262,6 +262,7 @@ es:
     order_number: "Número de orden"
     delivery_addrees: "Dirección de entrega"
     view_order_invoice: "Ver factura"
+    view_orders: "Ver ordenes"
     canceled: "Anulada"
     order_received_correctly: "Orden recibida correctamente"
     problem_receiving_order: "Hubo un problema al recibir el pedido"

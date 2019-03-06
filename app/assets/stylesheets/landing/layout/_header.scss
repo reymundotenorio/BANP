@@ -813,7 +813,7 @@
                   line-height: 1;
                 }
 
-                .fa, .fas{
+                .fa, .fas, .far{
                   -webkit-transition: all ease 0.5s;
                   transition: all ease 0.5s;
                   padding-right: 5px;
@@ -823,8 +823,12 @@
                   color: $text-color;
                   background: #eeeeee;
 
-                  .fa-cog{
+                  .fa-newspaper{
                     color: $primary-color;
+                  }
+
+                  .fa-cog{
+                    color: $fourth-color;
                   }
 
                   .fa-lock{

@@ -3,6 +3,10 @@
     = customer.first_name
     = customer.last_name
 %li
+  = link_to orders_path do
+    %i.far.fa-newspaper.hidden-xs
+    = t("sale.view_orders")
+%li
   %a{href: "#", target: "_self"}
     %i.fas.fa-cog.hidden-xs
     = t("header.user.configuration")
