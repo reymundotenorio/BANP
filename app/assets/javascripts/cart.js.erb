@@ -440,6 +440,43 @@ $(document).ready(function(){
   });
   // End Update address information on address field change
 
+  var currentURL = document.URL;
+  var params = currentURL.extract();
+
+  // Fuction clean cart
+  function cleanShoppingCart(){
+
+    try{
+      if(params.clean_cart == "clean-all"){
+
+        var jsonData = JSON.parse(localStorage.getItem("banpCart")) || {};
+        jsonData.cart = jsonData.cart || [];
+        var userID = parseInt(atob($("#currentCustomer").val().trim()));
+
+        if(userID == 0){
+          return;
+        }
+
+        // If product exists on the cart
+        $.each(jsonData.cart, function(index, value){
+          if(value !=  null){
+            if(userID == value.cartDetails.userId){
+              delete jsonData.cart[index];
+            }
+          }
+        });
+        // End If product exists on the cart
+
+        localStorage.setItem("banpCart", JSON.stringify(jsonData));
+        getProductsJson();
+
+      }
+    } catch (error){
+      // console.log(error.message);
+    }
+  }
+  // Fuction clean cart
+
   // Get products from API
   getProductsJson();
   // Get products from API
@@ -447,4 +484,8 @@ $(document).ready(function(){
   // Update address information
   updateAddress();
   // End Update address information
+
+  // Clean cart after payment
+  cleanShoppingCart();
+  // End Clean cart after payment
 });

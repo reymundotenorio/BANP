@@ -103,11 +103,13 @@ class StripeController < ApplicationController
 
         if order.save
           sync_update order
-          redirect_to cart_path, notice: "Orden generada correctamente"
+          # redirect_to cart_path, notice: "Orden generada correctamente"
+
+          redirect_to tracking_path(order.id, clean_cart: "clean-all"), notice: t("views.cart.payment_correctly")
           return
 
         else
-          redirect_to cart_path, error: "Error al generar orden"
+          redirect_to cart_path, error: t("sale.problem_generating_order")
           return
         end
       end

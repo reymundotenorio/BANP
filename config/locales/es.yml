@@ -267,6 +267,7 @@ es:
     problem_receiving_order: "Hubo un problema al recibir el pedido"
     order_shipped_correctly: "Pedido enviado correctamente"
     problem_shipping_order: "Hubo un problema con el envío del pedido"
+    problem_generating_order: "Hubo un problema generando el pedido"
 
   # Will paginate
   will_paginate:

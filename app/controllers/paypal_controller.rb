@@ -219,11 +219,13 @@ class PaypalController < ApplicationController
 
         if sale_order.save
           sync_update sale_order
-          redirect_to cart_path, notice: t("views.cart.payment_correctly")
+          # redirect_to cart_path, notice: t("views.cart.payment_correctly")
+
+          redirect_to tracking_path(sale_order.id, clean_cart: "clean-all"), notice: t("views.cart.payment_correctly")
           return
 
         else
-          redirect_to cart_path, error: "Error al generar orden"
+          redirect_to cart_path, error: t("sale.problem_generating_order")
           return
         end
         # End Creating the order

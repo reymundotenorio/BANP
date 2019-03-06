@@ -266,6 +266,7 @@ en:
     problem_receiving_order: "There was a problem receiving the order"
     order_shipped_correctly: "Order shipped correctly"
     problem_shipping_order: "There was a problem shipping the order"
+    problem_generating_order: "There was a problem generating the order"
 
 
   # Will paginate
