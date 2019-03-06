@@ -1,32 +1,20 @@
-%tr{class: "clickable-row #{sale.state}", "data-href": "#{admin_sale_details_path(sale.id)}"}
+%tr{class: "clickable-row #{sale.state}", "data-href": "#{tracking_path(sale.id)}"}
   -# Set attributes
-  - attributes = ["sale_datetime", "total", "customer", "employee", "paid", "payment_method", "delivery_status"]
+  - attributes = ["sale_datetime", "total", "paid", "payment_method", "delivery_status"]
 
   %td
-    = link_to admin_sale_details_path(sale.id), class: "record-link", "data-header": "No.", "data-toggle": "tooltip", "data-placement": "bottom", title: t("views.index.view_details") do
+    = link_to tracking_path(sale.id), class: "record-link", "data-header": "No.", "data-toggle": "tooltip", "data-placement": "bottom", title: t("views.index.view_details") do
       %p= sale.id
 
   - attributes.each do |attribute|
     %td
-      = link_to admin_sale_details_path(sale.id), class: "record-link", "data-header": t("activerecord.attributes.sale.#{attribute}"), "data-toggle": "tooltip", "data-placement": "bottom", title: t("views.index.view_details") do
+      = link_to tracking_path(sale.id), class: "record-link", "data-header": t("activerecord.attributes.sale.#{attribute}"), "data-toggle": "tooltip", "data-placement": "bottom", title: t("views.index.view_details") do
         - if attribute == "sale_datetime"
           -# %p= I18n.l(sale["#{attribute}"], format: :short)
           %p= I18n.locale == :es ? sale.sale_datetime.strftime("%d/%m/%Y") : sale.sale_datetime.strftime("%m/%d/%Y")
 
         - elsif attribute == "total"
           %p= number_to_currency((Sale.total(sale.id) - (Sale.total(sale.id) * (sale.discount / 100))), precision: 2, unit: '$', format: '%u%n', separator: '.', delimiter: ',')
-
-        - elsif attribute == "customer"
-          -# Customer name render_sync
-          = sync partial: "data_table_customer_name", resource: sale.customer
-          -# = sync_new partial: "data_table_customer_name", resource: Customer.new
-          -# End Customer name render_sync
-
-        - elsif attribute == "employee"
-          -# Employee name render_sync
-          = sync partial: "data_table_employee_name", resource: sale.employee
-          -# = sync_new partial: "data_table_employee_name", resource: Employee.new
-          -# End Employee name render_sync
 
         - elsif attribute == "paid"
           %p

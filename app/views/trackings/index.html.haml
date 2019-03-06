@@ -1,2 +1,56 @@
-%h1 Trackings#index
-%p Find me in app/views/trackings/index.html.haml
+%section.wrap
+  .banner.grad-section
+    .container-fluid
+      .row
+        .col-xs-12
+          %h1.search-title.text-center= t("header.navigation.orders")
+    .container
+      .row
+        .col-xs-12.col-sm-6.col-sm-offset-3
+          .search-container.animated.opacity-up{"data-delay": "1500", "data-scroll": "0"}
+            -# Render search_form
+            = render "layouts/search_form"
+            -# End Render search_form
+
+  -# Index
+  %section.index
+    .container
+      .row
+        .col-xs-12
+          -# Material card
+          .material-card.shadow-card
+            .row.no-margin
+              -# Search record
+              .col-xs-12.col-md-6.no-padding
+                #search-record.search-record
+                  -# Form
+                  = form_tag orders_path, method: "get", id: "search-form", autocomplete: "off", remote: true do
+                    .input-group
+                      = text_field_tag :search, params[:search], id: "search-input", class: "form-control"
+                      .border-bottom
+
+                      %span.input-group-btn
+                        = button_tag t("elements.search"), id: "search-btn", class: "btn btn-general", data: {disable_with: "<i class='fas fa-spinner fa-spin'></i>"}, "data-toggle": "tooltip", "data-placement": "top", title: t("views.landing.search") do
+                          %i.fas.fa-search
+                  -# End Form
+              -# End Search record
+
+              -# Show all
+              .col-xs-12.col-md-6.no-padding.text-right
+                #show-buttons.btn-container
+              -# End Show all
+
+            -# Render table and pagination with Ajax
+            #render-data
+              = render "sales"
+            -# End Render table and pagination with Ajax
+          -# End Material card
+  -# End Index
+
+-# Pagination with Ajax script
+= javascript_include_tag "pagination-ajax", "data-turbolinks-track": "reload"
+-# End Pagination with Ajax script
+
+-# Auto search script
+= javascript_include_tag "auto-search", "data-turbolinks-track": "reload"
+-# End Auto search script

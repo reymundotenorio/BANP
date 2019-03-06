@@ -161,7 +161,7 @@
 
       @include on-event{
         color: $text-color;
-        background-color: $grey;
+        background-color: rgba($text-color, 0.15);
         text-decoration: none;
 
         -webkit-box-shadow: 0px 2px 5px 0px rgba($black,0.16), 0px 2px 10px 0px rgba($black,0.12);

@@ -20,6 +20,17 @@ class Sale < ApplicationRecord
   # End Render sync
 
   # Search order
+  def self.search_order_ecommerce(search, customer_id)
+    if search
+      self.joins(:customer).joins(:employee).where("(DATE_FORMAT(sale_datetime, '%d/%m/%Y') LIKE :search OR DATE_FORMAT(sale_datetime, '%m/%d/%Y') LIKE :search OR payment_method LIKE :search OR payment_reference LIKE :search OR delivery_status LIKE :search) AND (status != 'invoiced') AND (sales.customer_id = :customer_id)", customer_id: customer_id, search: "%#{search}%")
+
+    else
+      self.where("sales.customer_id = :customer_id", customer_id: customer_id).not_invoices
+    end
+  end
+  # End Search order
+
+  # Search order
   def self.search_order(search, show_all)
     if search
       self.joins(:customer).joins(:employee).where("(DATE_FORMAT(sale_datetime, '%d/%m/%Y') LIKE :search OR DATE_FORMAT(sale_datetime, '%m/%d/%Y') LIKE :search OR customers.first_name LIKE :search OR customers.last_name LIKE :search OR customers.company LIKE :search OR employees.first_name LIKE :search OR employees.last_name LIKE :search) AND (status = 'ordered')", search: "%#{search}%")
@@ -104,6 +115,7 @@ class Sale < ApplicationRecord
   # End Numericality validation
 
   ## Scopes
+  scope :not_invoices, -> { where("(sales.status != 'invoiced')") }
   scope :enabled, -> { where(state: true) }
   scope :orders, -> { where(status: "ordered") }
   scope :invoices, -> { where(status: "invoiced") }

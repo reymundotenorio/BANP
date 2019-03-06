@@ -1,0 +1,464 @@
+// ----------------------------------------------------------
+// This file contains all styles related to the index pages
+// ----------------------------------------------------------
+
+.index{
+  padding: 40px 0px 20px 0px;
+
+  &.details{
+    scrollbar-face-color: rgba($primary-color, 0.7);
+    scrollbar-track-color: #ccc;
+
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: rgba($primary-color, 0.7);
+      border-radius: 7px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: #ccc;
+      border-radius: 10px;
+    }
+  }
+
+  .scroll-table{
+    max-height: 400px;
+    overflow-y: scroll;
+  }
+
+  .search-record{
+    padding-bottom: 25px;
+
+    // Material input
+    .input-group{
+      .border-bottom{
+        position: absolute;
+        left: 0px;
+        right: (46px + 10px);
+        bottom: 0px;
+        top: auto;
+
+        &:after{
+          content: "";
+          position: absolute;
+          bottom: 2px;
+          top: auto;
+          left: 0px;
+          right: auto;
+          width: 0px;
+          height: 2px;
+
+          -webkit-box-shadow: 0 1px 0 0 tint($primary-color, 15%);
+          box-shadow: 0 1px 0 0 tint($primary-color, 15%);
+          border-bottom: 1px solid tint($primary-color, 15%);
+
+          -webkit-transition: all 0.5s ease;
+          transition: all 0.5s ease;
+        }
+      }
+
+      input{
+        &.with-value, &:focus{
+          + .border-bottom{
+            &:after{
+              width: 100%;
+            }
+          }
+        }
+      }
+    }
+    // End Material input
+
+    .input-group{
+      width: 100%;
+      position: relative;
+
+      .input-group-btn{
+        padding-left: 10px;
+      }
+    }
+  }
+
+  .btn-container{
+    text-align: center;
+    padding-bottom: 15px;
+
+    &:last-child{
+      padding-bottom: 0px;
+    }
+
+    .btn-general{
+      i{
+        padding-right: 5px;
+      }
+    }
+  }
+
+  .table{
+    margin-top: 30px;
+    display: block;
+
+    // Table PDF
+    &.table-pdf{
+      display: table;
+      margin-top: 0px;
+
+      thead, tfoot{
+        display: table-row-group
+      }
+
+      >tr{
+        page-break-before: always;
+        page-break-after: always;
+        page-break-inside: avoid;
+
+        >th{
+          padding-left: 8px;
+          padding-right: 8px;
+
+          &:first-child{
+            padding-left: 0px;
+          }
+
+          &:last-child{
+            padding-right: 0px;
+          }
+        }
+      }
+
+      >tbody{
+        display: table-row-group;
+        vertical-align: top;
+
+        >tr{
+          page-break-before: always;
+          page-break-after: always;
+          page-break-inside: avoid;
+
+          display: table-row;
+          margin-top: 0px;
+
+          &.false{
+            td{
+              p{
+                color: $sixth-color;
+              }
+            }
+          }
+
+          &:first-child{
+            >td{
+              &:first-child{
+                border-top: 1px solid #ddd;
+              }
+            }
+          }
+
+          >td{
+            &:first-child{
+              border-top: 1px solid #ddd;
+            }
+          }
+
+          >td{
+            border-top: 1px solid #ddd;
+            padding-left: 8px;
+            padding-right: 8px;
+
+            &:first-child{
+              padding-left: 0px;
+            }
+
+            &:last-child{
+              padding-right: 0px;
+            }
+
+            >.record-link{
+              &:before{
+                display: none;
+              }
+            }
+          }
+        }
+      }
+    }
+    // End Table PDF
+
+    thead{
+      display: none;
+    }
+
+    >tbody{
+      display: block;
+
+      >tr{
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-orient: vertical;
+        -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+        flex-direction: column;
+        -webkit-box-pack: center;
+        -ms-flex-pack: center;
+        justify-content: center;
+        -webkit-box-align: stretch;
+        -ms-flex-align: stretch;
+        align-items: stretch;
+
+        -webkit-transition: all 0.5s ease;
+        transition: all 0.5s ease;
+
+        // margin: 0px -15px;
+        margin: 0 auto;
+        padding: 0px 15px;
+
+        margin-top: 15px;
+        // cursor: pointer;
+
+        -webkit-box-shadow: none;
+        box-shadow: none;
+
+        // No clickable row
+        &.no-clickable-row{
+          cursor: auto;
+
+          @include on-event{
+            background-color: $transparent;
+          }
+
+          &.false{
+            @include on-event{
+              background-color: $transparent;
+            }
+          }
+        }
+        // End No clickable row
+
+        @include on-event{
+          background-color: rgba($grey, 0.15);
+
+          // -webkit-box-shadow: 0px 3px 10px rgba($black, 0.15), 0px 3px 10px rgba($black, 0.1);
+          // box-shadow: 0px 3px 10px rgba($black, 0.15), 0px 3px 10px rgba($black, 0.1);
+        }
+
+        &.false{
+          @include on-event{
+            background-color: rgba($sixth-color, 0.05);
+          }
+        }
+
+        &.false{
+          >td{
+            p{
+              color: $sixth-color;
+            }
+
+            &:before{
+              color: $sixth-color;
+            }
+          }
+        }
+
+        &:first-child{
+          margin-top: 0px;
+
+          >td{
+            &:first-child{
+              border-top: none;
+            }
+          }
+        }
+
+        >td{
+          padding: 0px;
+
+          &.align-middle{
+            vertical-align: middle;
+            padding: 5px 0px;
+          }
+
+          &.price-container{
+            // width: 120px;
+
+            input{
+              padding: 1px 12px;
+              height: 25px;
+              border-bottom-color: #ccc;
+              width: 100%;
+
+              &.no-padding{
+                padding: 0px
+              }
+            }
+          }
+          //
+          // &.quantity-container{
+          //   width: 120px;
+          // }
+
+          >.record-link{
+            padding: 8px;
+            display: block;
+
+            &:before{
+              content: attr(data-header);
+              display: block;
+              font-weight: bold;
+              padding-bottom: 5px;
+            }
+
+            @include on-event(true){
+              color: $text-color;
+              -webkit-transition: all 0s ease 0s;
+              transition: all 0s ease 0s;
+              text-decoration: none;
+            }
+          }
+
+          p{
+            margin: 0px;
+          }
+
+          &:first-child{
+            border-top: none;
+          }
+        }
+      }
+    }
+  }
+}
+
+
+@media (min-width: 768px){
+
+  .index{
+    padding: 60px 0px 40px 0px;
+  }
+
+}
+
+@media (min-width: 992px){
+
+  .index{
+    padding-bottom: 60px;
+
+    .search-record{
+      padding-bottom: 15px;
+    }
+
+    .scroll-table{
+      max-height: 325px;
+      padding-right: 15px;
+    }
+
+    .btn-container{
+      padding-bottom: 0px;
+      padding-right: 10px;
+      display: inline-block;
+
+      &:last-child{
+        padding-right: 0px;
+      }
+    }
+
+    .table{
+      display: table;
+      margin-top: 15px;
+
+      thead{
+        display: table-header-group;
+      }
+
+      >tbody{
+        display: table-row-group;
+
+        >tr{
+          display: table-row;
+          margin: 0px;
+          padding: 0px;
+
+          &:first-child{
+            >td{
+              &:first-child{
+                border-top: 1px solid #ddd;
+              }
+            }
+          }
+
+          >td{
+            &:first-child{
+              border-top: 1px solid #ddd;
+            }
+
+            >.record-link{
+              &:before{
+                display: none;
+              }
+            }
+
+            &.price-container{
+              width: 120px;
+
+              &.price-row{
+                max-width: 120px;
+              }
+            }
+
+            &.name-container{
+              max-width: 155px;
+            }
+
+            &.quantity-container{
+              width: 135px;
+            }
+
+            &.total-container{
+
+            }
+          }
+        }
+      }
+
+      .actions-buttons{
+        text-align: center;
+
+        &.open{
+          .dropdown-menu{
+            right: -8px;
+            left: auto;
+
+            &:after{
+              right: 40px;
+              left: auto;
+            }
+          }
+        }
+      }
+    }
+  }
+
+}
+
+
+@media (min-width: 1200px){
+
+  .index{
+    .table{
+      >tbody{
+        >tr{
+          >td{
+
+            &.name-container{
+              max-width: none;
+            }
+          }
+        }
+      }
+    }
+  }
+
+}

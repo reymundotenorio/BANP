@@ -11,14 +11,25 @@ class TrackingsController < ApplicationController
   before_action :require_customer
   # End Authentication
 
+  # /orders
   def index
+    @orders = Sale.search_order_ecommerce(params[:search], current_customer.id).paginate(page: params[:page], per_page: 15) # Orders with pagination
+
+    # @orders = Sale.search_invoice(params[:all], params[:search]).paginate(page: params[:page], per_page: 15) # Orders with pagination
+
+    @count = @orders.count
+    @customer_id = current_customer.id
+
+    respond_to do |format|
+      format.html
+      format.js
+    end
   end
 
   def show
     @history = @order.associated_audits
     @history.push(@order.audits)
   end
-
 
   private
 
