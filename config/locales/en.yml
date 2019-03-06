@@ -250,6 +250,22 @@ en:
     delivery_details: "Delivery details"
     show_deliveries: "Show deliveries"
     available: "Available"
+    track_order: "Track your order"
+    ordered: "Ordered"
+    shipped: "Shipped"
+    delivered: "Delivered"
+    returned: "Returned"
+    order_delivery_status: "Order status"
+    order_history: "Order history"
+    shipment_information: "Shipping information"
+    order_number: "Order number"
+    delivery_addrees: "Delivery addrees"
+    view_order_invoice: "View invoice"
+    canceled: "Canceled"
+    order_received_correctly: "Order received correctly"
+    problem_receiving_order: "There was a problem receiving the order"
+    order_shipped_correctly: "Order shipped correctly"
+    problem_shipping_order: "There was a problem shipping the order"
 
 
   # Will paginate

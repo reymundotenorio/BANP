@@ -163,7 +163,8 @@
 
   .label{
     font-weight: 400;
-    width: 118.52px;
+    // width: 118.52px;
+    width: 200px;
     display: inline-block;
     padding-top: 3.4px;
   }
@@ -248,7 +249,7 @@
     .history{
       padding-top: 0px;
     }
-    
+
     &.cart-table{
       padding-top: 0px;
     }

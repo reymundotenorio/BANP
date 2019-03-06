@@ -434,11 +434,11 @@ class Admin::SalesController < ApplicationController
 
     if @shipment.save
       # redirect_to admin_sale_shipments_path, notice: "Orden enviada correctamente"
-      redirect_to admin_sale_shipments_path, notice: "Orden enviada correctamente"
+      redirect_to admin_sale_shipments_path, notice: t("sale.order_shipped_correctly")
 
     else
       # redirect_to admin_sale_details_path(@shipment.id), error: "No se pudo enviar la orden"
-      redirect_to admin_sale_shipments_path, error: "No se pudo enviar la orden"
+      redirect_to admin_sale_shipments_path, error: t("sale.problem_shipping_order")
     end
   end
 
@@ -527,11 +527,11 @@ class Admin::SalesController < ApplicationController
 
     if @delivery.save
       # redirect_to admin_sale_deliveries_path, notice: "Orden enviada correctamente"
-      redirect_to admin_sale_deliveries_path, notice: "Orden recibida correctamente"
+      redirect_to admin_sale_deliveries_path, notice: t("sale.order_received_correctly")
 
     else
       # redirect_to admin_sale_details_path(@delivery.id), error: "No se pudo enviar la orden"
-      redirect_to admin_sale_deliveries_path, error: "No se pudo recibir la orden"
+      redirect_to admin_sale_deliveries_path, error: t("sale.problem_receiving_order")
     end
   end
 

@@ -1,0 +1,21 @@
+.graphic.parent
+  %div{class: "item #{'active' if (sale.delivery_status == 'in_queue' || sale.delivery_status == 'shipped' || sale.delivery_status == 'delivered' && sale.state && sale.delivery_status != 'returned')}"}
+    .checked
+      %i.fas.fa-check
+    .icon
+      %i.fas.fa-clipboard-list
+      %span= t("sale.ordered")
+
+  %div{class: "item #{'active' if (sale.delivery_status == 'shipped' || sale.delivery_status == 'delivered' && sale.state && sale.delivery_status != 'returned')}"}
+    .checked
+      %i.fas.fa-check
+    .icon
+      %i.fas.fa-truck
+      %span= t("sale.shipped")
+
+  %div{class: "item #{'active' if (sale.delivery_status == 'delivered' && sale.state && sale.delivery_status != 'returned')}"}
+    .checked
+      %i.fas.fa-check
+    .icon
+      %i.fas.fa-box
+      %span= t("sale.delivered")

@@ -1,0 +1,17 @@
+.delivery_status
+  %h2.info-title.aligned-text= t("sale.order_delivery_status")
+  %h3.delivery_status.aligned-text
+    - if sale.delivery_status == "in_queue" && sale.state
+      = t("sale.ordered")
+
+    - elsif sale.delivery_status == "shipped" && sale.state
+      = t("sale.shipped")
+
+    - elsif sale.delivery_status == "delivered" && sale.state
+      = t("sale.delivered")
+
+    - elsif sale.delivery_status == "returned" && sale.state
+      = t("sale.returned")
+
+    - elsif !sale.state
+      %span.canceled= t("sale.canceled")

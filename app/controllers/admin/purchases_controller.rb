@@ -430,7 +430,7 @@ class Admin::PurchasesController < ApplicationController
 
       if is_edit
         @is_edit = true
-        
+
         # render :edit_reception
         respond_to do |format|
           format.html do

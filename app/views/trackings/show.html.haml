@@ -1,0 +1,88 @@
+%section.wrap
+  .banner.grad-section
+    .container-fluid
+      .row
+        .col-xs-12
+          %h1.search-title.text-center= t("sale.track_order")
+    .container
+      .row
+        .col-xs-12.col-sm-6.col-sm-offset-3
+          .search-container.animated.opacity-up{"data-delay": "1500", "data-scroll": "0"}
+            -# Render search_form
+            = render "layouts/search_form"
+            -# End Render search_form
+
+  #tracker-content.main-content
+    .container
+      .row
+        .col-xs-12.col-md-8
+          #tracker-main-card.white-card
+            -# Tracking graphic render_sync
+            = sync partial: "tracking_graphic", resource: @order
+
+            .info
+              .row
+                .col-xs-12.col-sm-5.col-sm-push-7
+                  -# Tracking delivery status render_sync
+                  = sync partial: "tracking_delivery_status", resource: @order
+
+                .col-xs-12.col-sm-7.col-sm-pull-5
+                  .history
+                    %h2.info-title.aligned-text= t("sale.order_history")
+                    .log.aligned-text
+
+                      - @history.order(:created_at).each do |record|
+
+                        -# Attribute and Changes
+                        - record.audited_changes.each do |attribute, changes|
+
+                          - if attribute == "delivery_status"
+                            %p
+                              - if record.action == "update"
+                                %span{class: "date label #{'label-success' if (changes[1] != 'returned' && changes[1] != 'in_queue')} #{'label-default' if changes[1] == 'in_queue'} #{'label-danger' if changes[1] == 'returned'}"}= I18n.l(record.created_at, format: I18n.locale == :es ? "%d #{t('sale.of')} %b, %Y - %I:%M:%S %p" : "d #{t('sale.of')} %b, %Y - %H:%M:%S").capitalize
+
+                                - if changes[1] == "in_queue"
+                                  = t("sale.ordered")
+
+                                - elsif changes[1] == "shipped"
+                                  = t("sale.shipped")
+
+                                - elsif changes[1] == "delivered"
+                                  = t("sale.delivered")
+
+                                - elsif changes[1] == "returned"
+                                  = t("sale.returned")
+
+                              - else
+                                %span{class: "date label #{'label-success' if (changes != 'returned' && changes != 'in_queue')} #{'label-default' if changes == 'in_queue'} #{'label-danger' if changes == 'returned'}"}= I18n.l(record.created_at, format: I18n.locale == :es ? "%d #{t('sale.of')} %b, %Y - %I:%M:%S %p" : "d #{t('sale.of')} %b, %Y - %H:%M:%S").capitalize
+
+                                - if changes == "in_queue"
+                                  = t("sale.ordered")
+
+                                - elsif changes == "shipped"
+                                  = t("sale.shipped")
+
+                                - elsif changes == "delivered"
+                                  = t("sale.delivered")
+
+                                - elsif changes == "returned"
+                                  = t("sale.returned")
+        .col-xs-12.col-md-4
+          .white-card
+            #shipment-info.summary
+              %h2.summary-title.aligned-text= t("sale.shipment_information")
+              .ship-item
+                %h4.aligned-text.no-margin= t("sale.order_number")
+                %p.aligned-text.no-margin= @order.id
+
+              %hr/
+
+              -# Tracking order observations render_sync
+              = sync partial: "tracking_order_observations", resource: @order
+
+              %hr/
+
+              .btn-container.text-center
+                = link_to (order_invoice_path(@order.id, format: "pdf", lang: I18n.locale)), target: "_blank", class: "btn btn-general btn-default" do
+                  %i.fas.fa-file-invoice
+                  %span= t("sale.view_order_invoice")

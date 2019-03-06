@@ -8,7 +8,7 @@ class PaypalController < ApplicationController
   # End Ecommerce layout
 
   # Authentication
-  # before_action :require_customer
+  before_action :require_customer
   # End Authentication
 
   def paypal_sign_in

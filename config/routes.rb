@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'trackings/index'
+  get 'trackings/show'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   # Change language
   get "/change-language/:lang", to: "settings#change_lang", as: "change_language"
@@ -80,6 +82,15 @@ Rails.application.routes.draw do
   # End Passwords
 
   # End Authentications
+
+  # Trackings
+  get "/trackings", to: "trackings#index", as: "trackings"
+  get "/tracking/:id", to: "trackings#show", as: "tracking"
+  # End Trackings
+
+  # Invoices
+  get "/invoice/:id", to: "invoices#show", as: "order_invoice"
+  # End Invoices
 
   # Charts namespace
   namespace :charts do
