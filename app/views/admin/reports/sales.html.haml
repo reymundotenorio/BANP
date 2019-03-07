@@ -67,7 +67,7 @@
 
                       .form-group
                         .input-group.date#datetimepicker-1
-                          = text_field_tag "report_from_datetime", "", class: "form-control input date-field"
+                          = text_field_tag "report_from_datetime", "", class: "form-control input date-field", required: true
                           %span.input-group-addon.btn.btn-general
                             %i.far.fa-calendar-alt
                           %label= t("charts.start_date")
@@ -77,7 +77,7 @@
 
                       .form-group
                         .input-group.date#datetimepicker-2
-                          = text_field_tag "report_to_datetime", "", class: "form-control input date-field"
+                          = text_field_tag "report_to_datetime", "", class: "form-control input date-field", required: true
                           %span.input-group-addon.btn.btn-general
                             %i.far.fa-calendar-alt
                           %label= t("charts.end_date")

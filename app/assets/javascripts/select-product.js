@@ -11,7 +11,7 @@ $(document).ready(function(){
       $("#report_product_id").val(product_id);
 
       $("#search-input").val("");
-      $("#getProviders").modal("hide");
+      $("#getProducts").modal("hide");
     });
 
   });

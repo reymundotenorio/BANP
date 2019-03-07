@@ -1,4 +1,15 @@
 GIT
+  remote: https://github.com/randym/axlsx.git
+  revision: c8ac844572b25fda358cc01d2104720c4c42f450
+  ref: c8ac844
+  specs:
+    axlsx (2.1.0.pre)
+      htmlentities (~> 4.3.4)
+      mimemagic (~> 0.3)
+      nokogiri (>= 1.6.6)
+      rubyzip (>= 1.2.1)
+
+GIT
   remote: https://github.com/reymundotenorio/render_sync
   revision: eb3ecc9b01094bbd5441e1b1c6692b78ceece86d
   branch: master
@@ -82,6 +93,9 @@ GEM
       aws-sdk-kms (~> 1)
       aws-sigv4 (~> 1.0)
     aws-sigv4 (1.0.3)
+    axlsx_rails (0.5.2)
+      actionpack (>= 3.1)
+      axlsx (>= 2.0.1)
     barby (0.6.6)
     bcrypt (3.1.12)
     better_errors (2.4.0)
@@ -181,6 +195,7 @@ GEM
       haml (>= 4.0, < 6)
       nokogiri (>= 1.6.0)
       ruby_parser (~> 3.5)
+    htmlentities (4.3.4)
     http_parser.rb (0.6.0)
     httparty (0.13.7)
       json (~> 1.8)
@@ -355,6 +370,8 @@ PLATFORMS
 DEPENDENCIES
   audited (~> 4.7)
   aws-sdk-s3
+  axlsx!
+  axlsx_rails
   barby
   bcrypt (~> 3.1.7)
   better_errors
@@ -396,6 +413,7 @@ DEPENDENCIES
   rails-html-sanitizer (~> 1.0.4)
   recaptcha
   render_sync!
+  rubyzip (>= 1.2.1)
   sass-rails (~> 5.0)
   selenium-webdriver
   spring
