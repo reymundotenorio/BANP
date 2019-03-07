@@ -195,7 +195,7 @@ ActiveRecord::Schema.define(version: 2019_02_05_120100) do
 
   create_table "sales", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.datetime "sale_datetime", null: false
-    t.string "status", default: "ordered", null: false
+    t.string "status", null: false
     t.string "delivery_status", default: "in_queue", null: false
     t.decimal "discount", precision: 8, scale: 2, default: "0.0", null: false
     t.string "payment_method", null: false

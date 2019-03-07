@@ -36,10 +36,10 @@ class ApplicationController < ActionController::Base
   def require_employee
     redirect_url = request.fullpath
 
-    if session[:employee_id] && session[:session_confirmed] == false
+    if session[:employee_id] && session[:employee_session_confirmed] == false
       redirect_to admin_two_factor_path(redirect: redirect_url), alert: t("views.authentication.otp_required")
 
-    elsif session[:employee_id] == nil && session[:session_confirmed] == nil
+    elsif session[:employee_id] == nil && session[:employee_session_confirmed] == nil
       redirect_to admin_sign_in_path(redirect: redirect_url), alert: t("views.authentication.sign_in_required") unless current_employee
     end
   end
@@ -97,7 +97,7 @@ class ApplicationController < ActionController::Base
       return true
 
     else
-      redirect_to auth_notifications_path(found: false), alert: t("views.authentication.user)views.authentication.user_must_be_customer")
+      redirect_to auth_notifications_path(found: false), alert: t("views.authentication.user_must_be_customer")
       return false
     end
   end

@@ -426,7 +426,7 @@ class Admin::SalesController < ApplicationController
     @shipment.status = "shipped"
     @shipment.delivery_status = "shipped"
 
-    @shipment.id_employee = current_employee.id
+    @shipment.employee_id = current_employee.id
 
     @shipment.sale_details.each do |detail|
       detail.status = "shipped"
@@ -519,7 +519,7 @@ class Admin::SalesController < ApplicationController
     @delivery.status = "delivered"
     @delivery.delivery_status = "delivered"
 
-    @delivery.id_employee = current_employee.id
+    @delivery.employee_id = current_employee.id
 
     @delivery.sale_details.each do |detail|
       detail.status = "delivered"

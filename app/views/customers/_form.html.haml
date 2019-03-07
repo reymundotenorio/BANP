@@ -1,5 +1,5 @@
 -# Form
-= form_for @customer, html: {autocomplete: "off", multipart: true} do |f|
+= form_for @customer, url: @form_url, html: {autocomplete: "off", multipart: true} do |f|
   %section.form.sign-up
     .container
       .row

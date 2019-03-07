@@ -43,11 +43,11 @@ Rails.application.routes.draw do
 
   # Customers
   get "/sign-up", to: "customers#new", as: "sign_up"
-  get "/customer", to: "customers#show", as: "customer"
-  get "/customer/edit", to: "customers#edit", as: "edit_customer"
-  get "/customers", to: redirect("/sign-up")
-  post "/customers", to: "customers#create"
-  patch "/customer", to: "customers#update", as: "update_customer"
+  get "/user", to: "customers#show", as: "customer"
+  get "/user/edit", to: "customers#edit", as: "edit_customer"
+  get "/users", to: redirect("/sign-up")
+  post "/users", to: "customers#create", as: "customers"
+  patch "/user", to: "customers#update", as: "update_customer"
   # End Customers
 
   # Users

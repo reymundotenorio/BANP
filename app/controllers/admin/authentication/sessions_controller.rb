@@ -6,12 +6,12 @@ class Admin::Authentication::SessionsController < ApplicationController
   # admin/sign-in
   def new
     # Redirect if user is not authenticated with two factor yet
-    if session[:employee_id] && session[:session_confirmed] == false
+    if session[:employee_id] && session[:employee_session_confirmed] == false
       redirect_to admin_two_factor_path
       return
 
       # Redirect if user is already authenticated
-    elsif session[:employee_id] && session[:session_confirmed] == true
+    elsif session[:employee_id] && session[:employee_session_confirmed] == true
       redirect_to admin_root_path
       return
     end
@@ -26,7 +26,7 @@ class Admin::Authentication::SessionsController < ApplicationController
   # admin/two-factor
   def two_factor
     # Redirect if user is already authenticated
-    if session[:employee_id] && session[:session_confirmed] == true
+    if session[:employee_id] && session[:employee_session_confirmed] == true
       redirect_to admin_root_path
       return
     end
@@ -51,7 +51,7 @@ class Admin::Authentication::SessionsController < ApplicationController
       # If user has exceeded the max of failed attemps
       if @user.failed_attempts > $max_failed_attempts
         session[:employee_id] = nil
-        session[:session_confirmed] = nil
+        session[:employee_session_confirmed] = nil
 
         # If unlock email has not been sent
         send_unlock_email unless @user.unlock_sent
@@ -60,7 +60,7 @@ class Admin::Authentication::SessionsController < ApplicationController
         return
       end
 
-      if session[:session_confirmed] == true
+      if session[:employee_session_confirmed] == true
         redirect_to admin_root_path
         return
       end
@@ -76,7 +76,7 @@ class Admin::Authentication::SessionsController < ApplicationController
     @email = params[:email]
 
     session[:employee_id] = nil
-    session[:session_confirmed] = nil
+    session[:employee_session_confirmed] = nil
 
     if @email
       redirect_to admin_sign_in_path(email: @email), notice: t("views.authentication.locked_correctly")
@@ -137,7 +137,7 @@ class Admin::Authentication::SessionsController < ApplicationController
 
           # If user has two factor authentication enabled
           if @user.two_factor_auth
-            session[:session_confirmed] = false
+            session[:employee_session_confirmed] = false
 
             generate_otp
             @user.update(two_factor_auth_otp: @OTP)
@@ -147,7 +147,7 @@ class Admin::Authentication::SessionsController < ApplicationController
             return
           end
 
-          session[:session_confirmed] = true
+          session[:employee_session_confirmed] = true
 
           redirect_to redirect_url, notice: t("views.authentication.signed_in_correctly", first_name: @employee.first_name, last_name: @employee.last_name)
 
@@ -186,7 +186,7 @@ class Admin::Authentication::SessionsController < ApplicationController
       otp = otp.strip
 
       if @user.two_factor_auth_otp == otp
-        session[:session_confirmed] = true
+        session[:employee_session_confirmed] = true
         redirect_to redirect_url, notice: t("views.authentication.signed_in_correctly", first_name: @employee.first_name, last_name: @employee.last_name)
 
       else
@@ -201,7 +201,7 @@ class Admin::Authentication::SessionsController < ApplicationController
 
   # Set user with two factor authentication
   def set_user_with_two_factor
-    @user = User.find(session[:employee_id]) if session[:employee_id] && session[:session_confirmed] == false
+    @user = User.find(session[:employee_id]) if session[:employee_id] && session[:employee_session_confirmed] == false
 
     if @user
       return true

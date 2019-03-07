@@ -19,6 +19,8 @@ class CustomersController < ApplicationController
   def new
     @customer = Customer.new
     @customer.build_user
+    
+    @form_url = customers_path
   end
 
   # /user)
@@ -29,6 +31,8 @@ class CustomersController < ApplicationController
   # /user/edit
   def edit
     # Customer found by before_action
+    
+     @form_url = update_customer_path
   end
 
   # Create
@@ -59,6 +63,7 @@ class CustomersController < ApplicationController
 
       # If record was not saved
     else
+      @form_url = customers_path
       render :new
     end
   end
@@ -69,6 +74,7 @@ class CustomersController < ApplicationController
       redirect_to customer_path, notice: t("alerts.updated", model: t("activerecord.models.user"))
 
     else
+      @form_url = update_customer_path
       render :edit
     end
   end
