@@ -9,4 +9,25 @@
   - attributes.each do |attribute|
     %td
       = link_to admin_employee_path(employee), class: "record-link", "data-header": t("activerecord.attributes.employee.#{attribute}"), "data-toggle": "tooltip", "data-placement": "bottom", title: t("views.index.view_details") do
-        %p= employee["#{attribute}"]
+        - if attribute == "role"
+          %p
+            - if employee.role == "administrator"
+              = I18n.locale == :es ? "Administrador" : "Administrator"
+
+            - elsif employee.role == "warehouse_supervisor"
+              = I18n.locale == :es ? "Auxiliar de bodega" : "Warehouse supervisor"
+
+            - elsif employee.role == "seller"
+              = I18n.locale == :es ? "Vendedor" : "Seller"
+
+            - elsif employee.role == "driver"
+              = I18n.locale == :es ? "Conductor" : "Driver"
+
+            - elsif employee.role == "chief_dispatch"
+              = I18n.locale == :es ? "Jefe de despacho" : "Chief dispatch"
+
+            - elsif employee.role == "warehouse_assistant"
+              = I18n.locale == :es ? "Auxiliar de bodega" : "Warehouse assistant"
+
+        - else
+          %p= employee["#{attribute}"]

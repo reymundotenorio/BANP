@@ -67,7 +67,7 @@
                     .border-bottom
 
                   .form-group
-                    - role_options = ["Seller", "Driver", "Administrator"].sort;
+                    - role_options = I18n.locale == :es ? ["Administrador", "Supervisor de Bodega", "Vendedor", "Conductor", ].sort : ["Administrator", "Warehouse supervisor", "Seller", "Driver", ].sort
 
                     #role-dropdown.dropdown
                       = f.text_field :role, class: "form-control input dropdown-toggle disabled", "data-toggle": "dropdown", readonly: true, required: true

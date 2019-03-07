@@ -52,6 +52,25 @@ class Admin::EmployeesController < ApplicationController
   def show
     # Employee found by before_action
 
+    if @employee.role == "administrator"
+      @employee.role = I18n.locale == :es ? "Administrador" : "Administrator"
+
+    elsif @employee.role == "warehouse_supervisor"
+      @employee.role = I18n.locale == :es ? "Auxiliar de bodega" : "Warehouse supervisor"
+
+    elsif @employee.role == "seller"
+      @employee.role = I18n.locale == :es ? "Vendedor" : "Seller"
+
+    elsif @employee.role == "driver"
+      @employee.role = I18n.locale == :es ? "Conductor" : "Driver"
+
+    elsif @employee.role == "chief_dispatch"
+      @employee.role = I18n.locale == :es ? "Jefe de despacho" : "Chief dispatch"
+
+    elsif @employee.role == "warehouse_assistant"
+      @employee.role = I18n.locale == :es ? "Auxiliar de bodega" : "Warehouse assistant"
+    end
+
     # PDF view configuration
     current_lang = params[:lang]
     I18n.locale = current_lang
@@ -75,6 +94,26 @@ class Admin::EmployeesController < ApplicationController
   # admin/employee/:id/edit
   def edit
     # Employee found by before_action
+
+    if @employee.role == "administrator"
+      @employee.role = I18n.locale == :es ? "Administrador" : "Administrator"
+
+    elsif @employee.role == "warehouse_supervisor"
+      @employee.role = I18n.locale == :es ? "Auxiliar de bodega" : "Warehouse supervisor"
+
+    elsif @employee.role == "seller"
+      @employee.role = I18n.locale == :es ? "Vendedor" : "Seller"
+
+    elsif @employee.role == "driver"
+      @employee.role = I18n.locale == :es ? "Conductor" : "Driver"
+
+    elsif @employee.role == "chief_dispatch"
+      @employee.role = I18n.locale == :es ? "Jefe de despacho" : "Chief dispatch"
+
+    elsif @employee.role == "warehouse_assistant"
+      @employee.role = I18n.locale == :es ? "Auxiliar de bodega" : "Warehouse assistant"
+    end
+
   end
 
   # admin/employee/:id/history
@@ -97,6 +136,25 @@ class Admin::EmployeesController < ApplicationController
     @employee[:role] = @employee[:role].strip
     # End Deleting blank spaces
 
+    if @employee[:role] == "Administrador" || @employee[:role] == "Administrator"
+      @employee[:role] = "administrator"
+
+    elsif @employee[:role] == "Auxiliar de bodega" || @employee[:role] == "Warehouse supervisor"
+      @employee[:role] = "warehouse_supervisor"
+
+    elsif @employee[:role] == "Vendedor" || @employee[:role] == "Seller"
+      @employee[:role] = "seller"
+
+    elsif @employee[:role] == "Conductor" || @employee[:role] == "Driver"
+      @employee[:role] = "driver"
+
+    elsif @employee[:role] == "Jefe de despacho" || @employee[:role] == "Chief dispatch"
+      @employee[:role] = "chief_dispatch"
+
+    elsif @employee[:role] == "Auxiliar de bodega" || @employee[:role] == "Warehouse assistant"
+      @employee[:role] = "warehouse_assistant"
+    end
+
     # If record was saved
     if @employee.save
       redirect_to [:admin, @employee], notice: t("alerts.created", model: t("activerecord.models.employee"))
@@ -109,7 +167,28 @@ class Admin::EmployeesController < ApplicationController
 
   # Update
   def update
-    if @employee.update(employee_params)
+    update_params = employee_params
+
+    if update_params[:role] == "Administrador" || update_params[:role] == "Administrator"
+      update_params[:role] = "administrator"
+
+    elsif update_params[:role] == "Auxiliar de bodega" || update_params[:role] == "Warehouse supervisor"
+      update_params[:role] = "warehouse_supervisor"
+
+    elsif update_params[:role] == "Vendedor" || update_params[:role] == "Seller"
+      update_params[:role] = "seller"
+
+    elsif update_params[:role] == "Conductor" || update_params[:role] == "Driver"
+      update_params[:role] = "driver"
+
+    elsif update_params[:role] == "Jefe de despacho" || update_params[:role] == "Chief dispatch"
+      update_params[:role] = "chief_dispatch"
+
+    elsif update_params[:role] == "Auxiliar de bodega" || update_params[:role] == "Warehouse assistant"
+      update_params[:role] = "warehouse_assistant"
+    end
+
+    if @employee.update(update_params)
       redirect_to [:admin, @employee], notice: t("alerts.updated", model: t("activerecord.models.employee"))
 
     else

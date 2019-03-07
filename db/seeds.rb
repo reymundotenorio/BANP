@@ -446,15 +446,15 @@ puts "Seeding customers"
   if count == 0 # Creating Independent customer
     Customer.create(
       id: (count + 1),
-      first_name: "***",
-      last_name: "***",
-      company: "***",
-      email: "***@***.***",
-      phone: "(***) ***-****",
-      zipcode: "***",
-      address: "***",
+      first_name: "####",
+      last_name: "####",
+      company: "####",
+      email: "####@####.###",
+      phone: "(000) 000-0000",
+      zipcode: "00000",
+      address: "######",
       state: true
-    )
+    ).save(validate: false)
 
   else
     begin

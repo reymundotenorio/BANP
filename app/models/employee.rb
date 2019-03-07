@@ -134,9 +134,24 @@ class Employee < ApplicationRecord
   # Helpers
 
   # Is administrator?
-  # def is_admin?
-  #   role == "administrator"
-  # end
+  def is_administrator?
+    role == "administrator"
+  end
+
+  # Is warehouse_supervisor?
+  def is_warehouse_supervisor?
+    role == "warehouse_supervisor"
+  end
+
+  # Is seller?
+  def is_seller?
+    role == "seller"
+  end
+
+  # Is driver?
+  def is_driver?
+    role == "driver"
+  end
 
   # End Helpers
 
