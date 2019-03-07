@@ -1,0 +1,38 @@
+.row.no-margin
+  .col-xs-12.no-padding
+    -# Table
+    %table.table
+      %thead
+        - model = "product"
+        - attributes = ["name", "price", "quantity", "total", "select"]
+
+        -# Render table header
+        = render partial: "partials/table_header", locals: {model: model, attributes: attributes}
+
+        - if I18n.locale == :es
+          - attributes = ["name_spanish", "price", "quantity", "total", "select"]
+
+      %tbody
+        -# Data table render_sync
+        = sync partial: "select_product", collection: @products
+        = sync_new partial: "select_product", resource: Product.new
+        -# End Data table render_sync
+    -# End Table
+
+.row.no-margin
+  .col-xs-12.no-padding.text-center
+    -# Pagination
+    = will_paginate @products, renderer: BootstrapPagination::Rails, param_name: "products_page"
+    -# End Pagination
+
+-# Auto search script
+= javascript_include_tag "auto-search", "data-turbolinks-track": "reload"
+-# End Auto search script
+
+-# Pagination with Ajax script
+= javascript_include_tag "pagination-ajax", "data-turbolinks-track": "reload"
+-# End Pagination with Ajax script
+
+-# Select product script
+= javascript_include_tag "select-product", "data-turbolinks-track": "reload"
+-# End Select product script

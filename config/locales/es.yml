@@ -285,6 +285,12 @@ es:
     purchases_product: "Compras por producto"
     sales_category: "Ventas por categoría"
     purchases_category: "Compras por categoría"
+    sales_report: "Reporte de ventas"
+    purchases_report: "Reporte de compras"
+    rank_time: "Rango de tiempo"
+    start_date: "Fecha inicio"
+    end_date: "Fecha final"
+    generate: "Generar"
 
   # Will paginate
   will_paginate:

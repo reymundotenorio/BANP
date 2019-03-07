@@ -84,3 +84,6 @@ Rails.application.config.assets.precompile += %w( select-customer.js )
 
 # Products modal on sale
 Rails.application.config.assets.precompile += %w( products-modal-sale.js )
+
+# Reports datepicker
+Rails.application.config.assets.precompile += %w( reports_datepicker.js )

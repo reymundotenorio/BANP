@@ -284,6 +284,12 @@ en:
     purchases_product: "Purchases by product"
     sales_category: "Sales by category"
     purchases_category: "Purchases by category"
+    sales_report: "Sales report"
+    purchases_report: "Purchases report"
+    rank_time: "Rank of time"
+    start_date: "Start date"
+    end_date: "End date"
+    generate: "Generate"
 
   # Will paginate
   will_paginate:

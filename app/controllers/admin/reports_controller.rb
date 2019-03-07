@@ -6,4 +6,17 @@ class Admin::ReportsController < ApplicationController
   # Authentication
   before_action :require_employee
   # End Authentication
+
+  def sales
+    @search_form_path = admin_create_reports_sales_path(@invoice)
+
+    @customers = Customer.search(params[:search_customer], "enabled-only").paginate(page: params[:customers_page], per_page: 5) # Providers with pagination
+    @products = Product.search(params[:search_product], "enabled-only").paginate(page: params[:products_page], per_page: 5) # Products with pagination
+  end
+
+  def sales_report
+  end
+
+  def purchases
+  end
 end

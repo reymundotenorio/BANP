@@ -307,6 +307,14 @@ Rails.application.routes.draw do
     get "/sale/detail/:id/history", to: "sale_details#history", as: "history_sale_detail"
     patch "/sales/detail/:id", to: "sale_details#update", as: "update_sale_detail"
     # End Sales details
+
+    # Reports
+    get "/reports/purchases", to: "reports#purchases", as: "reports_purchases"
+    get "/reports/sales", to: "reports#sales", as: "reports_sales"
+
+    post "/reports/purchases", to: "reports#purchases_report", as: "create_reports_purchases"
+    post "/reports/sales", to: "reports#sales_report", as: "create_reports_sales"
+    # End Reports
   end
   # End Admin namespace
 
