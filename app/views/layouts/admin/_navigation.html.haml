@@ -143,14 +143,14 @@
       %ul.dropdown-menu
         -# Purchases
         %li
-          %a{href: "#"}
+          = link_to (admin_reports_purchases_path), class: "#{'active' if (controller_name == 'reports' && (action_name == 'purchases' || action_name == 'purchases_report')) }" do
             %i.fas.fa-shopping-bag
             = t("header.navigation.purchases")
         -# End purchases
 
         -# Sales
         %li
-          %a{href: "#"}
+          = link_to (admin_reports_sales_path), class: "#{'active' if (controller_name == 'reports' && (action_name == 'sales' || action_name == 'sales_report')) }" do
             %i.fas.fa-shopping-cart
             = t("header.navigation.sales")
         -# End Sales

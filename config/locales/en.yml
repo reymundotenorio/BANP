@@ -186,6 +186,7 @@ en:
         customer: "Customer"
         payment_method: "Payment method"
         employee: "Employee"
+        category: "Category"
 
   # Purchase
   purchase:
@@ -325,6 +326,8 @@ en:
       show_all: "Show all"
       show_enabled: "Show enabled"
       export: "Export"
+      export_pdf: "Export to PDF"
+      export_excel: "Export to Excel"
       options: "Options"
       view_details: "View details"
       select: "Select"

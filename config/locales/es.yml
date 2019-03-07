@@ -185,6 +185,7 @@ es:
         customer: "Cliente"
         payment_method: "Método de pago"
         employee: "Empleado"
+        category: "Categoría"
 
   # Purchase
   purchase:
@@ -327,6 +328,8 @@ es:
       show_all: "Mostrar todos"
       show_enabled: "Mostrar habilitados"
       export: "Exportar"
+      export_pdf: "Exportar a PDF"
+      export_excel: "Exportar a Excel"
       options: "Opciones"
       view_details: "Ver detalles"
       select: "Seleccionar"

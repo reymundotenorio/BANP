@@ -2,14 +2,28 @@
   .container
     -# Title
     .row.title-container
-      .col-xs-12.col-lg-10
+      .col-xs-12.col-lg-8
         -# Heading
         %h1#count-title
           %i.fas.fa-chart-bar
           = t("charts.report_result")
         -# End Heading
 
-      .col-xs-12.col-lg-2.text-right
+      .col-xs-12.col-lg-4.text-right
+        -# Export PDF button
+        .btn-container.inline
+          = link_to request.parameters.merge(format: "pdf", lang: I18n.locale), target: "_blank", class: "btn btn-general btn-default" do
+            %i.fas.fa-file-pdf
+            %span= t("views.index.export_pdf")
+        -# End Export PDF button
+
+        -# Export Excel button
+        .btn-container.inline
+          = link_to request.parameters.merge(format: "pdf", lang: I18n.locale), target: "_blank", class: "btn btn-general btn-default" do
+            %i.fas.fa-file-excel
+            %span= t("views.index.export_excel")
+        -# End Export Excel button
+
     -# End Title
 
     -# Breadcrumb

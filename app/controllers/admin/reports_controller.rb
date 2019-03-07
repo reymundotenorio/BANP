@@ -16,7 +16,7 @@ class Admin::ReportsController < ApplicationController
   end
 
   def sales_report
-    puts "#{params}".red
+    @params = params
 
     if !params[:from_datetime]
       redirect_to admin_reports_sales_path, alert: "Debe seleccionar fecha de inicio"
@@ -25,7 +25,7 @@ class Admin::ReportsController < ApplicationController
 
     if !params[:to_datetime]
       redirect_to admin_reports_sales_path, alert: "Debe seleccionar fecha final"
-      return
+      returnñ
     end
 
     from_datetime = params[:from_datetime] = params[:from_datetime].to_datetime if params[:from_datetime]
@@ -38,11 +38,12 @@ class Admin::ReportsController < ApplicationController
 
     join_customer = "JOIN customers ON sales.customer_id = customers.id"
     join_employee = "JOIN employees ON sales.employee_id = employees.id"
+    join_category = "JOIN categories ON products.category_id = categories.id"
     where_dates_range = "sales.sale_datetime BETWEEN :from_datetime AND :to_datetime"
     where_paid = "sales.paid = true"
     order_datetime = "sales.sale_datetime"
 
-    @sales = SaleDetail.joins(:sale).joins(:product).joins(join_customer).joins(join_employee).where(where_dates_range, from_datetime: from_datetime, to_datetime: to_datetime).where(where_paid)
+    @sales = SaleDetail.joins(:sale).joins(:product).joins(join_category).joins(join_customer).joins(join_employee).where(where_dates_range, from_datetime: from_datetime, to_datetime: to_datetime).where(where_paid)
 
 
     if report_customer_id && report_customer_id != 0

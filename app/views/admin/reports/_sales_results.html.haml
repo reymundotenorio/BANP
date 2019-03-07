@@ -5,21 +5,17 @@
       %thead
         - model = "sale_details"
         -# - attributes
-        - attributes = ["sale_datetime", "customer", "product", "price", "quantity", "total", "payment_method", "employee"]
+        - attributes = ["sale_datetime", "customer", "product", "category", "price", "quantity", "total", "payment_method", "employee"]
 
         -# Render table header
-        = render partial: "partials/table_header", locals: {model: model, attributes: attributes}
+        = render partial: "partials/table_header_number", locals: {model: model, attributes: attributes}
 
       %tbody
         - @sales.each do |detail|
 
           %tr{class: "clickable-row #{detail.status.downcase}"}
             -# Set attributes
-            - attributes =  ["sale_datetime", "customer", "product", "price", "quantity", "total", "payment_method", "employee"]
-
-            %td
-              .record-link{"data-header": "No."}
-                %p= detail.id
+            - attributes =  ["sale_datetime", "customer", "product", "category", "price", "quantity", "total", "payment_method", "employee"]
 
             - attributes.each do |attribute|
               %td
@@ -33,6 +29,9 @@
 
                   - elsif attribute == "product"
                     %p=  I18n.locale == :es ? detail.product.name_spanish : detail.product.name
+
+                  - elsif attribute == "category"
+                    %p=  I18n.locale == :es ? detail.product.category.name_spanish : detail.product.category.name
 
                   - elsif attribute == "price"
                     %p= number_to_currency(detail.price, precision: 2, unit: "$", format: "%u%n", separator: ".", delimiter: ",")

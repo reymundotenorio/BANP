@@ -1,0 +1,66 @@
+-# PDF resource
+-# resource
+-# End PDF resource
+
+-# Index PDF
+%section.index.index-pdf
+  .container
+    .row
+      .col-xs-12
+        -# Material card
+        .material-card.shadow-card.material-card-pdf.shadow-card-pdf
+          .row.no-margin
+            .col-xs-12.no-padding
+              %h1.text-center= pdf_title
+              -# Table
+              %table.table.table-pdf
+                -# Set attributes
+                - model = "sale_details"
+                -# - attributes
+                - attributes = ["sale_datetime", "customer", "product", "price", "quantity", "total", "payment_method", "employee"]
+
+                -# Render table header
+                = render partial: "partials/table_header_number", locals: {model: model, attributes: attributes}
+                %tbody
+                  - resource.each do |detail|
+
+                    %tr.true
+                      - attributes.each do |attribute|
+                        %td
+                          - if attribute == "sale_datetime"
+                            %p= I18n.locale == :es ? detail.sale.sale_datetime.strftime("%d/%m/%Y") : detail.sale.sale_datetime.strftime("%m/%d/%Y")
+
+                          - elsif attribute == "customer"
+                            %p= "#{detail.sale.customer.first_name} #{detail.sale.customer.last_name}"
+
+                          - elsif attribute == "product"
+                            %p=  I18n.locale == :es ? detail.product.name_spanish : detail.product.name
+
+                          - elsif attribute == "category"
+                            %p=  I18n.locale == :es ? detail.product.category.name_spanish : detail.product.category.name
+
+                          - elsif attribute == "price"
+                            %p= number_to_currency(detail.price, precision: 2, unit: "$", format: "%u%n", separator: ".", delimiter: ",")
+
+                          - elsif attribute == "total"
+                            %p= number_to_currency((detail.price * detail.quantity), precision: 2, unit: "$", format: "%u%n", separator: ".", delimiter: ",")
+
+                          - elsif attribute == "payment_method"
+                            %p
+                              - if detail.sale["#{attribute}"] == "cash"
+                                = I18n.locale == :es ? "Efectivo" : "Cash"
+
+                              - elsif detail.sale["#{attribute}"] == "card"
+                                = I18n.locale == :es ? "Tarjeta" : "Card"
+
+                              - else
+                                = detail.sale["#{attribute}"]
+
+                          - elsif attribute == "employee"
+                            %p= "#{detail.sale.employee.first_name} #{detail.sale.employee.last_name}"
+
+                          - else
+                            %p= detail["#{attribute}"]
+              -# End Table
+        -# End Material card
+-# End Index PDF
