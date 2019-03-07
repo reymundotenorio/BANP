@@ -1,0 +1,13 @@
+.noti
+  - if notification.read_by == "false"
+    %li
+      = link_to admin_notification_redirect_path(notification.id) do
+        - if notification.message == "new_order"
+          %i.fas.fa-plus-square
+          %span
+            %b= I18n.locale == :es ? "Nueva orden de venta" : "New sales order"
+
+        - else
+          %i.fas.fa-times-circle
+          %span
+            %b= I18n.locale == :es ? "Producto escaso" : "Scarce product"

@@ -221,6 +221,19 @@ class PaypalController < ApplicationController
           sync_update sale_order
           # redirect_to cart_path, notice: t("views.cart.payment_correctly")
 
+          notification = ::Notification.new
+          notification.message = "new_order"
+          notification.path = "#{admin_sale_details_url(sale_order.id)}"
+          notification.read_by = "false"
+
+          if notification.save
+            puts "Notification saved"
+            sync_new notification
+
+          else
+            puts "Notification not saved"
+          end
+
           redirect_to tracking_path(sale_order.id, clean_cart: "clean-all"), notice: t("views.cart.payment_correctly")
           return
 

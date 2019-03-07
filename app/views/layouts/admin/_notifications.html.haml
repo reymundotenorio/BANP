@@ -1,25 +1,16 @@
 .notifications-container
+  - @noti_flag = true
+
   .dropdown
-    %a.custom-btn.dropdown-toggle{"data-toggle": "dropdown", href: "#", "data-tooltip": "true", "data-placement": "left", title: t("header.navigation.notifications")}
+    %a{class: "custom-btn dropdown-toggle #{'with-noti' if (Notification.where(read_by: 'false').count > 0)}", "data-toggle": "dropdown", href: "#", "data-tooltip": "true", "data-placement": "left", title: t("header.navigation.notifications")}
       %i.fas.fa-bell
+      -# Notification render_sync
+      = sync partial: "notification_icon", collection: Notification.all
+      = sync_new partial: "notification_icon", resource: Notification.new
+      -# End Notification render_sync
 
-    %ul.dropdown-menu
-      %li
-        %a{href: "#"}
-          %i.fas.fa-plus-square
-          %span Nuevo usuario registrado
-
-      %li
-        %a{href: "#"}
-          %i.fas.fa-times-circle
-          %span Pedido cancelado
-
-      %li
-        %a{href: "#"}
-          %i.fas.fa-clock
-          %span Envio pendiente
-
-      %li
-        %a{href: "#"}
-          %i.fas.fa-list
-          %span Todas las notificaciones
+    %ul{class: "dropdown-menu #{'no-noti' if (Notification.where(read_by: 'false').count < 1)}"}
+      -# Notifications render_sync
+      = sync partial: "notifications", collection: Notification.all
+      = sync_new partial: "notifications", resource: Notification.new
+      -# End Notifications render_sync

@@ -272,6 +272,27 @@
 
           .dropdown{
             > a{
+              position: relative;
+
+              .display-circle{
+                .circle-show{
+                  &:before{
+                    content: "";
+                    position: absolute;
+                    top: 14px;
+                    bottom: auto;
+                    right: 1px;
+                    left: auto;
+                    width: 10px;
+                    height: 10px;
+                    background-color: $third-color;
+                    border-radius: 100%;
+                    -webkit-box-shadow: -8px 8px 15px -5px rgba(0, 0, 0, 0.15);
+                    box-shadow: -8px 8px 15px -5px rgba(0, 0, 0, 0.15);
+                  }
+                }
+              }
+
               @include on-event{
                 text-decoration: none;
               }
@@ -287,6 +308,22 @@
               background-color: $white;
               margin-top: 10px;
 
+              .noti > li > a {
+                display: block;
+                padding: 3px 20px;
+                clear: both;
+                font-weight: 400;
+                line-height: 1.428571429;
+                color: #333333;
+                white-space: nowrap;
+
+                @include on-event{
+                  text-decoration: none;
+                  color: $hover-color;
+                  background-color: $transparent;
+                }
+              }
+
               &:before{
                 content: "";
                 position: absolute;
@@ -297,6 +334,12 @@
                 font-size: 0px;
                 border: 8px solid $transparent;
                 border-bottom-color: $white;
+              }
+
+              &.no-noti{
+                &:before{
+                  display: none;
+                }
               }
 
               a{

@@ -105,6 +105,19 @@ class StripeController < ApplicationController
           sync_update order
           # redirect_to cart_path, notice: "Orden generada correctamente"
 
+          notification = Notification.new
+          notification.message = "new_order"
+          notification.path = "#{admin_sale_details_url(order.id)}"
+          notification.read_by = "false"
+
+          if notification.save
+            puts "Notification saved"
+            sync_new notification
+
+          else
+            puts "Notification not saved"
+          end
+
           redirect_to tracking_path(order.id, clean_cart: "clean-all"), notice: t("views.cart.payment_correctly")
           return
 

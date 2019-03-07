@@ -314,6 +314,10 @@ Rails.application.routes.draw do
     get "/reports/purchases_results", to: "reports#purchases_report", as: "create_reports_purchases"
     get "/reports/sales_results", to: "reports#sales_report", as: "create_reports_sales"
     # End Reports
+    
+    # Notifications
+    get "/notification/:id", to: "notifications#notification_redirect", as: "notification_redirect"
+    # End Notifications
   end
   # End Admin namespace
 
