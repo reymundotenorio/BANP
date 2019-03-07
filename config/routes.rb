@@ -43,13 +43,18 @@ Rails.application.routes.draw do
 
   # Customers
   get "/sign-up", to: "customers#new", as: "sign_up"
-  get "/customer/:id", to: "customers#show", as: "customer"
-  get "/customer/:id/edit", to: "customers#edit", as: "edit_customer"
-  get "/customers", to: redirect("/sign-up")
-  post "/customers", to: "customers#create"
-  patch "/customer/:id", to: "customers#update", as: "update_customer"
-  patch "/customers/:id/deactive", to: "customers#deactive", as: "deactive_customer"
+  get "/user", to: "customers#show", as: "customer"
+  get "/user/edit", to: "customers#edit", as: "edit_customer"
+  get "/users", to: redirect("/sign-up")
+  post "/users", to: "customers#create"
+  patch "/user", to: "customers#update", as: "update_customer"
+  patch "/user/deactive", to: "customers#deactive", as: "deactive_customer"
   # End Customers
+
+  # Users
+  get "/user/update-password", to: "users#customer_update_password", as: "customer_update_password"
+  patch "/user/update-password", to: "users#customer_change_password", as: "customer_change_password"
+  # End Users
 
   # Sessions
   get "/sign-in", to: "authentication/sessions#new", as: "sign_in"

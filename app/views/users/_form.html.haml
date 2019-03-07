@@ -1,6 +1,6 @@
 -# Form
-= form_for @user, url: @form_url, html: {autocomplete: "off"} do |f|
-  %section.form
+= form_for @user, url: customer_change_password_path, html: {autocomplete: "off"} do |f|
+  %section.form.edit-form
     .container
       .row
         .col-xs-12.col-sm-10.col-sm-offset-1.col-md-8.col-md-offset-2
@@ -10,23 +10,23 @@
 
         .col-xs-12.col-sm-10.col-sm-offset-1.col-md-8.col-md-offset-2
           -# Material card
-          %div{class: "material-card shadow-card #{@employee ? @employee.state : @customer.state}"}
+          %div{class: "material-card shadow-card #{@customer.state}"}
             -# Table
             .row.no-margin
               .col-xs-12.no-padding
                 .form-info
                   -# Email
-                  = f.hidden_field :email, value: @employee ? @employee.email : @customer.email
+                  = f.hidden_field :email, value: @customer.email
                   -# End Email
 
                   .form-group
-                    = f.password_field :password, class: "form-control input", required: @required
+                    = f.password_field :password, class: "form-control input"
                     %label
                       %b= t("activerecord.attributes.user.password")
                     .border-bottom
 
                   .form-group
-                    = f.password_field :password_confirmation, class: "form-control input", required: @required
+                    = f.password_field :password_confirmation, class: "form-control input"
                     %label
                       %b= t("activerecord.attributes.user.password_confirmation")
                     .border-bottom

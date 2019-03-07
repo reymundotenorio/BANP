@@ -60,11 +60,12 @@
                       %b= t("activerecord.attributes.customer.company")
                     .border-bottom
 
-                  .form-group
-                    = f.email_field :email, class: "form-control input", required: true
-                    %label
-                      %b= t("activerecord.attributes.customer.email")
-                    .border-bottom
+                  - if action_name == "new" || action_name == "create"
+                    .form-group
+                      = f.email_field :email, class: "form-control input", required: true
+                      %label
+                        %b= t("activerecord.attributes.customer.email")
+                      .border-bottom
 
                   .form-group
                     -# < f.telephone_field :phone, class: "form-control input", "data-mask": "(000) 000-0000", required: true >
@@ -84,6 +85,15 @@
                     %label
                       %b= t("activerecord.attributes.customer.address")
                     .border-bottom
+
+                  - if action_name == "edit" || action_name == "update"
+                    -# Buttons
+                    .main-buttons
+                      .col-xs-12.button-container.no-padding
+                        = f.button class: "btn btn-general", data: {disable_with: "<i class='fas fa-spinner fa-spin'></i>"} do
+                          %i.fas.fa-save
+                          %span= t("views.form.save")
+                    -# End Buttons
           -# End Material card
 
         - if action_name == "new" || action_name == "create"
@@ -126,10 +136,9 @@
                     -# Buttons
                     .main-buttons
                       .col-xs-12.button-container.no-padding
-                        - if @customer.new_record?
-                          = button_tag type: "reset", id: "reset-button", class: "btn btn-general" do
-                            %i.fas.fa-eraser
-                            %span= t("views.form.restart")
+                        = button_tag type: "reset", id: "reset-button", class: "btn btn-general" do
+                          %i.fas.fa-eraser
+                          %span= t("views.form.restart")
 
                         = f.button class: "btn btn-general", data: {disable_with: "<i class='fas fa-spinner fa-spin'></i>"} do
                           %i.fas.fa-save

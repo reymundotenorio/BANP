@@ -269,6 +269,9 @@ es:
     order_shipped_correctly: "Pedido enviado correctamente"
     problem_shipping_order: "Hubo un problema con el envío del pedido"
     problem_generating_order: "Hubo un problema generando el pedido"
+    go_back: "Regresar"
+    profile: "Perfil"
+    update_profile: "Actualización del perfil"
 
   # Will paginate
   will_paginate:

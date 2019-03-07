@@ -1,0 +1,12 @@
+%section.wrap
+  .banner.grad-section
+    .container-fluid
+      .row
+        .col-xs-12
+          %h1.search-title.text-center= t("sale.profile")
+
+
+-# Customer detail render_sync
+= sync partial: "customer_details", resource: current_customer
+-# = sync_new partial: "customer_details", resource: Customer.new
+-# End Customer detail render_sync

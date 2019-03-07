@@ -2,10 +2,17 @@
 // This file contains all styles related to the form pages
 // ------------------------------------------------------------
 
+.form-title{
+  padding: 40px 0px 0px 0px;
+}
+
 .form{
   &.sign-up{
-    padding-top: 25px;
-    padding-bottom: 25px;
+    padding: 40px 0px 20px 0px;
+  }
+
+  &.edit-form{
+    padding: 10px 0px 20px 0px;
   }
 
   .alerts{
@@ -162,14 +169,21 @@
 
 @media (min-width: 768px){
 
+  .form-title{
+    padding: 60px 0px 0px 0px;
+  }
+
   .form{
     .logo-container{
       padding: 15px 0px 20px;
     }
 
     &.sign-up{
-      padding-top: 45px;
-      padding-bottom: 45px;
+      padding: 60px 0px 40px 0px;
+    }
+
+    &.edit-form{
+      padding: 10px 0px 40px 0px;
     }
 
     .form-info{
@@ -208,4 +222,17 @@
     }
   }
 
+}
+
+@media (min-width: 992px) {
+
+  .form{
+    &.sign-up{
+      padding-bottom: 60px;
+    }
+
+    &.edit-form{
+      padding-bottom: 60px;
+    }
+  }
 }

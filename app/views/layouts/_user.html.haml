@@ -7,10 +7,28 @@
       %i.fas.fa-user
   %ul.dropdown-menu.user-dropbown
     - if current_customer
-      -# Customer detail render_sync
-      = sync partial: "customer_info", resource: current_customer
-      -# = sync_new partial: "customer_info", resource: Customer.new
-      -# End Customer detail render_sync
+      %li.label
+        -# Customer detail render_sync
+        = sync partial: "customer_info", resource: current_customer
+        -# = sync_new partial: "customer_info", resource: Customer.new
+        -# End Customer detail render_sync
+
+      %li
+        = link_to orders_path do
+          %i.far.fa-newspaper.hidden-xs
+          = t("sale.view_orders")
+      %li
+        = link_to customer_path do
+          %i.fas.fa-cog.hidden-xs
+          = t("sale.profile")
+      %li
+        = link_to sign_out_path(email: current_customer.email), method: "delete" do
+          %i.fas.fa-lock.hidden-xs
+          = t("header.user.lock")
+      %li
+        = link_to sign_out_path, method: "delete" do
+          %i.fas.fa-sign-out-alt.hidden-xs
+          = t("header.user.sign_off")
 
     - else
       %li

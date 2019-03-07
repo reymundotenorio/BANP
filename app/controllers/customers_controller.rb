@@ -15,18 +15,18 @@ class CustomersController < ApplicationController
   # before_action :require_customer
   # End Authentication
 
-  # /customer/new
+  # /user/new
   def new
     @customer = Customer.new
     @customer.build_user
   end
 
-  # /customer/:id)
+  # /user)
   def show
     # Customer found by before_action
   end
 
-  # /customer/:id/edit
+  # /user/edit
   def edit
     # Customer found by before_action
   end
@@ -66,7 +66,7 @@ class CustomersController < ApplicationController
   # Update
   def update
     if @customer.update(customer_params)
-      redirect_to @customer, notice: t("alerts.updated", model: t("activerecord.models.customer"))
+      redirect_to customer_path, notice: t("alerts.updated", model: t("activerecord.models.user"))
 
     else
       render :edit
@@ -110,10 +110,10 @@ class CustomersController < ApplicationController
 
   # Set Customer
   def set_customer
-    @customer = Customer.friendly.find(params[:id])
+    @customer = Customer.find(current_customer.id)
 
   rescue
-    redirect_to customer_path(@customer), alert: t("alerts.not_found", model: t("activerecord.models.customer"))
+    redirect_to sign_in_path, alert: t("alerts.not_found", model: t("activerecord.models.user"))
   end
 
   # Customer params

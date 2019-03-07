@@ -332,7 +332,7 @@ header{
     }
 
     // Navigation items
-    li a, .open ul.dropdown-menu>li>a, ul.dropdown-menu>li>a, li span{
+    li a, .open ul.dropdown-menu>li>a, ul.dropdown-menu>li>a, li span, li p{
       -webkit-transition: all 0.5s ease;
       transition: all 0.5s ease;
       background-color: transparent;
@@ -413,7 +413,7 @@ header{
             // Dropdown menu items
             padding-top: 20px;
 
-            span{
+            span, p{
               font-weight: 400;
 
               @include on-event{
@@ -976,7 +976,7 @@ header{
               }
 
               // Dropdown menu items
-              >a, >span{
+              >a, >span, >p{
                 color: $text-color;
                 word-break: break-word;
                 white-space: normal;
