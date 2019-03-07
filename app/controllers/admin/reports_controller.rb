@@ -67,21 +67,30 @@ class Admin::ReportsController < ApplicationController
     datetime =  Time.zone.now
     file_time = datetime.strftime("%m%d%Y")
 
-    name_pdf = "reports-sales-#{file_time}"
+    name_pdf = "sales-report-#{file_time}"
     template = "admin/reports/sales_report_pdf.html.haml"
-    title_pdf = t("header.navigation.sales")
     # End PDF view configuration
+
+    @start_date = I18n.locale == :es ? from_datetime.strftime("%d/%m/%Y") : from_datetime.strftime("%m/%d/%Y")
+    @end_date = I18n.locale == :es ? to_datetime.strftime("%d/%m/%Y") : to_datetime.strftime("%m/%d/%Y")
+
+    title_pdf = "#{t('charts.sales_report')} (#{@start_date} - #{@end_date})"
 
     respond_to do |format|
       format.html
       format.js
       format.pdf do
-        to_pdf(name_pdf, template, @sales, I18n.l(datetime), title_pdf)
+        to_pdf_landscape(name_pdf, template, @sales, I18n.l(datetime), title_pdf)
       end
+      format.xlsx do
+        response.headers[
+          'Content-Disposition'
+          ] = "attachment; filename=sales-report-#{file_time}.xlsx"
+        end
+      end
+
     end
 
+    def purchases
+    end
   end
-
-  def purchases
-  end
-end

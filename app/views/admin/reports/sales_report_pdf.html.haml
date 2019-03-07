@@ -17,7 +17,7 @@
                 -# Set attributes
                 - model = "sale_details"
                 -# - attributes
-                - attributes = ["sale_datetime", "customer", "product", "price", "quantity", "total", "payment_method", "employee"]
+                - attributes = ["sale_datetime", "customer", "product", "category", "price", "quantity", "total", "payment_method", "employee"]
 
                 -# Render table header
                 = render partial: "partials/table_header_number", locals: {model: model, attributes: attributes}

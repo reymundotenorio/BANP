@@ -6,7 +6,7 @@
         -# Heading
         %h1#count-title
           %i.fas.fa-chart-bar
-          = t("charts.report_result")
+          = "#{t('charts.report_result')} (#{@start_date} - #{@end_date})"
         -# End Heading
 
       .col-xs-12.col-lg-4.text-right
@@ -19,7 +19,7 @@
 
         -# Export Excel button
         .btn-container.inline
-          = link_to request.parameters.merge(format: "pdf", lang: I18n.locale), target: "_blank", class: "btn btn-general btn-default" do
+          = link_to request.parameters.merge(format: "xlsx", lang: I18n.locale), target: "_blank", class: "btn btn-general btn-default" do
             %i.fas.fa-file-excel
             %span= t("views.index.export_excel")
         -# End Export Excel button

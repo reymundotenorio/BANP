@@ -1,0 +1,42 @@
+wb = xlsx_package.workbook
+
+wb.styles do |style|
+  project_heading = style.add_style(b: true, sz: 12, alignment: {horizontal: :center}, bg_color: "f15f79", fg_color: "FF")
+  heading = style.add_style(b: true)
+
+  wb.add_worksheet(name: "Sales") do |sheet|
+    # Add a title row
+    sheet.add_row ["BANP - #{t('charts.sales_report')} (#{@start_date} - #{@end_date})".upcase], style: project_heading
+    sheet.merge_cells("A1:I1")# will merge cell A1 an I1
+    sheet.column_widths 10, 15, 15, 20, nil, 5, nil, 5, 12
+
+    # Create the header row
+    sheet.add_row [
+    "#{t('activerecord.attributes.sale_details.sale_datetime')}",
+    "#{t('activerecord.attributes.sale_details.customer')}",
+    "#{t('activerecord.attributes.sale_details.product')}",
+    "#{t('activerecord.attributes.sale_details.category')}",
+    "#{t('activerecord.attributes.sale_details.price')}",
+    "#{t('activerecord.attributes.sale_details.quantity')}",
+    "#{t('activerecord.attributes.sale_details.total')}",
+    "#{t('activerecord.attributes.sale_details.payment_method')}",
+    "#{t('activerecord.attributes.sale_details.employee')}"
+    ], style: heading
+
+    # Create entries for each item
+    @sales.each do |detail|
+      sheet.add_row [
+      I18n.locale == :es ? detail.sale.sale_datetime.strftime("%d/%m/%Y") : detail.sale.sale_datetime.strftime("%m/%d/%Y"),
+      "#{detail.sale.customer.first_name} #{detail.sale.customer.last_name}",
+      I18n.locale == :es ? detail.product.name_spanish : detail.product.name,
+      I18n.locale == :es ? detail.product.category.name_spanish : detail.product.category.name,
+      number_to_currency(detail.price, precision: 2, unit: "$", format: "%u%n", separator: ".", delimiter: ","),
+      detail.quantity,
+      number_to_currency((detail.price * detail.quantity), precision: 2, unit: "$", format: "%u%n", separator: ".", delimiter: ","),
+      detail.sale.payment_method == "cash" ? I18n.locale == :es ? "Efectivo" : "Cash" : detail.sale.payment_method == "card" ? I18n.locale == :es ? "Tarjeta" : "Card" : detail.sale.payment_method,
+      "#{detail.sale.employee.first_name} #{detail.sale.employee.last_name}"
+      ]
+    end
+  end
+
+end
