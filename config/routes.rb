@@ -48,7 +48,6 @@ Rails.application.routes.draw do
   get "/users", to: redirect("/sign-up")
   post "/users", to: "customers#create"
   patch "/user", to: "customers#update", as: "update_customer"
-  patch "/user/deactive", to: "customers#deactive", as: "deactive_customer"
   # End Customers
 
   # Users
