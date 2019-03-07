@@ -178,15 +178,18 @@
       <% if Rails.env.development? %>
       // Local images
       -webkit-mask: url("img/icon-right.svg") no-repeat 50% 50%;
+      -webkit-mask: url("img/icon-right.svg") no-repeat 50% 50%;
       mask: url("img/icon-right.svg") no-repeat 50% 50%;
 
       // Load AWS images on production
       <% else %>
       // AWS S3
       -webkit-mask: url("https://s3.amazonaws.com/betterandnice/images/default/icon-right.svg") no-repeat 50% 50%;
+      -webkit-mask: url("https://s3.amazonaws.com/betterandnice/images/default/icon-right.svg") no-repeat 50% 50%;
       mask: url("https://s3.amazonaws.com/betterandnice/images/default/icon-right.svg") no-repeat 50% 50%;
       <% end %>
 
+      -webkit-mask-size: cover;
       -webkit-mask-size: cover;
       mask-size: cover;
       // transform: rotate(90deg);
@@ -209,15 +212,18 @@
     <% if Rails.env.development? %>
     // Local images
     -webkit-mask: url("img/products.svg") no-repeat 50% 50%;
+    -webkit-mask: url("img/products.svg") no-repeat 50% 50%;
     mask: url("img/products.svg") no-repeat 50% 50%;
 
     // Load AWS images on production
     <% else %>
     // AWS S3
     -webkit-mask: url("https://s3.amazonaws.com/betterandnice/images/default/products.svg") no-repeat 50% 50%;
+    -webkit-mask: url("https://s3.amazonaws.com/betterandnice/images/default/products.svg") no-repeat 50% 50%;
     mask: url("https://s3.amazonaws.com/betterandnice/images/default/products.svg") no-repeat 50% 50%;
     <% end %>
 
+    -webkit-mask-size: cover;
     -webkit-mask-size: cover;
     mask-size: cover;
 
@@ -550,15 +556,18 @@
         <% if Rails.env.development? %>
         // Local images
         -webkit-mask: url("img/products-hover.svg") no-repeat 50% 50%;
+        -webkit-mask: url("img/products-hover.svg") no-repeat 50% 50%;
         mask: url("img/products-hover.svg") no-repeat 50% 50%;
 
         // Load AWS images on production
         <% else %>
         // AWS S3
         -webkit-mask: url("https://s3.amazonaws.com/betterandnice/images/default/products-hover.svg") no-repeat 50% 50%;
+        -webkit-mask: url("https://s3.amazonaws.com/betterandnice/images/default/products-hover.svg") no-repeat 50% 50%;
         mask: url("https://s3.amazonaws.com/betterandnice/images/default/products-hover.svg") no-repeat 50% 50%;
         <% end %>
 
+        -webkit-mask-size: cover;
         -webkit-mask-size: cover;
         mask-size: cover;
         height: 500px !important;
@@ -691,7 +700,8 @@
 
     .explosion-container{
       max-width: none;
-      width: 750px;
+      // width: 750px;
+      width: 700px;
     }
 
     .produce-list{
@@ -718,6 +728,17 @@
           margin-bottom: 45px;
         }
       }
+    }
+  }
+
+}
+
+
+@media (min-width: 1600px){
+
+  .our-products{
+    .explosion-container{
+      width: 700px;
     }
   }
 
