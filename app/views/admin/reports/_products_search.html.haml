@@ -4,7 +4,7 @@
     %table.table
       %thead
         - model = "product"
-        - attributes = ["name", "price", "quantity", "total", "select"]
+        - attributes = ["name", "select"]
 
         -# Render table header
         = render partial: "partials/table_header", locals: {model: model, attributes: attributes}
@@ -14,8 +14,8 @@
 
       %tbody
         -# Data table render_sync
-        = sync partial: "select_product", collection: @products
-        = sync_new partial: "select_product", resource: Product.new
+        = sync partial: "reports_select_product", collection: @products
+        = sync_new partial: "reports_select_product", resource: Product.new
         -# End Data table render_sync
     -# End Table
 

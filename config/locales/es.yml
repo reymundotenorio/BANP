@@ -181,6 +181,10 @@ es:
         total: "Total"
         sale_id: "No. Venta"
         created_at: "Fecha"
+        sale_datetime: "Fecha"
+        customer: "Cliente"
+        payment_method: "Método de pago"
+        employee: "Empleado"
 
   # Purchase
   purchase:
@@ -291,6 +295,8 @@ es:
     start_date: "Fecha inicio"
     end_date: "Fecha final"
     generate: "Generar"
+    report_result: "Resultado de reporte"
+
 
   # Will paginate
   will_paginate:

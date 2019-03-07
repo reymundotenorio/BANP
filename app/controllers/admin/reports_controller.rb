@@ -8,7 +8,7 @@ class Admin::ReportsController < ApplicationController
   # End Authentication
 
   def sales
-    @search_form_path = admin_create_reports_sales_path(@invoice)
+    @search_form_path = admin_reports_sales_path
 
     @customers = Customer.search(params[:search_customer], "enabled-only").paginate(page: params[:customers_page], per_page: 5) # Providers with pagination
     @products = Product.search(params[:search_product], "enabled-only").paginate(page: params[:products_page], per_page: 5) # Products with pagination
@@ -36,22 +36,28 @@ class Admin::ReportsController < ApplicationController
     report_product_id = params[:report_product_id].to_i || nil
     report_employee_id = params[:report_employee_id].to_i || nil
 
-    if report_customer_id
+    join_customer = "JOIN customers ON sales.customer_id = customers.id"
+    join_employee = "JOIN employees ON sales.employee_id = employees.id"
+    where_dates_range = "sales.sale_datetime BETWEEN :from_datetime AND :to_datetime"
+    where_paid = "sales.paid = true"
+    order_datetime = "sales.sale_datetime"
+
+    @sales = SaleDetail.joins(:sale).joins(:product).joins(join_customer).joins(join_employee).where(where_dates_range, from_datetime: from_datetime, to_datetime: to_datetime).where(where_paid)
+
+
+    if report_customer_id && report_customer_id != 0
+      @sales = @sales.where("sales.customer_id = :report_customer_id", report_customer_id: report_customer_id)
     end
 
-    if report_product_id
+    if report_product_id && report_product_id != 0
+      @sales = @sales.where("sale_details.product_id = :report_product_id", report_product_id: report_product_id)
     end
 
-    if report_employee_id
+    if report_employee_id && report_employee_id != 0
+      @sales = @sales.where("sales.employee_id = :report_employee_id", report_employee_id: report_employee_id)
     end
 
-    # consult = ""
-    #
-    # consult += "( sales.sale_datetime BETWEEN NOW() - INTERVAL 12 MONTH AND NOW() ) AND (sales.paid = true)"
-
-    @sales = SaleDetail.joins(:sale).joins(:product).joins("JOIN customers ON sales.customer_id = customers.id").joins("JOIN employees ON sales.employee_id = employees.id").where("sales.sale_datetime BETWEEN NOW() - INTERVAL 2 MONTH AND NOW()").not_returned.not_pending.paginate(page: params[:page], per_page: 50)
-
-    # , product_id: product_id, customer_id: customer_id, employee_id: employee_id).not_returned.not_pending
+    @sales = @sales.order(order_datetime).not_returned.not_pending.paginate(page: params[:page], per_page: 50)
 
     # PDF view configuration
     current_lang = params[:lang]

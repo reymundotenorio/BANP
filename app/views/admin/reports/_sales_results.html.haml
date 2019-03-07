@@ -4,7 +4,7 @@
     %table.table
       %thead
         - model = "sale_details"
-        -# - attributes = ["sale_datetime", "customer", "product", "price", "quantity", "total", "payment_method", "delivery_status", "employee"]
+        -# - attributes
         - attributes = ["sale_datetime", "customer", "product", "price", "quantity", "total", "payment_method", "employee"]
 
         -# Render table header
@@ -15,7 +15,6 @@
 
           %tr{class: "clickable-row #{detail.status.downcase}"}
             -# Set attributes
-            -# - attributes =  ["sale_datetime", "customer", "product", "price", "quantity", "total", "payment_method", "delivery_status", "employee"]
             - attributes =  ["sale_datetime", "customer", "product", "price", "quantity", "total", "payment_method", "employee"]
 
             %td
@@ -51,23 +50,6 @@
 
                       - else
                         = detail.sale["#{attribute}"]
-
-                  -# - elsif attribute == "delivery_status"
-                  -#   %p
-                  -#     - if detail.sale["#{attribute}"] == "in_queue"
-                  -#       = I18n.locale == :es ? "En espera" : "In queue"
-                  -#
-                  -#     - elsif detail.sale["#{attribute}"] == "received"
-                  -#       = I18n.locale == :es ? "Recibido" : "Received"
-                  -#
-                  -#     - elsif detail.sale["#{attribute}"] == "shipped"
-                  -#       = I18n.locale == :es ? "Enviado" : "Shipped"
-                  -#
-                  -#     - elsif detail.sale["#{attribute}"] == "delivered"
-                  -#       = I18n.locale == :es ? "Entregado" : "Delivered"
-                  -#
-                  -#     - elsif detail.sale["#{attribute}"] == "returned"
-                  -#       = I18n.locale == :es ? "Devuelto" : "Returned"
 
                   - elsif attribute == "employee"
                     %p= "#{detail.sale.employee.first_name} #{detail.sale.employee.last_name}"
