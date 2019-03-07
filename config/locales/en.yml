@@ -272,6 +272,18 @@ en:
     profile: "Profile"
     update_profile: "Update profile"
 
+  # Charts
+  charts:
+    sales_last: "Sales last 12 months"
+    purchases_last: "Purchases last 12 months"
+    sales_customer: "Sales by customer"
+    purchases_provider: "Purchases by provider"
+    sales_employee: "Sales by employee"
+    purchases_employee: "Purchases by employee"
+    sales_product: "Sales by product"
+    purchases_product: "Purchases by product"
+    sales_category: "Sales by category"
+    purchases_category: "Purchases by category"
 
   # Will paginate
   will_paginate:

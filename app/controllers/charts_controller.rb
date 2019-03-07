@@ -14,7 +14,7 @@ class ChartsController < ApplicationController
   def sales_by_products
     product_name =   I18n.locale == :es ? "products.name_spanish" : "products.name"
 
-    render json: SaleDetail.not_returned.joins(:product).where("products.state = true").joins(:purchase).where("sales.state = true").group(product_name).order('( SUM(purchase_details.price * quantity) - (SUM(purchase_details.price * quantity) * (discount / 100)) ) DESC').limit(10).pluck("#{product_name}, ( SUM(purchase_details.price * quantity) - (SUM(purchase_details.price * quantity) * (discount / 100)) ) as 'Total'")
+    render json: SaleDetail.not_returned.joins(:product).where("products.state = true").joins(:sale).where("sales.state = true").group(product_name).order('( SUM(sale_details.price * quantity) - (SUM(sale_details.price * quantity) * (discount / 100)) ) DESC').limit(10).pluck("#{product_name}, ( SUM(sale_details.price * quantity) - (SUM(sale_details.price * quantity) * (discount / 100)) ) as 'Total'")
   end
 
   # /charts/purchases-by-products
@@ -24,11 +24,11 @@ class ChartsController < ApplicationController
     render json: PurchaseDetail.not_returned.joins(:product).where("products.state = true").joins(:purchase).where("purchases.state = true").group(product_name).order('( SUM(purchase_details.price * quantity) - (SUM(purchase_details.price * quantity) * (discount / 100)) ) DESC').limit(10).pluck("#{product_name}, ( SUM(purchase_details.price * quantity) - (SUM(purchase_details.price * quantity) * (discount / 100)) ) as 'Total'")
   end
 
-  # /charts/purchases-by-categories
-  def purchases_by_categories
-    category_name = I18n.locale == :es ? "categories.name_spanish" : "categories.name"
+  # /charts/sales-by-customers
+  def sales_by_customers
+    customer_name = "CONCAT_WS(' ', customers.first_name, customers.last_name)"
 
-    render json: PurchaseDetail.not_returned.joins(:product).where("products.state = true").joins(:purchase).where("purchases.state = true").joins("LEFT JOIN categories ON products.category_id = categories.id").where("categories.state = true").group(category_name).order('( SUM(purchase_details.price * quantity) - (SUM(purchase_details.price * quantity) * (discount / 100)) ) DESC').limit(10).pluck("#{category_name}, ( SUM(purchase_details.price * quantity) - (SUM(purchase_details.price * quantity) * (discount / 100)) ) as 'Total'")
+    render json: Sale.enabled.joins(:customer).enabled.joins(:sale_details).group(customer_name).order('( SUM(price * quantity) - (SUM(price * quantity) * (discount / 100)) ) DESC').limit(10).pluck("#{customer_name}, ( SUM(price * quantity) - (SUM(price * quantity) * (discount / 100)) ) as 'Total'")
   end
 
   # /charts/purchases-by-providers
@@ -38,6 +38,13 @@ class ChartsController < ApplicationController
     render json: Purchase.enabled.joins(:provider).enabled.joins(:purchase_details).group(provider_name).order('( SUM(price * quantity) - (SUM(price * quantity) * (discount / 100)) ) DESC').limit(10).pluck("#{provider_name}, ( SUM(price * quantity) - (SUM(price * quantity) * (discount / 100)) ) as 'Total'")
   end
 
+  # /charts/sales-by-employees
+  def sales_by_employees
+    employee_name = "CONCAT_WS(' ', employees.first_name, employees.last_name)"
+
+    render json: Sale.enabled.joins(:employee).enabled.joins(:sale_details).group(employee_name).order('( SUM(price * quantity) - (SUM(price * quantity) * (discount / 100)) ) DESC').limit(10).pluck("#{employee_name}, ( SUM(price * quantity) - (SUM(price * quantity) * (discount / 100)) ) as 'Total'")
+  end
+
   # /charts/purchases-by-employees
   def purchases_by_employees
     employee_name = "CONCAT_WS(' ', employees.first_name, employees.last_name)"
@@ -45,7 +52,19 @@ class ChartsController < ApplicationController
     render json: Purchase.enabled.joins(:employee).enabled.joins(:purchase_details).group(employee_name).order('( SUM(price * quantity) - (SUM(price * quantity) * (discount / 100)) ) DESC').limit(10).pluck("#{employee_name}, ( SUM(price * quantity) - (SUM(price * quantity) * (discount / 100)) ) as 'Total'")
   end
 
+  # /charts/sales-by-categories
+  def sales_by_categories
+    category_name = I18n.locale == :es ? "categories.name_spanish" : "categories.name"
 
+    render json: SaleDetail.not_returned.joins(:product).where("products.state = true").joins(:sale).where("sales.state = true").joins("LEFT JOIN categories ON products.category_id = categories.id").where("categories.state = true").group(category_name).order('( SUM(sale_details.price * quantity) - (SUM(sale_details.price * quantity) * (discount / 100)) ) DESC').limit(10).pluck("#{category_name}, ( SUM(sale_details.price * quantity) - (SUM(sale_details.price * quantity) * (discount / 100)) ) as 'Total'")
+  end
+
+  # /charts/purchases-by-categories
+  def purchases_by_categories
+    category_name = I18n.locale == :es ? "categories.name_spanish" : "categories.name"
+
+    render json: PurchaseDetail.not_returned.joins(:product).where("products.state = true").joins(:purchase).where("purchases.state = true").joins("LEFT JOIN categories ON products.category_id = categories.id").where("categories.state = true").group(category_name).order('( SUM(purchase_details.price * quantity) - (SUM(purchase_details.price * quantity) * (discount / 100)) ) DESC').limit(10).pluck("#{category_name}, ( SUM(purchase_details.price * quantity) - (SUM(purchase_details.price * quantity) * (discount / 100)) ) as 'Total'")
+  end
 
   # /charts/products-by-categories
   def products_by_categories

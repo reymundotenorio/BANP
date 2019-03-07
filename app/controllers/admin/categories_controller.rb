@@ -12,7 +12,7 @@ class Admin::CategoriesController < ApplicationController
   # End Sync model DSL
 
   # Authentication
-  # before_action :require_employee
+  before_action :require_employee
   # End Authentication
 
   # admin/categories

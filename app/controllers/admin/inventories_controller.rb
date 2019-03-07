@@ -4,7 +4,7 @@ class Admin::InventoriesController < ApplicationController
   # End Admin layout
 
   # Authentication
-  # before_action :require_employee
+  before_action :require_employee
   # End Authentication
 
   # admin/products

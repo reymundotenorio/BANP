@@ -8,7 +8,7 @@ class Admin::PurchaseDetailsController < ApplicationController
   # End Find purchase
 
   # Authentication
-  # before_action :require_employee
+  before_action :require_employee
   # End Authentication
 
   def show

@@ -96,13 +96,22 @@ Rails.application.routes.draw do
 
   # Charts namespace
   namespace :charts do
-    get "products-by-categories", to: "products_by_categories", as: "products_by_categories"
-    get "purchases-by-providers", to: "purchases_by_providers", as: "purchases_by_providers"
-    get "purchases-by-employees", to: "purchases_by_employees", as: "purchases_by_employees"
-    get "purchases-by-products", to: "purchases_by_products", as: "purchases_by_products"
-    get "purchases-by-categories", to: "purchases_by_categories", as: "purchases_by_categories"
     get "purchases-by-month", to: "purchases_by_month", as: "purchases_by_month"
     get "sales-by-month", to: "sales_by_month", as: "sales_by_month"
+
+    get "sales-by-products", to: "sales_by_products", as: "sales_by_products"
+    get "purchases-by-products", to: "purchases_by_products", as: "purchases_by_products"
+
+    get "sales-by-customers", to: "sales_by_customers", as: "sales_by_customers"
+    get "purchases-by-providers", to: "purchases_by_providers", as: "purchases_by_providers"
+
+    get "sales-by-employees", to: "sales_by_employees", as: "sales_by_employees"
+    get "purchases-by-employees", to: "purchases_by_employees", as: "purchases_by_employees"
+
+    get "sales-by-categories", to: "sales_by_categories", as: "sales_by_categories"
+    get "purchases-by-categories", to: "purchases_by_categories", as: "purchases_by_categories"
+
+    get "products-by-categories", to: "products_by_categories", as: "products_by_categories"
   end
   # End Charts namespace
 

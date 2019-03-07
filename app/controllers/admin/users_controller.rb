@@ -14,6 +14,10 @@ class Admin::UsersController < ApplicationController
   # Sync model DSL
   enable_sync only: [:create_employee_user, :create_customer_user, :employee_change_password, :customer_change_password, :send_confirmation_email]
   # End Sync model DSL
+  
+  # Authentication
+  before_action :require_employee
+  # End Authentication
 
   # admin/employee/:id/create-user
   def new_employee_user

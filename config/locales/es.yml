@@ -273,6 +273,19 @@ es:
     profile: "Perfil"
     update_profile: "Actualización del perfil"
 
+  # Charts
+  charts:
+    sales_last: "Ventas últimos 12 meses"
+    purchases_last: "Compras últimos 12 meses"
+    sales_customer: "Ventas por Cliente"
+    purchases_provider: "Compras por proveedor"
+    sales_employee: "Ventas por empleado"
+    purchases_employee: "Compras por empleado"
+    sales_product: "Ventas por producto"
+    purchases_product: "Compras por producto"
+    sales_category: "Ventas por categoría"
+    purchases_category: "Compras por categoría"
+
   # Will paginate
   will_paginate:
     previous_label: "Anterior"

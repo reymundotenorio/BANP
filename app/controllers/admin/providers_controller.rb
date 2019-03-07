@@ -12,7 +12,7 @@ class Admin::ProvidersController < ApplicationController
   # End Sync model DSL
 
   # Authentication
-  # before_action :require_employee
+  before_action :require_employee
   # End Authentication
 
   # admin/providers
