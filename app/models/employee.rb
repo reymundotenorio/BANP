@@ -12,7 +12,7 @@ class Employee < ApplicationRecord
   # Render sync
   sync :all
   # End Render sync
-  
+
   # Execute after record is saved on the Database
   after_save :update_user_email
 
@@ -26,7 +26,12 @@ class Employee < ApplicationRecord
   # Search
   def self.search(search, show_all)
     if search
-      self.where("(first_name LIKE :search OR last_name LIKE :search OR phone LIKE :search OR email LIKE :search)", search: "%#{search}%")
+      if show_all == "enabled-only"
+        self.where("(first_name LIKE :search OR last_name LIKE :search OR phone LIKE :search OR email LIKE :search) AND (employees.state = true)", search: "%#{search}%")
+
+      else
+        self.where("(first_name LIKE :search OR last_name LIKE :search OR phone LIKE :search OR email LIKE :search)", search: "%#{search}%")
+      end
 
     elsif show_all == "all"
       all

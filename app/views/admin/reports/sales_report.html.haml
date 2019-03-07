@@ -1,0 +1,43 @@
+%section.reports
+  .container
+    -# Title
+    .row.title-container
+      .col-xs-12.col-lg-10
+        -# Heading
+        %h1#count-title
+          %i.fas.fa-chart-bar
+          = "Resultado de reporte"
+        -# End Heading
+
+      .col-xs-12.col-lg-2.text-right
+    -# End Title
+
+    -# Breadcrumb
+    .row
+      .col-xs-12.hidden-xs
+        .breadcrumb-container
+          %ol.breadcrumb
+            %li
+              = link_to (admin_root_path) do
+                %i.fas.fa-tachometer-alt
+                %span= t("header.navigation.dashboard")
+            %li
+              = link_to (admin_reports_sales_path) do
+                %i.fas.fa-table
+                %span= t("charts.sales_report")
+            %li.active
+              %i.fas.fa-chart-bar
+              = t("charts.sales_report")
+    -# End Breadcrumb
+
+-# Index
+%section.index
+  .container
+    .row
+      .col-xs-12
+        -# Material card
+        .material-card.shadow-card
+          -# Render table and pagination with Ajax
+          #render-data
+            = render "sales_results"
+          -# End Render table and pagination with Ajax

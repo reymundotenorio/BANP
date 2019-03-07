@@ -1,6 +1,6 @@
 $(document).ready(function(){
 
-  // Select Provider
+  // Select Customer
   $(".select-customer").each(function(){
 
     $(this).click(function(){

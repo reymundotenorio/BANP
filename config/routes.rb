@@ -311,9 +311,8 @@ Rails.application.routes.draw do
     # Reports
     get "/reports/purchases", to: "reports#purchases", as: "reports_purchases"
     get "/reports/sales", to: "reports#sales", as: "reports_sales"
-
-    post "/reports/purchases", to: "reports#purchases_report", as: "create_reports_purchases"
-    post "/reports/sales", to: "reports#sales_report", as: "create_reports_sales"
+    get "/reports/purchases_results", to: "reports#purchases_report", as: "create_reports_purchases"
+    get "/reports/sales_results", to: "reports#sales_report", as: "create_reports_sales"
     # End Reports
   end
   # End Admin namespace

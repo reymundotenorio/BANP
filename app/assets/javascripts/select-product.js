@@ -1,6 +1,6 @@
 $(document).ready(function(){
 
-  // Select
+  // Select Product
   $(".select-product").each(function(){
 
     $(this).click(function(){
@@ -15,6 +15,6 @@ $(document).ready(function(){
     });
 
   });
-
+  
 
 });

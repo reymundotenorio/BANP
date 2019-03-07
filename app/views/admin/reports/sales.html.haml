@@ -27,7 +27,7 @@
     -# End Breadcrumb
 
   -# Form
-  = form_tag url: admin_create_reports_sales_path, autocomplete: "off", method: "post" do |f|
+  = form_tag admin_create_reports_sales_path, method: "get", autocomplete: "off"do |f|
     %section.form
       .container
         .row
@@ -59,6 +59,17 @@
                           .border-bottom
 
                           = link_to "", class: "btn btn-general", "data-toggle": "modal", "data-target": "#getProducts" do
+                            %i.fas.fa-search
+
+                      .form-group
+                        .input-btn-group
+                          = hidden_field_tag "report_employee_id", ""
+                          = text_field_tag "report_employee", "", class: "form-control input no-events"
+                          %label
+                            %b= t("activerecord.models.employee")
+                          .border-bottom
+
+                          = link_to "", class: "btn btn-general", "data-toggle": "modal", "data-target": "#getEmployees" do
                             %i.fas.fa-search
 
 
@@ -123,6 +134,18 @@
           -# Render products list
           = render "modal_products"
           -# End Render products list
+
+  -# Modal
+  .modal.fade{id: "getEmployees", tabindex: "-1", role: "dialog", "aria-labelledby": "", "aria-hidden": "true"}
+    .modal-dialog
+      .modal-content
+        .modal-body
+          %button.close{type: "button", "data-dismiss": "modal", "aria-hidden": "true", "data-toggle": "tooltip", "data-placement": "left", title: t("views.form.close")}
+            &times;
+
+          -# Render employees list
+          = render "modal_employees"
+          -# End Render employees list
 
 -# Reports datepicker script
 = javascript_include_tag "reports_datepicker", "data-turbolinks-track": "reload"

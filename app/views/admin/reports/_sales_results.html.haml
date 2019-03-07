@@ -1,0 +1,87 @@
+.row.no-margin
+  .col-xs-12.no-padding
+    -# Table
+    %table.table
+      %thead
+        - model = "sale_details"
+        -# - attributes = ["sale_datetime", "customer", "product", "price", "quantity", "total", "payment_method", "delivery_status", "employee"]
+        - attributes = ["sale_datetime", "customer", "product", "price", "quantity", "total", "payment_method", "employee"]
+
+        -# Render table header
+        = render partial: "partials/table_header", locals: {model: model, attributes: attributes}
+
+      %tbody
+        - @sales.each do |detail|
+
+          %tr{class: "clickable-row #{detail.status.downcase}"}
+            -# Set attributes
+            -# - attributes =  ["sale_datetime", "customer", "product", "price", "quantity", "total", "payment_method", "delivery_status", "employee"]
+            - attributes =  ["sale_datetime", "customer", "product", "price", "quantity", "total", "payment_method", "employee"]
+
+            %td
+              .record-link{"data-header": "No."}
+                %p= detail.id
+
+            - attributes.each do |attribute|
+              %td
+                .record-link{"data-header": t("activerecord.attributes.detail.#{attribute}")}
+
+                  - if attribute == "sale_datetime"
+                    %p= I18n.locale == :es ? detail.sale.sale_datetime.strftime("%d/%m/%Y") : detail.sale.sale_datetime.strftime("%m/%d/%Y")
+
+                  - elsif attribute == "customer"
+                    %p= "#{detail.sale.customer.first_name} #{detail.sale.customer.last_name}"
+
+                  - elsif attribute == "product"
+                    %p=  I18n.locale == :es ? detail.product.name_spanish : detail.product.name
+
+                  - elsif attribute == "price"
+                    %p= number_to_currency(detail.price, precision: 2, unit: "$", format: "%u%n", separator: ".", delimiter: ",")
+
+                  - elsif attribute == "total"
+                    %p= number_to_currency((detail.price * detail.quantity), precision: 2, unit: "$", format: "%u%n", separator: ".", delimiter: ",")
+
+                  - elsif attribute == "payment_method"
+                    %p
+                      - if detail.sale["#{attribute}"] == "cash"
+                        = I18n.locale == :es ? "Efectivo" : "Cash"
+
+                      - elsif detail.sale["#{attribute}"] == "card"
+                        = I18n.locale == :es ? "Tarjeta" : "Card"
+
+                      - else
+                        = detail.sale["#{attribute}"]
+
+                  -# - elsif attribute == "delivery_status"
+                  -#   %p
+                  -#     - if detail.sale["#{attribute}"] == "in_queue"
+                  -#       = I18n.locale == :es ? "En espera" : "In queue"
+                  -#
+                  -#     - elsif detail.sale["#{attribute}"] == "received"
+                  -#       = I18n.locale == :es ? "Recibido" : "Received"
+                  -#
+                  -#     - elsif detail.sale["#{attribute}"] == "shipped"
+                  -#       = I18n.locale == :es ? "Enviado" : "Shipped"
+                  -#
+                  -#     - elsif detail.sale["#{attribute}"] == "delivered"
+                  -#       = I18n.locale == :es ? "Entregado" : "Delivered"
+                  -#
+                  -#     - elsif detail.sale["#{attribute}"] == "returned"
+                  -#       = I18n.locale == :es ? "Devuelto" : "Returned"
+
+                  - elsif attribute == "employee"
+                    %p= "#{detail.sale.employee.first_name} #{detail.sale.employee.last_name}"
+
+                  - else
+                    %p= detail["#{attribute}"]
+  -# End Table
+
+.row.no-margin
+  .col-xs-12.no-padding.text-center
+    -# Pagination
+    = will_paginate @sales, renderer: BootstrapPagination::Rails
+    -# End Pagination
+
+-# Pagination with Ajax script
+= javascript_include_tag "pagination-ajax", "data-turbolinks-track": "reload"
+-# End Pagination with Ajax script

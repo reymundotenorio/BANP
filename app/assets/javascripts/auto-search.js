@@ -20,4 +20,9 @@ $(document).ready(function(){
     $("#search-btn-customers").delay(500).click();
   });
 
+  // Auto search employees
+  $("#search-input-employees").on("keyup", function(){
+    $("#search-btn-employees").delay(500).click();
+  });
+
 });
