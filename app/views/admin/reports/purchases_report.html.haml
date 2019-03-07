@@ -1,0 +1,57 @@
+%section.reports
+  .container
+    -# Title
+    .row.title-container
+      .col-xs-12.col-lg-8
+        -# Heading
+        %h1#count-title
+          %i.fas.fa-chart-bar
+          = "#{t('charts.report_result')} (#{@start_date} - #{@end_date})"
+        -# End Heading
+
+      .col-xs-12.col-lg-4.text-right
+        -# Export PDF button
+        .btn-container.inline
+          = link_to request.parameters.merge(format: "pdf", lang: I18n.locale), target: "_blank", class: "btn btn-general btn-default" do
+            %i.fas.fa-file-pdf
+            %span= t("views.index.export_pdf")
+        -# End Export PDF button
+
+        -# Export Excel button
+        .btn-container.inline
+          = link_to request.parameters.merge(format: "xlsx", lang: I18n.locale), target: "_blank", class: "btn btn-general btn-default" do
+            %i.fas.fa-file-excel
+            %span= t("views.index.export_excel")
+        -# End Export Excel button
+
+    -# End Title
+
+    -# Breadcrumb
+    .row
+      .col-xs-12.hidden-xs
+        .breadcrumb-container
+          %ol.breadcrumb
+            %li
+              = link_to (admin_root_path) do
+                %i.fas.fa-tachometer-alt
+                %span= t("header.navigation.dashboard")
+            %li
+              = link_to (admin_reports_purchases_path) do
+                %i.fas.fa-table
+                %span= t("charts.purchases_report")
+            %li.active
+              %i.fas.fa-chart-bar
+              = t("charts.report_result")
+    -# End Breadcrumb
+
+-# Index
+%section.index
+  .container
+    .row
+      .col-xs-12
+        -# Material card
+        .material-card.shadow-card
+          -# Render table and pagination with Ajax
+          #render-data
+            = render "purchases_results"
+          -# End Render table and pagination with Ajax

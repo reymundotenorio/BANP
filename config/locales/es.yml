@@ -153,6 +153,10 @@ es:
         total: "Total"
         purchase_id: "No. Compra"
         created_at: "Fecha"
+        purchase_datetime: "Fecha"
+        provider: "Proveedor"
+        category: "Categoría"
+        employee: "Empleado"
       sale:
         sale_datetime: "Fecha"
         delivery_status: "Condición del envío"
@@ -297,7 +301,8 @@ es:
     end_date: "Fecha final"
     generate: "Generar"
     report_result: "Resultado de reporte"
-
+    select_start_date: "Debe seleccionar la fecha de inicio"
+    select_end_date: "Debes seleccionar la fecha de final"
 
   # Will paginate
   will_paginate:
@@ -504,6 +509,7 @@ es:
       is_located: "Better and Nice Produce está ubicado en 1625 NW 20th Street Miami, Florida 33142"
       designed_developed: "Diseñado y desarrollado con"
       by: "por"
+      and: "y"
       back_to_top: "Volver arriba"
     products:
       all: "Todos"

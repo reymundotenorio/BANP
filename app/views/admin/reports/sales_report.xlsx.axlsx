@@ -4,7 +4,7 @@ wb.styles do |style|
   project_heading = style.add_style(b: true, sz: 12, alignment: {horizontal: :center}, bg_color: "f15f79", fg_color: "FF")
   heading = style.add_style(b: true)
 
-  wb.add_worksheet(name: "Sales") do |sheet|
+  wb.add_worksheet(name: "Sales | Ventas") do |sheet|
     # Add a title row
     sheet.add_row ["BANP - #{t('charts.sales_report')} (#{@start_date} - #{@end_date})".upcase], style: project_heading
     sheet.merge_cells("A1:I1")# will merge cell A1 an I1

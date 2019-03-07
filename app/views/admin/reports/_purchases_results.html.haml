@@ -1,0 +1,57 @@
+.row.no-margin
+  .col-xs-12.no-padding
+    -# Table
+    %table.table
+      %thead
+        - model = "purchase_details"
+        -# - attributes
+        - attributes = ["purchase_datetime", "provider", "product", "category", "price", "quantity", "total", "employee"]
+
+        -# Render table header
+        = render partial: "partials/table_header_number", locals: {model: model, attributes: attributes}
+
+      %tbody
+        - @purchases.each do |detail|
+
+          %tr{class: "clickable-row #{detail.status.downcase}"}
+            -# Set attributes
+            - attributes =  ["purchase_datetime", "provider", "product", "category", "price", "quantity", "total", "employee"]
+
+            - attributes.each do |attribute|
+              %td
+                .record-link{"data-header": t("activerecord.attributes.detail.#{attribute}")}
+
+                  - if attribute == "purchase_datetime"
+                    %p= I18n.locale == :es ? detail.purchase.purchase_datetime.strftime("%d/%m/%Y") : detail.purchase.purchase_datetime.strftime("%m/%d/%Y")
+
+                  - elsif attribute == "provider"
+                    %p= "#{detail.purchase.provider.name}"
+
+                  - elsif attribute == "product"
+                    %p=  I18n.locale == :es ? detail.product.name_spanish : detail.product.name
+
+                  - elsif attribute == "category"
+                    %p=  I18n.locale == :es ? detail.product.category.name_spanish : detail.product.category.name
+
+                  - elsif attribute == "price"
+                    %p= number_to_currency(detail.price, precision: 2, unit: "$", format: "%u%n", separator: ".", delimiter: ",")
+
+                  - elsif attribute == "total"
+                    %p= number_to_currency((detail.price * detail.quantity), precision: 2, unit: "$", format: "%u%n", separator: ".", delimiter: ",")
+
+                  - elsif attribute == "employee"
+                    %p= "#{detail.purchase.employee.first_name} #{detail.purchase.employee.last_name}"
+
+                  - else
+                    %p= detail["#{attribute}"]
+  -# End Table
+
+.row.no-margin
+  .col-xs-12.no-padding.text-center
+    -# Pagination
+    = will_paginate @purchases, renderer: BootstrapPagination::Rails
+    -# End Pagination
+
+-# Pagination with Ajax script
+= javascript_include_tag "pagination-ajax", "data-turbolinks-track": "reload"
+-# End Pagination with Ajax script

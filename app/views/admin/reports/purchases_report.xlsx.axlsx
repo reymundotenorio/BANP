@@ -1,0 +1,40 @@
+wb = xlsx_package.workbook
+
+wb.styles do |style|
+  project_heading = style.add_style(b: true, sz: 12, alignment: {horizontal: :center}, bg_color: "f15f79", fg_color: "FF")
+  heading = style.add_style(b: true)
+
+  wb.add_worksheet(name: "Purchases | Compras") do |sheet|
+    # Add a title row
+    sheet.add_row ["BANP - #{t('charts.purchases_report')} (#{@start_date} - #{@end_date})".upcase], style: project_heading
+    sheet.merge_cells("A1:I1")# will merge cell A1 an I1
+    sheet.column_widths 10, 15, 15, 20, nil, 5, 5, 12
+
+    # Create the header row
+    sheet.add_row [
+    "#{t('activerecord.attributes.purchase_details.purchase_datetime')}",
+    "#{t('activerecord.attributes.purchase_details.provider')}",
+    "#{t('activerecord.attributes.purchase_details.product')}",
+    "#{t('activerecord.attributes.purchase_details.category')}",
+    "#{t('activerecord.attributes.purchase_details.price')}",
+    "#{t('activerecord.attributes.purchase_details.quantity')}",
+    "#{t('activerecord.attributes.purchase_details.total')}",
+    "#{t('activerecord.attributes.purchase_details.employee')}"
+    ], style: heading
+
+    # Create entries for each item
+    @purchases.each do |detail|
+      sheet.add_row [
+      I18n.locale == :es ? detail.purchase.purchase_datetime.strftime("%d/%m/%Y") : detail.purchase.purchase_datetime.strftime("%m/%d/%Y"),
+      "#{detail.purchase.provider.name}",
+      I18n.locale == :es ? detail.product.name_spanish : detail.product.name,
+      I18n.locale == :es ? detail.product.category.name_spanish : detail.product.category.name,
+      number_to_currency(detail.price, precision: 2, unit: "$", format: "%u%n", separator: ".", delimiter: ","),
+      detail.quantity,
+      number_to_currency((detail.price * detail.quantity), precision: 2, unit: "$", format: "%u%n", separator: ".", delimiter: ","),
+      "#{detail.purchase.employee.first_name} #{detail.purchase.employee.last_name}"
+      ]
+    end
+  end
+
+end

@@ -1,0 +1,152 @@
+%section.reports
+  .container
+    -# Title
+    .row.title-container
+      .col-xs-12.col-lg-10
+        -# Heading
+        %h1#count-title
+          %i.fas.fa-chart-bar
+          = t("charts.purchases_report")
+        -# End Heading
+
+      .col-xs-12.col-lg-2.text-right
+    -# End Title
+
+    -# Breadcrumb
+    .row
+      .col-xs-12.hidden-xs
+        .breadcrumb-container
+          %ol.breadcrumb
+            %li
+              = link_to (admin_root_path) do
+                %i.fas.fa-tachometer-alt
+                %span= t("header.navigation.dashboard")
+            %li.active
+              %i.fas.fa-chart-bar
+              = t("charts.purchases_report")
+    -# End Breadcrumb
+
+  -# Form
+  = form_tag admin_create_reports_purchases_path, method: "get", autocomplete: "off"do |f|
+    %section.form
+      .container
+        .row
+          .col-xs-12
+            -# Material card
+            %div{class: "material-card shadow-card"}
+              .row.no-margin
+                .col-xs-12.no-padding
+                  .form-info
+                    .col-xs-12.col-md-6.container-left
+
+                      .form-group
+                        .input-btn-group
+                          = hidden_field_tag "report_provider_id", ""
+                          = text_field_tag "report_provider", "", class: "form-control input no-events"
+                          %label
+                            %b= t("activerecord.models.provider")
+                          .border-bottom
+
+                          = link_to "", class: "btn btn-general", "data-toggle": "modal", "data-target": "#getProviders" do
+                            %i.fas.fa-search
+
+                      .form-group
+                        .input-btn-group
+                          = hidden_field_tag "report_product_id", ""
+                          = text_field_tag "report_product", "", class: "form-control input no-events"
+                          %label
+                            %b= t("activerecord.models.product")
+                          .border-bottom
+
+                          = link_to "", class: "btn btn-general", "data-toggle": "modal", "data-target": "#getProducts" do
+                            %i.fas.fa-search
+
+                      .form-group
+                        .input-btn-group
+                          = hidden_field_tag "report_employee_id", ""
+                          = text_field_tag "report_employee", "", class: "form-control input no-events"
+                          %label
+                            %b= t("activerecord.models.employee")
+                          .border-bottom
+
+                          = link_to "", class: "btn btn-general", "data-toggle": "modal", "data-target": "#getEmployees" do
+                            %i.fas.fa-search
+
+
+                    .col-xs-12.col-md-5.col-md-offset-1.container-right
+                      -# %p.title= t("charts.rank_time")
+
+                      .form-group
+                        .input-group.date#datetimepicker-1
+                          = text_field_tag "report_from_datetime", "", class: "form-control input date-field", required: true
+                          %span.input-group-addon.btn.btn-general
+                            %i.far.fa-calendar-alt
+                          %label= t("charts.start_date")
+                          .border-bottom
+
+                      = hidden_field_tag "from_datetime", ""
+
+                      .form-group
+                        .input-group.date#datetimepicker-2
+                          = text_field_tag "report_to_datetime", "", class: "form-control input date-field", required: true
+                          %span.input-group-addon.btn.btn-general
+                            %i.far.fa-calendar-alt
+                          %label= t("charts.end_date")
+                          .border-bottom
+
+                      = hidden_field_tag "to_datetime", ""
+
+
+                    -# Buttons
+                    .main-buttons
+                      .col-xs-12.button-container.no-padding
+                        -# = button_tag type: "reset", id: "reset-button", class: "btn btn-general" do
+                        -#   %i.fas.fa-eraser
+                        -#   %span= t("views.form.restart")
+
+                        = button_tag class: "btn btn-general", data: {disable_with: "<i class='fas fa-spinner fa-spin'></i>"} do
+                          %i.fas.fa-table
+                          %span= t("charts.generate")
+                    -# End Buttons
+            -# End Material card
+  -# End Form
+
+  -# Modal
+  .modal.fade{id: "getProviders", tabindex: "-1", role: "dialog", "aria-labelledby": "", "aria-hidden": "true"}
+    .modal-dialog
+      .modal-content
+        .modal-body
+          %button.close{type: "button", "data-dismiss": "modal", "aria-hidden": "true", "data-toggle": "tooltip", "data-placement": "left", title: t("views.form.close")}
+            &times;
+
+          -# Render providers list
+          = render "modal_providers"
+          -# End Render providers list
+
+  -# Modal
+  .modal.fade{id: "getProducts", tabindex: "-1", role: "dialog", "aria-labelledby": "", "aria-hidden": "true"}
+    .modal-dialog
+      .modal-content
+        .modal-body
+          %button.close{type: "button", "data-dismiss": "modal", "aria-hidden": "true", "data-toggle": "tooltip", "data-placement": "left", title: t("views.form.close")}
+            &times;
+
+          -# Render products list
+          = render "modal_products"
+          -# End Render products list
+
+  -# Modal
+  .modal.fade{id: "getEmployees", tabindex: "-1", role: "dialog", "aria-labelledby": "", "aria-hidden": "true"}
+    .modal-dialog
+      .modal-content
+        .modal-body
+          %button.close{type: "button", "data-dismiss": "modal", "aria-hidden": "true", "data-toggle": "tooltip", "data-placement": "left", title: t("views.form.close")}
+            &times;
+
+          -# Render employees list
+          = render "modal_employees"
+          -# End Render employees list
+
+-# Reports datepicker script
+= javascript_include_tag "reports_datepicker", "data-turbolinks-track": "reload"
+-# End Reports datepicker script
