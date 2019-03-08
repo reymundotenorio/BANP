@@ -1,16 +1,18 @@
-.notifications-container
-  - @noti_flag = true
+- if current_employee.is_administrator? || current_employee.is_seller?
 
-  .dropdown
-    %a{class: "custom-btn dropdown-toggle #{'with-noti' if (Notification.where(read_by: 'false').count > 0)}", "data-toggle": "dropdown", href: "#", "data-tooltip": "true", "data-placement": "left", title: t("header.navigation.notifications")}
-      %i.fas.fa-bell
-      -# Notification render_sync
-      = sync partial: "notification_icon", collection: Notification.all
-      = sync_new partial: "notification_icon", resource: Notification.new
-      -# End Notification render_sync
+  .notifications-container
+    - @noti_flag = true
 
-    %ul{class: "dropdown-menu #{'no-noti' if (Notification.where(read_by: 'false').count < 1)}"}
-      -# Notifications render_sync
-      = sync partial: "notifications", collection: Notification.all
-      = sync_new partial: "notifications", resource: Notification.new
-      -# End Notifications render_sync
+    .dropdown
+      %a{class: "custom-btn dropdown-toggle #{'with-noti' if (Notification.where(read_by: 'false').count > 0)}", "data-toggle": "dropdown", href: "#", "data-tooltip": "true", "data-placement": "left", title: t("header.navigation.notifications")}
+        %i.fas.fa-bell
+        -# Notification render_sync
+        = sync partial: "notification_icon", collection: Notification.all
+        = sync_new partial: "notification_icon", resource: Notification.new
+        -# End Notification render_sync
+
+      %ul{class: "dropdown-menu #{'no-noti' if (Notification.where(read_by: 'false').count < 1)}"}
+        -# Notifications render_sync
+        = sync partial: "notifications", collection: Notification.all
+        = sync_new partial: "notifications", resource: Notification.new
+        -# End Notifications render_sync

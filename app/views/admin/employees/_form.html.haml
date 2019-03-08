@@ -66,18 +66,19 @@
                       %b= t("activerecord.attributes.employee.phone")
                     .border-bottom
 
-                  .form-group
-                    - role_options = I18n.locale == :es ? ["Administrador", "Supervisor de Bodega", "Vendedor", "Conductor", ].sort : ["Administrator", "Warehouse supervisor", "Seller", "Driver", ].sort
+                  - if current_employee.is_administrator?
+                    .form-group
+                      - role_options = I18n.locale == :es ? ["Administrador", "Supervisor de bodega", "Vendedor", "Conductor", "Jefe de despacho", "Auxiliar de bodega"].sort : ["Administrator", "Warehouse supervisor", "Seller", "Driver", "Chief dispatch", "Warehouse assistant"].sort
 
-                    #role-dropdown.dropdown
-                      = f.text_field :role, class: "form-control input dropdown-toggle disabled", "data-toggle": "dropdown", readonly: true, required: true
-                      %ul.dropdown-menu
-                        - role_options.each do |role_name|
-                          %li
-                            %p{class: "#{role_name == :role ? 'dropdown-item active' : 'dropdown-item'}", :tabindex => "0"}= role_name
-                    %label
-                      %b= t("activerecord.attributes.employee.role")
-                    .border-bottom
+                      #role-dropdown.dropdown
+                        = f.text_field :role, class: "form-control input dropdown-toggle disabled", "data-toggle": "dropdown", readonly: true, required: true
+                        %ul.dropdown-menu
+                          - role_options.each do |role_name|
+                            %li
+                              %p{class: "#{role_name == :role ? 'dropdown-item active' : 'dropdown-item'}", :tabindex => "0"}= role_name
+                      %label
+                        %b= t("activerecord.attributes.employee.role")
+                      .border-bottom
 
                   -# Buttons
                   .main-buttons

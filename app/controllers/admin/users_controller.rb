@@ -22,7 +22,7 @@ class Admin::UsersController < ApplicationController
   # End Authentication
 
   def require_self
-    if current_employee.id != @employee.id || current_employee.is_administrator?
+    if current_employee.id != @employee.id && !current_employee.is_administrator?
       # clean_session
       redirect_to admin_root_path, alert: t("views.authentication.access_denied")
     end

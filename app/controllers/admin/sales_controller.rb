@@ -34,8 +34,10 @@ class Admin::SalesController < ApplicationController
 
   # Authentication
   before_action :require_employee, :require_seller_driver
+
   before_action :require_seller, only: [:index_invoices, :new_invoice, :edit_invoice, :create_invoice, :update_invoice, :deactive_invoice, :history_invoice, :index_returns]
-  before_action :require_driver, only: [:index_shipments, :new_shipment, :history_shipment]
+
+  # before_action :require_driver, only: [:index_shipments, :new_shipment, :history_shipment]
   # End Authentication
 
   ########## ORDERS ##########

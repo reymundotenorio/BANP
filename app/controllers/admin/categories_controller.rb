@@ -15,6 +15,14 @@ class Admin::CategoriesController < ApplicationController
   before_action :require_employee, :require_administrator
   # End Authentication
 
+  # Authentication
+  before_action :require_seller_warehouse_supervisor, only: [:index, :show]
+  # End Authentication
+
+  # Authentication
+  skip_before_action :require_administrator, only: [:index, :show]
+  # End Authentication
+
   # admin/categories
   def index
     @categories = Category.search(params[:search], params[:show]).paginate(page: params[:page], per_page: 15) # Categories with pagination

@@ -7,158 +7,171 @@
         = t("header.navigation.dashboard")
     -# End Dashboard
 
-    -# Providers
-    %li
-      = link_to (admin_providers_path), class: "#{'active' if controller_name == 'providers'}" do
-        %i.fas.fa-building
-        %span= t("header.navigation.providers")
-    -# End Providers
+    - if current_employee.is_administrator? || current_employee.is_warehouse_supervisor?
+      -# Providers
+      %li
+        = link_to (admin_providers_path), class: "#{'active' if controller_name == 'providers'}" do
+          %i.fas.fa-building
+          %span= t("header.navigation.providers")
+      -# End Providers
 
-    -# Customers
-    %li
-      = link_to (admin_customers_path), class: "#{'active' if controller_name == 'customers'}" do
-        %i.fas.fa-users
-        %span= t("header.navigation.customers")
-    -# End Customers
+    - if current_employee.is_administrator? || current_employee.is_seller?
+      -# Customers
+      %li
+        = link_to (admin_customers_path), class: "#{'active' if controller_name == 'customers'}" do
+          %i.fas.fa-users
+          %span= t("header.navigation.customers")
+      -# End Customers
 
-    -# Catalog
-    %li.dropdown
-      %a{class: "dropdown-toggle #{'active' if (controller_name == 'categories' or controller_name == 'products')}", "data-toggle": "dropdown", href: "#"}
-        %i.fas.fa-list-alt
-        = t("header.navigation.catalog")
-        %i.fas.fa-caret-down
+    - if current_employee.is_administrator? || current_employee.is_warehouse_supervisor? || current_employee.is_seller?
+      -# Catalog
+      %li.dropdown
+        %a{class: "dropdown-toggle #{'active' if (controller_name == 'categories' or controller_name == 'products')}", "data-toggle": "dropdown", href: "#"}
+          %i.fas.fa-list-alt
+          = t("header.navigation.catalog")
+          %i.fas.fa-caret-down
 
-      %ul.dropdown-menu
-        -# Categories
-        %li
-          = link_to (admin_categories_path), class: "#{'active' if controller_name == 'categories'}" do
-            %i.fas.fa-tags
-            %span= t("header.navigation.categories")
-        -# End categories
+        %ul.dropdown-menu
+          -# Categories
+          %li
+            = link_to (admin_categories_path), class: "#{'active' if controller_name == 'categories'}" do
+              %i.fas.fa-tags
+              %span= t("header.navigation.categories")
+          -# End categories
 
-        -# Products
-        %li
-          = link_to (admin_products_path), class: "#{'active' if controller_name == 'products'}" do
-            %i.fas.fa-cubes
-            %span= t("header.navigation.products")
-        -# End Products
-    -# End Catalog
+          -# Products
+          %li
+            = link_to (admin_products_path), class: "#{'active' if controller_name == 'products'}" do
+              %i.fas.fa-cubes
+              %span= t("header.navigation.products")
+          -# End Products
+      -# End Catalog
 
-    -# Purchases
-    %li.dropdown
-      %a.dropdown-toggle{"data-toggle": "dropdown", href: "#"}
-        %i.fas.fa-shopping-bag
-        = t("header.navigation.purchases")
-        %i.fas.fa-caret-down
+    - if current_employee.is_administrator? || current_employee.is_warehouse_supervisor? || current_employee.is_seller?
+      -# Purchases
+      %li.dropdown
+        %a.dropdown-toggle{"data-toggle": "dropdown", href: "#"}
+          %i.fas.fa-shopping-bag
+          = t("header.navigation.purchases")
+          %i.fas.fa-caret-down
 
-      %ul.dropdown-menu
-        -# Orders
-        %li
-          = link_to (admin_purchase_orders_path), class: "#{'active' if (controller_name == 'purchases' && action_name == 'index_orders')}" do
-            %i.far.fa-newspaper
-            = t("header.navigation.orders")
-        -# End Orders
+        %ul.dropdown-menu
+          - if current_employee.is_administrator? || current_employee.is_warehouse_supervisor?
+            -# Orders
+            %li
+              = link_to (admin_purchase_orders_path), class: "#{'active' if (controller_name == 'purchases' && action_name == 'index_orders')}" do
+                %i.far.fa-newspaper
+                = t("header.navigation.orders")
+            -# End Orders
 
-        -# Receptions
-        %li
-          = link_to (admin_purchase_receptions_path), class: "#{'active' if (controller_name == 'purchases' && action_name == 'index_receptions')}" do
-            %i.fas.fa-cart-arrow-down
-            = t("header.navigation.receptions")
-        -# End Receptions
+            -# Receptions
+            %li
+              = link_to (admin_purchase_receptions_path), class: "#{'active' if (controller_name == 'purchases' && action_name == 'index_receptions')}" do
+                %i.fas.fa-cart-arrow-down
+                = t("header.navigation.receptions")
+            -# End Receptions
 
-        -# Inventory
-        %li
-          = link_to (admin_inventory_path), class: "#{'active' if controller_name == 'inventories'}" do
-            %i.fas.fa-archive
-            = t("header.navigation.inventory")
-        -# End Inventory
+          - if current_employee.is_administrator? || current_employee.is_warehouse_supervisor? || current_employee.is_seller?
+            -# Inventory
+            %li
+              = link_to (admin_inventory_path), class: "#{'active' if controller_name == 'inventories'}" do
+                %i.fas.fa-archive
+                = t("header.navigation.inventory")
+            -# End Inventory
+          - if current_employee.is_administrator? || current_employee.is_warehouse_supervisor?
+            -# Returns
+            %li
+              = link_to (admin_purchase_returns_path), class: "#{'active' if (controller_name == 'purchases' && action_name == 'index_returns')}" do
+                %i.fas.fa-undo
+                = t("header.navigation.returns")
+            -# End Returns
+      -# End Purchases
 
-        -# Returns
-        %li
-          = link_to (admin_purchase_returns_path), class: "#{'active' if (controller_name == 'purchases' && action_name == 'index_returns')}" do
-            %i.fas.fa-undo
-            = t("header.navigation.returns")
-        -# End Returns
+    - if current_employee.is_administrator? || current_employee.is_seller? || current_employee.is_driver?
+      -# Sales
+      %li.dropdown
+        %a.dropdown-toggle{"data-toggle": "dropdown", href: "#"}
+          %i.fas.fa-shopping-cart
+          = t("header.navigation.sales")
+          %i.fas.fa-caret-down
 
-    -# End Purchases
+        %ul.dropdown-menu
+          - if current_employee.is_administrator? || current_employee.is_seller?
+            -# Orders
+            %li
+              = link_to (admin_sale_orders_path), class: "#{'active' if (controller_name == 'sales' && action_name == 'index_orders')}" do
+                %i.far.fa-newspaper
+                = t("header.navigation.orders")
+            -# End Orders
 
-    -# Sales
-    %li.dropdown
-      %a.dropdown-toggle{"data-toggle": "dropdown", href: "#"}
-        %i.fas.fa-shopping-cart
-        = t("header.navigation.sales")
-        %i.fas.fa-caret-down
+          - if current_employee.is_administrator? || current_employee.is_seller?
+            -# Invoices
+            %li
+              = link_to (admin_sale_invoices_path), class: "#{'active' if (controller_name == 'sales' && action_name == 'index_invoices')}" do
+                %i.fas.fa-cart-plus
+                = t("header.navigation.invoicing")
+            -# End Invoices
 
-      %ul.dropdown-menu
-        -# Orders
-        %li
-          = link_to (admin_sale_orders_path), class: "#{'active' if (controller_name == 'sales' && action_name == 'index_orders')}" do
-            %i.far.fa-newspaper
-            = t("header.navigation.orders")
-        -# End Orders
+          - if current_employee.is_administrator? || current_employee.is_seller? || current_employee.is_driver?
+            -# Shipments
+            %li
+              = link_to (admin_sale_shipments_path), class: "#{'active' if (controller_name == 'sales' && action_name == 'index_shipments')}" do
+                %i.fas.fa-truck
+                = t("header.navigation.shipments")
+            -# End Shipments
 
-        -# Invoices
-        %li
-          = link_to (admin_sale_invoices_path), class: "#{'active' if (controller_name == 'sales' && action_name == 'index_invoices')}" do
-            %i.fas.fa-cart-plus
-            = t("header.navigation.invoicing")
-        -# End Invoices
+          - if current_employee.is_administrator? || current_employee.is_seller? || current_employee.is_driver?
+            -# Deliveries
+            %li
+              = link_to (admin_sale_deliveries_path), class: "#{'active' if (controller_name == 'sales' && action_name == 'index_deliveries')}" do
+                %i.fas.fa-box-open
+                = t("header.navigation.deliveries")
+            -# End Deliveries
 
-        -# Shipments
-        %li
-          = link_to (admin_sale_shipments_path), class: "#{'active' if (controller_name == 'sales' && action_name == 'index_shipments')}" do
-            %i.fas.fa-truck
-            = t("header.navigation.shipments")
-        -# End Shipments
+          -# Quotes
+          -# %li
+          -#   %a{href: "#"}
+          -#     %i.fas.fa-calculator
+          -#     = t("header.navigation.quotes")
+          -# End Quotes
 
-        -# Deliveries
-        %li
-          = link_to (admin_sale_deliveries_path), class: "#{'active' if (controller_name == 'sales' && action_name == 'index_deliveries')}" do
-            %i.fas.fa-box-open
-            = t("header.navigation.deliveries")
-        -# End Deliveries
+          - if current_employee.is_administrator? || current_employee.is_seller?
+            -# Returns
+            %li
+              = link_to (admin_sale_returns_path), class: "#{'active' if (controller_name == 'sales' && action_name == 'index_returns')}" do
+                %i.fas.fa-undo
+                = t("header.navigation.returns")
+            -# End Returns
+      -# End Sales
 
-        -# Quotes
-        -# %li
-        -#   %a{href: "#"}
-        -#     %i.fas.fa-calculator
-        -#     = t("header.navigation.quotes")
-        -# End Quotes
+    - if current_employee.is_administrator?
+      -# Reports
+      %li.dropdown
+        %a.dropdown-toggle{"data-toggle": "dropdown", href: "#"}
+          %i.fas.fa-chart-bar
+          = t("header.navigation.reports")
+          %i.fas.fa-caret-down
 
-        -# Returns
-        %li
-          = link_to (admin_sale_returns_path), class: "#{'active' if (controller_name == 'sales' && action_name == 'index_returns')}" do
-            %i.fas.fa-undo
-            = t("header.navigation.returns")
-        -# End Returns
-    -# End Sales
+        %ul.dropdown-menu
+          -# Purchases
+          %li
+            = link_to (admin_reports_purchases_path), class: "#{'active' if (controller_name == 'reports' && (action_name == 'purchases' || action_name == 'purchases_report')) }" do
+              %i.fas.fa-shopping-bag
+              = t("header.navigation.purchases")
+          -# End purchases
 
-    -# Reports
-    %li.dropdown
-      %a.dropdown-toggle{"data-toggle": "dropdown", href: "#"}
-        %i.fas.fa-chart-bar
-        = t("header.navigation.reports")
-        %i.fas.fa-caret-down
+          -# Sales
+          %li
+            = link_to (admin_reports_sales_path), class: "#{'active' if (controller_name == 'reports' && (action_name == 'sales' || action_name == 'sales_report')) }" do
+              %i.fas.fa-shopping-cart
+              = t("header.navigation.sales")
+          -# End Sales
+      -# End Reports
 
-      %ul.dropdown-menu
-        -# Purchases
-        %li
-          = link_to (admin_reports_purchases_path), class: "#{'active' if (controller_name == 'reports' && (action_name == 'purchases' || action_name == 'purchases_report')) }" do
-            %i.fas.fa-shopping-bag
-            = t("header.navigation.purchases")
-        -# End purchases
-
-        -# Sales
-        %li
-          = link_to (admin_reports_sales_path), class: "#{'active' if (controller_name == 'reports' && (action_name == 'sales' || action_name == 'sales_report')) }" do
-            %i.fas.fa-shopping-cart
-            = t("header.navigation.sales")
-        -# End Sales
-    -# End Reports
-
-    -# Employees
-    %li
-      = link_to (admin_employees_path), class: "#{'active' if controller_name == 'employees'}" do
-        %i.fas.fa-briefcase
-        %span= t("header.navigation.employees")
-    -# End Employees
+    - if current_employee.is_administrator?
+      -# Employees
+      %li
+        = link_to (admin_employees_path), class: "#{'active' if controller_name == 'employees'}" do
+          %i.fas.fa-briefcase
+          %span= t("header.navigation.employees")
+      -# End Employees

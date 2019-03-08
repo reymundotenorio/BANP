@@ -18,7 +18,7 @@ class Admin::EmployeesController < ApplicationController
   # End Authentication
 
   def require_self
-    if current_employee.id != @employee.id || current_employee.is_administrator?
+    if current_employee.id != @employee.id && !current_employee.is_administrator?
       # clean_session
       redirect_to admin_root_path, alert: t("views.authentication.access_denied")
     end
@@ -64,7 +64,7 @@ class Admin::EmployeesController < ApplicationController
       @employee.role = I18n.locale == :es ? "Administrador" : "Administrator"
 
     elsif @employee.role == "warehouse_supervisor"
-      @employee.role = I18n.locale == :es ? "Auxiliar de bodega" : "Warehouse supervisor"
+      @employee.role = I18n.locale == :es ? "Supervisor de bodega" : "Warehouse supervisor"
 
     elsif @employee.role == "seller"
       @employee.role = I18n.locale == :es ? "Vendedor" : "Seller"
@@ -107,7 +107,7 @@ class Admin::EmployeesController < ApplicationController
       @employee.role = I18n.locale == :es ? "Administrador" : "Administrator"
 
     elsif @employee.role == "warehouse_supervisor"
-      @employee.role = I18n.locale == :es ? "Auxiliar de bodega" : "Warehouse supervisor"
+      @employee.role = I18n.locale == :es ? "Supervisor de bodega" : "Warehouse supervisor"
 
     elsif @employee.role == "seller"
       @employee.role = I18n.locale == :es ? "Vendedor" : "Seller"
@@ -147,7 +147,7 @@ class Admin::EmployeesController < ApplicationController
     if @employee[:role] == "Administrador" || @employee[:role] == "Administrator"
       @employee[:role] = "administrator"
 
-    elsif @employee[:role] == "Auxiliar de bodega" || @employee[:role] == "Warehouse supervisor"
+    elsif @employee[:role] == "Supervisor de bodega" || @employee[:role] == "Warehouse supervisor"
       @employee[:role] = "warehouse_supervisor"
 
     elsif @employee[:role] == "Vendedor" || @employee[:role] == "Seller"
@@ -180,7 +180,7 @@ class Admin::EmployeesController < ApplicationController
     if update_params[:role] == "Administrador" || update_params[:role] == "Administrator"
       update_params[:role] = "administrator"
 
-    elsif update_params[:role] == "Auxiliar de bodega" || update_params[:role] == "Warehouse supervisor"
+    elsif update_params[:role] == "Supervisor de bodega" || update_params[:role] == "Warehouse supervisor"
       update_params[:role] = "warehouse_supervisor"
 
     elsif update_params[:role] == "Vendedor" || update_params[:role] == "Seller"
