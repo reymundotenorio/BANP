@@ -22,10 +22,10 @@ class Sale < ApplicationRecord
   # Search order
   def self.search_order_ecommerce(search, customer_id)
     if search
-      self.joins(:customer).joins(:employee).where("(DATE_FORMAT(sale_datetime, '%d/%m/%Y') LIKE :search OR DATE_FORMAT(sale_datetime, '%m/%d/%Y') LIKE :search OR payment_method LIKE :search OR payment_reference LIKE :search OR delivery_status LIKE :search) AND (status != 'invoiced') AND (sales.customer_id = :customer_id)", customer_id: customer_id, search: "%#{search}%")
+      self.joins(:customer).joins(:employee).where("(DATE_FORMAT(sale_datetime, '%d/%m/%Y') LIKE :search OR DATE_FORMAT(sale_datetime, '%m/%d/%Y') LIKE :search OR payment_method LIKE :search OR payment_reference LIKE :search OR delivery_status LIKE :search) AND (status != 'invoiced') AND (sales.customer_id = :customer_id)", customer_id: customer_id, search: "%#{search}%").order("sales.sale_datetime DESC")
 
     else
-      self.where("sales.customer_id = :customer_id", customer_id: customer_id).not_invoices
+      self.where("sales.customer_id = :customer_id", customer_id: customer_id).not_invoices.order("sales.sale_datetime DESC")
     end
   end
   # End Search order
@@ -33,13 +33,13 @@ class Sale < ApplicationRecord
   # Search order
   def self.search_order(search, show_all)
     if search
-      self.joins(:customer).joins(:employee).where("(DATE_FORMAT(sale_datetime, '%d/%m/%Y') LIKE :search OR DATE_FORMAT(sale_datetime, '%m/%d/%Y') LIKE :search OR customers.first_name LIKE :search OR customers.last_name LIKE :search OR customers.company LIKE :search OR employees.first_name LIKE :search OR employees.last_name LIKE :search) AND (status = 'ordered')", search: "%#{search}%")
+      self.joins(:customer).joins(:employee).where("(DATE_FORMAT(sale_datetime, '%d/%m/%Y') LIKE :search OR DATE_FORMAT(sale_datetime, '%m/%d/%Y') LIKE :search OR customers.first_name LIKE :search OR customers.last_name LIKE :search OR customers.company LIKE :search OR employees.first_name LIKE :search OR employees.last_name LIKE :search) AND (status = 'ordered')", search: "%#{search}%").order("sales.sale_datetime DESC")
 
     elsif show_all == "all"
-      orders
+      orders.order("sales.sale_datetime DESC")
 
     else
-      orders.enabled
+      orders.enabled.order("sales.sale_datetime DESC")
     end
   end
   # End Search order
@@ -47,13 +47,13 @@ class Sale < ApplicationRecord
   # Search invoice
   def self.search_invoice(search, show_all)
     if search
-      self.joins(:customer).joins(:employee).where("(DATE_FORMAT(sale_datetime, '%d/%m/%Y') LIKE :search OR DATE_FORMAT(sale_datetime, '%m/%d/%Y') LIKE :search OR customers.first_name LIKE :search OR customers.last_name LIKE :search OR customers.company LIKE :search OR employees.first_name LIKE :search OR employees.last_name LIKE :search) AND (status = 'invoiced')", search: "%#{search}%")
+      self.joins(:customer).joins(:employee).where("(DATE_FORMAT(sale_datetime, '%d/%m/%Y') LIKE :search OR DATE_FORMAT(sale_datetime, '%m/%d/%Y') LIKE :search OR customers.first_name LIKE :search OR customers.last_name LIKE :search OR customers.company LIKE :search OR employees.first_name LIKE :search OR employees.last_name LIKE :search) AND (status = 'invoiced')", search: "%#{search}%").order("sales.sale_datetime DESC")
 
     elsif show_all == "all"
-      invoices
+      invoices.order("sales.sale_datetime DESC")
 
     else
-      invoices.enabled
+      invoices.enabled.order("sales.sale_datetime DESC")
     end
   end
   # End Search invoice
@@ -61,13 +61,13 @@ class Sale < ApplicationRecord
   # Search shipment
   def self.search_shipment(search, show_all)
     if search
-      self.joins(:customer).joins(:employee).where("(DATE_FORMAT(sale_datetime, '%d/%m/%Y') LIKE :search OR DATE_FORMAT(sale_datetime, '%m/%d/%Y') LIKE :search OR customers.first_name LIKE :search OR customers.last_name LIKE :search OR customers.company LIKE :search OR employees.first_name LIKE :search OR employees.last_name LIKE :search) AND (status = 'shipped')", search: "%#{search}%")
+      self.joins(:customer).joins(:employee).where("(DATE_FORMAT(sale_datetime, '%d/%m/%Y') LIKE :search OR DATE_FORMAT(sale_datetime, '%m/%d/%Y') LIKE :search OR customers.first_name LIKE :search OR customers.last_name LIKE :search OR customers.company LIKE :search OR employees.first_name LIKE :search OR employees.last_name LIKE :search) AND (status = 'shipped')", search: "%#{search}%").order("sales.sale_datetime DESC")
 
     elsif show_all == "all"
-      shipments
+      shipments.order("sales.sale_datetime DESC")
 
     else
-      shipments.enabled
+      shipments.enabled.order("sales.sale_datetime DESC")
     end
   end
   # End Search shipment
@@ -75,13 +75,13 @@ class Sale < ApplicationRecord
   # Search delivery
   def self.search_delivery(search, show_all)
     if search
-      self.joins(:customer).joins(:employee).where("(DATE_FORMAT(sale_datetime, '%d/%m/%Y') LIKE :search OR DATE_FORMAT(sale_datetime, '%m/%d/%Y') LIKE :search OR customers.first_name LIKE :search OR customers.last_name LIKE :search OR customers.company LIKE :search OR employees.first_name LIKE :search OR employees.last_name LIKE :search) AND (status = 'delivered')", search: "%#{search}%")
+      self.joins(:customer).joins(:employee).where("(DATE_FORMAT(sale_datetime, '%d/%m/%Y') LIKE :search OR DATE_FORMAT(sale_datetime, '%m/%d/%Y') LIKE :search OR customers.first_name LIKE :search OR customers.last_name LIKE :search OR customers.company LIKE :search OR employees.first_name LIKE :search OR employees.last_name LIKE :search) AND (status = 'delivered')", search: "%#{search}%").order("sales.sale_datetime DESC")
 
     elsif show_all == "all"
-      deliveries
+      deliveries.order("sales.sale_datetime DESC")
 
     else
-      deliveries.enabled
+      deliveries.enabled.order("sales.sale_datetime DESC")
     end
   end
   # End Search delivery

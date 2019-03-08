@@ -24,13 +24,13 @@ class Purchase < ApplicationRecord
   # Search order
   def self.search_order(search, show_all)
     if search
-      self.joins(:provider).joins(:employee).where("(DATE_FORMAT(purchase_datetime, '%d/%m/%Y') LIKE :search OR DATE_FORMAT(purchase_datetime, '%m/%d/%Y') LIKE :search OR receipt_number LIKE :search OR providers.name LIKE :search OR employees.first_name LIKE :search OR employees.last_name LIKE :search) AND (status = 'ordered')", search: "%#{search}%")
+      self.joins(:provider).joins(:employee).where("(DATE_FORMAT(purchase_datetime, '%d/%m/%Y') LIKE :search OR DATE_FORMAT(purchase_datetime, '%m/%d/%Y') LIKE :search OR receipt_number LIKE :search OR providers.name LIKE :search OR employees.first_name LIKE :search OR employees.last_name LIKE :search) AND (status = 'ordered')", search: "%#{search}%").order("purchases.purchase_datetime DESC")
 
     elsif show_all == "all"
-      orders
+      orders.order("purchases.purchase_datetime DESC")
 
     else
-      orders.enabled
+      orders.enabled.order("purchases.purchase_datetime DESC")
     end
   end
   # End Search order
@@ -38,13 +38,13 @@ class Purchase < ApplicationRecord
   # Search reception
   def self.search_reception(search, show_all)
     if search
-      self.joins(:provider).joins(:employee).where("(DATE_FORMAT(purchase_datetime, '%d/%m/%Y') LIKE :search OR DATE_FORMAT(purchase_datetime, '%m/%d/%Y') LIKE :search OR receipt_number LIKE :search OR providers.name LIKE :search OR employees.first_name LIKE :search OR employees.last_name LIKE :search) AND (status = 'received')", search: "%#{search}%")
+      self.joins(:provider).joins(:employee).where("(DATE_FORMAT(purchase_datetime, '%d/%m/%Y') LIKE :search OR DATE_FORMAT(purchase_datetime, '%m/%d/%Y') LIKE :search OR receipt_number LIKE :search OR providers.name LIKE :search OR employees.first_name LIKE :search OR employees.last_name LIKE :search) AND (status = 'received')", search: "%#{search}%").order("purchases.purchase_datetime DESC")
 
     elsif show_all == "all"
-      receptions
+      receptions.order("purchases.purchase_datetime DESC")
 
     else
-      receptions.enabled
+      receptions.enabled.order("purchases.purchase_datetime DESC")
     end
   end
   # End Search reception
