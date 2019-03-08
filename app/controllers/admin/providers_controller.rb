@@ -12,7 +12,15 @@ class Admin::ProvidersController < ApplicationController
   # End Sync model DSL
 
   # Authentication
-  before_action :require_employee
+  before_action :require_employee, :require_administrator
+  # End Authentication
+
+  # Authentication
+  before_action :require_warehouse_supervisor, only: [:index, :show]
+  # End Authentication
+
+  # Authentication
+  skip_before_action :require_administrator, only: [:index, :show]
   # End Authentication
 
   # admin/providers

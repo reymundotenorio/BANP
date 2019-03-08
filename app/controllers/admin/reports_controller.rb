@@ -4,7 +4,7 @@ class Admin::ReportsController < ApplicationController
   # End Admin layout
 
   # Authentication
-  before_action :require_employee
+  before_action :require_employee, :require_administrator
   # End Authentication
 
   def sales

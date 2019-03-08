@@ -3,6 +3,11 @@
 // -----------------------------------------------------------------------------
 
 // Alert
+.alerts{
+position: relative;
+z-index: 1;
+}
+
 .alert{
   border-radius: 0px;
   color: $white;

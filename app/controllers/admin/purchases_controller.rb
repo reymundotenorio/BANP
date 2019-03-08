@@ -20,7 +20,7 @@ class Admin::PurchasesController < ApplicationController
   # End Find purchase reception with Friendly_ID
 
   # Authentication
-  before_action :require_employee
+  before_action :require_employee, :require_warehouse_supervisor
   # End Authentication
 
   ########## ORDERS ##########

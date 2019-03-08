@@ -4,7 +4,7 @@ class Admin::EmployeesController < ApplicationController
   # End Admin layout
 
   # Find employees with Friendly_ID
-  before_action :set_employee, only: [:show, :edit, :update, :active, :deactive, :history]
+  before_action :set_employee, only: [:require_self, :show, :edit, :update, :active, :deactive, :history]
   # End Find employees with Friendly_ID
 
   # Sync model DSL
@@ -12,9 +12,17 @@ class Admin::EmployeesController < ApplicationController
   # End Sync model DSL
 
   # Authentication
-  # before_action :require_employee, only: [:index, :show, :new, :create, :edit, :update, :active, :deactive, :history]
-  before_action :require_employee
+  before_action :require_employee, :require_administrator
+  skip_before_action :require_administrator, only: [:show, :edit, :history, :update]
+  before_action :require_self, only: [:show, :edit, :history, :update]
   # End Authentication
+
+  def require_self
+    if current_employee.id != @employee.id || current_employee.is_administrator?
+      # clean_session
+      redirect_to admin_root_path, alert: t("views.authentication.access_denied")
+    end
+  end
 
   # admin/employees
   def index

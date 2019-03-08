@@ -44,6 +44,83 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  # Require administrator
+  def require_administrator
+    puts "****************************************"
+    puts current_employee.role
+    puts "****************************************"
+
+    if !current_employee.is_administrator?
+      # clean_session
+      redirect_to admin_root_path, alert: t("views.authentication.access_denied")
+    end
+  end
+
+  # Require seller
+  def require_seller
+    puts "****************************************"
+    puts current_employee.role
+    puts "****************************************"
+
+    if !current_employee.is_seller? && !current_employee.is_administrator?
+      # clean_session
+      redirect_to admin_root_path, alert: t("views.authentication.access_denied")
+    end
+  end
+
+  # Require driver
+  def require_driver
+    puts "****************************************"
+    puts current_employee.role
+    puts "****************************************"
+
+    if !current_employee.is_driver? && !current_employee.is_administrator?
+      # clean_session
+      redirect_to admin_root_path, alert: t("views.authentication.access_denied")
+    end
+  end
+
+  # Require seller driver
+  def require_seller_driver
+    puts "****************************************"
+    puts current_employee.role
+    puts "****************************************"
+
+    if !current_employee.is_seller? && !current_employee.is_driver? && !current_employee.is_administrator?
+      # clean_session
+      redirect_to admin_root_path, alert: t("views.authentication.access_denied")
+    end
+  end
+
+  # Require warehouse supervisor
+  def require_warehouse_supervisor
+    puts "****************************************"
+    puts current_employee.role
+    puts "****************************************"
+
+    if !current_employee.is_warehouse_supervisor? && !current_employee.is_administrator?
+      # clean_session
+      redirect_to admin_root_path, alert: t("views.authentication.access_denied")
+    end
+  end
+
+  # Require seller warehouse supervisor
+  def require_seller_warehouse_supervisor
+    puts "****************************************"
+    puts current_employee.role
+    puts "****************************************"
+
+    if !current_employee.is_seller? && !current_employee.is_warehouse_supervisor? && !current_employee.is_administrator?
+      # clean_session
+      redirect_to admin_root_path, alert: t("views.authentication.access_denied")
+    end
+  end
+
+  def clean_session
+    session[:employee_id] = nil
+    session[:employee_session_confirmed] = nil
+  end
+
   # Require customer
   def require_customer
     redirect_url = request.fullpath

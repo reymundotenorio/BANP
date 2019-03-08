@@ -381,6 +381,7 @@ en:
       decrease: "Decrease"
       increase: "Increase"
     authentication:
+      access_denied: "Access denied"
       incorrect_user_pwd: "Incorrect email or password"
       incorrect_pwd: "Incorrect password"
       incorrect_otp: "Incorrect OTP"

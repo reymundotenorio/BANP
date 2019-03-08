@@ -4,7 +4,7 @@ class Admin::UsersController < ApplicationController
   # End Admin layout
 
   # Find employee with Friendly_ID
-  before_action :set_employee, only: [:new_employee_user, :create_employee_user, :employee_update_password, :employee_change_password]
+  before_action :set_employee, only: [:require_self, :new_employee_user, :create_employee_user, :employee_update_password, :employee_change_password]
   # End Find employee with Friendly_ID
 
   # Find customer with Friendly_ID
@@ -14,10 +14,19 @@ class Admin::UsersController < ApplicationController
   # Sync model DSL
   enable_sync only: [:create_employee_user, :create_customer_user, :employee_change_password, :customer_change_password, :send_confirmation_email]
   # End Sync model DSL
-  
+
   # Authentication
-  before_action :require_employee
+  before_action :require_employee, :require_administrator
+  skip_before_action :require_administrator, only: [:new_customer_user, :create_customer_user, :customer_update_password, :customer_change_password, :employee_update_password, :employee_change_password]
+  before_action :require_self, only: [:employee_update_password, :employee_change_password]
   # End Authentication
+
+  def require_self
+    if current_employee.id != @employee.id || current_employee.is_administrator?
+      # clean_session
+      redirect_to admin_root_path, alert: t("views.authentication.access_denied")
+    end
+  end
 
   # admin/employee/:id/create-user
   def new_employee_user

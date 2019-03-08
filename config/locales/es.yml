@@ -382,6 +382,7 @@ es:
       decrease: "Disminuir"
       increase: "Aumentar"
     authentication:
+      access_denied: "Acceso denegado"
       incorrect_user_pwd: "Correo electrónico o contraseña incorrecto"
       incorrect_pwd: "Contraseña incorrecta"
       incorrect_otp: "OTP incorrecto"

@@ -1,62 +1,55 @@
-.container.dashboard
-  .row
-    .col-xs-12
-      .material-card.shadow-card
-        %h2.text-center= t("charts.sales_last")
-        = line_chart charts_sales_by_month_path, defer: true, curve: true, xtitle: "Month", ytitle: "Dollars", prefix: "$", thousands: ",", decimal: ".", messages: {empty: "No data"}, discrete: true
+- if current_employee.is_administrator?
+  .container.dashboard
+    .row
+      .col-xs-12
+        .material-card.shadow-card
+          %h2.text-center= t("charts.sales_last")
+          = line_chart charts_sales_by_month_path, defer: true, curve: true, xtitle: "Month", ytitle: "Dollars", prefix: "$", thousands: ",", decimal: ".", messages: {empty: "No data"}, discrete: true
 
-    .col-xs-12
-      .material-card.shadow-card
-        %h2.text-center= t("charts.purchases_last")
-        = line_chart charts_purchases_by_month_path, defer: true, curve: true, xtitle: "Month", ytitle: "Dollars", prefix: "$", thousands: ",", decimal: ".", messages: {empty: "No data"}, discrete: true
+      .col-xs-12
+        .material-card.shadow-card
+          %h2.text-center= t("charts.purchases_last")
+          = line_chart charts_purchases_by_month_path, defer: true, curve: true, xtitle: "Month", ytitle: "Dollars", prefix: "$", thousands: ",", decimal: ".", messages: {empty: "No data"}, discrete: true
 
-    .col-xs-12.col-md-6
-      .material-card.shadow-card
-        %h2.text-center= t("charts.sales_customer")
-        = column_chart charts_sales_by_customers_path, defer: true, prefix: "$", thousands: ",", decimal: ".", messages: {empty: "No info"}, stacked: false
+      .col-xs-12.col-md-6
+        .material-card.shadow-card
+          %h2.text-center= t("charts.sales_customer")
+          = column_chart charts_sales_by_customers_path, defer: true, prefix: "$", thousands: ",", decimal: ".", messages: {empty: "No info"}, stacked: false
 
-    .col-xs-12.col-md-6
-      .material-card.shadow-card
-        %h2.text-center= t("charts.purchases_provider")
-        = column_chart charts_purchases_by_providers_path, defer: true, prefix: "$", thousands: ",", decimal: ".", messages: {empty: "No info"}, stacked: false
+      .col-xs-12.col-md-6
+        .material-card.shadow-card
+          %h2.text-center= t("charts.purchases_provider")
+          = column_chart charts_purchases_by_providers_path, defer: true, prefix: "$", thousands: ",", decimal: ".", messages: {empty: "No info"}, stacked: false
 
-    .col-xs-12.col-md-6
-      .material-card.shadow-card
-        %h2.text-center= t("charts.sales_employee")
-        = column_chart charts_sales_by_employees_path, defer: true, prefix: "$", thousands: ",", decimal: ".", messages: {empty: "No info"}, stacked: false
+      .col-xs-12.col-md-6
+        .material-card.shadow-card
+          %h2.text-center= t("charts.sales_employee")
+          = column_chart charts_sales_by_employees_path, defer: true, prefix: "$", thousands: ",", decimal: ".", messages: {empty: "No info"}, stacked: false
 
-    .col-xs-12.col-md-6
-      .material-card.shadow-card
-        %h2.text-center= t("charts.purchases_employee")
-        = column_chart charts_purchases_by_employees_path, defer: true, prefix: "$", thousands: ",", decimal: ".", messages: {empty: "No info"}, stacked: false
+      .col-xs-12.col-md-6
+        .material-card.shadow-card
+          %h2.text-center= t("charts.purchases_employee")
+          = column_chart charts_purchases_by_employees_path, defer: true, prefix: "$", thousands: ",", decimal: ".", messages: {empty: "No info"}, stacked: false
 
-    .col-xs-12.col-md-6
-      .material-card.shadow-card
-        %h2.text-center= t("charts.sales_product")
-        = column_chart charts_sales_by_products_path, defer: true, prefix: "$", thousands: ",", decimal: ".", messages: {empty: "No info"}, stacked: false
+      .col-xs-12.col-md-6
+        .material-card.shadow-card
+          %h2.text-center= t("charts.sales_product")
+          = column_chart charts_sales_by_products_path, defer: true, prefix: "$", thousands: ",", decimal: ".", messages: {empty: "No info"}, stacked: false
 
-    .col-xs-12.col-md-6
-      .material-card.shadow-card
-        %h2.text-center= t("charts.purchases_product")
-        = column_chart charts_purchases_by_products_path, defer: true, prefix: "$", thousands: ",", decimal: ".", messages: {empty: "No info"}, stacked: false
+      .col-xs-12.col-md-6
+        .material-card.shadow-card
+          %h2.text-center= t("charts.purchases_product")
+          = column_chart charts_purchases_by_products_path, defer: true, prefix: "$", thousands: ",", decimal: ".", messages: {empty: "No info"}, stacked: false
 
-    .col-xs-12.col-md-6
-      .material-card.shadow-card
-        %h2.text-center= t("charts.sales_category")
-        = column_chart charts_sales_by_categories_path, defer: true, prefix: "$", thousands: ",", decimal: ".", messages: {empty: "No info"}, stacked: false
+      .col-xs-12.col-md-6
+        .material-card.shadow-card
+          %h2.text-center= t("charts.sales_category")
+          = column_chart charts_sales_by_categories_path, defer: true, prefix: "$", thousands: ",", decimal: ".", messages: {empty: "No info"}, stacked: false
 
-    .col-xs-12.col-md-6
-      .material-card.shadow-card
-        %h2.text-center= t("charts.purchases_category")
-        = column_chart charts_purchases_by_categories_path, defer: true, prefix: "$", thousands: ",", decimal: ".", messages: {empty: "No info"}, stacked: false
+      .col-xs-12.col-md-6
+        .material-card.shadow-card
+          %h2.text-center= t("charts.purchases_category")
+          = column_chart charts_purchases_by_categories_path, defer: true, prefix: "$", thousands: ",", decimal: ".", messages: {empty: "No info"}, stacked: false
 
-    -# .col-xs-12.col-md-6
-    -#   .material-card.shadow-card
-    -#     %h2.text-center Productos por categoria
-    -#     = column_chart charts_products_by_categories_path, defer: true, messages: {empty: "No info"}, stacked: false
-    -#
-    -# .col-xs-12.col-md-6
-    -#   .material-card.shadow-card
-    -#     %h2.text-center Productos por categoria
-    -#     = pie_chart charts_product_by_categories_path, defer: true,  donut: true
-    -#     %br
+- else
+  .dashboard-bg

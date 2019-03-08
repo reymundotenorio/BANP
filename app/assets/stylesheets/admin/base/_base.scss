@@ -9,6 +9,7 @@ body{
   font-size: 16px;
   line-height: 25px;
   color: $text-color;
+  position: relative;
 
   // min-height: 100vh;
 
@@ -16,6 +17,17 @@ body{
     background-color: $white;
     font-size: 14px;
     line-height: 20px;
+  }
+
+  .dashboard-bg{
+    background: url("https://s3.amazonaws.com/betterandnice/images/default/dashboard-background.png") no-repeat center center;
+    background-size: cover;
+    position: absolute;
+    top: 0px;
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
+    min-height: 100vh;
   }
 }
 

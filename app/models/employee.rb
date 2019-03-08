@@ -144,7 +144,7 @@ class Employee < ApplicationRecord
   end
 
   # Is seller?
-  def is_seller?
+  def is_seller? 
     role == "seller"
   end
 

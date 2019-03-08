@@ -4,12 +4,12 @@ class Admin::NotificationsController < ApplicationController
   # End Find notifications
 
   # Authentication
-  before_action :require_employee
+  before_action :require_employee, :require_seller_driver
   # End Authentication
 
   def notification_redirect
     @notification.read_by = "true"
-    
+
     if @notification.save
       puts "Notification saved"
 
