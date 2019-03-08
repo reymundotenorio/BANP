@@ -21,7 +21,7 @@ class PayUponDeliveryController < ApplicationController
     order.employee_id = 1 # SIBANP
     order.observations = address
 
-    order.payment_method = "Cash"
+    order.payment_method = "cash"
     order.payment_reference = "-"
     order.paid = false
 
@@ -54,7 +54,7 @@ class PayUponDeliveryController < ApplicationController
 
       redirect_to tracking_path(order.id, clean_cart: "clean-all"), notice: t("views.cart.payment_correctly")
       return
-      
+
       # If order was not saved correcty
     else
       errors_messages = ""
