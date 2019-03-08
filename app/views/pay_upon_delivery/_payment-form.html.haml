@@ -1,0 +1,10 @@
+= form_tag pay_upon_delivery_checkout_path, method: "post" do
+  -# Loading cart productss
+  .cart-products-list
+
+  = hidden_field_tag "address", "", id: "delivery-address"
+
+  .text-center.skep-container
+    %button.as-link
+      = t("views.cart.skip_cash")
+      %i.fas.fa-angle-double-right

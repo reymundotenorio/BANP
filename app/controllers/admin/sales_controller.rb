@@ -521,6 +521,10 @@ class Admin::SalesController < ApplicationController
 
     @delivery.employee_id = current_employee.id
 
+    if !@delivery.paid
+      @delivery.paid = true
+    end
+
     @delivery.sale_details.each do |detail|
       detail.status = "delivered"
     end

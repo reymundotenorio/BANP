@@ -34,8 +34,12 @@ Rails.application.routes.draw do
   get "/paypal/checkout", to: "paypal#paypal_order", as: "paypal_order"
   post "/paypal/checkout", to: "paypal#paypal_checkout", as: "paypal_checkout"
   post "/paypal/sign-in", to: "paypal#paypal_auth", as: "paypal_auth"
-
   # End PayPal
+
+  # Pay upon delivery
+  get "/pay-upon-delivery/checkout", to: "pay_upon_delivery#payment", as: "pay_upon_delivery_payment"
+  post "/pay-upon-delivery/checkout", to: "pay_upon_delivery#checkout", as: "pay_upon_delivery_checkout"
+  # End Pay upon delivery
 
   # Notifications
   get "/authentication/notifications", to: "authentication/notifications#index", as: "auth_notifications"
@@ -314,7 +318,7 @@ Rails.application.routes.draw do
     get "/reports/purchases_results", to: "reports#purchases_report", as: "create_reports_purchases"
     get "/reports/sales_results", to: "reports#sales_report", as: "create_reports_sales"
     # End Reports
-    
+
     # Notifications
     get "/notification/:id", to: "notifications#notification_redirect", as: "notification_redirect"
     # End Notifications

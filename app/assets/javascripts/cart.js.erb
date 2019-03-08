@@ -200,7 +200,8 @@ $(document).ready(function(){
             var productInfo = "<div class='item'><input id='products_" + counter + "_id' name='products[" + counter + "][id]' type='hidden' value='" + product.id + "'> <input id='products_" + counter + "_quantity' name='products[" + counter + "][quantity]' type='hidden' value='" + value.cartDetails.quantity + "'></div>"
 
             $("#paypal-address").val(localStorage.getItem("paypalAddress") || "");
-            $("#cart-products").append(productInfo);
+            $("#delivery-address").val(localStorage.getItem("paypalAddress") || "");
+            $(".cart-products-list").append(productInfo);
             $(".cart-list").append(productItem);
           }
         }
@@ -393,6 +394,7 @@ $(document).ready(function(){
       }
 
       $("#paypal-address").val(localStorage.getItem("paypalAddress") || "");
+      $("#delivery-address").val(localStorage.getItem("paypalAddress") || "");
     }
   }
   // Update address localStorage

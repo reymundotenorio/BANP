@@ -377,9 +377,16 @@
     font-size: 13px;
     line-height: 1.3;
 
-    a{
+    button{
+      color: $third-color;
+      border: none;
+      box-shadow: none;
+      background-color: $transparent;
+      font-size: 13px;
+
       @include on-event{
         color: $third-color;
+        text-decoration: underline;
       }
     }
   }

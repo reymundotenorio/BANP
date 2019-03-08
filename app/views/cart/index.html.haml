@@ -94,7 +94,5 @@
 
                   = image_tag "#{Rails.env.development? ? 'img/paypal-vertical.svg' : 'https://s3.amazonaws.com/betterandnice/images/default/paypal-vertical.svg'}", class: "hidden-sm hidden-lg"
 
-              %p.text-center.skep-container
-                %a{href: "#"}
-                  = t("views.cart.skip_cash")
-                  %i.fas.fa-angle-double-right
+              -# Render skip upon delivery
+              = render "pay_upon_delivery/payment-form"
