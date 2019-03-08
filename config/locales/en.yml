@@ -127,6 +127,7 @@ en:
         image_file_size: "Image file size"
         quantity: "Quantity"
         select: ""
+        stock: "Stock"
       purchase:
         receipt_number: "Receipt number"
         purchase_datetime: "Date"

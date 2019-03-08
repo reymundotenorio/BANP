@@ -70,7 +70,7 @@ class Purchase < ApplicationRecord
   # End Length validation
 
   # Numericality validation
-  validates :discount, numericality: {greater_than_or_equal_to: 0, less_than: 100}
+  # validates :discount, numericality: {greater_than_or_equal_to: 0, less_than: 100}
   # End Numericality validation
 
   ## Scopes
