@@ -352,6 +352,7 @@ en:
       not_confirmed: "Not confirmed"
       create_user: "Create user"
       cancel: "Cancel"
+      delete_account: "Delete account"
     new:
       new: "New"
     edit:

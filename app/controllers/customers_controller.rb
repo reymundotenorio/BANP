@@ -19,7 +19,7 @@ class CustomersController < ApplicationController
   def new
     @customer = Customer.new
     @customer.build_user
-    
+
     @form_url = customers_path
   end
 
@@ -31,8 +31,8 @@ class CustomersController < ApplicationController
   # /user/edit
   def edit
     # Customer found by before_action
-    
-     @form_url = update_customer_path
+
+    @form_url = update_customer_path
   end
 
   # Create
@@ -79,13 +79,17 @@ class CustomersController < ApplicationController
     end
   end
 
-  # Deactive
+  # Deactive #Pending on view
   def deactive
     if @customer.update(state: false)
-      redirect_to_back(false, customer_path(@customer), "customer", "success")
+      session[:customer_id] = nil
+      session[:session_confirmed] = nil
+
+      redirect_to sign_in_path, notice: t("alerts.disabled", model: t("activerecord.models.customer"))
+      return
 
     else
-      redirect_to_back(false, customer_path(@customer), "customer", "error")
+      redirect_to customer_path(@customer), notice: t("alerts.disabled", model: t("activerecord.models.customer"))
     end
   end
 

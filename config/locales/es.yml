@@ -353,6 +353,7 @@ es:
       not_confirmed: "No confirmado"
       create_user: "Crear usuario"
       cancel: "Anular"
+      delete_account: "Eliminar cuenta"
     new:
       new: "Nuevo"
     edit:

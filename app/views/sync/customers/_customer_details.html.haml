@@ -39,6 +39,12 @@
                     = link_to (edit_customer_path), class: "btn btn-general" do
                       %i.fas.fa-edit
                       %span= t("views.show.edit")
+
+                  - if customer.state
+                    .col-xs-12.col-sm-8.col-sm-offset-2.button-container.no-padding
+                      = link_to (deactive_customer_path), method: "patch", class: "btn btn-general" do
+                        %i.fas.fa-user-times
+                        %span= t("views.show.delete_account")
         -# End Material card
 
       .col-xs-12.col-md-7.col-lg-8
