@@ -120,20 +120,20 @@ class Admin::CustomersController < ApplicationController
   # Active
   def active
     if @customer.update(state: true)
-      redirect_to_back(true, admin_customers_path, "customer", "success")
+      redirect_to admin_customer_path(@customer), notice: t("alerts.enabled", model: t("activerecord.models.customer"))
 
     else
-      redirect_to_back(true, admin_customers_path, "customer", "error")
+      redirect_to admin_customer_path(@customer), notice: t("alerts.not_enabled", model: t("activerecord.models.customer"))
     end
   end
 
   # Deactive
   def deactive
     if @customer.update(state: false)
-      redirect_to_back(false, admin_customers_path, "customer", "success")
+      redirect_to admin_customer_path(@customer), notice: t("alerts.disabled", model: t("activerecord.models.customer"))
 
     else
-      redirect_to_back(false, admin_customers_path, "customer", "error")
+      redirect_to admin_customer_path(@customer), notice: t("alerts.not_disabled", model: t("activerecord.models.customer"))
     end
   end
 
