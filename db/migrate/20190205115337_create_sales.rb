@@ -10,6 +10,7 @@ class CreateSales < ActiveRecord::Migration[5.2]
       t.boolean :paid, null: false
       t.string :observations
       t.boolean :state, null: false, default: true
+      t.boolean :delivery_confirmed, null: false, default: false
 
       # t.string :slug # Friendly_id slug
       t.timestamps # create_at & update_at

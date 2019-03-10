@@ -576,6 +576,7 @@ puts "Seeding sale invoices"
       customer_id: customers_id.sample,
       employee_id: employees_id.sample,
       observations: "",
+      delivery_confirmed: false,
       state: Faker::Boolean.boolean(0.95)
     )
   rescue StandardError => e

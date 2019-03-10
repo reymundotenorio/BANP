@@ -125,7 +125,7 @@ ActiveRecord::Schema.define(version: 2019_02_05_120100) do
     t.string "barcode", null: false
     t.decimal "price", precision: 10, scale: 2, null: false
     t.integer "stock", default: 0, null: false
-    t.integer "stock_min", default: 0, null: false
+    t.integer "stock_min", null: false
     t.text "content"
     t.text "content_spanish"
     t.text "description"
@@ -205,6 +205,7 @@ ActiveRecord::Schema.define(version: 2019_02_05_120100) do
     t.boolean "paid", null: false
     t.string "observations"
     t.boolean "state", default: true, null: false
+    t.boolean "delivery_confirmed", default: false, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "customer_id"
