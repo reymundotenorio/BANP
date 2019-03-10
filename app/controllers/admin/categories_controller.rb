@@ -125,20 +125,20 @@ class Admin::CategoriesController < ApplicationController
   # Active
   def active
     if @category.update(state: true)
-      redirect_to_back(true, admin_categories_path, "category", "success")
+      redirect_to admin_category_path(@category), notice: t("alerts.enabled", model: t("activerecord.models.category"))
 
     else
-      redirect_to_back(true, admin_categories_path, "category", "error")
+      redirect_to admin_category_path(@category), alert: t("alerts.not_enabled", model: t("activerecord.models.category"))
     end
   end
 
   # Deactive
   def deactive
     if @category.update(state: false)
-      redirect_to_back(false, admin_categories_path, "category", "success")
+      redirect_to admin_category_path(@category), notice: t("alerts.disabled", model: t("activerecord.models.category"))
 
     else
-      redirect_to_back(false, admin_categories_path, "category", "error")
+      redirect_to admin_category_path(@category), alert: t("alerts.not_disabled", model: t("activerecord.models.category"))
     end
   end
 

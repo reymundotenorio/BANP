@@ -4,11 +4,13 @@ class Admin::EmployeesController < ApplicationController
   # End Admin layout
 
   # Find employees with Friendly_ID
-  before_action :set_employee, only: [:require_self, :show, :edit, :update, :active, :deactive, :history]
+  # before_action :set_employee, only: [:require_self, :show, :edit, :update, :active, :deactive, :history]
+  before_action :set_employee, only: [:show, :edit, :update, :active, :deactive, :history]
+
   # End Find employees with Friendly_ID
 
   # Sync model DSL
-  enable_sync only: [:create, :update, :active, :deactive]
+  # enable_sync only: [:create, :update, :active, :deactive]
   # End Sync model DSL
 
   # Authentication
@@ -165,6 +167,7 @@ class Admin::EmployeesController < ApplicationController
 
     # If record was saved
     if @employee.save
+      sync_new @employee
       redirect_to [:admin, @employee], notice: t("alerts.created", model: t("activerecord.models.employee"))
 
       # If record was not saved
@@ -197,6 +200,7 @@ class Admin::EmployeesController < ApplicationController
     end
 
     if @employee.update(update_params)
+      sync_update @employee
       redirect_to [:admin, @employee], notice: t("alerts.updated", model: t("activerecord.models.employee"))
 
     else
@@ -207,20 +211,28 @@ class Admin::EmployeesController < ApplicationController
   # Active
   def active
     if @employee.update(state: true)
-      redirect_to_back(true, admin_employees_path, "employee", "success")
+      sync_update @employee
+      # redirect_to_back(true, admin_employees_path, "employee", "success")
+
+      redirect_to admin_employee_path(@employee), notice: t("alerts.enabled", model: t("activerecord.models.employee"))
 
     else
-      redirect_to_back(true, admin_employees_path, "employee", "error")
+      # redirect_to_back(true, admin_employees_path, "employee", "error")
+      redirect_to admin_employee_path(@employee), alert: t("alerts.not_enabled", model: t("activerecord.models.employee"))
     end
   end
 
   # Deactive
   def deactive
     if @employee.update(state: false)
-      redirect_to_back(false, admin_employees_path, "employee", "success")
+      sync_update @employee
+      # redirect_to_back(false, admin_employees_path, "employee", "success")
+
+      redirect_to admin_employee_path(@employee), notice: t("alerts.disabled", model: t("activerecord.models.employee"))
 
     else
-      redirect_to_back(false, admin_employees_path, "employee", "error")
+      # redirect_to_back(false, admin_employees_path, "employee", "error")
+      redirect_to admin_employee_path(@employee), alert: t("alerts.not_disabled", model: t("activerecord.models.employee"))
     end
   end
 

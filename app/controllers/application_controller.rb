@@ -21,10 +21,20 @@ class ApplicationController < ActionController::Base
 
   #Helper for the view
   helper_method :current_employee, :current_customer
+  # @current_employee = nil
+  # @current_employee_backup
 
   # Current employee
   def current_employee
+    # begin
     @current_employee ||= User.find(session[:employee_id]).employee if session[:employee_id]
+    # cookies.encrypted[:current_employee_id] = { value: @current_employee.id, expires: 24.hours }
+    # return @current_employee
+
+    # rescue
+    #   @current_employee = Employee.find(cookies.encrypted[:current_employee_id])
+    #   return @current_employee
+    # end
   end
 
   # Current customer
@@ -235,25 +245,25 @@ class ApplicationController < ActionController::Base
     twilio.messages.create({from: ENV["twilio_phone_number"], to: phone_number, body: message})
   end
 
-  # Redirect to back
-  def redirect_to_back(state, path, resource, type)
-    if state
-      if type == "success"
-        redirect_back fallback_location: path, notice: t("alerts.enabled", model: t("activerecord.models.#{resource}"))
-
-      elsif type == "error"
-        redirect_back fallback_location: path, alert: t("alerts.not_enabled", model: t("activerecord.models.#{resource}"))
-      end
-
-    else
-      if type == "success"
-        redirect_back fallback_location: path, notice: t("alerts.disabled", model: t("activerecord.models.#{resource}"))
-
-      elsif type == "error"
-        redirect_back fallback_location: path, alert: t("alerts.not_disabled", model: t("activerecord.models.#{resource}"))
-      end
-    end
-  end
+  # # Redirect to back
+  # def redirect_to_back(state, path, resource, type)
+  #   if state
+  #     if type == "success"
+  #       redirect_back fallback_location: path, notice: t("alerts.enabled", model: t("activerecord.models.#{resource}"))
+  #
+  #     elsif type == "error"
+  #       redirect_back fallback_location: path, alert: t("alerts.not_enabled", model: t("activerecord.models.#{resource}"))
+  #     end
+  #
+  #   else
+  #     if type == "success"
+  #       redirect_back fallback_location: path, notice: t("alerts.disabled", model: t("activerecord.models.#{resource}"))
+  #
+  #     elsif type == "error"
+  #       redirect_back fallback_location: path, alert: t("alerts.not_disabled", model: t("activerecord.models.#{resource}"))
+  #     end
+  #   end
+  # end
 
   # Render PDF
   def to_pdf(name_pdf, template, resource, datetime, pdf_title)

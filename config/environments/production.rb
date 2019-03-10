@@ -49,6 +49,7 @@ Rails.application.configure do
 
   # Force all access to the app over SSL, use Strict-Transport-Security, and use secure cookies.
   config.force_ssl = true
+  config.session_store :cookie_store, key: '_banp_session', expire_after: 30.minutes, secure: true
 
   # Use the lowest log level to ensure availability of diagnostic information
   # when problems arise.

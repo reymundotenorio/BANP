@@ -21,6 +21,8 @@ module Banp
     config.time_zone = "Eastern Time (US & Canada)" # GTM-5 (Miami, Florida)
     config.active_record.default_timezone = :utc #:local # Or :utc
 
+    config.session_store :cookie_store, key: '_banp_session', expire_after: 30.minutes
+
     # Paperclip S3
     # config.paperclip_defaults = {
     #   storage: :s3,
