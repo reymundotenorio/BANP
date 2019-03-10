@@ -212,12 +212,10 @@ class Admin::EmployeesController < ApplicationController
   def active
     if @employee.update(state: true)
       sync_update @employee
-      # redirect_to_back(true, admin_employees_path, "employee", "success")
 
       redirect_to admin_employee_path(@employee), notice: t("alerts.enabled", model: t("activerecord.models.employee"))
 
     else
-      # redirect_to_back(true, admin_employees_path, "employee", "error")
       redirect_to admin_employee_path(@employee), alert: t("alerts.not_enabled", model: t("activerecord.models.employee"))
     end
   end
@@ -226,12 +224,10 @@ class Admin::EmployeesController < ApplicationController
   def deactive
     if @employee.update(state: false)
       sync_update @employee
-      # redirect_to_back(false, admin_employees_path, "employee", "success")
 
       redirect_to admin_employee_path(@employee), notice: t("alerts.disabled", model: t("activerecord.models.employee"))
 
     else
-      # redirect_to_back(false, admin_employees_path, "employee", "error")
       redirect_to admin_employee_path(@employee), alert: t("alerts.not_disabled", model: t("activerecord.models.employee"))
     end
   end

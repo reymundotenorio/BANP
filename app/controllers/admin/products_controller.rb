@@ -170,20 +170,20 @@ class Admin::ProductsController < ApplicationController
   # Active
   def active
     if @product.update(state: true)
-      redirect_to_back(true, admin_products_path, "product", "success")
+      redirect_to admin_product_path(@product), notice: t("alerts.enabled", model: t("activerecord.models.product"))
 
     else
-      redirect_to_back(true, admin_products_path, "product", "error")
+      redirect_to admin_product_path(@product), notice: t("alerts.not_enabled", model: t("activerecord.models.product"))
     end
   end
 
   # Deactive
   def deactive
     if @product.update(state: false)
-      redirect_to_back(false, admin_products_path, "product", "success")
+      redirect_to admin_product_path(@product), notice: t("alerts.disabled", model: t("activerecord.models.product"))
 
     else
-      redirect_to_back(false, admin_products_path, "product", "error")
+      redirect_to admin_product_path(@product), notice: t("alerts.not_disabled", model: t("activerecord.models.product"))
     end
   end
 
