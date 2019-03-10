@@ -40,6 +40,7 @@
       -# = sync_new partial: "data_details_ecommerce", resource: Product.new
       -# End Data details render_sync
 
-      -# Render related products
-      = render "related_products"
-      -# End Render related products
+      - if @products.count > 0
+        -# Render related products
+        = render "related_products"
+        -# End Render related products

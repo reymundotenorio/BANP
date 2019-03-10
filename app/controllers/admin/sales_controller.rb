@@ -132,7 +132,7 @@ class Admin::SalesController < ApplicationController
     @form_url = admin_sales_invoice_path
 
     @customers = Customer.search(params[:search_customer], "enabled-only").paginate(page: params[:customers_page], per_page: 5) # Providers with pagination
-    @products = Product.search(params[:search_product], "enabled-only").paginate(page: params[:products_page], per_page: 5) # Products with pagination
+    @products = Product.search(params[:search_product], "with-stock-only").paginate(page: params[:products_page], per_page: 5) # Products with pagination
 
     respond_to do |format|
       format.html do
@@ -155,7 +155,7 @@ class Admin::SalesController < ApplicationController
     @form_url = admin_update_sale_invoice_path
 
     @customers = Customer.search(params[:search_customer], "enabled-only").paginate(page: params[:customers_page], per_page: 5) # Providers with pagination
-    @products = Product.search(params[:search_product], "enabled-only").paginate(page: params[:products_page], per_page: 5) # Products with pagination
+    @products = Product.search(params[:search_product], "with-stock-only").paginate(page: params[:products_page], per_page: 5) # Products with pagination
 
     @is_edit = true
 
@@ -217,7 +217,7 @@ class Admin::SalesController < ApplicationController
       @form_url = admin_sales_invoice_path
 
       @customers = Customer.search(params[:search_customer], "enabled-only").paginate(page: params[:customers_page], per_page: 5) # Providers with pagination
-      @products = Product.search(params[:search_product], "enabled-only").paginate(page: params[:products_page], per_page: 5) # Products with pagination
+      @products = Product.search(params[:search_product], "with-stock-only").paginate(page: params[:products_page], per_page: 5) # Products with pagination
       # render :new_invoice
 
       respond_to do |format|
@@ -311,7 +311,7 @@ class Admin::SalesController < ApplicationController
       @form_url = admin_update_sale_invoice_path
 
       @customers = Customer.search(params[:search_customer], "enabled-only").paginate(page: params[:customers_page], per_page: 5) # Providers with pagination
-      @products = Product.search(params[:search_product], "enabled-only").paginate(page: params[:products_page], per_page: 5) # Products with pagination
+      @products = Product.search(params[:search_product], "with-stock-only").paginate(page: params[:products_page], per_page: 5) # Products with pagination
       # render :edit_invoice
 
       respond_to do |format|
@@ -494,7 +494,7 @@ class Admin::SalesController < ApplicationController
     @form_url = admin_update_sale_delivery_path
 
     @customers = Customer.search(params[:search_customer], "enabled-only").paginate(page: params[:customers_page], per_page: 5) # Providers with pagination
-    @products = Product.search(params[:search_product], "enabled-only").paginate(page: params[:products_page], per_page: 5) # Products with pagination
+    @products = Product.search(params[:search_product], "with-stock-only").paginate(page: params[:products_page], per_page: 5) # Products with pagination
 
     @is_edit = true
 
@@ -622,7 +622,7 @@ class Admin::SalesController < ApplicationController
       @form_url = admin_update_sale_delivery_path
 
       @customers = Customer.search(params[:search_customer], "enabled-only").paginate(page: params[:customers_page], per_page: 5) # Providers with pagination
-      @products = Product.search(params[:search_product], "enabled-only").paginate(page: params[:products_page], per_page: 5) # Products with pagination
+      @products = Product.search(params[:search_product], "with-stock-only").paginate(page: params[:products_page], per_page: 5) # Products with pagination
       # render :edit_delivery
 
       respond_to do |format|

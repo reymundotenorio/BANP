@@ -19,14 +19,23 @@ class Product < ApplicationRecord
       if show_all == "enabled-only"
         self.joins(:category).where("(products.name LIKE :search OR products.name_spanish LIKE :search OR categories.name LIKE :search OR categories.name_spanish LIKE :search OR barcode LIKE :search OR products.description LIKE :search OR products.description_spanish LIKE :search) AND (products.state = true)", search: "%#{search}%")
 
+      elsif show_all == "with-stock-only"
+        self.joins(:category).where("(products.name LIKE :search OR products.name_spanish LIKE :search OR categories.name LIKE :search OR categories.name_spanish LIKE :search OR barcode LIKE :search OR products.description LIKE :search OR products.description_spanish LIKE :search) AND (products.state = true) AND (products.stock > 0)", search: "%#{search}%")
+
       else
         self.joins(:category).where("products.name LIKE :search OR products.name_spanish LIKE :search OR categories.name LIKE :search OR categories.name_spanish LIKE :search OR barcode LIKE :search OR products.description LIKE :search OR products.description_spanish LIKE :search", search: "%#{search}%")
       end
+      
     elsif show_all == "all"
       all
 
     else
-      enabled
+      if show_all == "with-stock-only"
+        self.joins(:category).where("(products.name LIKE :search OR products.name_spanish LIKE :search OR categories.name LIKE :search OR categories.name_spanish LIKE :search OR barcode LIKE :search OR products.description LIKE :search OR products.description_spanish LIKE :search) AND (products.state = true) AND (products.stock > 0)", search: "%#{search}%")
+
+      else
+        enabled
+      end
     end
   end
   # End Search
