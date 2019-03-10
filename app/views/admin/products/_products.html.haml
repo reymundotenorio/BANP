@@ -4,13 +4,13 @@
     %table.table
       %thead
         - model = "product"
-        - attributes = ["name", "barcode", "price", "category", "stock", "content"]
+        - attributes = ["name", "barcode", "price", "category", "stock", "stock_min", "content"]
 
         -# Render table header
         = render partial: "partials/table_header", locals: {model: model, attributes: attributes}
 
         - if I18n.locale == :es
-          - attributes = ["name_spanish", "barcode", "price", "category", "stock", "content_spanish"]
+          - attributes = ["name_spanish", "barcode", "price", "category", "stock", "stock_min", "content_spanish"]
 
       %tbody
         -# Data table render_sync

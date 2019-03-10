@@ -128,6 +128,7 @@ en:
         quantity: "Quantity"
         select: ""
         stock: "Stock"
+        stock_min: "Minimum stock"
       purchase:
         receipt_number: "Receipt number"
         purchase_datetime: "Date"

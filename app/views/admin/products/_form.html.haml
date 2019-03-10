@@ -66,6 +66,12 @@
                     .border-bottom
 
                   .form-group
+                    = f.text_field :stock_min, class: "form-control input", "data-mask": "##", required: true
+                    %label
+                      %b= t("activerecord.attributes.product.stock_min")
+                    .border-bottom
+
+                  .form-group
                     .input-btn-group
                       = f.hidden_field :category_id
                       = f.text_field :category, value: @product.category_id.nil? ? "" : "#{@product.category.name}", class: "form-control input no-events", required: true

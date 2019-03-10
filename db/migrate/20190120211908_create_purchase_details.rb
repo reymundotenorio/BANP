@@ -4,6 +4,7 @@ class CreatePurchaseDetails < ActiveRecord::Migration[5.2]
       t.decimal :price, null: false, precision: 8, scale: 2
       t.integer :quantity, null: false
       t.string :status # returned
+      t.boolean :lost_defeated, null: false, default: false
 
       # t.string :slug # Friendly_id slug
       t.timestamps # create_at & update_at

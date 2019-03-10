@@ -6,12 +6,13 @@ class CreateProducts < ActiveRecord::Migration[5.2]
       t.string :barcode, null: false
       t.decimal :price, null: false, precision: 10, scale: 2
       t.integer :stock, null: false, default: 0
-      t.string :content
-      t.string :content_spanish
-      t.string :description
-      t.string :description_spanish
-      t.string :recipes
-      t.string :recipes_spanish
+      t.integer :stock_min, null: false
+      t.text :content
+      t.text :content_spanish
+      t.text :description
+      t.text :description_spanish
+      t.text :recipes
+      t.text :recipes_spanish
       t.boolean :state, null: false, default: true
 
       t.string :slug # Friendly_id slug

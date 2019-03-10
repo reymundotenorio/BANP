@@ -88,7 +88,7 @@
             .col-xs-12.no-padding
               %div{class: "detail-info #{product.state}"}
                 -# Set attributes
-                - attributes = I18n.locale == :es ? [["name_spanish", "name"], ["price", "price"], ["category.name_spanish", "category"], ["stock", "stock"], ["content_spanish", "content"], ["description_spanish", "description"], ["recipes_spanish", "recipes"], ["state", "state"], ["barcode", "barcode"]] : [["name", "name"], ["price", "price"], ["stock", "stock"], ["category.name", "category"], ["content", "content"], ["description", "description"], ["recipes", "recipes"], ["state", "state"], ["barcode", "barcode"]]
+                - attributes = I18n.locale == :es ? [["name_spanish", "name"], ["price", "price"], ["category.name_spanish", "category"], ["stock", "stock"], ["stock_min", "stock_min"], ["content_spanish", "content"], ["description_spanish", "description"], ["recipes_spanish", "recipes"], ["state", "state"], ["barcode", "barcode"]] : [["name", "name"], ["price", "price"], ["stock", "stock"], ["stock_min", "stock_min"], ["category.name", "category"], ["content", "content"], ["description", "description"], ["recipes", "recipes"], ["state", "state"], ["barcode", "barcode"]]
 
                 - attributes.each do |attribute, title|
                   .info

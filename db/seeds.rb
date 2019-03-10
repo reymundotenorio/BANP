@@ -123,6 +123,7 @@ Product.create(
   recipes: "Cucumber snacks with roasted shrimp, Cucumber sushi, Thai salad, Stuffed cucumber, Bites of cucumber with salmon.",
   recipes_spanish: "Botanas de pepino con camarones asados, Sushi de pepino, Ensalada Thai, Pepino relleno, Bites de pepino con salmón.",
   barcode: Faker::Code.ean,
+  stock_min: Faker::Number.number(2),
   state: true
 )
 product_count += 1
@@ -140,6 +141,7 @@ Product.create(
   recipes: "Stuffed chiltoma, fusilli, brochettes, chiltoma omelette, roasted chiltoma.",
   recipes_spanish: "Chiltoma rellenas, fusilli, brochetas, omelette de chiltoma, chiltoma asada.",
   barcode: Faker::Code.ean,
+  stock_min: Faker::Number.number(2),
   state: true
 )
 product_count += 1
@@ -157,6 +159,7 @@ Product.create(
   recipes: "Stuffed chiltoma, fusilli, brochettes, chiltoma omelette, roasted chiltoma.",
   recipes_spanish: "Chiltoma rellenas, fusilli, brochetas, omelette de chiltoma, chiltoma asada.",
   barcode: Faker::Code.ean,
+  stock_min: Faker::Number.number(2),
   state: true
 )
 product_count += 1
@@ -174,6 +177,7 @@ Product.create(
   recipes: "Cold tomato soup, tuna with tomato, tomato and mozzarella salad, lasagna.",
   recipes_spanish: "Sopa fría de tomate, atún con tomate, ensalada de tomate y mozzrela, lasaña.",
   barcode: Faker::Code.ean,
+  stock_min: Faker::Number.number(2),
   state: true
 )
 product_count += 1
@@ -191,6 +195,7 @@ Product.create(
   recipes: "Green salad, watermelon brochette with ham and lettuce, Banana salad New York.",
   recipes_spanish: "Ensalada verde, Brocheta de sandía con jamon y lechuga, Ensalada de plátano New York.",
   barcode: Faker::Code.ean,
+  stock_min: Faker::Number.number(2),
   state: true
 )
 product_count += 1
@@ -208,6 +213,7 @@ Product.create(
   recipes: "Pineapple and carrot smoothie, Wellington Cocktail, Apple and tropical fruit salad, Pineapple and blue cheese sauce with crispy vegetables.",
   recipes_spanish: "Batido de piña y zanahorias, Cocktail Wellington, Ensalada de manzana y frutas tropicales, Salsa de piña y queso azul con hortalizas crujientes.",
   barcode: Faker::Code.ean,
+  stock_min: Faker::Number.number(2),
   state: true
 )
 product_count += 1
@@ -225,6 +231,7 @@ Product.create(
   recipes: "Peach and orange smoothie, Crab with orange, Wellington cocktail, Tropical fruit salad, Floating banana and orange islands, Orange loin, Fruit punch.",
   recipes_spanish: "Batido de melocotón y naranja, Cangrejo a la naranja, Cocktaill Wellington, Ensalada de fruta tropical, Islas flotantes de plátano y naranja, Lomo a la naranja, Ponche de frutas.",
   barcode: Faker::Code.ean,
+  stock_min: Faker::Number.number(2),
   state: true
 )
 product_count += 1
@@ -242,6 +249,7 @@ Product.create(
   recipes: "Melon with wine, melon sangria, tomato and melon skewers.",
   recipes_spanish: "Melón con vino, sangría de melon, Pinchos de Tomate y melón.",
   barcode: Faker::Code.ean,
+  stock_min: Faker::Number.number(2),
   state: true
 )
 product_count += 1
@@ -259,6 +267,7 @@ Product.create(
   recipes: "Apple and tropical fruit salad, banana, melon and grapefruit salad, ice-cold fruit skewers, melon and strawberry puree, timbales with scarlet sauce.",
   recipes_spanish: "Ensalada de manzana y frutas tropicales, Ensalada de plátano, melón y pomelo, Pinchitos de fruta helada, puré de melón y fresa, Timbales con salsa escarlata.",
   barcode: Faker::Code.ean,
+  stock_min: Faker::Number.number(2),
   state: true
 )
 product_count += 1
@@ -276,6 +285,7 @@ Product.create(
   recipes: "Apple Pie, Apple Salad and Tropical Fruits, Lancashire Stew, Apple Strudel.",
   recipes_spanish: "Pastel de manzana, Ensalada de manzana y frutas tropicales, Estofado Lancashire, Strudel de manzana.",
   barcode: Faker::Code.ean,
+  stock_min: Faker::Number.number(2),
   state: true
 )
 product_count += 1
@@ -293,6 +303,7 @@ Product.create(
   recipes: "Green salad, watermelon brochette with ham and lettuce, Banana salad New York.",
   recipes_spanish: "Ensalada verde, Brocheta de sandía con jamon y lechuga, Ensalada de plátano New York.",
   barcode: Faker::Code.ean,
+  stock_min: Faker::Number.number(2),
   state: true
 )
 product_count += 1
@@ -310,6 +321,7 @@ Product.create(
   recipes: "Vegetable quiche, fried zucchini sticks, zucchini soup, oriental chicken.",
   recipes_spanish: "Quiche de verdura, Palitos de zucchini fritos, Sopa de zucchini, Pollo a la oriental.",
   barcode: Faker::Code.ean,
+  stock_min: Faker::Number.number(2),
   state: true
 )
 product_count += 1
@@ -327,6 +339,7 @@ Product.create(
   recipes: "Avocado with onions and salsa, avocado salad, avocado vegetable tacos, cod with tomato, prawns and avocado.",
   recipes_spanish: "Aguacate con cebollas y salsa, Ensalada de aguacate, Tacos vegetales de aguacate, Bacalao con tomate, gambas y aguacate.",
   barcode: Faker::Code.ean,
+  stock_min: Faker::Number.number(2),
   state: true
 )
 product_count += 1
@@ -344,6 +357,7 @@ Product.create(
   recipes: "Banana salad New York, Salad with carrots and bananas, Vegetable paella, Vegetable cake, Carrot soup and orange.",
   recipes_spanish: "Ensalada de plátano New York, Ensalada de zanahorias y plátanos, Paella vegetal, Pastel de verduras, Sopa de zanahoria y naranja.",
   barcode: Faker::Code.ean,
+  stock_min: Faker::Number.number(2),
   state: true
 )
 product_count += 1
@@ -361,6 +375,7 @@ Product.create(
   recipes: "Banana and grape smoothie, celery and grapes salad, grape ice cream, fruit soup, cream grapes, cheesecake with grapes and nuts.",
   recipes_spanish: "Batido de plátano y uva, Ensalada de apio y uvas, Helado de uva, Sopa de frutas, Uvas a la crema, Tarta de queso con uva y nueces.",
   barcode: Faker::Code.ean,
+  stock_min: Faker::Number.number(2),
   state: true
 )
 product_count += 1
@@ -378,6 +393,7 @@ Product.create(
   recipes: "Chicken with white grapes, Banana and grape smoothie, Celery and grapes salad, Grape ice cream, Fruit soup, Cream grapes, Cheesecake with grapes and nuts.",
   recipes_spanish: "Pollo con uvas blancas, Batido de plátano y uva, Ensalada de apio y uvas, Helado de uva, Sopa de frutas, Uvas a la crema, Tarta de queso con uva y nueces.",
   barcode: Faker::Code.ean,
+  stock_min: Faker::Number.number(2),
   state: true
 )
 product_count += 1
@@ -395,6 +411,7 @@ Product.create(
   recipes: "Strawberry milkshake, strawberry chutney, tropical Macedonia, melon and strawberry puree, strawberry soup.",
   recipes_spanish: "Batido de fresa, chutney de fresa, Macedonia tropical, Puré de melón y fresa, Suflé de fresa.",
   barcode: Faker::Code.ean,
+  stock_min: Faker::Number.number(2),
   state: true
 )
 product_count += 1
@@ -412,33 +429,35 @@ Product.create(
   recipes: "Avocado with kiwis, Kiwi milkshake, Kiwi and ginger ale cocktail, Wellington Cocktail, Kiwi and caviar, Sushi rolls with kiwi.",
   recipes_spanish: "Aguacate con kiwis, Batido kiwiana, Cocktail de kiwi y ginger ale, Cocktaill Wellington, Kiwi y caviar, Rollos de sushi con kiwi.",
   barcode: Faker::Code.ean,
+  stock_min: Faker::Number.number(2),
   state: true
 )
 product_count += 1
 
-60.times do |count|
-  begin
-    product_count += 1
-    Product.create(
-      id: (product_count),
-      name: Faker::Food.dish,
-      name_spanish: Faker::Food.dish,
-      barcode: Faker::Code.ean,
-      price: Faker::Number.decimal(2, 2).to_d.abs,
-      content: Faker::Food.measurement,
-      content_spanish: Faker::Food.measurement,
-      description: Faker::Food.description,
-      description_spanish: Faker::Food.description,
-      recipes: "#{Faker::Food.dish}, #{Faker::Food.dish}, #{Faker::Food.dish}",
-      recipes_spanish: "#{Faker::Food.dish}, #{Faker::Food.dish}, #{Faker::Food.dish}",
-      state: Faker::Boolean.boolean(0.8),
-      category_id: categories_id.sample
-    )
-
-  rescue StandardError => e
-    puts "Error found #{e.to_s}"
-  end
-end
+# 60.times do |count|
+#   begin
+#     product_count += 1
+#     Product.create(
+#       id: (product_count),
+#       name: Faker::Food.dish,
+#       name_spanish: Faker::Food.dish,
+#       barcode: Faker::Code.ean,
+#       stock_min: Faker::Number.number(2),
+#       price: Faker::Number.decimal(2, 2).to_d.abs,
+#       content: Faker::Food.measurement,
+#       content_spanish: Faker::Food.measurement,
+#       description: Faker::Food.description,
+#       description_spanish: Faker::Food.description,
+#       recipes: "#{Faker::Food.dish}, #{Faker::Food.dish}, #{Faker::Food.dish}",
+#       recipes_spanish: "#{Faker::Food.dish}, #{Faker::Food.dish}, #{Faker::Food.dish}",
+#       state: Faker::Boolean.boolean(0.8),
+#       category_id: categories_id.sample
+#     )
+#
+#   rescue StandardError => e
+#     puts "Error found #{e.to_s}"
+#   end
+# end
 
 puts "Seeding customers"
 80.times do |count|
@@ -488,7 +507,7 @@ Employee.enabled.each do |employee|
 end
 
 puts "Seeding purchase orders"
-5600.times do |count|
+500.times do |count|
   begin
     Purchase.create(
       id: (count + 1),
@@ -519,7 +538,7 @@ Purchase.enabled.each do |purchase|
 end
 
 puts "Seeding purchase details"
-10300.times do |count|
+800.times do |count|
   begin
     PurchaseDetail.create(
       id: (count + 1),
@@ -527,7 +546,8 @@ puts "Seeding purchase details"
       product_id: products_id.sample,
       price: Faker::Number.decimal(2, 2).to_d.abs,
       quantity: Faker::Number.between(1, 100),
-      status: "ordered"
+      status: "ordered",
+      lost_defeated: false
       # status: ["ordered", "returned"].sample
     )
   rescue StandardError => e
@@ -542,7 +562,7 @@ Customer.enabled.each do |customer|
 end
 
 puts "Seeding sale invoices"
-5600.times do |count|
+500.times do |count|
   begin
     Sale.create(
       id: (count + 1),
@@ -570,7 +590,7 @@ Sale.enabled.each do |sale|
 end
 
 puts "Seeding sale details"
-10300.times do |count|
+800.times do |count|
   begin
     SaleDetail.create(
       id: (count + 1),

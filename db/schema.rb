@@ -125,12 +125,13 @@ ActiveRecord::Schema.define(version: 2019_02_05_120100) do
     t.string "barcode", null: false
     t.decimal "price", precision: 10, scale: 2, null: false
     t.integer "stock", default: 0, null: false
-    t.string "content"
-    t.string "content_spanish"
-    t.string "description"
-    t.string "description_spanish"
-    t.string "recipes"
-    t.string "recipes_spanish"
+    t.integer "stock_min", default: 0, null: false
+    t.text "content"
+    t.text "content_spanish"
+    t.text "description"
+    t.text "description_spanish"
+    t.text "recipes"
+    t.text "recipes_spanish"
     t.boolean "state", default: true, null: false
     t.string "slug"
     t.datetime "created_at", null: false
@@ -158,6 +159,7 @@ ActiveRecord::Schema.define(version: 2019_02_05_120100) do
     t.decimal "price", precision: 8, scale: 2, null: false
     t.integer "quantity", null: false
     t.string "status"
+    t.boolean "lost_defeated", default: false, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "purchase_id"

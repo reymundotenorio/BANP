@@ -1,6 +1,6 @@
 %tr{class: "clickable-row #{product.state}", "data-href": "#{admin_product_path(product)}"}
   -# Set attributes
-  - attributes = I18n.locale == :es ? ["name_spanish", "barcode", "price", "category", "stock", "content_spanish"] : ["name", "barcode", "price", "category", "stock", "content"]
+  - attributes = I18n.locale == :es ? ["name_spanish", "barcode", "price", "category", "stock", "stock_min", "content_spanish"] : ["name", "barcode", "price", "category", "stock", "stock_min", "content"]
 
   %td
     = link_to admin_product_path(product), class: "record-link", "data-header": "No.", "data-toggle": "tooltip", "data-placement": "bottom", title: t("views.index.view_details") do

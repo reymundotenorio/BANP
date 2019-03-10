@@ -15,7 +15,7 @@ es:
       categories: "Categorías"
       products: "Productos"
       purchases: "Compras"
-      orders: "Ordenes"
+      orders: "Órdenes"
       order: "Orden"
       receptions: "Recepciones"
       inventory: "Inventario"
@@ -129,6 +129,7 @@ es:
         quantity: "Cantidad"
         select: ""
         stock: "Stock"
+        stock_min: "Stock mínimo"
       purchase:
         receipt_number: "Número de recibo"
         purchase_datetime: "Fecha"
@@ -195,10 +196,10 @@ es:
   # Purchase
   purchase:
     order: "Orden de compra"
-    orders: "Ordenes de compra"
+    orders: "Órdenes de compra"
     order_detail: "Detalle de orden de compra"
     order_details: "Detalles de orden de compra"
-    show_orders: "Mostrar ordenes de compra"
+    show_orders: "Mostrar órdenes de compra"
     hide_returned: "Ocultar devueltas"
     of: "de"
     add_products: "Agregar productos"
@@ -218,10 +219,10 @@ es:
   # Sale
   sale:
     order: "Orden de venta"
-    orders: "Ordenes de venta"
+    orders: "Órdenes de venta"
     order_detail: "Detalle de orden de venta"
     order_details: "Detalles de orden de venta"
-    show_orders: "Mostrar ordenes de venta"
+    show_orders: "Mostrar órdenes de venta"
     hide_returned: "Ocultar devueltas"
     of: "de"
     add_products: "Agregar productos"
@@ -272,7 +273,7 @@ es:
     order_number: "Número de orden"
     delivery_addrees: "Dirección de entrega"
     view_order_invoice: "Ver factura"
-    view_orders: "Ver ordenes"
+    view_orders: "Ver órdenes"
     canceled: "Anulada"
     order_received_correctly: "Orden recibida correctamente"
     problem_receiving_order: "Hubo un problema al recibir el pedido"

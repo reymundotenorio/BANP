@@ -91,6 +91,7 @@ class Product < ApplicationRecord
   validates :name_spanish, presence: true
   validates :barcode, presence: true
   validates :price, presence: true
+  validates :stock_min, presence: true
   # validates :stock, presence: true
   # End  Presence validation
 
@@ -98,12 +99,12 @@ class Product < ApplicationRecord
   validates :name, length: { maximum: 255 }
   validates :name_spanish, length: { maximum: 255 }
   validates :barcode, length: { maximum: 255 }
-  validates :content, length: { maximum: 255 }, allow_blank: true
-  validates :content_spanish, length: { maximum: 255 }, allow_blank: true
-  validates :description, length: { maximum: 255 }, allow_blank: true
-  validates :description_spanish, length: { maximum: 255 }, allow_blank: true
-  validates :recipes, length: { maximum: 255 }, allow_blank: true
-  validates :recipes_spanish, length: { maximum: 255 }, allow_blank: true
+  # validates :content, length: { maximum: 255 }, allow_blank: true
+  # validates :content_spanish, length: { maximum: 255 }, allow_blank: true
+  # validates :description, length: { maximum: 255 }, allow_blank: true
+  # validates :description_spanish, length: { maximum: 255 }, allow_blank: true
+  # validates :recipes, length: { maximum: 255 }, allow_blank: true
+  # validates :recipes_spanish, length: { maximum: 255 }, allow_blank: true
   # End Length validation
 
   # Numericality validation

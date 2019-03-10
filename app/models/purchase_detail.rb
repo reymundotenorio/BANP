@@ -14,7 +14,6 @@ class PurchaseDetail < ApplicationRecord
   # End Render sync
 
   ## Callbacks
-
   before_validation :update_stock, on: :update
 
   # Update product stock
@@ -177,6 +176,7 @@ class PurchaseDetail < ApplicationRecord
   # validates :purchase_id, presence: true
   validates :product_id, presence: true
   validates :price, presence: true
+  validates :quantity, presence: true
   validates :quantity, presence: true
   # End  Presence validation
 
