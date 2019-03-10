@@ -209,20 +209,20 @@ class Admin::PurchasesController < ApplicationController
   # Active
   def active_order
     if @order.update(state: true)
-      redirect_to admin_purchase_details_path(@order.id), notice: t("alerts.disabled", model: t("activerecord.models.purchase"))
+      redirect_to admin_purchase_details_path(@order.id), notice: t("alerts.enabled", model: t("activerecord.models.purchase"))
 
     else
-      redirect_to_back(true, admin_purchase_orders_path, "purchase", "error")
+      redirect_to admin_purchase_details_path(@order.id), notice: t("alerts.not_enabled", model: t("activerecord.models.purchase"))
     end
   end
 
   # Deactive
   def deactive_order
     if @order.update(state: false)
-      redirect_to_back(false, admin_purchase_orders_path, "purchase", "success")
+      redirect_to admin_purchase_details_path(@order.id), notice: t("alerts.disabled", model: t("activerecord.models.purchase"))
 
     else
-      redirect_to_back(false, admin_purchase_orders_path, "purchase", "error")
+      redirect_to admin_purchase_details_path(@order.id), notice: t("alerts.not_disabled", model: t("activerecord.models.purchase"))
     end
   end
 
@@ -465,10 +465,10 @@ class Admin::PurchasesController < ApplicationController
     end
 
     if @reception.update(state: false)
-      redirect_to_back(false, admin_purchase_receptions_path, "purchase", "success")
+      redirect_to admin_purchase_details_path(@reception.id), notice: t("alerts.disabled", model: t("activerecord.models.purchase"))
 
     else
-      redirect_to_back(false, admin_purchase_receptions_path, "purchase", "error")
+      redirect_to admin_purchase_details_path(@reception.id), notice: t("alerts.not_disabled", model: t("activerecord.models.purchase"))
     end
   end
 
