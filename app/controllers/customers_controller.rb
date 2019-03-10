@@ -86,7 +86,6 @@ class CustomersController < ApplicationController
       session[:session_confirmed] = nil
 
       redirect_to sign_in_path, notice: t("alerts.disabled", model: t("activerecord.models.customer"))
-      return
 
     else
       redirect_to customer_path(@customer), notice: t("alerts.disabled", model: t("activerecord.models.customer"))

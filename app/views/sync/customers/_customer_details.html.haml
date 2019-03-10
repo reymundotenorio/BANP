@@ -42,7 +42,7 @@
 
                   - if customer.state
                     .col-xs-12.col-sm-8.col-sm-offset-2.button-container.no-padding
-                      = link_to (deactive_customer_path), method: "patch", class: "btn btn-general" do
+                      = link_to (deactive_customer_path), class: "btn btn-general", method: "patch", data: {confirm: t("sale.are_you_sure")} do
                         %i.fas.fa-user-times
                         %span= t("views.show.delete_account")
         -# End Material card

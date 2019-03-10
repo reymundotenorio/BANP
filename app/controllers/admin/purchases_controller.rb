@@ -209,7 +209,7 @@ class Admin::PurchasesController < ApplicationController
   # Active
   def active_order
     if @order.update(state: true)
-      redirect_to_back(true, admin_purchase_orders_path, "purchase", "success")
+      redirect_to admin_purchase_details_path(@order.id), notice: t("alerts.disabled", model: t("activerecord.models.purchase"))
 
     else
       redirect_to_back(true, admin_purchase_orders_path, "purchase", "error")

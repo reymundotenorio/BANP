@@ -333,10 +333,10 @@ class Admin::SalesController < ApplicationController
     end
 
     if @invoice.update(state: false)
-      redirect_to_back(false, admin_sale_invoices_path, "sale", "success")
+      redirect_to admin_sale_details_path(@invoice.id), notice: t("alerts.disabled", model: t("activerecord.models.sale"))
 
     else
-      redirect_to_back(false, admin_sale_invoices_path, "sale", "error")
+      redirect_to admin_sale_details_path(@invoice.id), notice: t("alerts.not_disabled", model: t("activerecord.models.sale"))
     end
   end
 
@@ -644,10 +644,10 @@ class Admin::SalesController < ApplicationController
     end
 
     if @delivery.update(state: false)
-      redirect_to_back(false, admin_sale_deliveries_path, "sale", "success")
+      redirect_to admin_sale_details_path(@delivery.id), notice: t("alerts.disabled", model: t("activerecord.models.sale"))
 
     else
-      redirect_to_back(false, admin_sale_deliveries_path, "sale", "error")
+      redirect_to admin_sale_details_path(@delivery.id), notice: t("alerts.not_disabled", model: t("activerecord.models.sale"))
     end
   end
 
