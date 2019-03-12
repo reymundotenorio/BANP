@@ -107,7 +107,7 @@
           - if current_employee.is_administrator? || current_employee.is_seller?
             -# Invoices
             %li
-              = link_to (admin_sale_invoices_path), class: "#{'active' if (controller_name == 'sales' && action_name == 'index_invoices')}" do
+              = link_to (admin_sale_invoices_path), class: "#{'active' if (controller_name == 'sales' && (action_name == 'index_invoices' || action_name == 'new_invoice'))}" do
                 %i.fas.fa-cart-plus
                 = t("header.navigation.invoicing")
             -# End Invoices
@@ -128,13 +128,6 @@
                 = t("header.navigation.deliveries")
             -# End Deliveries
 
-          -# Quotes
-          -# %li
-          -#   %a{href: "#"}
-          -#     %i.fas.fa-calculator
-          -#     = t("header.navigation.quotes")
-          -# End Quotes
-
           - if current_employee.is_administrator? || current_employee.is_seller?
             -# Returns
             %li
@@ -142,6 +135,14 @@
                 %i.fas.fa-undo
                 = t("header.navigation.returns")
             -# End Returns
+
+          - if current_employee.is_administrator? || current_employee.is_seller?
+            -# Quotes
+            %li
+              = link_to (admin_price_lists_path), class: "#{'active' if (controller_name == 'price_lists')}" do
+                %i.fas.fa-calculator
+                = t("header.navigation.price_lists")
+            -# End Quotes
       -# End Sales
 
     - if current_employee.is_administrator?

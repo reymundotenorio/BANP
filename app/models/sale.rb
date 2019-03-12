@@ -19,7 +19,7 @@ class Sale < ApplicationRecord
   # sync_touch :sale_details
   # End Render sync
 
-  # Search order
+  # Search order e-commerce
   def self.search_order_ecommerce(search, customer_id)
     if search
       self.joins(:customer).joins(:employee).where("(DATE_FORMAT(sale_datetime, '%d/%m/%Y') LIKE :search OR DATE_FORMAT(sale_datetime, '%m/%d/%Y') LIKE :search OR payment_method LIKE :search OR payment_reference LIKE :search OR delivery_status LIKE :search) AND (status != 'invoiced') AND (sales.customer_id = :customer_id)", customer_id: customer_id, search: "%#{search}%").order("sales.sale_datetime DESC")
@@ -28,7 +28,7 @@ class Sale < ApplicationRecord
       self.where("sales.customer_id = :customer_id", customer_id: customer_id).not_invoices.order("sales.sale_datetime DESC")
     end
   end
-  # End Search order
+  # End Search order e-commerce
 
   # Search order
   def self.search_order(search, show_all)
@@ -86,6 +86,17 @@ class Sale < ApplicationRecord
   end
   # End Search delivery
 
+  # Search price list
+  def self.search_price_list(search, show_all)
+    if search
+      self.joins(:customer).joins(:employee).where("(DATE_FORMAT(sale_datetime, '%d/%m/%Y') LIKE :search OR DATE_FORMAT(sale_datetime, '%m/%d/%Y') LIKE :search OR customers.first_name LIKE :search OR customers.last_name LIKE :search OR customers.company LIKE :search OR employees.first_name LIKE :search OR employees.last_name LIKE :search) AND (status = 'price_list')", search: "%#{search}%").order("sales.sale_datetime DESC")
+
+    else
+      price_lists.order("sales.sale_datetime DESC")
+    end
+  end
+  # End Search price list
+
   # Total
   def self.total(id)
     self.find(id).sale_details.not_returned.sum("price * quantity")
@@ -121,6 +132,7 @@ class Sale < ApplicationRecord
   scope :invoices, -> { where(status: "invoiced") }
   scope :shipments, -> { where(status: "shipped") }
   scope :deliveries, -> { where(status: "delivered") }
+  scope :price_lists, -> { where(status: "price_lists") }
   ## End Scopes
 
   ## Callbacks

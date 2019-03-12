@@ -27,6 +27,7 @@ en:
       reports: "Reports"
       employees: "Employees"
       notifications: "Notifications"
+      price_lists: "Price lists"
     search:
       search: "Search..."
 

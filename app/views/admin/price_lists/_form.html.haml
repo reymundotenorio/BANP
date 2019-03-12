@@ -1,0 +1,168 @@
+-# Form
+= form_for @price_list, url: @form_url, html: {autocomplete: "off", multipart: true} do |f|
+  %section.form
+    .container
+      .row
+        .col-xs-12
+          -# Show errors
+          = render partial: "partials/form_errors", locals: {resource: @price_list, model: Sale}
+          -# End Show errors
+
+        .col-xs-12.col-md-8
+          -# Material card
+          %div{class: "material-card shadow-card #{@price_list.state}"}
+            .row.no-margin
+              .col-xs-12.no-padding
+                .form-info
+
+                  .form-group.hidden
+                    = f.hidden_field :employee_id, value: 1, required: true # current_employee.id
+
+                  .col-xs-12.col-md-7.container-left
+
+                    .form-group
+                      .input-btn-group
+                        = f.hidden_field :customer_id
+                        = f.text_field :customer, value: @price_list.customer_id.nil? ? "" : "#{@price_list.customer.first_name} #{@price_list.customer.last_name}", class: "form-control input no-events", required: true
+                        %label
+                          %b= t("activerecord.attributes.sale.customer")
+                        .border-bottom
+
+                        = link_to "", class: "btn btn-general", "data-toggle": "modal", "data-target": "#getCustomers" do
+                          %i.fas.fa-search
+
+                    .col-xs-12.col-md-4.container-left
+                      .form-group
+                        = f.text_field :discount, class: "form-control input discount"
+                        %label
+                          %b= "#{t('activerecord.attributes.sale.discount')} %"
+                        .border-bottom
+
+                    .col-xs-12.col-md-8.container-right
+                      .form-group
+                        .input-group.date#datetimepicker
+                          = f.text_field :sale_datetime, id: "sale_datetime_picker", class: "form-control input date-field", required: true
+                          %span.input-group-addon.btn.btn-general
+                            %i.far.fa-calendar-alt
+                          %label
+                            %b= t("activerecord.attributes.sale.sale_datetime")
+                          .border-bottom
+
+                      = f.hidden_field :sale_datetime
+
+                    .form-group.hidden
+                      = f.text_field :status, class: "form-control input"
+                      %label
+                        %b= t("activerecord.attributes.sale.status")
+                      .border-bottom
+
+                  .col-xs-12.col-md-5.container-right
+                    .form-group
+                      = f.text_area :observations, class: "form-control input text-area big"
+                      %label
+                        %b= t("activerecord.attributes.sale.observations")
+                      .border-bottom
+
+                  .col-xs-12.no-padding.container-add-products
+                    = link_to "", class: "btn btn-general", "data-toggle": "modal", "data-target": "#getProducts" do
+                      %i.fas.fa-plus
+                      %span= t("sale.add_products")
+
+                  .col-xs-12.no-padding.index.details
+                    .scroll-table
+                      -# Table
+                      %table.table#details-table
+                        %thead
+                          - model = "product"
+                          - attributes = ["name", "price", "quantity", "total", "select"]
+
+                          -# Render table header
+                          = render partial: "partials/table_header_details", locals: {model: model, attributes: attributes}
+
+                        %tbody#sale_details.order_details
+                          -# Set counter
+                          - @details_counter = 0
+
+                          = f.fields_for :sale_details do |detail|
+                            = render "sale_detail_fields", f: detail
+                            -# Increse couter
+                            - @details_counter += 1
+                    -# End Table
+
+                  -# Buttons
+                  .main-buttons
+                    .col-xs-12.button-container.no-padding
+                      - if @price_list.new_record?
+                        = button_tag type: "reset", id: "reset-button", class: "btn btn-general" do
+                          %i.fas.fa-eraser
+                          %span= t("views.form.restart")
+
+                      = f.button class: "btn btn-general", data: {disable_with: "<i class='fas fa-spinner fa-spin'></i>"} do
+                        %i.fas.fa-save
+                        %span= t("views.form.save")
+                  -# End Buttons
+          -# End Material card
+
+        .col-xs-12.col-md-4
+          -# Material card
+          %div{class: "material-card shadow-card #{@price_list.state}"}
+            .row.no-margin
+              .col-xs-12.no-padding.details
+                .general-info
+
+                  %p.summary= t("views.cart.summary")
+
+                  .main-info.text-left-right
+                    %p.text-left
+                      %b= t("views.cart.subtotal")
+                    %p.text-right#subtotal $00.00
+
+                  .main-info.text-left-right
+                    %p.text-left
+                      %b= t("views.cart.shipping")
+                    %p.text-right#shipping $00.00
+
+                  .main-info.text-left-right
+                    %p.text-left
+                      %b
+                        %span= t("activerecord.attributes.sale.discount")
+                        %span#discountPercent (0%)
+                    %p.text-right#discount $00.00
+
+                  .main-info.text-left-right
+                    .divider
+
+                  .main-info.text-left-right
+                    %p.text-left.total
+                      %b Total
+                    %p.text-right.total#total $00.00
+          -# End Material card
+-# End Form
+
+-# Modal
+.modal.fade{id: "getCustomers", tabindex: "-1", role: "dialog", "aria-labelledby": "", "aria-hidden": "true"}
+  .modal-dialog
+    .modal-content
+      .modal-body
+        %button.close{type: "button", "data-dismiss": "modal", "aria-hidden": "true", "data-toggle": "tooltip", "data-placement": "left", title: t("views.form.close")}
+          &times;
+
+        -# Render customers list
+        = render "modal_customers"
+        -# End Render customers list
+
+-# Modal
+.modal.fade{id: "getProducts", tabindex: "-1", role: "dialog", "aria-labelledby": "", "aria-hidden": "true"}
+  .modal-dialog
+    .modal-content
+      .modal-body
+        %button.close{type: "button", "data-dismiss": "modal", "aria-hidden": "true", "data-toggle": "tooltip", "data-placement": "left", title: t("views.form.close")}
+          &times;
+
+        -# Render products list
+        = render "modal_products"
+        -# End Render products list
+
+-# Products modals script
+= javascript_include_tag "products-modal-sale", "data-turbolinks-track": "reload"
+-# End Products modals script

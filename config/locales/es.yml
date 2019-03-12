@@ -28,6 +28,7 @@ es:
       reports: "Reportes"
       employees: "Empleados"
       notifications: "Notificaciones"
+      price_lists: "Listas de precios"
     search:
       search: "Buscar..."
 
