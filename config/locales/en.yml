@@ -282,6 +282,7 @@ en:
     go_back: "Go back"
     profile: "Profile"
     update_profile: "Update profile"
+    return: "Return"
 
   # Charts
   charts:

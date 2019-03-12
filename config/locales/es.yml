@@ -283,6 +283,7 @@ es:
     go_back: "Regresar"
     profile: "Perfil"
     update_profile: "Actualización del perfil"
+    return: "Devolución"
 
   # Charts
   charts:
