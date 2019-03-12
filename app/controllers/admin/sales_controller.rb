@@ -129,7 +129,7 @@ class Admin::SalesController < ApplicationController
     @invoice.discount = 0
 
     @search_form_path = admin_new_sale_invoice_path(@invoice)
-    @form_url = admin_sales_invoice_path
+    @form_url = admin_sale_invoice_path
 
     @customers = Customer.search(params[:search_customer], "enabled-only").paginate(page: params[:customers_page], per_page: 5) # Providers with pagination
     @products = Product.search(params[:search_product], "with-stock-only").paginate(page: params[:products_page], per_page: 5) # Products with pagination
@@ -214,7 +214,7 @@ class Admin::SalesController < ApplicationController
       # If record was not saved
     else
       @search_form_path = admin_new_sale_invoice_path(@invoice)
-      @form_url = admin_sales_invoice_path
+      @form_url = admin_sale_invoice_path
 
       @customers = Customer.search(params[:search_customer], "enabled-only").paginate(page: params[:customers_page], per_page: 5) # Providers with pagination
       @products = Product.search(params[:search_product], "with-stock-only").paginate(page: params[:products_page], per_page: 5) # Products with pagination

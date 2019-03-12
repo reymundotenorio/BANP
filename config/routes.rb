@@ -241,7 +241,7 @@ Rails.application.routes.draw do
     get "/purchases/order/new", to: "purchases#new_order", as: "new_purchase_order"
     get "/purchases/order/:id/edit", to: "purchases#edit_order", as: "edit_purchase_order"
     get "/purchases/order/:id/history", to: "purchases#history_order", as: "history_purchase_order"
-    post "/purchases/order", to: "purchases#create_order", as: "purchases_order"
+    post "/purchases/order", to: "purchases#create_order", as: "purchase_order"
     patch "/purchases/order/:id", to: "purchases#update_order", as: "update_purchase_order"
     patch "/purchases/order/:id/active", to: "purchases#active_order", as: "active_purchase_order"
     patch "/purchases/order/:id/deactive", to: "purchases#deactive_order", as: "deactive_purchase_order"
@@ -282,7 +282,7 @@ Rails.application.routes.draw do
     get "/sales/invoice/new", to: "sales#new_invoice", as: "new_sale_invoice"
     get "/sales/invoice/:id/edit", to: "sales#edit_invoice", as: "edit_sale_invoice"
     get "/sales/invoice/:id/history", to: "sales#history_invoice", as: "history_sale_invoice"
-    post "/sales/invoice", to: "sales#create_invoice", as: "sales_invoice"
+    post "/sales/invoice", to: "sales#create_invoice", as: "sale_invoice"
     patch "/sales/invoice/:id", to: "sales#update_invoice", as: "update_sale_invoice"
     patch "/sales/invoice/:id/deactive", to: "sales#deactive_invoice", as: "deactive_sale_invoice"
     # End Sales invoices
@@ -305,6 +305,12 @@ Rails.application.routes.draw do
     # Sales returns
     get "/sales/returns", to: "sales#index_returns", as: "sale_returns"
     # End Sales returns
+
+    # Price lists
+    get "/price-lists", to: "price_lists#index", as: "price_lists"
+    get "/price-lists/new", to: "price_lists#new", as: "new_price_list"
+    post "/price-lists", to: "price_lists#create", as: "price_list"
+    # End Price lists
 
     # Sales details
     get "/sales/:id/details", to: "sale_details#show", as: "sale_details"
