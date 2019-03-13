@@ -65,6 +65,7 @@ class Admin::SaleDetailsController < ApplicationController
 
     @invoice_no = @sale.id
     @invoice_date = @sale.sale_datetime
+
     template = "partials/invoice.html.haml"
 
     respond_to do |format|

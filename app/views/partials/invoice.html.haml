@@ -27,10 +27,11 @@
 
                 %span= resource.payment_reference
 
-            %p.invoice-name
-              %i.fas.fa-hand-holding-usd
-              %span
-                %b= resource.paid ? t("sale.paid_out").upcase : t("sale.pending_payment").upcase
+            - if resource.status != "price_list"
+              %p.invoice-name
+                %i.fas.fa-hand-holding-usd
+                %span
+                  %b= resource.paid ? t("sale.paid_out").upcase : t("sale.pending_payment").upcase
 
             - if resource.customer.company
               %p.invoice-name
@@ -83,7 +84,7 @@
 
         .total-container
           .flex-child.note
-            %span= t("sale.sale_claim")
+            %span= resource.status == "price_list" ? t("sale.price_list_claim") : t("sale.sale_claim")
 
           .flex-child.total
             %span= t("activerecord.attributes.sale.total")

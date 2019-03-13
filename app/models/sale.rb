@@ -132,7 +132,7 @@ class Sale < ApplicationRecord
   scope :invoices, -> { where(status: "invoiced") }
   scope :shipments, -> { where(status: "shipped") }
   scope :deliveries, -> { where(status: "delivered") }
-  scope :price_lists, -> { where(status: "price_lists") }
+  scope :price_lists, -> { where(status: "price_list") }
   ## End Scopes
 
   ## Callbacks
