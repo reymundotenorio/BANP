@@ -285,6 +285,11 @@ es:
     profile: "Perfil"
     update_profile: "Actualización del perfil"
     return: "Devolución"
+    price_list: "Lista de precio"
+    price_lists: "Listas de precio"
+    price_list_detail: "Detalle de lista de precio"
+    price_list_details: "Detalles de lista de precio"
+    show_price_lists: "Mostrar listas de precio"
 
   # Charts
   charts:

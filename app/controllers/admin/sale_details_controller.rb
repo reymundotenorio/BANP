@@ -15,6 +15,7 @@ class Admin::SaleDetailsController < ApplicationController
     @is_invoice = @sale.status == "invoiced" ? true : false
     @is_shipment = @sale.status == "shipped" ? true : false
     @is_delivery = @sale.status == "delivered" ? true : false
+    @is_price_list = @sale.status == "price_list" ? true : false
 
     if @is_invoice
       @details =  SaleDetail.search_invoices(@sale.id, params[:search], params[:show]).paginate(page: params[:page], per_page: 15)
@@ -24,6 +25,9 @@ class Admin::SaleDetailsController < ApplicationController
 
     elsif @is_delivery
       @details = SaleDetail.search_deliveries(@sale.id, params[:search], params[:show]).paginate(page: params[:page], per_page: 15) # Details with pagination
+
+    elsif @is_price_list
+      @details = SaleDetail.search_price_lists(@sale.id, params[:search], params[:show]).paginate(page: params[:page], per_page: 15) # Details with pagination
 
     else
       @details = SaleDetail.search_orders(@sale.id, params[:search], params[:show]).paginate(page: params[:page], per_page: 15) # Details with pagination
@@ -51,6 +55,9 @@ class Admin::SaleDetailsController < ApplicationController
     elsif @is_delivery
       title_pdf = "#{t('sale.delivery_details')} ##{@sale.id}"
 
+    elsif @is_price_list
+      title_pdf = "#{t('sale.price_lists')} ##{@sale.id}"
+
     else
       title_pdf = "#{t('sale.order_details')} ##{@sale.id}"
     end
@@ -65,7 +72,12 @@ class Admin::SaleDetailsController < ApplicationController
       format.js
       format.pdf do
         # to_pdf(name_pdf, template, @details, I18n.l(datetime), title_pdf)
-        invoice_pdf(name_pdf, template, @sale, I18n.l(datetime), title_pdf)
+        if @is_price_list
+          price_list_pdf(name_pdf, template, @sale, I18n.l(datetime), title_pdf)
+
+        else
+          invoice_pdf(name_pdf, template, @sale, I18n.l(datetime), title_pdf)
+        end
       end
     end
   end

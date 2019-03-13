@@ -8,5 +8,8 @@
 - elsif @is_delivery
   = "#{@count == 1 ? t('sale.delivery_detail') : t('sale.delivery_details')} ##{@sale.id}"
 
+- elsif @is_price_list
+  = "#{@count == 1 ? t('sale.price_list_detail') : t('sale.price_list_details')} ##{@sale.id}"
+
 - else
   = "#{@count == 1 ? t('sale.order_detail') : t('sale.order_details')} ##{@sale.id}"

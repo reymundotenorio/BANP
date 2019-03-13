@@ -19,8 +19,8 @@ class SaleDetail < ApplicationRecord
 
   ## Callbacks
 
-  before_validation :update_stock, on: :update
-  before_validation :update_stock_create, on: :create
+  # before_validation :update_stock, on: :update
+  # before_validation :update_stock_create, on: :create
 
   # Update product stock
   def update_stock
@@ -193,6 +193,20 @@ class SaleDetail < ApplicationRecord
   end
   # End Search returns
 
+  # Search price lists
+  def self.search_price_lists(sale_id, search, show_all)
+    if search
+      self.joins(:sale).joins(:product).where("(products.name LIKE :search OR products.name_spanish LIKE :search) AND (sale_details.sale_id = :sale_id)", sale_id: sale_id, search: "%#{search}%").price_list.not_returned.not_pending
+
+    elsif show_all == "all"
+      self.where("sale_id = :sale_id", sale_id: sale_id).price_list.not_returned.not_pending
+
+    else
+      self.where("sale_id = :sale_id", sale_id: sale_id).price_list.not_returned.not_pending
+    end
+  end
+  # End Search price lists
+
   # Search
   def self.search(sale_id, search, show_all)
     if search
@@ -230,5 +244,6 @@ class SaleDetail < ApplicationRecord
   scope :invoiced, -> { where("(sale_details.status = 'invoiced')") }
   scope :shipped, -> { where("(sale_details.status = 'shipped')") }
   scope :delivered, -> { where("(sale_details.status = 'delivered')") }
+  scope :price_list, -> { where("(sale_details.status = 'price_list')") }
   ## End Scopes
 end

@@ -284,6 +284,11 @@ en:
     profile: "Profile"
     update_profile: "Update profile"
     return: "Return"
+    price_list: "Price list"
+    price_lists: "Price lists"
+    price_list_detail: "Price list detail"
+    price_list_details: "Price list details"
+    show_price_lists: "Show price lists"
 
   # Charts
   charts:

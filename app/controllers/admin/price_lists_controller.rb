@@ -42,7 +42,7 @@ class Admin::PriceListsController < ApplicationController
     @form_url = admin_price_list_path
 
     @customers = Customer.search(params[:search_customer], "enabled-only").paginate(page: params[:customers_page], per_page: 5) # Providers with pagination
-    @products = Product.search(params[:search_product], "with-stock-only").paginate(page: params[:products_page], per_page: 5) # Products with pagination
+    @products = Product.search(params[:search_product], "enabled-only").paginate(page: params[:products_page], per_page: 5) # Products with pagination
 
     respond_to do |format|
       format.html
@@ -87,7 +87,7 @@ class Admin::PriceListsController < ApplicationController
       @form_url = admin_price_list_path
 
       @customers = Customer.search(params[:search_customer], "enabled-only").paginate(page: params[:customers_page], per_page: 5) # Providers with pagination
-      @products = Product.search(params[:search_product], "with-stock-only").paginate(page: params[:products_page], per_page: 5) # Products with pagination
+      @products = Product.search(params[:search_product], "enabled-only").paginate(page: params[:products_page], per_page: 5) # Products with pagination
       # render :new_price_list
 
       respond_to do |format|

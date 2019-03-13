@@ -14,7 +14,7 @@ class PurchaseDetail < ApplicationRecord
   # End Render sync
 
   ## Callbacks
-  before_validation :update_stock, on: :update
+  # before_validation :update_stock, on: :update
 
   # Update product stock
   def update_stock
