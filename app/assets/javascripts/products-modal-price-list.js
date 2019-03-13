@@ -103,8 +103,17 @@ $(document).ready(function(){
   function updateTotal(){
     var totalDetails = 0;
     var discount = 0;
+
+    $(".nested-fields").each(function(){
+      $(this).removeClass("is-visible");
+
+      if($(this).css("display") != "none"){
+        $(this).addClass("is-visible");
+      }
+    });
+
     // Detail total
-    $(".detail-total").each(function(){
+    $(".nested-fields.is-visible .detail-total").each(function(){
       // If not empty
       if($(this).text() != ""){
         total = $(this).text().replace("$", "");
@@ -224,6 +233,12 @@ $(document).ready(function(){
 
   // Updating Total on remove
   $("#sale_details").on("cocoon:after-remove", function() {
+    updateTotal();
+  });
+  // End Updating Total on remove
+
+  // Updating Total on remove
+  $("#purchase_details").on("cocoon:after-remove", function() {
     updateTotal();
   });
   // End Updating Total on remove

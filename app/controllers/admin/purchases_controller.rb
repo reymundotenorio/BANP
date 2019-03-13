@@ -19,6 +19,12 @@ class Admin::PurchasesController < ApplicationController
   before_action :set_purchase_reception, only: [:new_reception, :edit_reception, :create_reception, :deactive_reception, :history_reception]
   # End Find purchase reception with Friendly_ID
 
+    ########## RETURNS ##########
+
+    # Find purchase return with Friendly_ID
+    before_action :set_purchase_return, only: [:new_return, :create_return]
+    # End Find purchase return with Friendly_ID
+
   # Authentication
   before_action :require_employee, :require_warehouse_supervisor
   # End Authentication
@@ -549,7 +555,33 @@ class Admin::PurchasesController < ApplicationController
         render "admin/purchases/returns/index"
       end
       format.pdf do
-        to_pdf(name_pdf, template, PurchaseDetail.returns, I18n.l(datetime), title_pdf)
+        to_pdf(name_pdf, template, PurchaseDetail.returned, I18n.l(datetime), title_pdf)
+      end
+    end
+  end
+
+  # admin/purchases/reception/:id/return
+  def new_return
+    # Order found by before_action
+    @return.discount = "%.2f" % @return.discount
+    @return.discount = "0#{@return.discount.to_s.gsub! '.', ''}" if @return.discount < 10
+
+    @search_form_path = admin_new_purchase_return_path(@return)
+    @form_url = admin_purchase_return_path
+    # @form_url = admin_update_purchase_return_path
+
+    @providers = Provider.search(params[:search_provider], "enabled-only").paginate(page: params[:providers_page], per_page: 5) # Providers with pagination
+    @products = Product.search(params[:search_product], "enabled-only").paginate(page: params[:products_page], per_page: 5) # Products with pagination
+
+    @is_edit = true
+
+    respond_to do |format|
+      format.html do
+        render "admin/purchases/returns/edit"
+      end
+
+      format.js do
+        render "admin/purchases/returns/edit"
       end
     end
   end
@@ -583,6 +615,20 @@ class Admin::PurchasesController < ApplicationController
   end
 
   def purchase_reception_params
+    params.require(:purchase).permit(:purchase_datetime, :receipt_number, :status, :discount, :provider_id, :employee_id, :observations, purchase_details_attributes: PurchaseDetail.attribute_names.map(&:to_sym).push(:_destroy))
+  end
+
+  ########## RETURNS ##########
+
+  # Set Purchase
+  def set_purchase_return
+    @return = Purchase.find(params[:id])
+
+  rescue
+    redirect_to admin_purchase_returns_path, alert: t("alerts.not_found", model: t("purchase.return"))
+  end
+
+  def purchase_return_params
     params.require(:purchase).permit(:purchase_datetime, :receipt_number, :status, :discount, :provider_id, :employee_id, :observations, purchase_details_attributes: PurchaseDetail.attribute_names.map(&:to_sym).push(:_destroy))
   end
 end

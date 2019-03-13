@@ -259,6 +259,8 @@ Rails.application.routes.draw do
 
     # Purchases returns
     get "/purchases/returns", to: "purchases#index_returns", as: "purchase_returns"
+    get "/purchases/reception/:id/return", to: "purchases#new_return", as: "new_purchase_return"
+    patch "/purchases/reception/return/:id", to: "purchases#create_return", as: "purchase_return"
     # End Purchases returns
 
     # Purchases details

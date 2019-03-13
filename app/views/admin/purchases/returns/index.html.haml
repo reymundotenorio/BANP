@@ -54,7 +54,7 @@
 
               -# Export button
               .btn-container
-                = link_to (admin_inventory_path(format: "pdf", lang: I18n.locale)), target: "_blank", class: "btn btn-general btn-default" do
+                = link_to (admin_purchase_returns_path(format: "pdf", lang: I18n.locale)), target: "_blank", class: "btn btn-general btn-default" do
                   %i.fas.fa-download
                   %span= t("views.index.export")
               -# End Export button

@@ -1,0 +1,47 @@
+-# Form Title
+%section.form-title
+  .container
+    -# Title
+    .row.title-container
+      .col-xs-12.col-sm-4.col-lg-8
+        -# Heading
+        %h1{class: "#{@return.state}"}
+          %i.fas.fa-edit
+          = t("views.edit.edit")
+        -# End Heading
+
+      .col-xs-12.col-sm-8.col-lg-4
+        -# Provider button
+        .btn-container
+          = link_to (admin_purchase_details_path(@return.id)), class: "btn btn-general" do
+            %i.fas.fa-id-card
+            %span= t("purchase.return_details")
+        -# End Provider button
+    -# End Title
+
+    -# Breadcrumb
+    .row
+      .col-xs-12.hidden-xs
+        .breadcrumb-container
+          %ol.breadcrumb
+            %li
+              = link_to (admin_root_path) do
+                %i.fas.fa-tachometer-alt
+                %span= t("header.navigation.dashboard")
+            %li
+              = link_to (admin_purchase_returns_path) do
+                %i.far.fa-newspaper
+                %span= t("purchase.returns")
+            %li
+              = link_to (admin_purchase_details_path(@return.id)) do
+                %i.fas.fa-list-alt
+                = "#{t('purchase.return_details')} ##{@return.id}"
+            %li.active
+              %i.fas.fa-edit
+              = t("views.edit.edit")
+    -# End Breadcrumb
+-# End Form Title
+
+-# Render form
+= render "admin/purchases/returns/form"
+-# End Render form
