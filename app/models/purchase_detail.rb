@@ -41,7 +41,10 @@ class PurchaseDetail < ApplicationRecord
             # If already is a reception
           else
             # Current stock - Purchase original quantity + Purchase new quantity
-            final_stock = product.stock - old_quantity + self.quantity
+            # final_stock = product.stock - old_quantity + self.quantity
+
+            # Current stock - Purchase return quantity
+            final_stock = product.stock - self.quantity
 
             # If the new quantity exceed the stock
             if (final_stock) < 0
@@ -54,18 +57,19 @@ class PurchaseDetail < ApplicationRecord
               product.stock = final_stock
 
               # If quantity was reduced (returned or loss)
-              if self.quantity < old_quantity
+              if self.quantity <= old_quantity
                 # Save new return
                 returned = PurchaseDetail.new
                 returned.purchase_id = self.purchase_id
                 returned.product_id = self.product_id
                 returned.price = self.price
-                returned.quantity = (old_quantity - self.quantity)
+                returned.quantity = self.quantity
                 returned.status = "returned"
                 returned.loss_expiration = self.loss_expiration
 
-                # Reset loss_expiration param
-                self.loss_expiration = true
+                # Reset params
+                self.loss_expiration = false
+                self.quantity = (old_quantity - self.quantity)
 
                 # Saving return
                 if returned.save
@@ -101,7 +105,6 @@ class PurchaseDetail < ApplicationRecord
     # End If product has been found
   end
   # End Update product stock
-
 
   ## End Callbacks
 

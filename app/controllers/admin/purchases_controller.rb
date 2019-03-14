@@ -511,11 +511,11 @@ class Admin::PurchasesController < ApplicationController
 
     respond_to do |format|
       format.html do
-        render "admin/purchases/returns/edit"
+        render "admin/purchases/returns/new"
       end
 
       format.js do
-        render "admin/purchases/returns/edit"
+        render "admin/purchases/returns/new"
       end
     end
   end
@@ -609,6 +609,11 @@ class Admin::PurchasesController < ApplicationController
 
     # If record was saved
     if @return.update(updated_params)
+      @return.purchase_details.each do |detail|
+        product = detail.product
+        sync_update product 
+      end
+
       redirect_to admin_purchase_returns_path, notice: t("alerts.created", model: t("sale.return")) # Returned
 
       # If record was not saved

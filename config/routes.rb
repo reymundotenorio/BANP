@@ -271,7 +271,7 @@ Rails.application.routes.draw do
     # End Purchases details
 
     # Inventory
-    get "/inventory", to: "inventories#index", as: "inventory"
+    get "/inventory", to: "products#inventory_index", as: "inventory"
     # End Inventory
 
     # Sales orders

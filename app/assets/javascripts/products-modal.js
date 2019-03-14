@@ -157,11 +157,15 @@ $(document).ready(function(){
     $(".subtract").off("click");
     $(".add").off("click");
     // End Remove duplicate click functions
-
-
+    
     // Subtract button on cart details
     $(".subtract").click(function(){
-      var $input = $(this).next();
+      var $input = $(this).parent().find("div.field_with_errors > input.q-input.details");
+
+      if($input.length == 0) {
+        $input = $(this).next();
+      }
+
       var currentValue = parseInt($input.val());
 
       if(currentValue > 1){
@@ -178,7 +182,12 @@ $(document).ready(function(){
 
     // Add button on cart details
     $(".add").click(function(){
-      var $input = $(this).prev();
+      var $input = $(this).parent().find("div.field_with_errors > input.q-input.details");
+
+      if($input.length == 0) {
+        $input = $(this).prev();
+      }
+
       var currentValue = parseInt($input.val());
 
       $input.val(currentValue + 1);
