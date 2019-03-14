@@ -16,8 +16,12 @@
         = f.text_field :price, class: "input-disabled no-padding price-details", "data-price": f.object.price, value: number_to_currency(f.object.price, precision: 2, unit: "$", format: "%u%n", separator: ".", delimiter: ",")
 
     %td.price-container.price-row.align-middle
-      %p.record-link{"data-header": "#{t('activerecord.attributes.product.quantity')}"}
-        = f.text_field :quantity, class: "input-disabled no-padding", value: "#{f.object.quantity} (#{f.object.product.stock})"
+      %p.record-link.inline{"data-header": "#{t('activerecord.attributes.product.quantity')}"}
+        %span= "#{f.object.quantity}"
+      -# Stock render_sync
+      = sync partial: "product_quantity_stock", resource: f.object.product
+      -# = sync_new partial: "product_quantity_stock", resource: PurchaseDetail.new
+      -# End Stock render_sync
 
     %td.quantity-container.align-middle
       .form-group.no-padding.record-link{"data-header": "#{t('activerecord.attributes.product.quantity_to_return')}"}

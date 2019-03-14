@@ -547,7 +547,7 @@ puts "Seeding purchase details"
       price: Faker::Number.decimal(2, 2).to_d.abs,
       quantity: Faker::Number.between(1, 100),
       status: "ordered",
-      lost_defeated: false
+      loss_expiration: false
       # status: ["ordered", "returned"].sample
     )
   rescue StandardError => e

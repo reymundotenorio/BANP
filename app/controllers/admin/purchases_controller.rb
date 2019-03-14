@@ -19,11 +19,11 @@ class Admin::PurchasesController < ApplicationController
   before_action :set_purchase_reception, only: [:new_reception, :edit_reception, :create_reception, :deactive_reception, :history_reception]
   # End Find purchase reception with Friendly_ID
 
-    ########## RETURNS ##########
+  ########## RETURNS ##########
 
-    # Find purchase return with Friendly_ID
-    before_action :set_purchase_return, only: [:new_return, :create_return]
-    # End Find purchase return with Friendly_ID
+  # Find purchase return with Friendly_ID
+  before_action :set_purchase_return, only: [:new_return, :create_return]
+  # End Find purchase return with Friendly_ID
 
   # Authentication
   before_action :require_employee, :require_warehouse_supervisor
@@ -356,66 +356,6 @@ class Admin::PurchasesController < ApplicationController
       updated_params[:status] = "received"
       # End Deleting blank spaces
 
-      # Validating detail with stock on Destroy
-      json = JSON.parse(updated_params["purchase_details_attributes"].to_json) # Converting to Json
-      # Iterating Json
-      json.each do |item|
-        # Item is being destroyed
-        if item[1]["_destroy"] == "1"
-          detail_id = item[1]["id"] || nil
-          detail = PurchaseDetail.find(detail_id) || nil
-
-          product_id = item[1]["product_id"] || nil
-          product = Product.find(product_id) || nil
-
-          # If detail has been found
-          if detail
-            # If product has been found
-            if product
-              # If purchase is active
-              if detail.purchase.state
-                # If sale is a reception
-                if detail.purchase.status == "received"
-                  # If the quantity is more than the stock
-                  if (product.stock - detail.quantity) < 0
-                    redirect_to admin_edit_purchase_reception_path(@reception), alert: t("purchase.stock_is_less", stock: detail.product.stock ,product: I18n.locale == :es ? detail.product.name_spanish : detail.product.name)
-                    return
-
-                    # If the quantity is less than the stock
-                  else
-                    puts "Stock is more than the quantity"
-
-                    product.stock = product.stock - detail.quantity
-
-                    returned = PurchaseDetail.new
-                    returned.purchase_id = detail.purchase_id
-                    returned.product_id = detail.product_id
-                    returned.price = detail.price
-                    returned.quantity = detail.quantity
-                    returned.status = "returned"
-
-                    if returned.save
-                      puts "Return created on detail destroy"
-                    end
-
-                    # Trigger saving successfully
-                    if product.save
-                      puts "Stock updated on destroy"
-                    end
-                  end
-                end
-                # End If sale is a reception
-              end
-              # End If purchase is active
-            end
-            # End If product has been found
-          end
-          # End If detail has been found
-        end
-        # End Item is being destroyed
-      end
-      # End Iterating Json
-
     end
     # If record is an edit
 
@@ -568,12 +508,6 @@ class Admin::PurchasesController < ApplicationController
 
     @search_form_path = admin_new_purchase_return_path(@return)
     @form_url = admin_purchase_return_path
-    # @form_url = admin_update_purchase_return_path
-
-    @providers = Provider.search(params[:search_provider], "enabled-only").paginate(page: params[:providers_page], per_page: 5) # Providers with pagination
-    @products = Product.search(params[:search_product], "enabled-only").paginate(page: params[:products_page], per_page: 5) # Products with pagination
-
-    @is_edit = true
 
     respond_to do |format|
       format.html do
@@ -582,6 +516,115 @@ class Admin::PurchasesController < ApplicationController
 
       format.js do
         render "admin/purchases/returns/edit"
+      end
+    end
+  end
+
+  # Create
+  def create_return
+    updated_params = purchase_return_params
+
+    # Deleting blank spaces
+    updated_params[:receipt_number] = updated_params[:receipt_number].strip
+    updated_params[:status] = updated_params[:status].strip
+    updated_params[:observations] = updated_params[:observations].strip
+    # End Deleting blank spaces
+
+    updated_params[:purchase_datetime] = updated_params[:purchase_datetime].to_datetime if updated_params[:purchase_datetime]
+
+    # Fixing discount
+    if updated_params[:discount]
+      begin
+        updated_params[:discount] = updated_params[:discount].to_d
+
+      rescue
+        updated_params[:discount] = 0.00
+      end
+    end
+
+    # Deleting blank spaces
+    updated_params[:status] = "received"
+    # End Deleting blank spaces
+
+    # Validating detail with stock on Destroy
+    json = JSON.parse(updated_params["purchase_details_attributes"].to_json) # Converting to Json
+
+    # Iterating Json
+    json.each do |item|
+      # Item is being destroyed
+      if item[1]["_destroy"] == "1"
+        detail_id = item[1]["id"] || nil
+        detail = PurchaseDetail.find(detail_id) || nil
+
+        product_id = item[1]["product_id"] || nil
+        product = Product.find(product_id) || nil
+
+        # If detail has been found
+        if detail
+          # If product has been found
+          if product
+            # If purchase is active
+            if detail.purchase.state
+              # If purchase is a reception
+              if detail.purchase.status == "received"
+                # If the quantity is more than the stock
+                if (product.stock - detail.quantity) < 0
+                  redirect_to admin_new_purchase_return_path(@return), alert: t("purchase.stock_is_less", stock: detail.product.stock ,product: I18n.locale == :es ? detail.product.name_spanish : detail.product.name)
+                  return
+
+                  # If the quantity is less than the stock
+                else
+                  puts "Stock is more than the quantity"
+
+                  product.stock = product.stock - detail.quantity
+
+                  returned = PurchaseDetail.new
+                  returned.purchase_id = detail.purchase_id
+                  returned.product_id = detail.product_id
+                  returned.price = detail.price
+                  returned.quantity = detail.quantity
+                  returned.status = "returned"
+
+                  if returned.save
+                    puts "Return created on detail destroy"
+                  end
+
+                  # Trigger saving successfully
+                  if product.save
+                    puts "Stock updated on destroy"
+                  end
+                end
+              end
+              # End If purchase is a reception
+            end
+            # End If purchase is active
+          end
+          # End If product has been found
+        end
+        # End If detail has been found
+      end
+      # End Item is being destroyed
+    end
+    # End Iterating Json
+
+    # If record was saved
+    if @return.update(updated_params)
+      redirect_to admin_purchase_returns_path, notice: t("alerts.created", model: t("sale.return")) # Returned
+
+      # If record was not saved
+    else
+      @search_form_path = admin_new_purchase_return_path(@return)
+      @form_url = admin_purchase_return_path
+
+      # render :new_reception
+      respond_to do |format|
+        format.html do
+          render "admin/purchases/returns/new"
+        end
+
+        format.js do
+          render "admin/purchases/returns/new"
+        end
       end
     end
   end

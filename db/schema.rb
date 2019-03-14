@@ -159,7 +159,7 @@ ActiveRecord::Schema.define(version: 2019_02_05_120100) do
     t.decimal "price", precision: 8, scale: 2, null: false
     t.integer "quantity", null: false
     t.string "status"
-    t.boolean "lost_defeated", default: false, null: false
+    t.boolean "loss_expiration", default: false, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "purchase_id"

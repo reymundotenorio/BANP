@@ -293,6 +293,7 @@ es:
     price_list_detail: "Detalle de lista de precio"
     price_list_details: "Detalles de lista de precio"
     show_price_lists: "Mostrar listas de precio"
+    loss_expiration: "Pérdida"    
 
   # Charts
   charts:

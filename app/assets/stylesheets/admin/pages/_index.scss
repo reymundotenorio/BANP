@@ -308,9 +308,17 @@
           //   width: 120px;
           // }
 
+          .product-stock{
+            display: inline-block;
+          }
+
           >.record-link{
             padding: 8px;
             display: block;
+
+            &.inline{
+              display: inline-block;
+            }
 
             &:before{
               content: attr(data-header);
