@@ -14,7 +14,7 @@ class PurchaseDetail < ApplicationRecord
   # End Render sync
 
   ## Callbacks
-  # before_validation :update_stock, on: :update
+  before_validation :update_stock, on: :update
 
   # Update product stock
   def update_stock
@@ -26,80 +26,82 @@ class PurchaseDetail < ApplicationRecord
       if self.purchase.state
         # If purchase is a reception
         if self.purchase.status == "received"
-          # If purchase details has been returned
-          if self.status == "returned"
-            # # If the stock is less than the quantity to return
-            # if product.stock < self.quantity
-            #   self.errors.add(:quantity, "Cantidad no debe ser mayor a stock #{product.stock}")
-            #   return false
-            #
-            #   # If the stock is greater or equal than the quantity to return
-            # else
-            #   product.stock = product.stock - self.quantity
-            # end
-            # # End If the stock is less than the quantity to return
 
-            # If purchase details has been received
+          old_quantity = self.changes["quantity"][0] if changes["quantity"]
+          old_quantity = 0 if !old_quantity
+
+          old_status = self.changes["status"][0] if changes["status"]
+          old_status = "received" if !old_status
+
+          # If is a new reception
+          if self.purchase.status == "received" && old_status == "ordered"
+            # Increment stock
+            product.stock = product.stock + self.quantity
+
+            # If already is a reception
           else
-            old_quantity = self.changes["quantity"][0] if changes["quantity"]
-            old_quantity = 0 if !old_quantity
+            # Current stock - Purchase original quantity + Purchase new quantity
+            final_stock = product.stock - old_quantity + self.quantity
 
-            old_status = self.changes["status"][0] if changes["status"]
-            old_status = "received" if !old_status
+            # If the new quantity exceed the stock
+            if (final_stock) < 0
+              self.errors.add(:quantity, I18n.t("purchase.stock_is_less", stock: product.stock, product: I18n.locale == :es ? product.name_spanish : product.name))
+              return
 
-
-            # If is a order that is being received
-            if self.purchase.status == "received" && old_status == "ordered"
-              product.stock = product.stock + self.quantity
-
-              # If already is a reception
+              # If the new quantity is less than the stock
             else
-              final_stock = product.stock - old_quantity + self.quantity
+              # Set new stock to product
+              product.stock = final_stock
 
-              # If the new quantity is more than the stock
-              if (final_stock) < 0
-                self.errors.add(:quantity, I18n.t("purchase.stock_is_less", stock: product.stock, product: I18n.locale == :es ? product.name_spanish : product.name))
-                return
+              # If quantity was reduced (returned or loss)
+              if self.quantity < old_quantity
+                # Save new return
+                returned = PurchaseDetail.new
+                returned.purchase_id = self.purchase_id
+                returned.product_id = self.product_id
+                returned.price = self.price
+                returned.quantity = (old_quantity - self.quantity)
+                returned.status = "returned"
+                returned.loss_expiration = self.loss_expiration
 
-                # If the new quantity is less than the stock
-              else
-                product.stock = final_stock
+                # Reset loss_expiration param
+                self.loss_expiration = true
 
-                # If quantity was reduced
-                if self.quantity < old_quantity
-                  returned = PurchaseDetail.new
-                  returned.purchase_id = self.purchase_id
-                  returned.product_id = self.product_id
-                  returned.price = self.price
-                  returned.quantity = (old_quantity - self.quantity)
-                  returned.status = "returned"
+                # Saving return
+                if returned.save
+                  puts "Return created on purchase detail update"
 
-                  if returned.save
-                    puts "Return created on detail update"
-                  end
+                  # Return not saved
+                else
+                  puts "Return not created on purchase detail update"
                 end
-                # End If quantity was reduced
+                # End Saving return
+
               end
+              # If quantity was reduced (returned or loss)
             end
-            # End If already is a reception
+            # End If the new quantity exceed the stock
           end
-          # End If purchase details has been received
+          # End If is a new reception
 
-          # Trigger saving successfully
+          # Saving product new stock
           if product.save
+            puts "Product stock updated on purchase detail update"
 
-            # Trigger saving failed
+            # Product stock not saved
           else
-            puts "Product stock not updated"
+            puts "Product stock not updated on purchase detail update"
           end
+          # End Saving product new stock
+
         end
-        # End If purchase is a reception
       end
       # End If purchase is active
     end
     # End If product has been found
   end
   # End Update product stock
+
 
   ## End Callbacks
 
