@@ -130,6 +130,7 @@ en:
         select: ""
         stock: "Stock"
         stock_min: "Minimum stock"
+        quantity_to_return: "Return"
       purchase:
         receipt_number: "Receipt number"
         purchase_datetime: "Date"

@@ -19,7 +19,7 @@
                     = f.hidden_field :employee_id, value: current_employee.id, required: true
 
                   .form-group
-                    = f.text_field :receipt_number, class: "form-control input", required: true, autofocus: true
+                    = f.text_field :receipt_number, class: "form-control input input-disabled with-padding", required: true, autofocus: true
                     %label
                       %b= t("activerecord.attributes.purchase.receipt_number")
                     .border-bottom
@@ -39,14 +39,14 @@
 
                     .col-xs-12.col-md-4.container-left
                       .form-group
-                        = f.text_field :discount, class: "form-control input discount input-disabled"
+                        = f.text_field :discount, class: "form-control input discount input-disabled with-padding"
                         %label
                           %b= "#{t('activerecord.attributes.purchase.discount')} %"
                         .border-bottom
 
                     .col-xs-12.col-md-8.container-right
                       .form-group
-                        .input-group.date#datetimepicker
+                        .input-group.date.no-btn#datetimepicker
                           = f.text_field :purchase_datetime, id: "purchase_datetime_picker", class: "form-control input date-field", required: true
                           -# %span.input-group-addon.btn.btn-general
                           -#   %i.far.fa-calendar-alt
@@ -64,7 +64,7 @@
 
                   .col-xs-12.col-md-5.container-right
                     .form-group
-                      = f.text_area :observations, class: "form-control input text-area big input-disabled"
+                      = f.text_area :observations, class: "form-control input text-area big input-disabled with-padding"
                       %label
                         %b= t("activerecord.attributes.purchase.observations")
                       .border-bottom
@@ -80,7 +80,7 @@
                       %table.table#details-table
                         %thead
                           - model = "product"
-                          - attributes = ["name", "price", "quantity", "total", "select"]
+                          - attributes = ["name", "price", "quantity", "quantity_to_return", "total", "select"]
 
                           -# Render table header
                           = render partial: "partials/table_header_details", locals: {model: model, attributes: attributes}

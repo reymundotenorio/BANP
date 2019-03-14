@@ -6,8 +6,8 @@
       .col-xs-12.col-sm-4.col-lg-8
         -# Heading
         %h1{class: "#{@return.state}"}
-          %i.fas.fa-edit
-          = t("views.edit.edit")
+          %i.fas.fa-undo-alt
+          = t("sale.return")
         -# End Heading
 
       .col-xs-12.col-sm-8.col-lg-4
@@ -15,7 +15,7 @@
         .btn-container
           = link_to (admin_purchase_details_path(@return.id)), class: "btn btn-general" do
             %i.fas.fa-id-card
-            %span= t("purchase.return_details")
+            %span= t("purchase.reception")
         -# End Provider button
     -# End Title
 
@@ -31,14 +31,14 @@
             %li
               = link_to (admin_purchase_returns_path) do
                 %i.far.fa-newspaper
-                %span= t("purchase.returns")
+                %span= t("purchase.receptions")
             %li
               = link_to (admin_purchase_details_path(@return.id)) do
                 %i.fas.fa-list-alt
-                = "#{t('purchase.return_details')} ##{@return.id}"
+                = "#{t('purchase.reception_details')} ##{@return.id}"
             %li.active
-              %i.fas.fa-edit
-              = t("views.edit.edit")
+              %i.fas.fa-undo-alt
+              = t("sale.return")
     -# End Breadcrumb
 -# End Form Title
 

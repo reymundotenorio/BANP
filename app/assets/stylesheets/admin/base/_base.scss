@@ -220,6 +220,12 @@ a{
           width: 100%;
         }
       }
+
+      &.no-btn{
+        .border-bottom{
+          right: 0px;
+        }
+      }
     }
   }
 

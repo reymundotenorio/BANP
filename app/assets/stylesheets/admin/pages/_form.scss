@@ -105,7 +105,7 @@ form{
       margin-bottom: 0px;
     }
 
-    input{
+    input, textarea{
       margin: 0px;
 
       &.input-disabled{
@@ -117,6 +117,10 @@ form{
         box-shadow: none;
         word-wrap: break-word;
         padding: 0px;
+
+        &.with-padding{
+          padding: 6px 12px;
+        }
       }
     }
 
