@@ -26,15 +26,7 @@ class ApplicationController < ActionController::Base
 
   # Current employee
   def current_employee
-    # begin
     @current_employee ||= User.find(session[:employee_id]).employee if session[:employee_id]
-    # cookies.encrypted[:current_employee_id] = { value: @current_employee.id, expires: 24.hours }
-    # return @current_employee
-
-    # rescue
-    #   @current_employee = Employee.find(cookies.encrypted[:current_employee_id])
-    #   return @current_employee
-    # end
   end
 
   # Current customer
