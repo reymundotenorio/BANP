@@ -76,7 +76,7 @@
 
     .col-xs-12.col-sm-3.col-md-6.button-container.no-padding.padding-top
       - if purchase.state
-        = link_to (admin_new_purchase_return_path(purchase)), class: "btn btn-general" do
+        = link_to (admin_new_purchase_loss_path(purchase)), class: "btn btn-general" do
           %i.fas.fa-box-open
           %span= t("sale.loss_expiration")
 

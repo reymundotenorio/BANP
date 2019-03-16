@@ -7,6 +7,13 @@
     %td.hidden
       = f.hidden_field :status, value: "received"
 
+    %td.hidden
+      - if @is_loss
+        = f.hidden_field :loss_expiration, value: true
+
+      - else
+        = f.hidden_field :loss_expiration, value: false
+
     %td.name-container
       %p.record-link{"data-header": "#{t('activerecord.attributes.product.name')}"}
         = f.text_field :product, class: "input-disabled", value: I18n.locale == :es ? f.object.product.name_spanish : f.object.product.name

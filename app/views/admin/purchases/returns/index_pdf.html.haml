@@ -16,7 +16,7 @@
               %table.table.table-pdf
                 -# Set attributes
                 - model = "purchase_details"
-                - attributes = ["purchase_id", "created_at", "product", "price", "quantity", "total"]
+                - attributes = ["purchase_id", "created_at", "product", "price", "quantity", "total_purchase_detail", "loss_expiration"]
 
                 -# Render table header
                 = render partial: "partials/table_header", locals: {model: model, attributes: attributes}

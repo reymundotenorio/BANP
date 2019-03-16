@@ -257,11 +257,13 @@ Rails.application.routes.draw do
     patch "/purchases/reception/:id/deactive", to: "purchases#deactive_reception", as: "deactive_purchase_reception"
     # End Purchases receptions
 
-    # Purchases returns
+    # Purchases returns and loss
     get "/purchases/returns", to: "purchases#index_returns", as: "purchase_returns"
     get "/purchases/reception/:id/return", to: "purchases#new_return", as: "new_purchase_return"
+    get "/purchases/reception/:id/loss", to: "purchases#new_loss", as: "new_purchase_loss"
     patch "/purchases/reception/return/:id", to: "purchases#create_return", as: "purchase_return"
-    # End Purchases returns
+    patch "/purchases/reception/loss/:id", to: "purchases#create_loss", as: "purchase_loss"
+    # End Purchases returns and loss
 
     # Purchases details
     get "/purchases/:id/details", to: "purchase_details#show", as: "purchase_details"

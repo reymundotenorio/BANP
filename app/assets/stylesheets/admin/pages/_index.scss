@@ -337,6 +337,11 @@
 
           p{
             margin: 0px;
+
+            &.loss-expiration{
+              // color: $sixth-color;
+              color: $fifth-color;
+            }
           }
 
           &:first-child{
@@ -471,7 +476,12 @@
             }
 
             &.total-container{
+            }
 
+            p{
+              &.loss-expiration{
+                text-align: center;
+              }
             }
           }
         }

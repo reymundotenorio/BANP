@@ -76,6 +76,14 @@
           - elsif resource["#{attribute}"] == "returned"
             = I18n.locale == :es ? "Devuelto" : "Returned"
 
+      - elsif attribute == "loss_expiration"
+        %p.loss-expiration
+          - if resource["#{attribute}"] == true
+            %i.fas.fa-check-circle
+
+          - else
+            -# %i.fas.fa-times-circle
+
       - elsif attribute == "product"
         %p= I18n.locale == :es ? resource.product.name_spanish : resource.product.name
 

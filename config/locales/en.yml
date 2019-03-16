@@ -162,6 +162,7 @@ en:
         provider: "Provider"
         category: "Category"
         employee: "Employee"
+        loss_expiration: "Loss/Expiration"
       sale:
         sale_datetime: "Date"
         delivery_status: "Delivery status"

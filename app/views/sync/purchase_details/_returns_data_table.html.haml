@@ -1,7 +1,7 @@
 %tr{class: "clickable-row #{purchase_detail.status.downcase}"}
   -# Set attributes
   -# - attributes = ["product", "price", "quantity", "total", "status"]
-  - attributes = ["purchase_id", "created_at", "product", "price", "quantity", "total"]
+  - attributes = ["purchase_id", "created_at", "product", "price", "quantity", "total", "loss_expiration"]
 
   %td
     .record-link{"data-header": "No."}
@@ -9,7 +9,7 @@
 
   - attributes.each do |attribute|
     %td
-      .record-link{"data-header": t("activerecord.attributes.purchase_detail.#{attribute}")}
+      .record-link{"data-header": t("activerecord.attributes.purchase_details.#{attribute}")}
         - if attribute == "created_at"
           %p= I18n.locale == :es ? purchase_detail.created_at.strftime("%d/%m/%Y - %I:%M:%S %p") : purchase_detail.created_at.strftime("%m/%d/%Y - %H:%M:%S")
 
@@ -24,6 +24,14 @@
 
         - elsif attribute == "total"
           %p= number_to_currency((purchase_detail.price * purchase_detail.quantity), precision: 2, unit: "$", format: "%u%n", separator: ".", delimiter: ",")
+
+        - elsif attribute == "loss_expiration"
+          %p.loss-expiration
+            - if purchase_detail["#{attribute}"] == true
+              %i.fas.fa-check-circle
+
+            - else
+              -# %i.fas.fa-times-circle
 
         - else
           %p= purchase_detail["#{attribute}"]

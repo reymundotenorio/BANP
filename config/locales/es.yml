@@ -161,6 +161,7 @@ es:
         provider: "Proveedor"
         category: "Categoría"
         employee: "Empleado"
+        loss_expiration: "Pérdida/Expiración"
       sale:
         sale_datetime: "Fecha"
         delivery_status: "Condición del envío"
@@ -293,7 +294,7 @@ es:
     price_list_detail: "Detalle de lista de precio"
     price_list_details: "Detalles de lista de precio"
     show_price_lists: "Mostrar listas de precio"
-    loss_expiration: "Pérdida"    
+    loss_expiration: "Pérdida"
 
   # Charts
   charts:

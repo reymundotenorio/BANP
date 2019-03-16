@@ -97,9 +97,10 @@
                       .border-bottom
 
                   .col-xs-12.no-padding.container-add-products
-                    = link_to "", class: "btn btn-general", "data-toggle": "modal", "data-target": "#getProducts" do
-                      %i.fas.fa-plus
-                      %span= t("purchase.add_products")
+                    - if !@is_edit
+                      = link_to "", class: "btn btn-general", "data-toggle": "modal", "data-target": "#getProducts" do
+                        %i.fas.fa-plus
+                        %span= t("purchase.add_products")
 
                   .col-xs-12.no-padding.index.details
                     .scroll-table

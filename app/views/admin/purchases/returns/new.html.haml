@@ -6,8 +6,13 @@
       .col-xs-12.col-sm-4.col-lg-8
         -# Heading
         %h1{class: "#{@return.state}"}
-          %i.fas.fa-undo-alt
-          = t("sale.return")
+          - if @is_loss
+            %i.fas.fa-box-open
+            = t("sale.loss_expiration")
+
+          - else
+            %i.fas.fa-undo-alt
+            = t("sale.return")
         -# End Heading
 
       .col-xs-12.col-sm-8.col-lg-4
@@ -29,7 +34,7 @@
                 %i.fas.fa-tachometer-alt
                 %span= t("header.navigation.dashboard")
             %li
-              = link_to (admin_purchase_returns_path) do
+              = link_to (admin_purchase_receptions_path) do
                 %i.far.fa-newspaper
                 %span= t("purchase.receptions")
             %li
@@ -37,8 +42,14 @@
                 %i.fas.fa-list-alt
                 = "#{t('purchase.reception_details')} ##{@return.id}"
             %li.active
-              %i.fas.fa-undo-alt
-              = t("sale.return")
+              - if @is_loss
+                %i.fas.fa-box-open
+                = t("sale.loss_expiration")
+
+              - else
+                %i.fas.fa-undo-alt
+                = t("sale.return")
+
     -# End Breadcrumb
 -# End Form Title
 

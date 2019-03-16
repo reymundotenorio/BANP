@@ -68,7 +68,7 @@ class PurchaseDetail < ApplicationRecord
                 returned.loss_expiration = self.loss_expiration
 
                 # Reset params
-                self.loss_expiration = false
+                # self.loss_expiration = false
                 self.quantity = (old_quantity - self.quantity)
 
                 # Saving return
@@ -87,6 +87,9 @@ class PurchaseDetail < ApplicationRecord
             # End If the new quantity exceed the stock
           end
           # End If is a new reception
+
+          # Reset params
+          self.loss_expiration = false
 
           # Saving product new stock
           if product.save
