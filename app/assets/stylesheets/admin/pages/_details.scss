@@ -148,6 +148,22 @@
 
 }
 
+@media (min-width: 768px){
+
+  .details{
+    .general-info{
+      .main-buttons{
+        .button-container{
+          &.padding-top-md{
+            padding-top: 15px;
+          }
+        }
+      }
+    }
+  }
+
+}
+
 @media (min-width: 992px){
 
   .details{

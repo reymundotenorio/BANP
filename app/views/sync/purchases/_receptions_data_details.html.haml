@@ -58,29 +58,29 @@
 
   .main-buttons
     - if purchase.state
-      .col-xs-12.col-sm-3.col-md-6.button-container.no-padding
+      .col-xs-12.col-sm-4.col-md-6.button-container.no-padding.padding-top
         = link_to (admin_edit_purchase_reception_path(purchase)), class: "btn btn-general" do
           %i.fas.fa-edit
           %span= t("views.show.edit")
 
-    %div{class: " col-xs-12 col-sm-3 col-md-6 #{'col-md-offset-3' if !purchase.state} button-container no-padding"}
+    %div{class: " col-xs-12 col-sm-4 col-md-6 #{'col-md-offset-3' if !purchase.state} button-container no-padding padding-top"}
       = link_to (admin_history_purchase_reception_path(purchase)), class: "btn btn-general" do
         %i.fas.fa-history
         %span= t("views.show.history")
 
-    .col-xs-12.col-sm-3.col-md-6.button-container.no-padding.padding-top
+    .col-xs-12.col-sm-4.col-md-6.button-container.no-padding.padding-top
       - if purchase.state
         = link_to (admin_deactive_purchase_reception_path(purchase)), method: "patch", class: "btn btn-general", data: {confirm: t("sale.are_you_sure")} do
           %i.fas.fa-times
           %span= t("views.show.cancel")
 
-    .col-xs-12.col-sm-3.col-md-6.button-container.no-padding.padding-top
+    .col-xs-12.col-sm-6.button-container.no-padding.padding-top.padding-top-md
       - if purchase.state
         = link_to (admin_new_purchase_loss_path(purchase)), class: "btn btn-general" do
           %i.fas.fa-box-open
           %span= t("sale.loss_expiration")
 
-    .col-xs-12.col-sm-3.col-md-12.button-container.no-padding.padding-top
+    .col-xs-12.col-sm-6.col-md-12.button-container.no-padding.padding-top.padding-top-md
       - if purchase.state
         = link_to (admin_new_purchase_return_path(purchase)), class: "btn btn-general" do
           %i.fas.fa-undo-alt

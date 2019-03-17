@@ -306,9 +306,13 @@ Rails.application.routes.draw do
     patch "/sales/delivery/:id/deactive", to: "sales#deactive_delivery", as: "deactive_sale_delivery"
     # End Sales deliveries
 
-    # Sales returns
+    # sales returns
     get "/sales/returns", to: "sales#index_returns", as: "sale_returns"
-    # End Sales returns
+    get "/sales/invoice/:id/return", to: "sales#new_invoice_return", as: "new_sale_invoice_return"
+    get "/sales/delivery/:id/return", to: "sales#new_delivery_return", as: "new_sale_delivery_return"
+    patch "/sales/invoice/return/:id", to: "sales#create_invoice_return", as: "sale_invoice_return"
+    patch "/sales/delivery/return/:id", to: "sales#create_delivery_return", as: "sale_delivery_return"
+    # End sales returns
 
     # Price lists
     get "/price-lists", to: "price_lists#index", as: "price_lists"

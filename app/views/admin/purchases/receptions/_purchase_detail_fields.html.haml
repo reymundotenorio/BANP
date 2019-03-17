@@ -29,8 +29,8 @@
           = f.text_field :price, class: "input-disabled no-padding price-details", "data-price": f.object.price, value: number_to_currency(f.object.price, precision: 2, unit: "$", format: "%u%n", separator: ".", delimiter: ",")
 
     %td.quantity-container.align-middle
-      - if f.object.new_record?
-        .form-group.no-padding.record-link{"data-header": "#{t('activerecord.attributes.product.quantity')}"}
+      .form-group.no-padding.record-link{"data-header": "#{t('activerecord.attributes.product.quantity')}"}
+        - if f.object.new_record?
           .quantity
             %button.subtract{name: "minus", type: "button"}
               %i.fas.fa-minus
@@ -39,8 +39,9 @@
 
             %button.add{name: "plus", type: "button"}
               %i.fas.fa-plus
-      - else
-        = f.text_field :quantity, class: "input-disabled no-padding"
+              
+        - else
+          = f.text_field :quantity, class: "input-disabled no-padding"
 
     %td.align-middle.total-container
       %p.record-link.detail-total{"data-header": "#{t('activerecord.attributes.purchase.total')}", id:"purchase_purchase_details_attributes_#{@details_counter}_total"}

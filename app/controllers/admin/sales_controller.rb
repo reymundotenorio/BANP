@@ -25,11 +25,16 @@ class Admin::SalesController < ApplicationController
   before_action :set_sale_shipment, only: [:new_shipment, :history_shipment]
   # End Find sale order with Friendly_ID
 
-
-  ########## SHIPMENTS ##########
+  ########## DELIVERIES ##########
 
   # Find sale order with Friendly_ID
   before_action :set_sale_delivery, only: [:new_delivery, :edit_delivery, :update_delivery, :deactive_delivery, :history_delivery]
+  # End Find sale order with Friendly_ID
+
+  ########## RETURNS ##########
+
+  # Find sale order with Friendly_ID
+  before_action :set_sale_return, only: [:new_invoice_return, :new_delivery_return, :create_invoice_return, :create_delivery_return]
   # End Find sale order with Friendly_ID
 
   # Authentication
@@ -252,57 +257,6 @@ class Admin::SalesController < ApplicationController
       end
     end
 
-    # Validating detail with stock on Destroy
-    json = JSON.parse(updated_params["sale_details_attributes"].to_json) # Converting to Json
-    # Iterating Json
-    json.each do |item|
-      # Item is being destroyed
-      if item[1]["_destroy"] == "1"
-        detail_id = item[1]["id"] || nil
-        detail = SaleDetail.find(detail_id) || nil
-
-        product_id = item[1]["product_id"] || nil
-        product = Product.find(product_id) || nil
-
-        # If detail has been found
-        if detail
-          # If product has been found
-          if product
-            # If sale is active
-            if detail.sale.state
-              # If sale is an invoice or delivery
-              if detail.sale.status == "invoiced" || detail.sale.status == "delivered"
-                product.stock = product.stock + detail.quantity
-
-                returned = SaleDetail.new
-                returned.sale_id = detail.sale_id
-                returned.product_id = detail.product_id
-                returned.price = detail.price
-                returned.quantity = detail.quantity
-                returned.status = "returned"
-
-
-                if returned.save
-                  puts "Return created on detail destroy"
-                end
-
-                # Trigger saving successfully
-                if product.save
-                  puts "Stock updated on destroy"
-                end
-              end
-              # End If sale is an invoice or delivery
-            end
-            # End If sale is active
-          end
-          # End If product has been found
-        end
-        # End If detail has been found
-      end
-      # End Item is being destroyed
-    end
-    # End Iterating Json
-
     if @invoice.update(updated_params)
       redirect_to admin_sale_details_path(@invoice.id), notice: t("alerts.updated", model: t("sale.invoice"))
 
@@ -360,7 +314,7 @@ class Admin::SalesController < ApplicationController
         returned.status = "returned"
 
         if returned.save
-          puts "Return created on detail deactivation"
+          puts "Sale return created on detail deactivation"
         end
 
         # Trigger saving successfully
@@ -369,7 +323,7 @@ class Admin::SalesController < ApplicationController
 
           # Trigger saving failed
         else
-          puts "Product stock not updated on deactivation"
+          puts "Product stock not updated on deactivation (Sale)"
         end
       end
       # End If sale is active
@@ -563,57 +517,6 @@ class Admin::SalesController < ApplicationController
       end
     end
 
-    # Validating detail with stock on Destroy
-    json = JSON.parse(updated_params["sale_details_attributes"].to_json) # Converting to Json
-    # Iterating Json
-    json.each do |item|
-      # Item is being destroyed
-      if item[1]["_destroy"] == "1"
-        detail_id = item[1]["id"] || nil
-        detail = SaleDetail.find(detail_id) || nil
-
-        product_id = item[1]["product_id"] || nil
-        product = Product.find(product_id) || nil
-
-        # If detail has been found
-        if detail
-          # If product has been found
-          if product
-            # If sale is active
-            if detail.sale.state
-              # If sale is an invoice or delivery
-              if detail.sale.status == "invoiced" || detail.sale.status == "delivered"
-                product.stock = product.stock + detail.quantity
-
-                returned = SaleDetail.new
-                returned.sale_id = detail.sale_id
-                returned.product_id = detail.product_id
-                returned.price = detail.price
-                returned.quantity = detail.quantity
-                returned.status = "returned"
-
-
-                if returned.save
-                  puts "Return created on detail destroy"
-                end
-
-                # Trigger saving successfully
-                if product.save
-                  puts "Stock updated on destroy"
-                end
-              end
-              # End If sale is an invoice or delivery
-            end
-            # End If sale is active
-          end
-          # End If product has been found
-        end
-        # End If detail has been found
-      end
-      # End Item is being destroyed
-    end
-    # End Iterating Json
-
     if @delivery.update(updated_params)
       redirect_to admin_sale_details_path(@delivery.id), notice: t("alerts.updated", model: t("sale.delivery"))
 
@@ -686,6 +589,266 @@ class Admin::SalesController < ApplicationController
     end
   end
 
+  # admin/sales/invoice/:id/return
+  def new_invoice_return
+    # Order found by before_action
+    @return.discount = "%.2f" % @return.discount
+    @return.discount = "0#{@return.discount.to_s.gsub! '.', ''}" if @return.discount < 10
+
+    @search_form_path = admin_new_sale_invoice_return_path(@return)
+    @form_url = admin_sale_invoice_return_path
+
+    respond_to do |format|
+      format.html do
+        render "admin/sales/returns/new"
+      end
+
+      format.js do
+        render "admin/sales/returns/new"
+      end
+    end
+  end
+
+  # admin/sales/delivery/:id/return
+  def new_delivery_return
+    # Order found by before_action
+    @return.discount = "%.2f" % @return.discount
+    @return.discount = "0#{@return.discount.to_s.gsub! '.', ''}" if @return.discount < 10
+
+    @search_form_path = admin_new_sale_delivery_return_path(@return)
+    @form_url = admin_sale_delivery_return_path
+    @is_delivery = true
+
+    respond_to do |format|
+      format.html do
+        render "admin/sales/returns/new"
+      end
+
+      format.js do
+        render "admin/sales/returns/new"
+      end
+    end
+  end
+
+  # Create
+  def create_invoice_return
+    updated_params = sale_return_params
+
+    # Deleting blank spaces
+    updated_params[:observations] = updated_params[:observations].strip
+    updated_params[:status] = "invoiced"
+    # End Deleting blank spaces
+
+    updated_params[:sale_datetime] = updated_params[:sale_datetime].to_datetime if updated_params[:sale_datetime]
+
+    # Fixing discount
+    if updated_params[:discount]
+      begin
+        updated_params[:discount] = updated_params[:discount].to_d
+
+      rescue
+        updated_params[:discount] = 0.00
+      end
+    end
+
+    # Validating detail with stock on Destroy
+    json = JSON.parse(updated_params["sale_details_attributes"].to_json) # Converting to Json
+
+    # Iterating Json
+    json.each do |item|
+      # Item is being destroyed
+      if item[1]["_destroy"] == "1"
+        detail_id = item[1]["id"] || nil
+        detail = SaleDetail.find(detail_id) || nil
+
+        product_id = item[1]["product_id"] || nil
+        product = Product.find(product_id) || nil
+
+        # If detail has been found
+        if detail
+          # If product has been found
+          if product
+            # If sale is active
+            if detail.sale.state
+              # If sale is a invoice
+              if detail.sale.status == "invoiced"
+                # If the quantity is more than the stock
+                if (product.stock - detail.quantity) < 0
+                  redirect_to admin_new_sale_return_path(@return), alert: t("sale.stock_is_less", stock: detail.product.stock ,product: I18n.locale == :es ? detail.product.name_spanish : detail.product.name)
+                  return
+
+                  # If the quantity is less than the stock
+                else
+                  puts "Stock is more than the quantity - on create return (invoice)"
+
+                  product.stock = product.stock - detail.quantity
+
+                  returned = SaleDetail.new
+                  returned.sale_id = detail.sale_id
+                  returned.product_id = detail.product_id
+                  returned.price = detail.price
+                  returned.quantity = detail.quantity
+                  returned.status = "returned"
+
+                  if returned.save
+                    puts "Sale return created on detail destroy - on create return (invoice)"
+                  end
+
+                  # Trigger saving successfully
+                  if product.save
+                    puts "Stock updated on destroy - on create return (invoice)"
+                  end
+                end
+              end
+              # End If sale is a invoice
+            end
+            # End If sale is active
+          end
+          # End If product has been found
+        end
+        # End If detail has been found
+      end
+      # End Item is being destroyed
+    end
+    # End Iterating Json
+
+    # If record was saved
+    if @return.update(updated_params)
+      @return.sale_details.each do |detail|
+        product = detail.product
+        sync_update product
+      end
+
+      redirect_to admin_sale_returns_path, notice: t("alerts.created", model: t("sale.return")) # Returned
+
+      # If record was not saved
+    else
+      @search_form_path = admin_new_sale_invoice_return_path(@return)
+      @form_url = admin_sale_invoice_return_path
+
+      # render :new_reception
+      respond_to do |format|
+        format.html do
+          render "admin/sales/returns/new"
+        end
+
+        format.js do
+          render "admin/sales/returns/new"
+        end
+      end
+    end
+  end
+
+  # Create
+  def create_delivery_return
+    updated_params = sale_return_params
+
+    # Deleting blank spaces
+    updated_params[:observations] = updated_params[:observations].strip
+    updated_params[:status] = "delivered"
+    # End Deleting blank spaces
+
+    updated_params[:sale_datetime] = updated_params[:sale_datetime].to_datetime if updated_params[:sale_datetime]
+
+    # Fixing discount
+    if updated_params[:discount]
+      begin
+        updated_params[:discount] = updated_params[:discount].to_d
+
+      rescue
+        updated_params[:discount] = 0.00
+      end
+    end
+
+    # Validating detail with stock on Destroy
+    json = JSON.parse(updated_params["sale_details_attributes"].to_json) # Converting to Json
+
+    # Iterating Json
+    json.each do |item|
+      # Item is being destroyed
+      if item[1]["_destroy"] == "1"
+        detail_id = item[1]["id"] || nil
+        detail = SaleDetail.find(detail_id) || nil
+
+        product_id = item[1]["product_id"] || nil
+        product = Product.find(product_id) || nil
+
+        # If detail has been found
+        if detail
+          # If product has been found
+          if product
+            # If sale is active
+            if detail.sale.state
+              # If sale is a delivery
+              if detail.sale.status == "delivered"
+                # If the quantity is more than the stock
+                if (product.stock - detail.quantity) < 0
+                  redirect_to admin_new_sale_return_path(@return), alert: t("sale.stock_is_less", stock: detail.product.stock ,product: I18n.locale == :es ? detail.product.name_spanish : detail.product.name)
+                  return
+
+                  # If the quantity is less than the stock
+                else
+                  puts "Stock is more than the quantity - on create return (delivery)"
+
+                  product.stock = product.stock - detail.quantity
+
+                  returned = SaleDetail.new
+                  returned.sale_id = detail.sale_id
+                  returned.product_id = detail.product_id
+                  returned.price = detail.price
+                  returned.quantity = detail.quantity
+                  returned.status = "returned"
+
+                  if returned.save
+                    puts "Sale return created on detail destroy - on create return (delivery)"
+                  end
+
+                  # Trigger saving successfully
+                  if product.save
+                    puts "Stock updated on destroy - on create return (delivery)"
+                  end
+                end
+              end
+              # End If sale is a delivery
+            end
+            # End If sale is active
+          end
+          # End If product has been found
+        end
+        # End If detail has been found
+      end
+      # End Item is being destroyed
+    end
+    # End Iterating Json
+
+    # If record was saved
+    if @return.update(updated_params)
+      @return.sale_details.each do |detail|
+        product = detail.product
+        sync_update product
+      end
+
+      redirect_to admin_sale_returns_path, notice: t("alerts.created", model: t("sale.return")) # Returned
+
+      # If record was not saved
+    else
+      @search_form_path = admin_new_sale_delivery_return_path(@return)
+      @form_url = admin_sale_delivery_return_path
+      @is_delivery = true
+
+      # render :new_reception
+      respond_to do |format|
+        format.html do
+          render "admin/sales/returns/new"
+        end
+
+        format.js do
+          render "admin/sales/returns/new"
+        end
+      end
+    end
+  end
+
   ########## END RETURNS ##########
 
   private
@@ -735,6 +898,20 @@ class Admin::SalesController < ApplicationController
   end
 
   def sale_delivery_params
+    params.require(:sale).permit(:sale_datetime, :status, :delivery_status, :payment_method, :payment_reference, :paid, :discount, :customer_id, :employee_id, :observations, sale_details_attributes: SaleDetail.attribute_names.map(&:to_sym).push(:_destroy))
+  end
+
+  ########## RETURNS ##########
+
+  # Set Sale
+  def set_sale_return
+    @return = Sale.find(params[:id])
+
+  rescue
+    redirect_to admin_sale_returns_path, alert: t("alerts.not_found", model: t("sale.return"))
+  end
+
+  def sale_return_params
     params.require(:sale).permit(:sale_datetime, :status, :delivery_status, :payment_method, :payment_reference, :paid, :discount, :customer_id, :employee_id, :observations, sale_details_attributes: SaleDetail.attribute_names.map(&:to_sym).push(:_destroy))
   end
 end

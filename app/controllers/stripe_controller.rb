@@ -81,12 +81,12 @@ class StripeController < ApplicationController
       begin
 
         charge = Stripe::Charge.create(
-        {
-          amount: price_cents,
-          currency: "usd",
-          description: products_description,
-          source: token,
-        }
+          {
+            amount: price_cents,
+            currency: "usd",
+            description: products_description,
+            source: token,
+          }
         )
 
       rescue Stripe::InvalidRequestError => e
@@ -103,6 +103,11 @@ class StripeController < ApplicationController
 
         if order.save
           sync_update order
+
+          order.sale_details.each do |detail|
+            product = detail.product
+            sync_update product
+          end
           # redirect_to cart_path, notice: "Orden generada correctamente"
 
           notification = Notification.new

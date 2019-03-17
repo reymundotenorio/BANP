@@ -26,7 +26,7 @@
                 .form-info
 
                   .form-group.hidden
-                    = f.hidden_field :employee_id, value: current_employee.id, required: true 
+                    = f.hidden_field :employee_id, value: current_employee.id, required: true
 
                   .col-xs-12.col-md-7.container-left
 
@@ -74,9 +74,10 @@
                       .border-bottom
 
                   .col-xs-12.no-padding.container-add-products
-                    = link_to "", class: "btn btn-general", "data-toggle": "modal", "data-target": "#getProducts" do
-                      %i.fas.fa-plus
-                      %span= t("sale.add_products")
+                    - if !@is_edit
+                      = link_to "", class: "btn btn-general", "data-toggle": "modal", "data-target": "#getProducts" do
+                        %i.fas.fa-plus
+                        %span= t("sale.add_products")
 
                   .col-xs-12.no-padding.index.details
                     .scroll-table

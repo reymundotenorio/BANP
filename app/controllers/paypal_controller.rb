@@ -121,44 +121,44 @@ class PaypalController < ApplicationController
 
         # Build Payment object
         payment = Payment.new(
-        {
-          intent: "sale",
-          payer: {
-            payment_method: "paypal"
-          },
-          transactions: [
-            {
-              amount: {
-                total: "#{items_subtotal}",
-                currency: "USD"
-                # details: {
-                #   subtotal: "#{items_subtotal}",
-                #   shipping: "#{items_shipping}",
-                #   shipping_discount: "#{items_discount}"
-                # }
-              },
-              description: I18n.t("views.cart.paypal_description"),
-              item_list: {
-                items: product_items
-                # ,
-                # shipping_address: {
-                #   recipient_name: "#{current_customer.first_name} #{current_customer.last_name}",
-                #   line1: address, #current_customer.address,
-                #   phone: current_customer.phone#,
-                #   city: zip_info[:city],
-                #   state: zip_info[:state_code],
-                #   postal_code: zip_code,
-                #   country_code: "US"
-                # }
+          {
+            intent: "sale",
+            payer: {
+              payment_method: "paypal"
+            },
+            transactions: [
+              {
+                amount: {
+                  total: "#{items_subtotal}",
+                  currency: "USD"
+                  # details: {
+                  #   subtotal: "#{items_subtotal}",
+                  #   shipping: "#{items_shipping}",
+                  #   shipping_discount: "#{items_discount}"
+                  # }
+                },
+                description: I18n.t("views.cart.paypal_description"),
+                item_list: {
+                  items: product_items
+                  # ,
+                  # shipping_address: {
+                  #   recipient_name: "#{current_customer.first_name} #{current_customer.last_name}",
+                  #   line1: address, #current_customer.address,
+                  #   phone: current_customer.phone#,
+                  #   city: zip_info[:city],
+                  #   state: zip_info[:state_code],
+                  #   postal_code: zip_code,
+                  #   country_code: "US"
+                  # }
+                }
               }
+            ],
+            note_to_payer: I18n.t("views.cart.paypal_note_payer"),
+            redirect_urls: {
+              return_url: paypal_payment_url(order: sale_order.id),
+              cancel_url: cart_url
             }
-          ],
-          note_to_payer: I18n.t("views.cart.paypal_note_payer"),
-          redirect_urls: {
-            return_url: paypal_payment_url(order: sale_order.id),
-            cancel_url: cart_url
           }
-        }
         )  # Creating the order
 
         # If the payment was correctly created
@@ -219,6 +219,11 @@ class PaypalController < ApplicationController
 
         if sale_order.save
           sync_update sale_order
+
+          sale_order.sale_details.each do |detail|
+            product = detail.product
+            sync_update product
+          end
           # redirect_to cart_path, notice: t("views.cart.payment_correctly")
 
           notification = ::Notification.new

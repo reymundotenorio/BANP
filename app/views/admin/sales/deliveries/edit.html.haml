@@ -15,7 +15,7 @@
         .btn-container
           = link_to (admin_sale_details_path(@delivery.id)), class: "btn btn-general" do
             %i.fas.fa-id-card
-            %span= t("sale.order_details")
+            %span= t("sale.delivery_details")
         -# End Provider button
     -# End Title
 
@@ -29,13 +29,13 @@
                 %i.fas.fa-tachometer-alt
                 %span= t("header.navigation.dashboard")
             %li
-              = link_to (admin_sale_orders_path) do
+              = link_to (admin_sale_deliveries_path) do
                 %i.far.fa-newspaper
-                %span= t("sale.orders")
+                %span= t("sale.deliveries")
             %li
               = link_to (admin_sale_details_path(@delivery.id)) do
                 %i.fas.fa-list-alt
-                = "#{t('sale.order_details')} ##{@delivery.id}"
+                = "#{t('sale.delivery_details')} ##{@delivery.id}"
             %li.active
               %i.fas.fa-edit
               = t("views.edit.edit")

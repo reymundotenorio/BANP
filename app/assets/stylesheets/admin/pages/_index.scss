@@ -468,11 +468,13 @@
             }
 
             &.name-container{
-              max-width: 155px;
+              // max-width: 155px;
+              width: 155px;
             }
 
             &.quantity-container{
               width: 135px;
+              max-width: 135px;
             }
 
             &.total-container{

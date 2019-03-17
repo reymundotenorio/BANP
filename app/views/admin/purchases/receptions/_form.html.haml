@@ -57,10 +57,12 @@
                     .col-xs-12.col-md-8.container-right
                       - if @is_edit
                         .form-group
-                          .input-group.date#datetimepicker
+                          #datetimepicker{class: "input-group date #{'no-btn' if !current_employee.is_administrator?}"}
                             = f.text_field :purchase_datetime, id: "purchase_datetime_picker", class: "form-control input date-field", required: true
-                            %span.input-group-addon.btn.btn-general
-                              %i.far.fa-calendar-alt
+
+                            - if current_employee.is_administrator?
+                              %span.input-group-addon.btn.btn-general
+                                %i.far.fa-calendar-alt
                             %label
                               %b= t("activerecord.attributes.purchase.purchase_datetime")
                             .border-bottom

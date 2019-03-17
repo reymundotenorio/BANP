@@ -1,0 +1,47 @@
+- if f.object.status != "returned"
+
+  %tr.nested-fields
+    %td.hidden
+      = f.hidden_field :product_id
+
+    %td.hidden
+      - if @is_delivery
+        = f.hidden_field :status, value: "delivered"
+
+      - else
+        = f.hidden_field :status, value: "invoiced"
+
+    %td.name-container
+      %p.record-link{"data-header": "#{t('activerecord.attributes.product.name')}"}
+        = f.text_field :product, class: "input-disabled", value: I18n.locale == :es ? f.object.product.name_spanish : f.object.product.name
+
+    %td.price-container.price-row.align-middle
+      %p.record-link{"data-header": "#{t('activerecord.attributes.product.price')}"}
+        = f.text_field :price, class: "input-disabled no-padding price-details", "data-price": f.object.price, value: number_to_currency(f.object.price, precision: 2, unit: "$", format: "%u%n", separator: ".", delimiter: ",")
+
+    %td.price-container.price-row.align-middle
+      %p.record-link.inline{"data-header": "#{t('activerecord.attributes.product.quantity')}"}
+        %span= "#{f.object.quantity}"
+      -# Stock render_sync
+      = sync partial: "product_quantity_stock", resource: f.object.product
+      -# = sync_new partial: "product_quantity_stock", resource: SaleDetail.new
+      -# End Stock render_sync
+
+    %td.quantity-container.align-middle
+      .form-group.no-padding.record-link{"data-header": "#{t('activerecord.attributes.product.quantity_to_return')}"}
+        .quantity
+          %button.subtract{name: "minus", type: "button"}
+            %i.fas.fa-minus
+
+          = f.number_field :quantity, class: "q-input details", min: "1", step: "1"
+
+          %button.add{name: "plus", type: "button"}
+            %i.fas.fa-plus
+
+    %td.align-middle.total-container
+      %p.record-link.detail-total{"data-header": "#{t('activerecord.attributes.sale.total')}", id:"sale_sale_details_attributes_#{@details_counter}_total"}
+        = number_to_currency((f.object.price * f.object.quantity), precision: 2, unit: "$", format: "%u%n", separator: ".", delimiter: ",") if !f.object.new_record?
+
+    %td.align-middle
+      = link_to_remove_association f, class: "btn btn-general" do
+        %i.fas.fa-trash-alt

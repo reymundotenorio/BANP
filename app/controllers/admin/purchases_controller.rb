@@ -411,6 +411,11 @@ class Admin::PurchasesController < ApplicationController
     end
 
     if @reception.update(state: false)
+      @reception.purchase_details.each do |detail|
+        product = detail.product
+        sync_update product
+      end
+
       redirect_to admin_purchase_details_path(@reception.id), notice: t("alerts.disabled", model: t("activerecord.models.purchase"))
 
     else
@@ -455,7 +460,7 @@ class Admin::PurchasesController < ApplicationController
 
           # Trigger saving failed
         else
-          puts "Product stock not updated - on detail deactivation"
+          puts "Product stock not updated - on detail deactivation (Purchase)"
         end
       end
       # End If purchase is active
