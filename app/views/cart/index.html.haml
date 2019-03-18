@@ -72,8 +72,13 @@
               %label.new-check.collapsed{"aria-controls": "address-group", "aria-expanded": "false", "data-target": "#address-group", "data-toggle": "collapse"}
                 %input#different-address{type: "checkbox"}/
                 %span= t("views.cart.different_address")
-              #address-group.new-group.collapse
+              #address-group.new-group.collapse{"aria-expanded": "false"}
                 .pad
+                  .form-group
+                    %input.form-control.input.zipcode#zipcode-field{name: "new_zipcode", required: "required", "data-mask": "00000"}
+                    %label= t("views.cart.shipping_zipcode")
+                    .border-bottom
+
                   .form-group
                     %textarea.form-control.input.text-area.address#address-field{name: "new_address", required: "required"}
                     %label= t("views.cart.shipping_address")
@@ -96,3 +101,7 @@
 
               -# Render skip upon delivery
               = render "pay_upon_delivery/payment-form"
+
+-# Zip Code validator form script
+= javascript_include_tag "zipcode", "data-turbolinks-track": "reload"
+-# End Zip Code validator form script

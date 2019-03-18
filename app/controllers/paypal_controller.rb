@@ -22,7 +22,13 @@ class PaypalController < ApplicationController
 
   def paypal_checkout
     code = params[:code]
-    address = params[:address] || current_customer.address
+    address = params[:address] || "#{current_customer.address} - #{t('activerecord.attributes.customer.zipcode')}: #{current_customer.zipcode}}"
+    address = address.strip
+
+    if address == ""
+      redirect_to cart_path, alert: t("sale.address_empty")
+      return
+    end
 
     # If code param is present
     if code

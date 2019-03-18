@@ -1,7 +1,16 @@
 $(document).ready(function(){
 
-  // Set current locale
   var i18nLocale = $("body").data("locale");
+
+  function openIfChecked(){
+    // If checkbox exists
+    if($("#different-address").length){
+      // If checkbox is selected
+      if($("#different-address").prop("checked")){
+        $("#address-group").collapse("show");
+      }
+    }
+  }
 
   // Get US State by Zip Code
   function getState(zipcode) {
@@ -239,54 +248,67 @@ $(document).ready(function(){
   }
   // End Get US State by Zip Code
 
-  // Create a Stripe client.
-  var stripe = Stripe("<%= ENV["stripe_publishable_key"] %>");
+  // Sign up and Edit profile Zip Code field paste keyup
+  $("#customer_zipcode").bind("paste keyup", function(e) {
+    $(this).css({"background-color" : "rgba(0, 0, 0, 0)", "color": "#555555"});
 
-  // Create an instance of Elements.
-  var elements = stripe.elements({locale: i18nLocale == "es" ? "es" : "en"});
+    var zipcode = $(this).val();
+    if(zipcode.length == 5){
+      var state = getState(zipcode);
 
-  // Custom styling can be passed to options when creating an Element.
-  var style = {
-    base: {
-      color: "#555555",
-      // lineHeight: "19.2px",
-      fontFamily: "'Montserrat', 'Open Sans', sans-serif",
-      fontSmoothing: "antialiased",
-      fontSize: "16px",
-      "::placeholder": {
-        color: "#888888"
+      if (state == "Florida"){
+        // return true;
+        $(this).css({"background-color" : "rgba(0, 166, 140, 0.05)", "color": "#00a68c"});
+
+        var originalBtn = i18nLocale == "es" ? "<i class='fas fa-save'></i> <span>Guardar</span>" : "<i class='fas fa-save'></i> <span>Save</span>";
+
+        $("#new_customer").find(":submit").prop("disabled", false);
+        $("#new_customer").find(":submit").empty();
+        $("#new_customer").find(":submit").append(originalBtn);
       }
-    },
-    invalid: {
-      color: "#c0392b",
-      iconColor: "#c0392b"
-    }
-  };
-
-  // Create an instance of the card Element.
-  var card = elements.create("card", {style: style});
-
-  // Add an instance of the card Element into the `card-element` <div>.
-  card.mount("#card-element");
-
-  // Handle real-time validation errors from the card Element.
-  card.addEventListener("change", function(event) {
-    var displayError = document.getElementById("card-errors");
-
-    if (event.error) {
-      displayError.textContent = event.error.message;
-    }
-
-    else {
-      displayError.textContent = "";
+      else{
+        $(this).css({"background-color" : "rgba(192, 57, 43, 0.05)", "color": "#c0392b"});
+      }
     }
   });
+  // End Sign up and Edit profile Zip Code field paste keyup
 
-  // Handle form submission.
-  var form = document.getElementById("payment-form");
-  form.addEventListener("submit", function(event) {
-    event.preventDefault();
+  // Cart zip code field paste keyup
+  $("#zipcode-field").bind("paste keyup", function(e) {
+    $(this).css({"background-color" : "rgba(0, 0, 0, 0)", "color": "#555555"});
 
+    var zipcode = $(this).val();
+    if(zipcode.length == 5){
+      var state = getState(zipcode);
+
+      if (state == "Florida"){
+        $(this).css({"background-color" : "rgba(0, 166, 140, 0.05)", "color": "#00a68c"});
+      }
+      else{
+        $(this).css({"background-color" : "rgba(192, 57, 43, 0.05)", "color": "#c0392b"});
+      }
+    }
+  });
+  // End Cart zip code field paste keyup
+
+  // On submit in sign up form
+  $("#new_customer").submit(function(e){
+    var zipcode = $("#customer_zipcode").val();
+
+    if(zipcode.length == 5){
+      var state = getState(zipcode);
+
+      if (state != "Florida"){
+        $("#customer_zipcode").focus();
+        e.preventDefault();
+      }
+    }
+  });
+  // End On submit in sign up form
+
+
+  // On submit in PayPal form
+  $("#paypal-form").submit(function(e){
     var zipcode = $("#zipcode-field").val();
 
     // If checkbox exists
@@ -306,27 +328,9 @@ $(document).ready(function(){
 
             toastr.error(floridaZipcode, titleZipcode, {closeButton: true, timeOut: 0, extendedTimeOut: 0});
             $("#zipcode-field").focus();
-            return;
+            e.preventDefault();
           }
-          // If is a valid Zip code
-          else{
-            // Prevent multiple calls
-            document.getElementById("stripe-btn").style.display = "none";
-            document.getElementById("stripe-spinner").style.display = "block";
-
-            stripe.createToken(card).then(function(result) {
-              if (result.error) {
-                // Inform the user if there was an error.
-                var errorElement = document.getElementById("card-errors");
-                errorElement.textContent = result.error.message;
-              }
-              else {
-                // Send the token to your server.
-                stripeTokenHandler(result.token);
-              }
-            });
-          }
-          // End If is a valid Zip code
+          // End If Zip code is not valid
         }
         // If Zip code length not is valid
         else{
@@ -335,65 +339,58 @@ $(document).ready(function(){
 
           toastr.error(zipcodeLenght, titleZipcode, {closeButton: true, timeOut: 0, extendedTimeOut: 0});
           $("#zipcode-field").focus();
-          return;
+          e.preventDefault();
         }
         // End If Zip code length not is valid
       }
-      // If checkbox is not selected
-      else{
-        // Prevent multiple calls
-        document.getElementById("stripe-btn").style.display = "none";
-        document.getElementById("stripe-spinner").style.display = "block";
-
-        stripe.createToken(card).then(function(result) {
-          if (result.error) {
-            // Inform the user if there was an error.
-            var errorElement = document.getElementById("card-errors");
-            errorElement.textContent = result.error.message;
-          }
-          else {
-            // Send the token to your server.
-            stripeTokenHandler(result.token);
-          }
-        });
-      }
-      // End If checkbox is not selected
+      // End If checkbox is selected
     }
-    // If checkbox not exists
-    else{
-      // Prevent multiple calls
-      document.getElementById("stripe-btn").style.display = "none";
-      document.getElementById("stripe-spinner").style.display = "block";
-
-      stripe.createToken(card).then(function(result) {
-        if (result.error) {
-          // Inform the user if there was an error.
-          var errorElement = document.getElementById("card-errors");
-          errorElement.textContent = result.error.message;
-        }
-
-        else {
-          // Send the token to your server.
-          stripeTokenHandler(result.token);
-        }
-      });
-    }
-    // End If checkbox not exists
-
+    // End If checkbox exists
   });
+  // End On submit in PayPal form
 
-  // Submit the form with the token ID.
-  function stripeTokenHandler(token) {
-    // Insert the token ID into the form so it gets submitted to the server
-    var form = document.getElementById("payment-form");
-    var hiddenInput = document.createElement("input");
-    hiddenInput.setAttribute("type", "hidden");
-    hiddenInput.setAttribute("name", "stripeToken");
-    hiddenInput.setAttribute("value", token.id);
-    form.appendChild(hiddenInput);
+  // On submit in Pay upon delivery form
+  $("#pay-upon-form").submit(function(e){
+    var zipcode = $("#zipcode-field").val();
 
-    // Submit the form
-    form.submit();
-  }
+    // If checkbox exists
+    if($("#different-address").length){
+      // If checkbox is selected
+      if($("#different-address").prop("checked")){
+        // If Zip code length is valid
+        if(zipcode.length == 5){
+          var state = getState(zipcode);
+          // If Zip code is not valid
+          if (state != "Florida"){
+            $("stripe-btn").css({"display": "block"});
+            $("stripe-spinner").css({"display": "none"});
 
+            titleZipcode = i18nLocale == "es" ? "Código postal no válido" : "Invalid zip code";
+            floridaZipcode = i18nLocale == "es" ? "El código postal debe pertenecer al estado de la Florida, Estados Unidos" : "The zip code must belong to the state of Florida, United States";
+
+            toastr.error(floridaZipcode, titleZipcode, {closeButton: true, timeOut: 0, extendedTimeOut: 0});
+            $("#zipcode-field").focus();
+            e.preventDefault();
+          }
+          // End If Zip code is not valid
+        }
+        // If Zip code length not is valid
+        else{
+          titleZipcode = i18nLocale == "es" ? "Código postal no válido" : "Invalid zip code";
+          zipcodeLenght = i18nLocale == "es" ? "El código postal debe ser válido" : "The postal code must be valid";
+
+          toastr.error(zipcodeLenght, titleZipcode, {closeButton: true, timeOut: 0, extendedTimeOut: 0});
+          $("#zipcode-field").focus();
+          e.preventDefault();
+        }
+        // End If Zip code length not is valid
+      }
+      // End If checkbox is selected
+    }
+    // End If checkbox exists
+  });
+  // End On submit in Pay upon delivery form
+
+  // Open Custom address collapse
+  openIfChecked();
 });

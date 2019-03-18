@@ -17,7 +17,10 @@
     -# Used to display form errors.
     #card-errors{role: "alert"}
 
-  %button
+  #stripe-spinner
+    %i.fas.fa-spinner.fa-spin
+
+  %button#stripe-btn
     %span= t("views.cart.submit_payment")
 
 -# Stripe script

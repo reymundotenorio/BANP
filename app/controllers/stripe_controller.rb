@@ -15,7 +15,13 @@ class StripeController < ApplicationController
     # Token is created using Checkout or Elements!
     # Get the payment token ID submitted by the form
     token = params[:stripeToken]
-    address = params[:address] || current_customer.address
+    address = params[:address] || "#{current_customer.address} - #{t('activerecord.attributes.customer.zipcode')}: #{current_customer.zipcode}}"
+    address = address.strip
+
+    if address == ""
+      redirect_to cart_path, alert: t("sale.address_empty")
+      return
+    end
 
     product_items = Array.new
     products_description = ""

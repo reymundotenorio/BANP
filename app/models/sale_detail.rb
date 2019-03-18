@@ -19,8 +19,8 @@ class SaleDetail < ApplicationRecord
 
   ## Callbacks
 
+  before_validation :update_stock_create, on: :create
   # before_validation :update_stock, on: :update
-  # before_validation :update_stock_create, on: :create
 
   # Update product stock
   def update_stock
@@ -90,33 +90,33 @@ class SaleDetail < ApplicationRecord
 
     # If product has been found
     if product
-      old_quantity = self.changes["quantity"][0] if changes["quantity"]
-      old_quantity = 0 if !old_quantity
 
-      old_status = self.changes["status"][0] if changes["status"]
-      old_status = "invoiced" if !old_status
+      # If is not a return
+      if self.status != "returned"
+        # Current stock - Sale quantity
+        final_stock = product.stock - self.quantity
 
-      # If is a return
-      if self.status == "returned"
-
-        # If is not a return
-      else
-        # If is a order that is being invoiced
-        if (product.stock - self.quantity) < 0
+        # If the sale quantity exceed the stock
+        if (final_stock) < 0
           self.errors.add(:quantity, I18n.t("sale.stock_is_less_sale", stock: product.stock, product: I18n.locale == :es ? product.name_spanish : product.name))
           return
 
+          #  If the sale quantity is less than the stock
         else
-          product.stock = product.stock - self.quantity
-        end
+          # Set new stock to product
+          product.stock = final_stock
 
-        # Trigger saving successfully
-        if product.save
+          # Saving product new stock
+          if product.save
+            puts "Product stock updated on sale detail create"
 
-          # Trigger saving failed
-        else
-          puts "Product stock not updated"
+            # Product stock not saved
+          else
+            puts "Product stock not updated on sale detail create"
+          end
+          # End Saving product new stock
         end
+        # End If product stock is less than the quantity to sale
       end
       # End If is not a return
     end

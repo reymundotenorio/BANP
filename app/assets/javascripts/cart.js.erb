@@ -1,4 +1,5 @@
 $(document).ready(function(){
+
   // Set current locale
   var i18nLocale = $("body").data("locale");
 
@@ -381,11 +382,13 @@ $(document).ready(function(){
       // If checkbox is selected
       if($("#different-address").prop("checked")){
 
-        if($("#address-field").val().trim() == ""){
+        if($("#address-field").val().trim() == "" || $("#zipcode-field").val().trim() == ""){
           localStorage.setItem("paypalAddress", $("#default-address").text() || "");
         }
         else{
-          localStorage.setItem("paypalAddress", $("#address-field").val() || "");
+          zipcode = i18nLocale == "es" ? "Código postal" : "Zip code";
+
+          localStorage.setItem("paypalAddress", $("#address-field").val() + " - " + zipcode +": "+ $("#zipcode-field").val() || "");
         }
       }
       // If checkbox is not selected
@@ -436,11 +439,15 @@ $(document).ready(function(){
   });
   // End Update address information on checkbox change
 
-  // Update address information on address field change
+  // Update address information on address or zipcode field change
   $("#address-field").on("keyup change", function(){
     updateAddress();
   });
-  // End Update address information on address field change
+
+  $("#zipcode-field").on("keyup change", function(){
+    updateAddress();
+  });
+  // End Update address information on address or zipcode field change
 
   var currentURL = document.URL;
   var params = currentURL.extract();
@@ -490,4 +497,5 @@ $(document).ready(function(){
   // Clean cart after payment
   cleanShoppingCart();
   // End Clean cart after payment
+  
 });

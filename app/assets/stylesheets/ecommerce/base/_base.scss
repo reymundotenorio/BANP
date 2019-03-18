@@ -69,6 +69,12 @@ a{
   transition: all 0.5s ease;
   height: 40px;
 
+  &.zipcode{
+    + label, + grammarly-btn + label{
+      font-size: 12px;
+    }
+  }
+
   &.text-area{
     height: 80px;
     resize: none;
@@ -230,7 +236,7 @@ a{
     //   }
     // }
 
-    &.address{
+    &.address, &.zipcode{
       &.with-value, &:focus{
         + label, + grammarly-btn + label{
           font-size: 10px;

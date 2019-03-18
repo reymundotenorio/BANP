@@ -93,3 +93,6 @@ Rails.application.config.assets.precompile += %w( select-employee.js )
 
 # Products modal price list
 Rails.application.config.assets.precompile += %w( products-modal-price-list.js )
+
+# Zip Code
+Rails.application.config.assets.precompile += %w( zipcode.js )

@@ -295,6 +295,7 @@ es:
     price_list_details: "Detalles de lista de precio"
     show_price_lists: "Mostrar listas de precio"
     loss_expiration: "Pérdida"
+    address_empty: "Dirección / Código Postal están vacíos"
 
   # Charts
   charts:
@@ -476,6 +477,7 @@ es:
       shipping: "Envío"
       different_address: "Use una dirección de envío diferente"
       shipping_address: "Dirección de envío"
+      shipping_zipcode: "Código postal de envío"
       or: "- O -"
       pay_credit_card: "Paga con tarjeta de crédito"
       checkout_paypal: "Paga con"
