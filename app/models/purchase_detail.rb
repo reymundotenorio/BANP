@@ -81,8 +81,13 @@ class PurchaseDetail < ApplicationRecord
                 end
                 # End Saving return
 
+                # If quantity was not reduced
+              else
+                # Quantity to return is more than the quantity purchased
+                self.errors.add(:quantity, I18n.t("purchase.quantity_more_than_purchased", quantity: self.quantity, product: I18n.locale == :es ? product.name_spanish : product.name))
+                return
               end
-              # If quantity was reduced (returned or loss)
+              # End If quantity was reduced (returned or loss)
             end
             # End If the new quantity exceed the stock
           end
