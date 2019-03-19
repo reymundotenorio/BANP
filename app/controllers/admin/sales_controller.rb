@@ -674,7 +674,7 @@ class Admin::SalesController < ApplicationController
               if detail.sale.status == "invoiced"
                 # If the quantity is more than the stock
                 if (product.stock - detail.quantity) < 0
-                  redirect_to admin_new_sale_return_path(@return), alert: t("sale.stock_is_less", stock: detail.product.stock ,product: I18n.locale == :es ? detail.product.name_spanish : detail.product.name)
+                  redirect_to admin_new_sale_invoice_return_path(@return), alert: t("sale.stock_is_less", stock: detail.product.stock ,product: I18n.locale == :es ? detail.product.name_spanish : detail.product.name)
                   return
 
                   # If the quantity is less than the stock
@@ -783,7 +783,7 @@ class Admin::SalesController < ApplicationController
               if detail.sale.status == "delivered"
                 # If the quantity is more than the stock
                 if (product.stock - detail.quantity) < 0
-                  redirect_to admin_new_sale_return_path(@return), alert: t("sale.stock_is_less", stock: detail.product.stock ,product: I18n.locale == :es ? detail.product.name_spanish : detail.product.name)
+                  redirect_to admin_new_sale_delivery_return_path(@return), alert: t("sale.stock_is_less", stock: detail.product.stock ,product: I18n.locale == :es ? detail.product.name_spanish : detail.product.name)
                   return
 
                   # If the quantity is less than the stock

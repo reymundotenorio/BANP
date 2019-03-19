@@ -28,7 +28,7 @@ class PurchaseDetail < ApplicationRecord
         if self.purchase.status == "received"
 
           old_quantity = self.changes["quantity"][0] if changes["quantity"]
-          old_quantity = 0 if !old_quantity
+          old_quantity = self.quantity if !old_quantity
 
           old_status = self.changes["status"][0] if changes["status"]
           old_status = "received" if !old_status
@@ -83,9 +83,15 @@ class PurchaseDetail < ApplicationRecord
 
                 # If quantity was not reduced
               else
-                # Quantity to return is more than the quantity purchased
-                self.errors.add(:quantity, I18n.t("purchase.quantity_more_than_purchased", quantity: self.quantity, product: I18n.locale == :es ? product.name_spanish : product.name))
-                return
+                # If quantity is different of zero
+                if (old_quantity != 0)
+                  # Quantity to return is more than the quantity purchased
+                  self.quantity = old_quantity
+
+                  self.errors.add(:quantity, I18n.t("purchase.quantity_more_than_purchased", quantity: self.quantity, product: I18n.locale == :es ? product.name_spanish : product.name))
+                  return
+                end
+                # End If quantity is different of zero
               end
               # End If quantity was reduced (returned or loss)
             end
@@ -147,10 +153,10 @@ class PurchaseDetail < ApplicationRecord
   # Search returns
   def self.search_returns(search)
     if search
-      self.joins(:purchase).joins(:product).where("(products.name LIKE :search OR products.name_spanish LIKE :search)", search: "%#{search}%").returned
+      self.joins(:purchase).joins(:product).where("(products.name LIKE :search OR products.name_spanish LIKE :search)", search: "%#{search}%").returned.not_zero
 
     else
-      returned
+      returned.not_zero
     end
   end
   # End Search returns
@@ -207,5 +213,6 @@ class PurchaseDetail < ApplicationRecord
   scope :returned, -> { where("(purchase_details.status = 'returned')") }
   scope :ordered, -> { where("(purchase_details.status = 'ordered')") }
   scope :received, -> { where("(purchase_details.status = 'received')") }
+  scope :not_zero, -> { where("(purchase_details.quantity > 0)") }
   ## End Scopes
 end
