@@ -24,6 +24,31 @@ class ApplicationController < ActionController::Base
   # @current_employee = nil
   # @current_employee_backup
 
+  # Redirection per employee role
+  def redirect_per_role(message_with_locale)
+    # If employee is a seller
+    if current_employee.is_seller?
+      redirect_to admin_sale_invoices_path, alert: message_with_locale
+      return
+
+      # If employee is a driver
+    elsif current_employee.is_driver?
+      redirect_to admin_sale_shipments_path, alert: message_with_locale
+      return
+
+      # If employee is a warehouse supervisor
+    elsif current_employee.is_warehouse_supervisor?
+      redirect_to admin_purchase_orders_path, alert: message_with_locale
+      return
+
+      # If employee is a other role (administrator)
+    else
+      redirect_to admin_root_path, alert: message_with_locale
+      return
+    end
+    # End If employee is a seller
+  end
+
   # Current employee
   def current_employee
     @current_employee ||= User.find(session[:employee_id]).employee if session[:employee_id]
@@ -48,73 +73,73 @@ class ApplicationController < ActionController::Base
 
   # Require administrator
   def require_administrator
-    puts "****************************************"
-    puts current_employee.role
-    puts "****************************************"
+    # puts "****************************************"
+    # puts current_employee.role
+    # puts "****************************************"
 
     if !current_employee.is_administrator?
       # clean_session
-      redirect_to admin_root_path, alert: t("views.authentication.access_denied")
+      redirect_per_role(t("views.authentication.access_denied"))
     end
   end
 
   # Require seller
   def require_seller
-    puts "****************************************"
-    puts current_employee.role
-    puts "****************************************"
+    # puts "****************************************"
+    # puts current_employee.role
+    # puts "****************************************"
 
     if !current_employee.is_seller? && !current_employee.is_administrator?
       # clean_session
-      redirect_to admin_root_path, alert: t("views.authentication.access_denied")
+      redirect_per_role(t("views.authentication.access_denied"))
     end
   end
 
   # Require driver
   def require_driver
-    puts "****************************************"
-    puts current_employee.role
-    puts "****************************************"
+    # puts "****************************************"
+    # puts current_employee.role
+    # puts "****************************************"
 
     if !current_employee.is_driver? && !current_employee.is_administrator?
       # clean_session
-      redirect_to admin_root_path, alert: t("views.authentication.access_denied")
+      redirect_per_role(t("views.authentication.access_denied"))
     end
   end
 
   # Require seller driver
   def require_seller_driver
-    puts "****************************************"
-    puts current_employee.role
-    puts "****************************************"
+    # puts "****************************************"
+    # puts current_employee.role
+    # puts "****************************************"
 
     if !current_employee.is_seller? && !current_employee.is_driver? && !current_employee.is_administrator?
       # clean_session
-      redirect_to admin_root_path, alert: t("views.authentication.access_denied")
+      redirect_per_role(t("views.authentication.access_denied"))
     end
   end
 
   # Require warehouse supervisor
   def require_warehouse_supervisor
-    puts "****************************************"
-    puts current_employee.role
-    puts "****************************************"
+    # puts "****************************************"
+    # puts current_employee.role
+    # puts "****************************************"
 
     if !current_employee.is_warehouse_supervisor? && !current_employee.is_administrator?
       # clean_session
-      redirect_to admin_root_path, alert: t("views.authentication.access_denied")
+      redirect_per_role(t("views.authentication.access_denied"))
     end
   end
 
   # Require seller warehouse supervisor
   def require_seller_warehouse_supervisor
-    puts "****************************************"
-    puts current_employee.role
-    puts "****************************************"
+    # puts "****************************************"
+    # puts current_employee.role
+    # puts "****************************************"
 
     if !current_employee.is_seller? && !current_employee.is_warehouse_supervisor? && !current_employee.is_administrator?
       # clean_session
-      redirect_to admin_root_path, alert: t("views.authentication.access_denied")
+      redirect_per_role(t("views.authentication.access_denied"))
     end
   end
 

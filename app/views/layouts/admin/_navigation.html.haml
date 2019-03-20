@@ -1,11 +1,12 @@
 #navbar.collapse.navbar-collapse
   %ul.nav.navbar-nav
-    -# Dashboard
-    %li
-      = link_to (admin_root_path) do
-        %i.fas.fa-tachometer-alt
-        = t("header.navigation.dashboard")
-    -# End Dashboard
+    - if current_employee.is_administrator?
+      -# Dashboard
+      %li
+        = link_to (admin_root_path) do
+          %i.fas.fa-tachometer-alt
+          = t("header.navigation.dashboard")
+      -# End Dashboard
 
     - if current_employee.is_administrator? || current_employee.is_warehouse_supervisor?
       -# Providers
