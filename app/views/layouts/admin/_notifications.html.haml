@@ -11,16 +11,17 @@
         = sync_new partial: "notification_icon", resource: Notification.new
         -# End Notification render_sync
 
-      %ul{class: "dropdown-menu #{'no-noti' if (Notification.where(read_by: 'false').count < 1)}"}
-        -# Notifications render_sync
-        = sync partial: "notifications", collection: Notification.all
-        = sync_new partial: "notifications", resource: Notification.new
-        -# End Notifications render_sync
+      - if current_employee
+        %ul{class: "dropdown-menu #{'no-noti' if (Notification.where(read_by: 'false').count < 1)}"}
+          -# Notifications render_sync
+          = sync partial: "notifications", collection: Notification.all
+          = sync_new partial: "notifications", resource: Notification.new
+          -# End Notifications render_sync
 
-        - if (Notification.unread.count > 0)
-          .noti.clean
-            %li
-              = link_to admin_clean_notifications_path(redirect_to: request.fullpath), method: "patch" do
-                %i.fas.fa-trash
-                %span
-                  %b= t("sale.clean_notifications")
+          - if (Notification.unread.count > 0)
+            .noti.clean
+              %li
+                = link_to admin_clean_notifications_path(redirect_to: request.fullpath), method: "patch" do
+                  %i.fas.fa-trash
+                  %span
+                    %b= t("sale.clean_notifications")

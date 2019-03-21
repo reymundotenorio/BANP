@@ -298,6 +298,8 @@ en:
     loss_expiration: "Loss"
     address_empty: "Address / Zip Code are empty"
     clean_notifications: "Clean notifications"
+    delivery_confirmed: "Delivery confirmed"
+    delivery_not_confirmed: "There was a problem confirming the delivery, please try again in a moment"
 
   # Charts
   charts:

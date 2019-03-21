@@ -299,6 +299,8 @@ es:
     loss_expiration: "Pérdida"
     address_empty: "Dirección / Código Postal están vacíos"
     clean_notifications: "Limpiar notificaciones"
+    delivery_confirmed: "Entrega confirmada"
+    delivery_not_confirmed: "Se ha producido un problema al confirmar la entrega. Por favor, inténtelo de nuevo en un momento"
 
   # Charts
   charts:

@@ -4,7 +4,7 @@ class TrackingsController < ApplicationController
   # End Ecommerce layout
 
   # Find sale order with Friendly_ID
-  before_action :set_sale_order, only: [:show]
+  before_action :set_sale_order, only: [:show, :confirm_delivery]
   # End Find sale order with Friendly_ID
 
   # Authentication
@@ -26,9 +26,24 @@ class TrackingsController < ApplicationController
     end
   end
 
+  # tracking/:id
   def show
     @history = @order.associated_audits
     @history.push(@order.audits)
+  end
+
+  # tracking/:id/confirm
+  def confirm_delivery
+    @order.delivery_confirmed = true
+
+    # If order was saved correcty
+    if @order.save
+      redirect_to tracking_path(@order.id), notice: t("sale.delivery_confirmed")
+
+      # If order was not saved correcty
+    else
+      redirect_to tracking_path(@order.id), notice: t("sale.delivery_not_confirmed")
+    end
   end
 
   private

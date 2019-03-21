@@ -93,6 +93,7 @@ Rails.application.routes.draw do
   # Trackings
   get "/orders", to: "trackings#index", as: "orders"
   get "/tracking/:id", to: "trackings#show", as: "tracking"
+  patch "/tracking/:id/confirm", to: "trackings#confirm_delivery", as: "confirm_delivery"
   # End Trackings
 
   # Invoices

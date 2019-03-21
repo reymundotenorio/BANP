@@ -149,7 +149,7 @@ class StripeController < ApplicationController
       end
 
       errors_messages = errors_messages.strip
-      
+
       redirect_to cart_path, alert: errors_messages
       return
     end

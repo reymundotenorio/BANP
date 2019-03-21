@@ -8,7 +8,14 @@
       = t("sale.shipped")
 
     - elsif sale.delivery_status == "delivered" && sale.state
-      = t("sale.delivered")
+      - if !sale.delivery_confirmed
+        = t("sale.delivered")
+        .button-container.confirm
+          = link_to confirm_delivery_path(sale.id), class: "btn btn-general", method: "patch" do
+            %i.fas.fa-check-double
+            %span= t("sale.confirm_delivery")
+      - else
+        = t("sale.delivery_confirmed")
 
     - elsif sale.delivery_status == "returned" && sale.state
       = t("sale.returned")

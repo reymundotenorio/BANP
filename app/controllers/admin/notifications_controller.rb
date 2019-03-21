@@ -24,7 +24,7 @@ class Admin::NotificationsController < ApplicationController
 
   # admin/notifications/clean
   def clean_notifications
-    redirect_url = params[:redirect_to] || root_path
+    redirect_url = params[:redirect_to] || admin_root_path
 
     @notifications = Notification.unread
 

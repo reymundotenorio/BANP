@@ -855,7 +855,7 @@ class Admin::SalesController < ApplicationController
       end
     end
   end
-  
+
   ########## END RETURNS ##########
 
   # Verify product stock
