@@ -52,7 +52,7 @@
                       .form-group
                         #datetimepicker{class: "input-group date #{'no-btn' if !current_employee.is_administrator?}"}
                           = f.text_field :sale_datetime, id: "sale_datetime_picker", class: "form-control input date-field", required: true
-                          
+
                           - if current_employee.is_administrator?
                             %span.input-group-addon.btn.btn-general
                               %i.far.fa-calendar-alt
@@ -69,6 +69,13 @@
                       .border-bottom
 
                   .col-xs-12.col-md-5.container-right
+                    -# .form-group.static
+                    -#   .toggle#switcherToggle
+                    -#     = check_box_tag :card, "true", "false", class: "check", id: "switcher"
+                    -#     %b.b.switch
+                    -#   %label.checkbox
+                    -#     %b= t("sale.card")
+
                     .form-group
                       = f.text_area :observations, class: "form-control input text-area big"
                       %label

@@ -1,13 +1,39 @@
 .noti
   - if notification.read_by == "false"
-    %li
-      = link_to admin_notification_redirect_path(notification.id) do
-        - if notification.message == "new_order"
-          %i.fas.fa-plus-square
-          %span
-            %b= I18n.locale == :es ? "Nueva orden de venta" : "New sale order"
+    -# If employee is administrator
+    - if current_employee.is_administrator?
+      %li
+        = link_to admin_notification_redirect_path(notification.id) do
+          - if notification.message == "new_order"
+            %i.fas.fa-plus-square
+            %span
+              %b= I18n.locale == :es ? "Nueva orden de venta" : "New sale order"
 
-        - else
-          %i.fas.fa-exclamation-triangle
-          %span
-            %b= I18n.locale == :es ? "Producto escaso" : "Scarce product"
+          - else
+            %i.fas.fa-exclamation-triangle
+            %span
+              %b= I18n.locale == :es ? "Producto escaso" : "Scarce product"
+
+      -# If employee is seller
+    - elsif current_employee.is_seller?
+      %li
+        = link_to admin_notification_redirect_path(notification.id) do
+          - if notification.message == "new_order"
+            %i.fas.fa-plus-square
+            %span
+              %b= I18n.locale == :es ? "Nueva orden de venta" : "New sale order"
+
+          - else
+            -# Do nothing
+
+      -# If employee is warehouse supervisor
+    - elsif current_employee.is_warehouse_supervisor?
+      %li
+        = link_to admin_notification_redirect_path(notification.id) do
+          - if notification.message == "new_order"
+            -# Do nothing
+
+          - else
+            %i.fas.fa-exclamation-triangle
+            %span
+              %b= I18n.locale == :es ? "Producto escaso" : "Scarce product"
