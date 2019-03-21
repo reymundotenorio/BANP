@@ -39,6 +39,12 @@ class PayUponDeliveryController < ApplicationController
     if order.save
       sync_new order
 
+      order.sale_details.each do |detail|
+        product = detail.product
+        verify_stock(product)
+        sync_update product
+      end
+
       notification = Notification.new
       notification.message = "new_order"
       notification.path = "#{admin_sale_details_url(order.id)}"
@@ -71,7 +77,27 @@ class PayUponDeliveryController < ApplicationController
     # End Creating the order
   end
 
-
   def payment
   end
+
+  # Verify product stock
+  def verify_stock(product)
+    # Verify if current stock is greather than the min stock
+    if (product.stock < product.stock_min)
+      # Creating new notification
+      notification = Notification.new
+      notification.message = "scarce_product"
+      notification.path = "#{admin_product_url(product)}"
+      notification.read_by = "false"
+
+      if notification.save
+        puts "Notification saved"
+        sync_new notification
+
+      else
+        puts "Notification not saved"
+      end
+    end
+  end
+  # End Verify product stock
 end

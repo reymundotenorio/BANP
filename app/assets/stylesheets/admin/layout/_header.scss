@@ -270,6 +270,7 @@
           text-align: center;
           padding: 0px 5px;
 
+
           .dropdown{
             > a{
               position: relative;
@@ -308,19 +309,57 @@
               background-color: $white;
               margin-top: 10px;
 
-              .noti > li > a {
-                display: block;
-                padding: 8px 20px;
-                clear: both;
-                font-weight: 400;
-                // line-height: 1.428571429;
-                color: #333333;
-                white-space: nowrap;
+              .noti{
+                &.clean{
+                  > li > a{
+                    border-top: 1px solid shade($grey, 10%);
+                    color: $sixth-color;
+                    // text-transform: uppercase;
 
-                @include on-event{
-                  text-decoration: none;
-                  color: $hover-color;
-                  background-color: $transparent;
+                    @include on-event{
+                      background-color: rgba($sixth-color, 0.1);
+                      color: shade($sixth-color, 10%);
+                    }
+                  }
+                }
+
+                > li > a {
+                  display: block;
+                  padding: 8px 20px;
+                  clear: both;
+                  font-weight: 400;
+                  // line-height: 1.428571429;
+                  color: #333333;
+                  white-space: nowrap;
+
+                  i{
+                    -webkit-transition: all 0.3s ease;
+                    transition: all 0.3s ease;
+
+                    &.fas{
+                      &.fa-plus-square{
+                        color: $fifth-color;
+                      }
+
+                      &.fa-exclamation-triangle{
+                        color: $fourth-color;
+                      }
+                    }
+                  }
+
+                  @include on-event{
+                    text-decoration: none;
+                    color: $hover-color;
+                    background-color: $transparent;
+
+                    i{
+                      &.fas{
+                        &.fa-plus-square, &.fa-exclamation-triangle{
+                          color: $hover-color;
+                        }
+                      }
+                    }
+                  }
                 }
               }
 

@@ -5,9 +5,9 @@
         - if notification.message == "new_order"
           %i.fas.fa-plus-square
           %span
-            %b= I18n.locale == :es ? "Nueva orden de venta" : "New sales order"
+            %b= I18n.locale == :es ? "Nueva orden de venta" : "New sale order"
 
         - else
-          %i.fas.fa-times-circle
+          %i.fas.fa-exclamation-triangle
           %span
             %b= I18n.locale == :es ? "Producto escaso" : "Scarce product"

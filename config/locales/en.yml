@@ -297,6 +297,7 @@ en:
     show_price_lists: "Show price lists"
     loss_expiration: "Loss"
     address_empty: "Address / Zip Code are empty"
+    clean_notifications: "Clean notifications"
 
   # Charts
   charts:

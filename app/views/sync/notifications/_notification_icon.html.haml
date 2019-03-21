@@ -1,6 +1,6 @@
 .display-circle
   -if notification.state
-    - if (Notification.where(read_by: 'false').count > 0)
+    - if (Notification.unread.count > 0)
       - if @noti_flag
         .circle-show
         - @noti_flag = false

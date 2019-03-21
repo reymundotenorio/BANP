@@ -336,6 +336,7 @@ Rails.application.routes.draw do
 
     # Notifications
     get "/notification/:id", to: "notifications#notification_redirect", as: "notification_redirect"
+    patch "/notifications/clean", to: "notifications#clean_notifications", as: "clean_notifications"
     # End Notifications
   end
   # End Admin namespace

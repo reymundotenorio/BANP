@@ -112,6 +112,7 @@ class StripeController < ApplicationController
 
           order.sale_details.each do |detail|
             product = detail.product
+            verify_stock(product)
             sync_update product
           end
           # redirect_to cart_path, notice: "Orden generada correctamente"
@@ -148,7 +149,7 @@ class StripeController < ApplicationController
       end
 
       errors_messages = errors_messages.strip
-
+      
       redirect_to cart_path, alert: errors_messages
       return
     end
@@ -161,4 +162,25 @@ class StripeController < ApplicationController
 
   def payment
   end
+
+  # Verify product stock
+  def verify_stock(product)
+    # Verify if current stock is greather than the min stock
+    if (product.stock < product.stock_min)
+      # Creating new notification
+      notification = Notification.new
+      notification.message = "scarce_product"
+      notification.path = "#{admin_product_url(product)}"
+      notification.read_by = "false"
+
+      if notification.save
+        puts "Notification saved"
+        sync_new notification
+
+      else
+        puts "Notification not saved"
+      end
+    end
+  end
+  # End Verify product stock
 end

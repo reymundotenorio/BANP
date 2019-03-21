@@ -1,6 +1,6 @@
-%tr{class: "clickable-row #{product.state}", "data-href": "#{admin_product_path(product)}"}
+%tr{class: "clickable-row #{'false' if product.stock < product.stock_min}", "data-href": "#{admin_product_path(product)}"}
   -# Set attributes
-  - attributes = I18n.locale == :es ? ["name_spanish", "barcode", "price", "category", "stock", "stock_min", "content_spanish"] : ["name", "barcode", "price", "category", "stock", "stock_min", "content"]
+  - attributes = I18n.locale == :es ? ["name_spanish", "barcode", "price", "category", "stock", "stock_min", "total", "content_spanish"] : ["name", "barcode", "price", "category", "stock", "stock_min", "total", "content"]
 
   %td
     .record-link{"data-header": "No."}
@@ -11,6 +11,9 @@
       .record-link{"data-header": t("activerecord.attributes.product.#{attribute}")}
         - if attribute == "price"
           %p= number_to_currency(product.price, precision: 2, unit: "$", format: "%u%n", separator: ".", delimiter: ",")
+
+        - elsif attribute == "total"
+          %p= number_to_currency((product.price * product.stock), precision: 2, unit: "$", format: "%u%n", separator: ".", delimiter: ",")
 
         - elsif attribute == "category"
           -# Category name render_sync

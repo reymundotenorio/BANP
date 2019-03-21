@@ -212,7 +212,7 @@ class Admin::ProductsController < ApplicationController
       format.html
       format.js
       format.pdf do
-        to_pdf(name_pdf, template, Product.available, I18n.l(datetime), title_pdf)
+        to_pdf_landscape(name_pdf, template, Product.available, I18n.l(datetime), title_pdf)
       end
     end
   end

@@ -7,8 +7,10 @@ class Admin::NotificationsController < ApplicationController
   before_action :require_employee, :require_seller_driver
   # End Authentication
 
+  # admin/notification/:id
   def notification_redirect
     @notification.read_by = "true"
+    # @notification.read_by = @notification.read_by == "" ? current_customer.id : ", #{current_customer.id}"
 
     if @notification.save
       puts "Notification saved"
@@ -18,6 +20,28 @@ class Admin::NotificationsController < ApplicationController
     end
 
     redirect_to @notification.path
+  end
+
+  # admin/notifications/clean
+  def clean_notifications
+    redirect_url = params[:redirect_to] || root_path
+
+    @notifications = Notification.unread
+
+    if @notifications
+      @notifications.each do |notification|
+        notification.read_by = "true"
+
+        if notification.save
+          puts "Notification cleaned"
+
+        else
+          puts "Notification not cleaned"
+        end
+      end
+
+      redirect_to redirect_url
+    end
   end
 
   private

@@ -298,6 +298,7 @@ es:
     show_price_lists: "Mostrar listas de precio"
     loss_expiration: "Pérdida"
     address_empty: "Dirección / Código Postal están vacíos"
+    clean_notifications: "Limpiar notificaciones"
 
   # Charts
   charts:

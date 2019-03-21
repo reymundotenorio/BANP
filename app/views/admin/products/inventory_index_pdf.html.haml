@@ -16,19 +16,19 @@
               %table.table.table-pdf
                 -# Set attributes
                 - model = "product"
-                - attributes = ["name", "barcode", "price", "category", "stock", "stock_min", "content"]
+                - attributes = ["name", "barcode", "price", "category", "stock", "stock_min", "total", "content"]
 
                 -# Render table header
                 = render partial: "partials/table_header", locals: {model: model, attributes: attributes}
 
                 -# Set attributes
                 - if I18n.locale == :es
-                  - attributes = ["name_spanish", "barcode", "price", "category", "stock", "stock_min", "content_spanish"]
+                  - attributes = ["name_spanish", "barcode", "price", "category", "stock", "stock_min", "total", "content_spanish"]
 
                 %tbody
                   - resource.each do |info|
                     -# Render table information
-                    = render partial: "partials/information_table", locals: {resource: info, attributes: attributes}
+                    = render partial: "partials/information_table_inventory", locals: {resource: info, attributes: attributes}
               -# End Table
         -# End Material card
 -# End Index PDF

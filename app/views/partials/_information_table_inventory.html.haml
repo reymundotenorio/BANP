@@ -1,0 +1,17 @@
+%tr{class: "#{'false' if resource.stock < resource.stock_min}"}
+  %td
+    %p= resource.id
+
+  - attributes.each do |attribute|
+    %td
+      - if attribute == "price"
+        %p= number_to_currency(resource.price, precision: 2, unit: "$", format: "%u%n", separator: ".", delimiter: ",")
+
+      - elsif attribute == "category"
+        %p= I18n.locale == :es ? resource.category.name_spanish : resource.category.name
+
+      - elsif attribute == "total"
+        %p= number_to_currency((resource.price * resource.stock), precision: 2, unit: "$", format: "%u%n", separator: ".", delimiter: ",")
+
+      - else
+        %p= resource["#{attribute}"]
