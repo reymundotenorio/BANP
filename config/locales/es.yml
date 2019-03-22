@@ -301,6 +301,7 @@ es:
     clean_notifications: "Limpiar notificaciones"
     delivery_confirmed: "Entrega confirmada"
     delivery_not_confirmed: "Se ha producido un problema al confirmar la entrega. Por favor, inténtelo de nuevo en un momento"
+    order_delivered: "Tu pedido no. {order} ha sido entregado. Por favor confirme la entrega en"
 
   # Charts
   charts:

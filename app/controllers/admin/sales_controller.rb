@@ -495,6 +495,13 @@ class Admin::SalesController < ApplicationController
     end
 
     if @delivery.save
+
+      # Send SMS
+      send_sms(@delivery.customer.phone, "BANP - #{t('views.mailer.greetings')} #{@delivery.customer.first_name} #{@delivery.customer.last_name}, #{t('sale.order_delivered', order: @delivery.id)}: #{tracking_url(@delivery.id)}")
+
+      # Send email
+      # AdminAuthenticationMailer.order_delivered(@user, I18n.locale, ip, location).deliver
+
       # redirect_to admin_sale_deliveries_path, notice: "Orden enviada correctamente"
       redirect_to admin_sale_deliveries_path, notice: t("sale.order_received_correctly")
 

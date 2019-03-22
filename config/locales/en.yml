@@ -300,6 +300,7 @@ en:
     clean_notifications: "Clean notifications"
     delivery_confirmed: "Delivery confirmed"
     delivery_not_confirmed: "There was a problem confirming the delivery, please try again in a moment"
+    order_delivered: "Your order no. {order} has been delivered. Please confirm the delivery at"
 
   # Charts
   charts:
