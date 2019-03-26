@@ -12,7 +12,7 @@ class AdminAuthenticationMailer < ApplicationMailer
     @location = location
 
     I18n.with_locale(locale) do
-      mail(to: @user.email, subject: "BANP - #{I18n.t('views.mailer.confirm_account')}")
+      mail(to: @user.email, subject: "🍅 BANP - #{I18n.t('views.mailer.confirm_account')}")
     end
   end
 
@@ -24,7 +24,7 @@ class AdminAuthenticationMailer < ApplicationMailer
     @location = location
 
     I18n.with_locale(locale) do
-      mail(to: @user.email, subject: "BANP - #{I18n.t('views.mailer.unlock_account')}")
+      mail(to: @user.email, subject: "🍅 BANP - #{I18n.t('views.mailer.unlock_account')}")
     end
   end
 
@@ -36,7 +36,7 @@ class AdminAuthenticationMailer < ApplicationMailer
     @location = location
 
     I18n.with_locale(locale) do
-      mail(to: @user.email, subject: "BANP - #{I18n.t('views.mailer.reset_password')}")
+      mail(to: @user.email, subject: "🍅 BANP - #{I18n.t('views.mailer.reset_password')}")
     end
   end
 
@@ -47,7 +47,7 @@ class AdminAuthenticationMailer < ApplicationMailer
     @location = location
 
     I18n.with_locale(locale) do
-      mail(to: @user.email, subject: "BANP - #{I18n.t('views.mailer.update_password')}")
+      mail(to: @user.email, subject: "🍅 BANP - #{I18n.t('views.mailer.update_password')}")
     end
   end
 end
