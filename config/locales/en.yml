@@ -462,6 +462,12 @@ en:
       requested_info: "The instructions were requested from the IP %{ip} with location in %{location}"
       token_expiration: "This link will be available for %{expiration_time} hours. If you did not request to reset your password, then you can just ignore this email; your password will not be change."
       password_updated: "Your password has been updated successfully"
+      order_received: "Order received"
+      order_delivery: "Order delivered"
+      order_received_link: "Your order has been received successfully. You can track and view details of your order by clicking on the following link"
+      order_delivery_link: "Your order has been delivered successfully. You can confirm the arrive and view details of the track of your order by clicking on the following link"
+      order_received_button_link: "Your order has been received successfully. You can track and view details of your order by clicking on the button or through the link"
+      order_delivery_button_link: "Your order has been delivered successfully. You can confirm the arrive and view details of the track of your order by clicking on the button or through the link"
     navigation:
       home: "Home"
       all_products: "All Products"

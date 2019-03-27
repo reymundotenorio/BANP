@@ -1,0 +1,3 @@
+= "#{I18n.t('views.mailer.welcome')} #{@customer.first_name} #{@customer.last_name}"
+= I18n.t("views.mailer.order_delivery_link")
+= tracking_url(@order.id)

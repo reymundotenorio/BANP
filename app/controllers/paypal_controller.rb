@@ -231,7 +231,16 @@ class PaypalController < ApplicationController
             verify_stock(product)
             sync_update product
           end
-          # redirect_to cart_path, notice: t("views.cart.payment_correctly")
+
+          # Send SMS
+          send_sms(sale_order.customer.phone, "BANP - #{t('views.mailer.greetings')} #{sale_order.customer.first_name} #{sale_order.customer.last_name}. #{t('views.mailer.order_received_link')}: #{tracking_url(sale_order.id)}")
+
+          # Get request information
+          ip = request.remote_ip
+          location = Geocoder.search(ip).first.country
+
+          # Send email
+          AdminAuthenticationMailer.order_received(sale_order, sale_order.customer, I18n.locale, ip, location).deliver
 
           notification = ::Notification.new
           notification.message = "new_order"

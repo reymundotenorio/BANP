@@ -497,10 +497,14 @@ class Admin::SalesController < ApplicationController
     if @delivery.save
 
       # Send SMS
-      send_sms(@delivery.customer.phone, "BANP - #{t('views.mailer.greetings')} #{@delivery.customer.first_name} #{@delivery.customer.last_name}, #{t('sale.order_delivered', order: @delivery.id)}: #{tracking_url(@delivery.id)}")
+      send_sms(@delivery.customer.phone, "BANP - #{t('views.mailer.greetings')} #{@delivery.customer.first_name} #{@delivery.customer.last_name}. #{t('views.mailer.order_delivery_link')}: #{tracking_url(@delivery.id)}")
+
+      # Get request information
+      ip = request.remote_ip
+      location = Geocoder.search(ip).first.country
 
       # Send email
-      # AdminAuthenticationMailer.order_delivered(@user, I18n.locale, ip, location).deliver
+      AdminAuthenticationMailer.order_delivery(@delivery, @delivery.customer, I18n.locale, ip, location).deliver
 
       # redirect_to admin_sale_deliveries_path, notice: "Orden enviada correctamente"
       redirect_to admin_sale_deliveries_path, notice: t("sale.order_received_correctly")

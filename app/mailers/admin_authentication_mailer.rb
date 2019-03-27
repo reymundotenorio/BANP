@@ -50,26 +50,26 @@ class AdminAuthenticationMailer < ApplicationMailer
       mail(to: @user.email, subject: "🍅 BANP - #{I18n.t('views.mailer.update_password')}")
     end
   end
-  
-    def order_received(user, locale, ip, location)
-    @user = user
-    @customer = user.customer
+
+    def order_received(order, customer, locale, ip, location)
+    @customer = customer
     @ip = ip
     @location = location
+    @order = order
 
     I18n.with_locale(locale) do
-      mail(to: @user.email, subject: "🍅 BANP - #{I18n.t('views.mailer.order_received')}")
+      mail(to: @customer.email, subject: "🍅 BANP - #{I18n.t('views.mailer.order_received')}")
     end
   end
-  
-    def order_delivery(user, locale, ip, location)
-    @user = user
-    @customer = user.customer
+
+    def order_delivery(order, customer, locale, ip, location)
+    @customer = customer
     @ip = ip
     @location = location
+    @order = order
 
     I18n.with_locale(locale) do
-      mail(to: @user.email, subject: "🍅 BANP - #{I18n.t('views.mailer.order_delivery')}")
+      mail(to: @customer.email, subject: "🍅 BANP - #{I18n.t('views.mailer.order_delivery')}")
     end
   end
 end

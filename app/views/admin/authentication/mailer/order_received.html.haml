@@ -1,0 +1,21 @@
+%tr
+  %td{style: "background-color: #fef7f8;"}
+    %table{border: "0", cellpadding: "0", cellspacing: "0", role: "presentation", width: "100%"}
+      %tr
+        %td{style: "padding: 20px; font-family: sans-serif; font-size: 16px; line-height: 20px; color: #555555;"}
+          %h1{style: "margin: 0 0 30px; font-size: 26px; line-height: 30px; color: #333333; font-weight: bold; text-align:center;"} Better and Nice Produce Corp
+          %p{style: "margin: 0 0 15px; color: #333333; text-align:center;"}= "#{I18n.t('views.mailer.welcome')} #{@customer.first_name} #{@customer.last_name}"
+          %p{style: "margin: 0 0 10px; color: #333333; text-align:center;"}= I18n.t("views.mailer.order_received_button_link")
+      %tr
+        %td{style: "padding: 0 20px 20px;"}
+          -# Button
+          %table{align: "center", border: "0", cellpadding: "0", cellspacing: "0", role: "presentation", style: "margin: auto;"}
+            %tr
+              %td.button-td.button-td-primary{style: "background: #fef7f8; text-align: center;"}
+                = link_to I18n.t("views.index.view_details"), tracking_url(@order.id), class: "button-a button-a-primary", target: "_blank", style: "background: #f15f79; font-family: sans-serif; font-size: 16px; line-height: 15px; text-decoration: none; padding: 13px 17px; color: #ffffff; display: inline-block;"
+                %p{style: "margin: 30px 0 10px; text-align:center;"}
+                = link_to "#{tracking_url(@order.id)}", tracking_url(@order.id), target: "_blank", style: "font-family: sans-serif; font-size: 14px; line-height: 15px; text-decoration: underline; color: #b24592; display: inline-block;"
+          -# End Button
+      %tr
+        %td{style: "padding: 20px; font-family: sans-serif; font-size: 12px; line-height: 20px; color: #555555;"}
+          %p{style: "margin: 0 0 10px; color: #888888; text-align:center;"}= I18n.t("views.mailer.requested_info", ip: @ip, location: @location)

@@ -117,6 +117,16 @@ class StripeController < ApplicationController
           end
           # redirect_to cart_path, notice: "Orden generada correctamente"
 
+          # Send SMS
+          send_sms(order.customer.phone, "BANP - #{t('views.mailer.greetings')} #{order.customer.first_name} #{order.customer.last_name}. #{t('views.mailer.order_received_link')}: #{tracking_url(order.id)}")
+
+          # Get request information
+          ip = request.remote_ip
+          location = Geocoder.search(ip).first.country
+
+          # Send email
+          AdminAuthenticationMailer.order_received(order, order.customer, I18n.locale, ip, location).deliver
+
           notification = Notification.new
           notification.message = "new_order"
           notification.path = "#{admin_sale_details_url(order.id)}"

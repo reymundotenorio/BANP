@@ -463,6 +463,12 @@ es:
       requested_info: "Las instrucciones fueron solicitadas desde el IP %{ip} con ubicación en %{location}"
       token_expiration: "Este enlace estará disponible por %{expiration_time} horas. Si no solicitó restablecer su contraseña, simplemente puede ignorar este correo electrónico; Su contraseña no será cambiada."
       password_updated: "Su contraseña ha sido actualizada con éxito"
+      order_received: "Orden recibida"
+      order_delivery: "Orden entregada"
+      order_received_link: "Su pedido ha sido recibido con éxito. Puede hacer un seguimiento y ver los detalles de su pedido haciendo clic en el siguiente enlace"
+      order_delivery_link: "Su pedido ha sido entregado con éxito. Puede confirmar la llegada y ver los detalles del seguimiento de su pedido haciendo clic en el siguiente enlace"
+      order_received_button_link: "Su pedido ha sido recibido con éxito. Puede hacer un seguimiento y ver los detalles de su pedido haciendo clic en el botón o a través del enlace"
+      order_delivery_button_link: "Su pedido ha sido entregado con éxito. Puede confirmar la llegada y ver los detalles del seguimiento de su pedido haciendo clic en el botón o a través del enlace"
     navigation:
       home: "Inicio"
       all_products: "Todos los Productos"
