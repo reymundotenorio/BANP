@@ -1,4 +1,4 @@
-%tr{class: "clickable-row #{sale.state}", "data-href": "#{admin_sale_details_path(sale.id)}"}
+%tr{class: "clickable-row #{sale.state} delivery-#{sale.delivery_confirmed}", "data-href": "#{admin_sale_details_path(sale.id)}"}
   -# Set attributes
   - attributes = ["sale_datetime", "total", "customer", "employee", "paid", "payment_method", "delivery_status"]
 

@@ -13,6 +13,14 @@
 
     %p.text-right= sale.paid ? "Si" : "No"
 
+  %div{class: "main-info text-left-right paid #{'not-paid' if !sale.delivery_confirmed}"}
+    %p.text-left
+      %b
+        %i.fas.fa-check-double
+        %span= t("activerecord.attributes.sale.delivery_confirmed")
+
+    %p.text-right= sale.delivery_confirmed ? "Si" : "No"
+
   .main-info.text-left-right
     %p.text-left
       %b

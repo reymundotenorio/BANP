@@ -182,6 +182,7 @@ en:
         payment_method: "Payment method"
         payment_reference: "Payment reference"
         paid: "Paid"
+        delivery_confirmed: "Confirmed"
       sale_details:
         product: "Product"
         price: "Price"

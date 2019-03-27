@@ -230,6 +230,12 @@
         -webkit-box-shadow: none;
         box-shadow: none;
 
+        &.delivery-true{
+          p, a{
+            color: $fifth-color;
+          }
+        }
+
         // No clickable row
         &.no-clickable-row{
           cursor: auto;

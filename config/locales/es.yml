@@ -181,6 +181,7 @@ es:
         payment_method: "Método de pago"
         payment_reference: "Referencia de pago"
         paid: "Pagado"
+        delivery_confirmed: "Confirmado"
       sale_details:
         product: "Producto"
         price: "Precio"
