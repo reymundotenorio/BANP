@@ -90,15 +90,15 @@ class Authentication::SessionsController < ApplicationController
 
   # Sign in
   def create
-    # Verify recaptcha
-    if !verify_recaptcha
-      redirect_to sign_in_path, alert: t("views.form.recaptcha_error")
-      return
-    end
-
     # Redirect URL
     redirect_url = params[:sign_in][:redirect]
     redirect_url = redirect_url.blank? ? root_path : redirect_url.strip.downcase
+
+    # Verify recaptcha
+    if !verify_recaptcha
+      redirect_to sign_in_path(redirect: redirect_url), alert: t("views.form.recaptcha_error")
+      return
+    end
 
     # If user exists
     if set_user
@@ -165,15 +165,15 @@ class Authentication::SessionsController < ApplicationController
 
   # Validating the two factor otp
   def two_factor_auth
-    # Verify recaptcha
-    if !verify_recaptcha
-      redirect_to two_factor_path, alert: t("views.form.recaptcha_error")
-      return
-    end
-
     # Redirect URL
     redirect_url = params[:two_factor][:redirect]
     redirect_url = redirect_url.blank? ? root_path : redirect_url.strip.downcase
+
+    # Verify recaptcha
+    if !verify_recaptcha
+      redirect_to two_factor_path(redirect: redirect_url), alert: t("views.form.recaptcha_error")
+      return
+    end
 
     # If user exists
     if set_user_with_two_factor

@@ -507,7 +507,7 @@ Employee.enabled.each do |employee|
 end
 
 puts "Seeding purchase orders"
-500.times do |count|
+8300.times do |count|
   begin
     Purchase.create(
       id: (count + 1),
@@ -538,7 +538,7 @@ Purchase.enabled.each do |purchase|
 end
 
 puts "Seeding purchase details"
-800.times do |count|
+10500.times do |count|
   begin
     PurchaseDetail.create(
       id: (count + 1),
@@ -562,7 +562,7 @@ Customer.enabled.each do |customer|
 end
 
 puts "Seeding sale invoices"
-500.times do |count|
+8300.times do |count|
   begin
     Sale.create(
       id: (count + 1),
@@ -591,7 +591,7 @@ Sale.enabled.each do |sale|
 end
 
 puts "Seeding sale details"
-800.times do |count|
+10500.times do |count|
   begin
     SaleDetail.create(
       id: (count + 1),
