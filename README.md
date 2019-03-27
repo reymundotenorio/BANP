@@ -3,6 +3,74 @@
 ### Descripción
 >Sistema de Información Web para la Gestión Comercial de Better and Nice Produce Corp.
 
+
+## Contenido
+
+### Panel de Control
+
+### Proveedores
+
+### Clientes
+
+### Catálogo
+>- Categorías
+>- Productos
+
+### Compras
+>- Órdenes
+>- Recepciones
+>- Inventario
+>- Devoluciones
+
+### Ventas
+>- Órdenes
+>- Facturaciones
+>- Envíos
+>- Entregas
+>- Devoluciones
+>- Listas de precios
+
+### Reportes
+>- Compras
+>- Ventas
+
+### Empleados
+
+### e-Commerce
+>- **Inicio**
+>- **Todos los productos**
+
+>- **Idioma**
+>- Inglés
+>- Español
+
+>- **Carrito**
+>- Stripe
+>- PayPal
+>- Omitir y pagar en efectivo a la entrega
+
+>- **Usuario**
+>- Ver órdenes
+>- *Rastreo*
+>- Perfil
+>- Bloquear
+>- Cerrar sesión
+
+
+## Instalación
+>*Para el correcto funcionamiento del Sistema, se debe tener instalado Ruby, Rails, MySQL y las librerías necesarias que Ruby on Rails + MySQL requieren.*
+
+```console
+foo@bar:~$ bundle install
+foo@bar:~$ rails db:create
+foo@bar:~$ rails db:migrate
+foo@bar:~$ rails db:seed
+foo@bar:~$ rails s
+```
+
+
+## Requerimientos
+
 ### Versión de Ruby
 >Ruby 2.5.1
 
@@ -49,56 +117,3 @@
 >- rubyzip
 >- axlsx
 >- axlsx_rails
-
-
-## Contenido
-
-### Panel de Control
-
-### Proveedores
-
-### Clientes
-
-### Catálogo
->- Categorías
->- Productos
-
-### Compras
->- Órdenes
->- Recepciones
->- Inventario
->- Devoluciones
-
-### Ventas
->- Órdenes
->- Facturaciones
->- Envíos
->- Entregas
->- Devoluciones
->- Listas de precios
-
-### Reportes
->- Compras
->- Ventas
-
-### Empleados
-
-### e-Commerce
->- Inicio
->- Todos los productos
->- Idioma
-  >- Inglés
-  >- Español
-
->- Carrito
-  >- Stripe
-  >- PayPal
-  >- Omitir y pagar en efectivo a la entrega
-
->- Usuario
-  >- Ver órdenes
-    >- Tracking
-
-  >- Perfil
-  >- Bloquear
-  >- Cerrar sesión
