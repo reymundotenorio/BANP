@@ -51,7 +51,7 @@
 
 >- **Usuario**
 >- Ver órdenes
->- *Rastreo*
+>- *Rastrar orden*
 >- Perfil
 >- Bloquear
 >- Cerrar sesión
