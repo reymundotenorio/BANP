@@ -14,7 +14,7 @@ class PayUponDeliveryController < ApplicationController
     order = Sale.new
 
     order.sale_datetime = Time.current
-    order.status = "pending"
+    order.status = "ordered"
     order.delivery_status = "in_queue"
     order.discount = 0.00
     order.customer_id = current_customer.id

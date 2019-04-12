@@ -77,7 +77,7 @@ class SaleDetail < ApplicationRecord
         old_status = "invoiced" if !old_status
 
         # If is an invoice or a delivery
-        if (self.status == "invoiced" || self.status == "delivered")
+        if (self.status == "invoiced" || (self.status == "delivered" && old_status != "shipped"))
           # Current stock + New Sale quantity
           final_stock =  product.stock + self.quantity
 
