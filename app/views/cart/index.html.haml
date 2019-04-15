@@ -88,10 +88,10 @@
               %a#btn-stripe.btn.btn-general.btn-paid.collapsed{"aria-controls": "stripe", "aria-expanded": "false", "data-target": "#stripe", "data-toggle": "collapse"}= t("views.cart.pay_credit_card")
               #stripe.collapse
                 -# Render Stripe form
-                = render "stripe/payment-form"
+                =# render "stripe/payment-form"
 
               %p.text-center.divider= t("views.cart.or")
-              = form_tag paypal_auth_path, method: "post", id: "paypal-form" do
+              =# form_tag paypal_auth_path, method: "post", id: "paypal-form" do
 
                 %button#btn-paypal.btn.btn-general.btn-paid{name: "paypal", type: "submit"}
                   = t("views.cart.checkout_paypal")
@@ -100,7 +100,7 @@
                   = image_tag "#{Rails.env.development? ? 'img/paypal-vertical.svg' : 'https://s3.amazonaws.com/betterandnice/images/default/paypal-vertical.svg'}", class: "hidden-sm hidden-lg"
 
               -# Render skip upon delivery
-              = render "pay_upon_delivery/payment-form"
+              =# render "pay_upon_delivery/payment-form"
 
 -# Zip Code validator form script
 = javascript_include_tag "zipcode", "data-turbolinks-track": "reload"
