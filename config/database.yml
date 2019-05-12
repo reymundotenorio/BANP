@@ -48,4 +48,4 @@ test:
 # You can use this database configuration with:
 #
 production:
-  url: <%= ENV["aws_rds_database_url"] %>
+  url: <%= ENV["cleardb_database_url"] %>
