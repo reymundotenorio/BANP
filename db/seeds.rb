@@ -460,7 +460,7 @@ product_count += 1
 # end
 
 puts "Seeding customers"
-80.times do |count|
+20.times do |count|
 
   if count == 0 # Creating Independent customer
     Customer.create(
@@ -507,7 +507,7 @@ Employee.enabled.each do |employee|
 end
 
 puts "Seeding purchase orders"
-8300.times do |count|
+80.times do |count|
   begin
     Purchase.create(
       id: (count + 1),
@@ -538,7 +538,7 @@ Purchase.enabled.each do |purchase|
 end
 
 puts "Seeding purchase details"
-10500.times do |count|
+100.times do |count|
   begin
     PurchaseDetail.create(
       id: (count + 1),
@@ -562,7 +562,7 @@ Customer.enabled.each do |customer|
 end
 
 puts "Seeding sale invoices"
-8300.times do |count|
+80.times do |count|
   begin
     Sale.create(
       id: (count + 1),
@@ -591,7 +591,7 @@ Sale.enabled.each do |sale|
 end
 
 puts "Seeding sale details"
-10500.times do |count|
+100.times do |count|
   begin
     SaleDetail.create(
       id: (count + 1),
