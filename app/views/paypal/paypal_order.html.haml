@@ -18,6 +18,6 @@
 
   %button#btn-paypal.btn.btn-general.btn-paid{name: "paypal", type: "submit"}
     = t("views.cart.checkout_paypal")
-    = image_tag "#{Rails.env.development? ? 'img/paypal.svg' : 'https://s3.amazonaws.com/betterandnice/images/default/paypal.svg'}", class: "hidden-xs hidden-md"
+    = image_tag "#{Rails.env.development? ? 'img/paypal.svg' : 'https://res.cloudinary.com/reymundotenorio/image/upload/v1563543087/BANP/paypal.svg'}", class: "hidden-xs hidden-md"
 
-    = image_tag "#{Rails.env.development? ? 'img/paypal-vertical.svg' : 'https://s3.amazonaws.com/betterandnice/images/default/paypal-vertical.svg'}", class: "hidden-sm hidden-lg"
+    = image_tag "#{Rails.env.development? ? 'img/paypal-vertical.svg' : 'https://res.cloudinary.com/reymundotenorio/image/upload/v1563543090/BANP/paypal-vertical.svg'}", class: "hidden-sm hidden-lg"

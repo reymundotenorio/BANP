@@ -5,7 +5,7 @@
       = image_tag url_for(product.image), class: "img-responsive"
 
     - else
-      = image_tag url_for("https://s3.amazonaws.com/betterandnice/images/default/product-default.png"), class: "img-responsive"
+      = image_tag url_for("https://res.cloudinary.com/reymundotenorio/image/upload/v1563543090/BANP/product-arkansas-black-apple.png"), class: "img-responsive"
 
     .overlay
       - if product.stock > 0

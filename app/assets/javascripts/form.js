@@ -9,7 +9,7 @@ $(document).ready(function(){
 
   // Reset the file-input and img-tag values
   $("#reset-button").click(function(){
-    $("#preview-image").attr("src", "https://s3.amazonaws.com/betterandnice/images/default/default.png"),
+    $("#preview-image").attr("src", "https://res.cloudinary.com/reymundotenorio/image/upload/v1563544834/BANP/default.png"),
     $("#filename").attr("value", "");
   });
 
@@ -26,7 +26,7 @@ $(document).ready(function(){
     }
 
     else{
-      $("#preview-image").attr("src", "https://s3.amazonaws.com/betterandnice/images/default/default.png"),
+      $("#preview-image").attr("src", "https://res.cloudinary.com/reymundotenorio/image/upload/v1563544834/BANP/default.png"),
       $("#filename").attr("value", "");
     }
   }
