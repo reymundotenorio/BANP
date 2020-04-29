@@ -107,7 +107,7 @@ gem "render_sync", git: "https://github.com/reymundotenorio/render_sync", branch
 # Render_Sync with Pusher
 gem "pusher", "~> 1.3", ">= 1.3.1"
 # Faye (Only to prevent precompile heroku error)
-gem "faye", "~> 1.2", ">= 1.2.2"
+gem "faye", "~> 1.2"
 
 # Bootstrap 3
 gem "bootstrap-sass", ">= 3.4.1"
