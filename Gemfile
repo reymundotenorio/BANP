@@ -117,7 +117,7 @@ gem "wicked_pdf", "~> 1.1"
 gem "wkhtmltopdf-binary", "~> 0.12.3"
 
 # Rails HTML Sanitizer (Heroku fix)
-gem "rails-html-sanitizer", "~> 1.0.4 "
+gem "rails-html-sanitizer", "~> 1.4.3"
 
 # AWS - Amazon Web Services
 # gem "aws-sdk", "~> 2.3"
