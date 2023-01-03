@@ -169,7 +169,7 @@ gem "groupdate"
 gem "json", "~> 1.8"
 
 # HTTParty - Request HTTP
-gem "httparty", "~> 0.13.7"
+gem "httparty", "~> 0.21.0"
 
 # Paypal SDK
 gem "paypal-sdk-rest"
