@@ -207,8 +207,8 @@ GEM
     htmlentities (4.3.4)
     http-2 (0.10.1)
     http_parser.rb (0.6.0)
-    httparty (0.13.7)
-      json (~> 1.8)
+    httparty (0.21.0)
+      mini_mime (>= 1.0.0)
       multi_xml (>= 0.5.2)
     httpclient (2.8.3)
     i18n (1.6.0)
@@ -427,7 +427,7 @@ DEPENDENCIES
   groupdate
   haml
   haml-rails (~> 1.0)
-  httparty (~> 0.13.7)
+  httparty (~> 0.21.0)
   jbuilder (~> 2.5)
   jquery-rails
   json (~> 1.8)
